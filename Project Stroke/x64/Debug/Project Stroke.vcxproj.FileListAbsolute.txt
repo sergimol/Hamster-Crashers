@@ -1,2 +1,0 @@
-D:\UCM\2º GDV\P2\Hamster-Crashers\Project Stroke\x64\Debug\Project Stroke.exe
-D:\UCM\2º GDV\P2\Hamster-Crashers\Project Stroke\x64\Debug\Project Stroke.pdb
