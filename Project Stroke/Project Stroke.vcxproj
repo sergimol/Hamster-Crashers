@@ -145,7 +145,51 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Proyecto\ecs\Entity.cpp" />
+    <ClCompile Include="Proyecto\ecs\Manager.cpp" />
+    <ClCompile Include="Proyecto\game\Game.cpp" />
+    <ClCompile Include="Proyecto\json\JSON.cpp" />
+    <ClCompile Include="Proyecto\json\JSONValue.cpp" />
+    <ClCompile Include="Proyecto\sdlutils\RandomNumberGenerator.cpp" />
+    <ClCompile Include="Proyecto\sdlutils\SDLUtils.cpp" />
+    <ClCompile Include="Proyecto\sdlutils\sdlutils_demo.cpp" />
+    <ClCompile Include="Proyecto\sdlutils\SoundEffect.cpp" />
+    <ClCompile Include="Proyecto\sdlutils\Texture.cpp" />
+    <ClCompile Include="Proyecto\utils\Collisions.cpp" />
+    <ClCompile Include="Proyecto\utils\Vector2D.cpp" />
     <ClCompile Include="Source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Proyecto\components\Bounce.h" />
+    <ClInclude Include="Proyecto\components\DeAcceleration.h" />
+    <ClInclude Include="Proyecto\components\FighterCtrl.h" />
+    <ClInclude Include="Proyecto\components\Image.h" />
+    <ClInclude Include="Proyecto\components\KeyBoardCtrl.h" />
+    <ClInclude Include="Proyecto\components\Rectangle.h" />
+    <ClInclude Include="Proyecto\components\Transform.h" />
+    <ClInclude Include="Proyecto\ecs\Component.h" />
+    <ClInclude Include="Proyecto\ecs\ecs.h" />
+    <ClInclude Include="Proyecto\ecs\ecs_defs_example.h" />
+    <ClInclude Include="Proyecto\ecs\Entity.h" />
+    <ClInclude Include="Proyecto\ecs\Manager.h" />
+    <ClInclude Include="Proyecto\ecs\mpl.h" />
+    <ClInclude Include="Proyecto\game\ecs_defs.h" />
+    <ClInclude Include="Proyecto\game\Game.h" />
+    <ClInclude Include="Proyecto\json\JSON.h" />
+    <ClInclude Include="Proyecto\json\JSONValue.h" />
+    <ClInclude Include="Proyecto\sdlutils\Font.h" />
+    <ClInclude Include="Proyecto\sdlutils\InputHandler.h" />
+    <ClInclude Include="Proyecto\sdlutils\macros.h" />
+    <ClInclude Include="Proyecto\sdlutils\Music.h" />
+    <ClInclude Include="Proyecto\sdlutils\RandomNumberGenerator.h" />
+    <ClInclude Include="Proyecto\sdlutils\SDLUtils.h" />
+    <ClInclude Include="Proyecto\sdlutils\sdlutils_demo.h" />
+    <ClInclude Include="Proyecto\sdlutils\SoundEffect.h" />
+    <ClInclude Include="Proyecto\sdlutils\Texture.h" />
+    <ClInclude Include="Proyecto\sdlutils\VirtualTimer.h" />
+    <ClInclude Include="Proyecto\utils\Collisions.h" />
+    <ClInclude Include="Proyecto\utils\Singleton.h" />
+    <ClInclude Include="Proyecto\utils\Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
