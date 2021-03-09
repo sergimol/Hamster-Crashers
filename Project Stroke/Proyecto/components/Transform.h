@@ -8,20 +8,29 @@
 class Transform: public Component {
 public:
 	Transform() :
-			pos_(), vel_(), width_(), height_(), rotation_() {
+			pos_(), vel_(), width_(), height_(), rotation_(), z_() {
 	}
 
 	Transform(Vector2D pos, Vector2D vel, float width, float height,
-			float rotation) :
-			pos_(pos), //
-			vel_(vel), //
-			width_(width), //
-			height_(height), //
-			rotation_(rotation)
+		float rotation, float z) :
+		pos_(pos), //
+		vel_(vel), //
+		width_(width), //
+		height_(height), //
+		rotation_(rotation),
+		z_(z)
 	{
 	}
 
 	virtual ~Transform() {
+	}
+
+	float& getZ() {
+		return z_;
+	}
+
+	void setZ(float z) {
+		z_ = z;
 	}
 
 	Vector2D& getPos() {
@@ -60,11 +69,14 @@ public:
 		pos_ = pos_ + vel_;
 	}
 
+
+
 private:
 	Vector2D pos_;
 	Vector2D vel_;
 	float width_;
 	float height_;
 	float rotation_;
+	float z_;
 };
 
