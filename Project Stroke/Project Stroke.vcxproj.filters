@@ -46,6 +46,12 @@
     <Filter Include="Archivos de origen\json">
       <UniqueIdentifier>{6b86f01d-691d-465f-9fdd-ff2e1d073295}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de recursos\resources">
+      <UniqueIdentifier>{2469618e-39ea-41b1-b778-13528bde6279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de recursos\resources\config">
+      <UniqueIdentifier>{7c817044-c1f6-46cd-80f9-692ddfd99f17}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -179,5 +185,10 @@
     <ClInclude Include="Proyecto\json\JSONValue.h">
       <Filter>Archivos de encabezado\json</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Proyecto\resources\config\hamsters.resources.json">
+      <Filter>Archivos de recursos\resources\config</Filter>
+    </None>
   </ItemGroup>
 </Project>

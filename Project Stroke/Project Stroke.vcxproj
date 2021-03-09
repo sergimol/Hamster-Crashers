@@ -191,6 +191,9 @@
     <ClInclude Include="Proyecto\utils\Singleton.h" />
     <ClInclude Include="Proyecto\utils\Vector2D.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Proyecto\resources\config\hamsters.resources.json" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

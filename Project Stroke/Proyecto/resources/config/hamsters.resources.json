@@ -3,12 +3,12 @@
   "fonts": [
     {
       "id": "ARIAL16",
-      "file": "resources/fonts/ARIAL.ttf",
+      "file": "../../../Proyecto/resources/fonts/ARIAL.ttf",
       "size": 16
     },
     {
       "id": "ARIAL24",
-      "file": "resources/fonts/ARIAL.ttf",
+      "file": "../../../Proyecto/resources/fonts/ARIAL.ttf",
       "size": 24
     }
   ],
@@ -16,15 +16,15 @@
   "images": [
     {
       "id": "fighter",
-      "file": "resources/images/fighter.png"
+      "file": "../../../Proyecto/resources/images/fighter.png"
     },
     {
       "id": "heart",
-      "file": "resources/images/heart.png"
+      "file": "../../../Proyecto/resources/images/heart.png"
     },
     {
       "id": "asteroidsA",
-      "file": "resources/images/asteroid.png"
+      "file": "../../../Proyecto/resources/images/asteroid.png"
     }
   ],
 
@@ -53,19 +53,19 @@
   "sounds": [
     {
       "id": "paddle_hit",
-      "file": "resources/sound/paddle_hit.wav"
+      "file": "../../../Proyecto/resources/sound/paddle_hit.wav"
     },
     {
       "id": "wall_hit",
-      "file": "resources/sound/wall_hit.wav"
+      "file": "../../../Proyecto/resources/sound/wall_hit.wav"
     },
     {
       "id": "fire",
-      "file": "resources/sound/fire.wav"
+      "file": "../../../Proyecto/resources/sound/fire.wav"
     },
     {
       "id": "thrust",
-      "file": "resources/sound/thrust.wav"
+      "file": "../../../Proyecto/resources/sound/thrust.wav"
     }
   ]
 
