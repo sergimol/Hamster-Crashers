@@ -26,8 +26,8 @@ Game::~Game() {
 
 void Game::init() {
 
-	SDLUtils::init("Ping Pong", 800, 600,
-			"resources/config/pingpong.resources.json");
+	SDLUtils::init("Squeak Ship", 800, 600,
+			"resources/config/hamsters.resources.json");
 
 	auto *caza = mngr_->addEntity();
 	caza->addComponent<Transform>(
