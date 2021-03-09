@@ -165,6 +165,7 @@
     <ClInclude Include="Proyecto\components\FighterCtrl.h" />
     <ClInclude Include="Proyecto\components\Image.h" />
     <ClInclude Include="Proyecto\components\KeyBoardCtrl.h" />
+    <ClInclude Include="Proyecto\components\Movement.h" />
     <ClInclude Include="Proyecto\components\Rectangle.h" />
     <ClInclude Include="Proyecto\components\Transform.h" />
     <ClInclude Include="Proyecto\ecs\Component.h" />
