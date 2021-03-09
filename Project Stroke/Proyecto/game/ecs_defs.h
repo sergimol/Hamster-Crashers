@@ -8,13 +8,15 @@ class FighterCtrl;
 class Bounce;
 class Image;
 class DeAcceleration;
+class Movement;
 
 #define _CMPS_LIST_  \
 	Transform,\
 	FighterCtrl,\
 	Image,\
 	DeAcceleration,\
-	Bounce
+	Bounce, \
+	Movement
 
 // groups
 
