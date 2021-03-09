@@ -188,6 +188,9 @@
     <ClInclude Include="Proyecto\components\Movement.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Proyecto\components\LightAttack.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Proyecto\resources\config\hamsters.resources.json">

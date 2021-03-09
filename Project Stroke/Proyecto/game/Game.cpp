@@ -10,6 +10,7 @@
 #include "../components/DeAcceleration.h"
 #include "../components/FighterCtrl.h"
 #include "../components/Movement.h"
+#include "../components/LightAttack.h"
 
 #include "../ecs/ecs.h"
 #include "../ecs/Entity.h"
@@ -37,6 +38,7 @@ void Game::init() {
 			Vector2D(), 60.0f, 60.0f, 0.0f, 0.0f);
 	caza->addComponent<Image>(&sdlutils().images().at("fighter"));
 	caza->addComponent<Movement>();
+	caza->addComponent<LightAttack>();
 
 }
 
