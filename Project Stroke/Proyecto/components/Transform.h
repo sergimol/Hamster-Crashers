@@ -8,7 +8,7 @@
 class Transform: public Component {
 public:
 	Transform() :
-			pos_(), vel_(), width_(), height_(), rotation_(), z_() {
+			pos_(), vel_(), width_(), height_(), rotation_(), z_(), flip_(){
 	}
 
 	Transform(Vector2D pos, Vector2D vel, float width, float height,
@@ -18,11 +18,16 @@ public:
 		width_(width), //
 		height_(height), //
 		rotation_(rotation),
-		z_(z)
+		z_(z),
+		flip_(false)
 	{
 	}
 
 	virtual ~Transform() {
+	}
+
+	bool& getFlip() {
+		return flip_;
 	}
 
 	float& getZ() {
@@ -78,5 +83,6 @@ private:
 	float height_;
 	float rotation_;
 	float z_;
+	bool flip_;
 };
 

@@ -24,7 +24,11 @@ public:
 
 	void render() override {
 		SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getW(), tr_->getH());
-		tex_->render(dest, tr_->getRot());
+		if(tr_->getFlip())
+			tex_->render(dest, tr_->getRot(), SDL_FLIP_VERTICAL);
+		else 
+			tex_->render(dest, tr_->getRot());
+		
 	}
 
 private:
