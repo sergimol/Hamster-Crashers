@@ -22,9 +22,10 @@ class Movement;
 
 // groups
 
-struct Group_1;
-#define _GRPS_LIST_  Group_1
+struct Enemy;
+#define _GRPS_LIST_  Enemy
 
 // handlers
-struct Hdlr_1;
-#define _HDLRS_LIST_ Hdlr_1
+//Creo que hay que hacer un handler por cada player
+struct Player;
+#define _HDLRS_LIST_ Player

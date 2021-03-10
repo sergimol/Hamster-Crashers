@@ -29,6 +29,18 @@
     {
       "id": "sardinilla",
       "file": "../../../Proyecto/resources/images/sardinilla.png"
+    },
+    {
+      "id": "keta",
+      "file": "../../../Proyecto/resources/images/keta.png"
+    },
+    {
+      "id": "canelon",
+      "file": "../../../Proyecto/resources/images/canelon.png"
+    },
+    {
+      "id": "monchi",
+      "file": "../../../Proyecto/resources/images/monchi.png"
     }
   ],
 
@@ -70,6 +82,18 @@
     {
       "id": "thrust",
       "file": "../../../Proyecto/resources/sound/thrust.wav"
+    },
+    {
+      "id": "light_attack",
+      "file": "../../../Proyecto/resources/sound/light_attack.wav"
+    },
+    {
+      "id": "strong_attack",
+      "file": "../../../Proyecto/resources/sound/strong_attack.wav"
+    },
+    {
+      "id": "hit",
+      "file": "../../../Proyecto/resources/sound/hit.wav"
     }
   ]
 
