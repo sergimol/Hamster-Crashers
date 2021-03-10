@@ -83,52 +83,6 @@ public:
 			Vector2D newVel = Vector2D(dir.getX() * speed.getX(), dir.getY() * speed.getY());
 			vel = newVel;
 
-
-
-			/*if(ih().isKeyDown(SDL_SCANCODE_UP))
-				vel.setY(-mov_);
-			else if(ih().isKeyDown(SDL_SCANCODE_DOWN)) {
-				vel.setY(mov_);
-			}
-			else {
-				vel.setY(0);
-			}
-
-			if (ih().isKeyDown(SDL_SCANCODE_RIGHT))
-				vel.setX(mov_);
-			else if (ih().isKeyDown(SDL_SCANCODE_LEFT)) {
-				vel.setX(-mov_);
-			}
-			else {
-				vel.setX(0);
-			}*/
-
-			/*
-				auto& pos = tr_->getPos();
-			if (ih().isKeyDown(SDL_SCANCODE_UP) && ih().isKeyDown(SDL_SCANCODE_LEFT)) {
-				pos.set(pos.getX() - mov_, pos.getY() - mov_);
-			}
-			else if (ih().isKeyDown(SDL_SCANCODE_UP) && ih().isKeyDown(SDL_SCANCODE_RIGHT)) {
-				pos.set(pos.getX() + mov_, pos.getY() - mov_);
-			}
-			else if (ih().isKeyDown(SDL_SCANCODE_UP)) {
-				pos.setY(pos.getY() - mov_);
-			}
-			else if (ih().isKeyDown(SDL_SCANCODE_DOWN) && ih().isKeyDown(SDL_SCANCODE_LEFT)) {
-				pos.set(pos.getX() - mov_, pos.getY() + mov_);
-			}
-			else if (ih().isKeyDown(SDL_SCANCODE_DOWN) && ih().isKeyDown(SDL_SCANCODE_RIGHT)) {
-				pos.set(pos.getX() + mov_, pos.getY() + mov_);
-			}
-			else if (ih().isKeyDown(SDL_SCANCODE_DOWN)) {
-				pos.setY(pos.getY() + mov_);
-			}
-			else if (ih().isKeyDown(SDL_SCANCODE_LEFT)) {
-				pos.setX(pos.getX() - mov_);
-			}
-			else if (ih().isKeyDown(SDL_SCANCODE_RIGHT)) {
-				pos.setX(pos.getX() + mov_);
-			}*/
 		}
 	}
 

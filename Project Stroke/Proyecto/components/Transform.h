@@ -34,10 +34,6 @@ public:
 		return z_;
 	}
 
-	void setZ(float z) {
-		z_ = z;
-	}
-
 	Vector2D& getPos() {
 		return pos_;
 	}
