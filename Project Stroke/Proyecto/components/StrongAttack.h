@@ -12,12 +12,12 @@
 
 #include "Transform.h"
 
-class LightAttack : public Component {
+class StrongAttack : public Component {
 public:
-	LightAttack() :
-		tr_(nullptr), w_(60), h_(30), cooldown_(350), time_(sdlutils().currRealTime()), attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {
+	StrongAttack() :
+		tr_(nullptr), w_(60), h_(30), cooldown_(500), time_(sdlutils().currRealTime()), attackSound_(sdlutils().soundEffects().at("strong_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {
 	}
-	virtual ~LightAttack() {
+	virtual ~StrongAttack() {
 	}
 
 	void init() override {
@@ -27,7 +27,7 @@ public:
 
 	void update() override {
 		if (ih().mouseButtonEvent()) {
-			if (ih().getMouseButtonState(ih().LEFT) == 1 && sdlutils().currRealTime() > time_ + cooldown_) {
+			if (ih().getMouseButtonState(ih().RIGHT) == 1 && sdlutils().currRealTime() > time_ + cooldown_) {
 
 				auto size = tr_->getW();
 				auto& pos = tr_->getPos();
@@ -90,8 +90,6 @@ public:
 				//Y comprobamos si colisiona
 				if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
 					canHit = true;
-					//Llamamos a un componente del enemy(Vida.getDaño(dmg) y le restas el daño
-					//ents[i]->getComponent<Life>().getDmg(dmg_);
 				}
 			}
 		}

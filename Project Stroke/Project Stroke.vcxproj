@@ -168,6 +168,7 @@
     <ClInclude Include="Proyecto\components\Movement.h" />
     <ClInclude Include="Proyecto\components\LightAttack.h" />
     <ClInclude Include="Proyecto\components\Rectangle.h" />
+    <ClInclude Include="Proyecto\components\StrongAttack.h" />
     <ClInclude Include="Proyecto\components\Transform.h" />
     <ClInclude Include="Proyecto\ecs\Component.h" />
     <ClInclude Include="Proyecto\ecs\ecs.h" />

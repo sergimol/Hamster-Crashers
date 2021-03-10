@@ -11,6 +11,7 @@
 #include "../components/FighterCtrl.h"
 #include "../components/Movement.h"
 #include "../components/LightAttack.h"
+#include "../components/StrongAttack.h"
 
 #include "../ecs/ecs.h"
 #include "../ecs/Entity.h"
@@ -39,6 +40,15 @@ void Game::init() {
 	caza->addComponent<Image>(&sdlutils().images().at("sardinilla"));
 	caza->addComponent<Movement>();
 	caza->addComponent<LightAttack>();
+	caza->addComponent<StrongAttack>();
+
+	//Enemigo de prueba
+	auto* enemy = mngr_->addEntity();
+	enemy->addComponent<Transform>(
+		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
+		Vector2D(), 300.0f, 300.0f, 0.0f, 0.0f);
+	enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
+	enemy->setGroup<Enemy>(true);
 
 }
 

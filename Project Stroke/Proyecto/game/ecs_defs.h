@@ -9,6 +9,7 @@ class Bounce;
 class Image;
 class DeAcceleration;
 class LightAttack;
+class StrongAttack;
 class Movement;
 
 #define _CMPS_LIST_  \
@@ -18,6 +19,7 @@ class Movement;
 	DeAcceleration,\
 	Bounce, \
 	LightAttack, \
+	StrongAttack, \
 	Movement
 
 // groups
