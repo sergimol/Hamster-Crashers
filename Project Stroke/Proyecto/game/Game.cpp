@@ -35,8 +35,8 @@ void Game::init() {
 	auto *caza = mngr_->addEntity();
 	caza->addComponent<Transform>(
 			Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
-			Vector2D(), 60.0f, 60.0f, 90.0f, 0.0f);
-	caza->addComponent<Image>(&sdlutils().images().at("fighter"));
+			Vector2D(), 128.0f, 128.0f, 0.0f, 0.0f);
+	caza->addComponent<Image>(&sdlutils().images().at("sardinilla"));
 	caza->addComponent<Movement>();
 	caza->addComponent<LightAttack>();
 

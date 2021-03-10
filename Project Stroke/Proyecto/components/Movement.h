@@ -13,7 +13,7 @@
 class Movement : public Component {
 public:
 	Movement() :
-		tr_(nullptr), mov_(7.0f) {
+		tr_(nullptr), speed(7.0f, 3.5f) {
 	}
 	virtual ~Movement() {
 	}
@@ -51,27 +51,38 @@ public:
 			else if (ih().isKeyUp(SDL_SCANCODE_LEFT))
 				keymap.at(LEFT) = false;
 
+
+			Vector2D dir = Vector2D();
+
 			if (keymap.at(UP)) {
-				vel.setY(-mov_);
+				//vel.setY(-speedY_);
+				dir.setY(-1.0f);
 			}
 			else if (keymap.at(DOWN)) {
-				vel.setY(mov_);
+				//vel.setY(speedY_);
+				dir.setY(1.0f);
 			}
 			else {
-				vel.setY(0);
+				//vel.setY(0);
 			}
 
 			if (keymap.at(RIGHT)) {
-				vel.setX(mov_);
+				//vel.setX(speedX_);
+				dir.setX(1.0f);
 				tr_->getFlip() = false;
 			}
 			else if (keymap.at(LEFT)) {
-				vel.setX(-mov_);
+				//vel.setX(-speedX_);
+				dir.setX(-1.0f);
 				tr_->getFlip() = true;
 			}
 			else {
-				vel.setX(0);
+				//vel.setX(0);
 			}
+
+			Vector2D newVel = Vector2D(dir.getX() * speed.getX(), dir.getY() * speed.getY());
+			vel = newVel;
+
 
 
 			/*if(ih().isKeyDown(SDL_SCANCODE_UP))
@@ -123,7 +134,7 @@ public:
 
 private:
 	Transform* tr_;
-	float mov_;
+	Vector2D speed;
 	const enum KEYS {
 		UP, DOWN, LEFT, RIGHT
 	};

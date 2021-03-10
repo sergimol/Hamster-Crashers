@@ -25,6 +25,10 @@
     {
       "id": "asteroidsA",
       "file": "../../../Proyecto/resources/images/asteroid.png"
+    },
+    {
+      "id": "sardinilla",
+      "file": "../../../Proyecto/resources/images/sardinilla.png"
     }
   ],
 
