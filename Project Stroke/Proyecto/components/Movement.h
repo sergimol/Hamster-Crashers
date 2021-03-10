@@ -5,6 +5,7 @@
 #include "../ecs/Entity.h"
 #include "../sdlutils/InputHandler.h"
 #include <map>
+#include <cmath>
 
 #include "Transform.h"
 
@@ -13,10 +14,12 @@
 class Movement : public Component {
 public:
 	Movement() :
-		tr_(nullptr), speed(7.0f, 3.5f) {
+		tr_(nullptr), speed_(7.0f, 3.5f), goalVel_(0,0), dt_(0.0f), time_(sdlutils().currRealTime()){
 	}
+
 	virtual ~Movement() {
 	}
+
 	void init() override {
 		tr_ = entity_->getComponent<Transform>();
 		assert(tr_ != nullptr);
@@ -28,9 +31,14 @@ public:
 	}
 
 	void update() override {
-		if (ih().keyDownEvent() || ih().keyUpEvent()) {
-			auto& vel = tr_->getVel();
 
+		dt_ = (sdlutils().currRealTime() - time_) / 1000;
+		time_ = sdlutils().currRealTime();
+		
+		auto& vel = tr_->getVel();
+		if (ih().keyDownEvent() || ih().keyUpEvent()) {
+			
+			
 			if (ih().isKeyDown(SDL_SCANCODE_UP))
 				keymap.at(UP) = true;
 			else if(ih().isKeyUp(SDL_SCANCODE_UP))
@@ -51,47 +59,65 @@ public:
 			else if (ih().isKeyUp(SDL_SCANCODE_LEFT))
 				keymap.at(LEFT) = false;
 
-
-			Vector2D dir = Vector2D();
+			Vector2D dir = Vector2D(0,0);
 
 			if (keymap.at(UP)) {
-				//vel.setY(-speedY_);
 				dir.setY(-1.0f);
 			}
 			else if (keymap.at(DOWN)) {
-				//vel.setY(speedY_);
 				dir.setY(1.0f);
-			}
-			else {
-				//vel.setY(0);
 			}
 
 			if (keymap.at(RIGHT)) {
-				//vel.setX(speedX_);
 				dir.setX(1.0f);
 				tr_->getFlip() = false;
 			}
 			else if (keymap.at(LEFT)) {
-				//vel.setX(-speedX_);
 				dir.setX(-1.0f);
 				tr_->getFlip() = true;
 			}
-			else {
-				//vel.setX(0);
-			}
 
-			Vector2D newVel = Vector2D(dir.getX() * speed.getX(), dir.getY() * speed.getY());
-			vel = newVel;
+			if(dir.magnitude() != 0)
+				dir = dir.normalize();
+			
+			goalVel_ = Vector2D(dir.getX() * speed_.getX(), dir.getY() * speed_.getY());
 
+			vel = goalVel_;
+
+			//vel.setX(lerp(goalVel_.getX(),  vel.getX(), dt_ * 50));
+			//vel.setY(lerp(goalVel_.getY(), vel.getY(), dt_ * 50));
+
+			//std::cout << tr_->getPos() << std::endl;
 		}
+		/*else {
+			vel.setX(lerp(0, vel.getX(), dt_ * 50));
+			vel.setY(lerp(0, vel.getY(), dt_ * 50));
+		}*/
+		//std::cout << dt_ << std::endl;
+	}
+
+
+	/*float lerp(float goal, float current, float dt) {
+		float diff = goal - current;
+
+		if (diff > dt)
+			return current + dt;
+		if (diff < dt)
+			return current - dt;
+
+		return goal;
+	}*/
+
+	float lerp(float a, float b, float f)
+	{
+		return (a + f*(b-a));
 	}
 
 private:
 	Transform* tr_;
-	Vector2D speed;
-	const enum KEYS {
-		UP, DOWN, LEFT, RIGHT
-	};
+	Vector2D speed_, goalVel_;
+	float dt_, time_;
+	const enum KEYS {UP, DOWN, LEFT, RIGHT};
 	std::map<KEYS, bool> keymap;
 };
 
