@@ -52,6 +52,9 @@
     <Filter Include="Archivos de recursos\resources\config">
       <UniqueIdentifier>{7c817044-c1f6-46cd-80f9-692ddfd99f17}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de origen\components">
+      <UniqueIdentifier>{cc57e568-abf2-4c0f-943f-3b7765a988db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -92,6 +95,21 @@
     </ClCompile>
     <ClCompile Include="Proyecto\json\JSONValue.cpp">
       <Filter>Archivos de origen\json</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Image.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\LightAttack.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Movement.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\StrongAttack.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Tansform.cpp">
+      <Filter>Archivos de origen\components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

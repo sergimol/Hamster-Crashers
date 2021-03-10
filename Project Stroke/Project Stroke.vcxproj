@@ -145,6 +145,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Proyecto\components\Image.cpp" />
+    <ClCompile Include="Proyecto\components\LightAttack.cpp" />
+    <ClCompile Include="Proyecto\components\Movement.cpp" />
+    <ClCompile Include="Proyecto\components\StrongAttack.cpp" />
+    <ClCompile Include="Proyecto\components\Tansform.cpp" />
     <ClCompile Include="Proyecto\ecs\Entity.cpp" />
     <ClCompile Include="Proyecto\ecs\Manager.cpp" />
     <ClCompile Include="Proyecto\game\Game.cpp" />
