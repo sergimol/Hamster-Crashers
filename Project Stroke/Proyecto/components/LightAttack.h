@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <SDL.h>
 #include <cassert>
@@ -15,7 +15,8 @@
 class LightAttack : public Component {
 public:
 	LightAttack() :
-		tr_(nullptr), w_(60), h_(30), cooldown_(350), time_(sdlutils().currRealTime()), attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {
+		tr_(nullptr), w_(60), h_(30), cooldown_(350), time_(sdlutils().currRealTime()), 
+		attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {
 	}
 	virtual ~LightAttack() {
 	}
@@ -66,7 +67,7 @@ public:
 			}
 		}
 	}
-	bool CheckCollisions(SDL_Rect rectPlayer) {
+	bool CheckCollisions(const SDL_Rect& rectPlayer)  {
 		bool canHit = false;
 
 		//Cogemos todas las entidades del juego
@@ -74,7 +75,7 @@ public:
 		//Y guardamos el numero
 		int n = ents.size();
 
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < n; i++) { //pero hacer un iterador ᵇᵒʳʳⁱᶜᵒˢ
 			//Si la entidad es un enemigo...
 			if (ents[i]->hasGroup<Enemy>()) {
 				//Cogemos el transform del enemigo
@@ -90,7 +91,7 @@ public:
 				//Y comprobamos si colisiona
 				if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
 					canHit = true;
-					//Llamamos a un componente del enemy(Vida.getDa�o(dmg) y le restas el da�o
+					//Llamamos a un componente del enemy(Vida.getDaño(dmg) y le restas el daño
 					//ents[i]->getComponent<Life>().getDmg(dmg_);
 				}
 			}
@@ -98,7 +99,7 @@ public:
 		return canHit;
 	}
 
-	//Establece el da�o del light attack
+	//Establece el daño del light attack
 	void setDmg(float dmg) {
 		dmg_ = dmg;
 	}
