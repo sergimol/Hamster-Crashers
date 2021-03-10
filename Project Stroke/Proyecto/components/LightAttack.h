@@ -9,12 +9,12 @@
 #include "../sdlutils/SDLUtils.h"
 
 #include "../ecs/Manager.h"
-
+#include "Life.h"
 #include "Transform.h"
 
 class LightAttack : public Component {
 public:
-	LightAttack();
+	LightAttack(float dmg);
 
 	virtual ~LightAttack() {}
 

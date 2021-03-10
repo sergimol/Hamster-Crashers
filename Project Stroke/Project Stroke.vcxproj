@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Proyecto\components\Image.cpp" />
+    <ClCompile Include="Proyecto\components\Life.cpp" />
     <ClCompile Include="Proyecto\components\LightAttack.cpp" />
     <ClCompile Include="Proyecto\components\Movement.cpp" />
     <ClCompile Include="Proyecto\components\StrongAttack.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Proyecto\components\FighterCtrl.h" />
     <ClInclude Include="Proyecto\components\Image.h" />
     <ClInclude Include="Proyecto\components\KeyBoardCtrl.h" />
+    <ClInclude Include="Proyecto\components\Life.h" />
     <ClInclude Include="Proyecto\components\Movement.h" />
     <ClInclude Include="Proyecto\components\LightAttack.h" />
     <ClInclude Include="Proyecto\components\Rectangle.h" />

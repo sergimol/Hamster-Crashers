@@ -1,7 +1,7 @@
 #include "LightAttack.h"
 
-LightAttack::LightAttack() :
-	tr_(nullptr), w_(60), h_(30), cooldown_(350), time_(sdlutils().currRealTime()),
+LightAttack::LightAttack(float dmg) :
+	tr_(nullptr), w_(60), h_(30), cooldown_(350), time_(sdlutils().currRealTime()),dmg_(dmg),
 	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {}
 
 void LightAttack::init() {
@@ -73,8 +73,8 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 			//Y comprobamos si colisiona
 			if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
 				canHit = true;
-				//Llamamos a un componente del enemy(Vida.getDaño(dmg) y le restas el daño
-				//ents[i]->getComponent<Life>().getDmg(dmg_);
+				//Le restamos la vida al enemigo
+				e->getComponent<Life>()->recieveDmg(dmg_);
 			}
 		}
 	}

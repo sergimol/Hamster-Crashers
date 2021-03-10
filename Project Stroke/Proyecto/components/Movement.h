@@ -113,7 +113,7 @@ public:
 			//ocurre un error y es que cada dos lecturas de eventos pasa una vez por aqui, esto tmb es malo ay que se supone 
 			vel.setX(lerp(vel.getX(), 0, /*dt_ **/ 0.1));
 			vel.setY(lerp(vel.getY(), 0,  /*dt_ **/ 0.1));
-			std::cout << "a" << std::endl;
+			//std::cout << "a" << std::endl;
 		}
 		else {
 			vel.setX(lerp(goalVel_.getX(), vel.getX(), /*dt_ **/ 0.9));

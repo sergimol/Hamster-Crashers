@@ -1,7 +1,7 @@
 #include "StrongAttack.h"
 
-StrongAttack::StrongAttack() :
-	tr_(nullptr), w_(60), h_(30), cooldown_(500), time_(sdlutils().currRealTime()), attackSound_(sdlutils().soundEffects().at("strong_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {
+StrongAttack::StrongAttack(float dmg) :
+	tr_(nullptr), w_(60), h_(30), cooldown_(500),dmg_(dmg), time_(sdlutils().currRealTime()), attackSound_(sdlutils().soundEffects().at("strong_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {
 }
 
 void StrongAttack::init() {
@@ -73,8 +73,8 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 			//Y comprobamos si colisiona
 			if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
 				canHit = true;
-				//Llamamos a un componente del enemy(Vida.getDaño(dmg) y le restas el daño
-				//ents[i]->getComponent<Life>().getDmg(dmg_);
+				//Le restamos la vida al enemigo
+				e->getComponent<Life>()->recieveDmg(dmg_);
 			}
 		}
 	}

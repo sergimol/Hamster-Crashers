@@ -11,6 +11,7 @@ class DeAcceleration;
 class LightAttack;
 class StrongAttack;
 class Movement;
+class Life;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -20,7 +21,8 @@ class Movement;
 	Bounce, \
 	LightAttack, \
 	StrongAttack, \
-	Movement
+	Movement, \
+	Life
 
 // groups
 

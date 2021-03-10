@@ -9,12 +9,13 @@
 #include "../sdlutils/SDLUtils.h"
 
 #include "../ecs/Manager.h"
+#include "Life.h"
 
 #include "Transform.h"
 
 class StrongAttack : public Component {
 public:
-	StrongAttack();
+	StrongAttack(float dmg);
 
 	virtual ~StrongAttack() {};
 
