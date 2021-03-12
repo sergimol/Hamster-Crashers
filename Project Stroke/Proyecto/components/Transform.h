@@ -12,13 +12,14 @@ public:
 	}
 
 	Transform(Vector2D pos, Vector2D vel, float width, float height,
-		float rotation, float z) :
+		float rotation) :
 		pos_(pos), //
 		vel_(vel), //
 		width_(width), //
 		height_(height), //
 		rotation_(rotation),
-		z_(z),
+		z_(0),
+		velZ_(0),
 		flip_(false)
 	{
 	}
@@ -32,6 +33,18 @@ public:
 
 	float& getZ() {
 		return z_;
+	}
+	
+	void setZ(float z) {
+		z_ = z;
+	}
+	
+	void setVelZ(float z) {
+		velZ_ = z;
+	}
+	
+	float& getVelZ() {
+		return velZ_;
 	}
 
 	Vector2D& getPos() {
@@ -67,7 +80,9 @@ public:
 	}
 
 	void update() override {
-		pos_ = pos_ + vel_;
+		z_ -= velZ_;
+		//pos_.setY(pos_.getY() - z_);
+		pos_ = pos_ + vel_;		
 	}
 
 
@@ -79,6 +94,7 @@ private:
 	float height_;
 	float rotation_;
 	float z_;
+	float velZ_;
 	bool flip_;
 };
 
