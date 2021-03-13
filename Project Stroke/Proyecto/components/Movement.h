@@ -8,6 +8,7 @@
 #include <cmath>
 
 #include "Transform.h"
+#include "Stroke.h"
 
 
 
@@ -62,6 +63,7 @@ public:
 			if (!keymap.at(SPACE) && ih().isKeyDown(SDLK_SPACE)) {
 				keymap.at(SPACE) = true;
 				jump_ = -5;
+				entity_->getComponent<Stroke>()->increaseChance(2, this);
 			}
 
 			if (keymap.at(UP)) {

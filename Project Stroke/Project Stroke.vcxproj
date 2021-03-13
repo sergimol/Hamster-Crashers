@@ -145,13 +145,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Proyecto\components\Ability.cpp" />
     <ClCompile Include="Proyecto\components\Image.cpp" />
     <ClCompile Include="Proyecto\components\UI.cpp" />
     <ClCompile Include="Proyecto\components\Life.cpp" />
     <ClCompile Include="Proyecto\components\LightAttack.cpp" />
     <ClCompile Include="Proyecto\components\Movement.cpp" />
+    <ClCompile Include="Proyecto\components\Stroke.cpp" />
     <ClCompile Include="Proyecto\components\StrongAttack.cpp" />
-    <ClCompile Include="Proyecto\components\Tansform.cpp" />
+    <ClCompile Include="Proyecto\components\Transform.cpp" />
     <ClCompile Include="Proyecto\ecs\Entity.cpp" />
     <ClCompile Include="Proyecto\ecs\Manager.cpp" />
     <ClCompile Include="Proyecto\game\Game.cpp" />
@@ -167,6 +169,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Proyecto\components\Abilty.h" />
     <ClInclude Include="Proyecto\components\Bounce.h" />
     <ClInclude Include="Proyecto\components\DeAcceleration.h" />
     <ClInclude Include="Proyecto\components\FighterCtrl.h" />
@@ -177,6 +180,7 @@
     <ClInclude Include="Proyecto\components\Movement.h" />
     <ClInclude Include="Proyecto\components\LightAttack.h" />
     <ClInclude Include="Proyecto\components\Rectangle.h" />
+    <ClInclude Include="Proyecto\components\Stroke.h" />
     <ClInclude Include="Proyecto\components\StrongAttack.h" />
     <ClInclude Include="Proyecto\components\Transform.h" />
     <ClInclude Include="Proyecto\ecs\Component.h" />

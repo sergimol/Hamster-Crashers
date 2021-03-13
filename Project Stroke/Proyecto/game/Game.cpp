@@ -12,6 +12,7 @@
 #include "../components/Movement.h"
 #include "../components/LightAttack.h"
 #include "../components/StrongAttack.h"
+#include "../components/Stroke.h"
 #include "../components/UI.h"
 
 #include "../ecs/ecs.h"
@@ -34,16 +35,17 @@ void Game::init() {
 	SDLUtils::init("Squeak Ship", 800, 600,
 		"../../../Proyecto/resources/config/hamsters.resources.json");
 
-	auto* caza = mngr_->addEntity();
-	caza->addComponent<Transform>(
+	auto* hamster1 = mngr_->addEntity();
+	hamster1->addComponent<Transform>(
 		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
 		Vector2D(), 128.0f, 128.0f, 0.0f);
-	caza->addComponent<Image>(&sdlutils().images().at("sardinilla"));
-	caza->addComponent<Movement>();
-	caza->addComponent<LightAttack>(20);
-	caza->addComponent<StrongAttack>(30);
-	caza->addComponent<Life>(100);
-	//caza->addComponent<UI>("sardinilla");
+	hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+	hamster1->addComponent<Movement>();
+	hamster1->addComponent<LightAttack>(20);
+	hamster1->addComponent<StrongAttack>(30);
+	hamster1->addComponent<Life>(100);
+	hamster1->addComponent<Stroke>();
+	hamster1->addComponent<UI>("sardinilla");
 
 
 	//Enemigo de prueba
