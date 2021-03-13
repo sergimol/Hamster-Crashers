@@ -43,7 +43,7 @@ void Game::init() {
 	caza->addComponent<LightAttack>(20);
 	caza->addComponent<StrongAttack>(30);
 	caza->addComponent<Life>(100);
-	caza->addComponent<UI>("sardinilla");
+	//caza->addComponent<UI>("sardinilla");
 
 
 	//Enemigo de prueba
@@ -54,6 +54,7 @@ void Game::init() {
 		Vector2D(), 300.0f, 300.0f, 0.0f);
 	enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
 	enemy->setGroup<Enemy>(true);
+	enemy->addComponent<UI>("sardinilla");
 }
 
 void Game::start() {
