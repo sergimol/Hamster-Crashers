@@ -12,6 +12,7 @@
 #include "../components/Movement.h"
 #include "../components/LightAttack.h"
 #include "../components/StrongAttack.h"
+#include "../components/UI.h"
 
 #include "../ecs/ecs.h"
 #include "../ecs/Entity.h"
@@ -42,6 +43,8 @@ void Game::init() {
 	caza->addComponent<LightAttack>(20);
 	caza->addComponent<StrongAttack>(30);
 	caza->addComponent<Life>(100);
+	caza->addComponent<UI>(&sdlutils().images().at("sardinillaHead1"));
+
 
 	//Enemigo de prueba
 	auto* enemy = mngr_->addEntity();

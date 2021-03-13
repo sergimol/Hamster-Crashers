@@ -29,6 +29,7 @@ public:
 		keymap.insert({ RIGHT, false });
 		keymap.insert({ LEFT, false });
 		keymap.insert({ SPACE, false });
+
 	}
 
 	void update() override {
@@ -36,24 +37,24 @@ public:
 		auto& vel = tr_->getVel();
 		if (ih().keyDownEvent() || ih().keyUpEvent()) {
 
-			if (ih().isKeyDown(SDL_SCANCODE_UP))
+			if (ih().isKeyDown(SDL_SCANCODE_UP) || ih().isKeyDown(SDLK_w))
 				keymap.at(UP) = true;
-			else if (ih().isKeyUp(SDL_SCANCODE_UP))
+			else if (ih().isKeyUp(SDL_SCANCODE_UP) && ih().isKeyUp(SDLK_w))
 				keymap.at(UP) = false;
 
-			if (ih().isKeyDown(SDL_SCANCODE_DOWN))
+			if (ih().isKeyDown(SDL_SCANCODE_DOWN) || ih().isKeyDown(SDLK_s))
 				keymap.at(DOWN) = true;
-			else if (ih().isKeyUp(SDL_SCANCODE_DOWN))
+			else if (ih().isKeyUp(SDL_SCANCODE_DOWN) && ih().isKeyUp(SDLK_s))
 				keymap.at(DOWN) = false;
 
-			if (ih().isKeyDown(SDL_SCANCODE_RIGHT))
+			if (ih().isKeyDown(SDL_SCANCODE_RIGHT) || ih().isKeyDown(SDLK_d))
 				keymap.at(RIGHT) = true;
-			else if (ih().isKeyUp(SDL_SCANCODE_RIGHT))
+			else if (ih().isKeyUp(SDL_SCANCODE_RIGHT) && ih().isKeyUp(SDLK_d))
 				keymap.at(RIGHT) = false;
 
-			if (ih().isKeyDown(SDL_SCANCODE_LEFT))
+			if (ih().isKeyDown(SDL_SCANCODE_LEFT) || ih().isKeyDown(SDLK_a))
 				keymap.at(LEFT) = true;
-			else if (ih().isKeyUp(SDL_SCANCODE_LEFT))
+			else if (ih().isKeyUp(SDL_SCANCODE_LEFT) && ih().isKeyUp(SDLK_a))
 				keymap.at(LEFT) = false;
 
 			Vector2D dir = Vector2D(0, 0);
@@ -83,7 +84,7 @@ public:
 				dir = dir.normalize();
 
 				goalVel_ = Vector2D(dir.getX() * speed_.getX(), dir.getY() * speed_.getY());
-			}		
+			}
 		}
 
 		if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {
@@ -95,10 +96,10 @@ public:
 			vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.5));
 		}
 
-		if (keymap.at(SPACE) && jump_!=0) {
+		if (keymap.at(SPACE) && jump_ != 0) {
 			tr_->setVelZ(tr_->getVelZ() + jump_);
-			if(jump_<5) jump_ += 1.2;
-		}	
+			if (jump_ < 5) jump_ += 1.2;
+		}
 		if (tr_->getZ() < 0) {
 			keymap.at(SPACE) = false;
 			jump_ = 0;
