@@ -9,13 +9,16 @@ Life::Life(int life) : health_(life) {}
 //Resta el daño y devuelve true si ha muerto
 bool Life::recieveDmg(int dmg) {
 	health_ -= dmg;
-	std::cout << health_<<std::endl;
-
+	std::cout << health_ << std::endl;
 	//Si la vida ha bajado de 0...
 	if (health_ <= 0) {
+		//Actualizamos UI
+		if (entity_->hasComponent<UI>())
+			entity_->getComponent<UI>()->dep();
+
 		health_ = 0;
 		//Desactivamos la entidad
-		this->getEntity()->setActive(false);
+		//this->getEntity()->setActive(false);
 		return true;
 	}
 	else

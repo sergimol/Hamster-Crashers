@@ -3,26 +3,26 @@
 
 #include "../ecs/Component.h"
 #include "../ecs/Entity.h"
-#include "../sdlutils/InputHandler.h"
-#include <map>
-#include <cmath>
-
-#include "Transform.h"
 
 #include "../sdlutils/Texture.h"
 #include "../sdlutils/SDLUtils.h"
-#include "Life.h"
 
 
 class UI : public Component {
 public:
-	UI(Texture* face);
+	UI(std::string n);
 	virtual ~UI() {};
 
 	void render() override;
-	void changeText();
+	void dep();
+	void bar();
 private:
+	//Texturas de la UI
 	Texture* face_;
 	Texture* hearth_;
 	Texture* bar_;
+	//Nombre del personaje que contiene la UI, todo en minusculas
+	std::string name;	
+
+	int scale;
 };

@@ -3,6 +3,7 @@
 #include "../ecs/Component.h"
 
 #include "../ecs/Entity.h"
+#include "UI.h"
 
 class Life: public Component {
 public:
