@@ -45,7 +45,7 @@ void Game::init() {
 	hamster1->addComponent<StrongAttack>(30);
 	hamster1->addComponent<Life>(100);
 	hamster1->addComponent<Stroke>();
-	hamster1->addComponent<UI>("sardinilla");
+	//hamster1->addComponent<UI>("sardinilla");
 
 
 	//Enemigo de prueba
