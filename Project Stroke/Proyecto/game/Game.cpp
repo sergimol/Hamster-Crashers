@@ -23,25 +23,28 @@
 
 Game::Game() {
 	mngr_.reset(new Manager());
+	// Creación de cámara
+	camera_ = { 0,0,2500, 2000 };
 }
 
 Game::~Game() {
 }
 
 void Game::init() {
+	SDLUtils::init("Squeak Ship", 1920, 1010,
+		"../../../Proyecto/resources/config/hamsters.resources.json");
 
-	SDLUtils::init("Squeak Ship", 800, 600,
-			"../../../Proyecto/resources/config/hamsters.resources.json");
+	auto* hamster = mngr_->addEntity();
+	hamster->addComponent<Transform>(
+		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
+		Vector2D(), 128.0f, 128.0f, 0.0f);
+	hamster->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+	hamster->addComponent<Movement>();
+	hamster->addComponent<LightAttack>(20);
+	hamster->addComponent<StrongAttack>(30);
+	hamster->addComponent<Life>(100);
 
-	auto *caza = mngr_->addEntity();
-	caza->addComponent<Transform>(
-			Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
-			Vector2D(), 128.0f, 128.0f, 0.0f);
-	caza->addComponent<Image>(&sdlutils().images().at("sardinilla"));
-	caza->addComponent<Movement>();
-	caza->addComponent<LightAttack>(20);
-	caza->addComponent<StrongAttack>(30);
-	caza->addComponent<Life>(100);
+	players_.push_back(hamster);
 
 	//Enemigo de prueba
 	auto* enemy = mngr_->addEntity();
@@ -75,6 +78,8 @@ void Game::start() {
 		mngr_->update();
 		mngr_->refresh();
 
+		updateCamera();
+
 		sdlutils().clearRenderer();
 		mngr_->render();
 		sdlutils().presentRenderer();
@@ -85,5 +90,32 @@ void Game::start() {
 			SDL_Delay(20 - frameTime);
 	}
 
+}
+
+// establece la cámara en la posición correcta dados los jugadores
+void Game::updateCamera() {
+
+	Vector2D camPos;
+
+	//Cámara sigue a los personajes
+	for (Entity* e : players_) {
+		auto& playerpos = e->getComponent<Transform>()->getPos();
+		
+		// Operación para calcular el punto medio con más jugadores
+		camPos = playerpos;
+	}
+
+	camera_.x = camPos.getX() - camera_.w / 2;
+	camera_.y = camPos.getY() - camera_.h / 2;
+
+	// Bordes de la cámara
+	if (camera_.x < 0)
+		camera_.x = 0;
+	if (camera_.y < 0)
+		camera_.y = 0;
+	if (camera_.x > camera_.w)
+		camera_.x = camera_.w;
+	if (camera_.h > camera_.h)
+		camera_.y = camera_.h;
 }
 
