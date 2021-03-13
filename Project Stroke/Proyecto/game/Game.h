@@ -16,11 +16,11 @@ public:
 	virtual ~Game();
 	void init();
 	void start();
+	static SDL_Rect camera_;
 
 private:
 	std::unique_ptr<Manager> mngr_;
 	std::vector<Entity*> players_; // vector de jugadores
-	SDL_Rect camera_;
 
 	void updateCamera();
 };

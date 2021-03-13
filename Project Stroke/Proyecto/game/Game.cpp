@@ -21,10 +21,11 @@
 #include "../ecs/Manager.h"
 #include "../utils/Vector2D.h"
 
+SDL_Rect Game::camera_ = { 0,0,2500, 2000 };
+
 Game::Game() {
 	mngr_.reset(new Manager());
 	// Creación de cámara
-	camera_ = { 0,0,2500, 2000 };
 }
 
 Game::~Game() {
@@ -109,6 +110,7 @@ void Game::updateCamera() {
 	camera_.y = camPos.getY() - camera_.h / 2;
 
 	// Bordes de la cámara
+	/*
 	if (camera_.x < 0)
 		camera_.x = 0;
 	if (camera_.y < 0)
@@ -117,5 +119,8 @@ void Game::updateCamera() {
 		camera_.x = camera_.w;
 	if (camera_.h > camera_.h)
 		camera_.y = camera_.h;
+	*/
+
+	//std::cout << camera_.x << " " << camera_.y;
 }
 
