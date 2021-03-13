@@ -1,4 +1,5 @@
 #include "StrongAttack.h"
+#include "Stroke.h"
 
 StrongAttack::StrongAttack(float dmg) :
 	tr_(nullptr), w_(60), h_(30), cooldown_(500),dmg_(dmg), time_(sdlutils().currRealTime()), attackSound_(sdlutils().soundEffects().at("strong_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {
@@ -47,6 +48,7 @@ void StrongAttack::update() {
 			//this.anims.play(pegarse)
 
 			time_ = sdlutils().currRealTime();
+			entity_->getComponent<Stroke>()->increaseChance(10, this);
 		}
 	}
 }
