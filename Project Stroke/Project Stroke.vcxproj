@@ -145,7 +145,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Proyecto\components\Camera.cpp" />
     <ClCompile Include="Proyecto\components\Ability.cpp" />
     <ClCompile Include="Proyecto\components\Image.cpp" />
     <ClCompile Include="Proyecto\components\UI.cpp" />
@@ -172,7 +171,6 @@
   <ItemGroup>
     <ClInclude Include="Proyecto\components\Abilty.h" />
     <ClInclude Include="Proyecto\components\Bounce.h" />
-    <ClInclude Include="Proyecto\components\Camera.h" />
     <ClInclude Include="Proyecto\components\DeAcceleration.h" />
     <ClInclude Include="Proyecto\components\FighterCtrl.h" />
     <ClInclude Include="Proyecto\components\Image.h" />
