@@ -87,7 +87,7 @@ void Movement:: update() {
 		state = MOVING;
 	}
 
-	if ((state == IDLE || state == MOVING) && keymap.at(SPACE) && jump_ != 0) {
+	if ((state == IDLE || state == MOVING) && keymap.at(SPACE)) {
 		tr_->setVelZ(tr_->getVelZ() + jump_);
 		if (jump_ < 5) jump_ += 1.2;
 		state = JUMPING;

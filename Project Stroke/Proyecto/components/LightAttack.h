@@ -11,6 +11,7 @@
 #include "../ecs/Manager.h"
 #include "Life.h"
 #include "Transform.h"
+#include "HamsterStateMachine.h"
 
 class LightAttack : public Component {
 public:
@@ -27,6 +28,7 @@ public:
 
 private:
 	Transform* tr_;
+	HamsterStateMachine* hms_;
 	short unsigned int w_, h_;
 	long unsigned int cooldown_, time_;
 	SoundEffect& attackSound_;

@@ -4,6 +4,7 @@
 
 #include "../ecs/Entity.h"
 #include "UI.h"
+#include "HamsterStateMachine.h"
 
 class Life: public Component {
 public:
@@ -14,13 +15,15 @@ public:
 	virtual ~Life() {
 	}
 
+	void init() override;
+
 	bool recieveDmg(int dmg);
 
 	void heal(int hp);
 
 
 	void update() override {
-	}
+	};
 
 	inline void setLife(int life) { health_ = life; };
 
@@ -33,6 +36,7 @@ public:
 	}
 
 private:
+	HamsterStateMachine* hms_;
 	int health_;
 	int maxHealth_;
 };

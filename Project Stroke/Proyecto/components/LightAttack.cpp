@@ -8,15 +8,18 @@ LightAttack::LightAttack(float dmg) :
 void LightAttack::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+	hms_ = entity_->getComponent<HamsterStateMachine>();
+	assert(hms_ != nullptr);
 }
 
 void LightAttack::update() {
 	if (ih().mouseButtonEvent()) {
-		if (ih().getMouseButtonState(ih().LEFT) == 1 && sdlutils().currRealTime() > time_ + cooldown_) {
+		auto state = hms_->getState();
+		if (!(state == DEAD || state == STUNNED || state == INFARCTED) && ih().getMouseButtonState(ih().LEFT) == 1 && sdlutils().currRealTime() > time_ + cooldown_) {
 
 			auto size = tr_->getW();
 			auto& pos = tr_->getPos();
-
+			state = LIGHTATTACK;
 
 			SDL_Rect rect;
 			rect.w = w_;
@@ -49,6 +52,9 @@ void LightAttack::update() {
 
 			time_ = sdlutils().currRealTime();
 			entity_->getComponent<Stroke>()->increaseChance(5, this);
+		}
+		else if (sdlutils().currRealTime() > time_ + cooldown_ / 2) {
+			state = IDLE;
 		}
 	}
 }

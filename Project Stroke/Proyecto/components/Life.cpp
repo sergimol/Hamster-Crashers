@@ -10,6 +10,11 @@ Life::Life(int life) :
 	maxHealth_(life)
 {}
 
+void Life::init() {
+	hms_ = entity_->getComponent<HamsterStateMachine>();
+	assert(hms_ != nullptr);
+}
+
 //Resta el da�o y devuelve true si ha muerto
 bool Life::recieveDmg(int dmg) {
 	health_ -= dmg;
@@ -20,6 +25,7 @@ bool Life::recieveDmg(int dmg) {
 
 	//Si la vida ha bajado de 0...
 	if (health_ <= 0) {
+		hms_->getState() = DEAD;
 		//Actualizamos UI
 		if (entity_->hasComponent<UI>())
 			entity_->getComponent<UI>()->dep();

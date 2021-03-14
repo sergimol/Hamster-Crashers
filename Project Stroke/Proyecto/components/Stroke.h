@@ -5,6 +5,7 @@
 #include "../ecs/Entity.h"
 #include "Transform.h"
 #include "../sdlutils/SDLUtils.h"
+#include "HamsterStateMachine.h"
 
 // Tiempo entre comprobación
 const int UPDATETIME = 5000,
@@ -26,6 +27,7 @@ public:
 
 private:
 	Transform *tr_;
+	HamsterStateMachine* hms_;
 	// Probabilidad de que haya un infarto
 	int chance_ = 1,
 		chanceFromAb_ = 0,

@@ -4,6 +4,8 @@
 void Stroke::init() {
 		tr_ = entity_->getComponent<Transform>();
 		assert(tr_ != nullptr);
+		hms_ = entity_->getComponent<HamsterStateMachine>();
+		assert(hms_ != nullptr);
 }
 
 void Stroke::update() {
@@ -12,9 +14,12 @@ void Stroke::update() {
 		// Número aleatorio para ver si infarta o no
 		int i = r_.nextInt(0, 100);
 		// Si i es menor que la probabilidad, infarta
-		if(i <= chance_ + chanceFromAb_)
+		if (i <= chance_ + chanceFromAb_) {
 			//TODO madremia que no lo podemos desactivar porque hay que quitarlo de la lsita de player y noseque algo habra que ahcer para que la camara no explote
 			//entity_->setActive(false);
+			hms_->getState() = INFARCTED;
+		}
+			
 
 		timeLastUpdate_ = sdlutils().currRealTime();
 	}
