@@ -5,11 +5,12 @@
 #include <map>
 #include "Transform.h"
 #include "HamsterStateMachine.h"
+#include "Animator.h"
 
 class Movement : public Component {
 public:
 	Movement() :
-		tr_(nullptr), hms_(nullptr), speed_(7.0f, 3.5f), goalVel_(0, 0), jump_(0) {
+		tr_(nullptr), hms_(nullptr), anim_(nullptr), speed_(7.0f, 3.5f), goalVel_(0, 0), jump_(0) {
 	}
 
 	virtual ~Movement() {
@@ -24,6 +25,7 @@ public:
 private:
 	Transform* tr_;
 	HamsterStateMachine* hms_;
+	Animator* anim_;
 	Vector2D speed_, goalVel_;
 	float jump_;
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };

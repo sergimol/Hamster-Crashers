@@ -12,6 +12,7 @@ class Movement;
 class Life;
 class UI;
 class Stroke;
+class Animator;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -22,7 +23,8 @@ class Stroke;
 	Movement, \
 	Life, \
 	Stroke, \
-	UI
+	UI, \
+	Animator
 
 // groups
 

@@ -248,6 +248,9 @@
     <ClInclude Include="Proyecto\components\HamsterStateMachine.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Proyecto\components\Animator.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Proyecto\resources\config\hamsters.resources.json">

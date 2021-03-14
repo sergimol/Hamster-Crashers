@@ -176,6 +176,7 @@
     <ClInclude Include="Proyecto\components\Camera.h" />
     <ClInclude Include="Proyecto\components\DeAcceleration.h" />
     <ClInclude Include="Proyecto\components\FighterCtrl.h" />
+    <ClInclude Include="Proyecto\components\Animator.h" />
     <ClInclude Include="Proyecto\components\HamsterStateMachine.h" />
     <ClInclude Include="Proyecto\components\Image.h" />
     <ClInclude Include="Proyecto\components\UI.h" />

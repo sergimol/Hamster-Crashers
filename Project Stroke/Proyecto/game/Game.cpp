@@ -10,6 +10,7 @@
 #include "../components/StrongAttack.h"
 #include "../components/Stroke.h"
 #include "../components/UI.h"
+#include "../components/Animator.h"
 
 #include "../ecs/ecs.h"
 #include "../sdlutils/InputHandler.h"
@@ -35,13 +36,24 @@ void Game::init() {
 	hamster1->addComponent<Transform>(
 		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
 		Vector2D(), 128.0f, 128.0f, 0.0f);
-	hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+	//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+	hamster1->addComponent<Animator>(
+		&sdlutils().images().at("sardinillaSheet"),
+		64,
+		64,
+		3,
+		1,
+		220,
+		Vector2D(0, 0),
+		Vector2D(2, 0)
+		);
 	hamster1->addComponent<HamsterStateMachine>();
 	hamster1->addComponent<Movement>();
 	hamster1->addComponent<LightAttack>(20);
 	hamster1->addComponent<StrongAttack>(30);
-	hamster1->addComponent<Life>(100);
+	//hamster1->addComponent<Life>(100);
 	hamster1->addComponent<Stroke>();
+	
 
 	//hamster1->addComponent<UI>("sardinilla");
 
@@ -49,7 +61,7 @@ void Game::init() {
 
 	//Enemigo de prueba
 	auto* enemy = mngr_->addEntity();
-	enemy->addComponent<Life>(200);
+	//enemy->addComponent<Life>(200);
 	enemy->addComponent<Transform>(
 		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
 		Vector2D(), 300.0f, 300.0f, 0.0f);

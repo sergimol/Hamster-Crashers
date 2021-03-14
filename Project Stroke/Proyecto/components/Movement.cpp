@@ -11,6 +11,10 @@ void Movement:: init() {
 	hms_ = entity_->getComponent<HamsterStateMachine>();
 	assert(hms_ != nullptr);
 
+	anim_ = entity_->getComponent<Animator>();
+	assert(anim_ != nullptr);
+
+
 	keymap.insert({ UP, false });
 	keymap.insert({ DOWN, false });
 	keymap.insert({ RIGHT, false });
@@ -79,12 +83,22 @@ void Movement:: update() {
 	if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {
 		vel.setX(lerp(vel.getX(), 0, 0.1));
 		vel.setY(lerp(vel.getY(), 0, 0.1));
+
+		//ANIMACION DE IDLE
+		if(state != IDLE)
+			anim_->play(Vector2D(0, 0), Vector2D(2, 0), 220);
 		state = IDLE;
+	
 	}
 	else if (state == IDLE || state == MOVING || state == JUMPING) {
 		vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.5));
 		vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.5));
+
+		//ANIMACION DE MOVIMIENTO
+		if (state != MOVING)
+			anim_->play(Vector2D(0, 1), Vector2D(2, 2), 100);
 		state = MOVING;
+
 	}
 
 	if ((state == IDLE || state == MOVING) && keymap.at(SPACE)) {
