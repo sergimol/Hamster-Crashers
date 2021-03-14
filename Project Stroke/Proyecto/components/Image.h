@@ -23,14 +23,13 @@ public:
 	}
 
 	void render() override {
-		Vector2D renderPos = Vector2D(tr_->getPos().getX() - Game::camera_.x, tr_->getPos().getY() - tr_->getZ() - Game::camera_.y);
+		Vector2D renderPos = Vector2D(tr_->getPos().getX() + Game::camera_.x, tr_->getPos().getY() - tr_->getZ() );
 		SDL_Rect dest = build_sdlrect(renderPos, tr_->getW(), tr_->getH());
 		if(tr_->getFlip())
 			tex_->render(dest, tr_->getRot(), SDL_FLIP_HORIZONTAL);
 		else 
 			tex_->render(dest, tr_->getRot());
-
-		std::cout << renderPos.getX() << " " << renderPos.getY() << "\n";
+		
 	}
 
 private:
