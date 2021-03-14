@@ -2,13 +2,9 @@
 
 #include "Game.h"
 
-#include "../components/Bounce.h"
-#include "../components/KeyBoardCtrl.h"
-#include "../components/Rectangle.h"
 #include "../components/Transform.h"
+#include "../components/HamsterStateMachine.h"
 #include "../components/Image.h"
-#include "../components/DeAcceleration.h"
-#include "../components/FighterCtrl.h"
 #include "../components/Movement.h"
 #include "../components/LightAttack.h"
 #include "../components/StrongAttack.h"
@@ -16,7 +12,6 @@
 #include "../components/UI.h"
 
 #include "../ecs/ecs.h"
-#include "../ecs/Entity.h"
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
 
@@ -41,11 +36,13 @@ void Game::init() {
 		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
 		Vector2D(), 128.0f, 128.0f, 0.0f);
 	hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+	hamster1->addComponent<HamsterStateMachine>();
 	hamster1->addComponent<Movement>();
 	hamster1->addComponent<LightAttack>(20);
 	hamster1->addComponent<StrongAttack>(30);
 	hamster1->addComponent<Life>(100);
 	hamster1->addComponent<Stroke>();
+
 	//hamster1->addComponent<UI>("sardinilla");
 
 	players_.push_back(hamster1);

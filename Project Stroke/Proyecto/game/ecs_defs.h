@@ -4,10 +4,8 @@
 
 // components -- forward declaration, i.e., assume they are defined somewhere
 class Transform;
-class FighterCtrl;
-class Bounce;
+class HamsterStateMachine;
 class Image;
-class DeAcceleration;
 class LightAttack;
 class StrongAttack;
 class Movement;
@@ -17,10 +15,8 @@ class Stroke;
 
 #define _CMPS_LIST_  \
 	Transform,\
-	FighterCtrl,\
+	HamsterStateMachine, \
 	Image,\
-	DeAcceleration,\
-	Bounce, \
 	LightAttack, \
 	StrongAttack, \
 	Movement, \

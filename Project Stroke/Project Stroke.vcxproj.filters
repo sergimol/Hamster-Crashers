@@ -126,6 +126,9 @@
     <ClCompile Include="Proyecto\components\Camera.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\HamsterStateMachine.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\components\Bounce.h">
@@ -241,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\Camera.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\HamsterStateMachine.h">
+      <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
