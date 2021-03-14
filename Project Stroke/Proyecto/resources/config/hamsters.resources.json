@@ -41,54 +41,6 @@
     {
       "id": "monchi",
       "file": "../../../Proyecto/resources/images/monchi.png"
-    },
-    {
-      "id": "bar",
-      "file": "../../../Proyecto/resources/images/UI/bar.png"
-    },
-    {
-      "id": "heart1",
-      "file": "../../../Proyecto/resources/images/UI/heart1.png"
-    },
-    {
-      "id": "heart2",
-      "file": "../../../Proyecto/resources/images/UI/heart2.png"
-    },
-    {
-      "id": "heart3",
-      "file": "../../../Proyecto/resources/images/UI/heart3.png"
-    },
-    {
-      "id": "sardinillaHead1",
-      "file": "../../../Proyecto/resources/images/UI/sardinillaHead1.png"
-    },
-    {
-      "id": "sardinillaHead2",
-      "file": "../../../Proyecto/resources/images/UI/sardinillaHead2.png"
-    },
-    {
-      "id": "ketaHead1",
-      "file": "../../../Proyecto/resources/images/UI/ketaHead1.png"
-    },
-    {
-      "id": "ketaHead2",
-      "file": "../../../Proyecto/resources/images/UI/ketaHead2.png"
-    },
-    {
-      "id": "monchiHead1",
-      "file": "../../../Proyecto/resources/images/UI/monchiHead1.png"
-    },
-    {
-      "id": "monchiHead2",
-      "file": "../../../Proyecto/resources/images/UI/monchiHead2.png"
-    },
-    {
-      "id": "canelonHead1",
-      "file": "../../../Proyecto/resources/images/UI/canelonHead1.png"
-    },
-    {
-      "id": "canelonHead2",
-      "file": "../../../Proyecto/resources/images/UI/canelonHead2.png"
     }
   ],
 

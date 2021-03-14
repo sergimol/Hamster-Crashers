@@ -1,32 +1,21 @@
 #include "Life.h"
 
 Life::Life() :
-	health_(),
-	maxHealth_()
-{}
+	health_() {
+}
 
-Life::Life(int life) :
-	health_(life),
-	maxHealth_(life)
-{}
+Life::Life(int life) : health_(life) {}
 
-//Resta el daï¿½o y devuelve true si ha muerto
+//Resta el daño y devuelve true si ha muerto
 bool Life::recieveDmg(int dmg) {
 	health_ -= dmg;
-	std::cout << health_ << std::endl;
-	//Actualizamos la healthBar
-	if (entity_->hasComponent<UI>())
-		entity_->getComponent<UI>()->bar(-dmg);
+	std::cout << health_<<std::endl;
 
 	//Si la vida ha bajado de 0...
 	if (health_ <= 0) {
-		//Actualizamos UI
-		if (entity_->hasComponent<UI>())
-			entity_->getComponent<UI>()->dep();
-
 		health_ = 0;
 		//Desactivamos la entidad
-		//entity_->setActive(false);
+		this->getEntity()->setActive(false);
 		return true;
 	}
 	else
