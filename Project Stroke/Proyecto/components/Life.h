@@ -3,6 +3,7 @@
 #include "../ecs/Component.h"
 
 #include "../ecs/Entity.h"
+#include "UI.h"
 
 class Life: public Component {
 public:
@@ -27,9 +28,12 @@ public:
 	inline int getLife() const {
 		return health_;
 	}
+	inline int getMaxLife() const {
+		return maxHealth_;
+	}
 
 private:
 	int health_;
-
+	int maxHealth_;
 };
 

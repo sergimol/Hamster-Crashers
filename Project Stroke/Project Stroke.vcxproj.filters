@@ -108,10 +108,19 @@
     <ClCompile Include="Proyecto\components\StrongAttack.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\Tansform.cpp">
+    <ClCompile Include="Proyecto\components\Life.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\Life.cpp">
+    <ClCompile Include="Proyecto\components\Stroke.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Ability.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Transform.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\UI.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
     <ClCompile Include="Proyecto\components\Camera.cpp">
@@ -222,6 +231,13 @@
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\Camera.h">
+    <ClInclude Include="Proyecto\components\Stroke.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Abilty.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\UI.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>
