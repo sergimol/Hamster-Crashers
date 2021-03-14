@@ -23,16 +23,18 @@
 #include "../ecs/Manager.h"
 #include "../utils/Vector2D.h"
 
+SDL_Rect Game::camera_ = { 0,0,1920, 1010 };
+
 Game::Game() {
 	mngr_.reset(new Manager());
+	// Creaci�n de c�mara
 }
 
 Game::~Game() {
 }
 
 void Game::init() {
-
-	SDLUtils::init("Squeak Ship", 800, 600,
+	SDLUtils::init("Squeak Ship", 1920, 1010,
 		"../../../Proyecto/resources/config/hamsters.resources.json");
 
 	auto* hamster1 = mngr_->addEntity();
@@ -46,7 +48,6 @@ void Game::init() {
 	hamster1->addComponent<Life>(100);
 	hamster1->addComponent<Stroke>();
 	//hamster1->addComponent<UI>("sardinilla");
-
 
 	//Enemigo de prueba
 	auto* enemy = mngr_->addEntity();
@@ -80,6 +81,8 @@ void Game::start() {
 		mngr_->update();
 		mngr_->refresh();
 
+		updateCamera();
+
 		sdlutils().clearRenderer();
 		mngr_->render();
 		sdlutils().presentRenderer();
@@ -90,5 +93,36 @@ void Game::start() {
 			SDL_Delay(20 - frameTime);
 	}
 
+}
+
+// establece la c�mara en la posici�n correcta dados los jugadores
+void Game::updateCamera() {
+
+	Vector2D camPos;
+
+	//C�mara sigue a los personajes
+	for (Entity* e : players_) {
+		auto& playerpos = e->getComponent<Transform>()->getPos();
+		
+		// Operaci�n para calcular el punto medio con m�s jugadores
+		camPos = playerpos;
+	}
+
+	camera_.x = camPos.getX() -camera_.w / 2;
+	camera_.y = camPos.getY() -camera_.h / 2;
+
+	// Bordes de la c�mara
+	/*
+	if (camera_.x < 0)
+		camera_.x = 0;
+	if (camera_.y < 0)
+		camera_.y = 0;
+	if (camera_.x > camera_.w)
+		camera_.x = camera_.w;
+	if (camera_.h > camera_.h)
+		camera_.y = camera_.h;
+	*/
+
+	std::cout << camera_.x << " " << camera_.y << "\n";
 }
 

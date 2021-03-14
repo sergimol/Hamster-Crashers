@@ -123,6 +123,9 @@
     <ClCompile Include="Proyecto\components\UI.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\Camera.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\components\Bounce.h">
@@ -227,6 +230,7 @@
     <ClInclude Include="Proyecto\components\Life.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Proyecto\components\Camera.h">
     <ClInclude Include="Proyecto\components\Stroke.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
