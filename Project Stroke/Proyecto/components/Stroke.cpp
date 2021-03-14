@@ -13,7 +13,8 @@ void Stroke::update() {
 		int i = r_.nextInt(0, 100);
 		// Si i es menor que la probabilidad, infarta
 		if(i <= chance_ + chanceFromAb_)
-			entity_->setActive(false);
+			//TODO madremia que no lo podemos desactivar porque hay que quitarlo de la lsita de player y noseque algo habra que ahcer para que la camara no explote
+			//entity_->setActive(false);
 
 		timeLastUpdate_ = sdlutils().currRealTime();
 	}

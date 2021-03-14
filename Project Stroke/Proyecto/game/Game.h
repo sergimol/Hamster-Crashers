@@ -2,7 +2,9 @@
 
 #pragma once
 #include <memory>
-
+#include <SDL.h>
+#include <vector>
+#include "../ecs/Entity.h"
 
 
 // when you are not using the methods of a class, just
@@ -15,7 +17,11 @@ public:
 	virtual ~Game();
 	void init();
 	void start();
+	void updateCamera();
+
+	static SDL_Rect camera_;
 private:
 	std::unique_ptr<Manager> mngr_;
+	std::vector<Entity*> players_; // vector de jugadores
 };
 
