@@ -2,9 +2,8 @@
 
 #pragma once
 #include <memory>
-#include <SDL.h>
-#include <vector>
-#include "../ecs/Entity.h"
+
+
 
 // when you are not using the methods of a class, just
 // say that it exists, that saves time when parsing files
@@ -16,12 +15,7 @@ public:
 	virtual ~Game();
 	void init();
 	void start();
-	static SDL_Rect camera_;
-
 private:
 	std::unique_ptr<Manager> mngr_;
-	std::vector<Entity*> players_; // vector de jugadores
-
-	void updateCamera();
 };
 

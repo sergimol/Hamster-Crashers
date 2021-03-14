@@ -12,6 +12,8 @@ class LightAttack;
 class StrongAttack;
 class Movement;
 class Life;
+class UI;
+class Stroke;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -22,7 +24,9 @@ class Life;
 	LightAttack, \
 	StrongAttack, \
 	Movement, \
-	Life
+	Life, \
+	Stroke, \
+	UI
 
 // groups
 

@@ -12,6 +12,8 @@
 #include "../components/Movement.h"
 #include "../components/LightAttack.h"
 #include "../components/StrongAttack.h"
+#include "../components/Stroke.h"
+#include "../components/UI.h"
 
 #include "../ecs/ecs.h"
 #include "../ecs/Entity.h"
@@ -21,31 +23,30 @@
 #include "../ecs/Manager.h"
 #include "../utils/Vector2D.h"
 
-SDL_Rect Game::camera_ = { 0,0,1920, 1010 };
-
 Game::Game() {
 	mngr_.reset(new Manager());
-	// Creación de cámara
 }
 
 Game::~Game() {
 }
 
 void Game::init() {
-	SDLUtils::init("Squeak Ship", 1920, 1010,
+
+	SDLUtils::init("Squeak Ship", 800, 600,
 		"../../../Proyecto/resources/config/hamsters.resources.json");
 
-	auto* hamster = mngr_->addEntity();
-	hamster->addComponent<Transform>(
+	auto* hamster1 = mngr_->addEntity();
+	hamster1->addComponent<Transform>(
 		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
 		Vector2D(), 128.0f, 128.0f, 0.0f);
-	hamster->addComponent<Image>(&sdlutils().images().at("sardinilla"));
-	hamster->addComponent<Movement>();
-	hamster->addComponent<LightAttack>(20);
-	hamster->addComponent<StrongAttack>(30);
-	hamster->addComponent<Life>(100);
+	hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+	hamster1->addComponent<Movement>();
+	hamster1->addComponent<LightAttack>(20);
+	hamster1->addComponent<StrongAttack>(30);
+	hamster1->addComponent<Life>(100);
+	hamster1->addComponent<Stroke>();
+	//hamster1->addComponent<UI>("sardinilla");
 
-	players_.push_back(hamster);
 
 	//Enemigo de prueba
 	auto* enemy = mngr_->addEntity();
@@ -55,7 +56,7 @@ void Game::init() {
 		Vector2D(), 300.0f, 300.0f, 0.0f);
 	enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
 	enemy->setGroup<Enemy>(true);
-
+	enemy->addComponent<UI>("sardinilla");
 }
 
 void Game::start() {
@@ -79,8 +80,6 @@ void Game::start() {
 		mngr_->update();
 		mngr_->refresh();
 
-		updateCamera();
-
 		sdlutils().clearRenderer();
 		mngr_->render();
 		sdlutils().presentRenderer();
@@ -91,36 +90,5 @@ void Game::start() {
 			SDL_Delay(20 - frameTime);
 	}
 
-}
-
-// establece la cámara en la posición correcta dados los jugadores
-void Game::updateCamera() {
-
-	Vector2D camPos;
-
-	//Cámara sigue a los personajes
-	for (Entity* e : players_) {
-		auto& playerpos = e->getComponent<Transform>()->getPos();
-		
-		// Operación para calcular el punto medio con más jugadores
-		camPos = playerpos;
-	}
-
-	camera_.x = camPos.getX() -camera_.w / 2;
-	camera_.y = camPos.getY() -camera_.h / 2;
-
-	// Bordes de la cámara
-	/*
-	if (camera_.x < 0)
-		camera_.x = 0;
-	if (camera_.y < 0)
-		camera_.y = 0;
-	if (camera_.x > camera_.w)
-		camera_.x = camera_.w;
-	if (camera_.h > camera_.h)
-		camera_.y = camera_.h;
-	*/
-
-	std::cout << camera_.x << " " << camera_.y << "\n";
 }
 
