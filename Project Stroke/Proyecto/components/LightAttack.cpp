@@ -1,5 +1,4 @@
 #include "LightAttack.h"
-#include "Stroke.h"
 
 LightAttack::LightAttack(float dmg) :
 	tr_(nullptr), w_(60), h_(30), cooldown_(350), time_(sdlutils().currRealTime()),dmg_(dmg),
@@ -48,7 +47,6 @@ void LightAttack::update() {
 			//this.anims.play(pegarse)
 
 			time_ = sdlutils().currRealTime();
-			entity_->getComponent<Stroke>()->increaseChance(5, this);
 		}
 	}
 }
