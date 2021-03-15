@@ -36,7 +36,7 @@ void Game::init() {
 	hamster1->addComponent<Transform>(
 		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
 		Vector2D(), 128.0f, 128.0f, 0.0f);
-	hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+	//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
 	hamster1->addComponent<Animator>(
 		&sdlutils().images().at("sardinillaSheet"),
 		64,
