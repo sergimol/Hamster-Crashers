@@ -11,7 +11,7 @@
 
 class UI : public Component {
 public:
-	UI(std::string n);
+	UI(std::string n, int pos);
 	virtual ~UI() {};
 
 	void render() override;
@@ -38,4 +38,5 @@ private:
 	int scale;
 	int barLenght;
 	int barLenghtInit;
+	int position;
 };

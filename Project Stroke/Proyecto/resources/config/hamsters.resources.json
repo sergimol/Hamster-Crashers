@@ -47,6 +47,10 @@
       "file": "../../../Proyecto/resources/images/UI/bar.png"
     },
     {
+      "id": "barEnemy",
+      "file": "../../../Proyecto/resources/images/UI/barEnemy.png"
+    },
+    {
       "id": "heart1",
       "file": "../../../Proyecto/resources/images/UI/heart1.png"
     },

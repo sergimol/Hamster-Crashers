@@ -53,9 +53,7 @@ void Game::init() {
 	hamster1->addComponent<StrongAttack>(30);
 	hamster1->addComponent<Stroke>();
 	hamster1->addComponent<Life>(100);
-	
-
-	//hamster1->addComponent<UI>("sardinilla");
+	hamster1->addComponent<UI>("sardinilla", 3 );
 
 	players_.push_back(hamster1);
 
@@ -67,7 +65,7 @@ void Game::init() {
 		Vector2D(), 300.0f, 300.0f, 0.0f);
 	enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
 	enemy->setGroup<Enemy>(true);
-	enemy->addComponent<UI>("sardinilla");
+	enemy->addComponent<UI>("canelon", 4);
 }
 
 void Game::start() {
