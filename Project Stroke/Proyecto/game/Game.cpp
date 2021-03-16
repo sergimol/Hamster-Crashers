@@ -29,8 +29,8 @@ Game::~Game() {
 
 void Game::init() {
 
-	SDLUtils::init("Squeak Ship", 1920, 1080,
-		"../../../Proyecto/resources/config/hamsters.resources.json");
+	SDLUtils::init("Squeak Ship", 1920, 1010,
+		"resources/config/hamsters.resources.json");
 
 	//Imagen de fondo fija
 	auto* background = mngr_->addEntity();
@@ -103,7 +103,7 @@ void Game::init() {
 	
 
 
-	//Enemigo de prueba con la imagen de canelón
+	//Enemigo de prueba con la imagen de canelÃ³n
 	auto* enemy = mngr_->addEntity();
 	enemy->addComponent<Life>(200);
 	enemy->addComponent<Transform>(
@@ -153,18 +153,18 @@ void Game::updateCamera() {
 
 	Vector2D camPos;
 
-	//Cámara sigue a los personajes
+	//CÃ¡mara sigue a los personajes
 	for (Entity* e : players_) {
 		auto& playerpos = e->getComponent<Transform>()->getPos();
 
-		// Operación para calcular el punto medio con más jugadores
+		// OperaciÃ³n para calcular el punto medio con mÃ¡s jugadores
 		camPos = playerpos;
 	}
 
 	camera_.x = camPos.getX() - camera_.w / 2;
 	camera_.y = camPos.getY() - camera_.h / 2;
 
-	// Bordes de la cámara
+	// Bordes de la cÃ¡mara
 	/*
 	if (camera_.x < 0)
 		camera_.x = 0;

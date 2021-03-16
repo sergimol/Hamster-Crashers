@@ -253,7 +253,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Proyecto\resources\config\hamsters.resources.json">
+    <None Include="SDL2-2.0.7\lib\x64\resources\config\hamsters.resources.json">
       <Filter>Archivos de recursos\resources\config</Filter>
     </None>
   </ItemGroup>

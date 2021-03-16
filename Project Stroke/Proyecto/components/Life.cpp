@@ -17,7 +17,7 @@ void Life::init() {
 //Resta el da�o y devuelve true si ha muerto
 bool Life::recieveDmg(int dmg) {
 	health_ -= dmg;
-	std::cout << health_ << std::endl;
+	//std::cout << health_ << std::endl;
 	//Actualizamos la healthBar
 	if (entity_->hasComponent<UI>())
 		entity_->getComponent<UI>()->bar(-dmg);
