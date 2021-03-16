@@ -25,7 +25,7 @@ public:
 
 private:
 
-	const float jump_ = 10.0f, gravity_ = 9.8f, jumpTimer_ = 500.0f;
+	const float jump_ = 45.0f, gravity_ = 4.8f, jumpTimer_ = 10.0f;
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 	long unsigned int timer;
 

@@ -29,7 +29,7 @@ Game::~Game() {
 
 void Game::init() {
 
-	SDLUtils::init("Squeak Ship", 1920, 1010,
+	SDLUtils::init("Squeak Ship", 1920, 1080,
 		"../../../Proyecto/resources/config/hamsters.resources.json");
 
 	//Imagen de fondo fija
