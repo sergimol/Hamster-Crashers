@@ -15,11 +15,11 @@ void StrongAttack::init() {
 void StrongAttack::update() {
 	if (ih().mouseButtonEvent()) {
 		auto state = hms_->getState();
-		if (!(state==DEAD || state ==STUNNED || state == INFARCTED) && ih().getMouseButtonState(ih().RIGHT) == 1 && sdlutils().currRealTime() > time_ + cooldown_) {
+		if (!(state== HamStates::DEAD || state == HamStates::STUNNED || state == HamStates::INFARCTED) && ih().getMouseButtonState(ih().RIGHT) == 1 && sdlutils().currRealTime() > time_ + cooldown_) {
 
 			auto size = tr_->getW();
 			auto& pos = tr_->getPos();
-			state = STRONGATTACK;
+			state = HamStates::STRONGATTACK;
 
 			SDL_Rect rect;
 			rect.w = w_;
@@ -54,7 +54,7 @@ void StrongAttack::update() {
 			entity_->getComponent<Stroke>()->increaseChance(10, this);
 		}
 		else if (sdlutils().currRealTime() > time_ + cooldown_ / 2) {
-			state = IDLE;
+			state = HamStates::IDLE;
 		}
 	}
 }

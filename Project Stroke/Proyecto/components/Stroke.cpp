@@ -17,7 +17,7 @@ void Stroke::update() {
 		if (i <= chance_ + chanceFromAb_) {
 			//TODO madremia que no lo podemos desactivar porque hay que quitarlo de la lsita de player y noseque algo habra que ahcer para que la camara no explote
 			//entity_->setActive(false);
-			hms_->getState() = INFARCTED;
+			hms_->getState() = HamStates::INFARCTED;
 		}
 			
 

@@ -32,8 +32,7 @@ private:
 	HamsterStateMachine* hms_;
 	short unsigned int w_, h_;
 	long unsigned int cooldown_, time_;
-	SoundEffect& attackSound_;
-	SoundEffect& hitSound_;
+	SoundEffect& attackSound_, &hitSound_;
 	float dmg_ = 0;
 }
 ;

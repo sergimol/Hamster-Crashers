@@ -3,6 +3,7 @@
 
 #include "../ecs/Component.h"
 #include <map>
+#include "../sdlutils/SDLUtils.h"
 #include "Transform.h"
 #include "HamsterStateMachine.h"
 #include "Animator.h"
@@ -10,7 +11,7 @@
 class Movement : public Component {
 public:
 	Movement() :
-		tr_(nullptr), hms_(nullptr), anim_(nullptr), speed_(7.0f, 3.5f), goalVel_(0, 0), jump_(0) {
+		tr_(nullptr), hms_(nullptr), anim_(nullptr), speed_(7.0f, 3.5f), goalVel_(0, 0), timer(sdlutils().currRealTime()) {
 	}
 
 	virtual ~Movement() {
@@ -23,12 +24,16 @@ public:
 	float lerp(float a, float b, float f);
 
 private:
+
+	const float jump_ = 10.0f, gravity_ = 9.8f, jumpTimer_ = 500.0f;
+	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
+	long unsigned int timer;
+
 	Transform* tr_;
 	HamsterStateMachine* hms_;
 	Animator* anim_;
 	Vector2D speed_, goalVel_;
-	float jump_;
-	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
+	
 	std::map<KEYS, bool> keymap;
 };
 

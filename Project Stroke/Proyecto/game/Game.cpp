@@ -176,6 +176,6 @@ void Game::updateCamera() {
 		camera_.y = camera_.h;
 	*/
 
-	std::cout << camera_.x << " " << camera_.y << "\n";
+	//std::cout << camera_.x << " " << camera_.y << "\n";
 }
 

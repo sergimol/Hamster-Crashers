@@ -27,6 +27,9 @@ void Movement:: update() {
 
 	auto& vel = tr_->getVel();
 	auto& state = hms_->getState();
+	auto& z = tr_->getZ();
+	auto& velZ = tr_->getVelZ();
+
 	if (ih().keyDownEvent() || ih().keyUpEvent()) {
 
 		if (ih().isKeyDown(SDL_SCANCODE_UP) || ih().isKeyDown(SDLK_w))
@@ -53,7 +56,7 @@ void Movement:: update() {
 
 		if (!keymap.at(SPACE) && ih().isKeyDown(SDLK_SPACE)) {
 			keymap.at(SPACE) = true;
-			jump_ = -5;
+			//jump_ = -5;
 			entity_->getComponent<Stroke>()->increaseChance(2, this);
 		}
 
@@ -80,38 +83,49 @@ void Movement:: update() {
 		}
 	}
 
-	if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {
+	if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT) && !(state == HamStates::JUMPING)) {
 		vel.setX(lerp(vel.getX(), 0, 0.1));
 		vel.setY(lerp(vel.getY(), 0, 0.1));
-
+		
 		//ANIMACION DE IDLE
-		if(state != IDLE)
+		if(state != HamStates::IDLE)
 			anim_->play(Vector2D(0, 0), Vector2D(2, 0), 220);
-		state = IDLE;
+		state = HamStates::IDLE;
 	
 	}
-	else if (state == IDLE || state == MOVING || state == JUMPING) {
+	else if (state == HamStates::IDLE || state == HamStates::MOVING /*|| state == HamStates::JUMPING*/) {
 		vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.5));
 		vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.5));
 
 		//ANIMACION DE MOVIMIENTO
-		if (state != MOVING)
+		if (state != HamStates::MOVING)
 			anim_->play(Vector2D(0, 1), Vector2D(2, 2), 100);
-		state = MOVING;
+		state = HamStates::MOVING;
 
 	}
-
-	if ((state == IDLE || state == MOVING) && keymap.at(SPACE)) {
-		tr_->setVelZ(tr_->getVelZ() + jump_);
-		if (jump_ < 5) jump_ += 1.2;
-		state = JUMPING;
+	else if (state == HamStates::JUMPING) {
+		anim_->play(Vector2D(0, 0), Vector2D(2, 0), 220);
 	}
-	if (tr_->getZ() < 0) {
+
+	if ((state == HamStates::IDLE || state == HamStates::MOVING) && keymap.at(SPACE)) {
+		velZ = jump_;
+		//velZ = velZ + jump_;
+		//if (jump_ < 10) jump_ += 1.2;
+		state = HamStates::JUMPING;
+		timer = sdlutils().currRealTime();
+	}
+
+	if (velZ > 0 && sdlutils().currRealTime() > timer + jumpTimer_) {
+		velZ -= gravity_;
+	}
+
+	if (z < 0) {
 		keymap.at(SPACE) = false;
-		jump_ = 0;
-		tr_->setVelZ(0);
-		tr_->setZ(0);
-		state = IDLE;
+		//jump_ = 0;
+		velZ = 0;
+		z = 0;
+		state = HamStates::IDLE;
+		timer = sdlutils().currRealTime();
 	}
 }
 

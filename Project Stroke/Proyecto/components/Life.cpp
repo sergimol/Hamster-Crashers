@@ -25,7 +25,7 @@ bool Life::recieveDmg(int dmg) {
 	//Si la vida ha bajado de 0...
 	if (health_ <= 0) {
 			if (hms_ != nullptr) {
-				hms_->getState() = DEAD;
+				hms_->getState() = HamStates::DEAD;
 			}
 		//Actualizamos UI
 		if (entity_->hasComponent<UI>())

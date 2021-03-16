@@ -35,14 +35,6 @@ public:
 		return z_;
 	}
 	
-	void setZ(float z) {
-		z_ = z;
-	}
-	
-	void setVelZ(float z) {
-		velZ_ = z;
-	}
-	
 	float& getVelZ() {
 		return velZ_;
 	}
@@ -80,7 +72,7 @@ public:
 	}
 
 	void update() override {
-		z_ -= velZ_;
+		z_ += velZ_;
 		//pos_.setY(pos_.getY() - z_);
 		pos_ = pos_ + vel_;		
 	}
