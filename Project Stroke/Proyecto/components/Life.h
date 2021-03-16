@@ -6,6 +6,7 @@
 #include "UI.h"
 #include "HamsterStateMachine.h"
 
+
 class Life: public Component {
 public:
 	Life();

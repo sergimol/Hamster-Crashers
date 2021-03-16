@@ -27,6 +27,7 @@ private:
 	SDL_Rect dest;	//Face
 	SDL_Rect dest2;	//Heart
 	SDL_Rect dest3;	//Bar
+
 	//Posiciones de los destRects
 	Vector2D renderPosHead;
 	Vector2D renderPosHeart;

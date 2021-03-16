@@ -39,6 +39,7 @@ UI::UI(std::string n, int pos) :
 }
 
 void UI::render() {
+	//Renderizamos la barra, la cara del hamster y su corazon
 	bar_->render(dest3);
 	face_->render(dest);
 	heart_->render(dest2);

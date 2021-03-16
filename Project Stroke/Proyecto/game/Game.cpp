@@ -32,10 +32,53 @@ void Game::init() {
 	SDLUtils::init("Squeak Ship", 1920, 1010,
 		"../../../Proyecto/resources/config/hamsters.resources.json");
 
+	//Imagen de fondo fija
+	auto* background = mngr_->addEntity();
+	background->addComponent<Transform>(
+		Vector2D(0,0),
+		Vector2D(), 1920.0f, 1010.0f, 0.0f);
+
+	background->addComponent<Image>(&sdlutils().images().at("background"));
+
+
+	////MATERIAL PARA EL HITO1
+	////Keta
+	//auto* hamster2 = mngr_->addEntity();
+	//hamster2->addComponent<Transform>(
+	//	Vector2D(sdlutils().width() / 2.0f - 500, sdlutils().height() / 2.0f + 200),
+	//	Vector2D(), 256.0f, 256.0f, 0.0f);
+	//hamster2->addComponent<Image>(&sdlutils().images().at("keta"));
+	//hamster2->addComponent<HamsterStateMachine>();
+	//hamster2->addComponent<LightAttack>(20);
+	//hamster2->addComponent<StrongAttack>(30);
+	//hamster2->addComponent<Stroke>();
+	//hamster2->addComponent<Life>(100);
+	//hamster2->addComponent<UI>("keta", 1);
+
+	//players_.push_back(hamster2);
+
+	//auto* hamster3 = mngr_->addEntity();
+	//hamster3->addComponent<Transform>(
+	//	Vector2D(sdlutils().width() / 2.0f -800, sdlutils().height() / 2.0f + -50),
+	//	Vector2D(), 256.0f, 256.0f, 0.0f);
+	//hamster3->addComponent<Image>(&sdlutils().images().at("monchi"));
+	//hamster3->addComponent<HamsterStateMachine>();
+	//hamster3->addComponent<LightAttack>(20);
+	//hamster3->addComponent<StrongAttack>(30);
+	//hamster3->addComponent<Stroke>();
+	//hamster3->addComponent<Life>(100);
+	//hamster3->addComponent<UI>("monchi", 2);
+
+	//players_.push_back(hamster3);
+
+	////MATERIAL PARA EL HITO1//
+
+
+	//Sardinilla
 	auto* hamster1 = mngr_->addEntity();
 	hamster1->addComponent<Transform>(
 		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
-		Vector2D(), 128.0f, 128.0f, 0.0f);
+		Vector2D(), 256.0f, 256.0f, 0.0f);
 	//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
 	hamster1->addComponent<Animator>(
 		&sdlutils().images().at("sardinillaSheet"),
@@ -53,16 +96,19 @@ void Game::init() {
 	hamster1->addComponent<StrongAttack>(30);
 	hamster1->addComponent<Stroke>();
 	hamster1->addComponent<Life>(100);
-	hamster1->addComponent<UI>("sardinilla", 3 );
+	hamster1->addComponent<UI>("sardinilla", 0 );
 
 	players_.push_back(hamster1);
 
-	//Enemigo de prueba
+	
+
+
+	//Enemigo de prueba con la imagen de canelón
 	auto* enemy = mngr_->addEntity();
 	enemy->addComponent<Life>(200);
 	enemy->addComponent<Transform>(
-		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
-		Vector2D(), 300.0f, 300.0f, 0.0f);
+		Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f-100),
+		Vector2D(), 500.0f,500.0f, 0.0f)->getFlip() = true;
 	enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
 	enemy->setGroup<Enemy>(true);
 	enemy->addComponent<UI>("canelon", 4);

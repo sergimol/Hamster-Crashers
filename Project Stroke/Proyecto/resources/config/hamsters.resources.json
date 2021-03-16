@@ -97,6 +97,10 @@
     {
       "id": "sardinillaSheet",
       "file": "../../../Proyecto/resources/images/protsardina.png"
+    },
+    {
+      "id": "background",
+      "file": "../../../Proyecto/resources/images/background.png"
     }
   ],
 

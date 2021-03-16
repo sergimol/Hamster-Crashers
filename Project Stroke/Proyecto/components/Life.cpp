@@ -34,6 +34,7 @@ bool Life::recieveDmg(int dmg) {
 		health_ = 0;
 		//Desactivamos la entidad
 		//entity_->setActive(false);
+
 		return true;
 	}
 	else
