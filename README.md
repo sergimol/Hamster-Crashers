@@ -31,7 +31,8 @@ Hito 2(28/04/2021)
 - Página del juego: https://github.com/sergimol/Hamster-Crashers
 - Página de Gestión: www.pivotaltracker.com/n/projects/2489769
 ## Logotipo y portada del juego 
- ![pasted image 0 (1)](https://user-images.githubusercontent.com/62880649/111375614-c00d8b80-869e-11eb-8bff-927ba0685797.png)
+
+![LOGOSQUEAKSHIPSINASADOS](https://user-images.githubusercontent.com/62880649/111395594-88faa280-86bd-11eb-9e75-4038ffe65ff4.jpg)
 
  
 ## Tabla de contenidos 
