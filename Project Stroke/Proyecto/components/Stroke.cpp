@@ -9,8 +9,21 @@ void Stroke::init() {
 }
 
 void Stroke::update() {
-	// Comprobamos que haya pasado el tiempo suficiente entre comprobaciones
-	if (sdlutils().currRealTime() >= timeLastUpdate_ + UPDATETIME) {
+	int t = sdlutils().currRealTime();
+	// Comprobación de la reducción de la probabilidad
+	if (t >= timeLastIncrease_ + TIMETODECREASE && t >= timeLastDecrease_ + TIMEBETWEENDECREASES) {
+		chance_--;
+		chanceFromAb_--;
+		if (chance_ < 1)
+			chance_ = 1;
+		if (chanceFromAb_ < 0)
+			chanceFromAb_ = 0;
+
+		timeLastDecrease_ = t;
+	}
+
+	// Comprobamos que haya pasado el tiempo suficiente entre actualizaciones
+	if (t >= timeLastUpdate_ + UPDATETIME) {
 		// Número aleatorio para ver si infarta o no
 		int i = r_.nextInt(0, 100);
 		// Si i es menor que la probabilidad, infarta
@@ -21,8 +34,10 @@ void Stroke::update() {
 		}
 			
 
-		timeLastUpdate_ = sdlutils().currRealTime();
+		timeLastUpdate_ = t;
 	}
+
+	std::cout << chance_ << " " << chanceFromAb_ << std::endl;
 }
 
 void Stroke::increaseChance(int n, Component* c) {
@@ -37,6 +52,7 @@ void Stroke::increaseChance(int n, Component* c) {
 		if(chanceFromAb_ > MAXAB)
 			chanceFromAb_ = MAXAB;
 	}
-
+	
+	timeLastIncrease_ = sdlutils().currRealTime();
 	//std::cout << chance_ + " " + chanceFromAb_ << std::endl;
 }

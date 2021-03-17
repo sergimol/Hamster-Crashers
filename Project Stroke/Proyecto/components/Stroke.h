@@ -7,10 +7,12 @@
 #include "../sdlutils/SDLUtils.h"
 #include "HamsterStateMachine.h"
 
-// Tiempo entre comprobación
-const int UPDATETIME = 5000,
-		  MAXAB = 65,
-		  MAXCHANCE = 35;
+		  
+const int UPDATETIME = 5000, // Tiempo entre comprobaciones de infarto
+		  MAXAB = 65, // Máximo de probabilidad de infarto que se puede recibir por habilidades
+		  MAXCHANCE = 35, // Máximo de probabilidad de infarto que se puede recibir por salto y ataque
+		  TIMETODECREASE = 10000, // Tiempo que debe pasar para empezar a reducir el infarto
+		  TIMEBETWEENDECREASES = 2500; // Tiempo entre reducciones de la probabilidad
 
 class Stroke: public Component {
 public:
@@ -31,8 +33,12 @@ private:
 	// Probabilidad de que haya un infarto
 	int chance_ = 1,
 		chanceFromAb_ = 0,
-		// Tiempo desde la última comprobación
-		timeLastUpdate_ = 0;
+		// Tiempo de la última comprobación
+		timeLastUpdate_ = 0,
+		// Tiempo del último aumento
+		timeLastIncrease_ = 0,
+		// Tiempo de la última reducción
+		timeLastDecrease_ = 0;
 	// Generador de números aleatorios
 	RandomNumberGenerator& r_ = sdlutils().rand();
 };
