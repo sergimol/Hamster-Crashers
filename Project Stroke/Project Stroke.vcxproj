@@ -24,6 +24,7 @@
     <ProjectGuid>{f86c793d-ba37-4ce1-8fa2-8306e5b94c5e}</ProjectGuid>
     <RootNamespace>ProjectStroke</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>The SqueakShip</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
