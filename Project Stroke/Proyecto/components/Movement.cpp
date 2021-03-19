@@ -127,3 +127,9 @@ float Movement::lerp(float a, float b, float f)
 {
 	return (a + f * (b - a));
 }
+
+void Movement::onDisable()
+{
+	auto& vel = tr_->getVel();
+	vel = Vector2D();
+}

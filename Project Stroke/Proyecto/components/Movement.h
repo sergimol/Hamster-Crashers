@@ -23,6 +23,8 @@ public:
 
 	float lerp(float a, float b, float f);
 
+	virtual void onDisable() override;
+
 private:
 
 	const float jump_ = 45.0f, gravity_ = 4.8f, jumpTimer_ = 10.0f;

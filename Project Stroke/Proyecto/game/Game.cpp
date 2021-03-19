@@ -100,7 +100,8 @@ void Game::init() {
 	hamster1->addComponent<Stroke>();
 	hamster1->addComponent<Life>(100);
 	hamster1->addComponent<UI>("sardinilla", 0 );
-	hamster1->addComponent<Pray>(30, 50);
+	//hamster1->addComponent<Pray>(30, 50);
+	hamster1->addComponent<Roll>();
 	hamster1->setGroup<Ally>(true);
 	players_.push_back(hamster1);
 
