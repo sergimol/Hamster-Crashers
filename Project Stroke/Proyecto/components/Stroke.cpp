@@ -37,7 +37,7 @@ void Stroke::update() {
 		timeLastUpdate_ = t;
 	}
 
-	std::cout << chance_ << " " << chanceFromAb_ << std::endl;
+	//std::cout << chance_ << " " << chanceFromAb_ << std::endl;
 }
 
 void Stroke::increaseChance(int n, Component* c) {

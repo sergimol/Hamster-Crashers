@@ -150,6 +150,7 @@
     <ClCompile Include="Proyecto\components\Camera.cpp" />
     <ClCompile Include="Proyecto\components\HamsterStateMachine.cpp" />
     <ClCompile Include="Proyecto\components\Image.cpp" />
+    <ClCompile Include="Proyecto\components\Pray.cpp" />
     <ClCompile Include="Proyecto\components\Roll.cpp" />
     <ClCompile Include="Proyecto\components\UI.cpp" />
     <ClCompile Include="Proyecto\components\Life.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="Proyecto\components\Animator.h" />
     <ClInclude Include="Proyecto\components\HamsterStateMachine.h" />
     <ClInclude Include="Proyecto\components\Image.h" />
+    <ClInclude Include="Proyecto\components\Pray.h" />
     <ClInclude Include="Proyecto\components\Roll.h" />
     <ClInclude Include="Proyecto\components\UI.h" />
     <ClInclude Include="Proyecto\components\KeyBoardCtrl.h" />

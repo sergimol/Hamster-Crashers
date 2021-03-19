@@ -1,4 +1,5 @@
 #include "../components/Ability.h"
+#
 
 void Ability::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -10,4 +11,13 @@ void Ability::init() {
 	anim_ = entity_->getComponent<Animator>();
 	assert(anim_ != nullptr);
 
+	state_ = st_->getState();
+}
+
+void Ability::update() {
+	if (ih().keyDownEvent() && (state_ == HamStates::IDLE || state_ == HamStates::MOVING)) {
+		if (ih().isKeyDown(key_)) {
+			action();
+		}
+	}
 }

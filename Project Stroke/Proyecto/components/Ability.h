@@ -19,17 +19,18 @@ public:
 
 	virtual void init() override;
 
-	virtual void update() override {};
+	virtual void update() override;
 
 	virtual void render() override {};
 
 	//Ejecuta la habilidad en funcion del hamster que sea
-	virtual void accion() = 0;
+	virtual void action() = 0;
 protected:
 	Transform* tr_;
 	HamsterStateMachine* st_;
 	Animator* anim_;
 	float timer_, cooldown_; //Contador para ver cada cuanto puede usar una habilidad
 	const SDL_Keycode key_ = SDLK_m;
+	HamStates state_;
 };
 

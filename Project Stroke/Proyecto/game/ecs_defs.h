@@ -13,6 +13,7 @@ class Life;
 class UI;
 class Stroke;
 class Animator;
+class Pray;
 class Roll;
 
 #define _CMPS_LIST_  \
@@ -26,12 +27,14 @@ class Roll;
 	Stroke, \
 	UI, \
 	Animator, \
+	Pray, \
 	Roll
 
 // groups
 
-struct Enemy;
-#define _GRPS_LIST_  Enemy
+struct Enemy; 
+struct Ally;
+#define _GRPS_LIST_  Enemy, Ally
 
 // handlers
 //Creo que hay que hacer un handler por cada player

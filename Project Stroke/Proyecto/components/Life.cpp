@@ -21,7 +21,7 @@ bool Life::recieveDmg(int dmg) {
 	//Actualizamos la healthBar
 	if (entity_->hasComponent<UI>())
 		entity_->getComponent<UI>()->bar(-dmg);
-
+	std::cout << "me cago en tus muertos" << health_ << std::endl;
 	//Si la vida ha bajado de 0...
 	if (health_ <= 0) {
 			if (hms_ != nullptr) {
@@ -42,6 +42,16 @@ bool Life::recieveDmg(int dmg) {
 }
 
 //Sana 'hp' unidades
-void Life::heal(int hp) {
-	health_ += hp;
+void Life::heal(int hp) {	
+	if (health_ + hp >= maxHealth_) {
+		hp = maxHealth_ - health_;
+		health_ = maxHealth_;
+	}
+	else {
+		health_ += hp;
+	}
+	if (entity_->hasComponent<UI>())
+		entity_->getComponent<UI>()->bar(hp);
+
+	std::cout << "ave maria" <<health_ << std::endl;
 }
