@@ -7,7 +7,7 @@ class Entity;
 class Component {
 public:
 	Component() :
-			entity_(nullptr) {
+			entity_(nullptr), active_(true) {
 	}
 
 	virtual ~Component() {
@@ -21,6 +21,14 @@ public:
 		return entity_;
 	}
 
+	inline void setActive(bool act) {
+		active_ = act;
+	}
+
+	inline bool isActive() {
+		return active_;
+	}
+
 	virtual void init() {
 	}
 
@@ -32,6 +40,6 @@ public:
 
 protected:
 	Entity *entity_;
-
+	bool active_;
 };
 

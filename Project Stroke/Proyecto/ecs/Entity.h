@@ -111,14 +111,14 @@ public:
 	void update() {
 		std::size_t n = components_.size();
 		for (auto i = 0u; i < n; i++) {
-			components_[i]->update();
+			if(components_[i]->isActive()) components_[i]->update();
 		}
 	}
 
 	void render() {
 		std::size_t n = components_.size();
 		for (auto i = 0u; i < n; i++) {
-			components_[i]->render();
+			if (components_[i]->isActive()) components_[i]->render();
 		}
 	}
 

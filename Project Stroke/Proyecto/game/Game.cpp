@@ -11,6 +11,7 @@
 #include "../components/Stroke.h"
 #include "../components/UI.h"
 #include "../components/Animator.h"
+#include "../components/Roll.h"
 
 #include "../ecs/ecs.h"
 #include "../sdlutils/InputHandler.h"
@@ -97,6 +98,7 @@ void Game::init() {
 	hamster1->addComponent<Stroke>();
 	hamster1->addComponent<Life>(100);
 	hamster1->addComponent<UI>("sardinilla", 0 );
+	hamster1->addComponent<Roll>();
 
 	players_.push_back(hamster1);
 

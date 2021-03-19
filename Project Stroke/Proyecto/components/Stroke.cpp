@@ -1,5 +1,5 @@
 #include "Stroke.h"
-#include "Abilty.h"
+#include "Ability.h"
 
 void Stroke::init() {
 		tr_ = entity_->getComponent<Transform>();

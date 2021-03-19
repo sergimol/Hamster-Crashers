@@ -1,23 +1,13 @@
-#include "Abilty.h"
-
-Ability::Ability() :
-	tr_(nullptr) {
-};
-
-Ability::~Ability() {
-
-}
+#include "../components/Ability.h"
 
 void Ability::init() {
+	tr_ = entity_->getComponent<Transform>();
+	assert(tr_ != nullptr);
+
+	st_ = entity_->getComponent<HamsterStateMachine>();
+	assert(st_ != nullptr);
+
+	anim_ = entity_->getComponent<Animator>();
+	assert(anim_ != nullptr);
 
 }
-
-void Ability::update() {
-
-};
-
-float Ability::lerp(float a, float b, float f) {
-
-	//Pongo esto para que no de error de compilacion
-	return 0;
-};

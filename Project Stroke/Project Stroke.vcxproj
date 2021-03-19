@@ -173,7 +173,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Proyecto\components\Abilty.h" />
+    <ClInclude Include="Proyecto\components\Ability.h" />
     <ClInclude Include="Proyecto\components\Bounce.h" />
     <ClInclude Include="Proyecto\components\Camera.h" />
     <ClInclude Include="Proyecto\components\DeAcceleration.h" />
