@@ -10,30 +10,30 @@
 #include "Transform.h"
 
 
-
 class Ability : public Component {
 public:
-	Ability() :
-		tr_(nullptr) {
-	}
+	Ability();
 
-	virtual ~Ability() {
-	}
+	virtual ~Ability();
 
-	void init() override {
-		
-	}
+	void init() override;
 
-	void update() override {
+	void update();
 
-	}
+	float lerp(float a, float b, float f);
 
-	float lerp(float a, float b, float f)
-	{
+	//Ejecuta la habilidad en funcion del hamster que sea
+	virtual void accion() = 0;
 
-	}
+	//Devuelve si puede volvera lanzar la habilidad o no
+	bool getCanAttack() { return canAttack; }
 
+	//Setters auxiliares
+	void setCanAttack(bool can) { canAttack = can; }
+	void setTime(float seconds) { timer = seconds; }
 private:
 	Transform* tr_;
+	bool canAttack;
+	float timer; //Contador para ver cada cuanto puede usar una habilidad
 };
 
