@@ -14,6 +14,5 @@ float Roll::lerp(float a, float b, float f){
 }
 
 void Roll::action() {
-	entity_->getComponent<Movement>()->setActive(!entity_->getComponent<Movement>()->isActive());
-	entity_->getComponent<Transform>()->getVel().set(0, 0);
+	entity_->getComponent<Animator>()->setActive(!entity_->getComponent<Animator>()->isActive());
 }

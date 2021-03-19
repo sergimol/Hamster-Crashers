@@ -21,7 +21,7 @@
 #include "../ecs/Manager.h"
 #include "../utils/Vector2D.h"
 
-SDL_Rect Game::camera_ = { 0,0,1280, 800 };
+SDL_Rect Game::camera_ = { 0,0,1920, 1080 };
 
 Game::Game() {
 	mngr_.reset(new Manager());
@@ -32,7 +32,7 @@ Game::~Game() {
 
 void Game::init() {
 
-	SDLUtils::init("Squeak Ship", 1280, 800,
+	SDLUtils::init("Squeak Ship", 1920, 1080,
 		"resources/config/hamsters.resources.json");
 
 	//Imagen de fondo fija
@@ -100,7 +100,7 @@ void Game::init() {
 	hamster1->addComponent<Stroke>();
 	hamster1->addComponent<Life>(100);
 	hamster1->addComponent<UI>("sardinilla", 0 );
-	hamster1->addComponent<Pray>(50, 30);
+	hamster1->addComponent<Pray>(30, 50);
 	hamster1->setGroup<Ally>(true);
 	players_.push_back(hamster1);
 

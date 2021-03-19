@@ -23,6 +23,7 @@ public:
 
 	inline void setActive(bool act) {
 		active_ = act;
+		if (!act) onDisable();
 	}
 
 	inline bool isActive() {
@@ -36,6 +37,9 @@ public:
 	}
 
 	virtual void render() {
+	}
+
+	virtual void onDisable() {
 	}
 
 protected:
