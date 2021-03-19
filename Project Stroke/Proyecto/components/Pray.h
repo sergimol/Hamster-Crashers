@@ -11,8 +11,6 @@ public:
 
 	virtual ~Pray();
 
-	virtual void init();
-
 	virtual void update();
 
 	//Ejecuta la habilidad en funcion del hamster que sea

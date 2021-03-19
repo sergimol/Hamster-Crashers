@@ -14,11 +14,6 @@ Pray::~Pray() {
 
 }
 
-void Pray::init() {
-	Ability::init();
-	came_ = Game::camera_;
-}
-
 void Pray::update() {
 	Ability::update();
 	if (magicTime) {
@@ -37,7 +32,7 @@ void Pray::action() {
 void Pray::prayAbility() {
 	magicTime = false;
 	auto& ents = entity_->getMngr()->getEnteties();
-
+	came_ = Game::camera_;
 	for (Entity* e : ents) {
 		if (evil) {
 			//Si la entidad es un enemigo...
