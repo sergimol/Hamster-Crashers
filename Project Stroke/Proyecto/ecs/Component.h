@@ -24,6 +24,7 @@ public:
 	inline void setActive(bool act) {
 		active_ = act;
 		if (!act) onDisable();
+		else onEnable();
 	}
 
 	inline bool isActive() {
@@ -40,6 +41,9 @@ public:
 	}
 
 	virtual void onDisable() {
+	}
+
+	virtual void onEnable() {
 	}
 
 protected:
