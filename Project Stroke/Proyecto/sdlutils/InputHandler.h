@@ -99,12 +99,10 @@ public:
 		return mbState_[b];
 	}
 
-	// TODO add support for Joystick, see Chapter 4 of
-	// the book 'SDL Game Development'
-
 private:
 	InputHandler() {
 		kbState_ = SDL_GetKeyboardState(0);
+		startGamepads();
 		clearState();
 	}
 
@@ -138,6 +136,12 @@ private:
 		default:
 			break;
 		}
+	}
+
+	// mandos
+	void startGamepads() {
+		if (SDL_GameControllerAddMappingsFromFile("resources/config/gamecontrollerdb.txt") == -1)
+			std::cout << "error mandos";
 	}
 
 	bool isKeyUpEvent_;
