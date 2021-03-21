@@ -132,6 +132,9 @@
     <ClCompile Include="Proyecto\components\EntityAttribs.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\Combos.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\components\Bounce.h">
@@ -255,6 +258,9 @@
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\EntityAttribs.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Combos.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>

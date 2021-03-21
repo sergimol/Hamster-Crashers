@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Proyecto\components\Ability.cpp" />
+    <ClCompile Include="Proyecto\components\Combos.cpp" />
     <ClCompile Include="Proyecto\components\HamsterStateMachine.cpp" />
     <ClCompile Include="Proyecto\components\Image.cpp" />
     <ClCompile Include="Proyecto\components\Pray.cpp" />
@@ -175,6 +176,7 @@
   <ItemGroup>
     <ClInclude Include="Proyecto\components\Ability.h" />
     <ClInclude Include="Proyecto\components\Bounce.h" />
+    <ClInclude Include="Proyecto\components\Combos.h" />
     <ClInclude Include="Proyecto\components\DeAcceleration.h" />
     <ClInclude Include="Proyecto\components\FighterCtrl.h" />
     <ClInclude Include="Proyecto\components\Animator.h" />

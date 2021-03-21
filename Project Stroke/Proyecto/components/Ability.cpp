@@ -1,5 +1,4 @@
-#include "../components/Ability.h"
-#
+#include "Ability.h"
 
 void Ability::init() {
 	tr_ = entity_->getComponent<Transform>();

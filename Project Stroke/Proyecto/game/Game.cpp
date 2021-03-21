@@ -13,7 +13,7 @@
 #include "../components/Animator.h"
 #include "../components/Roll.h"
 #include "../components/Pray.h"
-//#include "../components/HamsterInfo.h"
+#include "../components/Combos.h"
 
 #include "../ecs/ecs.h"
 #include "../sdlutils/InputHandler.h"
@@ -103,6 +103,7 @@ void Game::init() {
 	hamster1->addComponent<UI>("sardinilla", 0 );
 	//hamster1->addComponent<Pray>(30, 50);
 	hamster1->addComponent<Roll>();
+	hamster1->addComponent<Combos>();
 	hamster1->setGroup<Ally>(true);
 	players_.push_back(hamster1);
 

@@ -14,6 +14,7 @@ class UI;
 class Stroke;
 class Animator;
 class Pray;
+class Combos;
 class Roll;
 
 #define _CMPS_LIST_  \
@@ -28,6 +29,7 @@ class Roll;
 	UI, \
 	Animator, \
 	Pray, \
+	Combos, \
 	Roll
 
 // groups

@@ -1,5 +1,6 @@
 #include "StrongAttack.h"
 #include "Stroke.h"
+#include "Combos.h"
 
 StrongAttack::StrongAttack() :
 	tr_(nullptr), w_(60), h_(30), cooldown_(500), time_(sdlutils().currRealTime()), attackSound_(sdlutils().soundEffects().at("strong_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {
@@ -38,11 +39,13 @@ void StrongAttack::update() {
 
 			rect.y = pos.getY();
 
-
 			//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
+			//A�adimos a los combos
+			bool finCombo = entity_->getComponent<Combos>()->checkCombo(1);
+
 			//Si se colisiona..
-			if (CheckCollisions(rect))
+			if (CheckCollisions(rect, finCombo))
 				//Suena el hit y le pega
 				hitSound_.play();
 			//Si no colisiona..
@@ -61,7 +64,7 @@ void StrongAttack::update() {
 	}
 }
 
-bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
+bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 	bool canHit = false;
 
 	//Cogemos todas las entidades del juego
@@ -83,6 +86,10 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 			//Y comprobamos si colisiona
 			if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
 				int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
+				if (finCombo) {
+					if (!canHit); //Aumentar probabilidad critico
+					//Empujar y stunn al enemigo 
+				}
 				canHit = true;
 				//Le restamos la vida al enemigo
 				e->getComponent<EntityAttribs>()->recieveDmg(dmg*1.5);

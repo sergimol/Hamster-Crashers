@@ -1,5 +1,6 @@
 #include "LightAttack.h"
 #include "Stroke.h"
+#include "Combos.h"
 
 LightAttack::LightAttack() :
 	tr_(nullptr), w_(60), h_(30), cooldown_(350), time_(sdlutils().currRealTime()),
@@ -37,11 +38,12 @@ void LightAttack::update() {
 
 			rect.y = pos.getY();
 
-
 			//Comprobamos si colisiona con alguno de los enemigos que tiene delante
+			//A�adimos a los combos
+			bool finCombo = entity_->getComponent<Combos>()->checkCombo(0);
 
 			//Si se colisiona..
-			if (CheckCollisions(rect))
+			if (CheckCollisions(rect, finCombo))
 				//Suena el hit y le pega
 				hitSound_.play();
 			//Si no colisiona..
@@ -60,7 +62,7 @@ void LightAttack::update() {
 	}
 }
 
-bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
+bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 	bool canHit = false;
 
 	//Cogemos todas las entidades del juego
@@ -82,6 +84,10 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 			//Y comprobamos si colisiona
 			if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
 				int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
+				if (finCombo) {
+					if (!canHit); //Aumentar probabilidad critico
+					//Empujar y stunn al enemigo 
+				}
 				canHit = true;
 				//Le restamos la vida al enemigo
 				e->getComponent<EntityAttribs>()->recieveDmg(dmg);

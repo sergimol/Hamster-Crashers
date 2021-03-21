@@ -22,7 +22,7 @@ public:
 
 	void init() override;
 	void update() override;
-	bool CheckCollisions(const SDL_Rect& rectPlayer);
+	bool CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo);
 
 private:
 	Transform* tr_;
