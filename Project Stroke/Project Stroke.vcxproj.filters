@@ -108,9 +108,6 @@
     <ClCompile Include="Proyecto\components\StrongAttack.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\Life.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
     <ClCompile Include="Proyecto\components\Stroke.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
@@ -123,9 +120,6 @@
     <ClCompile Include="Proyecto\components\UI.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\Camera.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="Proyecto\components\HamsterStateMachine.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
@@ -133,6 +127,9 @@
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
     <ClCompile Include="Proyecto\components\Pray.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\EntityAttribs.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -236,17 +233,11 @@
     <ClInclude Include="Proyecto\components\StrongAttack.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\Life.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Proyecto\components\Stroke.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\UI.h">
       <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\Camera.h">
-      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\HamsterStateMachine.h">
       <Filter>Archivos de encabezado\Components</Filter>
@@ -261,6 +252,9 @@
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\Pray.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\EntityAttribs.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>

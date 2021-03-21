@@ -20,7 +20,6 @@ public:
 	void update() override {
 		auto &vel = tr_->getVel();
 		vel = vel * 0.995f;
-		
 	}
 
 private:

@@ -13,6 +13,7 @@
 #include "../components/Animator.h"
 #include "../components/Roll.h"
 #include "../components/Pray.h"
+//#include "../components/HamsterInfo.h"
 
 #include "../ecs/ecs.h"
 #include "../sdlutils/InputHandler.h"
@@ -82,6 +83,7 @@ void Game::init() {
 	hamster1->addComponent<Transform>(
 		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
 		Vector2D(), 256.0f, 256.0f, 0.0f);
+	hamster1->addComponent<EntityAttribs>(100);
 	//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
 	hamster1->addComponent<Animator>(
 		&sdlutils().images().at("sardinillaSheet"),
@@ -95,10 +97,9 @@ void Game::init() {
 		);
 	hamster1->addComponent<HamsterStateMachine>();
 	hamster1->addComponent<Movement>();
-	hamster1->addComponent<LightAttack>(20);
-	hamster1->addComponent<StrongAttack>(30);
+	hamster1->addComponent<LightAttack>();
+	hamster1->addComponent<StrongAttack>();
 	hamster1->addComponent<Stroke>();
-	hamster1->addComponent<Life>(100);
 	hamster1->addComponent<UI>("sardinilla", 0 );
 	//hamster1->addComponent<Pray>(30, 50);
 	hamster1->addComponent<Roll>();
@@ -110,7 +111,7 @@ void Game::init() {
 
 	//Enemigo de prueba con la imagen de canelón
 	auto* enemy = mngr_->addEntity();
-	enemy->addComponent<Life>(200);
+	enemy->addComponent<EntityAttribs>(200);
 	enemy->addComponent<Transform>(
 		Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f-100),
 		Vector2D(), 500.0f,500.0f, 0.0f)->getFlip() = true;

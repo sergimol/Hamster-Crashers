@@ -6,7 +6,7 @@
 
 #include "../sdlutils/Texture.h"
 #include "../sdlutils/SDLUtils.h"
-#include "Life.h"
+#include "EntityAttribs.h"
 
 
 class UI : public Component {

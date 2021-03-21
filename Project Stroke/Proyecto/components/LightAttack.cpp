@@ -1,8 +1,8 @@
 #include "LightAttack.h"
 #include "Stroke.h"
 
-LightAttack::LightAttack(float dmg) :
-	tr_(nullptr), w_(60), h_(30), cooldown_(350), time_(sdlutils().currRealTime()),dmg_(dmg),
+LightAttack::LightAttack() :
+	tr_(nullptr), w_(60), h_(30), cooldown_(350), time_(sdlutils().currRealTime()),
 	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {}
 
 void LightAttack::init() {
@@ -19,10 +19,11 @@ void LightAttack::update() {
 
 			auto size = tr_->getW();
 			auto& pos = tr_->getPos();
+			auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
 			state = HamStates::LIGHTATTACK;
 
 			SDL_Rect rect;
-			rect.w = w_;
+			rect.w = w_ + w_ * range;
 			rect.h = h_;
 
 			auto flip = tr_->getFlip();
@@ -80,9 +81,10 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 
 			//Y comprobamos si colisiona
 			if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
+				int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
 				canHit = true;
 				//Le restamos la vida al enemigo
-				e->getComponent<Life>()->recieveDmg(dmg_);
+				e->getComponent<EntityAttribs>()->recieveDmg(dmg);
 			}
 		}
 	}

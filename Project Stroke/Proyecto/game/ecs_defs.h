@@ -9,7 +9,7 @@ class Image;
 class LightAttack;
 class StrongAttack;
 class Movement;
-class Life;
+class EntityAttribs;
 class UI;
 class Stroke;
 class Animator;
@@ -23,7 +23,7 @@ class Roll;
 	LightAttack, \
 	StrongAttack, \
 	Movement, \
-	Life, \
+	EntityAttribs, \
 	Stroke, \
 	UI, \
 	Animator, \

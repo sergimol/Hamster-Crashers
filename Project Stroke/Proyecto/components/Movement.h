@@ -7,11 +7,12 @@
 #include "Transform.h"
 #include "HamsterStateMachine.h"
 #include "Animator.h"
+#include "EntityAttribs.h"
 
 class Movement : public Component {
 public:
 	Movement() :
-		tr_(nullptr), hms_(nullptr), anim_(nullptr), speed_(7.0f, 3.5f), goalVel_(0, 0), timer(sdlutils().currRealTime()) {
+		tr_(nullptr), hms_(nullptr), anim_(nullptr), speed_(), goalVel_(0, 0), timer(sdlutils().currRealTime()) {
 	}
 
 	virtual ~Movement() {

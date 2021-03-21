@@ -14,6 +14,8 @@ void Movement:: init() {
 	anim_ = entity_->getComponent<Animator>();
 	assert(anim_ != nullptr);
 
+	speed_ = entity_->getComponent<EntityAttribs>()->getVel();
+	assert(speed_ != Vector2D());
 
 	keymap.insert({ UP, false });
 	keymap.insert({ DOWN, false });

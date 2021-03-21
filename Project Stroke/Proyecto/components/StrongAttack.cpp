@@ -1,8 +1,8 @@
 #include "StrongAttack.h"
 #include "Stroke.h"
 
-StrongAttack::StrongAttack(float dmg) :
-	tr_(nullptr), w_(60), h_(30), cooldown_(500),dmg_(dmg), time_(sdlutils().currRealTime()), attackSound_(sdlutils().soundEffects().at("strong_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {
+StrongAttack::StrongAttack() :
+	tr_(nullptr), w_(60), h_(30), cooldown_(500), time_(sdlutils().currRealTime()), attackSound_(sdlutils().soundEffects().at("strong_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {
 }
 
 void StrongAttack::init() {
@@ -15,14 +15,16 @@ void StrongAttack::init() {
 void StrongAttack::update() {
 	if (ih().mouseButtonEvent()) {
 		auto state = hms_->getState();
-		if (!(state== HamStates::DEAD || state == HamStates::STUNNED || state == HamStates::INFARCTED) && ih().getMouseButtonState(ih().RIGHT) == 1 && sdlutils().currRealTime() > time_ + cooldown_) {
+		if (!(state == HamStates::DEAD || state == HamStates::STUNNED || state == HamStates::INFARCTED) && ih().getMouseButtonState(ih().RIGHT) == 1 && sdlutils().currRealTime() > time_ + cooldown_) {
 
 			auto size = tr_->getW();
 			auto& pos = tr_->getPos();
+			auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
 			state = HamStates::STRONGATTACK;
 
+
 			SDL_Rect rect;
-			rect.w = w_;
+			rect.w = w_ + w_ * range;
 			rect.h = h_;
 
 			auto flip = tr_->getFlip();
@@ -80,9 +82,10 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 
 			//Y comprobamos si colisiona
 			if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
+				int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
 				canHit = true;
 				//Le restamos la vida al enemigo
-				e->getComponent<Life>()->recieveDmg(dmg_);
+				e->getComponent<EntityAttribs>()->recieveDmg(dmg*1.5);
 			}
 		}
 	}
