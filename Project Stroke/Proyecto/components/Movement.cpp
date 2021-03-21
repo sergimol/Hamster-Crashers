@@ -87,9 +87,9 @@ void Movement:: update() {
 		vel.setY(lerp(vel.getY(), 0, 0.25));
 		
 		//ANIMACION DE IDLE
-		if(state != HamStates::IDLE)
-			anim_->play(Vector2D(0, 0), Vector2D(2, 0), 220);
-		if(state != HamStates::JUMPING) state = HamStates::IDLE;
+		//if(state != HamStates::IDLE)
+		//	anim_->play(Vector2D(0, 0), Vector2D(2, 0), 220);
+		//if(state != HamStates::JUMPING) state = HamStates::IDLE;
 	
 	}
 	else if (state == HamStates::IDLE || state == HamStates::MOVING || state == HamStates::JUMPING) {		//Aceleracion
@@ -97,9 +97,9 @@ void Movement:: update() {
 		vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.9));
 
 		//ANIMACION DE MOVIMIENTO
-		if (state != HamStates::MOVING)
-			anim_->play(Vector2D(0, 1), Vector2D(2, 2), 100);
-		if(state != HamStates::JUMPING) state = HamStates::MOVING;
+		//if (state != HamStates::MOVING)
+		//	anim_->play(Vector2D(0, 1), Vector2D(2, 2), 100);
+		//if(state != HamStates::JUMPING) state = HamStates::MOVING;
 
 	}
 

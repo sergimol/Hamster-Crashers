@@ -84,14 +84,14 @@ void Game::init() {
 		Vector2D(), 256.0f, 256.0f, 0.0f);
 	//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
 	hamster1->addComponent<Animator>(
-		&sdlutils().images().at("sardinillaSheet"),
-		64,
-		64,
-		3,
-		1,
-		220,
-		Vector2D(0, 0),
-		Vector2D(2, 0)
+		&sdlutils().images().at("sardinillaSheet"),	//tex_(tex)
+		66,				//widthFrame
+		66,				//heightFrame
+		1,				//cols
+		1,				//rows
+		5,			//frameUpdate
+		Vector2D(0, 0),	//textureFrame y startFrame
+		Vector2D(32, 0)	//endFrame
 		);
 	hamster1->addComponent<HamsterStateMachine>();
 	hamster1->addComponent<Movement>();

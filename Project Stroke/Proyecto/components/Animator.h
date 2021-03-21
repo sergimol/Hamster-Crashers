@@ -14,12 +14,12 @@ class Animator : public Component {
 public:
 	Animator(Texture* tex, int w, int h, int c, int r, Uint32 f, Vector2D sf, Vector2D ef) :
 		tr_(nullptr), //
-		tex_(tex), //
+		tex_(tex),//	
 		widthFrame(w), //
 		heightFrame(h), //
-		startFrame(sf), //
-		endFrame(ef), //
-		textureFrame(sf), //
+		startFrame(sf), //(0,0)
+		endFrame(ef), //(2,0)
+		textureFrame(sf), //(0,0)
 		cols(c), //
 		rows(r), //
 		frameUpdate(f), //
@@ -28,6 +28,7 @@ public:
 	}
 	virtual ~Animator() {
 	}
+	
 
 	void init() override {
 		tr_ = entity_->getComponent<Transform>();
@@ -92,13 +93,15 @@ public:
 	}
 
 	//Metodo que cambia de animacion sobre la spritesheet actual
-	void play(Vector2D sFrame, Vector2D eFrame, Uint32 fU) 
+	void play(Vector2D sFrame, Vector2D eFrame, Uint32 fU)
 	{
 		frameUpdate = fU;
 		startFrame = sFrame;
 		endFrame = eFrame;
 		textureFrame = startFrame;
 	}
+
+
 
 private:
 	Transform* tr_;
@@ -116,5 +119,6 @@ private:
 	int heightFrame;
 	int cols;
 	int rows;
+
 };
 
