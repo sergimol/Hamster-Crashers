@@ -87,7 +87,7 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 			if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
 				int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
 				if (finCombo) {
-					if (!canHit); //Aumentar probabilidad critico
+					if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.02); //Aumentar probabilidad critico
 					//Empujar y stunn al enemigo 
 				}
 				canHit = true;
