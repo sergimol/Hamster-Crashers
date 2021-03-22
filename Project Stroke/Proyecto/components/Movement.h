@@ -12,7 +12,7 @@
 class Movement : public Component {
 public:
 	Movement() :
-		tr_(nullptr), hms_(nullptr), anim_(nullptr), speed_(), goalVel_(0, 0), timer(sdlutils().currRealTime()) {
+		tr_(nullptr), hms_(nullptr), anim_(nullptr), speed_(), goalVel_(0, 0), lastDir_(1,0), timer(sdlutils().currRealTime()) {
 	}
 
 	virtual ~Movement() {
@@ -26,6 +26,8 @@ public:
 
 	virtual void onDisable() override;
 
+	Vector2D getLastDir() { return lastDir_; };
+
 private:
 
 	const float jump_ = 45.0f, gravity_ = 4.8f, jumpTimer_ = 10.0f;
@@ -35,7 +37,7 @@ private:
 	Transform* tr_;
 	HamsterStateMachine* hms_;
 	Animator* anim_;
-	Vector2D speed_, goalVel_;
+	Vector2D speed_, goalVel_, lastDir_;
 	
 	std::map<KEYS, bool> keymap;
 };

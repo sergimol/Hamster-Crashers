@@ -65,7 +65,7 @@ public:
 			lastTime = sdlutils().currRealTime();
 
 			//si llegamos al final de una fila
-			if (textureFrame.getX() >= endFrame.getX()) //habia puesto textureFrame.getX() >= cols-1
+			if (textureFrame.getX() >= 2) //habia puesto textureFrame.getX() >= cols-1
 			{
 				//si estamos en la ultima fila
 				if (textureFrame.getY() >= endFrame.getY()) //habia puesto textureFrame.getY() >= rows-1

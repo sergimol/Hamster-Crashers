@@ -8,7 +8,7 @@
 #include "SDL_net.h"
 #include "SDL_image.h"
 #include "box2d.h"
-#include "tmxlite/include/Config.hpp"
+#include "tmxlite/include/tmxlite/Config.hpp"
 
 #include "Proyecto/game/Game.h"
 

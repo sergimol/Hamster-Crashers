@@ -82,6 +82,8 @@ void Movement:: update() {
 
 			goalVel_ = Vector2D(dir.getX() * speed_.getX(), dir.getY() * speed_.getY());
 		}
+
+		lastDir_ = dir;
 	}
 
 	if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {		//Deceleracion
@@ -123,6 +125,7 @@ void Movement:: update() {
 		state = HamStates::IDLE;
 		timer = sdlutils().currRealTime();
 	}
+
 }
 
 float Movement::lerp(float a, float b, float f)

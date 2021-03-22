@@ -13,7 +13,7 @@
 
 class Ability : public Component {
 public:
-	Ability() : tr_(nullptr), st_(nullptr), timer_(0.0f), cooldown_(0.0f) {};
+	Ability() : tr_(nullptr), st_(nullptr), timer_(0.0f), cooldown_(1000.0f) {};
 
 	virtual ~Ability() {};
 
