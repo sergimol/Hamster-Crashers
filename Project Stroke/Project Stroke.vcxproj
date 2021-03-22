@@ -146,7 +146,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ControlHandeler.cpp" />
     <ClCompile Include="Proyecto\components\Ability.cpp" />
     <ClCompile Include="Proyecto\components\Combos.cpp" />
     <ClCompile Include="Proyecto\components\ControlHandeler.cpp" />
@@ -176,7 +175,6 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ControlHandeler.h" />
     <ClInclude Include="Proyecto\components\Ability.h" />
     <ClInclude Include="Proyecto\components\Bounce.h" />
     <ClInclude Include="Proyecto\components\Combos.h" />
