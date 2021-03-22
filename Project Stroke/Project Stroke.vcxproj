@@ -147,11 +147,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Proyecto\components\Ability.cpp" />
+    <ClCompile Include="Proyecto\components\BulletHit.cpp" />
     <ClCompile Include="Proyecto\components\Combos.cpp" />
+    <ClCompile Include="Proyecto\components\DisableOnExit.cpp" />
     <ClCompile Include="Proyecto\components\HamsterStateMachine.cpp" />
     <ClCompile Include="Proyecto\components\Image.cpp" />
     <ClCompile Include="Proyecto\components\Pray.cpp" />
     <ClCompile Include="Proyecto\components\Roll.cpp" />
+    <ClCompile Include="Proyecto\components\Turret.cpp" />
     <ClCompile Include="Proyecto\components\UI.cpp" />
     <ClCompile Include="Proyecto\components\EntityAttribs.cpp" />
     <ClCompile Include="Proyecto\components\LightAttack.cpp" />
@@ -176,14 +179,17 @@
   <ItemGroup>
     <ClInclude Include="Proyecto\components\Ability.h" />
     <ClInclude Include="Proyecto\components\Bounce.h" />
+    <ClInclude Include="Proyecto\components\BulletHit.h" />
     <ClInclude Include="Proyecto\components\Combos.h" />
     <ClInclude Include="Proyecto\components\DeAcceleration.h" />
+    <ClInclude Include="Proyecto\components\DisableOnExit.h" />
     <ClInclude Include="Proyecto\components\FighterCtrl.h" />
     <ClInclude Include="Proyecto\components\Animator.h" />
     <ClInclude Include="Proyecto\components\HamsterStateMachine.h" />
     <ClInclude Include="Proyecto\components\Image.h" />
     <ClInclude Include="Proyecto\components\Pray.h" />
     <ClInclude Include="Proyecto\components\Roll.h" />
+    <ClInclude Include="Proyecto\components\Turret.h" />
     <ClInclude Include="Proyecto\components\UI.h" />
     <ClInclude Include="Proyecto\components\KeyBoardCtrl.h" />
     <ClInclude Include="Proyecto\components\EntityAttribs.h" />

@@ -101,6 +101,10 @@
     {
       "id": "background",
       "file": "resources/images/background.png"
+    },
+    {
+      "id": "bullet",
+      "file": "resources/images/tennis_ball.png"
     }
   ],
 

@@ -135,6 +135,15 @@
     <ClCompile Include="Proyecto\components\Combos.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\Turret.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\DisableOnExit.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\BulletHit.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\components\Bounce.h">
@@ -261,6 +270,15 @@
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\Combos.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Turret.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\DisableOnExit.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\BulletHit.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>

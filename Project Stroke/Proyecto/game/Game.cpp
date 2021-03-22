@@ -14,6 +14,7 @@
 #include "../components/Roll.h"
 #include "../components/Pray.h"
 #include "../components/Combos.h"
+#include "../components/Turret.h"
 
 #include "../ecs/ecs.h"
 #include "../sdlutils/InputHandler.h"
@@ -86,7 +87,7 @@ void Game::init() {
 	hamster1->addComponent<EntityAttribs>(100);
 	//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
 	hamster1->addComponent<Animator>(
-		&sdlutils().images().at("sardinillaSheet"),
+		&sdlutils().images().at("monchi"),
 		64,
 		64,
 		3,
@@ -102,7 +103,8 @@ void Game::init() {
 	hamster1->addComponent<Stroke>();
 	hamster1->addComponent<UI>("sardinilla", 0 );
 	//hamster1->addComponent<Pray>(30, 50);
-	hamster1->addComponent<Roll>();
+	//hamster1->addComponent<Roll>();
+	hamster1->addComponent<Turret>();
 	hamster1->addComponent<Combos>();
 	hamster1->setGroup<Ally>(true);
 	players_.push_back(hamster1);

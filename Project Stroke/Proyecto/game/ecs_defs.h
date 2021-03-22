@@ -16,6 +16,9 @@ class Animator;
 class Pray;
 class Combos;
 class Roll;
+class Turret;
+class DisableOnExit;
+class BulletHit;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -30,13 +33,17 @@ class Roll;
 	Animator, \
 	Pray, \
 	Combos, \
-	Roll
+	Roll, \
+	Turret, \
+	DisableOnExit, \
+	BulletHit
 
 // groups
 
 struct Enemy; 
 struct Ally;
-#define _GRPS_LIST_  Enemy, Ally
+struct Bullet_group;
+#define _GRPS_LIST_  Enemy, Ally, Bullet_group
 
 // handlers
 //Creo que hay que hacer un handler por cada player
