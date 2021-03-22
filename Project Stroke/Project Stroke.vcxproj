@@ -150,6 +150,7 @@
     <ClCompile Include="Proyecto\components\BulletHit.cpp" />
     <ClCompile Include="Proyecto\components\Combos.cpp" />
     <ClCompile Include="Proyecto\components\DisableOnExit.cpp" />
+    <ClCompile Include="Proyecto\components\ControlHandeler.cpp" />
     <ClCompile Include="Proyecto\components\HamsterStateMachine.cpp" />
     <ClCompile Include="Proyecto\components\Image.cpp" />
     <ClCompile Include="Proyecto\components\Pray.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="Proyecto\components\Bounce.h" />
     <ClInclude Include="Proyecto\components\BulletHit.h" />
     <ClInclude Include="Proyecto\components\Combos.h" />
+    <ClInclude Include="Proyecto\components\ControlHandeler.h" />
     <ClInclude Include="Proyecto\components\DeAcceleration.h" />
     <ClInclude Include="Proyecto\components\DisableOnExit.h" />
     <ClInclude Include="Proyecto\components\FighterCtrl.h" />
