@@ -26,7 +26,7 @@ public:
 
 private:
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
-	const enum KEYS2 { UP, DOWN, LEFT, RIGHT, SPACE };
+	//const enum KEYS2 { UP, DOWN, LEFT, RIGHT, SPACE };
 	int player_;
 
 
