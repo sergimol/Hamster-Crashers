@@ -25,6 +25,9 @@ void Movement:: init() {
 
 }
 
+void Movement::updateKeymap(KEYS x, bool is) {
+	keymap.at(x) = is;
+}
 void Movement:: update() {
 
 	auto& vel = tr_->getVel();
@@ -32,59 +35,40 @@ void Movement:: update() {
 	auto& z = tr_->getZ();
 	auto& velZ = tr_->getVelZ();
 
+	Vector2D dir = Vector2D(0, 0);
+
+	if (keymap.at(UP)) {
+		dir.setY(-1.0f);
+	}
+	else if (keymap.at(DOWN)) {
+		dir.setY(1.0f);
+	}
+
+	if (keymap.at(RIGHT)) {
+		dir.setX(1.0f);
+		tr_->getFlip() = false;
+	}
+	else if (keymap.at(LEFT)) {
+		dir.setX(-1.0f);
+		tr_->getFlip() = true;
+	}
+
+
 	if (ih().keyDownEvent() || ih().keyUpEvent()) {
-
-		if (ih().isKeyDown(SDL_SCANCODE_UP) || ih().isKeyDown(SDLK_w))
-			keymap.at(UP) = true;
-		else if (ih().isKeyUp(SDL_SCANCODE_UP) && ih().isKeyUp(SDLK_w))
-			keymap.at(UP) = false;
-
-		if (ih().isKeyDown(SDL_SCANCODE_DOWN) || ih().isKeyDown(SDLK_s))
-			keymap.at(DOWN) = true;
-		else if (ih().isKeyUp(SDL_SCANCODE_DOWN) && ih().isKeyUp(SDLK_s))
-			keymap.at(DOWN) = false;
-
-		if (ih().isKeyDown(SDL_SCANCODE_RIGHT) || ih().isKeyDown(SDLK_d))
-			keymap.at(RIGHT) = true;
-		else if (ih().isKeyUp(SDL_SCANCODE_RIGHT) && ih().isKeyUp(SDLK_d))
-			keymap.at(RIGHT) = false;
-
-		if (ih().isKeyDown(SDL_SCANCODE_LEFT) || ih().isKeyDown(SDLK_a))
-			keymap.at(LEFT) = true;
-		else if (ih().isKeyUp(SDL_SCANCODE_LEFT) && ih().isKeyUp(SDLK_a))
-			keymap.at(LEFT) = false;
-
-		Vector2D dir = Vector2D(0, 0);
 
 		if (!keymap.at(SPACE) && ih().isKeyDown(SDLK_SPACE)) {
 			keymap.at(SPACE) = true;
 			entity_->getComponent<Stroke>()->increaseChance(2, this);
 		}
-
-		if (keymap.at(UP)) {
-			dir.setY(-1.0f);
-		}
-		else if (keymap.at(DOWN)) {
-			dir.setY(1.0f);
-		}
-
-		if (keymap.at(RIGHT)) {
-			dir.setX(1.0f);
-			tr_->getFlip() = false;
-		}
-		else if (keymap.at(LEFT)) {
-			dir.setX(-1.0f);
-			tr_->getFlip() = true;
-		}
-
-		if (dir.magnitude() != 0) {
-			dir = dir.normalize();
-
-			goalVel_ = Vector2D(dir.getX() * speed_.getX(), dir.getY() * speed_.getY());
-		}
-
-		lastDir_ = dir;
 	}
+
+	if (dir.magnitude() != 0) {
+		dir = dir.normalize();
+
+		goalVel_ = Vector2D(dir.getX() * speed_.getX(), dir.getY() * speed_.getY());
+	}
+
+	lastDir_ = dir;
 
 	if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {		//Deceleracion
 		vel.setX(lerp(vel.getX(), 0, 0.25));

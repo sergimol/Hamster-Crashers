@@ -16,6 +16,8 @@
 #include "../components/Combos.h"
 #include "../components/Turret.h"
 
+#include "../components/ControlHandeler.h"
+
 #include "../ecs/ecs.h"
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
@@ -107,6 +109,7 @@ void Game::init() {
 	//hamster1->addComponent<Turret>();
 	hamster1->addComponent<Combos>();
 	hamster1->setGroup<Ally>(true);
+	hamster1->addComponent<ControlHandeler>(1);
 	players_.push_back(hamster1);
 
 	

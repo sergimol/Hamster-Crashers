@@ -11,6 +11,9 @@
 
 class Movement : public Component {
 public:
+
+	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
+
 	Movement() :
 		tr_(nullptr), hms_(nullptr), anim_(nullptr), speed_(), goalVel_(0, 0), lastDir_(1,0), timer(sdlutils().currRealTime()) {
 	}
@@ -22,16 +25,18 @@ public:
 
 	void update() override;
 
+	void updateKeymap(KEYS x, bool is);
+
 	float lerp(float a, float b, float f);
 
 	virtual void onDisable() override;
 
 	Vector2D getLastDir() { return lastDir_; };
 
+protected:
 private:
 
 	const float jump_ = 45.0f, gravity_ = 4.8f, jumpTimer_ = 10.0f;
-	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 	long unsigned int timer;
 
 	Transform* tr_;

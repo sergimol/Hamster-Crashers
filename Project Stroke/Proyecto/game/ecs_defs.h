@@ -19,6 +19,7 @@ class Roll;
 class Turret;
 class DisableOnExit;
 class BulletHit;
+class ControlHandeler;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -36,7 +37,8 @@ class BulletHit;
 	Roll, \
 	Turret, \
 	DisableOnExit, \
-	BulletHit
+	BulletHit, \
+	ControlHandeler
 
 // groups
 

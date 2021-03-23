@@ -25,12 +25,12 @@ public:
 	void update() override;
 
 private:
-	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
+	//const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 	//const enum KEYS2 { UP, DOWN, LEFT, RIGHT, SPACE };
 	int player_;
+	Movement* mov_;
 
-
-	std::map<KEYS, bool> keymap; //lo voy a necesitar de verdad?
+	//std::map<KEYS, bool> keymap; //lo voy a necesitar de verdad?
 };
 
 
