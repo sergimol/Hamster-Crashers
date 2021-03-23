@@ -112,7 +112,36 @@ void Game::init() {
 	hamster1->addComponent<ControlHandeler>(1);
 	players_.push_back(hamster1);
 
-	
+	//CLON Sardinilla (P2)
+	auto* hamster2 = mngr_->addEntity();
+	hamster2->addComponent<Transform>(
+		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
+		Vector2D(), 256.0f, 256.0f, 0.0f);
+	hamster2->addComponent<EntityAttribs>(100);
+	//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+	hamster2->addComponent<Animator>(
+		&sdlutils().images().at("sardinillaSheet"),
+		64,
+		64,
+		3,
+		1,
+		220,
+		Vector2D(0, 0),
+		Vector2D(2, 0)
+		);
+	hamster2->addComponent<HamsterStateMachine>();
+	hamster2->addComponent<Movement>();
+	hamster2->addComponent<LightAttack>();
+	hamster2->addComponent<StrongAttack>();
+	hamster2->addComponent<Stroke>();
+	hamster2->addComponent<UI>("sardinilla", 0);
+	//hamster1->addComponent<Pray>(30, 50);
+	hamster2->addComponent<Roll>();
+	//hamster1->addComponent<Turret>();
+	hamster2->addComponent<Combos>();
+	hamster2->setGroup<Ally>(true);
+	hamster2->addComponent<ControlHandeler>(2);
+	players_.push_back(hamster2);
 
 
 	//Enemigo de prueba con la imagen de canelón

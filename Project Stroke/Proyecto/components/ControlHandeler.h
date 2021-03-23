@@ -30,6 +30,9 @@ private:
 	int player_;
 	Movement* mov_;
 
+	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
+
+	std::map<KEYS ,SDL_Scancode> keymap;
 	//std::map<KEYS, bool> keymap; //lo voy a necesitar de verdad?
 };
 

@@ -7,6 +7,23 @@ void ControlHandeler::init() {
 	mov_ = entity_->getComponent<Movement>();
 	assert(mov_ != nullptr);
 
+	//En vez de construilo solamente deberia de tner que irse a donde estuviese guardado lso controles y coger el mapeado segun lo que le pida
+
+	if (player_ == 1) {
+		keymap.insert({ UP, SDL_SCANCODE_UP });
+		keymap.insert({ DOWN, SDL_SCANCODE_DOWN });
+		keymap.insert({ LEFT, SDL_SCANCODE_LEFT });
+		keymap.insert({ RIGHT, SDL_SCANCODE_RIGHT });
+		keymap.insert({ SPACE, SDL_SCANCODE_SPACE }); //el salto aun no esta includio
+	}
+	else if (player_ == 2) {
+		keymap.insert({ UP, SDL_SCANCODE_W });
+		keymap.insert({ DOWN, SDL_SCANCODE_S });
+		keymap.insert({ LEFT, SDL_SCANCODE_A });
+		keymap.insert({ RIGHT, SDL_SCANCODE_D });
+		keymap.insert({ SPACE, SDL_SCANCODE_SPACE }); //el salto aun no esta includio
+	}
+
 }
 
 
@@ -14,21 +31,21 @@ void ControlHandeler::init() {
 void ControlHandeler::update() {
 
 	//la parte para MOVEMENT
-	if (ih().isKeyDown(SDL_SCANCODE_UP) || ih().isKeyDown(SDLK_w)) //aqui es donde ahcemos nuestro keymap
+	if (ih().isKeyDown(keymap.at(UP))) //aqui es donde ahcemos nuestro keymap
 		mov_->updateKeymap(Movement::UP, true);
-	else if (ih().isKeyUp(SDL_SCANCODE_UP) && ih().isKeyUp(SDLK_w))
+	else if (ih().isKeyUp(keymap.at(UP)))
 		mov_->updateKeymap(Movement::UP, false);
-	if (ih().isKeyDown(SDL_SCANCODE_DOWN) || ih().isKeyDown(SDLK_s))
+	if (ih().isKeyDown(keymap.at(DOWN)))
 		mov_->updateKeymap(Movement::DOWN, true);
-	else if (ih().isKeyUp(SDL_SCANCODE_DOWN) && ih().isKeyUp(SDLK_s))
+	else if (ih().isKeyUp(keymap.at(DOWN)))
 		mov_->updateKeymap(Movement::DOWN, false);
-	if (ih().isKeyDown(SDL_SCANCODE_RIGHT) || ih().isKeyDown(SDLK_d))
+	if (ih().isKeyDown(keymap.at(RIGHT)))
 		mov_->updateKeymap(Movement::RIGHT, true);
-	else if (ih().isKeyUp(SDL_SCANCODE_RIGHT) && ih().isKeyUp(SDLK_d))
+	else if (ih().isKeyUp(keymap.at(RIGHT)))
 		mov_->updateKeymap(Movement::RIGHT, false);
-	if (ih().isKeyDown(SDL_SCANCODE_LEFT) || ih().isKeyDown(SDLK_a))
+	if (ih().isKeyDown(keymap.at(LEFT)))
 		mov_->updateKeymap(Movement::LEFT, true);
-	else if (ih().isKeyUp(SDL_SCANCODE_LEFT) && ih().isKeyUp(SDLK_a))
+	else if (ih().isKeyUp(keymap.at(LEFT)))
 		mov_->updateKeymap(Movement::LEFT, false);
 
 
