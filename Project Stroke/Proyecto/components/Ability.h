@@ -13,7 +13,7 @@
 
 class Ability : public Component {
 public:
-	Ability() : tr_(nullptr), st_(nullptr), timer_(0.0f), cooldown_(1000.0f) {};
+	Ability() : tr_(nullptr), st_(nullptr), timer_(0), cooldown_(1000) {};
 
 	virtual ~Ability() {};
 
@@ -23,14 +23,24 @@ public:
 
 	virtual void render() override {};
 
+	virtual void onEnable() override {};
+
+	virtual void onDisable() override {};
+
 	//Ejecuta la habilidad en funcion del hamster que sea
 	virtual void action() = 0;
+	
+	virtual void deActivate() {};
+
 protected:
+	const SDL_Keycode key_ = SDLK_m;
+
 	Transform* tr_;
 	HamsterStateMachine* st_;
 	Animator* anim_;
-	float timer_, cooldown_; //Contador para ver cada cuanto puede usar una habilidad
-	const SDL_Keycode key_ = SDLK_m;
+	long unsigned int timer_, cooldown_; //Contador para ver CADA CUANTO puede usar una habilidad
 	HamStates state_;
+
+	bool lastActive = false;
 };
 

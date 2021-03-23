@@ -29,6 +29,7 @@ public:
 
 	float lerp(float a, float b, float f);
 
+	virtual void onEnable() override;
 	virtual void onDisable() override;
 
 	Vector2D getLastDir() { return lastDir_; };

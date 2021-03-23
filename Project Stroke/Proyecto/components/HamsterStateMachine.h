@@ -2,7 +2,7 @@
 
 #include "../ecs/Component.h"
 
-const enum class HamStates { IDLE, DEAD, STUNNED, INFARCTED, MOVING, JUMPING, STRONGATTACK, LIGHTATTACK, HABILITY};
+const enum class HamStates { IDLE, DEAD, STUNNED, INFARCTED, MOVING, JUMPING, STRONGATTACK, LIGHTATTACK, ABILITY};
 
 class HamsterStateMachine : public Component
 {

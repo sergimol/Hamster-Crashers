@@ -146,6 +146,10 @@ public:
 		return (d.x_ != x_ && d.y_ != y_);
 	}
 
+	inline bool operator ==(const Vector2D& d) const {
+		return (d.x_ == x_ && d.y_ == y_);
+	}
+
 private:
 	float x_;  // first coordinate
 	float y_;  // second coordinate

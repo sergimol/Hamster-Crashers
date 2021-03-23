@@ -14,12 +14,25 @@ void Ability::init() {
 }
 
 void Ability::update() {
-	if (ih().keyDownEvent() && (state_ == HamStates::IDLE || state_ == HamStates::MOVING)) {
-		if (ih().isKeyDown(key_) && sdlutils().currRealTime() > timer_)
-		{
-			timer_ = sdlutils().currRealTime() + cooldown_;
-			action();
+	//Piscontronco 3:14 (DHH):
+	/*
+	* Cada "cooldown" milisegundos, se comprueba que se pueda activar la habilidad
+	* Si la habilidad estaba activa, se desactiva
+	* De lo contrario, no sucede nada
+	* 
+	*/
 
+	if (sdlutils().currRealTime() > timer_ + cooldown_) {
+		if (!lastActive && ih().keyDownEvent() && (state_ == HamStates::IDLE || state_ == HamStates::MOVING)) {
+			if (ih().isKeyDown(key_)) {
+				timer_ = sdlutils().currRealTime();
+				action();
+				lastActive = true;
+			}
+		}
+		else if(lastActive){
+			lastActive = false;
+			deActivate();
 		}
 	}
 }

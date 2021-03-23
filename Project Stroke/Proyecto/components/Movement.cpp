@@ -68,7 +68,7 @@ void Movement:: update() {
 		goalVel_ = Vector2D(dir.getX() * speed_.getX(), dir.getY() * speed_.getY());
 	}
 
-	lastDir_ = dir;
+	lastDir_ = dir; //Recogemos siempre la última dirección para quien la necesite
 
 	if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {		//Deceleracion
 		vel.setX(lerp(vel.getX(), 0, 0.25));
@@ -115,6 +115,13 @@ void Movement:: update() {
 float Movement::lerp(float a, float b, float f)
 {
 	return (a + f * (b - a));
+}
+
+void Movement::onEnable(){
+	if(tr_->getVel() == Vector2D(0,0))
+		anim_->play(Vector2D(0, 0), Vector2D(2, 0), 220); // Idle
+	else
+		anim_->play(Vector2D(0, 1), Vector2D(2, 2), 100);
 }
 
 void Movement::onDisable()
