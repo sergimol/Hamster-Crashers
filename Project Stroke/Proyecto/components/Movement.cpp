@@ -26,7 +26,12 @@ void Movement:: init() {
 }
 
 void Movement::updateKeymap(KEYS x, bool is) {
+	if (x != SPACE)
 	keymap.at(x) = is;
+	else if (!keymap.at(SPACE)) {
+		keymap.at(SPACE) = true;
+		entity_->getComponent<Stroke>()->increaseChance(2, this);
+	}
 }
 void Movement:: update() {
 
@@ -56,10 +61,7 @@ void Movement:: update() {
 
 	if (ih().keyDownEvent() || ih().keyUpEvent()) {
 
-		if (!keymap.at(SPACE) && ih().isKeyDown(SDLK_SPACE)) {
-			keymap.at(SPACE) = true;
-			entity_->getComponent<Stroke>()->increaseChance(2, this);
-		}
+		
 	}
 
 	if (dir.magnitude() != 0) {

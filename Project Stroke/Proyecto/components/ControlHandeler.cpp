@@ -14,14 +14,14 @@ void ControlHandeler::init() {
 		keymap.insert({ DOWN, SDL_SCANCODE_DOWN });
 		keymap.insert({ LEFT, SDL_SCANCODE_LEFT });
 		keymap.insert({ RIGHT, SDL_SCANCODE_RIGHT });
-		keymap.insert({ SPACE, SDL_SCANCODE_SPACE }); //el salto aun no esta includio
+		keymap.insert({ SPACE, SDL_SCANCODE_K }); //el salto aun no esta includio
 	}
 	else if (player_ == 2) {
 		keymap.insert({ UP, SDL_SCANCODE_W });
 		keymap.insert({ DOWN, SDL_SCANCODE_S });
 		keymap.insert({ LEFT, SDL_SCANCODE_A });
 		keymap.insert({ RIGHT, SDL_SCANCODE_D });
-		keymap.insert({ SPACE, SDL_SCANCODE_SPACE }); //el salto aun no esta includio
+		keymap.insert({ SPACE, SDL_SCANCODE_C }); //el salto aun no esta includio
 	}
 
 }
@@ -31,23 +31,32 @@ void ControlHandeler::init() {
 void ControlHandeler::update() {
 
 	//la parte para MOVEMENT
+
+	//UP
 	if (ih().isKeyDown(keymap.at(UP))) //aqui es donde ahcemos nuestro keymap
 		mov_->updateKeymap(Movement::UP, true);
 	else if (ih().isKeyUp(keymap.at(UP)))
 		mov_->updateKeymap(Movement::UP, false);
+	//DOWN
 	if (ih().isKeyDown(keymap.at(DOWN)))
 		mov_->updateKeymap(Movement::DOWN, true);
 	else if (ih().isKeyUp(keymap.at(DOWN)))
 		mov_->updateKeymap(Movement::DOWN, false);
+	//RIGHT
 	if (ih().isKeyDown(keymap.at(RIGHT)))
 		mov_->updateKeymap(Movement::RIGHT, true);
 	else if (ih().isKeyUp(keymap.at(RIGHT)))
 		mov_->updateKeymap(Movement::RIGHT, false);
+	//	LEFT
 	if (ih().isKeyDown(keymap.at(LEFT)))
 		mov_->updateKeymap(Movement::LEFT, true);
 	else if (ih().isKeyUp(keymap.at(LEFT)))
 		mov_->updateKeymap(Movement::LEFT, false);
-
+	//el jump no necesita que se le pase el false
+	if (ih().isKeyDown(keymap.at(SPACE))) 
+		mov_->updateKeymap(Movement::SPACE, true);
+	//el jump no necesita la parte para false
+	
 
 
 }
