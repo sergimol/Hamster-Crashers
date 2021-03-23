@@ -70,11 +70,11 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 	//Cogemos todas las entidades del juego
 	auto& ents = entity_->getMngr()->getEnteties();
 
-	for (Entity* e : ents) {
+	for (int i = 0; i < ents.size(); ++i) {
 		//Si la entidad es un enemigo...
-		if (e->hasGroup<Enemy>()) {
+		if (ents[i]->hasGroup<Enemy>()) {
 			//Cogemos el transform del enemigo
-			auto eTR = e->getComponent<Transform>();
+			auto eTR = ents[i]->getComponent<Transform>();
 
 			//Creamos su Rect
 			SDL_Rect rectEnemy;
@@ -92,7 +92,7 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 				}
 				canHit = true;
 				//Le restamos la vida al enemigo
-				e->getComponent<EntityAttribs>()->recieveDmg(dmg*1.5);
+				ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg*1.5);
 			}
 		}
 	}

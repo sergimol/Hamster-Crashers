@@ -152,6 +152,11 @@ void Roll::update() {
 		//	state = HamStates::IDLE;
 		//	timer = sdlutils().currRealTime();
 		//}
+
+		//Si se colisiona..
+		if (CheckCollisions())
+			//Suena el hit y le pega
+			hitSound_.play();
 	}
 	else if(!entity_->getComponent<Movement>()->isActive())
 	{
@@ -160,4 +165,47 @@ void Roll::update() {
 		entity_->getComponent<Movement>()->setActive(true);
 		rolling = false;
 	}
+}
+
+bool Roll::CheckCollisions()
+{
+	//Comprueba si has golpeado
+	bool hit = false;
+
+	//Cogemos todas las entidades
+	auto& ents = entity_->getMngr()->getEnteties();
+
+	//Recorremos la lista de componentes
+	for (int i = 0; i < ents.size(); ++i)
+	{
+		//Si es un enemigo
+		if (ents[i]->hasGroup<Enemy>())
+		{
+			//Cogemos el transform del enemigo
+			auto eTr = ents[i]->getComponent<Transform>();
+			//Creamos su "collider"
+			SDL_Rect rectEnemy = build_sdlrect(eTr->getPos(), eTr->getW(), eTr->getH());
+
+			//Cogemos el transform del jugador
+			auto pTr = entity_->getComponent<Transform>();
+			//Creamos su "collider"
+			SDL_Rect rectPlayer = build_sdlrect(pTr->getPos(), pTr->getW(), pTr->getH());
+
+			//Comprobamos si hay colision
+			if (SDL_HasIntersection(&rectPlayer, &rectEnemy))
+			{
+				//he puesto que le matas de una 
+				//creo que lo suyo seria stunnearlo y quitar la mitad de la vida o asi
+				int dmg = ents[i]->getComponent<EntityAttribs>()->getMaxLife();
+				if (ents[i]->getComponent<EntityAttribs>()->getLife() > 0)
+				{
+					ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg);
+					hit = true;
+				}
+			}
+
+		}
+	}
+
+	return hit;
 }
