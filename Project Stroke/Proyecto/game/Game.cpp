@@ -193,17 +193,18 @@ void Game::start() {
 void Game::updateCamera() {
 
 	Vector2D camPos;
-
+	int players(0);
 	//Cámara sigue a los personajes
 	for (Entity* e : players_) {
 		auto& playerpos = e->getComponent<Transform>()->getPos();
 
 		// Operación para calcular el punto medio con más jugadores
-		camPos = playerpos;
+		camPos = camPos + playerpos;
+		players++;
 	}
-
-	camera_.x = camPos.getX() - camera_.w / 2;
-	camera_.y = camPos.getY() - camera_.h / 2;
+	
+	camera_.x = (camPos.getX()/players) - camera_.w / 2;
+	camera_.y = (camPos.getY()/players) - camera_.h / 2;
 
 	// Bordes de la cámara
 	/*
