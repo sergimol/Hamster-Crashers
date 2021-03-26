@@ -151,8 +151,10 @@
     <ClCompile Include="Proyecto\components\Combos.cpp" />
     <ClCompile Include="Proyecto\components\DisableOnExit.cpp" />
     <ClCompile Include="Proyecto\components\ControlHandeler.cpp" />
+    <ClCompile Include="Proyecto\components\FollowPlayer.cpp" />
     <ClCompile Include="Proyecto\components\HamsterStateMachine.cpp" />
     <ClCompile Include="Proyecto\components\Image.cpp" />
+    <ClCompile Include="Proyecto\components\MovementSimple.cpp" />
     <ClCompile Include="Proyecto\components\Pray.cpp" />
     <ClCompile Include="Proyecto\components\Roll.cpp" />
     <ClCompile Include="Proyecto\components\Turret.cpp" />
@@ -187,8 +189,10 @@
     <ClInclude Include="Proyecto\components\DisableOnExit.h" />
     <ClInclude Include="Proyecto\components\FighterCtrl.h" />
     <ClInclude Include="Proyecto\components\Animator.h" />
+    <ClInclude Include="Proyecto\components\FollowPlayer.h" />
     <ClInclude Include="Proyecto\components\HamsterStateMachine.h" />
     <ClInclude Include="Proyecto\components\Image.h" />
+    <ClInclude Include="Proyecto\components\MovementSimple.h" />
     <ClInclude Include="Proyecto\components\Pray.h" />
     <ClInclude Include="Proyecto\components\Roll.h" />
     <ClInclude Include="Proyecto\components\Turret.h" />

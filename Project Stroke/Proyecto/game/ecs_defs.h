@@ -20,6 +20,8 @@ class Turret;
 class DisableOnExit;
 class BulletHit;
 class ControlHandeler;
+class MovementSimple;
+class FollowPlayer;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -38,7 +40,9 @@ class ControlHandeler;
 	Turret, \
 	DisableOnExit, \
 	BulletHit, \
-	ControlHandeler
+	ControlHandeler, \
+	MovementSimple,\
+	FollowPlayer
 
 // groups
 
