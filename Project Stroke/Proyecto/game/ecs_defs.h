@@ -53,5 +53,11 @@ struct Bullet_group;
 
 // handlers
 //Creo que hay que hacer un handler por cada player
-struct Player;
-#define _HDLRS_LIST_ Player
+struct Hamster1;
+struct Hamster2;
+struct Hamster3;
+struct Hamster4;
+#define _HDLRS_LIST_ Hamster1 , \
+					Hamster2, \
+					Hamster3, \
+					Hamster4

@@ -111,6 +111,9 @@ void Game::init() {
 	hamster1->setGroup<Ally>(true);
 	hamster1->addComponent<ControlHandeler>(1);
 	players_.push_back(hamster1);
+	//Igual luego no lo usammos pero por si aca
+	mngr_->setHandler<Hamster1>(hamster1);
+
 
 	//CLON Sardinilla (P2)
 	auto* hamster2 = mngr_->addEntity();
