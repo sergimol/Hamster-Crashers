@@ -168,6 +168,7 @@
     <ClCompile Include="Proyecto\game\Game.cpp" />
     <ClCompile Include="Proyecto\json\JSON.cpp" />
     <ClCompile Include="Proyecto\json\JSONValue.cpp" />
+    <ClCompile Include="Proyecto\sdlutils\Animation.cpp" />
     <ClCompile Include="Proyecto\sdlutils\RandomNumberGenerator.cpp" />
     <ClCompile Include="Proyecto\sdlutils\SDLUtils.cpp" />
     <ClCompile Include="Proyecto\sdlutils\sdlutils_demo.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="Proyecto\game\Game.h" />
     <ClInclude Include="Proyecto\json\JSON.h" />
     <ClInclude Include="Proyecto\json\JSONValue.h" />
+    <ClInclude Include="Proyecto\sdlutils\Animation.h" />
     <ClInclude Include="Proyecto\sdlutils\Font.h" />
     <ClInclude Include="Proyecto\sdlutils\InputHandler.h" />
     <ClInclude Include="Proyecto\sdlutils\macros.h" />

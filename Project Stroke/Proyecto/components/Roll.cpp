@@ -56,7 +56,7 @@ void Roll::action()
 		}
 
 
-		anim_->play(Vector2D(0, 3), Vector2D(0, 4), 100);
+		anim_->play(sdlutils().anims().at("sardinilla_roll"));
 	}
 	/*else
 		rolling = false;*/
@@ -132,7 +132,7 @@ void Roll::update() {
 
 			//ANIMACION DE IDLE
 			if (state != HamStates::IDLE)
-				anim_->play(Vector2D(0, 3), Vector2D(0, 4), 100);
+				anim_->play(sdlutils().anims().at("sardinilla_roll"));
 			if (state != HamStates::JUMPING) 
 				state = HamStates::IDLE;
 
@@ -143,7 +143,7 @@ void Roll::update() {
 
 			//ANIMACION DE MOVIMIENTO
 			if (state != HamStates::MOVING)
-				anim_->play(Vector2D(0, 3), Vector2D(0, 4), 100);
+				anim_->play(sdlutils().anims().at("sardinilla_roll"));
 			if (state != HamStates::JUMPING) 
 				state = HamStates::MOVING;
 

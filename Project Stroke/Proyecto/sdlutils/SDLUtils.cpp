@@ -215,6 +215,35 @@ void SDLUtils::loadReasources(std::string filename) {
 		}
 	}
 
+	// load musics
+	jValue = root["anims"];
+	if (jValue != nullptr) {
+		if (jValue->IsArray()) {
+			for (auto& v : jValue->AsArray()) {
+				if (v->IsObject()) {
+					JSONObject vObj = v->AsObject();
+					std::string key = vObj["id"]->AsString();
+
+					//LEO EL RESTO DE ATRIBUTOS Y SE LOS PASO EN UNA CONSTRUCTORA 
+					Vector2D st = Vector2D(vObj["startFrameX"]->AsNumber(), vObj["startFrameY"]->AsNumber());
+					int dur = vObj["duration"]->AsNumber();
+					int c = vObj["cols"]->AsNumber();
+					int r = vObj["rows"]->AsNumber();
+					int fu = vObj["frameUpdate"]->AsNumber();
+
+					anims_.emplace(key, Animation(st, dur, c, r, fu));
+				}
+				else {
+					throw "'anims' array in '" + filename
+						+ "' includes and invalid value";
+				}
+			}
+		}
+		else {
+			throw "'anims' is not an array";
+		}
+	}
+
 }
 
 void SDLUtils::closeSDLExtensions() {

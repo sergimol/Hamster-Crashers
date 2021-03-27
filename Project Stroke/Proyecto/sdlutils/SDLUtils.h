@@ -13,6 +13,8 @@
 #include "SoundEffect.h"
 #include "Texture.h"
 #include "VirtualTimer.h"
+#include "Animation.h"
+
 
 
 class SDLUtils: public Singleton<SDLUtils> {
@@ -120,6 +122,12 @@ public:
 		return musics_;
 	}
 
+	// animations maps
+	inline sdl_resource_table<Animation>& anims() {
+		return anims_;
+	}
+
+
 	// Access to the random number generator. It is important to always
 	// use this generator, this way you can regenerate the same sequence
 	// if you start from the same seed
@@ -162,6 +170,7 @@ private:
 	sdl_resource_table<Texture> msgs_; // textures map (string -> texture)
 	sdl_resource_table<SoundEffect> sounds_; // sounds map (string -> sound)
 	sdl_resource_table<Music> musics_; // musics map (string -> music)
+	sdl_resource_table<Animation> anims_; //animations map (string -> animation)
 
 	RandomNumberGenerator random_; // (pseudo) random numbers generator
 	VirtualTimer timer_; // virtual timer

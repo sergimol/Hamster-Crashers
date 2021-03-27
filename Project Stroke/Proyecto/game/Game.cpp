@@ -93,11 +93,12 @@ void Game::init() {
 		64,
 		64,
 		3,
-		1,
+		3,
 		220,
 		Vector2D(0, 0),
-		Vector2D(2, 0)
+		3
 		);
+
 	hamster1->addComponent<HamsterStateMachine>();
 	hamster1->addComponent<Movement>();
 	hamster1->addComponent<LightAttack>();
@@ -124,10 +125,10 @@ void Game::init() {
 		64,
 		64,
 		3,
-		1,
+		3,
 		220,
 		Vector2D(0, 0),
-		Vector2D(2, 0)
+		3
 		);
 	hamster2->addComponent<HamsterStateMachine>();
 	hamster2->addComponent<Movement>();

@@ -78,7 +78,7 @@ void Movement:: update() {
 		
 		//ANIMACION DE IDLE
 		if(state != HamStates::IDLE)
-			anim_->play(Vector2D(0, 0), Vector2D(2, 0), 220);
+			anim_->play(sdlutils().anims().at("sardinilla_idle"));
 		if(state != HamStates::JUMPING) state = HamStates::IDLE;
 	
 	}
@@ -88,7 +88,7 @@ void Movement:: update() {
 
 		//ANIMACION DE MOVIMIENTO
 		if (state != HamStates::MOVING)
-			anim_->play(Vector2D(0, 1), Vector2D(2, 2), 100);
+			anim_->play(sdlutils().anims().at("sardinilla_move"));
 		if(state != HamStates::JUMPING) state = HamStates::MOVING;
 
 	}
@@ -121,9 +121,9 @@ float Movement::lerp(float a, float b, float f)
 
 void Movement::onEnable(){
 	if(tr_->getVel() == Vector2D(0,0))
-		anim_->play(Vector2D(0, 0), Vector2D(2, 0), 220); // Idle
+		anim_->play(sdlutils().anims().at("sardinilla_idle")); // Idle
 	else
-		anim_->play(Vector2D(0, 1), Vector2D(2, 2), 100);
+		anim_->play(sdlutils().anims().at("sardinilla_move")); //Movimiento
 }
 
 void Movement::onDisable()

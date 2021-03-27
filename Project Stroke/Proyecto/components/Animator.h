@@ -12,18 +12,19 @@
 
 class Animator : public Component {
 public:
-	Animator(Texture* tex, int w, int h, int c, int r, Uint32 f, Vector2D sf, Vector2D ef) :
+	Animator(Texture* tex, int w, int h, int c, int r, Uint32 f, Vector2D sf, int dur) :
 		tr_(nullptr), //
 		tex_(tex), //
 		widthFrame(w), //
 		heightFrame(h), //
 		startFrame(sf), //
-		endFrame(ef), //
 		textureFrame(sf), //
 		cols(c), //
 		rows(r), //
 		frameUpdate(f), //
-		lastTime(sdlutils().currRealTime()) //
+		lastTime(sdlutils().currRealTime()), //
+		animCont(0), //
+		animDuration(dur) //
 	{
 	}
 	virtual ~Animator() {
@@ -64,57 +65,69 @@ public:
 
 			lastTime = sdlutils().currRealTime();
 
-			//si llegamos al final de una fila
-			if (textureFrame.getX() >= 2) //habia puesto textureFrame.getX() >= cols-1
+			//SI NO SE HA ACABADO LA ANIMACION
+			if (animCont < animDuration - 1)
 			{
-				//si estamos en la ultima fila
-				if (textureFrame.getY() >= endFrame.getY()) //habia puesto textureFrame.getY() >= rows-1
+				//Si no hemos llegado al final de una fila seguimos avanzando
+				if (textureFrame.getX() < cols-1)
 				{
-					//reseteamos
-					//textureFrame.setX(0);
-					//textureFrame.setY(0);
-					textureFrame.setX(startFrame.getX());
-					textureFrame.setY(startFrame.getY());
+					textureFrame.setX(textureFrame.getX() + 1);
 				}
-				//Si no lo estamos
-				else
+				//Si llegamos al final de la fila cambiamos
+				else 
 				{
-					//Empezamos a recorrer la siguiente fila
 					textureFrame.setX(0);
 					textureFrame.setY(textureFrame.getY() + 1);
 				}
+				animCont++;
 			}
-			//Si no llegamos al final de una fila, seguimos avanzando por la fila
-			else
-				textureFrame.setX(textureFrame.getX() + 1);
+			//SI SE HA ACABADO Y HAY QUE LOOPEAR
+			else 
+			{
+				animCont = 0;
+				textureFrame.setX(startFrame.getX());
+				textureFrame.setY(startFrame.getY());
+			}
 
 		}
 	}
 
 	//Metodo que cambia de animacion sobre la spritesheet actual
-	void play(Vector2D sFrame, Vector2D eFrame, Uint32 fU) 
+	void play(Animation actualAnim) 
 	{
-		frameUpdate = fU;
-		startFrame = sFrame;
-		endFrame = eFrame;
+		frameUpdate = actualAnim.frameUpdate();
+		startFrame = actualAnim.startFrame();
+		animDuration = actualAnim.duration();
 		textureFrame = startFrame;
+		cols = actualAnim.cols();
+		rows = actualAnim.rows();
+		animCont = 0;
 	}
 
 private:
+	//Variables de recursos
 	Transform* tr_;
 	Texture* tex_;
 
+	//Timers para actualizar la spritsheet
 	Uint32 lastTime;
 	Uint32 frameUpdate;
 
+	//Frame actual de la animacion
 	Vector2D textureFrame;
+	int animCont;
 
+	//Frame de entrada
 	Vector2D startFrame;
-	Vector2D endFrame;
+	//Frames que dura la animacion
+	int animDuration;
 
+	//Tamaño de los frames de la spritesheet
 	int widthFrame;
 	int heightFrame;
-	int cols;
+
+	//Filas y Columnas totales de la spritesheet
+	int cols; 
 	int rows;
 };
 
