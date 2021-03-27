@@ -42,12 +42,14 @@ void Game::init() {
 	//Imagen de fondo fija
 	auto* background = mngr_->addEntity();
 	background->addComponent<Transform>(
-		Vector2D(0,0),
+		Vector2D(0, 0),
 		Vector2D(), 1920.0f, 1010.0f, 0.0f);
 
 	background->addComponent<Image>(&sdlutils().images().at("background"));
 
-
+	tmx::Map map;
+	if (map.load("resources/tilemap/MapaBien.tmx"))
+		std::cout << "tus muertos";
 	////MATERIAL PARA EL HITO1
 	////Keta
 	//auto* hamster2 = mngr_->addEntity();
@@ -104,7 +106,7 @@ void Game::init() {
 	hamster1->addComponent<LightAttack>();
 	hamster1->addComponent<StrongAttack>();
 	hamster1->addComponent<Stroke>();
-	hamster1->addComponent<UI>("sardinilla", 0 );
+	hamster1->addComponent<UI>("sardinilla", 0);
 	//hamster1->addComponent<Pray>(30, 50);
 	hamster1->addComponent<Roll>();
 	//hamster1->addComponent<Turret>();
@@ -149,8 +151,8 @@ void Game::init() {
 	auto* enemy = mngr_->addEntity();
 	enemy->addComponent<EntityAttribs>(200);
 	enemy->addComponent<Transform>(
-		Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f-100),
-		Vector2D(), 500.0f,500.0f, 0.0f)->getFlip() = true;
+		Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
+		Vector2D(), 500.0f, 500.0f, 0.0f)->getFlip() = true;
 	enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
 	enemy->setGroup<Enemy>(true);
 	enemy->addComponent<UI>("canelon", 4);
@@ -203,9 +205,9 @@ void Game::updateCamera() {
 		camPos = camPos + playerpos;
 		players++;
 	}
-	
-	camera_.x = (camPos.getX()/players) - camera_.w / 2;
-	camera_.y = (camPos.getY()/players) - camera_.h / 2;
+
+	camera_.x = (camPos.getX() / players) - camera_.w / 2;
+	camera_.y = (camPos.getY() / players) - camera_.h / 2;
 
 	// Bordes de la cámara
 	/*

@@ -123,7 +123,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>.\SDL2-2.0.7\lib\x64;.\SDL2_ttf-2.0.14\lib\x64;.\SDL2_net-2.0.1\lib\x64;.\SDL2_mixer-2.0.2\lib\x64;.\SDL2_image-2.0.1\lib\x64;.\box2d\lib\x64;.\tmxlite\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_net.lib;SDL2_mixer.lib;SDL2_image.lib;box2d.lib;tmxlite.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_net.lib;SDL2_mixer.lib;SDL2_image.lib;box2d.lib;tmxlite-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
