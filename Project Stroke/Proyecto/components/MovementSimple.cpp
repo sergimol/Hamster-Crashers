@@ -7,12 +7,15 @@
 void MovementSimple:: init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
-
+	/*
 	hms_ = entity_->getComponent<HamsterStateMachine>();
 	assert(hms_ != nullptr);
+	*/
 
+	/*
 	anim_ = entity_->getComponent<Animator>();
 	assert(anim_ != nullptr);
+	*/
 
 	speed_ = entity_->getComponent<EntityAttribs>()->getVel();
 	assert(speed_ != Vector2D());
@@ -30,13 +33,15 @@ void MovementSimple::updateKeymap(KEYS x, bool is) {
 	keymap.at(x) = is;
 	else if (!keymap.at(SPACE)) {
 		keymap.at(SPACE) = true;
+		/*
 		entity_->getComponent<Stroke>()->increaseChance(2, this);
+		*/
 	}
 }
 void MovementSimple:: update() {
 
 	auto& vel = tr_->getVel();
-	auto& state = hms_->getState();
+	//auto& state = hms_->getState();
 	auto& z = tr_->getZ();
 	auto& velZ = tr_->getVelZ();
 
@@ -77,25 +82,29 @@ void MovementSimple:: update() {
 		vel.setY(lerp(vel.getY(), 0, 0.25));
 		
 		//ANIMACION DE IDLE
+		/*
 		if(state != HamStates::IDLE)
 			anim_->play(Vector2D(0, 0), Vector2D(2, 0), 220);
 		if(state != HamStates::JUMPING) state = HamStates::IDLE;
+		*/
 	
 	}
-	else if (state == HamStates::IDLE || state == HamStates::MOVING || state == HamStates::JUMPING) {		//Aceleracion
+	else  {		//Aceleracion
 		vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.9));
 		vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.9));
 
 		//ANIMACION DE MOVIMIENTO
+		/*
 		if (state != HamStates::MOVING)
 			anim_->play(Vector2D(0, 1), Vector2D(2, 2), 100);
 		if(state != HamStates::JUMPING) state = HamStates::MOVING;
+		*/
 
 	}
 
-	if ((state == HamStates::IDLE || state == HamStates::MOVING) && keymap.at(SPACE)) {		//Inicio del salto
+	if (keymap.at(SPACE)) {		//Inicio del salto
 		velZ = jump_;
-		state = HamStates::JUMPING;
+		//state = HamStates::JUMPING;
 		timer = sdlutils().currRealTime();
 	}
 
@@ -108,7 +117,7 @@ void MovementSimple:: update() {
 		keymap.at(SPACE) = false;
 		velZ = 0;
 		z = 0;
-		state = HamStates::IDLE;
+		//state = HamStates::IDLE;
 		timer = sdlutils().currRealTime();
 	}
 
@@ -120,10 +129,10 @@ float MovementSimple::lerp(float a, float b, float f)
 }
 
 void MovementSimple::onEnable(){
-	if(tr_->getVel() == Vector2D(0,0))
-		anim_->play(Vector2D(0, 0), Vector2D(2, 0), 220); // Idle
-	else
-		anim_->play(Vector2D(0, 1), Vector2D(2, 2), 100);
+	if (tr_->getVel() == Vector2D(0, 0)) {}
+		//anim_->play(Vector2D(0, 0), Vector2D(2, 0), 220); // Idle
+	//else
+		//anim_->play(Vector2D(0, 1), Vector2D(2, 2), 100);
 }
 
 void MovementSimple::onDisable()

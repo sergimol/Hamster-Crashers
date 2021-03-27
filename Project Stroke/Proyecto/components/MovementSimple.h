@@ -5,7 +5,6 @@
 #include <map>
 #include "../sdlutils/SDLUtils.h"
 #include "Transform.h"
-#include "HamsterStateMachine.h"
 #include "Animator.h"
 #include "EntityAttribs.h"
 
@@ -15,7 +14,7 @@ public:
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 
 	MovementSimple() :
-		tr_(nullptr), hms_(nullptr), anim_(nullptr), speed_(), goalVel_(0, 0), lastDir_(1,0), timer(sdlutils().currRealTime()) {
+		tr_(nullptr), speed_(), goalVel_(0, 0), lastDir_(1,0), timer(sdlutils().currRealTime()) {
 	}
 
 	virtual ~MovementSimple() {
@@ -41,8 +40,8 @@ private:
 	long unsigned int timer;
 
 	Transform* tr_;
-	HamsterStateMachine* hms_;
-	Animator* anim_;
+	//HamsterStateMachine* hms_;
+	//Animator* anim_;
 	Vector2D speed_, goalVel_, lastDir_;
 	
 	std::map<KEYS, bool> keymap;
