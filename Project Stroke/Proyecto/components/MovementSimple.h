@@ -7,6 +7,8 @@
 #include "Transform.h"
 #include "Animator.h"
 #include "EntityAttribs.h"
+#include "../ecs/Manager.h"
+#include "../ecs/Entity.h"
 
 class MovementSimple : public Component {
 public:
@@ -44,6 +46,6 @@ private:
 	//Animator* anim_;
 	Vector2D speed_, goalVel_, lastDir_;
 	
-	std::map<KEYS, bool> keymap;
+	std::map<KEYS, bool> keymapSimple;
 };
 

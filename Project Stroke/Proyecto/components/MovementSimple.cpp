@@ -20,22 +20,24 @@ void MovementSimple:: init() {
 	speed_ = entity_->getComponent<EntityAttribs>()->getVel();
 	assert(speed_ != Vector2D());
 
-	keymap.insert({ UP, false });
-	keymap.insert({ DOWN, false });
-	keymap.insert({ RIGHT, false });
-	keymap.insert({ LEFT, false });
-	keymap.insert({ SPACE, false });
-
+	keymapSimple.insert({ UP, false });
+	keymapSimple.insert({ DOWN, false });
+	keymapSimple.insert({ RIGHT, false });
+	keymapSimple.insert({ LEFT, false });
+	keymapSimple.insert({ SPACE, false });
 }
 
 void MovementSimple::updateKeymap(KEYS x, bool is) {
-	if (x != SPACE)
-	keymap.at(x) = is;
-	else if (!keymap.at(SPACE)) {
-		keymap.at(SPACE) = true;
-		/*
-		entity_->getComponent<Stroke>()->increaseChance(2, this);
-		*/
+	if (!keymapSimple.empty()) {
+
+		if (x != SPACE)
+		keymapSimple.at(x) = is;
+		/*else*/ if (!keymapSimple.at(SPACE)) {
+			keymapSimple.at(SPACE) = true;
+			/*
+			entity_->getComponent<Stroke>()->increaseChance(2, this);
+			*/
+		}
 	}
 }
 void MovementSimple:: update() {
@@ -47,18 +49,18 @@ void MovementSimple:: update() {
 
 	Vector2D dir = Vector2D(0, 0);
 
-	if (keymap.at(UP)) {
+	if (keymapSimple.at(UP)) {
 		dir.setY(-1.0f);
 	}
-	else if (keymap.at(DOWN)) {
+	else if (keymapSimple.at(DOWN)) {
 		dir.setY(1.0f);
 	}
 
-	if (keymap.at(RIGHT)) {
+	if (keymapSimple.at(RIGHT)) {
 		dir.setX(1.0f);
 		tr_->getFlip() = false;
 	}
-	else if (keymap.at(LEFT)) {
+	else if (keymapSimple.at(LEFT)) {
 		dir.setX(-1.0f);
 		tr_->getFlip() = true;
 	}
@@ -77,7 +79,7 @@ void MovementSimple:: update() {
 
 	lastDir_ = dir; //Recogemos siempre la última dirección para quien la necesite
 
-	if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {		//Deceleracion
+	if (!keymapSimple.at(UP) && !keymapSimple.at(DOWN) && !keymapSimple.at(LEFT) && !keymapSimple.at(RIGHT)) {		//Deceleracion
 		vel.setX(lerp(vel.getX(), 0, 0.25));
 		vel.setY(lerp(vel.getY(), 0, 0.25));
 		
@@ -102,7 +104,7 @@ void MovementSimple:: update() {
 
 	}
 
-	if (keymap.at(SPACE)) {		//Inicio del salto
+	if (keymapSimple.at(SPACE)) {		//Inicio del salto
 		velZ = jump_;
 		//state = HamStates::JUMPING;
 		timer = sdlutils().currRealTime();
@@ -114,7 +116,7 @@ void MovementSimple:: update() {
 	}
 
 	else if (z < 0) {			//Final del salto	!!!!!!!!!(0 SE SUSTITUIRA POR LA Z DEL MAPA)!!!!!!!!
-		keymap.at(SPACE) = false;
+		keymapSimple.at(SPACE) = false;
 		velZ = 0;
 		z = 0;
 		//state = HamStates::IDLE;

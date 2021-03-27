@@ -14,6 +14,7 @@
 #include "HamsterStateMachine.h"
 #include "Animator.h"
 #include "EntityAttribs.h"
+#include "MovementSimple.h"
 
 class FollowPlayer : public Component {
 public:

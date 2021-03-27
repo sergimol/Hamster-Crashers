@@ -52,6 +52,37 @@ void FollowPlayer::update() {
 	if (state == HamStates::DEAD || state == HamStates::INFARCTED) {
 		lockHamster(); // Habría que hacerlo quitando el actual para que no repita
 	}
+
+
+
+	auto& hamPos = hamsterTr_->getPos();
+	auto& pos = tr_->getPos();
+	int hamX = hamPos.getX(),
+		hamY = hamPos.getX(),
+		x = pos.getX(),
+		y = pos.getY();
+
+	if (y>hamY)
+		mov_->updateKeymap(MovementSimple::DOWN, true);
+	else
+		mov_->updateKeymap(MovementSimple::DOWN, false);
+	if (y<hamY)
+		mov_->updateKeymap(MovementSimple::UP, true);
+	else 
+		mov_->updateKeymap(MovementSimple::UP, false);
+	
+
+
+	if (x > hamX)
+		mov_->updateKeymap(MovementSimple::LEFT, true);
+	else
+		mov_->updateKeymap(MovementSimple::LEFT, false);
+	if (x < hamX)
+		mov_->updateKeymap(MovementSimple::RIGHT, true);
+	else 
+		mov_->updateKeymap(MovementSimple::RIGHT, false);
+	
+
 }
 
 

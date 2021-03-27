@@ -15,6 +15,8 @@
 #include "../components/Pray.h"
 #include "../components/Combos.h"
 #include "../components/Turret.h"
+#include "../components/FollowPlayer.h"
+#include "../components/MovementSimple.h"
 
 #include "../components/ControlHandeler.h"
 
@@ -156,6 +158,10 @@ void Game::init() {
 	enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
 	enemy->setGroup<Enemy>(true);
 	enemy->addComponent<UI>("canelon", 4);
+
+
+	enemy->addComponent<MovementSimple>();
+	enemy->addComponent<FollowPlayer>(players_);
 }
 
 void Game::start() {
