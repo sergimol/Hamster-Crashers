@@ -54,13 +54,12 @@ void FollowPlayer::update() {
 	if (state == HamStates::DEAD || state == HamStates::INFARCTED) {
 		lockHamster(); // Habría que hacerlo quitando el actual para que no repita
 	}
-
 	auto& hamPos = hamsterTr_->getPos();
 	auto& pos = tr_->getPos();
 	int hamX = hamPos.getX(),
-		hamY = hamPos.getY(),
+		hamY = hamPos.getY() + hamsterTr_->getH(),
 		x = pos.getX(),
-		y = pos.getY();
+		y = pos.getY() + tr_->getH();
 
 	
 	if (!isWithinAttackRange()) {
