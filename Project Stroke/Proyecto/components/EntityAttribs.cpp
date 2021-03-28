@@ -24,7 +24,7 @@ EntityAttribs::EntityAttribs(int life) :
 	damage_(20)
 {}
 
-EntityAttribs::EntityAttribs(int life, float range) :
+EntityAttribs::EntityAttribs(int life, float range, Vector2D speed) :
 	health_(life),
 	maxHealth_(life),
 	strokeResist_(0.0),
@@ -32,7 +32,7 @@ EntityAttribs::EntityAttribs(int life, float range) :
 	critProbability_(0.05),
 	maxCrit_(0.2),
 	critDamage_(1.0),
-	velocity_(Vector2D(7, 3.5)),
+	velocity_(speed),
 	damage_(20)
 {}
 

@@ -27,23 +27,20 @@ void MovementSimple:: init() {
 	keymapSimple.insert({ SPACE, false });
 }
 
+// Activa el movimiento en la dirección indicada
 void MovementSimple::updateKeymap(KEYS x, bool is) {
 	if (!keymapSimple.empty()) {
 
 		if (x != SPACE)
 		keymapSimple.at(x) = is;
-		/*else*/ if (!keymapSimple.at(SPACE)) {
-			keymapSimple.at(SPACE) = true;
-			/*
-			entity_->getComponent<Stroke>()->increaseChance(2, this);
-			*/
-		}
+		//if (!keymapSimple.at(SPACE)) {
+		//	keymapSimple.at(SPACE) = true;
+		//}
 	}
 }
 void MovementSimple:: update() {
 
 	auto& vel = tr_->getVel();
-	//auto& state = hms_->getState();
 	auto& z = tr_->getZ();
 	auto& velZ = tr_->getVelZ();
 
@@ -66,10 +63,10 @@ void MovementSimple:: update() {
 	}
 
 
-	if (ih().keyDownEvent() || ih().keyUpEvent()) {
+	//if (ih().keyDownEvent() || ih().keyUpEvent()) {
 
-		
-	}
+	
+	//}
 
 	if (dir.magnitude() != 0) {
 		dir = dir.normalize();

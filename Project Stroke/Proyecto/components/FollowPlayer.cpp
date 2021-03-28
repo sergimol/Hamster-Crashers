@@ -6,13 +6,14 @@ FollowPlayer::FollowPlayer(std::vector<Entity*>& players) :
 }
 
 void FollowPlayer::init() {
-	//mov_ = entity_->getComponent<MovementSimple>();
-	//assert(mov_ != nullptr);
+	mov_ = entity_->getComponent<MovementSimple>();
+	assert(mov_ != nullptr);
 
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 
-	lockHamster();
+	//lockHamster();
+	lockHamster(1); // De momento un hamster concreto para manejar mejor
 	assert(lockedHamster_ != nullptr);
 	assert(lockedHamState_ != nullptr);
 	assert(hamsterTr_ != nullptr);
@@ -31,6 +32,7 @@ void FollowPlayer::lockHamster() {
 void FollowPlayer::lockHamster(int id) {
 	lockedHamster_ = hamsters_[id];
 	hamsterTr_ = lockedHamster_->getComponent<Transform>();
+	lockedHamState_ = lockedHamster_->getComponent<HamsterStateMachine>();
 }
 
 //Esta a rango de ataque
@@ -38,7 +40,7 @@ bool FollowPlayer::isWithinAttackRange() {
 	auto& hamPos = hamsterTr_->getPos();
 	auto& pos = tr_->getPos();
 	int hamX = hamPos.getX(),
-		hamY = hamPos.getX(),
+		hamY = hamPos.getY(),
 		x = pos.getX(),
 		y = pos.getY();
 
@@ -53,36 +55,41 @@ void FollowPlayer::update() {
 		lockHamster(); // Habría que hacerlo quitando el actual para que no repita
 	}
 
-
-
 	auto& hamPos = hamsterTr_->getPos();
 	auto& pos = tr_->getPos();
 	int hamX = hamPos.getX(),
-		hamY = hamPos.getX(),
+		hamY = hamPos.getY(),
 		x = pos.getX(),
 		y = pos.getY();
 
-	if (y>hamY)
-		mov_->updateKeymap(MovementSimple::DOWN, true);
-	else
-		mov_->updateKeymap(MovementSimple::DOWN, false);
-	if (y<hamY)
-		mov_->updateKeymap(MovementSimple::UP, true);
-	else 
-		mov_->updateKeymap(MovementSimple::UP, false);
 	
+	if (!isWithinAttackRange()) {
+		// Movimiento del enemigo en base a pos del jugador
+		if (y < hamY - rangeOffsetY_)
+			mov_->updateKeymap(MovementSimple::DOWN, true);
+		else
+			mov_->updateKeymap(MovementSimple::DOWN, false);
+		if (y > hamY + rangeOffsetY_)
+			mov_->updateKeymap(MovementSimple::UP, true);
+		else
+			mov_->updateKeymap(MovementSimple::UP, false);
 
 
-	if (x > hamX)
-		mov_->updateKeymap(MovementSimple::LEFT, true);
-	else
-		mov_->updateKeymap(MovementSimple::LEFT, false);
-	if (x < hamX)
-		mov_->updateKeymap(MovementSimple::RIGHT, true);
-	else 
+		if (x > hamX + rangeOffsetX_)
+			mov_->updateKeymap(MovementSimple::LEFT, true);
+		else
+			mov_->updateKeymap(MovementSimple::LEFT, false);
+		if (x < hamX - rangeOffsetX_)
+			mov_->updateKeymap(MovementSimple::RIGHT, true);
+		else
+			mov_->updateKeymap(MovementSimple::RIGHT, false);
+	}
+	else { // Si está a rango, no necesita moverse
 		mov_->updateKeymap(MovementSimple::RIGHT, false);
-	
-
+		mov_->updateKeymap(MovementSimple::LEFT, false);
+		mov_->updateKeymap(MovementSimple::DOWN, false);
+		mov_->updateKeymap(MovementSimple::UP, false);
+	}
 }
 
 

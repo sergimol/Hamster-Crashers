@@ -13,7 +13,7 @@ public:
 
 	EntityAttribs(int life);
 
-	EntityAttribs(int life, float range);
+	EntityAttribs(int life, float range, Vector2D speed);
 
 	virtual ~EntityAttribs() {
 	}
