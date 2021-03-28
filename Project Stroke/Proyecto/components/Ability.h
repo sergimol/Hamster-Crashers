@@ -15,6 +15,8 @@ class Ability : public Component {
 public:
 	Ability() : tr_(nullptr), st_(nullptr), timer_(0), cooldown_(1000) {};
 
+	Ability(int cd) : tr_(nullptr), st_(nullptr), timer_(0), cooldown_(cd) {};
+
 	virtual ~Ability() {};
 
 	virtual void init() override;

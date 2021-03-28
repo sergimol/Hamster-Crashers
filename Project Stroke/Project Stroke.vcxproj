@@ -153,6 +153,7 @@
     <ClCompile Include="Proyecto\components\ControlHandeler.cpp" />
     <ClCompile Include="Proyecto\components\HamsterStateMachine.cpp" />
     <ClCompile Include="Proyecto\components\Image.cpp" />
+    <ClCompile Include="Proyecto\components\Poison.cpp" />
     <ClCompile Include="Proyecto\components\Pray.cpp" />
     <ClCompile Include="Proyecto\components\Roll.cpp" />
     <ClCompile Include="Proyecto\components\Turret.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="Proyecto\components\Animator.h" />
     <ClInclude Include="Proyecto\components\HamsterStateMachine.h" />
     <ClInclude Include="Proyecto\components\Image.h" />
+    <ClInclude Include="Proyecto\components\Poison.h" />
     <ClInclude Include="Proyecto\components\Pray.h" />
     <ClInclude Include="Proyecto\components\Roll.h" />
     <ClInclude Include="Proyecto\components\Turret.h" />

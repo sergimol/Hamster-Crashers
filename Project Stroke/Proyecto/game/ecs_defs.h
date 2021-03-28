@@ -20,6 +20,7 @@ class Turret;
 class DisableOnExit;
 class BulletHit;
 class ControlHandeler;
+class Poison;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -38,6 +39,7 @@ class ControlHandeler;
 	Turret, \
 	DisableOnExit, \
 	BulletHit, \
+	Poison, \
 	ControlHandeler
 
 // groups

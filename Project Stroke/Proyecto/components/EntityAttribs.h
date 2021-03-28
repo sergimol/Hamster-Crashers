@@ -6,6 +6,7 @@
 #include "UI.h"
 #include "HamsterStateMachine.h"
 
+const int INVENCIBLECD = 200;
 
 class EntityAttribs: public Component {
 public:
@@ -26,8 +27,7 @@ public:
 
 	void addCritProbability(float probability);
 
-	void update() override {
-	};
+	void update() override;
 
 	inline void setLife(int life) { health_ = life; };
 
@@ -62,6 +62,11 @@ private:
 	float critDamage_;
 	float strokeResist_;
 	float attackRange_;
+	float cadence_;
+
+	//Variables para tener invulnerabilidad tras una habilidad
+	bool invencible_;
+	float time;
 
 	std::string id_;
 

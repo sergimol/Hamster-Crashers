@@ -3,23 +3,22 @@
 
 #include "Ability.h"
 
-const float WAIT = 2000;
+const float CLOUDCD = 2000;
 
-class Pray : public Ability {
+class Poison : public Ability {
 public:
-	Pray(int dmg, int heal);
+	Poison(int dmg);
 
-	virtual ~Pray();
+	virtual ~Poison();
+
+	virtual void init();
+	virtual void update();
 
 	//Ejecuta la habilidad en funcion del hamster que sea
 	virtual void action();
 
-	virtual void deActivate();
 private:
-	SDL_Rect came_;
-	bool evil;
+	SDL_Rect cloud;
 	int dmg_;
-	int heal_;
 
-	void prayAbility();
 };

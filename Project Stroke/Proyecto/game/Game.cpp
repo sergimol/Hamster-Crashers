@@ -12,6 +12,7 @@
 #include "../components/UI.h"
 #include "../components/Animator.h"
 #include "../components/Roll.h"
+#include "../components/Poison.h"
 #include "../components/Pray.h"
 #include "../components/Combos.h"
 #include "../components/Turret.h"
@@ -81,7 +82,6 @@ void Game::init() {
 
 	////MATERIAL PARA EL HITO1//
 
-
 	//Sardinilla
 	auto* hamster1 = mngr_->addEntity();
 	hamster1->addComponent<Transform>(
@@ -107,8 +107,9 @@ void Game::init() {
 	hamster1->addComponent<Stroke>();
 	hamster1->addComponent<UI>("sardinilla", 0);
 	//hamster1->addComponent<Pray>(30, 50);
-	hamster1->addComponent<Roll>();
+	//hamster1->addComponent<Roll>();
 	//hamster1->addComponent<Turret>();
+	hamster1->addComponent<Poison>(5);
 	hamster1->addComponent<Combos>();
 	hamster1->setGroup<Ally>(true);
 	hamster1->addComponent<ControlHandeler>(1);
@@ -119,24 +120,24 @@ void Game::init() {
 	//hamster2->addComponent<Transform>(
 	//	Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
 	//	Vector2D(), 256.0f, 256.0f, 0.0f);
-	//hamster2->addComponent<EntityAttribs>(100, "sardinilla");
+	//hamster2->addComponent<EntityAttribs>(100);
 	////hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
 	//hamster2->addComponent<Animator>(
 	//	&sdlutils().images().at("sardinillaSheet"),
 	//	64,
 	//	64,
 	//	3,
-	//	3,
+	//	1,
 	//	220,
 	//	Vector2D(0, 0),
-	//	3
+	//	Vector2D(2, 0)
 	//	);
 	//hamster2->addComponent<HamsterStateMachine>();
 	//hamster2->addComponent<Movement>();
 	//hamster2->addComponent<LightAttack>();
 	//hamster2->addComponent<StrongAttack>();
 	//hamster2->addComponent<Stroke>();
-	//hamster2->addComponent<UI>("sardinilla", 0);
+	//hamster2->addComponent<UI>("sardinilla", 1);
 	////hamster1->addComponent<Pray>(30, 50);
 	//hamster2->addComponent<Roll>();
 	////hamster1->addComponent<Turret>();

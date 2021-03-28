@@ -150,6 +150,9 @@
     <ClCompile Include="Proyecto\sdlutils\Animation.cpp">
       <Filter>Archivos de origen\SDLutils</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\Poison.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\components\Bounce.h">
@@ -292,6 +295,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\sdlutils\Animation.h">
       <Filter>Archivos de encabezado\SDLutils</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Poison.h">
+      <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -7,30 +7,22 @@
 #include "EntityAttribs.h"
 #include "Transform.h"
 
-Pray::Pray(int dmg, int heal) : Ability(), dmg_(dmg), heal_(heal), evil(true), magicTime(false), waitTime(0.0){
+Pray::Pray(int dmg, int heal) : Ability(WAIT), dmg_(dmg), heal_(heal), evil(true){
 };
 
 Pray::~Pray() {
 
 }
 
-void Pray::update() {
-	Ability::update();
-	if (magicTime) {
-		if (sdlutils().currRealTime() > waitTime + WAIT) {
-			prayAbility();
-		}
-	}
-
+void Pray::action() {
+	//Ahora empiezas la animacion
 }
 
-void Pray::action() {
-	waitTime = sdlutils().currRealTime();
-	magicTime = true;
+void Pray::deActivate() {
+	prayAbility();
 }
 
 void Pray::prayAbility() {
-	magicTime = false;
 	auto& ents = entity_->getMngr()->getEnteties();
 	came_ = Game::camera_;
 	for (Entity* e : ents) {
