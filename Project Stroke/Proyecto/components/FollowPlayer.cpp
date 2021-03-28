@@ -2,7 +2,7 @@
 #include "Stroke.h"
 
 FollowPlayer::FollowPlayer(std::vector<Entity*>& players) :
-	mov_(nullptr), tr_(nullptr), rangeOffsetX_(50), rangeOffsetY_(50), lockedHamState_(nullptr), lockedHamster_(nullptr), hamsterTr_(nullptr), hamsters_(players) {
+	mov_(nullptr), tr_(nullptr), rangeOffsetX_(200), rangeOffsetY_(50), lockedHamState_(nullptr), lockedHamster_(nullptr), hamsterTr_(nullptr), hamsters_(players) {
 }
 
 void FollowPlayer::init() {
@@ -11,6 +11,9 @@ void FollowPlayer::init() {
 
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+
+	enAtk_ = entity_->getComponent<EnemyAttack>();
+	assert(enAtk_ != nullptr);
 
 	//lockHamster();
 	lockHamster(1); // De momento un hamster concreto para manejar mejor
@@ -40,11 +43,11 @@ bool FollowPlayer::isWithinAttackRange() {
 	auto& hamPos = hamsterTr_->getPos();
 	auto& pos = tr_->getPos();
 	int hamX = hamPos.getX(),
-		hamY = hamPos.getY(),
+		hamY = hamPos.getY() + hamsterTr_->getH(),
 		x = pos.getX(),
-		y = pos.getY();
+		y = pos.getY() + tr_->getH();
 
-	return((hamX + rangeOffsetX_ >= x && hamX - rangeOffsetX_ <= x) &&
+	return((hamX + rangeOffsetX_  >= x  && hamX - rangeOffsetX_ <= x ) &&
 		(hamY + rangeOffsetY_ >= y && hamY - rangeOffsetY_ <= y));
 }
 
@@ -78,16 +81,18 @@ void FollowPlayer::update() {
 			mov_->updateKeymap(MovementSimple::LEFT, true);
 		else
 			mov_->updateKeymap(MovementSimple::LEFT, false);
-		if (x < hamX - rangeOffsetX_)
+		if (x < hamX - rangeOffsetX_ - tr_->getW())
 			mov_->updateKeymap(MovementSimple::RIGHT, true);
 		else
 			mov_->updateKeymap(MovementSimple::RIGHT, false);
 	}
-	else { // Si está a rango, no necesita moverse
+	else { // Si está a rango, no necesita moverse e intentara atacar
 		mov_->updateKeymap(MovementSimple::RIGHT, false);
 		mov_->updateKeymap(MovementSimple::LEFT, false);
 		mov_->updateKeymap(MovementSimple::DOWN, false);
 		mov_->updateKeymap(MovementSimple::UP, false);
+
+		enAtk_->LaunchAttack();
 	}
 }
 

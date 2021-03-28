@@ -22,6 +22,7 @@ class BulletHit;
 class ControlHandeler;
 class MovementSimple;
 class FollowPlayer;
+class EnemyAttack;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -42,7 +43,8 @@ class FollowPlayer;
 	BulletHit, \
 	ControlHandeler, \
 	MovementSimple,\
-	FollowPlayer
+	FollowPlayer, \
+	EnemyAttack
 
 // groups
 

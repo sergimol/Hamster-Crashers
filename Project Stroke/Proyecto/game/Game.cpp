@@ -17,6 +17,7 @@
 #include "../components/Turret.h"
 #include "../components/FollowPlayer.h"
 #include "../components/MovementSimple.h"
+#include "../components/EnemyAttack.h"
 
 #include "../components/ControlHandeler.h"
 
@@ -160,6 +161,7 @@ void Game::init() {
 	enemy->addComponent<UI>("canelon", 4);
 
 
+	enemy->addComponent<EnemyAttack>();
 	enemy->addComponent<MovementSimple>();
 	enemy->addComponent<FollowPlayer>(players_);
 }

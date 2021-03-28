@@ -15,6 +15,7 @@
 #include "Animator.h"
 #include "EntityAttribs.h"
 #include "MovementSimple.h"
+#include "EnemyAttack.h"
 
 class FollowPlayer : public Component {
 public:
@@ -50,6 +51,8 @@ private:
 	HamsterStateMachine* lockedHamState_;
 	int rangeOffsetX_; // Esta movida habra que balancearla
 	int rangeOffsetY_; // Esta movida habra que balancearla
+
+	EnemyAttack* enAtk_; //componente de ataque
 
 };
 
