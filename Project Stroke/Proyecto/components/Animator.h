@@ -9,12 +9,14 @@
 #include "../game/Game.h"
 
 #include "Transform.h"
+#include "EntityAttribs.h"
 
 class Animator : public Component {
 public:
 	Animator(Texture* tex, int w, int h, int c, int r, Uint32 f, Vector2D sf, int dur) :
 		tr_(nullptr), //
 		tex_(tex), //
+		et_(nullptr), //
 		widthFrame(w), //
 		heightFrame(h), //
 		startFrame(sf), //
@@ -33,6 +35,11 @@ public:
 	void init() override {
 		tr_ = entity_->getComponent<Transform>();
 		assert(tr_ != nullptr);
+
+		et_ = entity_->getComponent<EntityAttribs>();
+		assert(et_ != nullptr);
+		id = et_->getId();
+
 	}
 
 	void render() override {
@@ -69,12 +76,12 @@ public:
 			if (animCont < animDuration - 1)
 			{
 				//Si no hemos llegado al final de una fila seguimos avanzando
-				if (textureFrame.getX() < cols-1)
+				if (textureFrame.getX() < cols - 1)
 				{
 					textureFrame.setX(textureFrame.getX() + 1);
 				}
 				//Si llegamos al final de la fila cambiamos
-				else 
+				else
 				{
 					textureFrame.setX(0);
 					textureFrame.setY(textureFrame.getY() + 1);
@@ -82,12 +89,15 @@ public:
 				animCont++;
 			}
 			//SI SE HA ACABADO Y HAY QUE LOOPEAR
-			else 
+			else if (looped)
 			{
 				animCont = 0;
 				textureFrame.setX(startFrame.getX());
 				textureFrame.setY(startFrame.getY());
 			}
+			//SI HAY QUE ENCADENAR OTRA ANIMACION
+			else if (idChain != "")
+				play(sdlutils().anims().at(idChain));
 
 		}
 	}
@@ -102,12 +112,44 @@ public:
 		cols = actualAnim.cols();
 		rows = actualAnim.rows();
 		animCont = 0;
+		looped = actualAnim.loop();
+		idChain = actualAnim.chain();
+	}
+
+	//Cambia las animaciones dependiendo del estado del hamster
+	void handleAnimState() 
+	{
+		//Cogemos el estado actual de la entidad / hamster
+		state = entity_->getComponent<HamsterStateMachine>()->getState();
+
+		//Si es diferente al anterior hay que cambiar la animacion
+		if (lastState != state)
+		{
+			//Depende del estado playeamos una animacion u otra
+			switch (state)
+			{
+			case HamStates::IDLE:
+				play(sdlutils().anims().at(id + "_idle"));
+				break;
+			case HamStates::MOVING:
+				play(sdlutils().anims().at(id + "_move"));
+				break;
+			case HamStates::ABILITY:
+				play(sdlutils().anims().at(id + "_ability"));
+				break;
+			}
+		}
+		
+		//Recogemos 
+		lastState = entity_->getComponent<HamsterStateMachine>()->getState();
+
 	}
 
 private:
 	//Variables de recursos
 	Transform* tr_;
 	Texture* tex_;
+	EntityAttribs* et_;
 
 	//Timers para actualizar la spritsheet
 	Uint32 lastTime;
@@ -129,5 +171,18 @@ private:
 	//Filas y Columnas totales de la spritesheet
 	int cols; 
 	int rows;
+
+	//ID de la entidad
+	std::string id;
+
+	//Comprobacion del loop
+	bool looped;
+
+	//Animacion encadenada
+	std::string idChain;
+
+	//Estado de la entidad
+	HamStates state;
+	HamStates lastState;
 };
 

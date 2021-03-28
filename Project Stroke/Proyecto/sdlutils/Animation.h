@@ -16,7 +16,7 @@ public:
 	Animation();
 
 
-	Animation(Vector2D st, int dur, int c, int r, int fu);
+	Animation(Vector2D st, int dur, int c, int r, int fu, int lo, std::string ch);
 
 
 	virtual ~Animation() {
@@ -43,6 +43,14 @@ public:
 		return frameUpdate_;
 	}
 
+	inline bool loop() const {
+		return loop_;
+	}
+
+	inline std::string chain() const {
+		return chain_;
+	}
+
 
 private:
 
@@ -51,4 +59,6 @@ private:
 	int cols_;
 	int rows_;
 	int frameUpdate_;
+	bool loop_;
+	std::string chain_;
 };

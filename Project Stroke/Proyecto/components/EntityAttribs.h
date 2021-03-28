@@ -11,9 +11,9 @@ class EntityAttribs: public Component {
 public:
 	EntityAttribs();
 
-	EntityAttribs(int life);
+	EntityAttribs(int life, std::string id);
 
-	EntityAttribs(int life, float range);
+	EntityAttribs(int life, float range, std::string id);
 
 	virtual ~EntityAttribs() {
 	}
@@ -47,6 +47,9 @@ public:
 	inline Vector2D getVel() const {
 		return velocity_;
 	}
+	inline std::string getId() const {
+		return id_;
+	}
 
 private:
 	HamsterStateMachine* hms_;
@@ -59,6 +62,8 @@ private:
 	float critDamage_;
 	float strokeResist_;
 	float attackRange_;
+
+	std::string id_;
 
 	Vector2D velocity_;
 };

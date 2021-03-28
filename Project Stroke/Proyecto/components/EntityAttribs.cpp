@@ -12,7 +12,7 @@ EntityAttribs::EntityAttribs() :
 	damage_(20)
 {}
 
-EntityAttribs::EntityAttribs(int life) :
+EntityAttribs::EntityAttribs(int life, std::string id) :
 	health_(life),
 	maxHealth_(life),
 	strokeResist_(0.0),
@@ -21,10 +21,11 @@ EntityAttribs::EntityAttribs(int life) :
 	maxCrit_(0.2),
 	critDamage_(1.0),
 	velocity_(Vector2D(7, 3.5)),
-	damage_(20)
+	damage_(20),
+	id_(id)
 {}
 
-EntityAttribs::EntityAttribs(int life, float range) :
+EntityAttribs::EntityAttribs(int life, float range, std::string id) :
 	health_(life),
 	maxHealth_(life),
 	strokeResist_(0.0),
@@ -33,7 +34,8 @@ EntityAttribs::EntityAttribs(int life, float range) :
 	maxCrit_(0.2),
 	critDamage_(1.0),
 	velocity_(Vector2D(7, 3.5)),
-	damage_(20)
+	damage_(20),
+	id_(id)
 {}
 
 void EntityAttribs::init() {

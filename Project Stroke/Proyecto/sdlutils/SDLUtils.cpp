@@ -225,7 +225,7 @@ void SDLUtils::loadReasources(std::string filename) {
 		}
 	}
 
-	// load musics
+	// load animations
 	jValue = root["anims"];
 	if (jValue != nullptr) {
 		if (jValue->IsArray()) {
@@ -240,8 +240,10 @@ void SDLUtils::loadReasources(std::string filename) {
 					int c = vObj["cols"]->AsNumber();
 					int r = vObj["rows"]->AsNumber();
 					int fu = vObj["frameUpdate"]->AsNumber();
+					int lo = vObj["loop"]->AsNumber();
+					std::string ch = vObj["chain"]->AsString();
 
-					anims_.emplace(key, Animation(st, dur, c, r, fu));
+					anims_.emplace(key, Animation(st, dur, c, r, fu, lo, ch));
 				}
 				else {
 					throw "'anims' array in '" + filename
