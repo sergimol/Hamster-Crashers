@@ -40,16 +40,14 @@ void Game::init() {
 	SDLUtils::init("Squeak Ship", 1920, 1080, "resources/config/hamsters.resources.json");
 
 	//Imagen de fondo fija
-	auto* background = mngr_->addEntity();
+	/*auto* background = mngr_->addEntity();
 	background->addComponent<Transform>(
 		Vector2D(0, 0),
 		Vector2D(), 1920.0f, 1010.0f, 0.0f);
 
-	background->addComponent<Image>(&sdlutils().images().at("background"));
+	background->addComponent<Image>(&sdlutils().images().at("background"));*/
 
-	tmx::Map map;
-	if (map.load("resources/tilemap/MapaBien.tmx"))
-		std::cout << "tus muertos";
+
 	////MATERIAL PARA EL HITO1
 	////Keta
 	//auto* hamster2 = mngr_->addEntity();
@@ -151,7 +149,7 @@ void Game::init() {
 	auto* enemy = mngr_->addEntity();
 	enemy->addComponent<EntityAttribs>(200, "enemy");
 	enemy->addComponent<Transform>(
-		Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
+		Vector2D(0, 0),	//sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100
 		Vector2D(), 500.0f, 500.0f, 0.0f)->getFlip() = true;
 	enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
 	enemy->setGroup<Enemy>(true);
@@ -164,7 +162,11 @@ void Game::start() {
 	bool exit = false;
 	SDL_Event event;
 
+	//Cargamos tiled
+
 	while (!exit) {
+
+
 		Uint32 startTime = sdlutils().currRealTime();
 
 		ih().clearState();
@@ -182,6 +184,7 @@ void Game::start() {
 		updateCamera();
 
 		sdlutils().clearRenderer();
+		loadMap();
 		mngr_->render();
 		sdlutils().presentRenderer();
 
@@ -224,3 +227,104 @@ void Game::updateCamera() {
 	//std::cout << camera_.x << " " << camera_.y << "\n";
 }
 
+void Game::loadMap() {
+	//Creamos el mapa
+	tmx::Map map;
+	//Si se puede cargar
+	if (map.load("resources/images/tiled/Mapa.tmx"))
+	{
+		//Variables que vamos a necesitar
+		tmx::Vector2u mapDimensions;	//Guarda las dimensiones del mapa
+		tmx::Vector2u tilesDimensions;	//Guarda las dimensiones de las tiles
+		Texture* tilesetsArr[2]; int indice = 0;
+		//------------------
+
+		//Guardamos las propiedades basicas
+		//Dimensiones del mapa
+		mapDimensions = map.getTileCount();
+		//Dimensiones de los tiles
+		tilesDimensions = map.getTileSize();
+
+		//Cargamos los tilesets y guardamos las texturas
+		const auto& tilesets = map.getTilesets();
+		for (const auto& tileset : tilesets)
+		{
+			//Guardamos las texturas de los tilesets
+			tilesetsArr[indice] = &sdlutils().images().at(tileset.getName());	//El nombre del tileset en Tiled y la textura png DEBEN llamarse igual
+			indice++;
+		}
+
+		//Recorremos las capas ("Floor", "Cuber")
+		const auto& layers = map.getLayers();
+		for (const auto& layer : layers)
+		{
+			//SI ES UNA CAPA DE OBJETOS, TODAVÍA NO
+			//if (layer->getType() == tmx::Layer::Type::Object)
+			//{
+			//	const auto& objectLayer = layer->getLayerAs<tmx::ObjectGroup>();
+			//	const auto& objects = objectLayer.getObjects();
+			//	for (const auto& object : objects)
+			//	{
+			//		//do stuff with object properties
+			//	}
+			//} else
+
+			//SI ES UNA CAPA DE TILES
+			indice = 0;	//Recorrerá los tilesets para saber a cual corresponde cada tile
+			if (layer->getType() == tmx::Layer::Type::Tile)
+			{
+				const auto& tileLayer = layer->getLayerAs<tmx::TileLayer>();
+				//read out tile layer properties etc...
+				for (int j = 0; j < mapDimensions.y; j++) {
+					for (int i = 0; i < mapDimensions.x; i++) {
+
+
+						//Guardamos el indice global del tile (nos servirá para saber en qué tileset se encuentra)
+						auto tileList = tileLayer.getTiles();
+						auto globalIndexTile = tileList[i + j * mapDimensions.x].ID;	//filas+columna*elementos_enuna_fila
+
+					//Necesitamos saber a cual de los tilesets pertenece esa posicion
+						while (globalIndexTile > tilesets[indice].getLastGID()) {
+							indice++;	//Marca la posicion del tileset al que pertenece el tile
+						}
+
+						//Calculamos la posicion del tile en la pantalla -> DestRect
+						auto x = i * tilesDimensions.x;
+						auto y = j * tilesDimensions.y;
+
+						//Calculamos la posición del tile en el tileset -> SrcRect
+						int tilesetSize = tilesets[indice].getColumnCount();
+						//Calculamos las coordenadas locales del tile
+						//Hay que restar el valor del primer tile del tileset a la posicion global
+						auto localIndexTile = globalIndexTile - tilesets[indice].getFirstGID();
+
+						auto Srcx = (localIndexTile % tilesets[indice].getColumnCount()) * tilesDimensions.x;
+						auto Srcy = (localIndexTile / tilesets[indice].getColumnCount()) * tilesDimensions.y;
+
+						//Sacamos el SDL_SrcRect y SDL_DestRect con el que imprimimos los tiles
+						SDL_Rect src;
+						src.x = Srcx; src.y = Srcy;
+						src.w = src.h = tilesDimensions.x;	//Las tiles son cuadradas
+
+						int scale = 6;
+
+						SDL_Rect dest;
+						dest.x = x * scale; dest.y = y * scale;
+						dest.w = dest.h = tilesDimensions.x * scale;
+
+						Vector2D renderPos = Vector2D(dest.x - Game::camera_.x, dest.y - Game::camera_.y);
+						dest.x = renderPos.getX();
+						dest.y = renderPos.getY();
+
+						if (globalIndexTile != 0)
+							tilesetsArr[indice]->render(src, dest);
+					}
+				}
+			}
+		}
+
+
+	}
+	else
+		std::cout << "Lavin que pringao";
+}

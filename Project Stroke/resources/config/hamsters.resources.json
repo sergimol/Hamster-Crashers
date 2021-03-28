@@ -105,6 +105,14 @@
     {
       "id": "bullet",
       "file": "resources/images/tennis_ball.png"
+    },
+    {
+      "id": "floorTileset",
+      "file": "resources/images/tiled/floorTileset.png"
+    },
+    {
+      "id": "cubesTileset",
+      "file": "resources/images/tiled/cubesTileset.png"
     }
   ],
 

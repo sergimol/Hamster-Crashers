@@ -33,5 +33,7 @@ public:
 private:
 	std::unique_ptr<Manager> mngr_;
 	std::vector<Entity*> players_; // vector de jugadores
+	void loadMap();
+
 };
 
