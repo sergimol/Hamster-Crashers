@@ -18,6 +18,7 @@
 #include "../components/FollowPlayer.h"
 #include "../components/MovementSimple.h"
 #include "../components/EnemyAttack.h"
+#include "../components/EnemyStateMachine.h"
 
 #include "../components/ControlHandeler.h"
 
@@ -152,6 +153,7 @@ void Game::init() {
 
 	//Enemigo de prueba con la imagen de canelón
 	auto* enemy = mngr_->addEntity();
+
 	enemy->addComponent<EntityAttribs>(200, 0.0, Vector2D(4.5, 2));
 	enemy->addComponent<Transform>(
 		Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
@@ -161,6 +163,7 @@ void Game::init() {
 	enemy->addComponent<UI>("canelon", 4);
 
 
+	enemy->addComponent<EnemyStateMachine>();
 	enemy->addComponent<EnemyAttack>();
 	enemy->addComponent<MovementSimple>();
 	enemy->addComponent<FollowPlayer>(players_);

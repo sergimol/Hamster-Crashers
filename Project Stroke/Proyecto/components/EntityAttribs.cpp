@@ -9,7 +9,9 @@ EntityAttribs::EntityAttribs() :
 	maxCrit_(0.2),
 	critDamage_(1.0),
 	velocity_(Vector2D(7, 3.5)),
-	damage_(20)
+	damage_(20),
+	hms_(nullptr),
+	enmState_(nullptr)
 {}
 
 EntityAttribs::EntityAttribs(int life) :
@@ -21,7 +23,9 @@ EntityAttribs::EntityAttribs(int life) :
 	maxCrit_(0.2),
 	critDamage_(1.0),
 	velocity_(Vector2D(7, 3.5)),
-	damage_(20)
+	damage_(20),
+	hms_(nullptr),
+	enmState_(nullptr)
 {}
 
 EntityAttribs::EntityAttribs(int life, float range, Vector2D speed) :
@@ -33,11 +37,22 @@ EntityAttribs::EntityAttribs(int life, float range, Vector2D speed) :
 	maxCrit_(0.2),
 	critDamage_(1.0),
 	velocity_(speed),
-	damage_(20)
+	damage_(20),
+	hms_(nullptr),
+	enmState_(nullptr)
 {}
 
 void EntityAttribs::init() {
-		hms_ = entity_->getComponent<HamsterStateMachine>();                                  
+	// Estados si es jugador o enemigo
+	if (!entity_->hasGroup<Enemy>()) {
+		hms_ = entity_->getComponent<HamsterStateMachine>();
+		//assert(hms_ != nullptr);
+	}
+	else {
+		enmState_ = entity_->getComponent<EnemyStateMachine>();
+		//assert(enmState_ != nullptr);
+	}
+
 }
 
 //Resta el da�o y devuelve true si ha muerto
@@ -50,9 +65,12 @@ bool EntityAttribs::recieveDmg(int dmg) {
 	std::cout << "me cago en tus muertos" << health_ << std::endl;
 	//Si la vida ha bajado de 0...
 	if (health_ <= 0) {
-			if (hms_ != nullptr) {
-				hms_->getState() = HamStates::DEAD;
-			}
+		if (hms_ != nullptr) {
+			hms_->getState() = HamStates::DEAD;
+		}
+		else if (enmState_ != nullptr) {
+			enmState_->getState() = EnemyStates::ENM_DEAD;
+		}
 		//Actualizamos UI
 		if (entity_->hasComponent<UI>())
 			entity_->getComponent<UI>()->dep();
@@ -68,7 +86,7 @@ bool EntityAttribs::recieveDmg(int dmg) {
 }
 
 //Sana 'hp' unidades
-void EntityAttribs::heal(int hp) {	
+void EntityAttribs::heal(int hp) {
 	if (health_ + hp >= maxHealth_) {
 		hp = maxHealth_ - health_;
 		health_ = maxHealth_;
@@ -79,7 +97,7 @@ void EntityAttribs::heal(int hp) {
 	if (entity_->hasComponent<UI>())
 		entity_->getComponent<UI>()->bar(hp);
 
-	std::cout << "ave maria" <<health_ << std::endl;
+	std::cout << "ave maria" << health_ << std::endl;
 }
 
 void EntityAttribs::addCritProbability(float probability) {

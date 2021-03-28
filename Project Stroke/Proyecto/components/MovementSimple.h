@@ -1,5 +1,4 @@
 #pragma once
-// This file is part of the course TPV2@UCM - Samir Genaim
 
 #include "../ecs/Component.h"
 #include <map>
@@ -7,8 +6,7 @@
 #include "Transform.h"
 #include "Animator.h"
 #include "EntityAttribs.h"
-#include "../ecs/Manager.h"
-#include "../ecs/Entity.h"
+#include "EnemyStateMachine.h"
 
 class MovementSimple : public Component {
 public:
@@ -16,7 +14,7 @@ public:
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 
 	MovementSimple() :
-		tr_(nullptr), speed_(), goalVel_(0, 0), lastDir_(1,0), timer(sdlutils().currRealTime()) {
+		tr_(nullptr), speed_(), enmState_(nullptr), goalVel_(0, 0), lastDir_(1,0), timer(sdlutils().currRealTime()) {
 	}
 
 	virtual ~MovementSimple() {
@@ -42,7 +40,7 @@ private:
 	long unsigned int timer;
 
 	Transform* tr_;
-	//HamsterStateMachine* hms_;
+	EnemyStateMachine* enmState_;
 	//Animator* anim_;
 	Vector2D speed_, goalVel_, lastDir_;
 	

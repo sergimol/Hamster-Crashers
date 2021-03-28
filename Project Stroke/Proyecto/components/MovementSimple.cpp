@@ -7,10 +7,10 @@
 void MovementSimple:: init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
-	/*
-	hms_ = entity_->getComponent<HamsterStateMachine>();
-	assert(hms_ != nullptr);
-	*/
+	
+	enmState_ = entity_->getComponent<EnemyStateMachine>();
+	assert(enmState_ != nullptr);
+	
 
 	/*
 	anim_ = entity_->getComponent<Animator>();
@@ -41,6 +41,7 @@ void MovementSimple::updateKeymap(KEYS x, bool is) {
 void MovementSimple:: update() {
 
 	auto& vel = tr_->getVel();
+	//auto& state = enmState_->getState();
 	auto& z = tr_->getZ();
 	auto& velZ = tr_->getVelZ();
 
@@ -62,12 +63,6 @@ void MovementSimple:: update() {
 		tr_->getFlip() = true;
 	}
 
-
-	//if (ih().keyDownEvent() || ih().keyUpEvent()) {
-
-	
-	//}
-
 	if (dir.magnitude() != 0) {
 		dir = dir.normalize();
 
@@ -81,10 +76,12 @@ void MovementSimple:: update() {
 		vel.setY(lerp(vel.getY(), 0, 0.25));
 		
 		//ANIMACION DE IDLE
-		/*
-		if(state != HamStates::IDLE)
-			anim_->play(Vector2D(0, 0), Vector2D(2, 0), 220);
-		if(state != HamStates::JUMPING) state = HamStates::IDLE;
+		
+		/*if (state != EnemyStates::ENM_IDLE)
+			anim_->play(Vector2D(0, 0), Vector2D(2, 0), 220);*/
+
+
+		/*if(state != EnemyStates::JUMPING) state = EnemyStates::IDLE;
 		*/
 	
 	}
@@ -93,17 +90,17 @@ void MovementSimple:: update() {
 		vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.9));
 
 		//ANIMACION DE MOVIMIENTO
-		/*
-		if (state != HamStates::MOVING)
-			anim_->play(Vector2D(0, 1), Vector2D(2, 2), 100);
-		if(state != HamStates::JUMPING) state = HamStates::MOVING;
-		*/
+		
+		/*if (state != EnemyStates::ENM_MOVING)
+			anim_->play(Vector2D(0, 1), Vector2D(2, 2), 100);*/
 
+
+		//if(state != EnemyStates::JUMPING) state = EnemyStates::MOVING;
 	}
 
 	if (keymapSimple.at(SPACE)) {		//Inicio del salto
 		velZ = jump_;
-		//state = HamStates::JUMPING;
+		//state = EnemyStates::JUMPING;
 		timer = sdlutils().currRealTime();
 	}
 
@@ -116,7 +113,7 @@ void MovementSimple:: update() {
 		keymapSimple.at(SPACE) = false;
 		velZ = 0;
 		z = 0;
-		//state = HamStates::IDLE;
+		//state = EnemyStates::ENM_IDLE;
 		timer = sdlutils().currRealTime();
 	}
 

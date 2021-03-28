@@ -5,6 +5,7 @@
 #include "../ecs/Entity.h"
 #include "UI.h"
 #include "HamsterStateMachine.h"
+#include "EnemyStateMachine.h"
 
 
 class EntityAttribs: public Component {
@@ -50,6 +51,7 @@ public:
 
 private:
 	HamsterStateMachine* hms_;
+	EnemyStateMachine*  enmState_;
 	int health_;
 	int maxHealth_;
 	int damage_;

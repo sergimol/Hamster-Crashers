@@ -23,6 +23,7 @@ class ControlHandeler;
 class MovementSimple;
 class FollowPlayer;
 class EnemyAttack;
+class EnemyStateMachine;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -44,7 +45,8 @@ class EnemyAttack;
 	ControlHandeler, \
 	MovementSimple,\
 	FollowPlayer, \
-	EnemyAttack
+	EnemyAttack, \
+	EnemyStateMachine
 
 // groups
 
