@@ -51,7 +51,7 @@ public:
 		return static_cast<T*>(sys_[ecs::sysIdx<T>].get());
 	}
 
-	inline const std::vector<Entity*>& getEntities() {
+	inline std::vector<Entity*>& getEntities() {
 		return entities_;
 	}
 
@@ -120,7 +120,7 @@ public:
 	void update();
 	void render();
 	void refresh();
-
+	void sortEntities();
 private:
 
 	std::vector<Entity*> entities_;

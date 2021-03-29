@@ -122,6 +122,8 @@ public:
 		}
 	}
 
+	bool operator < (Entity* e);
+
 private:
 
 	bool active_;

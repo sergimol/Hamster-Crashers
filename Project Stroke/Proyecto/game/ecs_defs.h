@@ -26,6 +26,7 @@ class EnemyAttack;
 class EnemyStateMachine;
 class Poison;
 class Cloud;
+class MapMngr;
 
 
 #define _CMPS_LIST_  \
@@ -51,7 +52,8 @@ class Cloud;
 	FollowPlayer, \
 	EnemyAttack, \
 	Cloud, \
-	EnemyStateMachine
+	EnemyStateMachine, \
+	MapMngr
 
 // groups
 

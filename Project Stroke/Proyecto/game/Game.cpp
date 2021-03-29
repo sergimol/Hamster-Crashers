@@ -20,7 +20,7 @@
 #include "../components/MovementSimple.h"
 #include "../components/EnemyAttack.h"
 #include "../components/EnemyStateMachine.h"
-
+#include "../components/MapMngr.h"
 #include "../components/ControlHandeler.h"
 
 #include "../ecs/ecs.h"
@@ -47,9 +47,9 @@ void Game::init() {
 	auto& enemies = mngr_->getEnemies();
 	auto& obstacles = mngr_->getObstacles();
 
-	//SÓLO NECESITA CARGAR EL MAPA UNA VEZ
-	assert(map_.load("resources/images/tiled/Mapa.tmx"));
-
+	// Mapa
+	auto* mapa = mngr_->addEntity();
+	mapa->addComponent<MapMngr>();
 
 	//Imagen de fondo fija
 	/*auto* background = mngr_->addEntity();
@@ -122,7 +122,7 @@ void Game::init() {
 	hamster1->addComponent<Poison>(5);
 	hamster1->addComponent<Combos>();
 	hamster1->setGroup<Ally>(true);
-	hamster1->addComponent<ControlHandeler>(2);
+	hamster1->addComponent<ControlHandeler>(1);
 
 	players.push_back(hamster1);
 
@@ -131,39 +131,39 @@ void Game::init() {
 
 
 	//CLON Sardinilla (P2)
-	//auto* hamster2 = mngr_->addEntity();
-	//hamster2->addComponent<Transform>(
-	//	Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
-	//	Vector2D(), 256.0f, 256.0f, 0.0f);
-	//hamster2->addComponent<EntityAttribs>(100);
-	////hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
-	//hamster2->addComponent<Animator>(
-	//	&sdlutils().images().at("sardinillaSheet"),
-	//	64,
-	//	64,
-	//	3,
-	//	1,
-	//	220,
-	//	Vector2D(0, 0),
-	//	Vector2D(2, 0)
-	//	);
-	//hamster2->addComponent<HamsterStateMachine>();
-	//hamster2->addComponent<Movement>();
-	//hamster2->addComponent<LightAttack>();
-	//hamster2->addComponent<StrongAttack>();
-	//hamster2->addComponent<Stroke>();
-	//hamster2->addComponent<UI>("sardinilla", 1);
-	////hamster1->addComponent<Pray>(30, 50);
-	//hamster2->addComponent<Roll>();
-	////hamster1->addComponent<Turret>();
-	//hamster2->addComponent<Combos>();
-	//hamster2->setGroup<Ally>(true);
-	//hamster2->addComponent<ControlHandeler>(2);
-	//players_.push_back(hamster2);
+	auto* hamster2 = mngr_->addEntity();
+	hamster2->addComponent<Transform>(
+		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
+		Vector2D(), 256.0f, 256.0f, 0.0f);
+	hamster2->addComponent<EntityAttribs>(100, 0.0, "sardinilla2", Vector2D(7, 4.5));
+	//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+	hamster2->addComponent<Animator>(
+		&sdlutils().images().at("sardinillaSheet"),
+		64,
+		64,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		);
+	hamster2->addComponent<HamsterStateMachine>();
+	hamster2->addComponent<Movement>();
+	hamster2->addComponent<LightAttack>();
+	hamster2->addComponent<StrongAttack>();
+	hamster2->addComponent<Stroke>();
+	hamster2->addComponent<UI>("sardinilla", 1);
+	//hamster1->addComponent<Pray>(30, 50);
+	hamster2->addComponent<Roll>();
+	//hamster1->addComponent<Turret>();
+	hamster2->addComponent<Combos>();
+	hamster2->setGroup<Ally>(true);
+	hamster2->addComponent<ControlHandeler>(2);
+	players.push_back(hamster2);
 
 
 	//Enemigo de prueba con la imagen de canelón
-	auto* enemy = mngr_->addEntity();
+	/*auto* enemy = mngr_->addEntity();
 	enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2));
 	enemy->addComponent<Transform>(
 		Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
@@ -176,7 +176,7 @@ void Game::init() {
 	enemy->addComponent<EnemyStateMachine>();
 	enemy->addComponent<EnemyAttack>();
 	enemy->addComponent<MovementSimple>();
-	enemy->addComponent<FollowPlayer>();
+	enemy->addComponent<FollowPlayer>();*/
 }
 
 void Game::start() {
@@ -203,11 +203,12 @@ void Game::start() {
 
 		mngr_->update();
 		mngr_->refresh();
+		sortEntities();
 
 		updateCamera();
 
 		sdlutils().clearRenderer();
-		loadMap();
+		//loadMap();
 		mngr_->render();
 		sdlutils().presentRenderer();
 
@@ -252,106 +253,13 @@ void Game::updateCamera() {
 	//std::cout << camera_.x << " " << camera_.y << "\n";
 }
 
-/*POSIBLE CAMBIO PARA QUE NO CARGUE TODO EL RATO*/
+bool Entity::operator < (Entity* e) {
+	if (this->hasComponent<Transform>() && e->hasComponent<Transform>())
+		return (this->getComponent<Transform>()->getPos().getY() < e->getComponent<Transform>()->getPos().getY());
+	return false;
+}
 
-void Game::loadMap() {
-	//Creamos el mapa
-	//tmx::Map map_;
-	//Si se puede cargar
-	/*if (map_.load("resources/images/tiled/Mapa.tmx"))*/
-	//{
-		//Variables que vamos a necesitar
-		tmx::Vector2u mapDimensions;	//Guarda las dimensiones del mapa
-		tmx::Vector2u tilesDimensions;	//Guarda las dimensiones de las tiles
-		Texture* tilesetsArr[2]; int indice = 0;
-		//------------------
-
-		//Guardamos las propiedades basicas
-		//Dimensiones del mapa
-		mapDimensions = map_.getTileCount();
-		//Dimensiones de los tiles
-		tilesDimensions = map_.getTileSize();
-
-		//Cargamos los tilesets y guardamos las texturas
-		const auto& tilesets = map_.getTilesets();
-		for (const auto& tileset : tilesets)
-		{
-			//Guardamos las texturas de los tilesets
-			tilesetsArr[indice] = &sdlutils().images().at(tileset.getName());	//El nombre del tileset en Tiled y la textura png DEBEN llamarse igual
-			indice++;
-		}
-
-		//Recorremos las capas ("Floor", "Cuber")
-		const auto& layers = map_.getLayers();
-		for (const auto& layer : layers)
-		{
-			//SI ES UNA CAPA DE OBJETOS, TODAVÍA NO
-			//if (layer->getType() == tmx::Layer::Type::Object)
-			//{
-			//	const auto& objectLayer = layer->getLayerAs<tmx::ObjectGroup>();
-			//	const auto& objects = objectLayer.getObjects();
-			//	for (const auto& object : objects)
-			//	{
-			//		//do stuff with object properties
-			//	}
-			//} else
-
-			//SI ES UNA CAPA DE TILES
-			indice = 0;	//Recorrerá los tilesets para saber a cual corresponde cada tile
-			if (layer->getType() == tmx::Layer::Type::Tile)
-			{
-				const auto& tileLayer = layer->getLayerAs<tmx::TileLayer>();
-				//read out tile layer properties etc...
-				for (int j = 0; j < mapDimensions.y; j++) {
-					for (int i = 0; i < mapDimensions.x; i++) {
-
-
-						//Guardamos el indice global del tile (nos servirá para saber en qué tileset se encuentra)
-						auto tileList = tileLayer.getTiles();
-						auto globalIndexTile = tileList[i + j * mapDimensions.x].ID;	//filas+columna*elementos_enuna_fila
-
-					//Necesitamos saber a cual de los tilesets pertenece esa posicion
-						while (globalIndexTile > tilesets[indice].getLastGID()) {
-							indice++;	//Marca la posicion del tileset al que pertenece el tile
-						}
-
-						//Calculamos la posicion del tile en la pantalla -> DestRect
-						auto x = i * tilesDimensions.x;
-						auto y = j * tilesDimensions.y;
-
-						//Calculamos la posición del tile en el tileset -> SrcRect
-						int tilesetSize = tilesets[indice].getColumnCount();
-						//Calculamos las coordenadas locales del tile
-						//Hay que restar el valor del primer tile del tileset a la posicion global
-						auto localIndexTile = globalIndexTile - tilesets[indice].getFirstGID();
-
-						auto Srcx = (localIndexTile % tilesets[indice].getColumnCount()) * tilesDimensions.x;
-						auto Srcy = (localIndexTile / tilesets[indice].getColumnCount()) * tilesDimensions.y;
-
-						//Sacamos el SDL_SrcRect y SDL_DestRect con el que imprimimos los tiles
-						SDL_Rect src;
-						src.x = Srcx; src.y = Srcy;
-						src.w = src.h = tilesDimensions.x;	//Las tiles son cuadradas
-
-						int scale = 6;
-
-						SDL_Rect dest;
-						dest.x = x * scale; dest.y = y * scale;
-						dest.w = dest.h = tilesDimensions.x * scale;
-
-						Vector2D renderPos = Vector2D(dest.x - Game::camera_.x, dest.y - Game::camera_.y);
-						dest.x = renderPos.getX();
-						dest.y = renderPos.getY();
-
-						if (globalIndexTile != 0)
-							tilesetsArr[indice]->render(src, dest);
-					}
-				}
-			}
-		}
-
-
-	//}
-	/*else
-		std::cout << "Lavin que pringao";*/
+void Game::sortEntities() {
+	auto& entities = mngr_->getEntities();
+	std::sort(entities.begin() + 1, entities.end());
 }

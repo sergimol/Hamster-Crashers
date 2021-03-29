@@ -28,12 +28,10 @@ public:
 	void init();
 	void start();
 	void updateCamera();
-
+	void sortEntities();
 	static SDL_Rect camera_;
 private:
 	std::unique_ptr<Manager> mngr_;
 	//std::vector<Entity*> players_; // vector de jugadores
-	void loadMap();
-	tmx::Map map_;
 };
 

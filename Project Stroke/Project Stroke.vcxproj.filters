@@ -168,6 +168,9 @@
     <ClCompile Include="Proyecto\components\Cloud.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\MapMngr.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\components\Bounce.h">
@@ -331,6 +334,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\ecs\System.h">
       <Filter>Archivos de encabezado\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\MapMngr.h">
+      <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
