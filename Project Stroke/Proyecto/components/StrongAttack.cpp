@@ -34,11 +34,11 @@ void StrongAttack::update() {
 			//Si esta flipeado...
 			if (flip)
 				//Le damos la vuelta al rect
-				attRect_.x = pos.getX() - size / 2 - Game::camera_.x;
+				attRect_.x = pos.getX() - attRect_.w - Game::camera_.x;
 			else
-				attRect_.x = pos.getX() + size / 2 - Game::camera_.x;
+				attRect_.x = pos.getX() + size - Game::camera_.x;
 
-			attRect_.y = pos.getY() - Game::camera_.y;
+			attRect_.y = pos.getY() + tr_->getH() / 2 - Game::camera_.y;
 
 			//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 

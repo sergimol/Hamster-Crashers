@@ -34,15 +34,13 @@ void EnemyAttack::LaunchAttack() {
 		//Si esta flipeado...
 		if (flip)
 			//Le damos la vuelta al rect
-			attRect_.x = pos.getX() - size / 2 - Game::camera_.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
+			attRect_.x = pos.getX() - attRect_.w - Game::camera_.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
 		else
-			attRect_.x = pos.getX() + size / 2 - Game::camera_.x;
+			attRect_.x = pos.getX() + size - Game::camera_.x;
 
 		attRect_.y = pos.getY() + tr_->getH()/2 - Game::camera_.y;
 
 		//Comprobamos si colisiona con alguno de los enemigos que tiene delante
-		//A�adimos a los combos
-		//bool finCombo = entity_->getComponent<Combos>()->checkCombo(0);
 
 		//Si se colisiona..
 		if (CheckCollisions(attRect_, true))
@@ -61,7 +59,7 @@ void EnemyAttack::LaunchAttack() {
 	}
 }
 
-bool EnemyAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
+bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 	bool canHit = false;
 
 	//Cogemos todas las entidades del juego
@@ -74,16 +72,15 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 			auto eTR = ents[i]->getComponent<Transform>();
 
 			//Creamos su Rect
-			SDL_Rect rectEnemy;
-			rectEnemy.h = eTR->getH();
-			rectEnemy.w = eTR->getW();
-			rectEnemy.x = eTR->getPos().getX() - Game::camera_.x;
-			rectEnemy.y = eTR->getPos().getY() - Game::camera_.y;
-
+			SDL_Rect allyRect;
+			allyRect.h = eTR->getH();
+			allyRect.w = eTR->getW();
+			allyRect.x = eTR->getPos().getX() - Game::camera_.x;
+			allyRect.y = eTR->getPos().getY() - Game::camera_.y;
 
 
 			//Y comprobamos si colisiona
-			if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
+			if (SDL_HasIntersection(&enemyRect, &allyRect)) {
 				int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
 				if (finCombo) {
 					if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.01); //Aumentar probabilidad critico
