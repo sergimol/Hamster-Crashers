@@ -3,7 +3,8 @@
 #include "Combos.h"
 
 StrongAttack::StrongAttack() :
-	tr_(nullptr), w_(60), h_(30), cooldown_(500), time_(sdlutils().currRealTime()), attackSound_(sdlutils().soundEffects().at("strong_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {
+	tr_(nullptr), w_(60), h_(30), cooldown_(500), time_(sdlutils().currRealTime()), attRect_(),
+	attackSound_(sdlutils().soundEffects().at("strong_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {
 }
 
 void StrongAttack::init() {
@@ -24,20 +25,20 @@ void StrongAttack::update() {
 			state = HamStates::STRONGATTACK;
 
 
-			SDL_Rect rect;
-			rect.w = w_ + w_ * range;
-			rect.h = h_;
+			/*attRect_ = new SDL_Rect;*/
+			attRect_.w = w_ + w_ * range;
+			attRect_.h = h_;
 
 			auto flip = tr_->getFlip();
 
 			//Si esta flipeado...
 			if (flip)
 				//Le damos la vuelta al rect
-				rect.x = pos.getX() - size / 2;
+				attRect_.x = pos.getX() - size / 2 - Game::camera_.x;
 			else
-				rect.x = pos.getX() + size / 2;
+				attRect_.x = pos.getX() + size / 2 - Game::camera_.x;
 
-			rect.y = pos.getY();
+			attRect_.y = pos.getY() - Game::camera_.y;
 
 			//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
@@ -45,7 +46,7 @@ void StrongAttack::update() {
 			bool finCombo = entity_->getComponent<Combos>()->checkCombo(1);
 
 			//Si se colisiona..
-			if (CheckCollisions(rect, finCombo))
+			if (CheckCollisions(attRect_, finCombo))
 				//Suena el hit y le pega
 				hitSound_.play();
 			//Si no colisiona..
@@ -80,8 +81,8 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 			SDL_Rect rectEnemy;
 			rectEnemy.h = eTR->getH();
 			rectEnemy.w = eTR->getW();
-			rectEnemy.x = eTR->getPos().getX();
-			rectEnemy.y = eTR->getPos().getY();
+			rectEnemy.x = eTR->getPos().getX() - Game::camera_.x;
+			rectEnemy.y = eTR->getPos().getY() - Game::camera_.y;
 
 			//Y comprobamos si colisiona
 			if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
@@ -92,9 +93,15 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 				}
 				canHit = true;
 				//Le restamos la vida al enemigo
-				ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg*1.5);
+				ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg * 1.5);
 			}
 		}
 	}
 	return canHit;
+}
+
+void StrongAttack::render() {
+	SDL_SetRenderDrawColor(sdlutils().renderer(), 255, 0, 0, 255);
+
+	SDL_RenderDrawRect(sdlutils().renderer(), &attRect_);
 }

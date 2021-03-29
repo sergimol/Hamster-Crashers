@@ -54,6 +54,11 @@ public:
 		Vector2D renderPos = Vector2D(tr_->getPos().getX() - Game::camera_.x, tr_->getPos().getY() - tr_->getZ() - Game::camera_.y);
 		SDL_Rect dest = build_sdlrect(renderPos, tr_->getW(), tr_->getH());
 
+
+		SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 255, 0, 255);
+
+		SDL_RenderDrawRect(sdlutils().renderer(), &dest);
+
 		//Renderizado
 		if (tr_->getFlip())
 			tex_->render(src, dest, tr_->getRot(), nullptr, SDL_FLIP_HORIZONTAL);

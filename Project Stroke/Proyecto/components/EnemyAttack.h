@@ -12,6 +12,7 @@
 #include "EntityAttribs.h"
 #include "Transform.h"
 #include "HamsterStateMachine.h"
+#include "../game/Game.h"
 
 class EnemyAttack : public Component {
 public:
@@ -21,12 +22,14 @@ public:
 
 	void init() override;
 	void update() override;
+	void render() override;
+
 	bool CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo);
 	void LaunchAttack();
 
 private:
 	Transform* tr_;
-	//maquina de estados para enemigos//HamsterStateMachine* hms_;
+	SDL_Rect attRect_;
 	short unsigned int w_, h_;
 	long unsigned int cooldown_, time_;
 	SoundEffect& attackSound_, &hitSound_;

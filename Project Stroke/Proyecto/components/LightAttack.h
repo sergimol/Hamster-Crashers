@@ -12,6 +12,7 @@
 #include "EntityAttribs.h"
 #include "Transform.h"
 #include "HamsterStateMachine.h"
+#include "../game/Game.h"
 
 class LightAttack : public Component {
 public:
@@ -21,13 +22,16 @@ public:
 
 	void init() override;
 	void update() override;
+	void render() override;
+
 	bool CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo);
 
 private:
 	Transform* tr_;
+	SDL_Rect attRect_;
 	HamsterStateMachine* hms_;
 	short unsigned int w_, h_;
 	long unsigned int cooldown_, time_;
-	SoundEffect& attackSound_, &hitSound_;
+	SoundEffect& attackSound_, & hitSound_;
 }
 ;

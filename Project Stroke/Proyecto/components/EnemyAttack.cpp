@@ -3,7 +3,7 @@
 #include "Combos.h"
 
 EnemyAttack::EnemyAttack() :
-	tr_(nullptr), w_(60), h_(30), cooldown_(350), time_(sdlutils().currRealTime()),
+	tr_(nullptr), w_(60), h_(30), cooldown_(350), time_(sdlutils().currRealTime()), attRect_(),
 	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {}
 
 void EnemyAttack::init() {
@@ -26,27 +26,26 @@ void EnemyAttack::LaunchAttack() {
 		auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
 
 
-		SDL_Rect rect;
-		rect.w = w_ + w_ * range;
-		rect.h = h_ + h_ * range;
+		attRect_.w = w_ + w_ * range;
+		attRect_.h = h_ + h_ * range;
 
 		auto flip = tr_->getFlip();
 
 		//Si esta flipeado...
 		if (flip)
 			//Le damos la vuelta al rect
-			rect.x = pos.getX() - size / 2; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
+			attRect_.x = pos.getX() - size / 2 - Game::camera_.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
 		else
-			rect.x = pos.getX() + size / 2;
+			attRect_.x = pos.getX() + size / 2 - Game::camera_.x;
 
-		rect.y = pos.getY() + tr_->getH()/2;
+		attRect_.y = pos.getY() + tr_->getH()/2 - Game::camera_.y;
 
 		//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 		//A�adimos a los combos
 		//bool finCombo = entity_->getComponent<Combos>()->checkCombo(0);
 
 		//Si se colisiona..
-		if (CheckCollisions(rect, true))
+		if (CheckCollisions(attRect_, true))
 			//Suena el hit y le pega
 			hitSound_.play();
 		//Si no colisiona..
@@ -78,8 +77,8 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 			SDL_Rect rectEnemy;
 			rectEnemy.h = eTR->getH();
 			rectEnemy.w = eTR->getW();
-			rectEnemy.x = eTR->getPos().getX();
-			rectEnemy.y = eTR->getPos().getY();
+			rectEnemy.x = eTR->getPos().getX() - Game::camera_.x;
+			rectEnemy.y = eTR->getPos().getY() - Game::camera_.y;
 
 
 
@@ -97,4 +96,10 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 		}
 	}
 	return canHit;
+}
+
+void EnemyAttack::render() {
+	SDL_SetRenderDrawColor(sdlutils().renderer(), 255, 170, 0, 255);
+
+	SDL_RenderDrawRect(sdlutils().renderer(), &attRect_);
 }
