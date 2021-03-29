@@ -20,6 +20,10 @@ class Turret;
 class DisableOnExit;
 class BulletHit;
 class ControlHandeler;
+class MovementSimple;
+class FollowPlayer;
+class EnemyAttack;
+class EnemyStateMachine;
 class Poison;
 
 #define _CMPS_LIST_  \
@@ -40,7 +44,11 @@ class Poison;
 	DisableOnExit, \
 	BulletHit, \
 	Poison, \
-	ControlHandeler
+	ControlHandeler, \
+	MovementSimple,\
+	FollowPlayer, \
+	EnemyAttack, \
+	EnemyStateMachine
 
 // groups
 
@@ -51,5 +59,11 @@ struct Bullet_group;
 
 // handlers
 //Creo que hay que hacer un handler por cada player
-struct Player;
-#define _HDLRS_LIST_ Player
+struct Hamster1;
+struct Hamster2;
+struct Hamster3;
+struct Hamster4;
+#define _HDLRS_LIST_ Hamster1 , \
+					Hamster2, \
+					Hamster3, \
+					Hamster4

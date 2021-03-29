@@ -5,6 +5,7 @@
 #include "../ecs/Entity.h"
 #include "UI.h"
 #include "HamsterStateMachine.h"
+#include "EnemyStateMachine.h"
 
 const int INVENCIBLECD = 200;
 
@@ -12,9 +13,7 @@ class EntityAttribs: public Component {
 public:
 	EntityAttribs();
 
-	EntityAttribs(int life, std::string id);
-
-	EntityAttribs(int life, float range, std::string id);
+	EntityAttribs(int life, float range, std::string id, Vector2D speed);
 
 	virtual ~EntityAttribs() {
 	}
@@ -53,6 +52,7 @@ public:
 
 private:
 	HamsterStateMachine* hms_;
+	EnemyStateMachine*  enmState_;
 	int health_;
 	int maxHealth_;
 	int damage_;

@@ -16,6 +16,10 @@
 #include "../components/Pray.h"
 #include "../components/Combos.h"
 #include "../components/Turret.h"
+#include "../components/FollowPlayer.h"
+#include "../components/MovementSimple.h"
+#include "../components/EnemyAttack.h"
+#include "../components/EnemyStateMachine.h"
 
 #include "../components/ControlHandeler.h"
 
@@ -85,7 +89,7 @@ void Game::init() {
 	hamster1->addComponent<Transform>(
 		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
 		Vector2D(), 256.0f, 256.0f, 0.0f);
-	hamster1->addComponent<EntityAttribs>(100, "sardinilla");
+	hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5));
 	//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
 	hamster1->addComponent<Animator>(
 		&sdlutils().images().at("sardinillaSheet"),
@@ -112,6 +116,9 @@ void Game::init() {
 	hamster1->setGroup<Ally>(true);
 	hamster1->addComponent<ControlHandeler>(1);
 	players_.push_back(hamster1);
+	//Igual luego no lo usammos pero por si aca
+	mngr_->setHandler<Hamster1>(hamster1);
+
 
 	//CLON Sardinilla (P2)
 	//auto* hamster2 = mngr_->addEntity();
@@ -147,13 +154,19 @@ void Game::init() {
 
 	//Enemigo de prueba con la imagen de canelón
 	auto* enemy = mngr_->addEntity();
-	enemy->addComponent<EntityAttribs>(200, "enemy");
+	enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2));
 	enemy->addComponent<Transform>(
-		Vector2D(0, 0),	//sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100
+		Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
 		Vector2D(), 500.0f, 500.0f, 0.0f)->getFlip() = true;
 	enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
 	enemy->setGroup<Enemy>(true);
 	enemy->addComponent<UI>("canelon", 4);
+
+
+	enemy->addComponent<EnemyStateMachine>();
+	enemy->addComponent<EnemyAttack>();
+	enemy->addComponent<MovementSimple>();
+	enemy->addComponent<FollowPlayer>(players_);
 }
 
 void Game::start() {

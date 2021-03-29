@@ -9,25 +9,13 @@ EntityAttribs::EntityAttribs() :
 	maxCrit_(0.2),
 	critDamage_(1.0),
 	velocity_(Vector2D(7, 3.5)),
+	cadence_(0.0),
 	damage_(20),
-	cadence_(0.0)
+	hms_(nullptr),
+	enmState_(nullptr)
 {}
 
-EntityAttribs::EntityAttribs(int life, std::string id) :
-	health_(life),
-	maxHealth_(life),
-	strokeResist_(0.0),
-	attackRange_(0.0),
-	critProbability_(0.05),
-	maxCrit_(0.2),
-	critDamage_(1.0),
-	velocity_(Vector2D(7, 3.5)),
-	damage_(20),
-	id_(id),
-	cadence_(0.0)
-{}
-
-EntityAttribs::EntityAttribs(int life, float range, std::string id) :
+EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed) :
 	health_(life),
 	maxHealth_(life),
 	strokeResist_(0.0),
@@ -35,14 +23,25 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id) :
 	critProbability_(0.05),
 	maxCrit_(0.2),
 	critDamage_(1.0),
-	velocity_(Vector2D(7, 3.5)),
+	velocity_(speed),
 	damage_(20),
+	hms_(nullptr),
 	id_(id),
-	cadence_(0.0)
+	cadence_(0.0),
+	enmState_(nullptr)
 {}
 
 void EntityAttribs::init() {
-	hms_ = entity_->getComponent<HamsterStateMachine>();
+	// Estados si es jugador o enemigo
+	if (!entity_->hasGroup<Enemy>()) {
+		hms_ = entity_->getComponent<HamsterStateMachine>();
+		//assert(hms_ != nullptr);
+	}
+	else {
+		enmState_ = entity_->getComponent<EnemyStateMachine>();
+		//assert(enmState_ != nullptr);
+	}
+
 }
 
 void EntityAttribs::update() {
@@ -54,14 +53,11 @@ void EntityAttribs::update() {
 
 //Resta el da�o y devuelve true si ha muerto
 bool EntityAttribs::recieveDmg(int dmg) {
-
 	if (!invencible_) {
+		health_ -= dmg;
 		//Timer de invulnerabilidad
 		time = sdlutils().currRealTime();
 		invencible_ = true;
-
-		health_ -= dmg;
-		//std::cout << health_ << std::endl;
 		//Actualizamos la healthBar
 		if (entity_->hasComponent<UI>())
 			entity_->getComponent<UI>()->bar(-dmg);
@@ -70,6 +66,9 @@ bool EntityAttribs::recieveDmg(int dmg) {
 		if (health_ <= 0) {
 			if (hms_ != nullptr) {
 				hms_->getState() = HamStates::DEAD;
+			}
+			else if (enmState_ != nullptr) {
+				enmState_->getState() = EnemyStates::ENM_DEAD;
 			}
 			//Actualizamos UI
 			if (entity_->hasComponent<UI>())
