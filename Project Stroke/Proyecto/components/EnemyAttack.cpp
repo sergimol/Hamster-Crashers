@@ -63,7 +63,7 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 	bool canHit = false;
 
 	//Cogemos todas las entidades del juego
-	auto& ents = entity_->getMngr()->getEnteties();
+	auto& ents = entity_->getMngr()->getEntities();
 
 	for (int i = 0; i < ents.size(); ++i) {
 		//Si la entidad es un enemigo...

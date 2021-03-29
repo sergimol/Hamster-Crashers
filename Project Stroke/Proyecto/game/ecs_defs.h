@@ -27,6 +27,7 @@ class EnemyStateMachine;
 class Poison;
 class Cloud;
 
+
 #define _CMPS_LIST_  \
 	Transform,\
 	HamsterStateMachine, \
@@ -69,3 +70,10 @@ struct Hamster4;
 					Hamster2, \
 					Hamster3, \
 					Hamster4
+
+
+//systems
+
+class HamsterSystem;
+
+#define _SYS_LIST_ HamsterSystem

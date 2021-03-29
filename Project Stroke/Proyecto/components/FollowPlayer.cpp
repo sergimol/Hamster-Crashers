@@ -1,8 +1,8 @@
 #include "FollowPlayer.h"
 #include "Stroke.h"
 
-FollowPlayer::FollowPlayer(std::vector<Entity*>& players) :
-	mov_(nullptr), tr_(nullptr), rangeOffsetX_(200), rangeOffsetY_(50), lockedHamState_(nullptr), lockedHamster_(nullptr), hamsterTr_(nullptr), hamsters_(players) {
+FollowPlayer::FollowPlayer() :
+	mov_(nullptr), tr_(nullptr), rangeOffsetX_(200), rangeOffsetY_(50), lockedHamState_(nullptr), lockedHamster_(nullptr), hamsterTr_(nullptr) {
 }
 
 void FollowPlayer::init() {
@@ -14,6 +14,8 @@ void FollowPlayer::init() {
 
 	enAtk_ = entity_->getComponent<EnemyAttack>();
 	assert(enAtk_ != nullptr);
+
+	hamsters_ = entity_->getMngr()->getPlayers();
 
 	lockHamster(); // De momento un hamster concreto para manejar mejor
 	assert(lockedHamster_ != nullptr);

@@ -46,7 +46,7 @@ namespace ecs {
 using ComponentsList = mpl::TypeList<_CMPS_LIST_>;
 using GroupsList = mpl::TypeList<_GRPS_LIST_>;
 using HdlrsList = mpl::TypeList<_HDLRS_LIST_>;
-
+using SysList = mpl::TypeList<_SYS_LIST_>;
 
 template<typename T>
 constexpr std::size_t cmpIdx = mpl::IndexOf<T, ComponentsList>();
@@ -57,10 +57,14 @@ constexpr std::size_t grpIdx = mpl::IndexOf<T, GroupsList>();
 template<typename T>
 constexpr std::size_t hdlrIdx = mpl::IndexOf<T, HdlrsList>();
 
+template<typename T>
+constexpr std::size_t sysIdx = mpl::IndexOf<T, SysList>();
+
+
 
 constexpr std::size_t maxComponent = ComponentsList::size;
 constexpr std::size_t maxGroup = GroupsList::size;
 constexpr std::size_t maxHdlr = HdlrsList::size;
-
+constexpr std::size_t maxSystem = SysList::size;
 }
 

@@ -53,6 +53,7 @@ public:
 private:
 	HamsterStateMachine* hms_;
 	EnemyStateMachine*  enmState_;
+	
 	int health_;
 	int maxHealth_;
 	int damage_;

@@ -17,7 +17,8 @@ class ControlHandeler : public Component {
 public:
 	ControlHandeler(int player) :
 		player_(player) // player es solo para decir que teclas le corresponde
-	{}
+	{
+	}
 
 		virtual ~ControlHandeler() {}
 

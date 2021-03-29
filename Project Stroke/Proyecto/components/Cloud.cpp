@@ -12,7 +12,7 @@ void Cloud::init() {
 void Cloud::update() {
 
 	//Cogemos todas las entidades del juego
-	auto& ents = entity_->getMngr()->getEnteties();
+	auto& ents = entity_->getMngr()->getEntities();
 
 	for (Entity* e : ents) {
 		//Si la entidad es un enemigo...

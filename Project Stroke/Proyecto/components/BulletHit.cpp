@@ -18,7 +18,7 @@ void BulletHit::init() {
 void BulletHit::update() {
 
 	//Cogemos todas las entidades del juego
-	auto& ents = entity_->getMngr()->getEnteties();
+	auto& ents = entity_->getMngr()->getEntities();
 
 	for (Entity* e : ents) {
 		//Si la entidad es un enemigo...

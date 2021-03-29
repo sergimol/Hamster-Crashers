@@ -19,7 +19,7 @@
 
 class FollowPlayer : public Component {
 public:
-	FollowPlayer(std::vector<Entity*>& players);
+	FollowPlayer();
 
 	virtual ~FollowPlayer() {};
 
@@ -45,10 +45,14 @@ private:
 	// mas adelante es posible que nos interese conocer estados o componentes oportunos, por ahora no ahce daño verdad¿?¿
 	std::vector<Entity*> hamsters_;
 	MovementSimple* mov_; //Igual esto es major al reves, que el movement coja los datos del follow y se mueva en la dir que le indique
+	
 	Transform* tr_;
 	Transform* hamsterTr_;
+	
 	Entity* lockedHamster_;
+	
 	HamsterStateMachine* lockedHamState_;
+	
 	int rangeOffsetX_; // Esta movida habra que balancearla
 	int rangeOffsetY_; // Esta movida habra que balancearla
 

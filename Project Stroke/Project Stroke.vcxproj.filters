@@ -329,6 +329,9 @@
     <ClInclude Include="Proyecto\components\Cloud.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Proyecto\ecs\System.h">
+      <Filter>Archivos de encabezado\ecs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\config\hamsters.resources.json">

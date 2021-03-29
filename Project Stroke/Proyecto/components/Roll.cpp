@@ -188,7 +188,7 @@ bool Roll::checkCollisions()
 	bool hit = false;
 
 	//Cogemos todas las entidades
-	auto& ents = entity_->getMngr()->getEnteties();
+	auto& ents = entity_->getMngr()->getEntities();
 
 	//Recorremos la lista de componentes
 	for (int i = 0; i < ents.size(); ++i)

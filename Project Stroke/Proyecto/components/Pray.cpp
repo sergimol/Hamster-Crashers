@@ -23,7 +23,7 @@ void Pray::deActivate() {
 }
 
 void Pray::prayAbility() {
-	auto& ents = entity_->getMngr()->getEnteties();
+	auto& ents = entity_->getMngr()->getEntities();
 	came_ = Game::camera_;
 	for (Entity* e : ents) {
 		if (evil) {

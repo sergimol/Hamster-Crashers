@@ -32,8 +32,8 @@ public:
 	static SDL_Rect camera_;
 private:
 	std::unique_ptr<Manager> mngr_;
-	std::vector<Entity*> players_; // vector de jugadores
+	//std::vector<Entity*> players_; // vector de jugadores
 	void loadMap();
-
+	tmx::Map map_;
 };
 

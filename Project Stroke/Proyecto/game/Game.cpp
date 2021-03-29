@@ -43,6 +43,14 @@ void Game::init() {
 
 	SDLUtils::init("Squeak Ship", 1920, 1080, "resources/config/hamsters.resources.json");
 
+	auto& players = mngr_->getPlayers();
+	auto& enemies = mngr_->getEnemies();
+	auto& obstacles = mngr_->getObstacles();
+
+	//SÓLO NECESITA CARGAR EL MAPA UNA VEZ
+	assert(map_.load("resources/images/tiled/Mapa.tmx"));
+
+
 	//Imagen de fondo fija
 	/*auto* background = mngr_->addEntity();
 	background->addComponent<Transform>(
@@ -114,8 +122,10 @@ void Game::init() {
 	hamster1->addComponent<Poison>(5);
 	hamster1->addComponent<Combos>();
 	hamster1->setGroup<Ally>(true);
-	hamster1->addComponent<ControlHandeler>(1);
-	players_.push_back(hamster1);
+	hamster1->addComponent<ControlHandeler>(2);
+
+	players.push_back(hamster1);
+
 	//Igual luego no lo usammos pero por si aca
 	mngr_->setHandler<Hamster1>(hamster1);
 
@@ -166,7 +176,7 @@ void Game::init() {
 	enemy->addComponent<EnemyStateMachine>();
 	enemy->addComponent<EnemyAttack>();
 	enemy->addComponent<MovementSimple>();
-	enemy->addComponent<FollowPlayer>(players_);
+	enemy->addComponent<FollowPlayer>();
 }
 
 void Game::start() {
@@ -213,6 +223,8 @@ void Game::updateCamera() {
 
 	Vector2D camPos;
 	int players(0);
+	auto& players_ = mngr_->getPlayers();
+
 	//Cámara sigue a los personajes
 	for (Entity* e : players_) {
 		auto& playerpos = e->getComponent<Transform>()->getPos();
@@ -240,12 +252,14 @@ void Game::updateCamera() {
 	//std::cout << camera_.x << " " << camera_.y << "\n";
 }
 
+/*POSIBLE CAMBIO PARA QUE NO CARGUE TODO EL RATO*/
+
 void Game::loadMap() {
 	//Creamos el mapa
-	tmx::Map map;
+	//tmx::Map map_;
 	//Si se puede cargar
-	if (map.load("resources/images/tiled/Mapa.tmx"))
-	{
+	/*if (map_.load("resources/images/tiled/Mapa.tmx"))*/
+	//{
 		//Variables que vamos a necesitar
 		tmx::Vector2u mapDimensions;	//Guarda las dimensiones del mapa
 		tmx::Vector2u tilesDimensions;	//Guarda las dimensiones de las tiles
@@ -254,12 +268,12 @@ void Game::loadMap() {
 
 		//Guardamos las propiedades basicas
 		//Dimensiones del mapa
-		mapDimensions = map.getTileCount();
+		mapDimensions = map_.getTileCount();
 		//Dimensiones de los tiles
-		tilesDimensions = map.getTileSize();
+		tilesDimensions = map_.getTileSize();
 
 		//Cargamos los tilesets y guardamos las texturas
-		const auto& tilesets = map.getTilesets();
+		const auto& tilesets = map_.getTilesets();
 		for (const auto& tileset : tilesets)
 		{
 			//Guardamos las texturas de los tilesets
@@ -268,7 +282,7 @@ void Game::loadMap() {
 		}
 
 		//Recorremos las capas ("Floor", "Cuber")
-		const auto& layers = map.getLayers();
+		const auto& layers = map_.getLayers();
 		for (const auto& layer : layers)
 		{
 			//SI ES UNA CAPA DE OBJETOS, TODAVÍA NO
@@ -337,7 +351,7 @@ void Game::loadMap() {
 		}
 
 
-	}
-	else
-		std::cout << "Lavin que pringao";
+	//}
+	/*else
+		std::cout << "Lavin que pringao";*/
 }

@@ -9,14 +9,14 @@ void ControlHandeler::init() {
 
 	//En vez de construilo solamente deberia de tner que irse a donde estuviese guardado lso controles y coger el mapeado segun lo que le pida
 
-	if (player_ == 1) {
+	if (player_ <= 1) {
 		keymap.insert({ UP, SDL_SCANCODE_UP });
 		keymap.insert({ DOWN, SDL_SCANCODE_DOWN });
 		keymap.insert({ LEFT, SDL_SCANCODE_LEFT });
 		keymap.insert({ RIGHT, SDL_SCANCODE_RIGHT });
 		keymap.insert({ SPACE, SDL_SCANCODE_K }); //el salto aun no esta includio
 	}
-	else if (player_ == 2) {
+	else if (player_ >= 2) {
 		keymap.insert({ UP, SDL_SCANCODE_W });
 		keymap.insert({ DOWN, SDL_SCANCODE_S });
 		keymap.insert({ LEFT, SDL_SCANCODE_A });

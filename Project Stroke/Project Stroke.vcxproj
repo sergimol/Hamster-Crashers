@@ -220,6 +220,7 @@
     <ClInclude Include="Proyecto\ecs\Entity.h" />
     <ClInclude Include="Proyecto\ecs\Manager.h" />
     <ClInclude Include="Proyecto\ecs\mpl.h" />
+    <ClInclude Include="Proyecto\ecs\System.h" />
     <ClInclude Include="Proyecto\game\ecs_defs.h" />
     <ClInclude Include="Proyecto\game\Game.h" />
     <ClInclude Include="Proyecto\json\JSON.h" />
