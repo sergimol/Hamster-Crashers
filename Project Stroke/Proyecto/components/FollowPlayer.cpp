@@ -2,7 +2,7 @@
 #include "Stroke.h"
 
 FollowPlayer::FollowPlayer() :
-	mov_(nullptr), tr_(nullptr), rangeOffsetX_(200), rangeOffsetY_(50), lockedHamState_(nullptr), lockedHamster_(nullptr), hamsterTr_(nullptr) {
+	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr), lockedHamster_(nullptr), hamsterTr_(nullptr) {
 }
 
 void FollowPlayer::init() {
@@ -78,7 +78,6 @@ void FollowPlayer::update() {
 		flip = true;
 
 	if (!isWithinAttackRange()) {
-		std::cout << "no ta a rango mister";
 		// Movimiento del enemigo en base a pos del jugador
 		if (y < hamY - rangeOffsetY_ / 10)
 			mov_->updateKeymap(MovementSimple::DOWN, true);
