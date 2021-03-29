@@ -24,14 +24,13 @@ public:
 	void update() override;
 	void render() override;
 
-	bool CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo);
+	bool CheckCollisions(const SDL_Rect& enemyRect, bool finCombo);
 	void LaunchAttack();
 
 private:
 	Transform* tr_;
 	SDL_Rect attRect_;
-	short unsigned int w_, h_;
 	long unsigned int cooldown_, time_;
-	SoundEffect& attackSound_, &hitSound_;
+	SoundEffect& attackSound_, & hitSound_;
 }
 ;

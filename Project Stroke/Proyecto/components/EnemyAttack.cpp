@@ -3,16 +3,12 @@
 #include "Combos.h"
 
 EnemyAttack::EnemyAttack() :
-	tr_(nullptr), w_(60), h_(30), cooldown_(350), time_(sdlutils().currRealTime()), attRect_(),
+	tr_(nullptr), cooldown_(1100), time_(sdlutils().currRealTime()), attRect_(),
 	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {}
 
 void EnemyAttack::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
-	/*
-	hms_ = entity_->getComponent<HamsterStateMachine>();
-	assert(hms_ != nullptr);
-	*/
 }
 
 void EnemyAttack::update() {
@@ -21,24 +17,25 @@ void EnemyAttack::update() {
 void EnemyAttack::LaunchAttack() {
 	if (sdlutils().currRealTime() > time_ + cooldown_) {
 
-		auto size = tr_->getW();
+		auto sizeW = tr_->getW();
+		auto sizeH = tr_->getH();
 		auto& pos = tr_->getPos();
 		auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
 
 
-		attRect_.w = w_ + w_ * range;
-		attRect_.h = h_ + h_ * range;
+		attRect_.w = sizeW / 2 + sizeW / 2 * range;
+		attRect_.h = sizeH / 2 + sizeH / 2 * range;
 
 		auto flip = tr_->getFlip();
 
 		//Si esta flipeado...
 		if (flip)
 			//Le damos la vuelta al rect
-			attRect_.x = pos.getX() - attRect_.w - Game::camera_.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
+			attRect_.x = pos.getX() - attRect_.w + sizeW / 4 - Game::camera_.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
 		else
-			attRect_.x = pos.getX() + size - Game::camera_.x;
+			attRect_.x = pos.getX() + sizeW - sizeW / 4 - Game::camera_.x;
 
-		attRect_.y = pos.getY() + tr_->getH()/2 - Game::camera_.y;
+		attRect_.y = pos.getY() + sizeH / 4 - Game::camera_.y;
 
 		//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
@@ -55,8 +52,8 @@ void EnemyAttack::LaunchAttack() {
 
 		time_ = sdlutils().currRealTime();
 	}
-	else if (sdlutils().currRealTime() > time_ + cooldown_ / 2) {
-	}
+	//else if (sdlutils().currRealTime() > time_ + cooldown_ / 2) {
+	//}
 }
 
 bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
@@ -82,12 +79,12 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 			//Y comprobamos si colisiona
 			if (SDL_HasIntersection(&enemyRect, &allyRect)) {
 				int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
-				if (finCombo) {
-					if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.01); //Aumentar probabilidad critico
-					//Empujar y stunn al enemigo 
-				}
+				//if (finCombo) {
+				//	if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.01); //Aumentar probabilidad critico
+				//	//Empujar y stun al aliado
+				//}
 				canHit = true;
-				//Le restamos la vida al enemigo
+				//Le restamos la vida al aliado
 				ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg);
 			}
 		}

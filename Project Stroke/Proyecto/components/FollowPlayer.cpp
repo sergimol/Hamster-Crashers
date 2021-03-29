@@ -1,4 +1,4 @@
-#include "FollowPlayer.h"
+ï»¿#include "FollowPlayer.h"
 #include "Stroke.h"
 
 FollowPlayer::FollowPlayer() :
@@ -41,6 +41,9 @@ void FollowPlayer::lockHamster(int id) {
 
 //Esta a rango de ataque
 bool FollowPlayer::isWithinAttackRange() {
+	auto width = tr_->getW();
+	auto hamWidth = hamsterTr_->getW();
+
 	auto& hamPos = hamsterTr_->getPos();
 	auto& pos = tr_->getPos();
 	int hamX = hamPos.getX(),
@@ -48,15 +51,15 @@ bool FollowPlayer::isWithinAttackRange() {
 		x = pos.getX(),
 		y = pos.getY() + tr_->getH();
 
-	return((hamX + rangeOffsetX_  >= x  && hamX - rangeOffsetX_ <= x ) &&
-		(hamY + rangeOffsetY_ >= y && hamY - rangeOffsetY_ <= y));
+	return((hamX + rangeOffsetX_ + hamWidth * 2 >= x + width && hamX + hamWidth - rangeOffsetX_ <= x + width) &&
+		(hamY + rangeOffsetY_ >= y && hamY - rangeOffsetY_ / 10 <= y));
 }
 
 void FollowPlayer::update() {
 	// Cambia el foco si el actual muere o le da un infarto
 	auto& state = lockedHamState_->getState();
 	if (state == HamStates::DEAD || state == HamStates::INFARCTED) {
-		lockHamster(); // Habría que hacerlo quitando el actual para que no repita
+		lockHamster(); // Habrï¿½a que hacerlo quitando el actual para que no repita
 	}
 	auto& hamPos = hamsterTr_->getPos();
 	auto& pos = tr_->getPos();
@@ -65,10 +68,19 @@ void FollowPlayer::update() {
 		x = pos.getX(),
 		y = pos.getY() + tr_->getH();
 
-	
+	auto width = tr_->getW();
+	auto hamWidth = hamsterTr_->getW();
+	auto& flip = tr_->getFlip();
+
+	if (x + width / 2 < hamX + hamWidth / 2)
+		flip = false;
+	else
+		flip = true;
+
 	if (!isWithinAttackRange()) {
+		std::cout << "no ta a rango mister";
 		// Movimiento del enemigo en base a pos del jugador
-		if (y < hamY - rangeOffsetY_)
+		if (y < hamY - rangeOffsetY_ / 10)
 			mov_->updateKeymap(MovementSimple::DOWN, true);
 		else
 			mov_->updateKeymap(MovementSimple::DOWN, false);
@@ -82,12 +94,13 @@ void FollowPlayer::update() {
 			mov_->updateKeymap(MovementSimple::LEFT, true);
 		else
 			mov_->updateKeymap(MovementSimple::LEFT, false);
-		if (x < hamX - rangeOffsetX_ - tr_->getW())
+		if (x < hamX - rangeOffsetX_ - tr_->getW() / 2)
 			mov_->updateKeymap(MovementSimple::RIGHT, true);
 		else
 			mov_->updateKeymap(MovementSimple::RIGHT, false);
 	}
-	else { // Si está a rango, no necesita moverse e intentara atacar
+	else { // Si estï¿½ a rango, no necesita moverse e intentara atacar
+
 		mov_->updateKeymap(MovementSimple::RIGHT, false);
 		mov_->updateKeymap(MovementSimple::LEFT, false);
 		mov_->updateKeymap(MovementSimple::DOWN, false);

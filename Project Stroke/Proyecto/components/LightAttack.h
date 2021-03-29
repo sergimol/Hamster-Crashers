@@ -30,7 +30,6 @@ private:
 	Transform* tr_;
 	SDL_Rect attRect_;
 	HamsterStateMachine* hms_;
-	short unsigned int w_, h_;
 	long unsigned int cooldown_, time_;
 	SoundEffect& attackSound_, & hitSound_;
 }

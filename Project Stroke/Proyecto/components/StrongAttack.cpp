@@ -3,7 +3,7 @@
 #include "Combos.h"
 
 StrongAttack::StrongAttack() :
-	tr_(nullptr), w_(60), h_(30), cooldown_(500), time_(sdlutils().currRealTime()), attRect_(),
+	tr_(nullptr), cooldown_(500), time_(sdlutils().currRealTime()), attRect_(),
 	attackSound_(sdlutils().soundEffects().at("strong_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {
 }
 
@@ -19,26 +19,25 @@ void StrongAttack::update() {
 		auto state = hms_->getState();
 		if (!(state == HamStates::DEAD || state == HamStates::STUNNED || state == HamStates::INFARCTED) && ih().getMouseButtonState(ih().RIGHT) == 1 && sdlutils().currRealTime() > time_ + cooldown_) {
 
-			auto size = tr_->getW();
+			auto sizeW = tr_->getW();
+			auto sizeH = tr_->getH();
 			auto& pos = tr_->getPos();
 			auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
-			state = HamStates::STRONGATTACK;
 
 
-			/*attRect_ = new SDL_Rect;*/
-			attRect_.w = w_ + w_ * range;
-			attRect_.h = h_;
+			attRect_.w = sizeW / 2 + sizeW / 2 * range;
+			attRect_.h = sizeH / 2 + sizeH / 2 * range;
 
 			auto flip = tr_->getFlip();
 
 			//Si esta flipeado...
 			if (flip)
 				//Le damos la vuelta al rect
-				attRect_.x = pos.getX() - attRect_.w - Game::camera_.x;
+				attRect_.x = pos.getX() - attRect_.w + sizeW / 4 - Game::camera_.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
 			else
-				attRect_.x = pos.getX() + size - Game::camera_.x;
+				attRect_.x = pos.getX() + sizeW - sizeW / 4 - Game::camera_.x;
 
-			attRect_.y = pos.getY() + tr_->getH() / 2 - Game::camera_.y;
+			attRect_.y = pos.getY() + sizeH / 4 - Game::camera_.y;
 
 			//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
