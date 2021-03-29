@@ -6,6 +6,8 @@
 #include "../game/Game.h"
 #include "EntityAttribs.h"
 #include "Transform.h"
+#include "Image.h"
+#include "Cloud.h"
 
 Poison::Poison(int dmg) : Ability(CLOUDCD), dmg_(dmg) {
 	
@@ -14,51 +16,30 @@ Poison::Poison(int dmg) : Ability(CLOUDCD), dmg_(dmg) {
 Poison::~Poison() {
 
 }
-void Poison::init() {
-	Ability::init();
-	cloud.h = tr_->getH() * 1.5;
-	cloud.w = tr_->getW() * 1.5;
-}
 
 void Poison::update() {
 	Ability::update();
-	if (lastActive) {
-		auto& ents = entity_->getMngr()->getEnteties();
-
-		for (Entity* e : ents) {
-			//Si la entidad es un enemigo...
-			if (e->hasGroup<Enemy>()) {
-				//Cogemos el transform del enemigo
-				auto eTR = e->getComponent<Transform>();
-
-				//Creamos su Rect
-				SDL_Rect rectEnemy;
-				rectEnemy.h = eTR->getH();
-				rectEnemy.w = eTR->getW();
-				rectEnemy.x = eTR->getPos().getX();
-				rectEnemy.y = eTR->getPos().getY();
-
-				//Y comprobamos si colisiona
-				if (SDL_HasIntersection(&cloud, &rectEnemy)) {
-					//Le restamos la vida al enemigo
-					e->getComponent<EntityAttribs>()->recieveDmg(dmg_);
-					//Y ponemos invulnerable al enemigo
-				}
-			}
-		}
-
-
-
+	if (!lastActive) {
+		if (cloud != nullptr)
+			cloud->setActive(false);
 	}
 }
 
 void Poison::action() {
 	//Realizamos las animaciones
 	if (tr_->getFlip())
-		cloud.x = tr_->getPos().getX() - 200;
+		x = -1;
 	else
-		cloud.x = tr_->getPos().getX() + 200;
+		x = 1;
 
-	cloud.y = tr_->getPos().getY();
+	cloud = entity_->getMngr()->addEntity();
+
+	cloud->addComponent<Transform>(
+		tr_->getPos() + Vector2D(tr_->getW() / 2 + x * COFFSETX, tr_->getH() / 2),
+		Vector2D(x, 0.0f) * CBULLETSPEED, 10.0f, 10.0f, 0.0f);
+
+	cloud->addComponent<Image>(&sdlutils().images().at("bullet"));
+
+	cloud->addComponent<Cloud>(dmg_);
 }
 

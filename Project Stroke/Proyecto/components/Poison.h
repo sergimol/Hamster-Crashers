@@ -4,6 +4,8 @@
 #include "Ability.h"
 
 const float CLOUDCD = 2000;
+const float COFFSETX = 200;
+const float CBULLETSPEED = 1;
 
 class Poison : public Ability {
 public:
@@ -11,14 +13,13 @@ public:
 
 	virtual ~Poison();
 
-	virtual void init();
 	virtual void update();
 
 	//Ejecuta la habilidad en funcion del hamster que sea
 	virtual void action();
 
 private:
-	SDL_Rect cloud;
 	int dmg_;
-
+	int x = 0;
+	Entity* cloud;
 };

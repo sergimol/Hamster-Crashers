@@ -1,21 +1,15 @@
 // This file is part of the course TPV2@UCM - Samir Gena
-#include "BulletHit.h"
+#include "Cloud.h"
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 #include "EntityAttribs.h"
 
-BulletHit::BulletHit() : dmg_(DMG) {
-}
-
-BulletHit::~BulletHit() {
-}
-
-void BulletHit::init() {
+void Cloud::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 }
 
-void BulletHit::update() {
+void Cloud::update() {
 
 	//Cogemos todas las entidades del juego
 	auto& ents = entity_->getMngr()->getEnteties();
@@ -44,12 +38,8 @@ void BulletHit::update() {
 			if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
 				//Le restamos la vida al enemigo
 				e->getComponent<EntityAttribs>()->recieveDmg(dmg_);
-
-				//Desactivamos la bala(aunque hay que destruirla)
-				entity_->setActive(false);
 			}
 		}
 	}
 }
-
 

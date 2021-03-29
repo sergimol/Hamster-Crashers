@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="Proyecto\components\Ability.cpp" />
     <ClCompile Include="Proyecto\components\BulletHit.cpp" />
+    <ClCompile Include="Proyecto\components\Cloud.cpp" />
     <ClCompile Include="Proyecto\components\Combos.cpp" />
     <ClCompile Include="Proyecto\components\DisableOnExit.cpp" />
     <ClCompile Include="Proyecto\components\ControlHandeler.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="Proyecto\components\Ability.h" />
     <ClInclude Include="Proyecto\components\Bounce.h" />
     <ClInclude Include="Proyecto\components\BulletHit.h" />
+    <ClInclude Include="Proyecto\components\Cloud.h" />
     <ClInclude Include="Proyecto\components\Combos.h" />
     <ClInclude Include="Proyecto\components\ControlHandeler.h" />
     <ClInclude Include="Proyecto\components\DeAcceleration.h" />

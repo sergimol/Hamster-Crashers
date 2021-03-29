@@ -8,13 +8,13 @@
 //Daño por bala
 const int DMG = 2;
 
-class BulletHit : public Component {
+class Cloud : public Component {
 
 public:
 
-	BulletHit();
+	Cloud(int dmg) : dmg_(dmg), tr_(nullptr) {};
 
-	virtual ~BulletHit();
+	virtual ~Cloud() {};
 
 	virtual void init() override;
 

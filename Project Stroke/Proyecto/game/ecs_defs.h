@@ -25,6 +25,7 @@ class FollowPlayer;
 class EnemyAttack;
 class EnemyStateMachine;
 class Poison;
+class Cloud;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -48,6 +49,7 @@ class Poison;
 	MovementSimple,\
 	FollowPlayer, \
 	EnemyAttack, \
+	Cloud, \
 	EnemyStateMachine
 
 // groups
