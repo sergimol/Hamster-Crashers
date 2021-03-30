@@ -19,6 +19,8 @@ public:
 	virtual void init() override;
 
 	virtual void update() override;
+
+	virtual void render() override;
 private:
 	int dmg_;
 	Transform* tr_;

@@ -15,6 +15,8 @@ public:
 
 	virtual void update();
 
+	virtual void render();
+
 	//Ejecuta la habilidad en funcion del hamster que sea
 	virtual void action();
 

@@ -93,41 +93,41 @@ void Game::init() {
 	////MATERIAL PARA EL HITO1//
 
 	//Sardinilla
-	auto* hamster1 = mngr_->addEntity();
-	hamster1->addComponent<Transform>(
-		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
-		Vector2D(), 256.0f, 256.0f, 0.0f);
-	hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5));
-	//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
-	hamster1->addComponent<Animator>(
-		&sdlutils().images().at("sardinillaSheet"),
-		64,
-		64,
-		3,
-		3,
-		220,
-		Vector2D(0, 0),
-		3
-		);
+	//auto* hamster1 = mngr_->addEntity();
+	//hamster1->addComponent<Transform>(
+	//	Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
+	//	Vector2D(), 256.0f, 256.0f, 0.0f);
+	//hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5));
+	////hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+	//hamster1->addComponent<Animator>(
+	//	&sdlutils().images().at("sardinillaSheet"),
+	//	64,
+	//	64,
+	//	3,
+	//	3,
+	//	220,
+	//	Vector2D(0, 0),
+	//	3
+	//	);
 
-	hamster1->addComponent<HamsterStateMachine>();
-	hamster1->addComponent<Movement>();
-	hamster1->addComponent<LightAttack>();
-	hamster1->addComponent<StrongAttack>();
-	hamster1->addComponent<Stroke>();
-	hamster1->addComponent<UI>("sardinilla", 0);
-	//hamster1->addComponent<Pray>(30, 50);
-	//hamster1->addComponent<Roll>();
-	//hamster1->addComponent<Turret>();
-	hamster1->addComponent<Poison>(5);
-	hamster1->addComponent<Combos>();
-	hamster1->setGroup<Ally>(true);
-	hamster1->addComponent<ControlHandeler>(1);
+	//hamster1->addComponent<HamsterStateMachine>();
+	//hamster1->addComponent<Movement>();
+	//hamster1->addComponent<LightAttack>();
+	//hamster1->addComponent<StrongAttack>();
+	//hamster1->addComponent<Stroke>();
+	//hamster1->addComponent<UI>("sardinilla", 0);
+	////hamster1->addComponent<Pray>(30, 50);
+	////hamster1->addComponent<Roll>();
+	////hamster1->addComponent<Turret>();
+	//hamster1->addComponent<Poison>(5);
+	//hamster1->addComponent<Combos>();
+	//hamster1->setGroup<Ally>(true);
+	//hamster1->addComponent<ControlHandeler>(1);
 
-	players.push_back(hamster1);
+	//players.push_back(hamster1);
 
-	//Igual luego no lo usammos pero por si aca
-	mngr_->setHandler<Hamster1>(hamster1);
+	////Igual luego no lo usammos pero por si aca
+	//mngr_->setHandler<Hamster1>(hamster1);
 
 
 	//CLON Sardinilla (P2)

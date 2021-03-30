@@ -3,6 +3,7 @@
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 #include "EntityAttribs.h"
+#include "../game/Game.h"
 
 void Cloud::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -24,15 +25,15 @@ void Cloud::update() {
 			SDL_Rect rectPlayer;
 			rectPlayer.h = tr_->getH();
 			rectPlayer.w = tr_->getW();
-			rectPlayer.x = tr_->getPos().getX();
-			rectPlayer.y = tr_->getPos().getY();
+			rectPlayer.x = tr_->getPos().getX() - Game::camera_.x;
+			rectPlayer.y = tr_->getPos().getY() - Game::camera_.y;
 
 			//Creamos su Rect
 			SDL_Rect rectEnemy;
 			rectEnemy.h = eTR->getH();
 			rectEnemy.w = eTR->getW();
-			rectEnemy.x = eTR->getPos().getX();
-			rectEnemy.y = eTR->getPos().getY();
+			rectEnemy.x = eTR->getPos().getX() - Game::camera_.x;
+			rectEnemy.y = eTR->getPos().getY() - Game::camera_.y;
 
 			//Y comprobamos si colisiona
 			if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
@@ -41,5 +42,10 @@ void Cloud::update() {
 			}
 		}
 	}
+}
+
+void Cloud::render() {
+
+
 }
 

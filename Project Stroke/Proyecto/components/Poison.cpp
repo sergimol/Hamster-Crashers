@@ -25,6 +25,10 @@ void Poison::update() {
 	}
 }
 
+void Poison::render() {
+
+
+}
 void Poison::action() {
 	//Realizamos las animaciones
 	if (tr_->getFlip())
