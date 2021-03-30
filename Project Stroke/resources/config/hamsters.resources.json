@@ -135,6 +135,18 @@
       "text": "Game Over",
       "font": "ARIAL24",
       "color": "0x0000ffff"
+    },
+    {
+      "id": "sardinilla",
+      "text": "sardinilla",
+      "font": "ARIAL24",
+      "color": "0x0000ffff"
+    },
+    {
+      "id": "sardinilla2",
+      "text": "sardinilla2",
+      "font": "ARIAL24",
+      "color": "0x0000ffff"
     }
   ],
 

@@ -93,41 +93,41 @@ void Game::init() {
 	////MATERIAL PARA EL HITO1//
 
 	//Sardinilla
-	//auto* hamster1 = mngr_->addEntity();
-	//hamster1->addComponent<Transform>(
-	//	Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
-	//	Vector2D(), 256.0f, 256.0f, 0.0f);
-	//hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5));
-	////hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
-	//hamster1->addComponent<Animator>(
-	//	&sdlutils().images().at("sardinillaSheet"),
-	//	64,
-	//	64,
-	//	3,
-	//	3,
-	//	220,
-	//	Vector2D(0, 0),
-	//	3
-	//	);
+	auto* hamster1 = mngr_->addEntity();
+	hamster1->addComponent<Transform>(
+		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
+		Vector2D(), 256.0f, 256.0f, 0.0f);
+	hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5));
+	//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+	hamster1->addComponent<Animator>(
+		&sdlutils().images().at("sardinillaSheet"),
+		64,
+		64,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		);
 
-	//hamster1->addComponent<HamsterStateMachine>();
-	//hamster1->addComponent<Movement>();
-	//hamster1->addComponent<LightAttack>();
-	//hamster1->addComponent<StrongAttack>();
-	//hamster1->addComponent<Stroke>();
-	//hamster1->addComponent<UI>("sardinilla", 0);
-	////hamster1->addComponent<Pray>(30, 50);
-	////hamster1->addComponent<Roll>();
-	////hamster1->addComponent<Turret>();
-	//hamster1->addComponent<Poison>(5);
-	//hamster1->addComponent<Combos>();
-	//hamster1->setGroup<Ally>(true);
-	//hamster1->addComponent<ControlHandeler>(1);
+	hamster1->addComponent<HamsterStateMachine>();
+	hamster1->addComponent<Movement>();
+	hamster1->addComponent<LightAttack>();
+	hamster1->addComponent<StrongAttack>();
+	hamster1->addComponent<Stroke>();
+	hamster1->addComponent<UI>("sardinilla", 0);
+	//hamster1->addComponent<Pray>(30, 50);
+	//hamster1->addComponent<Roll>();
+	//hamster1->addComponent<Turret>();
+	hamster1->addComponent<Poison>(5);
+	hamster1->addComponent<Combos>();
+	hamster1->setGroup<Ally>(true);
+	hamster1->addComponent<ControlHandeler>(1);
 
-	//players.push_back(hamster1);
+	players.push_back(hamster1);
 
-	////Igual luego no lo usammos pero por si aca
-	//mngr_->setHandler<Hamster1>(hamster1);
+	//Igual luego no lo usammos pero por si aca
+	mngr_->setHandler<Hamster1>(hamster1);
 
 
 	//CLON Sardinilla (P2)
@@ -203,13 +203,14 @@ void Game::start() {
 
 		mngr_->update();
 		mngr_->refresh();
-		sortEntities();
+		
 
 		updateCamera();
 
 		sdlutils().clearRenderer();
-		//loadMap();
 		mngr_->render();
+		sortEntities();
+
 		sdlutils().presentRenderer();
 
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
@@ -252,14 +253,99 @@ void Game::updateCamera() {
 
 	//std::cout << camera_.x << " " << camera_.y << "\n";
 }
+//
+//bool myfunction(Entity* a, Entity* b) {
+//	std::cout << "MENOR QUE" << std::endl;
+//	if (a->hasComponent<Transform>() && b->hasComponent<Transform>())
+//		return (a->getComponent<Transform>()->getPos().getY() <= b->getComponent<Transform>()->getPos().getY());
+//	return false;
+//}
 
-bool Entity::operator < (Entity* e) {
-	if (this->hasComponent<Transform>() && e->hasComponent<Transform>())
-		return (this->getComponent<Transform>()->getPos().getY() < e->getComponent<Transform>()->getPos().getY());
-	return false;
-}
+
 
 void Game::sortEntities() {
+	auto& t = sdlutils().msgs().at("sardinilla");
+	auto& t2 = sdlutils().msgs().at("sardinilla2");
+
 	auto& entities = mngr_->getEntities();
-	std::sort(entities.begin() + 1, entities.end());
+	
+	mergeSort(entities, 1, entities.size()-1);
+	
+	
+	if (entities[1]->hasComponent<EntityAttribs>()) {
+		if (entities[1]->getComponent<EntityAttribs>()->getId() == "sardinilla") {
+			t.render((sdlutils().width() - t.width()) / 2,
+				(sdlutils().height() - t.height()) / 2);
+		}
+		else {
+			t2.render((sdlutils().width() - t.width()) / 2,
+				(sdlutils().height() - t.height()) / 2);
+		}
+	}
+	
 }
+
+void Game::mergeSort(vector<Entity*>& vec, int l, int r) {
+	if (l >= r) {
+		return;//returns recursively
+	}
+	int m = l + (r - l) / 2;
+	mergeSort(vec, l, m);
+	mergeSort(vec, m + 1, r);
+	merge(vec, l, m, r);
+}
+
+void Game::merge(vector<Entity*>& vec, int l, int m, int r) {
+	int n1 = m - l + 1;
+	int n2 = r - m;
+
+	// Create temp arrays
+	vector<Entity*> L(n1);
+	vector<Entity*> R(n2);
+
+	// Copy data to temp arrays L[] and R[]
+	for (int i = 0; i < n1; i++)
+		L[i] = vec[l + i];
+	for (int j = 0; j < n2; j++)
+		R[j] = vec[m + 1 + j];
+
+	// Merge the temp arrays back into arr[l..r]
+
+	// Initial index of first subarray
+	int i = 0;
+
+	// Initial index of second subarray
+	int j = 0;
+
+	// Initial index of merged subarray
+	int k = l;
+
+	while (i < n1 && j < n2) {
+		if (L[i]->getComponent<Transform>()->getPos().getY() <= R[j]->getComponent<Transform>()->getPos().getY()) {
+			vec[k] = L[i];
+			i++;
+		}
+		else {
+			vec[k] = R[j];
+			j++;
+		}
+		k++;
+	}
+
+	// Copy the remaining elements of
+	// L[], if there are any
+	while (i < n1) {
+		vec[k] = L[i];
+		i++;
+		k++;
+	}
+
+	// Copy the remaining elements of
+	// R[], if there are any
+	while (j < n2) {
+		vec[k] = R[j];
+		j++;
+		k++;
+	}
+}
+

@@ -33,5 +33,8 @@ public:
 private:
 	std::unique_ptr<Manager> mngr_;
 	//std::vector<Entity*> players_; // vector de jugadores
+
+	void mergeSort(std::vector<Entity*>& vec, int l, int r);
+	void merge(std::vector<Entity*>& vec, int l, int m, int r);
 };
 

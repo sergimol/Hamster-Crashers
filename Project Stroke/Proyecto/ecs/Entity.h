@@ -122,7 +122,10 @@ public:
 		}
 	}
 
-	bool operator < (Entity* e);
+	//bool operator< (Entity* a);
+	//bool comparador(Entity* a, Entity* b);
+
+	//friend bool operator< ( Entity& a,  Entity& b);
 
 private:
 
