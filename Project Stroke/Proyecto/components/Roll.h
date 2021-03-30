@@ -5,9 +5,10 @@
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 
-
 class Roll : public Ability {
 public:
+	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
+
 	Roll() : tr_(nullptr), hms_(nullptr), anim_(nullptr), speed_(), goalVel_(0, 0), dir_(0,0), timer(sdlutils().currRealTime()), rolling(false),
 		hitSound_(sdlutils().soundEffects().at("strong_attack")) 
 	{
@@ -27,11 +28,14 @@ public:
 
 	virtual void deActivate() override;
 
+	void updateKeymap(KEYS x, bool is);
+
+
 private:
 	bool rolling;
 
 	const float jump_ = 45.0f, gravity_ = 4.8f, jumpTimer_ = 10.0f;
-	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
+	
 	const int maxAccel = 3, iniAccel = 10;
 	
 	long unsigned int timer;

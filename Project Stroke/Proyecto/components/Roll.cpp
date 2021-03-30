@@ -3,6 +3,7 @@
 #include "Animator.h"
 #include "Stroke.h"
 
+
 //Roll::Roll() : Ability() {
 //
 //};
@@ -37,7 +38,6 @@ float Roll::lerp(float a, float b, float f){
 
 void Roll::action() 
 {
-	
 	if (entity_->getComponent<Movement>()->isActive()){
 		entity_->getComponent<Movement>()->setActive(false);
 		
@@ -54,14 +54,17 @@ void Roll::action()
 		else {
 			tr_->getVel() = dir_ * iniAccel;
 		}
-
-
 		anim_->play(sdlutils().anims().at("sardinilla_ability"));
 	}
-	/*else
-		rolling = false;*/
-	//entity_->getComponent<Movement>()->setActive(!entity_->getComponent<Movement>()->isActive());
+}
 
+void Roll::updateKeymap(KEYS x, bool is) {
+	if (x != SPACE)
+		keymap.at(x) = is;
+	else if (!keymap.at(SPACE)) {
+		keymap.at(SPACE) = true;
+		entity_->getComponent<Stroke>()->increaseChance(2, this);
+	}
 }
 
 void Roll::update() {
@@ -75,55 +78,31 @@ void Roll::update() {
 		auto& z = tr_->getZ();
 		auto& velZ = tr_->getVelZ();
 
-		if (ih().keyDownEvent() || ih().keyUpEvent()) {
+		if (!keymap.at(SPACE) && ih().isKeyDown(SDLK_SPACE)) {
+			keymap.at(SPACE) = true;
+			entity_->getComponent<Stroke>()->increaseChance(2, this);
+		}
 
-			if (ih().isKeyDown(SDL_SCANCODE_UP) || ih().isKeyDown(SDLK_w))
-				keymap.at(UP) = true;
-			else if (ih().isKeyUp(SDL_SCANCODE_UP) && ih().isKeyUp(SDLK_w))
-				keymap.at(UP) = false;
+		if (keymap.at(UP)) {
+			dir_.setY(-1.0f);
+		}
+		else if (keymap.at(DOWN)) {
+			dir_.setY(1.0f);
+		}
 
-			if (ih().isKeyDown(SDL_SCANCODE_DOWN) || ih().isKeyDown(SDLK_s))
-				keymap.at(DOWN) = true;
-			else if (ih().isKeyUp(SDL_SCANCODE_DOWN) && ih().isKeyUp(SDLK_s))
-				keymap.at(DOWN) = false;
+		if (keymap.at(RIGHT)) {
+			dir_.setX(1.0f);
+			tr_->getFlip() = false;
+		}
+		else if (keymap.at(LEFT)) {
+			dir_.setX(-1.0f);
+			tr_->getFlip() = true;
+		}
 
-			if (ih().isKeyDown(SDL_SCANCODE_RIGHT) || ih().isKeyDown(SDLK_d))
-				keymap.at(RIGHT) = true;
-			else if (ih().isKeyUp(SDL_SCANCODE_RIGHT) && ih().isKeyUp(SDLK_d))
-				keymap.at(RIGHT) = false;
+		if (dir_.magnitude() != 0) {
+			dir_ = dir_.normalize();
 
-			if (ih().isKeyDown(SDL_SCANCODE_LEFT) || ih().isKeyDown(SDLK_a))
-				keymap.at(LEFT) = true;
-			else if (ih().isKeyUp(SDL_SCANCODE_LEFT) && ih().isKeyUp(SDLK_a))
-				keymap.at(LEFT) = false;
-
-
-			if (!keymap.at(SPACE) && ih().isKeyDown(SDLK_SPACE)) {
-				keymap.at(SPACE) = true;
-				entity_->getComponent<Stroke>()->increaseChance(2, this);
-			}
-
-			if (keymap.at(UP)) {
-				dir_.setY(-1.0f);
-			}
-			else if (keymap.at(DOWN)) {
-				dir_.setY(1.0f);
-			}
-
-			if (keymap.at(RIGHT)) {
-				dir_.setX(1.0f);
-				tr_->getFlip() = false;
-			}
-			else if (keymap.at(LEFT)) {
-				dir_.setX(-1.0f);
-				tr_->getFlip() = true;
-			}
-
-			if (dir_.magnitude() != 0) {
-				dir_ = dir_.normalize();
-
-				goalVel_ = Vector2D(dir_.getX() * speed_.getX() * maxAccel, dir_.getY() * speed_.getY() * maxAccel);
-			}
+			goalVel_ = Vector2D(dir_.getX() * speed_.getX() * maxAccel, dir_.getY() * speed_.getY() * maxAccel);
 		}
 
 		if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {		//Deceleracion
@@ -137,7 +116,7 @@ void Roll::update() {
 				state = HamStates::IDLE;
 
 		}
-		else if (state == HamStates::IDLE || state == HamStates::MOVING || state == HamStates::JUMPING) {		//Aceleracion
+		else if (hms_->canMove()) {		//Aceleracion
 			vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.95));
 			vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.95));
 
@@ -150,7 +129,7 @@ void Roll::update() {
 		}
 
 
-		if ((state == HamStates::IDLE || state == HamStates::MOVING) && keymap.at(SPACE)) {		//Inicio del salto
+		if (hms_->canJump() && keymap.at(SPACE)) {		//Inicio del salto
 			velZ = jump_;
 			state = HamStates::JUMPING;
 			timer = sdlutils().currRealTime();

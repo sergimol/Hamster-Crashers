@@ -7,6 +7,7 @@
 
 //las cosas que controla
 #include "Movement.h"
+#include "Roll.h"
 
 
 /*Esta clase es la encargada de filtar los inputs
@@ -30,6 +31,7 @@ private:
 	//const enum KEYS2 { UP, DOWN, LEFT, RIGHT, SPACE };
 	int player_;
 	Movement* mov_;
+	Roll* roll_;
 
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 

@@ -203,14 +203,12 @@ void Game::start() {
 
 		mngr_->update();
 		mngr_->refresh();
-		
+		sortEntities();
 
 		updateCamera();
 
 		sdlutils().clearRenderer();
 		mngr_->render();
-		sortEntities();
-
 		sdlutils().presentRenderer();
 
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
@@ -264,14 +262,16 @@ void Game::updateCamera() {
 
 
 void Game::sortEntities() {
-	auto& t = sdlutils().msgs().at("sardinilla");
-	auto& t2 = sdlutils().msgs().at("sardinilla2");
-
+	
 	auto& entities = mngr_->getEntities();
 	
 	mergeSort(entities, 1, entities.size()-1);
 	
-	
+	/*
+		-------------DEBUG-----------
+		auto& t = sdlutils().msgs().at("sardinilla");
+	auto& t2 = sdlutils().msgs().at("sardinilla2");
+
 	if (entities[1]->hasComponent<EntityAttribs>()) {
 		if (entities[1]->getComponent<EntityAttribs>()->getId() == "sardinilla") {
 			t.render((sdlutils().width() - t.width()) / 2,
@@ -281,8 +281,7 @@ void Game::sortEntities() {
 			t2.render((sdlutils().width() - t.width()) / 2,
 				(sdlutils().height() - t.height()) / 2);
 		}
-	}
-	
+	}*/
 }
 
 void Game::mergeSort(vector<Entity*>& vec, int l, int r) {

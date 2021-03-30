@@ -82,7 +82,7 @@ void Movement:: update() {
 		if(state != HamStates::JUMPING) state = HamStates::IDLE;
 	
 	}
-	else if (state == HamStates::IDLE || state == HamStates::MOVING || state == HamStates::JUMPING) {		//Aceleracion
+	else if (hms_->canMove()) {		//Aceleracion
 		vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.9));
 		vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.9));
 
@@ -93,7 +93,7 @@ void Movement:: update() {
 
 	}
 
-	if ((state == HamStates::IDLE || state == HamStates::MOVING) && keymap.at(SPACE)) {		//Inicio del salto
+	if (hms_->canJump() && keymap.at(SPACE)) {		//Inicio del salto
 		velZ = jump_;
 		state = HamStates::JUMPING;
 		timer = sdlutils().currRealTime();

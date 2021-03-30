@@ -3,7 +3,7 @@
 #include "Combos.h"
 
 LightAttack::LightAttack() :
-	tr_(nullptr), cooldown_(350), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
+	hms_(nullptr), tr_(nullptr), cooldown_(350), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
 	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {}
 
 void LightAttack::init() {
@@ -16,7 +16,7 @@ void LightAttack::init() {
 void LightAttack::update() {
 	if (ih().mouseButtonEvent()) {
 		auto state = hms_->getState();
-		if (!(state == HamStates::DEAD || state == HamStates::STUNNED || state == HamStates::INFARCTED) && ih().getMouseButtonState(ih().LEFT) == 1 && sdlutils().currRealTime() > time_ + cooldown_) {
+		if (hms_->canAttack() && ih().getMouseButtonState(ih().LEFT) == 1 && sdlutils().currRealTime() > time_ + cooldown_) {
 
 			auto sizeW = tr_->getW();
 			auto sizeH = tr_->getH();

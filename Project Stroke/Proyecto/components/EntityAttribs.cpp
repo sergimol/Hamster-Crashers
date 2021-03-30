@@ -83,6 +83,7 @@ bool EntityAttribs::recieveDmg(int dmg) {
 		else
 			return false;
 	}
+	return false;
 }
 
 //Sana 'hp' unidades

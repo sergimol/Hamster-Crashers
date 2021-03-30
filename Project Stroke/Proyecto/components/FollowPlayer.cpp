@@ -58,7 +58,7 @@ bool FollowPlayer::isWithinAttackRange() {
 void FollowPlayer::update() {
 	// Cambia el foco si el actual muere o le da un infarto
 	auto& state = lockedHamState_->getState();
-	if (state == HamStates::DEAD || state == HamStates::INFARCTED) {
+	if (lockedHamState_->cantBeTargeted()) {
 		lockHamster(); // Habr�a que hacerlo quitando el actual para que no repita
 	}
 	auto& hamPos = hamsterTr_->getPos();

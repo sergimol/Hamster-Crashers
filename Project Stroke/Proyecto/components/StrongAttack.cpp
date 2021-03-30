@@ -17,7 +17,7 @@ void StrongAttack::init() {
 void StrongAttack::update() {
 	if (ih().mouseButtonEvent()) {
 		auto state = hms_->getState();
-		if (!(state == HamStates::DEAD || state == HamStates::STUNNED || state == HamStates::INFARCTED) && ih().getMouseButtonState(ih().RIGHT) == 1 && sdlutils().currRealTime() > time_ + cooldown_) {
+		if (hms_->canAttack() && ih().getMouseButtonState(ih().RIGHT) == 1 && sdlutils().currRealTime() > time_ + cooldown_) {
 
 			auto sizeW = tr_->getW();
 			auto sizeH = tr_->getH();
