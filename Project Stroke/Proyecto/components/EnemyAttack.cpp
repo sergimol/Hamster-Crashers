@@ -12,6 +12,10 @@ void EnemyAttack::init() {
 }
 
 void EnemyAttack::update() {
+	//Deja de mostrar el collider
+	if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
+		DEBUG_isAttacking_ = false;
+	}
 }
 
 void EnemyAttack::LaunchAttack() {
@@ -50,10 +54,9 @@ void EnemyAttack::LaunchAttack() {
 
 		//this.anims.play(pegarse)
 
+		DEBUG_isAttacking_ = true;
 		time_ = sdlutils().currRealTime();
 	}
-	//else if (sdlutils().currRealTime() > time_ + cooldown_ / 2) {
-	//}
 }
 
 bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
@@ -93,7 +96,9 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 }
 
 void EnemyAttack::render() {
-	SDL_SetRenderDrawColor(sdlutils().renderer(), 255, 170, 0, 255);
+	if (DEBUG_isAttacking_) {
+		SDL_SetRenderDrawColor(sdlutils().renderer(), 255, 170, 0, 255);
 
-	SDL_RenderDrawRect(sdlutils().renderer(), &attRect_);
+		SDL_RenderDrawRect(sdlutils().renderer(), &attRect_);
+	}
 }

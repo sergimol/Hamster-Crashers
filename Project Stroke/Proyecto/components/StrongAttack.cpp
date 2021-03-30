@@ -3,7 +3,7 @@
 #include "Combos.h"
 
 StrongAttack::StrongAttack() :
-	tr_(nullptr), cooldown_(500), time_(sdlutils().currRealTime()), attRect_(),
+	tr_(nullptr), cooldown_(500), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
 	attackSound_(sdlutils().soundEffects().at("strong_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {
 }
 
@@ -55,12 +55,17 @@ void StrongAttack::update() {
 
 			//this.anims.play(pegarse)
 
+			DEBUG_isAttacking_ = true;
 			time_ = sdlutils().currRealTime();
 			entity_->getComponent<Stroke>()->increaseChance(10, this);
 		}
 		else if (sdlutils().currRealTime() > time_ + cooldown_ / 2) {
 			state = HamStates::IDLE;
 		}
+	}
+	//Deja de mostrar el collider
+	if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
+		DEBUG_isAttacking_ = false;
 	}
 }
 
@@ -100,7 +105,9 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 }
 
 void StrongAttack::render() {
-	SDL_SetRenderDrawColor(sdlutils().renderer(), 255, 0, 0, 255);
+	if (DEBUG_isAttacking_) {
+		SDL_SetRenderDrawColor(sdlutils().renderer(), 255, 0, 0, 255);
 
-	SDL_RenderDrawRect(sdlutils().renderer(), &attRect_);
+		SDL_RenderDrawRect(sdlutils().renderer(), &attRect_);
+	}
 }

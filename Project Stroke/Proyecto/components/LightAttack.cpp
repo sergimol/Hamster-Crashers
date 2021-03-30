@@ -3,7 +3,7 @@
 #include "Combos.h"
 
 LightAttack::LightAttack() :
-	tr_(nullptr), cooldown_(350), time_(sdlutils().currRealTime()), attRect_(),
+	tr_(nullptr), cooldown_(350), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
 	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {}
 
 void LightAttack::init() {
@@ -53,12 +53,17 @@ void LightAttack::update() {
 
 			//this.anims.play(pegarse)
 
+			DEBUG_isAttacking_ = true;
 			time_ = sdlutils().currRealTime();
 			entity_->getComponent<Stroke>()->increaseChance(5, this);
 		}
 		else if (sdlutils().currRealTime() > time_ + cooldown_ / 2) {
 			state = HamStates::IDLE;
 		}
+	}
+	//Deja de mostrar el collider
+	if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
+		DEBUG_isAttacking_ = false;
 	}
 }
 
@@ -98,7 +103,9 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 }
 
 void LightAttack::render() {
-	SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 212, 255, 255);
+	if (DEBUG_isAttacking_) {
+		SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 212, 255, 255);
 
-	SDL_RenderDrawRect(sdlutils().renderer(), &attRect_);
+		SDL_RenderDrawRect(sdlutils().renderer(), &attRect_);
+	}
 }
