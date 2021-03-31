@@ -1,9 +1,9 @@
-#include "ControlHandeler.h"
+#include "ControlHandler.h"
 #include <cmath>
 #include "../sdlutils/InputHandler.h"
 #include "../ecs/Entity.h"
 
-void ControlHandeler::init() {
+void ControlHandler::init() {
 
 	mov_ = entity_->getComponent<Movement>();
 	assert(mov_ != nullptr);
@@ -11,7 +11,7 @@ void ControlHandeler::init() {
 	roll_ = entity_->getComponent<Roll>();
 	//assert(roll_ != nullptr); PUEDE SER NULLPTR
 
-	//En vez de construilo solamente deberia de tner que irse a donde estuviese guardado lso controles y coger el mapeado segun lo que le pida
+	//En vez de construirlo solamente deberia de tner que irse a donde estuviesen guardado los controles y coger el mapeado segun lo que le pida
 
 	if (player_ <= 1) {
 		keymap.insert({ UP, SDL_SCANCODE_UP });
@@ -32,12 +32,12 @@ void ControlHandeler::init() {
 
 
 //el update recibe todos los input de SDL los filtra y envia la respuesta a la clase
-void ControlHandeler::update() {
+void ControlHandler::update() {
 
 	//la parte para MOVEMENT
 
 	//UP
-	if (ih().isKeyDown(keymap.at(UP))) //aqui es donde ahcemos nuestro keymap
+	if (ih().isKeyDown(keymap.at(UP))) //aqui es donde hacemos nuestro keymap
 	{
 		mov_->updateKeymap(Movement::UP, true);
 		if(roll_!=nullptr) roll_->updateKeymap(Roll::UP, true);

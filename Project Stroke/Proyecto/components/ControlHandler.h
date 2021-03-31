@@ -14,14 +14,16 @@
 para cada una de las entidades y mandarles la orden
 ¡de lo que sea que signifiquen,
 de esta forma tmb se permitira mas adelante el mapeado de estas acciones*/
-class ControlHandeler : public Component {
+class ControlHandler : public Component {
 public:
-	ControlHandeler(int player) :
+	ControlHandler(int player) :
+		mov_(nullptr),
+		roll_(nullptr),
 		player_(player) // player es solo para decir que teclas le corresponde
 	{
 	}
 
-		virtual ~ControlHandeler() {}
+		virtual ~ControlHandler() {}
 
 	void init() override;
 	void update() override;

@@ -21,7 +21,7 @@
 #include "../components/EnemyAttack.h"
 #include "../components/EnemyStateMachine.h"
 #include "../components/MapMngr.h"
-#include "../components/ControlHandeler.h"
+#include "../components/ControlHandler.h"
 
 #include "../ecs/ecs.h"
 #include "../sdlutils/InputHandler.h"
@@ -122,7 +122,7 @@ void Game::init() {
 	hamster1->addComponent<Poison>(5);
 	hamster1->addComponent<Combos>();
 	hamster1->setGroup<Ally>(true);
-	hamster1->addComponent<ControlHandeler>(1);
+	hamster1->addComponent<ControlHandler>(1);
 
 	players.push_back(hamster1);
 
@@ -158,7 +158,7 @@ void Game::init() {
 	//hamster1->addComponent<Turret>();
 	hamster2->addComponent<Combos>();
 	hamster2->setGroup<Ally>(true);
-	hamster2->addComponent<ControlHandeler>(2);
+	hamster2->addComponent<ControlHandler>(2);
 	players.push_back(hamster2);
 
 

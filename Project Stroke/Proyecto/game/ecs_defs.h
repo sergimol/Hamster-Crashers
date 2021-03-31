@@ -19,7 +19,7 @@ class Roll;
 class Turret;
 class DisableOnExit;
 class BulletHit;
-class ControlHandeler;
+class ControlHandler;
 class MovementSimple;
 class FollowPlayer;
 class EnemyAttack;
@@ -47,7 +47,7 @@ class MapMngr;
 	DisableOnExit, \
 	BulletHit, \
 	Poison, \
-	ControlHandeler, \
+	ControlHandler, \
 	MovementSimple,\
 	FollowPlayer, \
 	EnemyAttack, \

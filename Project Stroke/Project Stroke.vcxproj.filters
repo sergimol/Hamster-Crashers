@@ -144,9 +144,6 @@
     <ClCompile Include="Proyecto\components\BulletHit.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\ControlHandeler.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
     <ClCompile Include="Proyecto\sdlutils\Animation.cpp">
       <Filter>Archivos de origen\SDLutils</Filter>
     </ClCompile>
@@ -169,6 +166,9 @@
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
     <ClCompile Include="Proyecto\components\MapMngr.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\ControlHandler.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -299,9 +299,6 @@
     <ClInclude Include="Proyecto\components\Combos.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\ControlHandeler.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Proyecto\components\Turret.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
@@ -336,6 +333,9 @@
       <Filter>Archivos de encabezado\ecs</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\MapMngr.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\ControlHandler.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>
