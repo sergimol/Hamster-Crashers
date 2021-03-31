@@ -25,6 +25,8 @@ class FollowPlayer;
 class EnemyAttack;
 class EnemyStateMachine;
 class Poison;
+class GetItem;
+class Item;
 class Cloud;
 class MapMngr;
 
@@ -52,6 +54,8 @@ class MapMngr;
 	FollowPlayer, \
 	EnemyAttack, \
 	Cloud, \
+	Item, \
+	GetItem, \
 	EnemyStateMachine, \
 	MapMngr
 
@@ -60,7 +64,8 @@ class MapMngr;
 struct Enemy; 
 struct Ally;
 struct Bullet_group;
-#define _GRPS_LIST_  Enemy, Ally, Bullet_group
+struct Item_group;
+#define _GRPS_LIST_  Enemy, Ally, Bullet_group, Item_group
 
 // handlers
 //Creo que hay que hacer un handler por cada player

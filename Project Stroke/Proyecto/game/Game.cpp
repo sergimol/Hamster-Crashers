@@ -22,6 +22,8 @@
 #include "../components/EnemyStateMachine.h"
 #include "../components/MapMngr.h"
 #include "../components/ControlHandler.h"
+#include "../components/Item.h"
+#include "../components/GetItem.h"
 
 #include "../ecs/ecs.h"
 #include "../sdlutils/InputHandler.h"
@@ -123,6 +125,7 @@ void Game::init() {
 	hamster1->addComponent<Combos>();
 	hamster1->setGroup<Ally>(true);
 	hamster1->addComponent<ControlHandler>(1);
+	hamster1->addComponent<GetItem>();
 
 	players.push_back(hamster1);
 
@@ -159,24 +162,25 @@ void Game::init() {
 	hamster2->addComponent<Combos>();
 	hamster2->setGroup<Ally>(true);
 	hamster2->addComponent<ControlHandler>(2);
+	hamster2->addComponent<GetItem>();
 	players.push_back(hamster2);
 
 
 	//Enemigo de prueba con la imagen de canelón
-	/*auto* enemy = mngr_->addEntity();
-	enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2));
-	enemy->addComponent<Transform>(
-		Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
-		Vector2D(), 500.0f, 500.0f, 0.0f)->getFlip() = true;
-	enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
-	enemy->setGroup<Enemy>(true);
-	enemy->addComponent<UI>("canelon", 4);
+	//auto* enemy = mngr_->addEntity();
+	//enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2));
+	//enemy->addComponent<Transform>(
+	//	Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
+	//	Vector2D(), 500.0f, 500.0f, 0.0f)->getFlip() = true;
+	//enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
+	//enemy->setGroup<Enemy>(true);
+	//enemy->addComponent<UI>("canelon", 4);
 
 
-	enemy->addComponent<EnemyStateMachine>();
-	enemy->addComponent<EnemyAttack>();
-	enemy->addComponent<MovementSimple>();
-	enemy->addComponent<FollowPlayer>();*/
+	//enemy->addComponent<EnemyStateMachine>();
+	//enemy->addComponent<EnemyAttack>();
+	//enemy->addComponent<MovementSimple>();
+	//enemy->addComponent<FollowPlayer>();
 }
 
 void Game::start() {
