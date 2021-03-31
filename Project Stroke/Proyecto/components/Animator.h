@@ -150,6 +150,18 @@ public:
 
 	}
 
+	//Devuelve true o false en funcion si la animacion ha llegado al ultimo frame o no
+	bool OnAnimationFrameEnd() 
+	{
+		return animCont == animDuration;
+	}
+
+	//Devuelve true o false en funcion de si la animacion ha llegado al frame del parametro
+	bool OnAnimationFrame(int targetFrame)
+	{
+		return animCont == targetFrame;
+	}
+
 private:
 	//Variables de recursos
 	Transform* tr_;
