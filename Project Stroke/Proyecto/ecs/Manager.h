@@ -120,7 +120,6 @@ public:
 	void update();
 	void render();
 	void refresh();
-	void sortEntities();
 private:
 
 	std::vector<Entity*> entities_;
