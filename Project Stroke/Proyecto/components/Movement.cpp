@@ -98,12 +98,19 @@ void Movement:: update() {
 		if (state != HamStates::JUMPING) state = HamStates::MOVING;
 
 	}
-	else {
+	else  {
 		//cout << "Estado : " << hms_->currentstate() << "\n";
 		//porque esta kaput el bixo
 		vel.setX(lerp(vel.getX(), 0, 0.25));
 		vel.setY(lerp(vel.getY(), 0, 0.25));
 		//po se para
+
+
+		//ANIMACION DE MORIRSE
+		if (state != HamStates::DEAD)
+			;// anim_->play(sdlutils().anims().at("sardinilla_morirse"));
+		if (state != HamStates::INFARCTED)
+			;// anim_->play(sdlutils().anims().at("sardinilla_chungo"));
 	}
 
 	if (hms_->canJump() && keymap.at(SPACE)) {		//Inicio del salto
