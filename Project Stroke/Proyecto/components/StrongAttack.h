@@ -13,6 +13,7 @@
 
 #include "Transform.h"
 #include "HamsterStateMachine.h"
+#include "EnemyStateMachine.h"
 #include "../game/Game.h"
 
 class StrongAttack : public Component {

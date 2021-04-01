@@ -24,6 +24,7 @@
 #include "../components/ControlHandler.h"
 #include "../components/Item.h"
 #include "../components/GetItem.h"
+#include "../components/EnemyStun.h"
 
 #include "../ecs/ecs.h"
 #include "../sdlutils/InputHandler.h"
@@ -32,7 +33,7 @@
 #include "../ecs/Manager.h"
 #include "../utils/Vector2D.h"
 
-SDL_Rect Game::camera_ = { 0,0,800, 600 };
+SDL_Rect Game::camera_ = { 0,0,1920, 1080 };
 
 Game::Game() {
 	mngr_.reset(new Manager());
@@ -43,7 +44,7 @@ Game::~Game() {
 
 void Game::init() {
 
-	SDLUtils::init("Squeak Ship", 800, 600, "resources/config/hamsters.resources.json");
+	SDLUtils::init("Squeak Ship", 1920, 1080, "resources/config/hamsters.resources.json");
 
 	auto& players = mngr_->getPlayers();
 	auto& enemies = mngr_->getEnemies();
@@ -169,20 +170,21 @@ void Game::init() {
 
 
 	//Enemigo de prueba con la imagen de canelón
-	//auto* enemy = mngr_->addEntity();
-	//enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2));
-	//enemy->addComponent<Transform>(
-	//	Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
-	//	Vector2D(), 500.0f, 500.0f, 0.0f)->getFlip() = true;
-	//enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
-	//enemy->setGroup<Enemy>(true);
-	//enemy->addComponent<UI>("canelon", 4);
+	auto* enemy = mngr_->addEntity();
+	enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2));
+	enemy->addComponent<Transform>(
+		Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
+		Vector2D(), 240.0f, 370.0f, 0.0f)->getFlip() = true;
+	enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
+	enemy->setGroup<Enemy>(true);
+	enemy->addComponent<UI>("canelon", 4);
 
 
-	//enemy->addComponent<EnemyStateMachine>();
-	//enemy->addComponent<EnemyAttack>();
-	//enemy->addComponent<MovementSimple>();
-	//enemy->addComponent<FollowPlayer>();
+	enemy->addComponent<EnemyStateMachine>();
+	enemy->addComponent<EnemyAttack>();
+	enemy->addComponent<MovementSimple>();
+	enemy->addComponent<FollowPlayer>();
+	enemy->addComponent<EnemyStun>();
 }
 
 void Game::start() {

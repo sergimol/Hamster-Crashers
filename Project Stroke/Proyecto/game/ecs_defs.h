@@ -29,7 +29,7 @@ class GetItem;
 class Item;
 class Cloud;
 class MapMngr;
-
+class EnemyStun;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -57,6 +57,7 @@ class MapMngr;
 	Item, \
 	GetItem, \
 	EnemyStateMachine, \
+	EnemyStun, \
 	MapMngr
 
 // groups

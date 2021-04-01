@@ -96,6 +96,9 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 				canHit = true;
 				//Le restamos la vida al enemigo
 				ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg);
+				//Aturdimos al enemigo
+				auto enmStateM = ents[i]->getComponent<EnemyStateMachine>();
+				enmStateM->getState() = EnemyStates::ENM_STUNNED;
 			}
 		}
 	}

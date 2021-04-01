@@ -11,28 +11,26 @@
 #include "../ecs/Manager.h"
 #include "EntityAttribs.h"
 #include "Transform.h"
-#include "HamsterStateMachine.h"
 #include "EnemyStateMachine.h"
-#include "../game/Game.h"
+#include "FollowPlayer.h"
+#include "MovementSimple.h"
+#include "EnemyAttack.h"
 
-class LightAttack : public Component {
+class EnemyStun : public Component {
 public:
-	LightAttack();
+	EnemyStun();
 
-	virtual ~LightAttack() {}
+	virtual ~EnemyStun() {}
 
 	void init() override;
 	void update() override;
-	void render() override;
-
-	bool CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo);
+	void knockback();
 
 private:
 	Transform* tr_;
-	SDL_Rect attRect_;
-	HamsterStateMachine* hms_;
-	bool DEBUG_isAttacking_;
+	EnemyStateMachine* enmState_;
+	FollowPlayer* flwPlayer_;
+	bool isStunned_;
 	long unsigned int cooldown_, time_;
-	SoundEffect& attackSound_, & hitSound_;
 }
 ;
