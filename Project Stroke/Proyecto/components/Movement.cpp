@@ -101,8 +101,12 @@ void Movement:: update() {
 	else  {
 		//cout << "Estado : " << hms_->currentstate() << "\n";
 		//porque esta kaput el bixo
+		/*
 		vel.setX(lerp(vel.getX(), 0, 0.25));
 		vel.setY(lerp(vel.getY(), 0, 0.25));
+		*/
+
+		hms_->onDisable();
 		//po se para
 
 
