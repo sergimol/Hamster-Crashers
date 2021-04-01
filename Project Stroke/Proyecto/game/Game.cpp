@@ -32,7 +32,7 @@
 #include "../ecs/Manager.h"
 #include "../utils/Vector2D.h"
 
-SDL_Rect Game::camera_ = { 0,0,1920, 1080 };
+SDL_Rect Game::camera_ = { 0,0,800, 600 };
 
 Game::Game() {
 	mngr_.reset(new Manager());
@@ -43,7 +43,7 @@ Game::~Game() {
 
 void Game::init() {
 
-	SDLUtils::init("Squeak Ship", 1920, 1080, "resources/config/hamsters.resources.json");
+	SDLUtils::init("Squeak Ship", 800, 600, "resources/config/hamsters.resources.json");
 
 	auto& players = mngr_->getPlayers();
 	auto& enemies = mngr_->getEnemies();
@@ -93,7 +93,7 @@ void Game::init() {
 	//players_.push_back(hamster3);
 
 	////MATERIAL PARA EL HITO1//
-
+	/*
 	//Sardinilla
 	auto* hamster1 = mngr_->addEntity();
 	hamster1->addComponent<Transform>(
@@ -129,8 +129,10 @@ void Game::init() {
 
 	players.push_back(hamster1);
 
+
 	//Igual luego no lo usammos pero por si aca
 	mngr_->setHandler<Hamster1>(hamster1);
+	*/
 
 
 	//CLON Sardinilla (P2)

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../ecs/Component.h"
+#include <string>
 
 const enum class HamStates { IDLE, DEAD, STUNNED, INFARCTED, MOVING, JUMPING, STRONGATTACK, LIGHTATTACK, ABILITY};
 
@@ -27,5 +28,18 @@ public:
 
 	inline bool cantBeTargeted() const { return (currentState == HamStates::DEAD ||
 												 currentState == HamStates::INFARCTED); };
+	
+	inline std::string currentstate() const {
+		if (currentState == HamStates::INFARCTED) return "infarted";
+		else if (currentState == HamStates::IDLE) return "idle";
+		else if (currentState == HamStates::DEAD) return "dead";
+		else if (currentState == HamStates::STRONGATTACK) return "strongattk";
+		else if (currentState == HamStates::LIGHTATTACK) return "light atck";
+		else if (currentState == HamStates::STUNNED) return "stunned";
+		else if (currentState == HamStates::JUMPING) return "jumping";
+		else if (currentState == HamStates::MOVING) return "moving";
+		else if (currentState == HamStates::ABILITY) return "ability";
+		else return"catastrofe";
+	};
 };
 

@@ -75,22 +75,35 @@ void Movement:: update() {
 	if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {		//Deceleracion
 		vel.setX(lerp(vel.getX(), 0, 0.25));
 		vel.setY(lerp(vel.getY(), 0, 0.25));
-		
+
+	//std:cout << "estoy decelerando supuestamente porque no decelero bien? who knows \n";
+
 		//ANIMACION DE IDLE
-		if(state != HamStates::IDLE)
+		if (state != HamStates::IDLE)
 			anim_->play(sdlutils().anims().at("sardinilla_idle"));
-		if(state != HamStates::JUMPING) state = HamStates::IDLE;
-	
+		if (state != HamStates::JUMPING) state = HamStates::IDLE;
+
 	}
 	else if (hms_->canMove()) {		//Aceleracion
 		vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.9));
 		vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.9));
 
+
+		cout << "Up: " << keymap.at(UP) << " DOWN: " << keymap.at(DOWN) << " LEFT: " << keymap.at(LEFT) << " RIGHT: " << keymap.at(RIGHT)
+			<< " DIR: " << dir.getX() << " " << dir.getY() << "\n";
+
 		//ANIMACION DE MOVIMIENTO
 		if (state != HamStates::MOVING)
 			anim_->play(sdlutils().anims().at("sardinilla_move"));
-		if(state != HamStates::JUMPING) state = HamStates::MOVING;
+		if (state != HamStates::JUMPING) state = HamStates::MOVING;
 
+	}
+	else {
+		//cout << "Estado : " << hms_->currentstate() << "\n";
+		//porque esta kaput el bixo
+		vel.setX(lerp(vel.getX(), 0, 0.25));
+		vel.setY(lerp(vel.getY(), 0, 0.25));
+		//po se para
 	}
 
 	if (hms_->canJump() && keymap.at(SPACE)) {		//Inicio del salto
