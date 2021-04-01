@@ -79,19 +79,21 @@ void MapMngr::render() {
 }
 
 void MapMngr::loadNewMap(string map) {
-	assert(map_.load(map));
+	if (map_.load(map)) {
 
-	mapDimensions_ = map_.getTileCount();
-	//Dimensiones de los tiles
-	tilesDimensions_ = map_.getTileSize();
+		mapDimensions_ = map_.getTileCount();
+		//Dimensiones de los tiles
+		tilesDimensions_ = map_.getTileSize();
 
-	int i = 0;
-	//Cargamos los tilesets y guardamos las texturas
-	const auto& tilesets = map_.getTilesets();
-	for (const auto& tileset : tilesets)
-	{
-		//Guardamos las texturas de los tilesets
-		tilesetsArr[i] = &sdlutils().images().at(tileset.getName());	//El nombre del tileset en Tiled y la textura png DEBEN llamarse igual
-		i++;
+		int i = 0;
+		//Cargamos los tilesets y guardamos las texturas
+		const auto& tilesets = map_.getTilesets();
+		for (const auto& tileset : tilesets)
+		{
+			//Guardamos las texturas de los tilesets
+			tilesetsArr[i] = &sdlutils().images().at(tileset.getName());	//El nombre del tileset en Tiled y la textura png DEBEN llamarse igual
+			i++;
+		}
+
 	}
 }

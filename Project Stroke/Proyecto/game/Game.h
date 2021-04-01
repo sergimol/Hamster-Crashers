@@ -7,10 +7,10 @@
 #include "../ecs/Entity.h"
 
 //TILED BIEN
-#include <tmxlite/Map.hpp>
-#include <tmxlite/Layer.hpp>
-#include <tmxlite/TileLayer.hpp>
-#include <tmxlite/ObjectGroup.hpp>
+#include "tmxlite/Map.hpp"
+#include "tmxlite/Layer.hpp"
+#include "tmxlite/TileLayer.hpp"
+#include "tmxlite/ObjectGroup.hpp"
 
 
 // when you are not using the methods of a class, just
