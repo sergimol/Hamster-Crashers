@@ -89,8 +89,8 @@ void Movement:: update() {
 		vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.9));
 
 
-		cout << "Up: " << keymap.at(UP) << " DOWN: " << keymap.at(DOWN) << " LEFT: " << keymap.at(LEFT) << " RIGHT: " << keymap.at(RIGHT)
-			<< " DIR: " << dir.getX() << " " << dir.getY() << "\n";
+		//cout << "Up: " << keymap.at(UP) << " DOWN: " << keymap.at(DOWN) << " LEFT: " << keymap.at(LEFT) << " RIGHT: " << keymap.at(RIGHT)
+		//	<< " DIR: " << dir.getX() << " " << dir.getY() << "\n";
 
 		//ANIMACION DE MOVIMIENTO
 		if (state != HamStates::MOVING)
@@ -99,14 +99,16 @@ void Movement:: update() {
 
 	}
 	else  {
-		//cout << "Estado : " << hms_->currentstate() << "\n";
+		cout << "Estado : " << hms_->currentstate() << "\n";
 		//porque esta kaput el bixo
-		/*
+		
 		vel.setX(lerp(vel.getX(), 0, 0.25));
 		vel.setY(lerp(vel.getY(), 0, 0.25));
-		*/
+		
+		
 
-		hms_->onDisable();
+		//DANLLES ESTO NO FUNCIONA ME EMENTISTE!
+		//tr_->onDisable();
 		//po se para
 
 
