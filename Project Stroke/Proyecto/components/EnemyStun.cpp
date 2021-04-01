@@ -1,8 +1,8 @@
 #include "EnemyStun.h"
 
 EnemyStun::EnemyStun() :
-	tr_(nullptr), enmState_(nullptr), cooldown_(2500), time_(sdlutils().currRealTime()),
-	flwPlayer_(nullptr), isStunned_(false) {}
+	tr_(nullptr), enmState_(nullptr), cooldown_(1500), time_(sdlutils().currRealTime()),
+	flwPlayer_(nullptr), isStunned_(false), knockbackVel_(50) {}
 
 void EnemyStun::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -20,10 +20,12 @@ void EnemyStun::update() {
 	if (state == EnemyStates::ENM_STUNNED) {
 		//Sufre el estado del stun
 		if (!isStunned_) {
+
 			flwPlayer_->setActive(false);
 
 			isStunned_ = true;
 
+			knockback();
 			time_ = sdlutils().currRealTime();
 		}
 		else if(sdlutils().currRealTime() > time_ + cooldown_) {
@@ -40,9 +42,9 @@ void EnemyStun::knockback() {
 	auto& vel = tr_->getVel();
 	//anim de caerse de culo
 	if (flip) {
-		vel.setX(3);
+		vel.setX(knockbackVel_);
 	}
 	else {
-		vel.setX(-3);
+		vel.setX(-knockbackVel_);
 	}
 }

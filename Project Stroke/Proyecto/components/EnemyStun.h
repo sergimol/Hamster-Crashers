@@ -25,11 +25,14 @@ public:
 	void init() override;
 	void update() override;
 	void knockback();
+	inline void setKnockbackDistance(int val) { knockbackVel_ = val; }
+	inline void setStunCooldown(long unsigned cd) { cooldown_ = cd; }
 
 private:
 	Transform* tr_;
 	EnemyStateMachine* enmState_;
 	FollowPlayer* flwPlayer_;
+	int knockbackVel_;
 	bool isStunned_;
 	long unsigned int cooldown_, time_;
 }
