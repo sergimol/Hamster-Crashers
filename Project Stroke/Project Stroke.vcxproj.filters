@@ -177,7 +177,7 @@
     <ClCompile Include="Proyecto\components\EnemyStun.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\DeadBody.cpp">
+    <ClCompile Include="Proyecto\components\Knockback.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
     <ClCompile Include="Proyecto\components\Gravity.cpp">
@@ -359,7 +359,7 @@
     <ClInclude Include="Proyecto\components\EnemyStun.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\DeadBody.h">
+    <ClInclude Include="Proyecto\components\Knockback.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\Gravity.h">

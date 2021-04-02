@@ -26,6 +26,7 @@
 #include "../components/GetItem.h"
 #include "../components/EnemyStun.h"
 #include "../components/Gravity.h"
+#include "../components/Knockback.h"
 
 #include "../ecs/ecs.h"
 #include "../sdlutils/InputHandler.h"
@@ -95,7 +96,7 @@ void Game::init() {
 	//players_.push_back(hamster3);
 
 	////MATERIAL PARA EL HITO1//
-	/*
+	
 	//Sardinilla
 	auto* hamster1 = mngr_->addEntity();
 	hamster1->addComponent<Transform>(
@@ -118,12 +119,12 @@ void Game::init() {
 	hamster1->addComponent<Movement>();
 	hamster1->addComponent<LightAttack>();
 	hamster1->addComponent<StrongAttack>();
-	hamster1->addComponent<Stroke>();
 	hamster1->addComponent<UI>("sardinilla", 0);
 	//hamster1->addComponent<Pray>(30, 50);
 	//hamster1->addComponent<Roll>();
 	//hamster1->addComponent<Turret>();
 	hamster1->addComponent<Poison>(5);
+	hamster1->addComponent<Stroke>();
 	hamster1->addComponent<Combos>();
 	hamster1->setGroup<Ally>(true);
 	hamster1->addComponent<ControlHandler>(1);
@@ -131,10 +132,9 @@ void Game::init() {
 
 	players.push_back(hamster1);
 
-
 	//Igual luego no lo usammos pero por si aca
 	mngr_->setHandler<Hamster1>(hamster1);
-	*/
+	
 
 
 	//CLON Sardinilla (P2)
@@ -173,21 +173,22 @@ void Game::init() {
 
 
 	//Enemigo de prueba con la imagen de canelón
-	//auto* enemy = mngr_->addEntity();
-	//enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2));
-	//enemy->addComponent<Transform>(
-	//	Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
-	//	Vector2D(), 240.0f, 370.0f, 0.0f)->getFlip() = true;
-	//enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
-	//enemy->setGroup<Enemy>(true);
-	//enemy->addComponent<UI>("canelon", 4);
+	auto* enemy = mngr_->addEntity();
+	enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2));
+	enemy->addComponent<Transform>(
+		Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
+		Vector2D(), 240.0f, 370.0f, 0.0f)->getFlip() = true;
+	enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
+	enemy->setGroup<Enemy>(true);
+	enemy->addComponent<UI>("canelon", 4);
 
 
-	//enemy->addComponent<EnemyStateMachine>();
-	//enemy->addComponent<EnemyAttack>();
-	//enemy->addComponent<MovementSimple>();
-	//enemy->addComponent<FollowPlayer>();
-	//enemy->addComponent<EnemyStun>();
+	enemy->addComponent<EnemyStateMachine>();
+	enemy->addComponent<EnemyAttack>();
+	enemy->addComponent<Knockback>();
+	enemy->addComponent<MovementSimple>();
+	enemy->addComponent<FollowPlayer>();
+	enemy->addComponent<EnemyStun>();
 }
 
 void Game::start() {

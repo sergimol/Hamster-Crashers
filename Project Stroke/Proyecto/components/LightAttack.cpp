@@ -1,6 +1,9 @@
 #include "LightAttack.h"
 #include "Stroke.h"
 #include "Combos.h"
+#include "FollowPlayer.h"
+#include "Knockback.h"
+#include "EnemyStun.h"
 
 LightAttack::LightAttack() :
 	hms_(nullptr), tr_(nullptr), cooldown_(350), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
@@ -96,9 +99,34 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 				canHit = true;
 				//Le restamos la vida al enemigo
 				ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg);
-				//Aturdimos al enemigo
-				auto enmStateM = ents[i]->getComponent<EnemyStateMachine>();
-				enmStateM->getState() = EnemyStates::ENM_STUNNED;
+	
+				//Si tiene stun, se aplica
+				EnemyStun* enmStun = ents[i]->getComponent<EnemyStun>();
+				if (enmStun != nullptr) {
+
+					//Aturdimos al enemigo
+					auto enmStateM = ents[i]->getComponent<EnemyStateMachine>();
+					enmStateM->getState() = EnemyStates::ENM_STUNNED;
+
+					//Desactivamos componente de seguimiento de jugador
+					FollowPlayer* flwPlayer = ents[i]->getComponent<FollowPlayer>();
+					if (flwPlayer != nullptr)
+						flwPlayer->setActive(false);
+
+					//Reiniciamos tiempo de stun
+					enmStun->restartStunTime();
+				}
+
+				//Si tiene Knockback, se aplica
+				Knockback* enmKnockback = ents[i]->getComponent<Knockback>();
+				if (enmKnockback != nullptr) {
+					//Damos la vuelta si es atacado por detras
+					auto& enmFlip = eTR->getFlip();
+					if (enmFlip == tr_->getFlip())
+						enmFlip = !enmFlip;
+
+					enmKnockback->knockback();
+				}
 			}
 		}
 	}

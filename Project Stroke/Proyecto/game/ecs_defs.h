@@ -33,6 +33,7 @@ class MapMngr;
 class EnemyStun;
 class Gravity;
 class DeadBody;
+class Knockback;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -64,7 +65,9 @@ class DeadBody;
 	MapMngr, \
 	Ability, \
 	Gravity, \
-	DeadBody
+	DeadBody, \
+	Knockback, \
+	MapMngr
 
 // groups
 

@@ -13,8 +13,6 @@
 #include "Transform.h"
 #include "EnemyStateMachine.h"
 #include "FollowPlayer.h"
-#include "MovementSimple.h"
-#include "EnemyAttack.h"
 
 class EnemyStun : public Component {
 public:
@@ -24,16 +22,14 @@ public:
 
 	void init() override;
 	void update() override;
-	void knockback();
-	inline void setKnockbackDistance(int val) { knockbackVel_ = val; }
+	
+	void restartStunTime();
+	
 	inline void setStunCooldown(long unsigned cd) { cooldown_ = cd; }
 
 private:
-	Transform* tr_;
 	EnemyStateMachine* enmState_;
 	FollowPlayer* flwPlayer_;
-	int knockbackVel_;
-	bool isStunned_;
 	long unsigned int cooldown_, time_;
 }
 ;
