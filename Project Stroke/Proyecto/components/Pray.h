@@ -14,7 +14,7 @@ public:
 	//Ejecuta la habilidad en funcion del hamster que sea
 	virtual void action();
 
-	virtual void deActivate();
+	virtual void endAbility() override;
 private:
 	SDL_Rect came_;
 	bool evil;

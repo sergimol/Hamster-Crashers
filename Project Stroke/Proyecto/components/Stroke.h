@@ -3,10 +3,11 @@
 #pragma once
 #include "../ecs/Component.h"
 #include "../ecs/Entity.h"
-#include "Transform.h"
 #include "../sdlutils/SDLUtils.h"
-#include "HamsterStateMachine.h"
 
+#include "HamsterStateMachine.h"
+#include "Ability.h"
+//#include "Transform.h"
 		  
 const int UPDATETIME = 5000, // Tiempo entre comprobaciones de infarto
 		  MAXAB = 65, // Máximo de probabilidad de infarto que se puede recibir por habilidades
@@ -17,7 +18,7 @@ const int UPDATETIME = 5000, // Tiempo entre comprobaciones de infarto
 class Stroke: public Component {
 public:
 	Stroke() :
-			tr_(nullptr) {
+			hms_(nullptr), ab_(nullptr) {
 	}
 	virtual ~Stroke() {
 	}
@@ -25,11 +26,14 @@ public:
 
 	void update() override;
 
-	void increaseChance(int n, Component* c);
+	void increaseChance(int n, bool fromAbility);
+
+	void infarctHamster();
 
 private:
-	Transform *tr_;
 	HamsterStateMachine* hms_;
+	Ability* ab_;
+	Transform* tr_;
 	// Probabilidad de que haya un infarto
 	int chance_ = 1,
 		chanceFromAb_ = 0,

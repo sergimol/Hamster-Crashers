@@ -17,7 +17,8 @@ public:
 	
 	inline bool canMove() const { return (currentState == HamStates::IDLE || 
 										  currentState == HamStates::MOVING || 
-										  currentState == HamStates::JUMPING); };
+										  currentState == HamStates::JUMPING ||
+										  currentState == HamStates::INFARCTED ); };
 
 	inline bool canAttack() const { return (!(currentState == HamStates::DEAD || 
 												 currentState == HamStates::STUNNED || 

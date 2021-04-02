@@ -150,12 +150,14 @@
     <ClCompile Include="Proyecto\components\BulletHit.cpp" />
     <ClCompile Include="Proyecto\components\Cloud.cpp" />
     <ClCompile Include="Proyecto\components\Combos.cpp" />
+    <ClCompile Include="Proyecto\components\DeadBody.cpp" />
     <ClCompile Include="Proyecto\components\DisableOnExit.cpp" />
     <ClCompile Include="Proyecto\components\ControlHandler.cpp" />
     <ClCompile Include="Proyecto\components\EnemyAttack.cpp" />
     <ClCompile Include="Proyecto\components\EnemyStateMachine.cpp" />
     <ClCompile Include="Proyecto\components\FollowPlayer.cpp" />
     <ClCompile Include="Proyecto\components\GetItem.cpp" />
+    <ClCompile Include="Proyecto\components\Gravity.cpp" />
     <ClCompile Include="Proyecto\components\HamsterStateMachine.cpp" />
     <ClCompile Include="Proyecto\components\Image.cpp" />
     <ClCompile Include="Proyecto\components\MapMngr.cpp" />
@@ -195,6 +197,7 @@
     <ClInclude Include="Proyecto\components\Combos.h" />
     <ClInclude Include="Proyecto\components\ControlHandler.h" />
     <ClInclude Include="Proyecto\components\DeAcceleration.h" />
+    <ClInclude Include="Proyecto\components\DeadBody.h" />
     <ClInclude Include="Proyecto\components\DisableOnExit.h" />
     <ClInclude Include="Proyecto\components\EnemyAttack.h" />
     <ClInclude Include="Proyecto\components\EnemyStateMachine.h" />
@@ -202,6 +205,7 @@
     <ClInclude Include="Proyecto\components\Animator.h" />
     <ClInclude Include="Proyecto\components\FollowPlayer.h" />
     <ClInclude Include="Proyecto\components\GetItem.h" />
+    <ClInclude Include="Proyecto\components\Gravity.h" />
     <ClInclude Include="Proyecto\components\HamsterStateMachine.h" />
     <ClInclude Include="Proyecto\components\Image.h" />
     <ClInclude Include="Proyecto\components\Item.h" />

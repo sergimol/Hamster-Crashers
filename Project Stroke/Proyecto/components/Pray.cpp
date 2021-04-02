@@ -18,7 +18,7 @@ void Pray::action() {
 	//Ahora empiezas la animacion
 }
 
-void Pray::deActivate() {
+void Pray::endAbility() {
 	prayAbility();
 }
 

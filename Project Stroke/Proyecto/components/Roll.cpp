@@ -63,7 +63,7 @@ void Roll::updateKeymap(KEYS x, bool is) {
 		keymap.at(x) = is;
 	else if (!keymap.at(SPACE)) {
 		keymap.at(SPACE) = true;
-		entity_->getComponent<Stroke>()->increaseChance(2, this);
+		entity_->getComponent<Stroke>()->increaseChance(2, true);
 	}
 }
 
@@ -78,10 +78,10 @@ void Roll::update() {
 		auto& z = tr_->getZ();
 		auto& velZ = tr_->getVelZ();
 
-		if (!keymap.at(SPACE) && ih().isKeyDown(SDLK_SPACE)) {
+		/*if (!keymap.at(SPACE) && ih().isKeyDown(SDLK_SPACE)) {
 			keymap.at(SPACE) = true;
-			entity_->getComponent<Stroke>()->increaseChance(2, this);
-		}
+			entity_->getComponent<Stroke>()->increaseChance(2, true);
+		}*/
 
 		if (keymap.at(UP)) {
 			dir_.setY(-1.0f);
@@ -132,20 +132,20 @@ void Roll::update() {
 		if (hms_->canJump() && keymap.at(SPACE)) {		//Inicio del salto
 			velZ = jump_;
 			state = HamStates::JUMPING;
-			timer = sdlutils().currRealTime();
+		//	timer = sdlutils().currRealTime();
 		}
 
-		if (z > 0 && sdlutils().currRealTime() > timer + jumpTimer_) {			//Aceleracion del salto afectado por gravedad
-			velZ -= gravity_;
-			timer = sdlutils().currRealTime();
-		}
+		//if (z > 0 && sdlutils().currRealTime() > timer + jumpTimer_) {			//Aceleracion del salto afectado por gravedad
+		//	velZ -= gravity_;
+		//	timer = sdlutils().currRealTime();
+		//}
 
-		else if (z < 0) {			//Final del salto	!!!!!!!!!(0 SE SUSTITUIRA POR LA Z DEL MAPA)!!!!!!!!
+		if (z <= 0 && velZ < 0) {			//Final del salto	!!!!!!!!!(0 SE SUSTITUIRA POR LA Z DEL MAPA)!!!!!!!!
 			keymap.at(SPACE) = false;
-			velZ = 0;
-			z = 0;
+			/*velZ = 0;
+			z = 0;*/
 			state = HamStates::IDLE;
-			timer = sdlutils().currRealTime();
+			/*timer = sdlutils().currRealTime();*/
 		}
 
 		//Si se colisiona..
@@ -204,7 +204,7 @@ bool Roll::checkCollisions()
 	return hit;
 }
 
-void Roll::deActivate() {
+void Roll::endAbility() {
 	entity_->getComponent<Movement>()->setActive(true);
 	rolling = false;
 	tr_->getVel() = Vector2D(0,0);

@@ -24,6 +24,20 @@ public:
 	{
 	}
 
+	Transform(Vector2D pos, Vector2D vel, float width, float height,
+		float rotation, float z, bool flip) :
+		pos_(pos), //
+		vel_(vel), //
+		width_(width), //
+		height_(height), //
+		rotation_(rotation),
+		z_(z),
+		velZ_(0),
+		flip_(flip)
+	{
+	}
+
+
 	virtual ~Transform() {
 	}
 

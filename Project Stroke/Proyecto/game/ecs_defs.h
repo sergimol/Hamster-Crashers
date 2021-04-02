@@ -25,11 +25,14 @@ class FollowPlayer;
 class EnemyAttack;
 class EnemyStateMachine;
 class Poison;
+class Ability;
 class GetItem;
 class Item;
 class Cloud;
 class MapMngr;
 class EnemyStun;
+class Gravity;
+class DeadBody;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -58,7 +61,10 @@ class EnemyStun;
 	GetItem, \
 	EnemyStateMachine, \
 	EnemyStun, \
-	MapMngr
+	MapMngr, \
+	Ability, \
+	Gravity, \
+	DeadBody
 
 // groups
 

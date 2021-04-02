@@ -19,7 +19,7 @@ Turret::~Turret() {
 void Turret::update() {
 	Ability::update();
 
-	if (lastActive) {
+	if (lastUsed) {
 		if (sdlutils().currRealTime() > cadenceTime + CADENCESHOT) {
 
 			//Crea la entidad

@@ -26,7 +26,7 @@ public:
 
 	virtual void update() override;
 
-	virtual void deActivate() override;
+	virtual void endAbility() override;
 
 	void updateKeymap(KEYS x, bool is);
 

@@ -24,7 +24,7 @@
     },
     {
       "id": "asteroidsA",
-      "file": "resources/images/asteroid.png"
+      "file": "resources/images/asteroid_gold.png"
     },
     {
       "id": "sardinilla",
@@ -206,6 +206,17 @@
     },
     {
       "id": "sardinilla_ability",
+      "startFrameX": 0,
+      "startFrameY": 3,
+      "duration": 4,
+      "cols": 3,
+      "rows": 3,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": ""
+    },
+    {
+      "id": "sardinilla_idle_ghost",
       "startFrameX": 0,
       "startFrameY": 3,
       "duration": 4,

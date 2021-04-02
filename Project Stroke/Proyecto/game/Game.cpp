@@ -25,6 +25,7 @@
 #include "../components/Item.h"
 #include "../components/GetItem.h"
 #include "../components/EnemyStun.h"
+#include "../components/Gravity.h"
 
 #include "../ecs/ecs.h"
 #include "../sdlutils/InputHandler.h"
@@ -154,37 +155,39 @@ void Game::init() {
 		3
 		);
 	hamster2->addComponent<HamsterStateMachine>();
+
 	hamster2->addComponent<Movement>();
 	hamster2->addComponent<LightAttack>();
 	hamster2->addComponent<StrongAttack>();
-	hamster2->addComponent<Stroke>();
 	hamster2->addComponent<UI>("sardinilla", 1);
 	//hamster1->addComponent<Pray>(30, 50);
-	hamster2->addComponent<Roll>();
 	//hamster1->addComponent<Turret>();
+	hamster2->addComponent<Roll>();
+	hamster2->addComponent<Stroke>();
 	hamster2->addComponent<Combos>();
 	hamster2->setGroup<Ally>(true);
 	hamster2->addComponent<ControlHandler>(2);
 	hamster2->addComponent<GetItem>();
+	hamster2->addComponent<Gravity>();
 	players.push_back(hamster2);
 
 
 	//Enemigo de prueba con la imagen de canelón
-	auto* enemy = mngr_->addEntity();
-	enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2));
-	enemy->addComponent<Transform>(
-		Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
-		Vector2D(), 240.0f, 370.0f, 0.0f)->getFlip() = true;
-	enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
-	enemy->setGroup<Enemy>(true);
-	enemy->addComponent<UI>("canelon", 4);
+	//auto* enemy = mngr_->addEntity();
+	//enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2));
+	//enemy->addComponent<Transform>(
+	//	Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
+	//	Vector2D(), 240.0f, 370.0f, 0.0f)->getFlip() = true;
+	//enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
+	//enemy->setGroup<Enemy>(true);
+	//enemy->addComponent<UI>("canelon", 4);
 
 
-	enemy->addComponent<EnemyStateMachine>();
-	enemy->addComponent<EnemyAttack>();
-	enemy->addComponent<MovementSimple>();
-	enemy->addComponent<FollowPlayer>();
-	enemy->addComponent<EnemyStun>();
+	//enemy->addComponent<EnemyStateMachine>();
+	//enemy->addComponent<EnemyAttack>();
+	//enemy->addComponent<MovementSimple>();
+	//enemy->addComponent<FollowPlayer>();
+	//enemy->addComponent<EnemyStun>();
 }
 
 void Game::start() {

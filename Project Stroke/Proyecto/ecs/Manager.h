@@ -130,5 +130,6 @@ private:
 	std::vector<Entity*> players_; // vector de jugadores
 	std::vector<Entity*> enemies_; // EJEMPLO
 	std::vector<Entity*> obstacles_; // EJEMPLO
+	std::vector<Entity*> deadBodies_;
 };
 

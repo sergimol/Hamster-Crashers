@@ -22,17 +22,24 @@ void Ability::update() {
 	* 
 	*/
 
-	if (sdlutils().currRealTime() > timer_ + cooldown_) {
-		if (!lastActive && ih().keyDownEvent() && (state_ == HamStates::IDLE || state_ == HamStates::MOVING)) {
+	if (active && sdlutils().currRealTime() > timer_ + cooldown_) {
+		if (!lastUsed && ih().keyDownEvent() && (state_ == HamStates::IDLE || state_ == HamStates::MOVING)) {
 			if (ih().isKeyDown(key_)) {
 				timer_ = sdlutils().currRealTime();
 				action();
-				lastActive = true;
+				lastUsed = true;
 			}
 		}
-		else if(lastActive){
-			lastActive = false;
-			deActivate();
+		else if(lastUsed){
+			lastUsed = false;
+			endAbility();
 		}
+	}
+}
+
+void Ability::deactiveAbility() {
+	if (active) {
+		active = false;
+		endAbility();
 	}
 }

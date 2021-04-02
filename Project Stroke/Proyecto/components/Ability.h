@@ -25,14 +25,18 @@ public:
 
 	virtual void render() override {};
 
-	virtual void onEnable() override {};
+	//virtual void onEnable() override {};
 
-	virtual void onDisable() override {};
+	//virtual void onDisable() override {};
 
 	//Ejecuta la habilidad en funcion del hamster que sea
 	virtual void action() = 0;
 	
-	virtual void deActivate() {};
+	virtual void endAbility() {};
+
+	inline bool isAbilityActive() const { return active; };
+
+	void deactiveAbility();
 
 protected:
 	const SDL_Keycode key_ = SDLK_m;
@@ -43,6 +47,7 @@ protected:
 	long unsigned int timer_, cooldown_; //Contador para ver CADA CUANTO puede usar una habilidad
 	HamStates state_;
 
-	bool lastActive = false;
+	bool active = true;
+	bool lastUsed = false;
 };
 

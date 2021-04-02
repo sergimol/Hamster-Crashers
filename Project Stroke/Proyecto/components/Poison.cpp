@@ -19,7 +19,7 @@ Poison::~Poison() {
 
 void Poison::update() {
 	Ability::update();
-	if (!lastActive) {
+	if (!lastUsed) {
 		if (cloud != nullptr)
 			cloud->setActive(false);
 	}

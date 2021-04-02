@@ -55,7 +55,7 @@ void LightAttack::update() {
 
 			DEBUG_isAttacking_ = true;
 			time_ = sdlutils().currRealTime();
-			entity_->getComponent<Stroke>()->increaseChance(5, this);
+			entity_->getComponent<Stroke>()->increaseChance(5, false);
 		}
 		else if (sdlutils().currRealTime() > time_ + cooldown_ / 2) {
 			state = HamStates::IDLE;

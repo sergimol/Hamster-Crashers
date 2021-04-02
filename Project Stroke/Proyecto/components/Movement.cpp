@@ -30,7 +30,7 @@ void Movement::updateKeymap(KEYS x, bool is) {
 	keymap.at(x) = is;
 	else if (!keymap.at(SPACE)) {
 		keymap.at(SPACE) = true;
-		entity_->getComponent<Stroke>()->increaseChance(2, this);
+		entity_->getComponent<Stroke>()->increaseChance(2, false);
 	}
 }
 void Movement:: update() {
@@ -58,12 +58,6 @@ void Movement:: update() {
 		tr_->getFlip() = true;
 	}
 
-
-	if (ih().keyDownEvent() || ih().keyUpEvent()) {
-
-		
-	}
-
 	if (dir.magnitude() != 0) {
 		dir = dir.normalize();
 
@@ -79,9 +73,9 @@ void Movement:: update() {
 	//std:cout << "estoy decelerando supuestamente porque no decelero bien? who knows \n";
 
 		//ANIMACION DE IDLE
-		if (state != HamStates::IDLE)
+		if (state != HamStates::IDLE && state != HamStates::INFARCTED)
 			anim_->play(sdlutils().anims().at("sardinilla_idle"));
-		if (state != HamStates::JUMPING) state = HamStates::IDLE;
+		if (state != HamStates::JUMPING && state != HamStates::INFARCTED) state = HamStates::IDLE;
 
 	}
 	else if (hms_->canMove()) {		//Aceleracion
@@ -93,9 +87,9 @@ void Movement:: update() {
 		//	<< " DIR: " << dir.getX() << " " << dir.getY() << "\n";
 
 		//ANIMACION DE MOVIMIENTO
-		if (state != HamStates::MOVING)
+		if (state != HamStates::MOVING && state != HamStates::INFARCTED)
 			anim_->play(sdlutils().anims().at("sardinilla_move"));
-		if (state != HamStates::JUMPING) state = HamStates::MOVING;
+		if (state != HamStates::JUMPING && state != HamStates::INFARCTED) state = HamStates::MOVING;
 
 	}
 	else  {
@@ -105,39 +99,33 @@ void Movement:: update() {
 		vel.setX(lerp(vel.getX(), 0, 0.25));
 		vel.setY(lerp(vel.getY(), 0, 0.25));
 		
-		
-
-		//DANLLES ESTO NO FUNCIONA ME EMENTISTE!
-		//tr_->onDisable();
-		//po se para
-
-
 		//ANIMACION DE MORIRSE
-		if (state != HamStates::DEAD)
-			;// anim_->play(sdlutils().anims().at("sardinilla_morirse"));
-		if (state != HamStates::INFARCTED)
-			;// anim_->play(sdlutils().anims().at("sardinilla_chungo"));
+		//if (state != HamStates::DEAD)
+		//	;// anim_->play(sdlutils().anims().at("sardinilla_morirse"));
+		//if (state != HamStates::INFARCTED)
+			// anim_->play(sdlutils().anims().at("sardinilla_chungo"));
 	}
 
 	if (hms_->canJump() && keymap.at(SPACE)) {		//Inicio del salto
 		velZ = jump_;
 		state = HamStates::JUMPING;
-		timer = sdlutils().currRealTime();
+		//timer = sdlutils().currRealTime();
 	}
 
-	if (z > 0 && sdlutils().currRealTime() > timer + jumpTimer_) {			//Aceleracion del salto afectado por gravedad
-		velZ -= gravity_;
-		timer = sdlutils().currRealTime();
-	}
+	//if (z > 0 && sdlutils().currRealTime() > timer + jumpTimer_) {			//Aceleracion del salto afectado por gravedad
+	//	 -= gravity_;
+	//	timer = sdlutils().currRealTime();
+	//}
 
-	else if (z < 0) {			//Final del salto	!!!!!!!!!(0 SE SUSTITUIRA POR LA Z DEL MAPA)!!!!!!!!
+	if (z <= 0 && velZ < 0) {			//Final del salto	!!!!!!!!!(0 SE SUSTITUIRA POR LA Z DEL MAPA)!!!!!!!!
+		
 		keymap.at(SPACE) = false;
-		velZ = 0;
-		z = 0;
-		state = HamStates::IDLE;
-		timer = sdlutils().currRealTime();
+		//velZ = 0;
+		//z = 0;
+		if(state != HamStates::INFARCTED)
+			state = HamStates::IDLE;
+		//timer = sdlutils().currRealTime();
 	}
-
 }
 
 float Movement::lerp(float a, float b, float f)
