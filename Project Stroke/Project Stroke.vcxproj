@@ -158,6 +158,7 @@
     <ClCompile Include="Proyecto\components\GetItem.cpp" />
     <ClCompile Include="Proyecto\components\Gravity.cpp" />
     <ClCompile Include="Proyecto\components\HamsterStateMachine.cpp" />
+    <ClCompile Include="Proyecto\components\HeartUI.cpp" />
     <ClCompile Include="Proyecto\components\Image.cpp" />
     <ClCompile Include="Proyecto\components\Knockback.cpp" />
     <ClCompile Include="Proyecto\components\MapMngr.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Proyecto\components\GetItem.h" />
     <ClInclude Include="Proyecto\components\Gravity.h" />
     <ClInclude Include="Proyecto\components\HamsterStateMachine.h" />
+    <ClInclude Include="Proyecto\components\HeartUI.h" />
     <ClInclude Include="Proyecto\components\Image.h" />
     <ClInclude Include="Proyecto\components\Item.h" />
     <ClInclude Include="Proyecto\components\Knockback.h" />
@@ -247,6 +249,7 @@
     <ClInclude Include="Proyecto\sdlutils\SoundEffect.h" />
     <ClInclude Include="Proyecto\sdlutils\Texture.h" />
     <ClInclude Include="Proyecto\sdlutils\VirtualTimer.h" />
+    <ClInclude Include="Proyecto\utils\checkML.h" />
     <ClInclude Include="Proyecto\utils\Collisions.h" />
     <ClInclude Include="Proyecto\utils\Singleton.h" />
     <ClInclude Include="Proyecto\utils\Vector2D.h" />

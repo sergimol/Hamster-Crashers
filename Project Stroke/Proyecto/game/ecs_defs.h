@@ -34,6 +34,7 @@ class EnemyStun;
 class Gravity;
 class DeadBody;
 class Knockback;
+class HeartUI;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -67,6 +68,7 @@ class Knockback;
 	Gravity, \
 	DeadBody, \
 	Knockback, \
+	HeartUI, \
 	MapMngr
 
 // groups

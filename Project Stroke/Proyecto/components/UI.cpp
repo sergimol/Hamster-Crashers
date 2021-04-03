@@ -2,7 +2,6 @@
 
 UI::UI(std::string n, int pos) :
 	face_(&sdlutils().images().at(n + "Head1")), //
-	heart_(&sdlutils().images().at("heart1")),
 	scale(2),
 	name(n),
 	position(pos)
@@ -15,12 +14,10 @@ UI::UI(std::string n, int pos) :
 
 		//Posiciones de los elementos de la UI
 		renderPosHead = Vector2D((sdlutils().width() / 4) * position + 50, 50);
-		renderPosHeart = renderPosHead - Vector2D(10, -20);
 		renderPosBar = renderPosHead + Vector2D(25, 10);
 
 		//DestRects
 		dest = build_sdlrect(renderPosHead, face_->width() * 1.5 * scale, face_->height() * 1.5 * scale);
-		dest2 = build_sdlrect(renderPosHeart, heart_->width() * scale, heart_->height() * scale);
 
 	}//Si se trata de un boss
 	else {
@@ -42,12 +39,10 @@ void UI::render() {
 	//Renderizamos la barra, la cara del hamster y su corazon
 	bar_->render(dest3);
 	face_->render(dest);
-	heart_->render(dest2);
 }
 
 //Si el hamster muere cambiar textura a muerto
 void UI::dep() {
-	heart_ = &sdlutils().images().at("heart3");
 	face_ = &sdlutils().images().at(name + "Head2");
 }
 

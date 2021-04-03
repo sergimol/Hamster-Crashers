@@ -183,6 +183,9 @@
     <ClCompile Include="Proyecto\components\Gravity.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\HeartUI.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\components\Bounce.h">
@@ -364,6 +367,12 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\Gravity.h">
       <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\HeartUI.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\utils\checkML.h">
+      <Filter>Archivos de origen\utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

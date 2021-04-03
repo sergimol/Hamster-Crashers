@@ -27,6 +27,7 @@
 #include "../components/EnemyStun.h"
 #include "../components/Gravity.h"
 #include "../components/Knockback.h"
+#include "../components/HeartUI.h"
 
 #include "../ecs/ecs.h"
 #include "../sdlutils/InputHandler.h"
@@ -120,6 +121,7 @@ void Game::init() {
 	hamster1->addComponent<LightAttack>();
 	hamster1->addComponent<StrongAttack>();
 	hamster1->addComponent<UI>("sardinilla", 0);
+	//hamster1->addComponent<HeartUI>("sardinilla", 0);
 	//hamster1->addComponent<Pray>(30, 50);
 	//hamster1->addComponent<Roll>();
 	//hamster1->addComponent<Turret>();
@@ -160,6 +162,7 @@ void Game::init() {
 	hamster2->addComponent<LightAttack>();
 	hamster2->addComponent<StrongAttack>();
 	hamster2->addComponent<UI>("sardinilla", 1);
+	//hamster2->addComponent<HeartUI>("sardinilla", 1);
 	//hamster1->addComponent<Pray>(30, 50);
 	//hamster1->addComponent<Turret>();
 	hamster2->addComponent<Roll>();

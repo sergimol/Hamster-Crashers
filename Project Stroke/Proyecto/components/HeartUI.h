@@ -9,32 +9,34 @@
 #include "EntityAttribs.h"
 
 
-class UI : public Component {
+class HeartUI : public Component {
 public:
-	UI(std::string n, int pos);
-	virtual ~UI() {};
-
+	HeartUI(std::string n, int pos);
+	virtual ~HeartUI() {};
+	
+	void init() override;
+	void update() override;
 	void render() override;
 	void dep();
-	void bar(float objetivo);
+	void increaseLatency(float aux);
+
 private:
 	//Texturas de la UI
-	Texture* face_;
-	Texture* bar_;
+	Texture* heart_;
 
 	//DestRects
-	SDL_Rect dest;	//Face
-	SDL_Rect dest3;	//Bar
+	SDL_Rect dest2;	//Heart
 
 	//Posiciones de los destRects
-	Vector2D renderPosHead;
-	Vector2D renderPosBar;
+	Vector2D renderPosHeart;
+
+	Animator* anim_;
 
 	//Nombre del personaje que contiene la UI, todo en minusculas
 	std::string name;	
 
 	int scale;
-	int barLenght;
-	int barLenghtInit;
 	int position;
+	float latency;
+	float timeAux;
 };
