@@ -38,6 +38,12 @@ void Manager::update() {
 }
 
 void Manager::render() {
+	//RENDERIZA TILES
+	auto w = tiles_.size();
+	for (auto i = 0u; i < w; i++)
+		tiles_[i]->render();
+
+	//RENDERIZA ENTIDADES
 	auto n = entities_.size();
 	for (auto i = 0u; i < n; i++)
 		entities_[i]->render();

@@ -26,6 +26,15 @@ public:
 		return e;
 	}
 
+	Entity* addTile() {
+		Entity* e = new Entity(this);
+		if (e != nullptr) {
+			e->resetGroups();
+			tiles_.emplace_back(e);
+		}
+		return e;
+	}
+
 	// handlers
 	template<typename T>
 	inline void setHandler(Entity *e) {
@@ -116,6 +125,10 @@ public:
 		return obstacles_;
 	}
 
+	inline std::vector<Entity*>& getTiles() {
+		return tiles_;
+	}
+
 
 	void update();
 	void render();
@@ -123,6 +136,8 @@ public:
 private:
 
 	std::vector<Entity*> entities_;
+	std::vector<Entity*> tiles_;
+
 	std::array<Entity*, ecs::maxHdlr> hdlrs_;
 	std::array<std::unique_ptr<System>, ecs::maxSystem> sys_;
 

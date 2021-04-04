@@ -50,10 +50,6 @@ void Game::init() {
 
 	SDLUtils::init("Squeak Ship", 1920, 1080, "resources/config/hamsters.resources.json");
 
-	auto& players = mngr_->getPlayers();
-	auto& enemies = mngr_->getEnemies();
-	auto& obstacles = mngr_->getObstacles();
-
 	// Mapa
 	auto* mapa = mngr_->addEntity();
 	mapa->addComponent<MapMngr>();
@@ -66,137 +62,45 @@ void Game::init() {
 
 	background->addComponent<Image>(&sdlutils().images().at("background"));*/
 
-
-	////MATERIAL PARA EL HITO1
-	////Keta
+	////CLON Sardinilla (P2)
 	//auto* hamster2 = mngr_->addEntity();
 	//hamster2->addComponent<Transform>(
-	//	Vector2D(sdlutils().width() / 2.0f - 500, sdlutils().height() / 2.0f + 200),
+	//	Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
 	//	Vector2D(), 256.0f, 256.0f, 0.0f);
-	//hamster2->addComponent<Image>(&sdlutils().images().at("keta"));
+	//hamster2->addComponent<EntityAttribs>(100, 0.0, "sardinilla2", Vector2D(7, 4.5));
+	////hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+	//hamster2->addComponent<Animator>(
+	//	&sdlutils().images().at("sardinillaSheet"),
+	//	64,
+	//	64,
+	//	3,
+	//	3,
+	//	220,
+	//	Vector2D(0, 0),
+	//	3
+	//	);
 	//hamster2->addComponent<HamsterStateMachine>();
-	//hamster2->addComponent<LightAttack>(20);
-	//hamster2->addComponent<StrongAttack>(30);
+
+	//hamster2->addComponent<Movement>();
+	//hamster2->addComponent<LightAttack>();
+	//hamster2->addComponent<StrongAttack>();
+	//hamster2->addComponent<UI>("sardinilla", 1);
+	////hamster2->addComponent<HeartUI>("sardinilla", 1);
+	////hamster1->addComponent<Pray>(30, 50);
+	////hamster1->addComponent<Turret>();
+	//hamster2->addComponent<Roll>();
 	//hamster2->addComponent<Stroke>();
-	//hamster2->addComponent<Life>(100);
-	//hamster2->addComponent<UI>("keta", 1);
-
-	//players_.push_back(hamster2);
-
-	//auto* hamster3 = mngr_->addEntity();
-	//hamster3->addComponent<Transform>(
-	//	Vector2D(sdlutils().width() / 2.0f -800, sdlutils().height() / 2.0f + -50),
-	//	Vector2D(), 256.0f, 256.0f, 0.0f);
-	//hamster3->addComponent<Image>(&sdlutils().images().at("monchi"));
-	//hamster3->addComponent<HamsterStateMachine>();
-	//hamster3->addComponent<LightAttack>(20);
-	//hamster3->addComponent<StrongAttack>(30);
-	//hamster3->addComponent<Stroke>();
-	//hamster3->addComponent<Life>(100);
-	//hamster3->addComponent<UI>("monchi", 2);
-
-	//players_.push_back(hamster3);
-
-	////MATERIAL PARA EL HITO1//
-	
-	//Sardinilla
-	auto* hamster1 = mngr_->addEntity();
-	hamster1->addComponent<Transform>(
-		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
-		Vector2D(), 256.0f, 256.0f, 0.0f);
-	hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5));
-	//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
-	hamster1->addComponent<Animator>(
-		&sdlutils().images().at("sardinillaSheet"),
-		64,
-		64,
-		3,
-		3,
-		220,
-		Vector2D(0, 0),
-		3
-		);
-
-	hamster1->addComponent<HamsterStateMachine>();
-	hamster1->addComponent<Movement>();
-	hamster1->addComponent<LightAttack>();
-	hamster1->addComponent<StrongAttack>();
-	hamster1->addComponent<UI>("sardinilla", 0);
-	//hamster1->addComponent<HeartUI>("sardinilla", 0);
-	//hamster1->addComponent<Pray>(30, 50);
-	//hamster1->addComponent<Roll>();
-	//hamster1->addComponent<Turret>();
-	hamster1->addComponent<Poison>(5);
-	hamster1->addComponent<Stroke>();
-	hamster1->addComponent<Combos>();
-	hamster1->setGroup<Ally>(true);
-	hamster1->addComponent<ControlHandler>(1);
-	hamster1->addComponent<Stun>();
-	hamster1->addComponent<Knockback>();
-	hamster1->addComponent<GetItem>();
-
-	players.push_back(hamster1);
-
-	//Igual luego no lo usammos pero por si aca
-	mngr_->setHandler<Hamster1>(hamster1);
-	
+	//hamster2->addComponent<Combos>();
+	//hamster2->setGroup<Ally>(true);
+	//hamster2->addComponent<ControlHandler>(2);
+	//hamster2->addComponent<Stun>();
+	//hamster2->addComponent<Knockback>();
+	//hamster2->addComponent<GetItem>();
+	//hamster2->addComponent<Gravity>();
+	//players.push_back(hamster2);
 
 
-	//CLON Sardinilla (P2)
-	auto* hamster2 = mngr_->addEntity();
-	hamster2->addComponent<Transform>(
-		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
-		Vector2D(), 256.0f, 256.0f, 0.0f);
-	hamster2->addComponent<EntityAttribs>(100, 0.0, "sardinilla2", Vector2D(7, 4.5));
-	//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
-	hamster2->addComponent<Animator>(
-		&sdlutils().images().at("sardinillaSheet"),
-		64,
-		64,
-		3,
-		3,
-		220,
-		Vector2D(0, 0),
-		3
-		);
-	hamster2->addComponent<HamsterStateMachine>();
 
-	hamster2->addComponent<Movement>();
-	hamster2->addComponent<LightAttack>();
-	hamster2->addComponent<StrongAttack>();
-	hamster2->addComponent<UI>("sardinilla", 1);
-	//hamster2->addComponent<HeartUI>("sardinilla", 1);
-	//hamster1->addComponent<Pray>(30, 50);
-	//hamster1->addComponent<Turret>();
-	hamster2->addComponent<Roll>();
-	hamster2->addComponent<Stroke>();
-	hamster2->addComponent<Combos>();
-	hamster2->setGroup<Ally>(true);
-	hamster2->addComponent<ControlHandler>(2);
-	hamster2->addComponent<Stun>();
-	hamster2->addComponent<Knockback>();
-	hamster2->addComponent<GetItem>();
-	hamster2->addComponent<Gravity>();
-	players.push_back(hamster2);
-
-
-	//Enemigo de prueba con la imagen de canelón
-	auto* enemy = mngr_->addEntity();
-	enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2));
-	enemy->addComponent<Transform>(
-		Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
-		Vector2D(), 240.0f, 370.0f, 0.0f)->getFlip() = true;
-	enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
-	enemy->setGroup<Enemy>(true);
-	enemy->addComponent<UI>("canelon", 4);
-
-
-	enemy->addComponent<EnemyStateMachine>();
-	enemy->addComponent<EnemyAttack>();
-	enemy->addComponent<Knockback>();
-	enemy->addComponent<MovementSimple>();
-	enemy->addComponent<FollowPlayer>();
-	enemy->addComponent<EnemyStun>();
 }
 
 void Game::start() {
@@ -282,11 +186,11 @@ void Game::updateCamera() {
 
 
 void Game::sortEntities() {
-	
+
 	auto& entities = mngr_->getEntities();
-	
-	mergeSort(entities, 1, entities.size()-1);
-	
+
+	mergeSort(entities, 1, entities.size() - 1);
+
 	/*
 		-------------DEBUG-----------
 		auto& t = sdlutils().msgs().at("sardinilla");

@@ -7,7 +7,14 @@
 #include <tmxlite/Map.hpp>
 #include <tmxlite/TileLayer.hpp>
 
+#include "../game/Game.h"
+#include "../ecs/Manager.h"
+#include "../ecs/tile.h"
+
+
+
 using namespace std;
+class Game;
 
 class MapMngr : public Component
 {
@@ -20,7 +27,9 @@ public:
 	MapMngr() {};
 	~MapMngr() {};
 	virtual void init() override;
-	virtual void render() override;
 	void loadNewMap(string map);
+
+	int scale = 6;
+
 };
 

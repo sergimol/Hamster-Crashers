@@ -36,6 +36,7 @@ class Gravity;
 class DeadBody;
 class Knockback;
 class HeartUI;
+class tileRender;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -71,7 +72,8 @@ class HeartUI;
 	DeadBody, \
 	Knockback, \
 	HeartUI, \
-	MapMngr
+	MapMngr,\
+	tileRender
 
 // groups
 

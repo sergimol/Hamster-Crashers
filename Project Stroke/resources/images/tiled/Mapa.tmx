@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="2020.10.30" orientation="orthogonal" renderorder="left-up" width="18" height="11" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="1">
+<map version="1.4" tiledversion="2020.10.30" orientation="orthogonal" renderorder="left-up" width="18" height="11" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="14">
  <tileset firstgid="1" name="floorTileset" tilewidth="16" tileheight="16" tilecount="126" columns="18">
   <image source="floorTileset.png" width="288" height="112"/>
  </tileset>
@@ -36,4 +36,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="3" name="entities">
+  <object id="8" name="sardinilla" x="48" y="112"/>
+  <object id="13" name="enemigo" x="256" y="112"/>
+ </objectgroup>
 </map>
