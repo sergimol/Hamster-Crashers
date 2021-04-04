@@ -181,8 +181,9 @@ void MapMngr::loadNewMap(string map) {
 						dest.x = renderPos.getX();
 						dest.y = renderPos.getY();
 
+						//COMPROBAR DE ALGUNA MANERA SI ES COLLIDER O KHE
 						if (globalIndexTile != 0 && index < 2)
-							Tile(entity_->getMngr(), src, dest, tilesetsArr[index]);
+							Tile(entity_->getMngr(), src, dest, tilesetsArr[index],true);
 					}
 				}
 			}

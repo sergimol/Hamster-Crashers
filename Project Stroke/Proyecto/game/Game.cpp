@@ -30,6 +30,9 @@
 #include "../components/Knockback.h"
 #include "../components/HeartUI.h"
 
+//PARA LAS COLISIONES CON TILE
+#include "../utils/Collisions.h"
+
 #include "../ecs/ecs.h"
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
@@ -101,17 +104,16 @@ void Game::init() {
 }
 
 void Game::update() {
-	//Cogemos todos los tiles
-	auto tileCollision = mngr_->getTiles();
-	for (Entity* col : tileCollision) {
-		//Si choc
-	}
+	//TODO HACER ESTO SIN IMPORTAR EL NUM DE HAMSTERS QUE HAYA
+
+
+	
 }
 void Game::start() {
 
 	// a boolean to exit the loop
 	bool exit = false;
-	SDL_Event event;
+		SDL_Event event;
 
 	//Cargamos tiled
 
@@ -129,8 +131,33 @@ void Game::start() {
 			continue;
 		}
 
+		//Cutreria
+
+		//Cogemos la entidad del primer hamster
+		auto hamster1 = mngr_->getHandler<Hamster1>();
+
+		auto hamsterTr = hamster1->getComponent<Transform>();
+
+		Vector2D playerPos = hamster1->getComponent<Transform>()->getPos();
+
 		mngr_->update();
 		mngr_->refresh();
+
+		//Cogemos todos los tiles
+		auto tileCollision = mngr_->getColliders();
+		for (Entity* col : tileCollision) {
+
+			//Cojo el transform de la colision
+			auto auxTr = col->getComponent<Transform>();
+
+			//Si choca con la colision
+			if (Collisions::collidesWithRotation(hamsterTr->getPos(), hamsterTr->getW(), hamsterTr->getH(), hamsterTr->getRot(), auxTr->getPos(), auxTr->getW(), auxTr->getH(), auxTr->getRot())) {
+				//Vuelves a tu posicion de inicio
+				//Hay que arreglar esto dios
+				hamster1->getComponent<Transform>()->setPos(playerPos);
+			}
+		}
+
 		sortEntities();
 
 		updateCamera();

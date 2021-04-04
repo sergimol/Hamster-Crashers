@@ -85,6 +85,14 @@ public:
 		rotation_ = rot;
 	}
 
+	void setPos(Vector2D posNew) {
+		pos_ = posNew;
+	}
+	void setVel(Vector2D velNew) {
+		vel_ = velNew;
+	}
+
+
 	void update() override {
 		z_ += velZ_;
 		//pos_.setY(pos_.getY() - z_);

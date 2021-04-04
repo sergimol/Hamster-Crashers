@@ -9,7 +9,7 @@
 class Tile {
 
 public:
-	Tile(Manager* mn, SDL_Rect source, SDL_Rect dest, Texture* text);
+	Tile(Manager* mn, SDL_Rect source, SDL_Rect dest, Texture* text,bool colide);
 
 };
 
