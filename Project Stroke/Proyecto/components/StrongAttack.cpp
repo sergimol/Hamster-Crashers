@@ -6,7 +6,7 @@
 #include "EnemyStun.h"
 
 StrongAttack::StrongAttack() :
-	tr_(nullptr), cooldown_(500), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
+	hms_(nullptr), tr_(nullptr), cooldown_(500), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
 	attackSound_(sdlutils().soundEffects().at("strong_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {
 }
 
@@ -102,21 +102,25 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 				//Le restamos la vida al enemigo
 				ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg * 1.5);
 
-				//Si tiene stun, se aplica
-				EnemyStun* enmStun = ents[i]->getComponent<EnemyStun>();
-				if (enmStun != nullptr) {
+				auto& enmStateM = ents[i]->getComponent<EnemyStateMachine>()->getState();
 
-					//Aturdimos al enemigo
-					auto enmStateM = ents[i]->getComponent<EnemyStateMachine>();
-					enmStateM->getState() = EnemyStates::ENM_STUNNED;
+				if (enmStateM != EnemyStates::ENM_DEAD) {
+					//Si tiene stun, se aplica
+					EnemyStun* enmStun = ents[i]->getComponent<EnemyStun>();
+					if (enmStun != nullptr && enmStun->isActive()) {
 
-					//Desactivamos componente de seguimiento de jugador
-					FollowPlayer* flwPlayer = ents[i]->getComponent<FollowPlayer>();
-					if (flwPlayer != nullptr)
-						flwPlayer->setActive(false);
-
-					//Reiniciamos tiempo de stun
-					enmStun->restartStunTime();
+						//Si no estaba aturdido ya
+						if (enmStateM != EnemyStates::ENM_STUNNED) {
+							//Aturdimos al enemigo
+							enmStateM = EnemyStates::ENM_STUNNED;
+							//Desactivamos componente de seguimiento de jugador
+							FollowPlayer* flwPlayer = ents[i]->getComponent<FollowPlayer>();
+							if (flwPlayer != nullptr)
+								flwPlayer->setActive(false);
+						}
+						//Reiniciamos tiempo de stun
+						enmStun->restartStunTime();
+					}
 				}
 
 				//Si tiene Knockback, se aplica

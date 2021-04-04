@@ -12,27 +12,28 @@
 #include "EntityAttribs.h"
 #include "Transform.h"
 #include "HamsterStateMachine.h"
-#include "../game/Game.h"
+#include "ControlHandler.h"
+#include "LightAttack.h"
+#include "strongAttack.h"
 
-class EnemyAttack : public Component {
+class Stun : public Component {
 public:
-	EnemyAttack();
+	Stun();
 
-	virtual ~EnemyAttack() {}
+	virtual ~Stun() {}
 
 	void init() override;
 	void update() override;
-	void render() override;
 
-	bool CheckCollisions(const SDL_Rect& enemyRect, bool finCombo);
-	void LaunchAttack();
+	void restartStunTime();
+
+	inline void setStunCooldown(long unsigned cd) { cooldown_ = cd; }
 
 private:
-	Transform* tr_;
-	SDL_Rect attRect_;
-	Animator* anim_;
-	bool DEBUG_isAttacking_;
+	HamsterStateMachine* hamState_;
+	ControlHandler* hamCtrl_;
+	LightAttack* lghtAtt_;
+	StrongAttack* strAtt_;
 	long unsigned int cooldown_, time_;
-	SoundEffect& attackSound_, & hitSound_;
 }
 ;

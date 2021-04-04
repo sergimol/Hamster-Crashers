@@ -75,7 +75,7 @@ void Movement:: update() {
 		//ANIMACION DE IDLE
 		if (state != HamStates::IDLE && state != HamStates::INFARCTED)
 			anim_->play(sdlutils().anims().at("sardinilla_idle"));
-		if (state != HamStates::JUMPING && state != HamStates::INFARCTED) state = HamStates::IDLE;
+		if (state != HamStates::JUMPING && state != HamStates::INFARCTED && state != HamStates::STUNNED) state = HamStates::IDLE;
 
 	}
 	else if (hms_->canMove()) {		//Aceleracion
@@ -89,7 +89,7 @@ void Movement:: update() {
 		//ANIMACION DE MOVIMIENTO
 		if (state != HamStates::MOVING && state != HamStates::INFARCTED)
 			anim_->play(sdlutils().anims().at("sardinilla_move"));
-		if (state != HamStates::JUMPING && state != HamStates::INFARCTED) state = HamStates::MOVING;
+		if (state != HamStates::JUMPING && state != HamStates::INFARCTED && state != HamStates::STUNNED) state = HamStates::MOVING;
 
 	}
 	else  {

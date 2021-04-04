@@ -25,6 +25,7 @@
 #include "../components/Item.h"
 #include "../components/GetItem.h"
 #include "../components/EnemyStun.h"
+#include "../components/Stun.h"
 #include "../components/Gravity.h"
 #include "../components/Knockback.h"
 #include "../components/HeartUI.h"
@@ -130,6 +131,8 @@ void Game::init() {
 	hamster1->addComponent<Combos>();
 	hamster1->setGroup<Ally>(true);
 	hamster1->addComponent<ControlHandler>(1);
+	hamster1->addComponent<Stun>();
+	hamster1->addComponent<Knockback>();
 	hamster1->addComponent<GetItem>();
 
 	players.push_back(hamster1);
@@ -170,6 +173,8 @@ void Game::init() {
 	hamster2->addComponent<Combos>();
 	hamster2->setGroup<Ally>(true);
 	hamster2->addComponent<ControlHandler>(2);
+	hamster2->addComponent<Stun>();
+	hamster2->addComponent<Knockback>();
 	hamster2->addComponent<GetItem>();
 	hamster2->addComponent<Gravity>();
 	players.push_back(hamster2);

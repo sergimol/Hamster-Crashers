@@ -94,7 +94,11 @@ void ControlHandler::update() {
 
 	}
 	//el jump no necesita la parte para false
-	
+}
 
-
+void ControlHandler::onDisable() {
+	mov_->updateKeymap(Movement::RIGHT, false);
+	mov_->updateKeymap(Movement::LEFT, false);
+	mov_->updateKeymap(Movement::DOWN, false);
+	mov_->updateKeymap(Movement::UP, false);
 }

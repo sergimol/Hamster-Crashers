@@ -183,15 +183,15 @@
 
   "anims": [
     {
-      "id": "sardinilla_idle", 
-      "startFrameX": 0, 
-      "startFrameY": 0, 
-      "duration": 3, 
-      "cols": 3, 
+      "id": "sardinilla_idle",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 3,
+      "cols": 3,
       "rows": 3,
-      "frameUpdate": 200, 
-      "loop": 1, 
-      "chain": "" 
+      "frameUpdate": 200,
+      "loop": 1,
+      "chain": ""
     },
     {
       "id": "sardinilla_move",
@@ -224,6 +224,17 @@
       "rows": 3,
       "frameUpdate": 100,
       "loop": 1,
+      "chain": ""
+    },
+    {
+      "id": "sardinilla_stun",
+      "startFrameX": 0,
+      "startFrameY": 3,
+      "duration": 4,
+      "cols": 3,
+      "rows": 3,
+      "frameUpdate": 100,
+      "loop": 0,
       "chain": ""
     }
   ]

@@ -28,6 +28,8 @@ public:
 	void init() override;
 	void update() override;
 
+	virtual void onDisable() override;
+
 private:
 	//const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 	//const enum KEYS2 { UP, DOWN, LEFT, RIGHT, SPACE };

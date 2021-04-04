@@ -142,6 +142,9 @@ public:
 			case HamStates::ABILITY:
 				play(sdlutils().anims().at(id + "_ability"));
 				break;
+			case HamStates::STUNNED:
+				//play(sdlutils().anims().at(id + "_stun"));
+				break;
 			}
 		}
 		

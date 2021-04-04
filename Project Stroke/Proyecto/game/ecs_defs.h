@@ -31,6 +31,7 @@ class Item;
 class Cloud;
 class MapMngr;
 class EnemyStun;
+class Stun;
 class Gravity;
 class DeadBody;
 class Knockback;
@@ -63,6 +64,7 @@ class HeartUI;
 	GetItem, \
 	EnemyStateMachine, \
 	EnemyStun, \
+	Stun, \
 	MapMngr, \
 	Ability, \
 	Gravity, \
