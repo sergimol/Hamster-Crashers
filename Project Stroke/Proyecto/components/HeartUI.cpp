@@ -6,37 +6,60 @@ HeartUI::HeartUI(std::string n, int pos) :
 	scale(2),
 	name(n),
 	position(pos),
-	latency(10000)
+	latency(1000),
+	asciende(false),
+	desciende(false),
+	alive(true)
 {
 	//Posiciones de los elementos de la UI
 	renderPosHeart = Vector2D((sdlutils().width() / 4) * position + 50, 50) - Vector2D(10, -20);
 
 	//DestRects
-	dest2 = build_sdlrect(renderPosHeart, heart_->width() * scale, heart_->height() * scale);
-}
-
-void HeartUI::init() {
-	anim_ = entity_->getComponent<Animator>();
-	assert(anim_ != nullptr);
+	dest = build_sdlrect(renderPosHeart, heart_->width() * scale, heart_->height() * scale);
+	destAux = dest;
 }
 
 void HeartUI::update() {
-	if (sdlutils().currRealTime() > timeAux + latency) {
-		timeAux = sdlutils().currRealTime();
-		//anim_->play(sdlutils().anims().at("miCoraçaoPalpita"));
-		anim_->play(sdlutils().anims().at("sardinilla_idle_ghost"));
+	if (alive) {
+		if (sdlutils().currRealTime() > timeAux + latency) {
+			timeAux = sdlutils().currRealTime();
 
+			asciende = true;
+			//Lo vamos haciendo más grande
+		}
+
+		if (asciende) {
+			destAux.h += 1;
+			destAux.w += 1;
+
+			if (destAux.h > dest.h * 1.3) {
+				desciende = true;
+				asciende = false;
+			}
+		}
+
+		if (desciende) {
+			destAux.h -= 1;
+			destAux.w -= 1;
+
+			if (destAux.h == dest.h) {
+				destAux.h = dest.h;
+				destAux.w = dest.w;
+				desciende = false;
+			}
+		}
 	}
 }
 
 void HeartUI::render() {
 	//Renderizamos su corazon
-	heart_->render(dest2);
+	heart_->render(destAux);
 }
 
 //Si el hamster muere cambiar textura a muerto
 void HeartUI::dep() {
 	heart_ = &sdlutils().images().at("heart3");
+	alive = false;
 }
 
 //Incrementa o disminuye la latencia en un 'aux'%

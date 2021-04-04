@@ -4,6 +4,7 @@
 
 #include "../ecs/Entity.h"
 #include "UI.h"
+#include "HeartUI.h"
 #include "HamsterStateMachine.h"
 #include "EnemyStateMachine.h"
 

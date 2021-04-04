@@ -14,27 +14,28 @@ public:
 	HeartUI(std::string n, int pos);
 	virtual ~HeartUI() {};
 	
-	void init() override;
 	void update() override;
 	void render() override;
 	void dep();
 	void increaseLatency(float aux);
 
 private:
-	//Texturas de la UI
+	//Textura del corazon
 	Texture* heart_;
 
 	//DestRects
-	SDL_Rect dest2;	//Heart
+	SDL_Rect dest;	//Heart
+	SDL_Rect destAux;	//Para la latencia
 
 	//Posiciones de los destRects
 	Vector2D renderPosHeart;
 
-	Animator* anim_;
-
 	//Nombre del personaje que contiene la UI, todo en minusculas
 	std::string name;	
 
+	bool asciende;
+	bool desciende;
+	bool alive;
 	int scale;
 	int position;
 	float latency;

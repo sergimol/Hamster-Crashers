@@ -98,9 +98,6 @@ void Game::init() {
 	//hamster2->addComponent<GetItem>();
 	//hamster2->addComponent<Gravity>();
 	//players.push_back(hamster2);
-
-
-
 }
 
 void Game::start() {

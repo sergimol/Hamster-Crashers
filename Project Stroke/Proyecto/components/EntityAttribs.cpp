@@ -73,6 +73,9 @@ bool EntityAttribs::recieveDmg(int dmg) {
 			//Actualizamos UI
 			if (entity_->hasComponent<UI>())
 				entity_->getComponent<UI>()->dep();
+			//Actualizamos UI
+			if (entity_->hasComponent<HeartUI>())
+				entity_->getComponent<HeartUI>()->dep();
 
 			health_ = 0;
 			//Desactivamos la entidad

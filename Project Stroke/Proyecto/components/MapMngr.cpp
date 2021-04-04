@@ -95,7 +95,7 @@ void MapMngr::loadNewMap(string map) {
 						hamster1->addComponent<UI>("sardinilla", 0);
 
 
-						//hamster1->addComponent<HeartUI>("sardinilla", 0);
+						hamster1->addComponent<HeartUI>("sardinilla", 0);
 						//hamster1->addComponent<Pray>(30, 50);
 						//hamster1->addComponent<Roll>();
 						//hamster1->addComponent<Turret>();
