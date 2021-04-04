@@ -100,6 +100,13 @@ void Game::init() {
 	//players.push_back(hamster2);
 }
 
+void Game::update() {
+	//Cogemos todos los tiles
+	auto tileCollision = mngr_->getTiles();
+	for (Entity* col : tileCollision) {
+		//Si choc
+	}
+}
 void Game::start() {
 
 	// a boolean to exit the loop

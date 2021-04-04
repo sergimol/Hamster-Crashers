@@ -4,10 +4,10 @@
 #include "../sdlutils/Texture.h"
 
 
-class tileRender : public Component {
+class TileRender : public Component {
 public:
-	tileRender(SDL_Rect source, SDL_Rect dest, Texture* text);
-	virtual ~tileRender() {};
+	TileRender(SDL_Rect source, SDL_Rect dest, Texture* text);
+	virtual ~TileRender() {};
 	void render()override;
 private:
 	Texture* text;

@@ -1,7 +1,7 @@
-#include "tileRender.h"
+#include "TileRender.h"
 #include "../game/Game.h"
 
-tileRender::tileRender(SDL_Rect source, SDL_Rect dest, Texture* tx)
+TileRender::TileRender(SDL_Rect source, SDL_Rect dest, Texture* tx)
 {
 	src = source;
 	dst = dest;
@@ -9,7 +9,7 @@ tileRender::tileRender(SDL_Rect source, SDL_Rect dest, Texture* tx)
 
 }
 
-void tileRender::render() {
+void TileRender::render() {
 	Vector2D renderPos = Vector2D(dst.x - Game::camera_.x, dst.y - Game::camera_.y);
 	SDL_Rect dstFijo = build_sdlrect(renderPos, dst.w, dst.h);
 

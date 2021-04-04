@@ -26,6 +26,7 @@ public:
 	Game();
 	virtual ~Game();
 	void init();
+	void update();
 	void start();
 	void updateCamera();
 	void sortEntities();

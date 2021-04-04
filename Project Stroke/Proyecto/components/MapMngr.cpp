@@ -182,7 +182,7 @@ void MapMngr::loadNewMap(string map) {
 						dest.y = renderPos.getY();
 
 						if (globalIndexTile != 0 && index < 2)
-							tile(entity_->getMngr(), src, dest, tilesetsArr[index]);
+							Tile(entity_->getMngr(), src, dest, tilesetsArr[index]);
 					}
 				}
 			}

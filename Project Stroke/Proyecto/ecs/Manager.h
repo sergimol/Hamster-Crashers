@@ -35,6 +35,15 @@ public:
 		return e;
 	}
 
+	Entity* addTileCollider() {
+		Entity* e = new Entity(this);
+		if (e != nullptr) {
+			e->resetGroups();
+			tileCollider_.emplace_back(e);
+		}
+		return e;
+	}
+
 	// handlers
 	template<typename T>
 	inline void setHandler(Entity *e) {
@@ -129,6 +138,10 @@ public:
 		return tiles_;
 	}
 
+	inline std::vector<Entity*>& getColliders() {
+		return tiles_;
+	}
+
 
 	void update();
 	void render();
@@ -137,6 +150,7 @@ private:
 
 	std::vector<Entity*> entities_;
 	std::vector<Entity*> tiles_;
+	std::vector<Entity*> tileCollider_;
 
 	std::array<Entity*, ecs::maxHdlr> hdlrs_;
 	std::array<std::unique_ptr<System>, ecs::maxSystem> sys_;

@@ -168,7 +168,7 @@
     <ClCompile Include="Proyecto\components\Roll.cpp" />
     <ClCompile Include="Proyecto\components\EnemyStun.cpp" />
     <ClCompile Include="Proyecto\components\Stun.cpp" />
-    <ClCompile Include="Proyecto\components\tileRender.cpp" />
+    <ClCompile Include="Proyecto\components\TileRender.cpp" />
     <ClCompile Include="Proyecto\components\Turret.cpp" />
     <ClCompile Include="Proyecto\components\UI.cpp" />
     <ClCompile Include="Proyecto\components\EntityAttribs.cpp" />
@@ -179,7 +179,7 @@
     <ClCompile Include="Proyecto\components\Transform.cpp" />
     <ClCompile Include="Proyecto\ecs\Entity.cpp" />
     <ClCompile Include="Proyecto\ecs\Manager.cpp" />
-    <ClCompile Include="Proyecto\ecs\tile.cpp" />
+    <ClCompile Include="Proyecto\ecs\Tile.cpp" />
     <ClCompile Include="Proyecto\game\Game.cpp" />
     <ClCompile Include="Proyecto\json\JSON.cpp" />
     <ClCompile Include="Proyecto\json\JSONValue.cpp" />
@@ -221,7 +221,7 @@
     <ClInclude Include="Proyecto\components\Roll.h" />
     <ClInclude Include="Proyecto\components\EnemyStun.h" />
     <ClInclude Include="Proyecto\components\Stun.h" />
-    <ClInclude Include="Proyecto\components\tileRender.h" />
+    <ClInclude Include="Proyecto\components\TileRender.h" />
     <ClInclude Include="Proyecto\components\Turret.h" />
     <ClInclude Include="Proyecto\components\UI.h" />
     <ClInclude Include="Proyecto\components\KeyBoardCtrl.h" />
@@ -239,7 +239,7 @@
     <ClInclude Include="Proyecto\ecs\Manager.h" />
     <ClInclude Include="Proyecto\ecs\mpl.h" />
     <ClInclude Include="Proyecto\ecs\System.h" />
-    <ClInclude Include="Proyecto\ecs\tile.h" />
+    <ClInclude Include="Proyecto\ecs\Tile.h" />
     <ClInclude Include="Proyecto\game\ecs_defs.h" />
     <ClInclude Include="Proyecto\game\Game.h" />
     <ClInclude Include="Proyecto\json\JSON.h" />

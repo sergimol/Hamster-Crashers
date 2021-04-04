@@ -189,10 +189,10 @@
     <ClCompile Include="Proyecto\components\Stun.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\ecs\tile.cpp">
+    <ClCompile Include="Proyecto\ecs\Tile.cpp">
       <Filter>Archivos de origen\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\tileRender.cpp">
+    <ClCompile Include="Proyecto\components\TileRender.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -386,10 +386,10 @@
     <ClInclude Include="Proyecto\components\Stun.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\ecs\tile.h">
+    <ClInclude Include="Proyecto\ecs\Tile.h">
       <Filter>Archivos de encabezado\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\tileRender.h">
+    <ClInclude Include="Proyecto\components\TileRender.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>
