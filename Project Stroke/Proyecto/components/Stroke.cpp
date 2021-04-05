@@ -6,6 +6,7 @@
 #include "Gravity.h"
 #include "Image.h"
 #include "Animator.h"
+#include "GhostCtrl.h"
 
 void Stroke::init() {
 		hms_ = entity_->getComponent<HamsterStateMachine>();
@@ -40,7 +41,7 @@ void Stroke::update() {
 	// Comprobamos que haya pasado el tiempo suficiente entre actualizaciones
 	if (t >= timeLastUpdate_ + UPDATETIME) {
 		// Número aleatorio para ver si infarta o no
-		int i = r_.nextInt(0, 100);
+		int i = r_.nextInt(1, 100);
 		// Si i es menor que la probabilidad, infarta
 		if (i <= chance_ + chanceFromAb_ && hms_->getState() != HamStates::INFARCTED) {
 			//TODO madremia que no lo podemos desactivar porque hay que quitarlo de la lsita de player y noseque algo habra que ahcer para que la camara no explote
@@ -57,6 +58,7 @@ void Stroke::update() {
 }
 
 void Stroke::increaseChance(int n, bool fromAbility) {
+	n = 0;
 	if (!fromAbility) {
 		chance_ += n;
 		if(chance_ > MAXCHANCE)
@@ -84,6 +86,7 @@ void Stroke::infarctHamster() {
 	hms_->getState() = HamStates::INFARCTED;
 	ab_->deactiveAbility();
 	entity_->getComponent<Animator>()->play(sdlutils().anims().at("sardinilla_idle_ghost"));
+	entity_->getComponent<GhostCtrl>()->setActive(true);
 	//GENERAR PERSONAJE INFARTADO
 
 	auto* deadBody = entity_->getMngr()->addEntity();

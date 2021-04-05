@@ -31,14 +31,11 @@ private:
 	Movement* mv_;
 	Texture* tx_;
 
-	const int KEY_WIDHT = 10;
-	const int KEY_HEIGHT = 10;
+	const int KEY_WIDHT = 100;
+	const int KEY_HEIGHT = 100;
 	const SDL_Keycode key = SDLK_q;
 
 	bool show;
-	Vector2D showPos;
-
-	void actShow(bool s, const Vector2D& p);
 
 	void startPossesion();
 };

@@ -28,6 +28,8 @@
 #include "../components/Gravity.h"
 #include "../components/Knockback.h"
 #include "../components/HeartUI.h"
+#include "../components/Possesion.h"
+#include "../components/GhostCtrl.h"
 
 
 void MapMngr::init() {
@@ -118,11 +120,55 @@ void MapMngr::loadNewMap(string map) {
 
 						hamster1->setGroup<Ally>(true);
 
-						//Lo añadimos al vector de entidades
+						//Lo aï¿½adimos al vector de entidades
 						players.push_back(hamster1);
 
 						//Para acceder facilmente le metemos en Hamster1 de Handelers
 						mngr_->setHandler<Hamster1>(hamster1);
+
+						auto* hamster2 = mngr_->addEntity();
+						hamster2->addComponent<Transform>(
+							Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+							Vector2D(), 256.0f, 256.0f, 0.0f);
+						hamster2->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5));
+						//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+						hamster2->addComponent<Animator>(
+							&sdlutils().images().at("sardinillaSheet"),
+							64,
+							64,
+							3,
+							3,
+							220,
+							Vector2D(0, 0),
+							3
+							);
+						hamster2->addComponent<HamsterStateMachine>();
+						hamster2->addComponent<Movement>();
+						hamster2->addComponent<LightAttack>();
+						hamster2->addComponent<StrongAttack>();
+						hamster2->addComponent<UI>("sardinilla", 1);
+
+
+						hamster2->addComponent<HeartUI>("sardinilla", 1);
+						//hamster1->addComponent<Pray>(30, 50);
+						hamster2->addComponent<Roll>();
+						//hamster1->addComponent<Turret>();
+
+						//hamster1->addComponent<Poison>(5);
+						hamster2->addComponent<Possesion>();
+						hamster2->addComponent<GhostCtrl>();
+						hamster2->addComponent<Stroke>()->infarct();
+						hamster2->addComponent<Combos>();
+						hamster2->setGroup<Ally>(true);
+						hamster2->addComponent<ControlHandler>(2);
+						hamster2->addComponent<Stun>();
+						hamster2->addComponent<Knockback>();
+						hamster2->addComponent<GetItem>();
+
+						players.push_back(hamster2);
+
+						//Igual luego no lo usammos pero por si aca
+						mngr_->setHandler<Hamster1>(hamster2);
 					}
 					//CANELON
 					else if (name == "canelon") {
@@ -287,8 +333,8 @@ void MapMngr::loadNewMap(string map) {
 
 					//TO DO
 					else if (name == "enemigo") {
-						//Enemigo de prueba con la imagen de canelón
-						auto* enemy = mngr_->addEntity();
+						//Enemigo de prueba con la imagen de canelï¿½n
+					/*	auto* enemy = mngr_->addEntity();
 						enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2));
 						enemy->addComponent<Transform>(
 							Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
@@ -302,13 +348,13 @@ void MapMngr::loadNewMap(string map) {
 						enemy->addComponent<Knockback>();
 						enemy->addComponent<MovementSimple>();
 						enemy->addComponent<FollowPlayer>();
-						enemy->addComponent<EnemyStun>();
+						enemy->addComponent<EnemyStun>();*/
 					}
 				}
 			}
 
 			//SI ES UNA CAPA DE TILES
-			int index = 0;	//Recorrerá los tilesets para saber a cual corresponde cada tile
+			int index = 0;	//Recorrerï¿½ los tilesets para saber a cual corresponde cada tile
 			if (layer->getType() == tmx::Layer::Type::Tile)
 			{
 				const auto& tileLayer = layer->getLayerAs<tmx::TileLayer>();
@@ -317,7 +363,7 @@ void MapMngr::loadNewMap(string map) {
 					for (int i = 0; i < mapDimensions_.x; i++) {
 
 
-						//Guardamos el indice global del tile (nos servirá para saber en qué tileset se encuentra)
+						//Guardamos el indice global del tile (nos servirï¿½ para saber en quï¿½ tileset se encuentra)
 						auto tileList = tileLayer.getTiles();
 						auto globalIndexTile = tileList[i + j * mapDimensions_.x].ID;	//filas+columna*elementos_enuna_fila
 
@@ -330,7 +376,7 @@ void MapMngr::loadNewMap(string map) {
 						auto x = i * tilesDimensions_.x;
 						auto y = j * tilesDimensions_.y;
 
-						//Calculamos la posición del tile en el tileset -> SrcRect
+						//Calculamos la posiciï¿½n del tile en el tileset -> SrcRect
 						int tilesetSize = tilesets[index].getColumnCount();
 						//Calculamos las coordenadas locales del tile
 						//Hay que restar el valor del primer tile del tileset a la posicion global

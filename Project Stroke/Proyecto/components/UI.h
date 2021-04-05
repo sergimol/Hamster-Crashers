@@ -17,6 +17,9 @@ public:
 	void render() override;
 	void dep();
 	void bar(float objetivo);
+
+	Vector2D getBarPos() { return renderPosBar; };
+
 private:
 	//Texturas de la UI
 	Texture* face_;

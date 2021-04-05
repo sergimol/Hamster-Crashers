@@ -37,6 +37,8 @@ class DeadBody;
 class Knockback;
 class HeartUI;
 class TileRender;
+class Possesion;
+class GhostCtrl;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -73,7 +75,9 @@ class TileRender;
 	Knockback, \
 	HeartUI, \
 	MapMngr,\
-	TileRender
+	TileRender, \
+	GhostCtrl, \
+	Possesion
 
 // groups
 

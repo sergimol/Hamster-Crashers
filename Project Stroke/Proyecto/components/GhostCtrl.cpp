@@ -2,6 +2,8 @@
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 #include "../utils/Collisions.h"
+#include "../components/Possesion.h"
+#include "../components/Animator.h"
 
 
 void GhostCtrl::init() {
@@ -20,34 +22,30 @@ void GhostCtrl::onEnable() {
 void GhostCtrl::update() {
 	auto& hamsters = entity_->getMngr()->getPlayers();
 	for (Entity* e : hamsters) {
-		auto* oTr = e->getComponent<Transform>();
-		assert(oTr != nullptr);
-		if (Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), oTr->getPos(), oTr->getW(), oTr->getH())) {
-			actShow(true, tr_->getPos());
-			if (ih().isKeyDown(key)) {
+		if (e != entity_) {
+			auto* oTr = e->getComponent<Transform>();
+			assert(oTr != nullptr);
+			show = Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), oTr->getPos(), oTr->getW(), oTr->getH());
+			if (show && ih().isKeyDown(key)) {
 				startPossesion();
 			}
 		}
-		else actShow(false,Vector2D(0, 0));
 	}
 }
 
 void GhostCtrl::render() {
 	if (show) {
-		SDL_Rect rect = build_sdlrect(showPos, KEY_WIDHT, KEY_HEIGHT);
-		tx_->render(rect);
+		Vector2D renderPos = Vector2D(tr_->getPos().getX() - Game::camera_.x, tr_->getPos().getY() + tr_->getZ() - Game::camera_.y);
+		SDL_Rect dest = build_sdlrect(renderPos, KEY_WIDHT, KEY_HEIGHT);
+		tx_->render(dest);
 	}
-}
-
-void GhostCtrl::actShow(bool s, const Vector2D& p) {
-	show = s;
-	showPos = p;
 }
 
 void GhostCtrl::startPossesion() {
 	mv_->setActive(false);
 	//animacion meterse dentro?
-	actShow(false, Vector2D(0, 0));
+	show = false;
 	active_ = false;
-	//activarMinijuego
+	entity_->getComponent<Possesion>()->setActive(true);
+	entity_->getComponent<Animator>()->setActive(false);
 }

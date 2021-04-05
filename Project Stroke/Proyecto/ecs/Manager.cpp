@@ -9,7 +9,13 @@ Manager::Manager() {
 
 Manager::~Manager() {
 	for (auto e : entities_) {
-		delete e;
+		delete e; e = nullptr;
+	}
+	for (auto t : tiles_) {
+		delete t; t = nullptr;
+	}
+	for (auto tC : tileCollider_) {
+		delete tC; tC = nullptr;
 	}
 }
 

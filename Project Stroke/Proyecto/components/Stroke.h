@@ -26,6 +26,8 @@ public:
 
 	void infarctHamster();
 
+	void infarct() { chance_ = 100; };
+
 private:
 	HamsterStateMachine* hms_;
 	Ability* ab_;
@@ -39,7 +41,7 @@ private:
 		DECREASEPERCENTAGE = 15; // Porcentaje que se reduce por acierto en el minijuego
 
 	// Probabilidad de que haya un infarto
-	int chance_ = 1,
+	int chance_ = 0,
 		chanceFromAb_ = 0,
 		// Tiempo de la última comprobación
 		timeLastUpdate_ = 0,

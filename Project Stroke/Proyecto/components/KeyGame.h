@@ -21,7 +21,9 @@ class KeyGame :public Component {
 private:
 	Transform* tr_;
 	Texture* tx_;
+
 	float vel_;
+
 	SDL_Keycode key_;
 	SDL_Rect rect_;
 	SDL_Rect rect_end;
