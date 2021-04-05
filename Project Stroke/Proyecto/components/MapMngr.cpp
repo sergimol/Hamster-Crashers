@@ -232,55 +232,55 @@ void MapMngr::loadNewMap(string map) {
 					}
 					//MONCHI
 					else if (name == "monchi") {
-					//Sardinilla
-					auto* hamster4 = mngr_->addEntity();
-					hamster4->addComponent<Transform>(
-						Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-						Vector2D(), 256.0f, 256.0f, 0.0f);
-					hamster4->addComponent<EntityAttribs>(100, 0.0, "monchi", Vector2D(7, 4.5));
-					//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
-					hamster4->addComponent<Animator>(
-						&sdlutils().images().at("monchiSheet"),
-						64,
-						64,
-						3,
-						3,
-						220,
-						Vector2D(0, 0),
-						3
-						);
+						//Sardinilla
+						auto* hamster4 = mngr_->addEntity();
+						hamster4->addComponent<Transform>(
+							Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+							Vector2D(), 256.0f, 256.0f, 0.0f);
+						hamster4->addComponent<EntityAttribs>(100, 0.0, "monchi", Vector2D(7, 4.5));
+						//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+						hamster4->addComponent<Animator>(
+							&sdlutils().images().at("monchiSheet"),
+							64,
+							64,
+							3,
+							3,
+							220,
+							Vector2D(0, 0),
+							3
+							);
 
-					hamster4->addComponent<HamsterStateMachine>();
-					hamster4->addComponent<Movement>();
+						hamster4->addComponent<HamsterStateMachine>();
+						hamster4->addComponent<Movement>();
 
-					//Ataques basicos
-					hamster4->addComponent<LightAttack>();
-					hamster4->addComponent<StrongAttack>();
-					hamster4->addComponent<Combos>();
+						//Ataques basicos
+						hamster4->addComponent<LightAttack>();
+						hamster4->addComponent<StrongAttack>();
+						hamster4->addComponent<Combos>();
 
-					//Habilidad
-					hamster4->addComponent<Turret>();
+						//Habilidad
+						hamster4->addComponent<Turret>();
 
-					//Handler
-					hamster4->addComponent<ControlHandler>(1);
+						//Handler
+						hamster4->addComponent<ControlHandler>(1);
 
-					//Interfaz
-					hamster4->addComponent<UI>("monchi", 0);
-					hamster4->addComponent<HeartUI>("monchi", 0);
+						//Interfaz
+						hamster4->addComponent<UI>("monchi", 0);
+						hamster4->addComponent<HeartUI>("monchi", 0);
 
-					//Gestion de infarto
-					hamster4->addComponent<Stroke>();
+						//Gestion de infarto
+						hamster4->addComponent<Stroke>();
 
-					hamster4->addComponent<Stun>();
-					hamster4->addComponent<Knockback>();
-					hamster4->addComponent<GetItem>();
+						hamster4->addComponent<Stun>();
+						hamster4->addComponent<Knockback>();
+						hamster4->addComponent<GetItem>();
 
-					hamster4->setGroup<Ally>(true);
+						hamster4->setGroup<Ally>(true);
 
-					players.push_back(hamster4);
+						players.push_back(hamster4);
 
-					//Para acceder facilmente le metemos en Hamster4 de Handelers
-					mngr_->setHandler<Hamster4>(hamster4);
+						//Para acceder facilmente le metemos en Hamster4 de Handelers
+						mngr_->setHandler<Hamster4>(hamster4);
 					}
 					//ENEMIGO
 					//Faltan ifs especificando enemigos etc
@@ -355,10 +355,30 @@ void MapMngr::loadNewMap(string map) {
 
 						//COMPROBAR DE ALGUNA MANERA SI ES COLLIDER O KHE
 						if (globalIndexTile != 0 && index < 2)
-							Tile(entity_->getMngr(), src, dest, tilesetsArr[index],true);
+							
+							//ESTO ES EL NOMBRE DE LA LAYER QUE SE CREE SOLO DE LAS COLISIONES
+							/*if (tileLayer.getName() == "Collision")
+								Tile(entity_->getMngr(), src, dest, tilesetsArr[index], true);
+							else
+								Tile(entity_->getMngr(), src, dest, tilesetsArr[index], false);*/
+
+						//Esto esta porque falta depurar lo de arriba, hay que eliminarlo
+						Tile(entity_->getMngr(), src, dest, tilesetsArr[index], true);
 					}
 				}
 			}
 		}
 	}
 }
+
+
+//bool GameMap::intersectsWall(SDL_Rect rect) {
+//	Point2D topLeftCoords = static_cast<PlayState*>(juego)->SDLPointToMapCoords(Point2D(rect.x, rect.y));
+//	Point2D bottomRightCoords = static_cast<PlayState*>(juego)->SDLPointToMapCoords(Point2D(rect.x + rect.w - 1, rect.y + rect.h - 1));
+//
+//	for (int x = topLeftCoords.getX(); x <= bottomRightCoords.getX(); x++) {
+//		for (int y = topLeftCoords.getY(); y <= bottomRightCoords.getY(); y++)
+//			if (cells[x][y] == Wall) return true;
+//	}
+//	return false;
+//}
