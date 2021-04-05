@@ -112,6 +112,8 @@ void MapMngr::loadNewMap(string map) {
 						hamster1->addComponent<HeartUI>("sardinilla", 0);
 
 						//Gestion de infartos
+						hamster1->addComponent<Possesion>();
+						hamster1->addComponent<GhostCtrl>();
 						hamster1->addComponent<Stroke>();
 
 						hamster1->addComponent<Stun>();
@@ -168,7 +170,7 @@ void MapMngr::loadNewMap(string map) {
 						players.push_back(hamster2);
 
 						//Igual luego no lo usammos pero por si aca
-						mngr_->setHandler<Hamster1>(hamster2);
+						mngr_->setHandler<Hamster2>(hamster2);
 					}
 					//CANELON
 					else if (name == "canelon") {

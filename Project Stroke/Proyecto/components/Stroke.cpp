@@ -58,7 +58,6 @@ void Stroke::update() {
 }
 
 void Stroke::increaseChance(int n, bool fromAbility) {
-	n = 0;
 	if (!fromAbility) {
 		chance_ += n;
 		if(chance_ > MAXCHANCE)

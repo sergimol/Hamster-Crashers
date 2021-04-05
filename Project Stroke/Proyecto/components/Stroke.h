@@ -26,6 +26,7 @@ public:
 
 	void infarctHamster();
 
+	//DEBUG ------ INFARTA AL HAMSTER
 	void infarct() { chance_ = 100; };
 
 private:
@@ -41,7 +42,7 @@ private:
 		DECREASEPERCENTAGE = 15; // Porcentaje que se reduce por acierto en el minijuego
 
 	// Probabilidad de que haya un infarto
-	int chance_ = 0,
+	int chance_ = 1,
 		chanceFromAb_ = 0,
 		// Tiempo de la última comprobación
 		timeLastUpdate_ = 0,
