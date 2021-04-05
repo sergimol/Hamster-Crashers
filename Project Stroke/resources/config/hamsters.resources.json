@@ -113,6 +113,10 @@
     {
       "id": "cubesTileset",
       "file": "resources/images/tiled/cubesTileset.png"
+    },
+    {
+      "id": "q",
+      "file": "resources/images/tiled/tecla_Q.png"
     }
   ],
 
