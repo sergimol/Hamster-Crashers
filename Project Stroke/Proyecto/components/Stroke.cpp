@@ -3,7 +3,6 @@
 #include "Poison.h"
 #include "Pray.h"
 #include "Turret.h"
-#include "DeadBody.h"
 #include "Gravity.h"
 #include "Image.h"
 #include "Animator.h"
@@ -71,6 +70,13 @@ void Stroke::increaseChance(int n, bool fromAbility) {
 	
 	timeLastIncrease_ = sdlutils().currRealTime();
 	//std::cout << chance_ + " " + chanceFromAb_ << std::endl;
+}
+
+
+void Stroke::decreaseChance() {
+	if (chance_ > 0) {
+		chance_ -= (chance_ * DECREASEPERCENTAGE) / 100;
+	}
 }
 
 void Stroke::infarctHamster() {

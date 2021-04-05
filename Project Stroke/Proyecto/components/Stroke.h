@@ -8,12 +8,6 @@
 #include "HamsterStateMachine.h"
 #include "Ability.h"
 //#include "Transform.h"
-		  
-const int UPDATETIME = 5000, // Tiempo entre comprobaciones de infarto
-		  MAXAB = 65, // Máximo de probabilidad de infarto que se puede recibir por habilidades
-		  MAXCHANCE = 35, // Máximo de probabilidad de infarto que se puede recibir por salto y ataque
-		  TIMETODECREASE = 10000, // Tiempo que debe pasar para empezar a reducir el infarto
-		  TIMEBETWEENDECREASES = 2500; // Tiempo entre reducciones de la probabilidad
 
 class Stroke: public Component {
 public:
@@ -28,12 +22,22 @@ public:
 
 	void increaseChance(int n, bool fromAbility);
 
+	void decreaseChance();
+
 	void infarctHamster();
 
 private:
 	HamsterStateMachine* hms_;
 	Ability* ab_;
 	Transform* tr_;
+
+	const int UPDATETIME = 5000, // Tiempo entre comprobaciones de infarto
+		MAXAB = 65, // Máximo de probabilidad de infarto que se puede recibir por habilidades
+		MAXCHANCE = 35, // Máximo de probabilidad de infarto que se puede recibir por salto y ataque
+		TIMETODECREASE = 10000, // Tiempo que debe pasar para empezar a reducir el infarto
+		TIMEBETWEENDECREASES = 2500, // Tiempo entre reducciones de la probabilidad
+		DECREASEPERCENTAGE = 15; // Porcentaje que se reduce por acierto en el minijuego
+
 	// Probabilidad de que haya un infarto
 	int chance_ = 1,
 		chanceFromAb_ = 0,
