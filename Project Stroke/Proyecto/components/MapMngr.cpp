@@ -70,14 +70,16 @@ void MapMngr::loadNewMap(string map) {
 					auto& enemies = mngr_->getEnemies();
 					auto& obstacles = mngr_->getObstacles();
 
+					//SARDINILLA
 					if (name == "sardinilla") {
-						//Sardinilla
 						auto* hamster1 = mngr_->addEntity();
+
 						hamster1->addComponent<Transform>(
 							Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 							Vector2D(), 256.0f, 256.0f, 0.0f);
+
 						hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5));
-						//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+
 						hamster1->addComponent<Animator>(
 							&sdlutils().images().at("sardinillaSheet"),
 							64,
@@ -88,32 +90,202 @@ void MapMngr::loadNewMap(string map) {
 							Vector2D(0, 0),
 							3
 							);
+
 						hamster1->addComponent<HamsterStateMachine>();
 						hamster1->addComponent<Movement>();
+
+						//Ataques Basicos
 						hamster1->addComponent<LightAttack>();
 						hamster1->addComponent<StrongAttack>();
-						hamster1->addComponent<UI>("sardinilla", 0);
-
-
-						hamster1->addComponent<HeartUI>("sardinilla", 0);
-						//hamster1->addComponent<Pray>(30, 50);
-						//hamster1->addComponent<Roll>();
-						//hamster1->addComponent<Turret>();
-
-						hamster1->addComponent<Poison>(5);
-						hamster1->addComponent<Stroke>();
 						hamster1->addComponent<Combos>();
-						hamster1->setGroup<Ally>(true);
+
+						//Habilidad
+						hamster1->addComponent<Roll>();
+
+						//Handlr
 						hamster1->addComponent<ControlHandler>(1);
+
+						//Interfaz
+						hamster1->addComponent<UI>("sardinilla", 0);
+						hamster1->addComponent<HeartUI>("sardinilla", 0);
+
+						//Gestion de infartos
+						hamster1->addComponent<Stroke>();
+
 						hamster1->addComponent<Stun>();
 						hamster1->addComponent<Knockback>();
 						hamster1->addComponent<GetItem>();
 
+						hamster1->setGroup<Ally>(true);
+
+						//Lo añadimos al vector de entidades
 						players.push_back(hamster1);
 
-						//Igual luego no lo usammos pero por si aca
+						//Para acceder facilmente le metemos en Hamster1 de Handelers
 						mngr_->setHandler<Hamster1>(hamster1);
 					}
+					//CANELON
+					else if (name == "canelon") {
+						//Sardinilla
+						auto* hamster2 = mngr_->addEntity();
+
+						hamster2->addComponent<Transform>(
+							Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+							Vector2D(), 256.0f, 256.0f, 0.0f);
+
+						hamster2->addComponent<EntityAttribs>(100, 0.0, "canelon", Vector2D(7, 4.5));
+
+						hamster2->addComponent<Animator>(
+							&sdlutils().images().at("canelonSheet"),
+							64,
+							64,
+							3,
+							3,
+							220,
+							Vector2D(0, 0),
+							3
+							);
+
+						hamster2->addComponent<HamsterStateMachine>();
+						hamster2->addComponent<Movement>();
+
+						//Ataques basicos
+						hamster2->addComponent<LightAttack>();
+						hamster2->addComponent<StrongAttack>();
+						hamster2->addComponent<Combos>();
+
+						//Habilidad
+						hamster2->addComponent<Pray>(30, 50);
+
+						//Handlr
+						hamster2->addComponent<ControlHandler>(1);
+
+						//Interfaz
+						hamster2->addComponent<UI>("canelon", 0);
+						hamster2->addComponent<HeartUI>("canelon", 0);
+
+						//Gestion de infarto
+						hamster2->addComponent<Stroke>();
+
+						hamster2->addComponent<Stun>();
+						hamster2->addComponent<Knockback>();
+						hamster2->addComponent<GetItem>();
+
+						hamster2->setGroup<Ally>(true);
+
+						players.push_back(hamster2);
+
+						//Para acceder facilmente le metemos en Hamster2 de Handelers
+						mngr_->setHandler<Hamster2>(hamster2);
+					}
+					//KETA
+					else if (name == "keta") {
+						//Sardinilla
+						auto* hamster3 = mngr_->addEntity();
+						hamster3->addComponent<Transform>(
+							Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+							Vector2D(), 256.0f, 256.0f, 0.0f);
+						hamster3->addComponent<EntityAttribs>(100, 0.0, "keta", Vector2D(7, 4.5));
+						//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+						hamster3->addComponent<Animator>(
+							&sdlutils().images().at("ketaSheet"),
+							64,
+							64,
+							3,
+							3,
+							220,
+							Vector2D(0, 0),
+							3
+							);
+
+						hamster3->addComponent<HamsterStateMachine>();
+						hamster3->addComponent<Movement>();
+
+						//Ataques basicos
+						hamster3->addComponent<LightAttack>();
+						hamster3->addComponent<StrongAttack>();
+						hamster3->addComponent<Combos>();
+
+						//Habilidad
+						hamster3->addComponent<Poison>(5);
+
+						//Handler
+						hamster3->addComponent<ControlHandler>(1);
+
+						//Interfaz
+						hamster3->addComponent<UI>("keta", 0);
+						hamster3->addComponent<HeartUI>("keta", 0);
+
+						//Gestion de infarto
+						hamster3->addComponent<Stroke>();
+
+						hamster3->addComponent<Stun>();
+						hamster3->addComponent<Knockback>();
+						hamster3->addComponent<GetItem>();
+
+						hamster3->setGroup<Ally>(true);
+
+						players.push_back(hamster3);
+
+						//Para acceder facilmente le metemos en Hamster3 de Handelers
+						mngr_->setHandler<Hamster3>(hamster3);
+					}
+					//MONCHI
+					else if (name == "monchi") {
+					//Sardinilla
+					auto* hamster4 = mngr_->addEntity();
+					hamster4->addComponent<Transform>(
+						Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+						Vector2D(), 256.0f, 256.0f, 0.0f);
+					hamster4->addComponent<EntityAttribs>(100, 0.0, "monchi", Vector2D(7, 4.5));
+					//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+					hamster4->addComponent<Animator>(
+						&sdlutils().images().at("monchiSheet"),
+						64,
+						64,
+						3,
+						3,
+						220,
+						Vector2D(0, 0),
+						3
+						);
+
+					hamster4->addComponent<HamsterStateMachine>();
+					hamster4->addComponent<Movement>();
+
+					//Ataques basicos
+					hamster4->addComponent<LightAttack>();
+					hamster4->addComponent<StrongAttack>();
+					hamster4->addComponent<Combos>();
+
+					//Habilidad
+					hamster4->addComponent<Turret>();
+
+					//Handler
+					hamster4->addComponent<ControlHandler>(1);
+
+					//Interfaz
+					hamster4->addComponent<UI>("monchi", 0);
+					hamster4->addComponent<HeartUI>("monchi", 0);
+
+					//Gestion de infarto
+					hamster4->addComponent<Stroke>();
+
+					hamster4->addComponent<Stun>();
+					hamster4->addComponent<Knockback>();
+					hamster4->addComponent<GetItem>();
+
+					hamster4->setGroup<Ally>(true);
+
+					players.push_back(hamster4);
+
+					//Para acceder facilmente le metemos en Hamster4 de Handelers
+					mngr_->setHandler<Hamster4>(hamster4);
+					}
+					//ENEMIGO
+					//Faltan ifs especificando enemigos etc
+
+					//TO DO
 					else if (name == "enemigo") {
 						//Enemigo de prueba con la imagen de canelón
 						auto* enemy = mngr_->addEntity();
