@@ -29,7 +29,6 @@ private:
 
 	//Posiciones de los destRects
 	Vector2D renderPosHeart;
-
 	//Nombre del personaje que contiene la UI, todo en minusculas
 	std::string name;	
 
