@@ -35,6 +35,10 @@ public:
 
 	virtual ~InputHandler() {
 		for (int i = 0; i < maxConnectedControllers_; ++i) {
+
+			SDL_GameControllerClose((SDL_GameController*)i);
+			controllers_[i] = nullptr;
+
 			delete leftJoysticks_[i];
 			leftJoysticks_[i] = nullptr;
 
@@ -77,8 +81,15 @@ public:
 			break;
 		case SDL_JOYAXISMOTION:
 			onAxisMotion(event);
+			//cout << "motion" << endl;
 			break;
 		case SDL_JOYBUTTONDOWN:
+			onButtonDown(event);
+			//cout << "down" << endl;
+			break;
+		case SDL_JOYBUTTONUP:
+			onButtonDown(event);
+			//cout << "up" << endl;
 			break;
 		case SDL_CONTROLLERDEVICEADDED:
 			onControllerAdded(event);
@@ -160,15 +171,15 @@ private:
 		int controllerID = event.jaxis.which;
 
 		Uint8 i = 0;
-		bool bindFound = false;
+		bool found = false;
 		int axis;
 
 		// Encontramos el eje que se ha movido
-		while (!bindFound && i < SDL_GameControllerAxis::SDL_CONTROLLER_AXIS_MAX) {
+		while (!found && i < SDL_GameControllerAxis::SDL_CONTROLLER_AXIS_MAX) {
 			SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForAxis(controllers_[controllerID], (SDL_GameControllerAxis)i);
 			if (b.value.axis == event.jaxis.axis) {
 				axis = i;
-				bindFound = true;
+				found = true;
 			}
 			++i;
 		}
@@ -196,7 +207,7 @@ private:
 				break;
 			}
 		}
-		
+		// Si es gatillo
 		else {
 			if (event.jaxis.value > triggerDeadzone)
 				value = abs(event.jaxis.value);
@@ -230,11 +241,49 @@ private:
 		}
 	}
 
+	inline void onButtonDown(const SDL_Event& event) {
+		isButtonDownEvent_ = true;
+
+		Uint8 i = 0;
+		bool found = false;
+
+		// Encontramos el botón
+		while (!found && i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX) {
+			SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(controllers_[event.jaxis.which], (SDL_GameControllerButton)i);
+			if (b.value.button == event.cbutton.button)
+				found = true;
+			else
+				i++;
+		}
+
+		buttonStates_[event.jaxis.which][i] = true;
+	}
+
+	inline void onButtonUp(const SDL_Event& event) {
+		isButtonUpEvent_ = true;
+
+		Uint8 i = 0;
+		bool found = false;
+
+		// Encontramos el botón
+		while (!found && i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX) {
+			SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(controllers_[event.jaxis.which], (SDL_GameControllerButton)i);
+			if (b.value.button == event.cbutton.button)
+				found = true;
+			else
+				i++;
+		}
+
+		buttonStates_[event.jaxis.which][i] = false;
+	}
+
+	// Añade un mando al juego
 	inline void onControllerAdded(const SDL_Event& event) {
 		if (actualControllers_ < 4) {
-			int id = controllers_.size(); // id fisica
-			int gId; // id del juego
+			int id = controllers_.size(); // id fisica que recibe SDL
+			int gId; // id dentro del juego
 			initController(event.cdevice.which);
+			// Comprueba si el mando que se acaba de conectar es nuevo o reconectado
 			if (disconectedControllers_.empty()) {
 				gId = id;
 				maxConnectedControllers_++;
@@ -249,6 +298,7 @@ private:
 		}
 	}
 
+	// Elimina un mando del juego
 	inline void onControllerRemoved(const SDL_Event& event) {
 		actualControllers_--;
 		auto it = sysToGameId.find(event.cdevice.which);
