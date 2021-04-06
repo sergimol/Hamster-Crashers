@@ -129,7 +129,13 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 					if (enmFlip == tr_->getFlip())
 						enmFlip = !enmFlip;
 
-					enmKnockback->knockback();
+					if (finCombo) {
+						enmKnockback->setKnockbackDistance(50);
+						enmKnockback->knockback();
+						enmKnockback->setKnockbackDistance(10);
+					}
+					else
+						enmKnockback->knockback();
 				}
 			}
 		}
