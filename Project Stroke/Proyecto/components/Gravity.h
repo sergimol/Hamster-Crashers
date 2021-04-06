@@ -12,7 +12,7 @@ virtual ~Gravity() {};
 void init() override;
 
 void update() override;
-
+void onDisable() override;
 
 private:
 	Transform* tr_;

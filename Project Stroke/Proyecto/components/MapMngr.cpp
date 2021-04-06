@@ -96,6 +96,7 @@ void MapMngr::loadNewMap(string map) {
 
 						hamster1->addComponent<HamsterStateMachine>();
 						hamster1->addComponent<Movement>();
+						hamster1->addComponent<Gravity>();
 
 						//Ataques Basicos
 						hamster1->addComponent<LightAttack>();
@@ -147,6 +148,7 @@ void MapMngr::loadNewMap(string map) {
 							);
 						hamster2->addComponent<HamsterStateMachine>();
 						hamster2->addComponent<Movement>();
+						hamster2->addComponent<Gravity>();
 						hamster2->addComponent<LightAttack>();
 						hamster2->addComponent<StrongAttack>();
 						hamster2->addComponent<UI>("sardinilla", 1);

@@ -20,3 +20,7 @@ void Gravity::update() {
 		z = floor;
 	}
 }
+
+void Gravity::onDisable() {
+	tr_->getVelZ() = 0.0;
+}

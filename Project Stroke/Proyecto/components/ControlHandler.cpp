@@ -18,14 +18,14 @@ void ControlHandler::init() {
 		keymap.insert({ DOWN, SDL_SCANCODE_DOWN });
 		keymap.insert({ LEFT, SDL_SCANCODE_LEFT });
 		keymap.insert({ RIGHT, SDL_SCANCODE_RIGHT });
-		keymap.insert({ SPACE, SDL_SCANCODE_K }); //el salto aun no esta includio
+		keymap.insert({ SPACE, SDL_SCANCODE_K });
 	}
 	else if (player_ >= 2) {
 		keymap.insert({ UP, SDL_SCANCODE_W });
 		keymap.insert({ DOWN, SDL_SCANCODE_S });
 		keymap.insert({ LEFT, SDL_SCANCODE_A });
 		keymap.insert({ RIGHT, SDL_SCANCODE_D });
-		keymap.insert({ SPACE, SDL_SCANCODE_C }); //el salto aun no esta includio
+		keymap.insert({ SPACE, SDL_SCANCODE_SPACE });
 	}
 
 }
