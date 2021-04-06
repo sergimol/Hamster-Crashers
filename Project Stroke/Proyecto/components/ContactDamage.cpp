@@ -81,7 +81,8 @@ bool ContactDamage::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 			//es can attacks porque coninciden lso estados
 			//TODO si se cambian lso estados DEAD STUNNED INFARTED hayq eu cambiar este booleano por otro ams combeniente
 			if (ents[i]->getComponent<HamsterStateMachine>()->canAttack() && SDL_HasIntersection(&enemyRect, &allyRect)) {
-				//no voy a definir una entidad ahora
+				//TODO no voy a definir una entidad ahora
+				//int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
 				//if (finCombo) {
 				//	if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.01); //Aumentar probabilidad critico
 				//	//Empujar y stun al aliado
