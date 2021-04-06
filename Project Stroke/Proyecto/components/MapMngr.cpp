@@ -84,8 +84,8 @@ void MapMngr::loadNewMap(string map) {
 
 						hamster1->addComponent<Animator>(
 							&sdlutils().images().at("sardinillaSheet"),
-							64,
-							64,
+							86,
+							86,
 							3,
 							3,
 							220,
@@ -136,8 +136,8 @@ void MapMngr::loadNewMap(string map) {
 						//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
 						hamster2->addComponent<Animator>(
 							&sdlutils().images().at("sardinillaSheet"),
-							64,
-							64,
+							86,
+							86,
 							3,
 							3,
 							220,
