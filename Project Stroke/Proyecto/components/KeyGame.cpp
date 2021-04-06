@@ -1,35 +1,42 @@
 #include "KeyGame.h"
 #include "../utils/Collisions.h"
+#include "../sdlutils/Texture.h"
 
 void KeyGame::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
-	tr_->setVel(Vector2D(vel_, 0));
-	rect_end = rect_;
-	rect_end.x = rect_end.x - 10;
-	rect_end.y = rect_end.y - 10;
+	iniPos = tr_->getPos();
+	setKey();
+}
+
+void KeyGame::render() {
+	SDL_Rect box = build_sdlrect(tr_->getPos(), tr_->getW(), tr_->getH());
+	tx_->render(box);
 }
 
 void KeyGame::update() {
-	if (ih().keyDownEvent()) {
-		if (ih().isKeyDown(key_) && Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), Vector2D(rect_.x, rect_.y), rect_.w, rect_.h)) {
-			hitSkillCheck();
-		}
-		else missedSkillCheck();
-	}
-
-	if (Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), Vector2D(rect_end.x, rect_end.y), rect_end.w, rect_end.h)) {
+	if (!Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), Vector2D(), endLine.w, endLine.h)) {
 		missedSkillCheck();
 	}
-	//if collisiona al final
 }
 
 
 void KeyGame::missedSkillCheck() {
-	misstakes_++;
-	entity_->setActive(false);
+	if(!hit)
+		misstakes++;
+	setKey();
+	tr_->setPos(iniPos);
 }
 
 void KeyGame::hitSkillCheck() {
-	entity_->setActive(false);
+	if (ih().isKeyDown(key_) && Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), Vector2D(checkRect.x, checkRect.y), checkRect.w, checkRect.h)) {
+			hit = true;
+	}
+	else hit = false;
+}
+
+void KeyGame::setKey() {
+	int rand = sdlutils().rand().nextInt(0, 5);
+	tx_ = keys[rand];
+	key_ = keyCodes[rand];
 }

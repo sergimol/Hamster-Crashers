@@ -3,7 +3,6 @@
 #include "../ecs/Component.h"
 #include "../ecs/Entity.h"
 #include "../sdlutils/SDLUtils.h"
-
 #include <array>
 
 using namespace std;
@@ -31,15 +30,15 @@ private:
 	
 	SDL_Rect lineHPos, lineVPos;
 
-	const array<Texture*, 5> keys { &sdlutils().images().at("q") , &sdlutils().images().at("bullet"), &sdlutils().images().at("heart1"),  &sdlutils().images().at("heart2"),  &sdlutils().images().at("heart3") };
-	const array<SDL_Keycode, 5> keyCodes{ SDL_SCANCODE_A, SDL_SCANCODE_S, SDL_SCANCODE_D, SDL_SCANCODE_W, SDL_SCANCODE_SPACE };
-
 	Texture* lineH, * lineV;
+
+	Entity* key;
 	
-	int mistakes = 0;
+	int misstakes = 0;
 
 	const float LINE_SIZE_X = 400, LINE_SIZE_Y = 20, LINE_OFFSET_X = 0, LINE_OFFSET_Y = 50,
-				V_LINE_SIZE_X = 5, V_LINE_SIZE_Y = 70, V_LINE_OFFSET_X = 200, V_LINE_OFFSET_Y = 25;
+		V_LINE_SIZE_X = 5, V_LINE_SIZE_Y = 70, V_LINE_OFFSET_X = 200, V_LINE_OFFSET_Y = 25,
+		BOX_SIZE_X = 50, BOX_SIZE_Y = 50, BOX_INI_VEL_X = 5;
 
 	void start();
 };
