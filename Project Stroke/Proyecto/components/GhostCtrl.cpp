@@ -22,7 +22,7 @@ void GhostCtrl::onEnable() {
 void GhostCtrl::update() {
 	auto& hamsters = entity_->getMngr()->getPlayers();
 	for (Entity* e : hamsters) {
-		if (e != entity_) {
+		if (e != entity_ && !e->getComponent<HamsterStateMachine>()->cantBeTargeted()) {
 			auto* oTr = e->getComponent<Transform>();
 			assert(oTr != nullptr);
 			show = Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), oTr->getPos(), oTr->getW(), oTr->getH());

@@ -1,12 +1,12 @@
 #include "Possesion.h"
 #include "UI.h"
+#include "Stroke.h"
 #include "../sdlutils/InputHandler.h"
 #include "KeyGame.h"
 #include "../ecs/Manager.h"
 
 void Possesion::init() {
 	active_ = false;
-	//start();
 }
 
 void Possesion::render() {
@@ -16,7 +16,14 @@ void Possesion::render() {
 
 void Possesion::update() {
 	if (ih().keyDownEvent()) {
-		key->getComponent<KeyGame>()->hitSkillCheck();
+		if (ih().isKeyDown(actualKey) && keyGame->getComponent<KeyGame>()->hitSkillCheck())
+			succesfulHit();
+		else
+			failedHit();
+	}
+
+	if (possesedState->cantBeTargeted()) {
+		endPossesion();
 	}
 }
 
@@ -25,12 +32,19 @@ void Possesion::onEnable() {
 }
 
 void Possesion::onDisable() {
-	misstakes = 0;
+	mistakes = 0;
+	roundPassed = false;
+	failed = false;
 	possesed = nullptr;
+	keyGame = nullptr;
 }
 
 void Possesion::start() {
 	assert(possesed != nullptr);
+	//Tomamos el estado del poseído para comprobar que sigue vivo y no infartado mientras le ayudamos
+	possesedState = possesed->getComponent<HamsterStateMachine>();
+	
+	//Calcula la posición del minijuego en función del personahe poseido
 	Vector2D aux = possesed->getComponent<UI>()->getBarPos();
 	
 	Vector2D pos = Vector2D(aux.getX() + LINE_OFFSET_X, aux.getY() + LINE_OFFSET_Y);
@@ -39,7 +53,50 @@ void Possesion::start() {
 	pos = Vector2D(aux.getX() + V_LINE_OFFSET_X, aux.getY() + V_LINE_OFFSET_Y);
 	lineVPos = build_sdlrect(pos, V_LINE_SIZE_X, V_LINE_SIZE_Y);
 
-	key = entity_->getMngr()->addEntity();
-	key->addComponent<Transform>(Vector2D(aux.getX() + LINE_OFFSET_X, aux.getY() + V_LINE_OFFSET_Y), Vector2D(BOX_INI_VEL_X, 0), BOX_SIZE_X, BOX_SIZE_Y, 0);
-	key->addComponent<KeyGame>(lineVPos, lineHPos, misstakes);
+	//Crea la entidad del QuickTimeEvent
+	keyGame = entity_->getMngr()->addEntity();																											
+	keyGame->addComponent<Transform>(Vector2D(aux.getX() + LINE_OFFSET_X, aux.getY() + V_LINE_OFFSET_Y), Vector2D(BOX_INI_VEL_X, 0), BOX_SIZE_X, BOX_SIZE_Y, 0); 
+	keyGame->addComponent<KeyGame>(lineHPos, lineVPos, this);
+	randomiseKey();
+}
+
+void Possesion::reachedEnd() {
+	if (!roundPassed)
+		mistakes++;
+	
+	roundPassed = false;
+	failed = false;
+
+	if (mistakes >= maxMistakes) {
+		endPossesion();
+	}
+	else {
+		randomiseKey();
+	}
+}
+
+void Possesion::succesfulHit() {
+	//Si no hemos fallado la prueba antes, se da por pasada
+	if(!failed) roundPassed = true;
+	
+	//Se decrementa la probabilidad de infarto
+	auto* str = possesed->getComponent<Stroke>();
+	assert(str != nullptr);
+
+	str->decreaseChance();
+}
+
+void Possesion::failedHit() {
+	failed = true;
+}
+
+void Possesion::endPossesion() {
+	keyGame->setActive(false);
+	this->setActive(false);
+}
+
+void Possesion::randomiseKey() {
+	auto rand = sdlutils().rand().nextInt(0, numKeys);
+	actualKey = keyCodes[rand];
+	keyGame->getComponent<KeyGame>()->setTexture(keyTextures[rand]);
 }

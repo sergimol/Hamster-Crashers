@@ -5,8 +5,10 @@
 void KeyGame::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+
+	assert(poss_ != nullptr);
+
 	iniPos = tr_->getPos();
-	setKey();
 }
 
 void KeyGame::render() {
@@ -15,28 +17,31 @@ void KeyGame::render() {
 }
 
 void KeyGame::update() {
-	if (!Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), Vector2D(), endLine.w, endLine.h)) {
-		missedSkillCheck();
+	if (tr_->getPos().getX() > trail.x + trail.w) {
+		goBack();
 	}
 }
 
-
-void KeyGame::missedSkillCheck() {
-	if(!hit)
-		misstakes++;
-	setKey();
-	tr_->setPos(iniPos);
+void KeyGame::goBack() {
+	tr_->getPos() = iniPos;
+	poss_->reachedEnd();
 }
 
-void KeyGame::hitSkillCheck() {
-	if (ih().isKeyDown(key_) && Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), Vector2D(checkRect.x, checkRect.y), checkRect.w, checkRect.h)) {
-			hit = true;
-	}
-	else hit = false;
+//Comprueba si es un acierto
+bool KeyGame::hitSkillCheck() {
+	return Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), 
+						Vector2D(hitmarker.x, hitmarker.y), hitmarker.w, hitmarker.h);
 }
 
-void KeyGame::setKey() {
-	int rand = sdlutils().rand().nextInt(0, 5);
-	tx_ = keys[rand];
-	key_ = keyCodes[rand];
-}
+//void KeyGame::setKey() {
+//	int rand = sdlutils().rand().nextInt(0, 5);
+//	tx_ = keys[rand];
+//	key_ = keyCodes[rand];
+//}
+
+//void KeyGame::missedSkillCheck() {
+//	if(!hit)
+//		misstakes++;
+//	setKey();
+//	tr_->setPos(iniPos);
+//}

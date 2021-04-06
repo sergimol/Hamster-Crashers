@@ -6,12 +6,13 @@
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
 #include "Transform.h"
+#include "Possesion.h"
 
 using namespace std;
 
 class KeyGame : public Component {
 public:
-	KeyGame(SDL_Rect rect, SDL_Rect line, int& m): checkRect(rect), endLine(line), misstakes(m) {};
+	KeyGame(SDL_Rect path, SDL_Rect hit, Possesion* p): trail(path), hitmarker(hit), poss_(p) {};
 	~KeyGame() {};
 
 	virtual void init() override;
@@ -20,24 +21,18 @@ public:
 
 	virtual void render() override;
 
-	void hitSkillCheck();
+	bool hitSkillCheck();
 
+	inline void setTexture(Texture* txt) { tx_ = txt; };
 private:
 	Transform* tr_;
+	Possesion* poss_;
 	Texture* tx_;
 
-	const array<Texture*, 5> keys{ &sdlutils().images().at("q") , &sdlutils().images().at("bullet"), &sdlutils().images().at("heart1"),  &sdlutils().images().at("heart2"),  &sdlutils().images().at("heart3") };
-	const array<SDL_Keycode, 5> keyCodes{ SDL_SCANCODE_A, SDL_SCANCODE_S, SDL_SCANCODE_D, SDL_SCANCODE_W, SDL_SCANCODE_SPACE };
-
-	SDL_Keycode key_;
-	SDL_Rect checkRect;
-	SDL_Rect endLine;
+	SDL_Rect trail;
+	SDL_Rect hitmarker;
 	
-	bool hit;
-	int misstakes;
-
 	Vector2D iniPos;
 
-	void setKey();
-	void missedSkillCheck();
+	void goBack();
 };
