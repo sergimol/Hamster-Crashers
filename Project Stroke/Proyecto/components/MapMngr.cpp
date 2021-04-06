@@ -181,7 +181,7 @@ void MapMngr::loadNewMap(string map) {
 							Vector2D(object.getPosition().x* scale + 300, object.getPosition().y* scale),
 							Vector2D(), 256.0f, 256.0f, 0.0f);
 						hamster2->addComponent<EntityAttribs>(100, 0.0, "coso", Vector2D(7, 4.5));
-						cosodecosas->addComponent<ContactDamage>();
+						cosodecosas->addComponent<ContactDamage>(10);
 
 
 					}

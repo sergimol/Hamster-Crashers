@@ -16,7 +16,7 @@
 
 class ContactDamage : public Component {
 public:
-	ContactDamage();
+	ContactDamage(int danyo);
 
 	virtual ~ContactDamage() {}
 
@@ -34,5 +34,6 @@ private:
 	bool DEBUG_isAttacking_;
 	long unsigned int time_;
 	SoundEffect& attackSound_, & hitSound_;
+	int dmg_;
 }
 ;

@@ -7,9 +7,9 @@
 #include "StrongAttack.h"
 #include "ContactDamage.h"
 
-ContactDamage::ContactDamage() :
+ContactDamage::ContactDamage(int danyo) :
 	tr_(nullptr), attRect_(), DEBUG_isAttacking_(false),
-	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {}
+	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")), dmg_(danyo){}
 
 void ContactDamage::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -81,14 +81,14 @@ bool ContactDamage::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 			//es can attacks porque coninciden lso estados
 			//TODO si se cambian lso estados DEAD STUNNED INFARTED hayq eu cambiar este booleano por otro ams combeniente
 			if (ents[i]->getComponent<HamsterStateMachine>()->canAttack() && SDL_HasIntersection(&enemyRect, &allyRect)) {
-				int dmg = 10; //no voy a definir una entidad ahora
+				//no voy a definir una entidad ahora
 				//if (finCombo) {
 				//	if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.01); //Aumentar probabilidad critico
 				//	//Empujar y stun al aliado
 				//}
 				canHit = true;
 				//Le restamos la vida al aliado
-				ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg);
+				ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg_);
 
 				auto& hamStateM = ents[i]->getComponent<HamsterStateMachine>()->getState();
 
