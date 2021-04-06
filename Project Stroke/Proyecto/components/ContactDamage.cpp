@@ -77,9 +77,9 @@ bool ContactDamage::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 			allyRect.y = eTR->getPos().getY() - Game::camera_.y;
 
 
-			//Y comprobamos si colisiona
-			//es can attacks porque coninciden lso estados
-			//TODO si se cambian lso estados DEAD STUNNED INFARTED hayq eu cambiar este booleano por otro ams combeniente
+			// Y comprobamos si colisiona
+			// es can attacks porque coninciden lso estados
+			// TODO si se cambian lso estados DEAD STUNNED INFARTED hayq eu cambiar este booleano por otro ams combeniente
 			if (ents[i]->getComponent<HamsterStateMachine>()->canAttack() && SDL_HasIntersection(&enemyRect, &allyRect)) {
 				//TODO no voy a definir una entidad ahora
 				//int dmg = entity_->getComponent<EntityAttribs>()->getDmg();

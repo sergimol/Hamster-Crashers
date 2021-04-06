@@ -9,7 +9,7 @@
 using namespace std;
 
 class KeyGame :public Component {
-	KeyGame(float vel, SDL_Keycode key, SDL_Rect rect, int& misstakes): vel_(vel), key_(key), rect_(rect), misstakes_(misstakes) {};
+	KeyGame(float vel, SDL_Keycode key, SDL_Rect rect, int& misstakes): vel_(vel), key_(key), rect_(rect) {};
 	~KeyGame() {};
 
 	virtual void init() override;
@@ -25,9 +25,7 @@ private:
 	float vel_;
 
 	SDL_Keycode key_;
-	SDL_Rect rect_;
-	SDL_Rect rect_end;
-	int misstakes_;
+	SDL_Rect checkRect;
 
 	void missedSkillCheck();
 	void hitSkillCheck();

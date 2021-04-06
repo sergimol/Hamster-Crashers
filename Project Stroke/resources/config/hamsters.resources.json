@@ -117,6 +117,14 @@
     {
       "id": "q",
       "file": "resources/images/tecla_Q.png"
+    },
+    {
+      "id": "linea",
+      "file": "resources/images/linea.png"
+    },
+    {
+      "id": "lineaV",
+      "file": "resources/images/lineaV.png"
     }
   ],
 
