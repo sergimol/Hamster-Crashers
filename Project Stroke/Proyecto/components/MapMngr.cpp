@@ -30,6 +30,7 @@
 #include "../components/HeartUI.h"
 #include "../components/Possesion.h"
 #include "../components/GhostCtrl.h"
+#include "../components/ContactDamage.h"
 
 
 void MapMngr::init() {
@@ -166,11 +167,23 @@ void MapMngr::loadNewMap(string map) {
 						hamster2->addComponent<Stun>();
 						hamster2->addComponent<Knockback>();
 						hamster2->addComponent<GetItem>();
+						//hamster2->addComponent<ContactDamage>();
 
 						players.push_back(hamster2);
 
 						//Igual luego no lo usammos pero por si aca
 						mngr_->setHandler<Hamster2>(hamster2);
+
+
+
+						auto* cosodecosas = mngr_->addEntity();
+						cosodecosas->addComponent<Transform>(
+							Vector2D(object.getPosition().x* scale + 300, object.getPosition().y* scale),
+							Vector2D(), 256.0f, 256.0f, 0.0f);
+						hamster2->addComponent<EntityAttribs>(100, 0.0, "coso", Vector2D(7, 4.5));
+						cosodecosas->addComponent<ContactDamage>();
+
+
 					}
 					//CANELON
 					else if (name == "canelon") {

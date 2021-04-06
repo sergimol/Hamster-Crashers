@@ -39,6 +39,7 @@ class HeartUI;
 class TileRender;
 class Possesion;
 class GhostCtrl;
+class ContactDamage;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -77,7 +78,8 @@ class GhostCtrl;
 	MapMngr,\
 	TileRender, \
 	GhostCtrl, \
-	Possesion
+	Possesion,\
+	ContactDamage
 
 // groups
 
