@@ -40,6 +40,7 @@ class TileRender;
 class Possesion;
 class GhostCtrl;
 class ContactDamage;
+class KeyGame;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -79,7 +80,8 @@ class ContactDamage;
 	TileRender, \
 	GhostCtrl, \
 	Possesion,\
-	ContactDamage
+	ContactDamage,\
+	KeyGame
 
 // groups
 

@@ -37,6 +37,6 @@ private:
 
 	bool show;
 
-	void startPossesion();
+	void startPossesion(Entity* e);
 };
 

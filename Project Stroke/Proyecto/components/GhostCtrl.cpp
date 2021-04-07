@@ -22,12 +22,12 @@ void GhostCtrl::onEnable() {
 void GhostCtrl::update() {
 	auto& hamsters = entity_->getMngr()->getPlayers();
 	for (Entity* e : hamsters) {
-		if (e != entity_) {
+		if (e != entity_ && !e->getComponent<HamsterStateMachine>()->cantBeTargeted()) {
 			auto* oTr = e->getComponent<Transform>();
 			assert(oTr != nullptr);
 			show = Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), oTr->getPos(), oTr->getW(), oTr->getH());
 			if (show && ih().isKeyDown(key)) {
-				startPossesion();
+				startPossesion(e);
 			}
 		}
 	}
@@ -41,11 +41,20 @@ void GhostCtrl::render() {
 	}
 }
 
-void GhostCtrl::startPossesion() {
+void GhostCtrl::startPossesion(Entity* e) {
+	//Quitamos el movimiento y la imagen al poseer
 	mv_->setActive(false);
-	//animacion meterse dentro?
+	entity_->getComponent<Animator>()->setActive(false);
+
+	//animacion meterse dentro?------
+	
+	//Paramos el componente para que deje de buscar jugadores
 	show = false;
 	active_ = false;
-	entity_->getComponent<Possesion>()->setActive(true);
-	entity_->getComponent<Animator>()->setActive(false);
+	
+	//Activamos el minijuego
+	auto* poss = entity_->getComponent<Possesion>();
+
+	poss->setPossesed(e);
+	poss->setActive(true);
 }
