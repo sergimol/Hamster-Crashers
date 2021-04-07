@@ -14,7 +14,7 @@ class EntityAttribs: public Component {
 public:
 	EntityAttribs();
 
-	EntityAttribs(int life, float range, std::string id, Vector2D speed);
+	EntityAttribs(int life, float range, std::string id, Vector2D speed, int number);
 
 	virtual ~EntityAttribs() {
 	}
@@ -44,6 +44,9 @@ public:
 	inline int getDmg() const {
 		return damage_;
 	}
+	inline int getNumber() const {
+		return playerNumber_;
+	}
 	inline Vector2D getVel() const {
 		return velocity_;
 	}
@@ -58,6 +61,7 @@ private:
 	int health_;
 	int maxHealth_;
 	int damage_;
+	int playerNumber_;
 
 	float critProbability_;
 	float maxCrit_;

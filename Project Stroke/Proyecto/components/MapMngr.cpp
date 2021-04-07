@@ -81,7 +81,7 @@ void MapMngr::loadNewMap(string map) {
 							Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 							Vector2D(), 256.0f, 256.0f, 0.0f);
 
-						hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5));
+						hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5), 0);
 
 						hamster1->addComponent<Animator>(
 							&sdlutils().images().at("sardinillaSheet"),
@@ -107,7 +107,7 @@ void MapMngr::loadNewMap(string map) {
 						hamster1->addComponent<Roll>();
 
 						//Handlr
-						hamster1->addComponent<ControlHandler>(1);
+						hamster1->addComponent<ControlHandler>(hamster1->getComponent<EntityAttribs>()->getNumber());
 
 						//Interfaz
 						hamster1->addComponent<UI>("sardinilla", 0);
@@ -130,59 +130,10 @@ void MapMngr::loadNewMap(string map) {
 						//Para acceder facilmente le metemos en Hamster1 de Handelers
 						mngr_->setHandler<Hamster1>(hamster1);
 
-						auto* hamster2 = mngr_->addEntity();
-						hamster2->addComponent<Transform>(
-							Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-							Vector2D(), 256.0f, 256.0f, 0.0f);
-						hamster2->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5));
-						//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
-						hamster2->addComponent<Animator>(
-							&sdlutils().images().at("sardinillaSheet"),
-							86,
-							86,
-							3,
-							3,
-							220,
-							Vector2D(0, 0),
-							3
-							);
-						hamster2->addComponent<HamsterStateMachine>();
-						hamster2->addComponent<Movement>();
-						hamster2->addComponent<Gravity>();
-						hamster2->addComponent<LightAttack>();
-						hamster2->addComponent<StrongAttack>();
-						hamster2->addComponent<UI>("sardinilla", 1);
-
-
-						hamster2->addComponent<HeartUI>("sardinilla", 1);
-						//hamster1->addComponent<Pray>(30, 50);
-						hamster2->addComponent<Roll>();
-						//hamster1->addComponent<Turret>();
-
-						//hamster1->addComponent<Poison>(5);
-						hamster2->addComponent<Possesion>();
-						hamster2->addComponent<GhostCtrl>();
-						hamster2->addComponent<Stroke>()->infarct();
-						hamster2->addComponent<Combos>();
-						hamster2->setGroup<Ally>(true);
-						hamster2->addComponent<ControlHandler>(2);
-						hamster2->addComponent<Stun>();
-						hamster2->addComponent<Knockback>();
-						hamster2->addComponent<GetItem>();
-						//hamster2->addComponent<ContactDamage>();
-
-						players.push_back(hamster2);
-
-						//Igual luego no lo usammos pero por si aca
-						mngr_->setHandler<Hamster2>(hamster2);
-
-
-
 						auto* cosodecosas = mngr_->addEntity();
 						cosodecosas->addComponent<Transform>(
 							Vector2D(object.getPosition().x* scale + 300, object.getPosition().y* scale),
 							Vector2D(), 256.0f, 256.0f, 0.0f);
-						hamster2->addComponent<EntityAttribs>(100, 0.0, "coso", Vector2D(7, 4.5));
 						cosodecosas->addComponent<ContactDamage>(10);
 
 
@@ -196,7 +147,7 @@ void MapMngr::loadNewMap(string map) {
 							Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 							Vector2D(), 256.0f, 256.0f, 0.0f);
 
-						hamster2->addComponent<EntityAttribs>(100, 0.0, "canelon", Vector2D(7, 4.5));
+						hamster2->addComponent<EntityAttribs>(100, 0.0, "canelon", Vector2D(7, 4.5), 1);
 
 						hamster2->addComponent<Animator>(
 							&sdlutils().images().at("canelonSheet"),
@@ -221,7 +172,7 @@ void MapMngr::loadNewMap(string map) {
 						hamster2->addComponent<Pray>(30, 50);
 
 						//Handlr
-						hamster2->addComponent<ControlHandler>(1);
+						hamster2->addComponent<ControlHandler>(hamster2->getComponent<EntityAttribs>()->getNumber());
 
 						//Interfaz
 						hamster2->addComponent<UI>("canelon", 0);
@@ -248,7 +199,7 @@ void MapMngr::loadNewMap(string map) {
 						hamster3->addComponent<Transform>(
 							Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 							Vector2D(), 256.0f, 256.0f, 0.0f);
-						hamster3->addComponent<EntityAttribs>(100, 0.0, "keta", Vector2D(7, 4.5));
+						hamster3->addComponent<EntityAttribs>(100, 0.0, "keta", Vector2D(7, 4.5), 2);
 						//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
 						hamster3->addComponent<Animator>(
 							&sdlutils().images().at("ketaSheet"),
@@ -273,7 +224,7 @@ void MapMngr::loadNewMap(string map) {
 						hamster3->addComponent<Poison>(5);
 
 						//Handler
-						hamster3->addComponent<ControlHandler>(1);
+						hamster3->addComponent<ControlHandler>(hamster3->getComponent<EntityAttribs>()->getNumber());
 
 						//Interfaz
 						hamster3->addComponent<UI>("keta", 0);
@@ -300,7 +251,7 @@ void MapMngr::loadNewMap(string map) {
 						hamster4->addComponent<Transform>(
 							Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 							Vector2D(), 256.0f, 256.0f, 0.0f);
-						hamster4->addComponent<EntityAttribs>(100, 0.0, "monchi", Vector2D(7, 4.5));
+						hamster4->addComponent<EntityAttribs>(100, 0.0, "monchi", Vector2D(7, 4.5), 3);
 						//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
 						hamster4->addComponent<Animator>(
 							&sdlutils().images().at("monchiSheet"),
@@ -325,7 +276,7 @@ void MapMngr::loadNewMap(string map) {
 						hamster4->addComponent<Turret>();
 
 						//Handler
-						hamster4->addComponent<ControlHandler>(1);
+						hamster4->addComponent<ControlHandler>(hamster4->getComponent<EntityAttribs>()->getNumber());
 
 						//Interfaz
 						hamster4->addComponent<UI>("monchi", 0);

@@ -15,7 +15,7 @@ EntityAttribs::EntityAttribs() :
 	enmState_(nullptr)
 {}
 
-EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed) :
+EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number) :
 	health_(life),
 	maxHealth_(life),
 	strokeResist_(0.0),
@@ -28,7 +28,8 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	hms_(nullptr),
 	id_(id),
 	cadence_(0.0),
-	enmState_(nullptr)
+	enmState_(nullptr),
+	playerNumber_(number)
 {}
 
 void EntityAttribs::init() {

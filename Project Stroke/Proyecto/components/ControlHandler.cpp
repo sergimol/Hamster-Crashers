@@ -11,16 +11,14 @@ void ControlHandler::init() {
 	roll_ = entity_->getComponent<Roll>();
 	//assert(roll_ != nullptr); PUEDE SER NULLPTR
 
+	lt_ = entity_->getComponent<LightAttack>();
+	assert(lt_ != nullptr);
+
+	st_ = entity_->getComponent<StrongAttack>();
+	assert(st_ != nullptr);
 	//En vez de construirlo solamente deberia de tner que irse a donde estuviesen guardado los controles y coger el mapeado segun lo que le pida
 
-	if (player_ <= 1) {
-		keymap.insert({ UP, SDL_SCANCODE_UP });
-		keymap.insert({ DOWN, SDL_SCANCODE_DOWN });
-		keymap.insert({ LEFT, SDL_SCANCODE_LEFT });
-		keymap.insert({ RIGHT, SDL_SCANCODE_RIGHT });
-		keymap.insert({ SPACE, SDL_SCANCODE_K });
-	}
-	else if (player_ >= 2) {
+	if (player_ == 0) {
 		keymap.insert({ UP, SDL_SCANCODE_W });
 		keymap.insert({ DOWN, SDL_SCANCODE_S });
 		keymap.insert({ LEFT, SDL_SCANCODE_A });
@@ -28,19 +26,127 @@ void ControlHandler::init() {
 		keymap.insert({ SPACE, SDL_SCANCODE_SPACE });
 	}
 
+	else if (player_ == 1) {
+		keymap.insert({ UP, SDL_SCANCODE_UP });
+		keymap.insert({ DOWN, SDL_SCANCODE_DOWN });
+		keymap.insert({ LEFT, SDL_SCANCODE_LEFT });
+		keymap.insert({ RIGHT, SDL_SCANCODE_RIGHT });
+		keymap.insert({ SPACE, SDL_SCANCODE_K });
+	}
 }
 
 
 //el update recibe todos los input de SDL los filtra y envia la respuesta a la clase
 void ControlHandler::update() {
+	// Si el jugador tiene asignado un mando llama al método que controla el input de mando
+	if (ih().playerHasController(player_)) {
+		handleController();
+	}
+	else
+		handleKeyboard();
+}
 
+void ControlHandler::onDisable() {
+	mov_->updateKeymap(Movement::RIGHT, false);
+	mov_->updateKeymap(Movement::LEFT, false);
+	mov_->updateKeymap(Movement::DOWN, false);
+	mov_->updateKeymap(Movement::UP, false);
+}
+
+void ControlHandler::setController(bool hasController) {
+	hasController_ = hasController;
+}
+
+
+// Métododos que manejan el input según sea con mando o con teclado
+void ControlHandler::handleController() {
+	// MOVIMIENTO (Igual en un futuro se puede modificar para que vaya con el valor de los ejes)
+	// Por alguna razón el eje Y va del revés
+	// UP
+	if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) < 0) {
+		mov_->updateKeymap(Movement::UP, true);
+		mov_->updateKeymap(Movement::DOWN, false);
+		if (roll_ != nullptr) {
+			roll_->updateKeymap(Roll::UP, true);
+			roll_->updateKeymap(Roll::DOWN, false);
+		}
+	}
+	//DOWN
+	else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) > 0)
+	{
+		mov_->updateKeymap(Movement::UP, false);
+		mov_->updateKeymap(Movement::DOWN, true);
+		if (roll_ != nullptr) {
+			roll_->updateKeymap(Roll::UP, false);
+			roll_->updateKeymap(Roll::DOWN, true);
+		}
+	}
+	else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) == 0)
+	{
+		mov_->updateKeymap(Movement::UP, false);
+		mov_->updateKeymap(Movement::DOWN, false);
+		if (roll_ != nullptr) {
+			roll_->updateKeymap(Roll::UP, false);
+			roll_->updateKeymap(Roll::DOWN, false);
+		}
+	}
+
+	//RIGHT
+	if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) > 0)
+	{
+		mov_->updateKeymap(Movement::RIGHT, true);
+		mov_->updateKeymap(Movement::LEFT, false);
+		if (roll_ != nullptr) {
+			roll_->updateKeymap(Roll::RIGHT, true);
+			roll_->updateKeymap(Roll::LEFT, false);
+		}
+	}
+	//	LEFT
+	else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) < 0)
+	{
+		mov_->updateKeymap(Movement::RIGHT, false);
+		mov_->updateKeymap(Movement::LEFT, true);
+		if (roll_ != nullptr) {
+			roll_->updateKeymap(Roll::RIGHT, false);
+			roll_->updateKeymap(Roll::LEFT, true);
+		}
+	}
+	else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) == 0)
+	{
+		mov_->updateKeymap(Movement::RIGHT, false);
+		mov_->updateKeymap(Movement::LEFT, false);
+		if (roll_ != nullptr) {
+			roll_->updateKeymap(Roll::RIGHT, false);
+			roll_->updateKeymap(Roll::LEFT, false);
+		}
+	}
+
+	if (ih().isButtonDownEvent()) {
+		//JUMP
+		if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_A))
+		{
+			mov_->updateKeymap(Movement::SPACE, true);
+			if (roll_ != nullptr) roll_->updateKeymap(Roll::SPACE, true);
+		}
+
+		//ATAQUE LIGERO
+		if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_X)) {
+			lt_->attack();
+		}
+		//ATAQUE FUERTE
+		else if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_Y)) {
+			st_->attack();
+		}
+	}
+}
+
+void ControlHandler::handleKeyboard() {
 	//la parte para MOVEMENT
-
 	//UP
 	if (ih().isKeyDown(keymap.at(UP))) //aqui es donde hacemos nuestro keymap
 	{
 		mov_->updateKeymap(Movement::UP, true);
-		if(roll_!=nullptr) roll_->updateKeymap(Roll::UP, true);
+		if (roll_ != nullptr) roll_->updateKeymap(Roll::UP, true);
 	}
 	else if (ih().isKeyUp(keymap.at(UP)))
 	{
@@ -94,11 +200,15 @@ void ControlHandler::update() {
 
 	}
 	//el jump no necesita la parte para false
-}
 
-void ControlHandler::onDisable() {
-	mov_->updateKeymap(Movement::RIGHT, false);
-	mov_->updateKeymap(Movement::LEFT, false);
-	mov_->updateKeymap(Movement::DOWN, false);
-	mov_->updateKeymap(Movement::UP, false);
+	//ATAQUE LIGERO
+	if (ih().mouseButtonEvent()) {
+		if (ih().getMouseButtonState(InputHandler::MOUSEBUTTON::LEFT) == 1) {
+			lt_->attack();
+		}
+		//ATAQUE FUERTE
+		else if (ih().getMouseButtonState(InputHandler::MOUSEBUTTON::RIGHT) == 1) {
+			st_->attack();
+		}
+	}
 }
