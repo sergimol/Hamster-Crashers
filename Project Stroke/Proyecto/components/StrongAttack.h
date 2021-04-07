@@ -28,6 +28,8 @@ public:
 
 	bool CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo);
 
+	void attack();
+
 private:
 	Transform* tr_;
 	SDL_Rect attRect_;
@@ -35,5 +37,6 @@ private:
 	bool DEBUG_isAttacking_;
 	long unsigned int cooldown_, time_;
 	SoundEffect& attackSound_, & hitSound_;
+	int player_;
 }
 ;

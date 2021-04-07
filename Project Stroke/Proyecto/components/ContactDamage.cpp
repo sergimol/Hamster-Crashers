@@ -5,77 +5,71 @@
 #include "Knockback.h"
 #include "ControlHandler.h"
 #include "StrongAttack.h"
-#include "LightAttack.h"
+#include "ContactDamage.h"
 
-EnemyAttack::EnemyAttack() :
-	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
-	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {}
+ContactDamage::ContactDamage(int danyo) :
+	tr_(nullptr), attRect_(), DEBUG_isAttacking_(false),
+	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")), dmg_(danyo) {}
 
-void EnemyAttack::init() {
+void ContactDamage::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 }
 
-void EnemyAttack::update() {
+void ContactDamage::update() {
 	//Deja de mostrar el collider
-	if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
+	/*
+	if (sdlutils().currRealTime() > time_ / 1.5) {
 		DEBUG_isAttacking_ = false;
 	}
+	*/
+	updateRect();
 }
 
-void EnemyAttack::LaunchAttack() {
-	if (sdlutils().currRealTime() > time_ + cooldown_) {
+void ContactDamage::updateRect() {
 
-		auto sizeW = tr_->getW();
-		auto sizeH = tr_->getH();
-		auto& pos = tr_->getPos();
-		auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
+	auto sizeW = tr_->getW();
+	auto sizeH = tr_->getH();
+	auto& pos = tr_->getPos();
 
+	//crear el rectangulo que va a hacer el contact damage
 
-		attRect_.w = sizeW / 2 + sizeW / 2 * range;
-		attRect_.h = sizeH / 2 + sizeH / 2 * range;
+	attRect_.w = sizeW;
+	attRect_.h = sizeH;
+	attRect_.x = pos.getX() - Game::camera_.x;
+	attRect_.y = pos.getY() - Game::camera_.y;
 
-		auto flip = tr_->getFlip();
+	//Comprobamos si colisiona con alguno de los players
 
-		//Si esta flipeado...
-		if (flip)
-			//Le damos la vuelta al rect
-			attRect_.x = pos.getX() - attRect_.w + sizeW / 4 - Game::camera_.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
-		else
-			attRect_.x = pos.getX() + sizeW - sizeW / 4 - Game::camera_.x;
+	//Si se colisiona..
+	if (CheckCollisions(attRect_, true))
+		//Suena el hit y le pega
+		hitSound_.play();
+	//Si no colisiona..
+	else
+		//NO  NO QUIERO Suena el attackSound
+		//attackSound_.play();
 
-		attRect_.y = pos.getY() + sizeH / 4 - Game::camera_.y;
-
-		//Comprobamos si colisiona con alguno de los enemigos que tiene delante
-
-		//Si se colisiona..
-		if (CheckCollisions(attRect_, true))
-			//Suena el hit y le pega
-			hitSound_.play();
-		//Si no colisiona..
-		else
-			//Suena el attackSound
-			attackSound_.play();
-
-		//this.anims.play(pegarse)
+	//this.anims.play(pegarse)
 
 		DEBUG_isAttacking_ = true;
-		time_ = sdlutils().currRealTime();
-	}
+	time_ = sdlutils().currRealTime();
+
 }
 
-bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
+bool ContactDamage::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 	bool canHit = false;
 
 	//Cogemos todas las entidades del juego
 	auto& ents = entity_->getMngr()->getPlayers();
 
 	for (int i = 0; i < ents.size(); ++i) {
-		//Si la entidad es un enemigo...
-			//Cogemos el transform del enemigo
+		//Si la entidad es un player...
+
+			//Cogemos el transform del player
 		auto eTR = ents[i]->getComponent<Transform>();
 
-		//Creamos su Rect
+		//Creamos su Rect 
 		SDL_Rect allyRect;
 		allyRect.h = eTR->getH();
 		allyRect.w = eTR->getW();
@@ -84,15 +78,18 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 
 
 		//Y comprobamos si colisiona
-		if (SDL_HasIntersection(&enemyRect, &allyRect)) {
-			int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
+		//es can attacks porque coninciden lso estados
+		//TODO si se cambian lso estados DEAD STUNNED INFARTED hayq eu cambiar este booleano por otro ams combeniente
+		if (ents[i]->getComponent<HamsterStateMachine>()->canAttack() && SDL_HasIntersection(&enemyRect, &allyRect)) {
+			//TODO no voy a definir una entidad ahora
+			//int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
 			//if (finCombo) {
 			//	if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.01); //Aumentar probabilidad critico
 			//	//Empujar y stun al aliado
 			//}
 			canHit = true;
 			//Le restamos la vida al aliado
-			ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg);
+			ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg_);
 
 			auto& hamStateM = ents[i]->getComponent<HamsterStateMachine>()->getState();
 
@@ -132,9 +129,19 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 			Knockback* hamKnockback = ents[i]->getComponent<Knockback>();
 			if (hamKnockback != nullptr && hamKnockback->isActive()) {
 				//Damos la vuelta si es atacado por detras
+
+				//DEPENDE DE LA posicion de X y el width al medio
+				attRect_.x;
+				attRect_.w;
+				allyRect.w;
+				allyRect.x;
+
+				//MIRADNOA AL DERECHA ES !flip, izquierda es flip, por default quuiero que sea !flip
 				auto& hamFlip = eTR->getFlip();
-				if (hamFlip == tr_->getFlip())
-					hamFlip = !hamFlip;
+				if (attRect_.x + (attRect_.w / 2) > allyRect.x + (allyRect.w / 2)) //esta a ala izquierda entonces !flip
+					hamFlip = false;
+				else
+					hamFlip = true;
 
 				hamKnockback->knockback();
 			}
@@ -144,7 +151,7 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 	return canHit;
 }
 
-void EnemyAttack::render() {
+void ContactDamage::render() {
 	if (DEBUG_isAttacking_) {
 		SDL_SetRenderDrawColor(sdlutils().renderer(), 255, 170, 0, 255);
 

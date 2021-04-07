@@ -8,6 +8,8 @@
 //las cosas que controla
 #include "Movement.h"
 #include "Roll.h"
+#include "LightAttack.h"
+#include "StrongAttack.h"
 
 
 /*Esta clase es la encargada de filtar los inputs
@@ -19,7 +21,10 @@ public:
 	ControlHandler(int player) :
 		mov_(nullptr),
 		roll_(nullptr),
-		player_(player) // player es solo para decir que teclas le corresponde
+		lt_(nullptr),
+		st_(nullptr),
+		player_(player), // player es solo para decir que teclas le corresponde
+		hasController_(false) // true = el jugador tiene mando, false = no tiene 
 	{
 	}
 
@@ -30,17 +35,26 @@ public:
 
 	virtual void onDisable() override;
 
+	// Actualiza el booleano del mando, por si se conecta o desconecta
+	void setController(bool hasController);
+
 private:
 	//const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 	//const enum KEYS2 { UP, DOWN, LEFT, RIGHT, SPACE };
 	int player_;
 	Movement* mov_;
 	Roll* roll_;
+	LightAttack* lt_;
+	StrongAttack* st_;
+	bool hasController_;
 
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 
 	std::map<KEYS ,SDL_Scancode> keymap;
 	//std::map<KEYS, bool> keymap; //lo voy a necesitar de verdad?
+
+	void handleKeyboard();
+	void handleController();
 };
 
 

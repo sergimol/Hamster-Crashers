@@ -32,3 +32,7 @@ void Gravity::update() {
 		}
 	}
 }
+
+void Gravity::onDisable() {
+	tr_->getVelZ() = 0.0;
+}

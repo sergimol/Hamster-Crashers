@@ -39,6 +39,7 @@ class HeartUI;
 class TileRender;
 class Possesion;
 class GhostCtrl;
+class ContactDamage;
 class HeightObject;
 
 #define _CMPS_LIST_  \
@@ -79,7 +80,8 @@ class HeightObject;
 	TileRender, \
 	GhostCtrl, \
 	HeightObject, \
-	Possesion
+	Possesion,\
+	ContactDamage
 
 // groups
 

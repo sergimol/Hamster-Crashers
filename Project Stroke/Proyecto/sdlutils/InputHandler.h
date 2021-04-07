@@ -16,6 +16,8 @@ using namespace std;
 // Instead of a Singleton class, we could make it part of
 // SDLUtils as well.
 
+const int MAXPLAYERS = 4;
+
 class InputHandler: public Singleton<InputHandler> {
 
 	friend Singleton<InputHandler> ;
@@ -25,25 +27,18 @@ public:
 		LEFT = 0, MIDDLE = 1, RIGHT = 2
 	};
 
-	enum GAMEPADSTICK : uint8_t {
-		LEFTST = 0, RIGHTST = 1
-	};
-
-	enum GAMEPADTRIGGER : uint8_t {
-		LT = 0, RT = 1
-	};
-
 	virtual ~InputHandler() {
-		for (int i = 0; i < maxConnectedControllers_; ++i) {
+		for (int i = 0; i < MAXPLAYERS; ++i) {
+			if (controllers_[i] != nullptr) {
+				SDL_GameControllerClose((SDL_GameController*)i);
+				controllers_[i] = nullptr;
 
-			SDL_GameControllerClose((SDL_GameController*)i);
-			controllers_[i] = nullptr;
+				delete leftJoysticks_[i];
+				leftJoysticks_[i] = nullptr;
 
-			delete leftJoysticks_[i];
-			leftJoysticks_[i] = nullptr;
-
-			delete rightJoysticks_[i];
-			rightJoysticks_[i] = nullptr;
+				delete rightJoysticks_[i];
+				rightJoysticks_[i] = nullptr;
+			}
 		}
 	}
 
@@ -88,7 +83,7 @@ public:
 			//cout << "down" << endl;
 			break;
 		case SDL_JOYBUTTONUP:
-			onButtonDown(event);
+			onButtonUp(event);
 			//cout << "up" << endl;
 			break;
 		case SDL_CONTROLLERDEVICEADDED:
@@ -127,6 +122,59 @@ public:
 		return isKeyUp(SDL_GetScancodeFromKey(key));
 	}
 
+	// mando
+	inline bool isButtonDown(int controller, SDL_GameControllerButton button) {
+		if (controllers_[controller] == nullptr)
+			return false;
+		return (isButtonDownEvent_ && buttonStates_[controller][button]);
+	}
+
+	inline bool isButtonUp(int controller, SDL_GameControllerButton button) {
+		if (controllers_[controller] == nullptr)
+			return false;
+		return (isButtonUpEvent_ && buttonStates_[controller][button]);
+	}
+
+	inline bool isButtonDownEvent() {
+		return isButtonDownEvent_;
+	}
+
+	inline bool isButtonUpEvent() {
+		return isButtonUpEvent_;
+	}
+
+	inline float getAxisValue(int controller, SDL_GameControllerAxis axis) {
+		if (controllers_[controller] == nullptr)
+			return 0.0f;
+		switch (axis)
+		{
+		case SDL_CONTROLLER_AXIS_LEFTX:
+			return leftJoysticks_[controller]->getX();
+			break;
+		case SDL_CONTROLLER_AXIS_LEFTY:
+			return leftJoysticks_[controller]->getY();
+			break;
+		case SDL_CONTROLLER_AXIS_RIGHTX:
+			return rightJoysticks_[controller]->getX();
+			break;
+		case SDL_CONTROLLER_AXIS_RIGHTY:
+			return rightJoysticks_[controller]->getY();
+			break;
+		case SDL_CONTROLLER_AXIS_TRIGGERLEFT:
+			return leftTriggers_[controller];
+			break;
+		case SDL_CONTROLLER_AXIS_TRIGGERRIGHT:
+			return rightTriggers_[controller];
+			break;
+		default:
+			break;
+		}
+	}
+
+	inline bool playerHasController(int player) {
+		return controllers_[player] != nullptr;
+	}
+
 	// mouse
 	inline bool mouseMotionEvent() {
 		return isMouseMotionEvent_;
@@ -149,7 +197,6 @@ private:
 		kbState_ = SDL_GetKeyboardState(0);
 		clearState();
 		actualControllers_ = 0;
-		maxConnectedControllers_ = 0;
 	}
 
 	inline void onKeyDown(const SDL_Event&) {
@@ -168,7 +215,8 @@ private:
 
 	inline void onAxisMotion(const SDL_Event& event) {
 		isAxisMotionEvent_ = true;
-		int controllerID = event.jaxis.which;
+		auto it = sysToGameId.find(event.cdevice.which - reconnections_);
+		int controllerID = (*it).second;
 
 		Uint8 i = 0;
 		bool found = false;
@@ -247,16 +295,16 @@ private:
 		Uint8 i = 0;
 		bool found = false;
 
-		// Encontramos el botón
+		// Encontramos el botï¿½n
 		while (!found && i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX) {
-			SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(controllers_[event.jaxis.which], (SDL_GameControllerButton)i);
+			SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(controllers_[event.jaxis.which - reconnections_], (SDL_GameControllerButton)i);
 			if (b.value.button == event.cbutton.button)
 				found = true;
 			else
 				i++;
 		}
 
-		buttonStates_[event.jaxis.which][i] = true;
+		buttonStates_[event.jaxis.which - reconnections_][i] = true;
 	}
 
 	inline void onButtonUp(const SDL_Event& event) {
@@ -265,33 +313,32 @@ private:
 		Uint8 i = 0;
 		bool found = false;
 
-		// Encontramos el botón
+		// Encontramos el botï¿½n
 		while (!found && i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX) {
-			SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(controllers_[event.jaxis.which], (SDL_GameControllerButton)i);
+			SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(controllers_[event.jaxis.which - reconnections_], (SDL_GameControllerButton)i);
 			if (b.value.button == event.cbutton.button)
 				found = true;
 			else
 				i++;
 		}
 
-		buttonStates_[event.jaxis.which][i] = false;
+		buttonStates_[event.jaxis.which - reconnections_][i] = false;
 	}
 
-	// Añade un mando al juego
+	// AÃ±ade un mando al juego
 	inline void onControllerAdded(const SDL_Event& event) {
-		if (actualControllers_ < 4) {
-			int id = controllers_.size(); // id fisica que recibe SDL
+		if (actualControllers_ < MAXPLAYERS) {
+			int id = actualControllers_; // id fisica que recibe SDL
 			int gId; // id dentro del juego
-			initController(event.cdevice.which);
 			// Comprueba si el mando que se acaba de conectar es nuevo o reconectado
-			if (disconectedControllers_.empty()) {
+			if (disconectedControllers_.empty()) 
 				gId = id;
-				maxConnectedControllers_++;
-			}
 			else {
 				gId = disconectedControllers_.front();
 				disconectedControllers_.pop();
+				reconnections_++;
 			}
+			initController(event.cdevice.which, gId);
 			actualControllers_++;
 			sysToGameId.emplace(id, gId);
 			gameToSysId[gId] = id;
@@ -303,27 +350,40 @@ private:
 		actualControllers_--;
 		auto it = sysToGameId.find(event.cdevice.which);
 		if (it != sysToGameId.end()) {
-			disconectedControllers_.push((*it).second);
+			int id = (*it).second;
+			disconectedControllers_.push(id);
 			sysToGameId.erase(it);
+
+			SDL_GameControllerClose(controllers_[id]);
+			controllers_[id] = nullptr;
+
+			delete leftJoysticks_[id];
+			leftJoysticks_[id] = nullptr;
+
+			delete rightJoysticks_[id];
+			rightJoysticks_[id] = nullptr;
+
+			leftTriggers_[id] = 0.0f;
+			rightTriggers_[id] = 0.0f;
 		}
 	}
 
-	inline void initController(int id) {
+	inline void initController(int id, int gId) {
 		SDL_GameController* c = SDL_GameControllerOpen(id);
 		if (c) {
 			cout << SDL_GameControllerName(c) << endl;
 
-			controllers_.push_back(c);
-			leftJoysticks_.push_back(new Vector2D(0, 0));
-			rightJoysticks_.push_back(new Vector2D(0, 0));
-			leftTriggers_.push_back(0.0f);
-			rightTriggers_.push_back(0.0f);
+			controllers_[gId] = c;
+			leftJoysticks_[gId] = new Vector2D(0, 0);
+			rightJoysticks_[gId] = new Vector2D(0, 0);
+			leftTriggers_[gId] = 0.0f;
+			rightTriggers_[gId] = 0.0f;
 			
 			vector<int> aux;
 			for (int i = 0; i < SDL_CONTROLLER_BUTTON_MAX; ++i)
 				aux.push_back(0);
 
-			buttonStates_.push_back(aux);
+			buttonStates_[gId] = aux;
 		}
 		SDL_JoystickEventState(SDL_ENABLE);
 	}
@@ -342,20 +402,19 @@ private:
 	bool isButtonDownEvent_;
 	bool isButtonUpEvent_;
 	bool isAxisMotionEvent_;
-	vector<vector<int>> buttonStates_;
+	array<vector<int>, 4> buttonStates_;
 	array<int, 4> gameToSysId{ -1, -1, -1, -1 };
 	map<int, int> sysToGameId;
 
 	int actualControllers_; // Numero de mandos conectados en el momento
-	int maxConnectedControllers_; // Numero de mandos que se han conectado en total
-
+	Sint32 reconnections_ = 0; // Reconexiones de mandos que se han producido
 	
-	vector<SDL_GameController*> controllers_;
+	array<SDL_GameController*, 4> controllers_;
 	queue<int> disconectedControllers_;
-	vector<Vector2D*> leftJoysticks_;
-	vector<Vector2D*> rightJoysticks_;
-	vector<float> leftTriggers_;
-	vector<float> rightTriggers_;
+	array<Vector2D*, 4> leftJoysticks_;
+	array<Vector2D*, 4> rightJoysticks_;
+	array<float, 4> leftTriggers_;
+	array<float, 4> rightTriggers_;
 
 
 

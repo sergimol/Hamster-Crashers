@@ -204,6 +204,12 @@
     <ClCompile Include="Proyecto\components\KeyGame.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\ContactDamage.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\AnimHamsterStateMachine.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
     <ClCompile Include="Proyecto\components\HeightObject.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
@@ -411,6 +417,12 @@
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\KeyGame.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\ContactDamage.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\AnimHamsterStateMachine.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\HeightObject.h">
