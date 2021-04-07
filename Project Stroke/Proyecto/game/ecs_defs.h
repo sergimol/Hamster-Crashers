@@ -39,6 +39,7 @@ class HeartUI;
 class TileRender;
 class Possesion;
 class GhostCtrl;
+class HeightObject;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -77,6 +78,7 @@ class GhostCtrl;
 	MapMngr,\
 	TileRender, \
 	GhostCtrl, \
+	HeightObject, \
 	Possesion
 
 // groups

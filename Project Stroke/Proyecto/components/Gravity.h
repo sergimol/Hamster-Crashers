@@ -5,14 +5,13 @@
 class Gravity : public Component
 {
 public:
-Gravity() : floor(0) {};
+	Gravity() : floor(0), tr_(nullptr) {};
 
-virtual ~Gravity() {};
+	virtual ~Gravity() {};
 
-void init() override;
+	void init() override;
 
-void update() override;
-
+	void update() override;
 
 private:
 	Transform* tr_;
