@@ -68,79 +68,78 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 	bool canHit = false;
 
 	//Cogemos todas las entidades del juego
-	auto& ents = entity_->getMngr()->getEntities();
+	auto& ents = entity_->getMngr()->getPlayers();
 
 	for (int i = 0; i < ents.size(); ++i) {
 		//Si la entidad es un enemigo...
-		if (ents[i]->hasGroup<Ally>()) {
 			//Cogemos el transform del enemigo
-			auto eTR = ents[i]->getComponent<Transform>();
+		auto eTR = ents[i]->getComponent<Transform>();
 
-			//Creamos su Rect
-			SDL_Rect allyRect;
-			allyRect.h = eTR->getH();
-			allyRect.w = eTR->getW();
-			allyRect.x = eTR->getPos().getX() - Game::camera_.x;
-			allyRect.y = eTR->getPos().getY() - Game::camera_.y;
+		//Creamos su Rect
+		SDL_Rect allyRect;
+		allyRect.h = eTR->getH();
+		allyRect.w = eTR->getW();
+		allyRect.x = eTR->getPos().getX() - Game::camera_.x;
+		allyRect.y = eTR->getPos().getY() - Game::camera_.y;
 
 
-			//Y comprobamos si colisiona
-			if (SDL_HasIntersection(&enemyRect, &allyRect)) {
-				int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
-				//if (finCombo) {
-				//	if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.01); //Aumentar probabilidad critico
-				//	//Empujar y stun al aliado
-				//}
-				canHit = true;
-				//Le restamos la vida al aliado
-				ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg);
+		//Y comprobamos si colisiona
+		if (SDL_HasIntersection(&enemyRect, &allyRect)) {
+			int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
+			//if (finCombo) {
+			//	if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.01); //Aumentar probabilidad critico
+			//	//Empujar y stun al aliado
+			//}
+			canHit = true;
+			//Le restamos la vida al aliado
+			ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg);
 
-				auto& hamStateM = ents[i]->getComponent<HamsterStateMachine>()->getState();
+			auto& hamStateM = ents[i]->getComponent<HamsterStateMachine>()->getState();
 
-				if (hamStateM != HamStates::DEAD && hamStateM != HamStates::INFARCTED) {
-					//Si tiene stun, se aplica
-					Stun* stun = ents[i]->getComponent<Stun>();
-					if (stun != nullptr && stun->isActive()) {
+			if (hamStateM != HamStates::DEAD && hamStateM != HamStates::INFARCTED) {
+				//Si tiene stun, se aplica
+				Stun* stun = ents[i]->getComponent<Stun>();
+				if (stun != nullptr && stun->isActive()) {
 
-						//Si no estaba aturdido ya
-						if (hamStateM != HamStates::STUNNED) {
-							//Aturdimos al hamster
-							hamStateM = HamStates::STUNNED;
+					//Si no estaba aturdido ya
+					if (hamStateM != HamStates::STUNNED) {
+						//Aturdimos al hamster
+						hamStateM = HamStates::STUNNED;
 
-							//Animaci�n de stun
-							//anim_->play(sdlutils().anims().at("sardinilla_stun"));
+						//Animaci�n de stun
+						//anim_->play(sdlutils().anims().at("sardinilla_stun"));
 
-							//Desactivamos control de movimiento 
-							ControlHandler* ctrl = ents[i]->getComponent<ControlHandler>();
-							if (ctrl != nullptr)
-								ctrl->setActive(false);
+						//Desactivamos control de movimiento 
+						ControlHandler* ctrl = ents[i]->getComponent<ControlHandler>();
+						if (ctrl != nullptr)
+							ctrl->setActive(false);
 
-							//Desactivamos componentes de ataque
-							StrongAttack* strAtt = ents[i]->getComponent<StrongAttack>();
-							if (strAtt != nullptr)
-								strAtt->setActive(false);
+						//Desactivamos componentes de ataque
+						StrongAttack* strAtt = ents[i]->getComponent<StrongAttack>();
+						if (strAtt != nullptr)
+							strAtt->setActive(false);
 
-							LightAttack* lghtAtt = ents[i]->getComponent<LightAttack>();
-							if (lghtAtt != nullptr)
-								lghtAtt->setActive(false);
+						LightAttack* lghtAtt = ents[i]->getComponent<LightAttack>();
+						if (lghtAtt != nullptr)
+							lghtAtt->setActive(false);
 
-						}
-						//Reiniciamos tiempo de stun
-						stun->restartStunTime();
 					}
-				}
-				//Si tiene Knockback, se aplica
-				Knockback* hamKnockback = ents[i]->getComponent<Knockback>();
-				if (hamKnockback != nullptr && hamKnockback->isActive()) {
-					//Damos la vuelta si es atacado por detras
-					auto& hamFlip = eTR->getFlip();
-					if (hamFlip == tr_->getFlip())
-						hamFlip = !hamFlip;
-
-					hamKnockback->knockback();
+					//Reiniciamos tiempo de stun
+					stun->restartStunTime();
 				}
 			}
+			//Si tiene Knockback, se aplica
+			Knockback* hamKnockback = ents[i]->getComponent<Knockback>();
+			if (hamKnockback != nullptr && hamKnockback->isActive()) {
+				//Damos la vuelta si es atacado por detras
+				auto& hamFlip = eTR->getFlip();
+				if (hamFlip == tr_->getFlip())
+					hamFlip = !hamFlip;
+
+				hamKnockback->knockback();
+			}
 		}
+
 	}
 	return canHit;
 }

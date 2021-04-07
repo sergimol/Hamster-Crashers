@@ -15,56 +15,12 @@ void StrongAttack::init() {
 	assert(tr_ != nullptr);
 	hms_ = entity_->getComponent<HamsterStateMachine>();
 	assert(hms_ != nullptr);
+
+	player_ = entity_->getComponent<EntityAttribs>()->getNumber();
 }
 
 void StrongAttack::update() {
-	if (ih().mouseButtonEvent()) {
-		auto state = hms_->getState();
-		if (hms_->canAttack() && ih().getMouseButtonState(ih().RIGHT) == 1 && sdlutils().currRealTime() > time_ + cooldown_) {
-
-			auto sizeW = tr_->getW();
-			auto sizeH = tr_->getH();
-			auto& pos = tr_->getPos();
-			auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
-
-
-			attRect_.w = sizeW / 2 + sizeW / 2 * range;
-			attRect_.h = sizeH / 2 + sizeH / 2 * range;
-
-			auto flip = tr_->getFlip();
-
-			//Si esta flipeado...
-			if (flip)
-				//Le damos la vuelta al rect
-				attRect_.x = pos.getX() - attRect_.w + sizeW / 4 - Game::camera_.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
-			else
-				attRect_.x = pos.getX() + sizeW - sizeW / 4 - Game::camera_.x;
-
-			attRect_.y = pos.getY() + sizeH / 4 - Game::camera_.y;
-
-			//Comprobamos si colisiona con alguno de los enemigos que tiene delante
-
-			//A�adimos a los combos
-			bool finCombo = entity_->getComponent<Combos>()->checkCombo(1);
-
-			//Si se colisiona..
-			if (CheckCollisions(attRect_, finCombo))
-				//Suena el hit y le pega
-				hitSound_.play();
-			//Si no colisiona..
-			else
-				//Suena el attackSound
-				attackSound_.play();
-
-			//this.anims.play(pegarse)
-
-			DEBUG_isAttacking_ = true;
-			time_ = sdlutils().currRealTime();
-			entity_->getComponent<Stroke>()->increaseChance(10, false);
-		}
-		else if (sdlutils().currRealTime() > time_ + cooldown_ / 2) {
-			state = HamStates::IDLE;
-		}
+	if ((ih().playerHasController(player_) && ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_Y)) || ih().mouseButtonEvent()) {
 	}
 	//Deja de mostrar el collider
 	if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
@@ -150,5 +106,54 @@ void StrongAttack::render() {
 		SDL_SetRenderDrawColor(sdlutils().renderer(), 255, 0, 0, 255);
 
 		SDL_RenderDrawRect(sdlutils().renderer(), &attRect_);
+	}
+}
+
+void StrongAttack::attack() {
+	auto state = hms_->getState();
+	if (hms_->canAttack() && sdlutils().currRealTime() > time_ + cooldown_) {
+
+		auto sizeW = tr_->getW();
+		auto sizeH = tr_->getH();
+		auto& pos = tr_->getPos();
+		auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
+
+
+		attRect_.w = sizeW / 2 + sizeW / 2 * range;
+		attRect_.h = sizeH / 2 + sizeH / 2 * range;
+
+		auto flip = tr_->getFlip();
+
+		//Si esta flipeado...
+		if (flip)
+			//Le damos la vuelta al rect
+			attRect_.x = pos.getX() - attRect_.w + sizeW / 4 - Game::camera_.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
+		else
+			attRect_.x = pos.getX() + sizeW - sizeW / 4 - Game::camera_.x;
+
+		attRect_.y = pos.getY() + sizeH / 4 - Game::camera_.y;
+
+		//Comprobamos si colisiona con alguno de los enemigos que tiene delante
+
+		//A�adimos a los combos
+		bool finCombo = entity_->getComponent<Combos>()->checkCombo(1);
+
+		//Si se colisiona..
+		if (CheckCollisions(attRect_, finCombo))
+			//Suena el hit y le pega
+			hitSound_.play();
+		//Si no colisiona..
+		else
+			//Suena el attackSound
+			attackSound_.play();
+
+		//this.anims.play(pegarse)
+
+		DEBUG_isAttacking_ = true;
+		time_ = sdlutils().currRealTime();
+		entity_->getComponent<Stroke>()->increaseChance(10, false);
+	}
+	else if (sdlutils().currRealTime() > time_ + cooldown_ / 2) {
+		state = HamStates::IDLE;
 	}
 }

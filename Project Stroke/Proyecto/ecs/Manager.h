@@ -39,7 +39,16 @@ public:
 		Entity* e = new Entity(this);
 		if (e != nullptr) {
 			e->resetGroups();
-			tileCollider_.emplace_back(e);
+			tiles_.emplace_back(e);
+		}
+		return e;
+	}
+
+	Entity* addMapHeight() {
+		Entity* e = new Entity(this);
+		if (e != nullptr) {
+			e->resetGroups();
+			mapHeights_.emplace_back(e);
 		}
 		return e;
 	}
@@ -139,7 +148,11 @@ public:
 	}
 
 	inline std::vector<Entity*>& getColliders() {
-		return tiles_;
+		return tileCollider_;
+	}
+	
+	inline std::vector<Entity*>& getMapH() {
+		return mapHeights_;
 	}
 
 
@@ -151,6 +164,7 @@ private:
 	std::vector<Entity*> entities_;
 	std::vector<Entity*> tiles_;
 	std::vector<Entity*> tileCollider_;
+	std::vector<Entity*> mapHeights_;
 
 	std::array<Entity*, ecs::maxHdlr> hdlrs_;
 	std::array<std::unique_ptr<System>, ecs::maxSystem> sys_;

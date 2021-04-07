@@ -41,6 +41,7 @@ class Possesion;
 class GhostCtrl;
 class ContactDamage;
 class KeyGame;
+class HeightObject;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -79,6 +80,7 @@ class KeyGame;
 	MapMngr,\
 	TileRender, \
 	GhostCtrl, \
+	HeightObject, \
 	Possesion,\
 	ContactDamage,\
 	KeyGame

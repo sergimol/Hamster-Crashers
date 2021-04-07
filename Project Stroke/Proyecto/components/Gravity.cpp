@@ -1,6 +1,9 @@
 #include "Gravity.h"
 #include "../ecs/Entity.h"
 #include "../sdlutils/SDLUtils.h"
+#include "../utils/Collisions.h"
+#include "../ecs/Manager.h"
+#include "HeightObject.h"
 
 void Gravity::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -15,8 +18,21 @@ void Gravity::update() {
 		velZ -= gravity_;
 		timer = sdlutils().currRealTime();
 	}
-	else if (z < floor) {			//Final del salto	!!!!!!!!!(0 SE SUSTITUIRA POR LA Z DEL MAPA)!!!!!!!!
+	else if (z < floor) {			//Final del salto	
 		velZ = 0;
 		z = floor;
 	}
+	
+	auto& heights = entity_->getMngr()->getMapH();
+	for (Entity* alt : heights) {
+		auto* aTr = alt->getComponent<Transform>();
+		if (Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), aTr->getPos(), aTr->getW(), aTr->getH())) {
+			floor = alt->getComponent<HeightObject>()->getZ();
+			return;
+		}
+	}
+}
+
+void Gravity::onDisable() {
+	tr_->getVelZ() = 0.0;
 }

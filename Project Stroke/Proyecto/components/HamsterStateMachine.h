@@ -1,6 +1,8 @@
 #pragma once
 
 #include "../ecs/Component.h"
+#include "../ecs/Entity.h"
+#include "Gravity.h"
 #include <string>
 
 const enum class HamStates { IDLE, DEAD, STUNNED, INFARCTED, MOVING, JUMPING, STRONGATTACK, LIGHTATTACK, ABILITY};
@@ -24,8 +26,8 @@ public:
 												 currentState == HamStates::STUNNED || 
 												 currentState == HamStates::INFARCTED)); };
 
-	inline bool canJump() const { return (currentState == HamStates::IDLE ||
-										  currentState == HamStates::MOVING); };
+	inline bool canJump() const { return ((currentState == HamStates::IDLE ||
+										  currentState == HamStates::MOVING) && entity_->getComponent<Gravity>()->isActive()); };
 
 	inline bool cantBeTargeted() const { return (currentState == HamStates::DEAD ||
 												 currentState == HamStates::INFARCTED); };

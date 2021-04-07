@@ -1,5 +1,6 @@
 #include "Movement.h"
 #include "Stroke.h"
+#include "Combos.h"
 #include <cmath>
 #include "../sdlutils/InputHandler.h"
 #include "../ecs/Entity.h"
@@ -107,6 +108,7 @@ void Movement:: update() {
 	}
 
 	if (hms_->canJump() && keymap.at(SPACE)) {		//Inicio del salto
+		entity_->getComponent<Combos>()->checkCombo(2);
 		velZ = jump_;
 		state = HamStates::JUMPING;
 		//timer = sdlutils().currRealTime();
@@ -118,7 +120,7 @@ void Movement:: update() {
 	//}
 
 	if (z <= 0 && velZ < 0) {			//Final del salto	!!!!!!!!!(0 SE SUSTITUIRA POR LA Z DEL MAPA)!!!!!!!!
-		
+		entity_->getComponent<Combos>()->popUntilEmpty();
 		keymap.at(SPACE) = false;
 		//velZ = 0;
 		//z = 0;
