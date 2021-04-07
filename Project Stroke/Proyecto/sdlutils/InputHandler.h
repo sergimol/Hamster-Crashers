@@ -215,7 +215,8 @@ private:
 
 	inline void onAxisMotion(const SDL_Event& event) {
 		isAxisMotionEvent_ = true;
-		int controllerID = event.jaxis.which;
+		auto it = sysToGameId.find(event.cdevice.which - reconnections_);
+		int controllerID = (*it).second;
 
 		Uint8 i = 0;
 		bool found = false;
@@ -296,14 +297,14 @@ private:
 
 		// Encontramos el bot�n
 		while (!found && i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX) {
-			SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(controllers_[event.jaxis.which], (SDL_GameControllerButton)i);
+			SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(controllers_[event.jaxis.which - reconnections_], (SDL_GameControllerButton)i);
 			if (b.value.button == event.cbutton.button)
 				found = true;
 			else
 				i++;
 		}
 
-		buttonStates_[event.jaxis.which][i] = true;
+		buttonStates_[event.jaxis.which - reconnections_][i] = true;
 	}
 
 	inline void onButtonUp(const SDL_Event& event) {
@@ -314,14 +315,14 @@ private:
 
 		// Encontramos el bot�n
 		while (!found && i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX) {
-			SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(controllers_[event.jaxis.which], (SDL_GameControllerButton)i);
+			SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(controllers_[event.jaxis.which - reconnections_], (SDL_GameControllerButton)i);
 			if (b.value.button == event.cbutton.button)
 				found = true;
 			else
 				i++;
 		}
 
-		buttonStates_[event.jaxis.which][i] = false;
+		buttonStates_[event.jaxis.which - reconnections_][i] = false;
 	}
 
 	// Añade un mando al juego
@@ -335,6 +336,7 @@ private:
 			else {
 				gId = disconectedControllers_.front();
 				disconectedControllers_.pop();
+				reconnections_++;
 			}
 			initController(event.cdevice.which, gId);
 			actualControllers_++;
@@ -405,6 +407,7 @@ private:
 	map<int, int> sysToGameId;
 
 	int actualControllers_; // Numero de mandos conectados en el momento
+	Sint32 reconnections_ = 0; // Reconexiones de mandos que se han producido
 	
 	array<SDL_GameController*, 4> controllers_;
 	queue<int> disconectedControllers_;
