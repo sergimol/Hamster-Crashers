@@ -22,6 +22,7 @@ void KeyGame::update() {
 	}
 }
 
+// Devuelve a la posición inicial y notifica a Possesion
 void KeyGame::goBack() {
 	tr_->getPos() = iniPos;
 	poss_->reachedEnd();

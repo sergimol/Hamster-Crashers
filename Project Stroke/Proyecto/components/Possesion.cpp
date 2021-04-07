@@ -14,6 +14,7 @@ void Possesion::render() {
 	lineV->render(lineVPos);
 }
 
+//Comprueba que la tecla sea pulsada y la keyGame esté chocando con el marcador
 void Possesion::update() {
 	if (ih().keyDownEvent()) {
 		if (ih().isKeyDown(actualKey) && keyGame->getComponent<KeyGame>()->hitSkillCheck())
@@ -21,7 +22,7 @@ void Possesion::update() {
 		else
 			failedHit();
 	}
-
+//Si se muere o infarta el poseido, se acaba la posesion
 	if (possesedState->cantBeTargeted()) {
 		endPossesion();
 	}
@@ -90,11 +91,13 @@ void Possesion::failedHit() {
 	failed = true;
 }
 
+//Se elimina la key y se desactiva el componente al acabar
 void Possesion::endPossesion() {
 	keyGame->setActive(false);
 	this->setActive(false);
 }
 
+//Coge una key y su respectiva imagen aleatorias
 void Possesion::randomiseKey() {
 	auto rand = sdlutils().rand().nextInt(0, numKeys);
 	actualKey = keyCodes[rand];
