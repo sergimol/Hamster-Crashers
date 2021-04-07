@@ -90,7 +90,7 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 					if (finCombo) {
 						enmKnockback->setKnockbackDistance(50);
 						enmKnockback->knockback();
-						enmKnockback->setKnockbackDistance(10);
+						enmKnockback->setKnockbackDistance(5);
 					}
 					else
 						enmKnockback->knockback();

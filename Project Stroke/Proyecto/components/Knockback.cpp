@@ -1,7 +1,7 @@
 #include "Knockback.h"
 
 Knockback::Knockback() :
-	tr_(nullptr), knockbackVel_(10) {}
+	tr_(nullptr), knockbackVel_(5) {}
 
 void  Knockback::init() {
 	tr_ = entity_->getComponent<Transform>();

@@ -317,8 +317,8 @@ void MapMngr::loadNewMap(string map) {
 						//TO DO
 						else if (name == "enemigo") {
 							//Enemigo de prueba con la imagen de canel�n
-						/*	auto* enemy = mngr_->addEntity();
-							enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2));
+							auto* enemy = mngr_->addEntity();
+							enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0);
 							enemy->addComponent<Transform>(
 								Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
 								Vector2D(), 240.0f, 370.0f, 0.0f)->getFlip() = true;
@@ -331,7 +331,7 @@ void MapMngr::loadNewMap(string map) {
 							enemy->addComponent<Knockback>();
 							enemy->addComponent<MovementSimple>();
 							enemy->addComponent<FollowPlayer>();
-							enemy->addComponent<EnemyStun>();*/
+							enemy->addComponent<EnemyStun>();
 						}
 					}
 				}
