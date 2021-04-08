@@ -8,14 +8,23 @@ EntityAttribs::EntityAttribs() :
 	critProbability_(0.05),
 	maxCrit_(0.2),
 	critDamage_(1.0),
+	poisonDamage_(2),
 	velocity_(Vector2D(7, 3.5)),
 	cadence_(0.0),
 	damage_(20),
+	poisonProbability_(0.0),
+	canPoison_(poisonProbability_ > 0),
+	poisonCD_(7000),
+	updateCD_(1500),
+	invincible_(false),
+	poisonTime_(sdlutils().currRealTime()),
+	invincibilityTime_(sdlutils().currRealTime()),
 	hms_(nullptr),
+	poisoned_(false),
 	enmState_(nullptr)
 {}
 
-EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number) :
+EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb) :
 	health_(life),
 	maxHealth_(life),
 	strokeResist_(0.0),
@@ -25,9 +34,18 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	critDamage_(1.0),
 	velocity_(speed),
 	damage_(20),
+	poisonDamage_(2),
+	poisonCD_(7000),
+	updateCD_(1500),
+	poisonProbability_(poisonProb),
+	canPoison_(poisonProbability_ > 0),
+	invincible_(false),
 	hms_(nullptr),
 	id_(id),
 	cadence_(0.0),
+	poisoned_(false),
+	poisonTime_(sdlutils().currRealTime()),
+	invincibilityTime_(sdlutils().currRealTime()),
 	enmState_(nullptr),
 	playerNumber_(number)
 {}
@@ -47,18 +65,30 @@ void EntityAttribs::init() {
 
 void EntityAttribs::update() {
 	//Timer de invencibilidad
-	if (invencible_ && sdlutils().currRealTime() > time + INVENCIBLECD) {
-		invencible_ = false;
+	if (invincible_ && sdlutils().currRealTime() > invincibilityTime_ + INVINCIBLECD) {
+		invincible_ = false;
+	}
+	//Timer de envenenamiento
+	else if (poisoned_) {
+		//cada x segundos
+		if (sdlutils().currRealTime() >= timeLastUpdate_ + updateCD_) {
+			//Daño por veneno
+			recieveDmg(poisonDamage_);
+			timeLastUpdate_ = sdlutils().currRealTime();
+		}
+		if (sdlutils().currRealTime() >= poisonTime_ + poisonCD_) {
+			poisoned_ = false;
+		}
 	}
 }
 
 //Resta el da�o y devuelve true si ha muerto
 bool EntityAttribs::recieveDmg(int dmg) {
-	if (!invencible_) {
+	if (!invincible_) {
 		health_ -= dmg;
 		//Timer de invulnerabilidad
-		time = sdlutils().currRealTime();
-		invencible_ = true;
+		invincibilityTime_ = sdlutils().currRealTime();
+		invincible_ = true;
 		//Actualizamos la healthBar
 		if (entity_->hasComponent<UI>())
 			entity_->getComponent<UI>()->bar(-dmg);
@@ -112,4 +142,10 @@ void EntityAttribs::addCritProbability(float probability) {
 	if (critProbability_ > maxCrit_) {
 		critProbability_ = maxCrit_;
 	}
+}
+
+//Comienza el envenenamiento
+void EntityAttribs::poison() {
+	poisonTime_ = sdlutils().currRealTime();
+	poisoned_ = true;
 }

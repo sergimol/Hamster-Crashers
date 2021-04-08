@@ -8,13 +8,13 @@
 #include "HamsterStateMachine.h"
 #include "EnemyStateMachine.h"
 
-const int INVENCIBLECD = 200;
+const int INVINCIBLECD = 200;
 
 class EntityAttribs: public Component {
 public:
 	EntityAttribs();
 
-	EntityAttribs(int life, float range, std::string id, Vector2D speed, int number);
+	EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb);
 
 	virtual ~EntityAttribs() {
 	}
@@ -26,6 +26,8 @@ public:
 	void heal(int hp);
 
 	void addCritProbability(float probability);
+
+	void poison();
 
 	void update() override;
 
@@ -53,6 +55,18 @@ public:
 	inline std::string getId() const {
 		return id_;
 	}
+	inline void setPoisonProb(float prob) {
+		poisonProbability_ = prob;
+	}
+	inline bool canPoison() { 
+		return canPoison_; 
+	}
+	inline void activatePoison(bool b) {
+		canPoison_ = b;
+	}
+	inline float getPoisonProb() {
+		return poisonProbability_;
+	}
 
 private:
 	HamsterStateMachine* hms_;
@@ -61,9 +75,11 @@ private:
 	int health_;
 	int maxHealth_;
 	int damage_;
+	int poisonDamage_;
 	int playerNumber_;
 
 	float critProbability_;
+	float poisonProbability_;
 	float maxCrit_;
 	float critDamage_;
 	float strokeResist_;
@@ -71,8 +87,15 @@ private:
 	float cadence_;
 
 	//Variables para tener invulnerabilidad tras una habilidad
-	bool invencible_;
-	float time;
+	bool invincible_;
+	float invincibilityTime_;
+
+	bool canPoison_;
+	bool poisoned_;
+	float poisonTime_;
+	float timeLastUpdate_;
+	int poisonCD_;
+	int updateCD_;
 
 	std::string id_;
 

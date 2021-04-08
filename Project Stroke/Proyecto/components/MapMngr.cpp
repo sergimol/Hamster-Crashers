@@ -94,7 +94,7 @@ void MapMngr::loadNewMap(string map) {
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 256.0f, 0.0f);
 
-						hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5), 0);
+							hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5), 0, 0);
 
 							hamster1->addComponent<Animator>(
 								&sdlutils().images().at("sardinillaSheet"),
@@ -107,9 +107,9 @@ void MapMngr::loadNewMap(string map) {
 								3
 								);
 
-						hamster1->addComponent<HamsterStateMachine>();
-						hamster1->addComponent<Movement>();
-						hamster1->addComponent<Gravity>();
+							hamster1->addComponent<HamsterStateMachine>();
+							hamster1->addComponent<Movement>();
+							hamster1->addComponent<Gravity>();
 
 							//Ataques Basicos
 							hamster1->addComponent<LightAttack>();
@@ -119,8 +119,8 @@ void MapMngr::loadNewMap(string map) {
 							//Habilidad
 							hamster1->addComponent<Roll>();
 
-						//Handlr
-						hamster1->addComponent<ControlHandler>(hamster1->getComponent<EntityAttribs>()->getNumber());
+							//Handlr
+							hamster1->addComponent<ControlHandler>(hamster1->getComponent<EntityAttribs>()->getNumber());
 
 							//Interfaz
 							hamster1->addComponent<UI>("sardinilla", 0);
@@ -143,24 +143,24 @@ void MapMngr::loadNewMap(string map) {
 							//Para acceder facilmente le metemos en Hamster1 de Handelers
 							mngr_->setHandler<Hamster1>(hamster1);
 
-						auto* cosodecosas = mngr_->addEntity();
-						cosodecosas->addComponent<Transform>(
-							Vector2D(object.getPosition().x* scale + 300, object.getPosition().y* scale),
-							Vector2D(), 256.0f, 256.0f, 0.0f);
-						cosodecosas->addComponent<ContactDamage>(10);
+							auto* cosodecosas = mngr_->addEntity();
+							cosodecosas->addComponent<Transform>(
+								Vector2D(object.getPosition().x * scale + 300, object.getPosition().y * scale),
+								Vector2D(), 256.0f, 256.0f, 0.0f);
+							cosodecosas->addComponent<ContactDamage>(10);
 
 
-					}
-					//CANELON
-					else if (name == "canelon") {
-						//Sardinilla
-						auto* hamster2 = mngr_->addEntity();
+						}
+						//CANELON
+						else if (name == "canelon") {
+							//Sardinilla
+							auto* hamster2 = mngr_->addEntity();
 
 							hamster2->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 256.0f, 0.0f);
 
-						hamster2->addComponent<EntityAttribs>(100, 0.0, "canelon", Vector2D(7, 4.5), 1);
+							hamster2->addComponent<EntityAttribs>(100, 0.0, "canelon", Vector2D(7, 4.5), 1, 0);
 
 							hamster2->addComponent<Animator>(
 								&sdlutils().images().at("canelonSheet"),
@@ -184,8 +184,8 @@ void MapMngr::loadNewMap(string map) {
 							//Habilidad
 							hamster2->addComponent<Pray>(30, 50);
 
-						//Handlr
-						hamster2->addComponent<ControlHandler>(hamster2->getComponent<EntityAttribs>()->getNumber());
+							//Handlr
+							hamster2->addComponent<ControlHandler>(hamster2->getComponent<EntityAttribs>()->getNumber());
 
 							//Interfaz
 							hamster2->addComponent<UI>("canelon", 0);
@@ -202,28 +202,28 @@ void MapMngr::loadNewMap(string map) {
 
 							players.push_back(hamster2);
 
-						//Para acceder facilmente le metemos en Hamster2 de Handelers
-						mngr_->setHandler<Hamster2>(hamster2);
-					}
-					//KETA
-					else if (name == "keta") {
-						//Sardinilla
-						auto* hamster3 = mngr_->addEntity();
-						hamster3->addComponent<Transform>(
-							Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-							Vector2D(), 256.0f, 256.0f, 0.0f);
-						hamster3->addComponent<EntityAttribs>(100, 0.0, "keta", Vector2D(7, 4.5), 2);
-						//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
-						hamster3->addComponent<Animator>(
-							&sdlutils().images().at("ketaSheet"),
-							64,
-							64,
-							3,
-							3,
-							220,
-							Vector2D(0, 0),
-							3
-							);
+							//Para acceder facilmente le metemos en Hamster2 de Handelers
+							mngr_->setHandler<Hamster2>(hamster2);
+						}
+						//KETA
+						else if (name == "keta") {
+							//Sardinilla
+							auto* hamster3 = mngr_->addEntity();
+							hamster3->addComponent<Transform>(
+								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+								Vector2D(), 256.0f, 256.0f, 0.0f);
+							hamster3->addComponent<EntityAttribs>(100, 0.0, "keta", Vector2D(7, 4.5), 2, 30);
+							//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+							hamster3->addComponent<Animator>(
+								&sdlutils().images().at("ketaSheet"),
+								64,
+								64,
+								3,
+								3,
+								220,
+								Vector2D(0, 0),
+								3
+								);
 
 							hamster3->addComponent<HamsterStateMachine>();
 							hamster3->addComponent<Movement>();
@@ -237,8 +237,8 @@ void MapMngr::loadNewMap(string map) {
 							//Habilidad
 							hamster3->addComponent<Poison>(5);
 
-						//Handler
-						hamster3->addComponent<ControlHandler>(hamster3->getComponent<EntityAttribs>()->getNumber());
+							//Handler
+							hamster3->addComponent<ControlHandler>(hamster3->getComponent<EntityAttribs>()->getNumber());
 
 							//Interfaz
 							hamster3->addComponent<UI>("keta", 0);
@@ -255,28 +255,28 @@ void MapMngr::loadNewMap(string map) {
 
 							players.push_back(hamster3);
 
-						//Para acceder facilmente le metemos en Hamster3 de Handelers
-						mngr_->setHandler<Hamster3>(hamster3);
-					}
-					//MONCHI
-					else if (name == "monchi") {
-						//Sardinilla
-						auto* hamster4 = mngr_->addEntity();
-						hamster4->addComponent<Transform>(
-							Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-							Vector2D(), 256.0f, 256.0f, 0.0f);
-						hamster4->addComponent<EntityAttribs>(100, 0.0, "monchi", Vector2D(7, 4.5), 3);
-						//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
-						hamster4->addComponent<Animator>(
-							&sdlutils().images().at("monchiSheet"),
-							64,
-							64,
-							3,
-							3,
-							220,
-							Vector2D(0, 0),
-							3
-							);
+							//Para acceder facilmente le metemos en Hamster3 de Handelers
+							mngr_->setHandler<Hamster3>(hamster3);
+						}
+						//MONCHI
+						else if (name == "monchi") {
+							//Sardinilla
+							auto* hamster4 = mngr_->addEntity();
+							hamster4->addComponent<Transform>(
+								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+								Vector2D(), 256.0f, 256.0f, 0.0f);
+							hamster4->addComponent<EntityAttribs>(100, 0.0, "monchi", Vector2D(7, 4.5), 3, 0);
+							//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
+							hamster4->addComponent<Animator>(
+								&sdlutils().images().at("monchiSheet"),
+								64,
+								64,
+								3,
+								3,
+								220,
+								Vector2D(0, 0),
+								3
+								);
 
 							hamster4->addComponent<HamsterStateMachine>();
 							hamster4->addComponent<Movement>();
@@ -290,8 +290,8 @@ void MapMngr::loadNewMap(string map) {
 							//Habilidad
 							hamster4->addComponent<Turret>();
 
-						//Handler
-						hamster4->addComponent<ControlHandler>(hamster4->getComponent<EntityAttribs>()->getNumber());
+							//Handler
+							hamster4->addComponent<ControlHandler>(hamster4->getComponent<EntityAttribs>()->getNumber());
 
 							//Interfaz
 							hamster4->addComponent<UI>("monchi", 0);
@@ -318,7 +318,7 @@ void MapMngr::loadNewMap(string map) {
 						else if (name == "enemigo") {
 							//Enemigo de prueba con la imagen de canel�n
 							auto* enemy = mngr_->addEntity();
-							enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0);
+							enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0);
 							enemy->addComponent<Transform>(
 								Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
 								Vector2D(), 240.0f, 370.0f, 0.0f)->getFlip() = true;
@@ -385,15 +385,15 @@ void MapMngr::loadNewMap(string map) {
 
 						//COMPROBAR DE ALGUNA MANERA SI ES COLLIDER O KHE
 						if (globalIndexTile != 0 && index < 2)
-							
+
 							//ESTO ES EL NOMBRE DE LA LAYER QUE SE CREE SOLO DE LAS COLISIONES
 							/*if (tileLayer.getName() == "Collision")
 								Tile(entity_->getMngr(), src, dest, tilesetsArr[index], true);
 							else
 								Tile(entity_->getMngr(), src, dest, tilesetsArr[index], false);*/
 
-						//Esto esta porque falta depurar lo de arriba, hay que eliminarlo
-						Tile(entity_->getMngr(), src, dest, tilesetsArr[index], false);
+								//Esto esta porque falta depurar lo de arriba, hay que eliminarlo
+							Tile(entity_->getMngr(), src, dest, tilesetsArr[index], false);
 					}
 				}
 			}

@@ -49,14 +49,27 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 
 			//Y comprobamos si colisiona
 			if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
-				int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
+				EntityAttribs* playerAttribs = entity_->getComponent<EntityAttribs>();
+				int dmg = playerAttribs->getDmg();
 				if (finCombo) {
-					if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.02); //Aumentar probabilidad critico
+					if (!canHit) playerAttribs->addCritProbability(0.02); //Aumentar probabilidad critico
 					//Empujar y stunn al enemigo 
 				}
 				canHit = true;
+
+				EntityAttribs* enmAttribs = ents[i]->getComponent<EntityAttribs>();
 				//Le restamos la vida al enemigo
-				ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg * 1.5);
+				enmAttribs->recieveDmg(dmg * 1.5);
+
+				//Si puede envenenar
+				if (playerAttribs->canPoison()) {
+					// Número aleatorio para ver si envenena o no
+					float i = sdlutils().rand().nextInt(1, 100);
+					//Si i es menor que la probabilidad, envenena al enemigo
+					if (i <= playerAttribs->getPoisonProb()) {
+						enmAttribs->poison();
+					}
+				}
 
 				auto& enmStateM = ents[i]->getComponent<EnemyStateMachine>()->getState();
 
