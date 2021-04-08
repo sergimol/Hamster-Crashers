@@ -94,6 +94,9 @@ public:
 		render(src, dest, rotation, nullptr, flip);
 	}
 
+	inline SDL_Texture* getSDLText() {
+		return texture_;
+	}
 private:
 
 	// Construct from text

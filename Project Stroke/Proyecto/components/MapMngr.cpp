@@ -94,7 +94,7 @@ void MapMngr::loadNewMap(string map) {
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 256.0f, 0.0f);
 
-							hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5), 0, 0);
+							hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5), 0, 15);
 
 							hamster1->addComponent<Animator>(
 								&sdlutils().images().at("sardinillaSheet"),
@@ -212,7 +212,7 @@ void MapMngr::loadNewMap(string map) {
 							hamster3->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 256.0f, 0.0f);
-							hamster3->addComponent<EntityAttribs>(100, 0.0, "keta", Vector2D(7, 4.5), 2, 30);
+							hamster3->addComponent<EntityAttribs>(100, 0.0, "keta", Vector2D(7, 4.5), 2, 10);
 							//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
 							hamster3->addComponent<Animator>(
 								&sdlutils().images().at("ketaSheet"),

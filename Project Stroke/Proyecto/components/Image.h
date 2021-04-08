@@ -5,14 +5,14 @@
 #include "../ecs/Component.h"
 #include "../sdlutils/Texture.h"
 #include "../sdlutils/SDLUtils.h"
-
+#include "EntityAttribs.h"
 #include "Transform.h"
 
-class Image: public Component {
+class Image : public Component {
 public:
-	Image(Texture *tex) :
-			tr_(nullptr), //
-			tex_(tex) //
+	Image(Texture* tex) :
+		tr_(nullptr), //
+		tex_(tex) //
 	{
 	}
 	virtual ~Image() {
@@ -31,16 +31,25 @@ public:
 
 		SDL_RenderDrawRect(sdlutils().renderer(), &dest);
 
-		if(tr_->getFlip())
+
+		EntityAttribs* attribs = entity_->getComponent<EntityAttribs>();
+
+		//Color verdoso cuando está envenenado
+		if(attribs != nullptr && attribs->getPoisoned())
+			SDL_SetTextureColorMod(tex_->getSDLText(), 148, 236, 130);
+		else
+			SDL_SetTextureColorMod(tex_->getSDLText(), 255, 255, 255);
+
+		if (tr_->getFlip())
 			tex_->render(dest, tr_->getRot(), SDL_FLIP_HORIZONTAL);
-		else 
+		else
 			tex_->render(dest, tr_->getRot());
 
 		//std::cout << renderPos.getX() << " " << renderPos.getY() << "\n";
 	}
 
 private:
-	Transform *tr_;
-	Texture *tex_;
+	Transform* tr_;
+	Texture* tex_;
 };
 

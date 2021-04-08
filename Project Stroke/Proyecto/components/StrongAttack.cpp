@@ -62,7 +62,7 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 				enmAttribs->recieveDmg(dmg * 1.5);
 
 				//Si puede envenenar
-				if (playerAttribs->canPoison()) {
+				if (playerAttribs->getCanPoison()) {
 					// Número aleatorio para ver si envenena o no
 					float i = sdlutils().rand().nextInt(1, 100);
 					//Si i es menor que la probabilidad, envenena al enemigo

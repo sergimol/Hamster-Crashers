@@ -58,7 +58,7 @@ public:
 	inline void setPoisonProb(float prob) {
 		poisonProbability_ = prob;
 	}
-	inline bool canPoison() { 
+	inline bool getCanPoison() { 
 		return canPoison_; 
 	}
 	inline void activatePoison(bool b) {
@@ -67,10 +67,14 @@ public:
 	inline float getPoisonProb() {
 		return poisonProbability_;
 	}
+	inline bool getPoisoned() {
+		return poisoned_;
+	}
 
 private:
 	HamsterStateMachine* hms_;
 	EnemyStateMachine*  enmState_;
+	Texture* hmsText_;
 	
 	int health_;
 	int maxHealth_;

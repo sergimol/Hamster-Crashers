@@ -146,6 +146,7 @@ void EntityAttribs::addCritProbability(float probability) {
 
 //Comienza el envenenamiento
 void EntityAttribs::poison() {
+	//int SDL_SetTextureColorMod(hmsText_, 96, 227, 70);
 	poisonTime_ = sdlutils().currRealTime();
 	poisoned_ = true;
 }
