@@ -20,20 +20,19 @@ void Cloud::update() {
 		if (e->hasGroup<Enemy>()) {
 			//Cogemos el transform del enemigo
 			auto eTR = e->getComponent<Transform>();
-
 			//Creamos nuestroRect
 			SDL_Rect rectPlayer;
 			rectPlayer.h = tr_->getH();
 			rectPlayer.w = tr_->getW();
-			rectPlayer.x = tr_->getPos().getX() - Game::camera_.x;
-			rectPlayer.y = tr_->getPos().getY() - Game::camera_.y;
+			rectPlayer.x = tr_->getPos().getX() - Game::camera_->getComponent<Transform>()->getPos().getX();
+			rectPlayer.y = tr_->getPos().getY() - Game::camera_->getComponent<Transform>()->getPos().getY();
 
 			//Creamos su Rect
 			SDL_Rect rectEnemy;
 			rectEnemy.h = eTR->getH();
 			rectEnemy.w = eTR->getW();
-			rectEnemy.x = eTR->getPos().getX() - Game::camera_.x;
-			rectEnemy.y = eTR->getPos().getY() - Game::camera_.y;
+			rectEnemy.x = eTR->getPos().getX() - Game::camera_->getComponent<Transform>()->getPos().getX();
+			rectEnemy.y = eTR->getPos().getY() - Game::camera_->getComponent<Transform>()->getPos().getY();
 
 			//Y comprobamos si colisiona
 			if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {

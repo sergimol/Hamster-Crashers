@@ -28,9 +28,9 @@ public:
 	void init();
 	void update();
 	void start();
-	void updateCamera();
 	void sortEntities();
-	static SDL_Rect camera_;
+
+	static Entity* camera_;
 private:
 	std::unique_ptr<Manager> mngr_;
 	//std::vector<Entity*> players_; // vector de jugadores
