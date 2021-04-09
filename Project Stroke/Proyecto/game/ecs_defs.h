@@ -40,6 +40,7 @@ class TileRender;
 class Possesion;
 class GhostCtrl;
 class ContactDamage;
+class AnimHamsterStateMachine;
 class KeyGame;
 class HeightObject;
 
@@ -83,7 +84,9 @@ class HeightObject;
 	HeightObject, \
 	Possesion,\
 	ContactDamage,\
-	KeyGame
+	AnimHamsterStateMachine,\
+	KeyGame,\
+	HeightObject
 
 // groups
 

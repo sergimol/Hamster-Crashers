@@ -4,6 +4,7 @@
 #include "FollowPlayer.h"
 #include "Knockback.h"
 #include "EnemyStun.h"
+#include "AnimHamsterStateMachine.h"
 
 LightAttack::LightAttack() :
 	hms_(nullptr), tr_(nullptr), cooldown_(350), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
@@ -23,6 +24,13 @@ void LightAttack::update() {
 	if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
 		DEBUG_isAttacking_ = false;
 	}
+
+	//Fin animacion
+	if (entity_->getComponent<AnimHamsterStateMachine>()->getState() == HamStatesAnim::LIGHTATTACK1)
+	{
+		if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK1, false);
+	}
 }
 
 bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
@@ -36,6 +44,7 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 		if (ents[i]->hasGroup<Enemy>()) {
 			//Cogemos el transform del enemigo
 			auto eTR = ents[i]->getComponent<Transform>();
+
 
 			//Creamos su Rect
 			SDL_Rect rectEnemy;
@@ -157,6 +166,9 @@ void LightAttack::attack() {
 			attackSound_.play();
 
 		//this.anims.play(pegarse)
+
+		//GESTION DE LA ANIMACION
+		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK1, true);
 
 		DEBUG_isAttacking_ = true;
 		time_ = sdlutils().currRealTime();

@@ -1,6 +1,7 @@
 #include "Movement.h"
 #include "Stroke.h"
 #include "Combos.h"
+#include "AnimHamsterStateMachine.h"
 #include <cmath>
 #include "../sdlutils/InputHandler.h"
 #include "../ecs/Entity.h"
@@ -74,9 +75,13 @@ void Movement:: update() {
 	//std:cout << "estoy decelerando supuestamente porque no decelero bien? who knows \n";
 
 		//ANIMACION DE IDLE
-		if (state != HamStates::IDLE && state != HamStates::INFARCTED)
-			anim_->play(sdlutils().anims().at("sardinilla_idle"));
+		/*if (state != HamStates::IDLE && state != HamStates::INFARCTED)
+			anim_->play(sdlutils().anims().at("sardinilla_idle"));*/
 		if (state != HamStates::JUMPING && state != HamStates::INFARCTED && state != HamStates::STUNNED) state = HamStates::IDLE;
+
+		//ANIMACION DE IDLE
+		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, false);
+		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, true);
 
 	}
 	else if (hms_->canMove()) {		//Aceleracion
@@ -88,9 +93,14 @@ void Movement:: update() {
 		//	<< " DIR: " << dir.getX() << " " << dir.getY() << "\n";
 
 		//ANIMACION DE MOVIMIENTO
-		if (state != HamStates::MOVING && state != HamStates::INFARCTED)
-			anim_->play(sdlutils().anims().at("sardinilla_move"));
+		/*if (state != HamStates::MOVING && state != HamStates::INFARCTED)
+			anim_->play(sdlutils().anims().at("sardinilla_move"));*/
 		if (state != HamStates::JUMPING && state != HamStates::INFARCTED && state != HamStates::STUNNED) state = HamStates::MOVING;
+
+		//ANIMACION DE MOVIMIENTO
+		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, true);
+		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, false);
+
 
 	}
 	else  {

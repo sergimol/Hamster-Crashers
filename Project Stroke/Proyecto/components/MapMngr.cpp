@@ -32,6 +32,7 @@
 #include "../components/GhostCtrl.h"
 #include "../components/ContactDamage.h"
 #include "../components/HeightObject.h"
+#include "../components//AnimHamsterStateMachine.h"
 
 
 void MapMngr::init() {
@@ -107,6 +108,7 @@ void MapMngr::loadNewMap(string map) {
 								3
 								);
 
+							hamster1->addComponent<AnimHamsterStateMachine>();
 							hamster1->addComponent<HamsterStateMachine>();
 							hamster1->addComponent<Movement>();
 							hamster1->addComponent<Gravity>();
@@ -173,6 +175,7 @@ void MapMngr::loadNewMap(string map) {
 								3
 								);
 
+							hamster2->addComponent<AnimHamsterStateMachine>();
 							hamster2->addComponent<HamsterStateMachine>();
 							hamster2->addComponent<Movement>();
 

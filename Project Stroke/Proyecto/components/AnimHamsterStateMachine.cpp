@@ -1,4 +1,6 @@
 #include "AnimHamsterStateMachine.h"
+#include "EntityAttribs.h"
+#include "Animator.h"
 
 void AnimHamsterStateMachine::init()
 {
@@ -6,17 +8,34 @@ void AnimHamsterStateMachine::init()
 	assert(anim != nullptr);
 	ent = entity_->getComponent<EntityAttribs>();
 	assert(ent != nullptr);
+	id = ent->getId();
 }
 
 void AnimHamsterStateMachine::update()
 {
-	handleAnimState();
+	HandleAnimState();
+	CheckAnimState();
+}
+
+
+//Maneja las transiciones entre los estados
+void AnimHamsterStateMachine::HandleAnimState()
+{
+	//idle
+	if (idle && !attack && !move)
+		currentState = HamStatesAnim::IDLE;
+	//move
+	else if (move && !attack && !idle)
+		currentState = HamStatesAnim::MOVE;
+	//attack
+	else if (attack)
+		currentState = HamStatesAnim::LIGHTATTACK1;
 }
 
 //Cambia las animaciones dependiendo del estado del hamster
-void AnimHamsterStateMachine::handleAnimState()
+void AnimHamsterStateMachine::CheckAnimState()
 {
-	std::string id = ent->getId();
+
 	//Si es diferente al anterior hay que cambiar la animacion
 	if (lastState != currentState)
 	{
@@ -71,4 +90,55 @@ void AnimHamsterStateMachine::handleAnimState()
 	//Recogemos
 	lastState = currentState;
 
+}
+
+//PONE A TRUE O FALSE LOS BOOLEANOS DE ANIMACION
+void AnimHamsterStateMachine::setAnimBool(HamStatesAnim h, bool b) 
+{
+
+	switch (h)
+	{
+	case HamStatesAnim::IDLE:
+		idle = b;
+		break;
+	case HamStatesAnim::MOVE:
+		move = b;
+		break;
+	case HamStatesAnim::ABILITY:
+		idle = b;
+		break;
+	case HamStatesAnim::JUMPUP:
+		idle = b;
+		break;
+	case HamStatesAnim::JUMPDOWN:
+		idle = b;
+		break;
+	case HamStatesAnim::LIGHTATTACK1:
+		attack = b;
+		break;
+	case HamStatesAnim::LIGHTATTACK2:
+		idle = b;
+		break;
+	case HamStatesAnim::LIGHTCOMBO:
+		idle = b;
+		break;
+	case HamStatesAnim::STRONGATTACK:
+		idle = b;
+		break;
+	case HamStatesAnim::STRONGCOMBO:
+		idle = b;
+		break;
+	case HamStatesAnim::HITTED:
+		idle = b;
+		break;
+	case HamStatesAnim::STUNNED:
+		idle = b;
+		break;
+	case HamStatesAnim::DEAD:
+		idle = b;
+		break;
+	case HamStatesAnim::STROKE:
+		idle = b;
+		break;
+	}
 }

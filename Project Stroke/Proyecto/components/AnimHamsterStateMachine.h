@@ -11,8 +11,10 @@ const enum class HamStatesAnim {
 	LIGHTATTACK1, LIGHTATTACK2, LIGHTCOMBO,
 	STRONGATTACK, STRONGCOMBO,
 	HITTED, STUNNED, DEAD,
-	STROKE, GHOST
+	STROKE, GHOST,
+	DEFAULT
 };
+
 
 class AnimHamsterStateMachine : public Component
 {
@@ -21,8 +23,15 @@ private:
 	HamStatesAnim lastState;
 	Animator* anim;
 	EntityAttribs* ent;
+	std::string id;
+
+	//BOOLEANOS PARA LAS ANIMACIONES, 1 POR ESTADO
+	bool idle;
+	bool move;
+	bool attack;
+
 public: 
-	AnimHamsterStateMachine() : currentState(HamStatesAnim::IDLE), lastState(HamStatesAnim::IDLE), anim(nullptr), ent(nullptr) {};
+	AnimHamsterStateMachine() : currentState(HamStatesAnim::IDLE), lastState(HamStatesAnim::DEFAULT), anim(nullptr), ent(nullptr) {};
 
 	void init() override;
 
@@ -32,6 +41,13 @@ public:
 
 	virtual void update();
 
-	void handleAnimState();
+	//HACE PLAY DE LA ANIMACION NECESARIA EN CADA ESTADO
+	void CheckAnimState();
+
+	//MANEJA LAS TRANSICIONES DE LOS ESTADOS
+	void HandleAnimState();
+
+	void setAnimBool(HamStatesAnim h, bool b);
+
 };
 

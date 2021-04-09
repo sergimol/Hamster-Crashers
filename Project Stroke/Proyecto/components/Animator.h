@@ -16,7 +16,6 @@ public:
 	Animator(Texture* tex, int w, int h, int c, int r, Uint32 f, Vector2D sf, int dur) :
 		tr_(nullptr), //
 		tex_(tex), //
-		et_(nullptr), //
 		widthFrame(w), //
 		heightFrame(h), //
 		startFrame(sf), //
@@ -35,10 +34,6 @@ public:
 	void init() override {
 		tr_ = entity_->getComponent<Transform>();
 		assert(tr_ != nullptr);
-
-		et_ = entity_->getComponent<EntityAttribs>();
-		assert(et_ != nullptr);
-		id = et_->getId();
 
 	}
 
@@ -121,42 +116,12 @@ public:
 		idChain = actualAnim.chain();
 	}
 
-	//Cambia las animaciones dependiendo del estado del hamster
-	void handleAnimState() 
-	{
-		//Cogemos el estado actual de la entidad / hamster
-		state = entity_->getComponent<HamsterStateMachine>()->getState();
-
-		//Si es diferente al anterior hay que cambiar la animacion
-		if (lastState != state)
-		{
-			//Depende del estado playeamos una animacion u otra
-			switch (state)
-			{
-			case HamStates::IDLE:
-				play(sdlutils().anims().at(id + "_idle"));
-				break;
-			case HamStates::MOVING:
-				play(sdlutils().anims().at(id + "_move"));
-				break;
-			case HamStates::ABILITY:
-				play(sdlutils().anims().at(id + "_ability"));
-				break;
-			case HamStates::STUNNED:
-				//play(sdlutils().anims().at(id + "_stun"));
-				break;
-			}
-		}
-		
-		//Recogemos 
-		lastState = entity_->getComponent<HamsterStateMachine>()->getState();
-
-	}
+	
 
 	//Devuelve true o false en funcion si la animacion ha llegado al ultimo frame o no
 	bool OnAnimationFrameEnd() 
 	{
-		return animCont == animDuration;
+		return animCont == animDuration-1;
 	}
 
 	//Devuelve true o false en funcion de si la animacion ha llegado al frame del parametro
@@ -169,7 +134,6 @@ private:
 	//Variables de recursos
 	Transform* tr_;
 	Texture* tex_;
-	EntityAttribs* et_;
 
 	//Timers para actualizar la spritsheet
 	Uint32 lastTime;
@@ -192,8 +156,6 @@ private:
 	int cols; 
 	int rows;
 
-	//ID de la entidad
-	std::string id;
 
 	//Comprobacion del loop
 	bool looped;
@@ -201,8 +163,5 @@ private:
 	//Animacion encadenada
 	std::string idChain;
 
-	//Estado de la entidad
-	HamStates state;
-	HamStates lastState;
 };
 
