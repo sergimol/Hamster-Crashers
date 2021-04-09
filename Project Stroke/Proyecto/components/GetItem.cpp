@@ -22,15 +22,15 @@ void GetItem::update() {
 			SDL_Rect rectPlayer;
 			rectPlayer.h = tr_->getH();
 			rectPlayer.w = tr_->getW();
-			rectPlayer.x = tr_->getPos().getX() - Game::camera_->getComponent<Transform>()->getPos().getX();
-			rectPlayer.y = tr_->getPos().getY() - Game::camera_->getComponent<Transform>()->getPos().getY();
+			rectPlayer.x = tr_->getPos().getX() - Game::camera_.x;
+			rectPlayer.y = tr_->getPos().getY() - Game::camera_.y;
 
 			//Creamos su Rect
 			SDL_Rect rectItem;
 			rectItem.h = eTR->getH();
 			rectItem.w = eTR->getW();
-			rectItem.x = eTR->getPos().getX() - Game::camera_->getComponent<Transform>()->getPos().getX();
-			rectItem.y = eTR->getPos().getY() - Game::camera_->getComponent<Transform>()->getPos().getY();
+			rectItem.x = eTR->getPos().getX() - Game::camera_.x;
+			rectItem.y = eTR->getPos().getY() - Game::camera_.y;
 
 			//Y comprobamos si colisiona
 			if (SDL_HasIntersection(&rectPlayer, &rectItem)) {

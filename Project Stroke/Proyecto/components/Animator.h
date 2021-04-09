@@ -46,7 +46,7 @@ public:
 		SDL_Rect src = build_sdlrect(auxTextFrame, widthFrame, heightFrame);
 
 		//destino
-		Vector2D renderPos = Vector2D(tr_->getPos().getX() - Game::camera_->getComponent<Transform>()->getPos().getX() , tr_->getPos().getY() - tr_->getZ() - Game::camera_->getComponent<Transform>()->getPos().getY());
+		Vector2D renderPos = Vector2D(tr_->getPos().getX() - Game::camera_.x, tr_->getPos().getY() - tr_->getZ() - Game::camera_.y);
 		SDL_Rect dest = build_sdlrect(renderPos, tr_->getW(), tr_->getH());
 
 
