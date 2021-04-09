@@ -21,6 +21,8 @@ public:
 
 	void init() override;
 
+	void update() override;
+
 	bool recieveDmg(int dmg);
 
 	void heal(int hp);
@@ -28,8 +30,6 @@ public:
 	void addCritProbability(float probability);
 
 	void poison();
-
-	void update() override;
 
 	inline void setLife(int life) { health_ = life; };
 
@@ -69,7 +69,7 @@ public:
 	}
 	inline bool getPoisoned() {
 		return poisoned_;
-	}
+	}	
 
 private:
 	HamsterStateMachine* hms_;

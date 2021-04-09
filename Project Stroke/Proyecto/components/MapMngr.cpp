@@ -33,6 +33,7 @@
 #include "../components/ContactDamage.h"
 #include "../components/HeightObject.h"
 #include "../components//AnimHamsterStateMachine.h"
+#include "../components/Swallow.h"
 
 MapMngr::MapMngr() {
 	/*filas = rows;
@@ -314,6 +315,8 @@ void MapMngr::loadNewMap(string map) {
 
 							//Habilidad
 							hamster4->addComponent<Turret>();
+							//Pasiva
+							hamster4->addComponent<Swallow>(40);
 
 							//Handler
 							hamster4->addComponent<ControlHandler>(hamster4->getComponent<EntityAttribs>()->getNumber());

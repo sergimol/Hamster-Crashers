@@ -42,7 +42,7 @@
 #include "../ecs/Manager.h"
 #include "../utils/Vector2D.h"
 
-SDL_Rect Game::camera_ = { 0,0,1920, 1080 };
+SDL_Rect Game::camera_ = { 0,0,1920, 1010 };
 
 Game::Game() {
 	mngr_.reset(new Manager());
@@ -53,7 +53,7 @@ Game::~Game() {
 
 void Game::init() {
 
-	SDLUtils::init("Squeak Ship", 1920, 1080, "resources/config/hamsters.resources.json");
+	SDLUtils::init("Squeak Ship", 1920, 1010, "resources/config/hamsters.resources.json");
 
 	// Mapa
 	auto* mapa = mngr_->addEntity();
