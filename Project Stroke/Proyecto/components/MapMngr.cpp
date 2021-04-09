@@ -34,9 +34,31 @@
 #include "../components/HeightObject.h"
 #include "../components//AnimHamsterStateMachine.h"
 
+MapMngr::MapMngr() {
+	/*filas = rows;
+	columnas = cols;
+	casillas = new bool * [columnas];
+	for (int i = 0; i < columnas; i++)
+	{
+		casillas[i] = new bool[filas];
+	}*/
+}
+
+MapMngr::~MapMngr() {
+	for (int i = 0; i < columnas; i++)
+	{
+		delete[] collider[i];
+	}
+	delete[] collider;
+}
 
 void MapMngr::init() {
 	loadNewMap("resources/images/tiled/Mapa.tmx");
+}
+
+void MapMngr::update() {
+	//En cada iteracion comprueba si se pueden chocar o no los hamsters
+	intersectWall();
 }
 
 void MapMngr::loadNewMap(string map) {
@@ -404,14 +426,34 @@ void MapMngr::loadNewMap(string map) {
 	}
 }
 
+void MapMngr::intersectWall() {
 
-//bool GameMap::intersectsWall(SDL_Rect rect) {
-//	Point2D topLeftCoords = static_cast<PlayState*>(juego)->SDLPointToMapCoords(Point2D(rect.x, rect.y));
-//	Point2D bottomRightCoords = static_cast<PlayState*>(juego)->SDLPointToMapCoords(Point2D(rect.x + rect.w - 1, rect.y + rect.h - 1));
-//
-//	for (int x = topLeftCoords.getX(); x <= bottomRightCoords.getX(); x++) {
-//		for (int y = topLeftCoords.getY(); y <= bottomRightCoords.getY(); y++)
-//			if (cells[x][y] == Wall) return true;
-//	}
-//	return false;
-//}
+	//Cogemos a todos los jugadores
+	auto top = entity_->getMngr()->getPlayers();
+
+	for (Entity* hamsters : top) {
+
+		auto rect = hamsters->getComponent<Transform>();
+		Vector2D topLeftCoords = SDLPointToMapCoords(rect->getPos());
+		Vector2D bottomRightCoords = SDLPointToMapCoords(Vector2D(rect->getPos().getX() + rect->getW() - 1, rect->getPos().getY() + rect->getH() - 1));
+
+		for (int x = topLeftCoords.getX(); x <= bottomRightCoords.getX(); x++) {
+			for (int y = topLeftCoords.getY(); y <= bottomRightCoords.getY(); y++) {
+				if (collider[x][y])
+					//Llama al movement y no se mueve na (Por ejemplo)
+					;
+			}
+		}
+	}
+}
+
+
+Vector2D MapMngr::mapCoorsToSDLPoint(Vector2D coords) {
+	//return Vector2D(coords.getX() * TAM_CELDA, coords.getY() * TAM_CELDA);
+	return Vector2D(0, 0);
+}
+
+Vector2D MapMngr::SDLPointToMapCoords(Vector2D p) {
+	//return Vector2D(p.getX() / TAM_CELDA, p.getY() / TAM_CELDA);
+	return Vector2D(0, 0);
+}
