@@ -43,7 +43,6 @@ class ContactDamage;
 class AnimHamsterStateMachine;
 class KeyGame;
 class HeightObject;
-class Camera;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -87,8 +86,7 @@ class Camera;
 	ContactDamage,\
 	AnimHamsterStateMachine,\
 	KeyGame,\
-	HeightObject,\
-	Camera
+	HeightObject
 
 // groups
 
