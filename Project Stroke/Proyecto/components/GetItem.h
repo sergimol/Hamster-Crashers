@@ -27,5 +27,6 @@ public:
 
 private:
 	Transform* tr_;
+	SDL_Rect cam;
 };
 

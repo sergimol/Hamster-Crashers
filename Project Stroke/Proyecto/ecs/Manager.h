@@ -160,7 +160,6 @@ public:
 	void render();
 	void refresh();
 private:
-
 	std::vector<Entity*> entities_;
 	std::vector<Entity*> tiles_;
 	std::vector<Entity*> tileCollider_;

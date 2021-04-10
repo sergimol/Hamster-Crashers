@@ -41,8 +41,9 @@
 
 #include "../ecs/Manager.h"
 #include "../utils/Vector2D.h"
+#include "../ecs/Camera.h"
 
-SDL_Rect Game::camera_ = { 0,0,1920, 1080 };
+
 
 Game::Game() {
 	mngr_.reset(new Manager());
@@ -55,9 +56,15 @@ void Game::init() {
 
 	SDLUtils::init("Squeak Ship", 1920, 1080, "resources/config/hamsters.resources.json");
 
+	//Camara
+	camera_ = { 0,0,1920, 1080 };
+	auto* camera = mngr_->addEntity();
+	camera->addComponent<Camera>(camera_);
+	mngr_->setHandler<Camera__>(camera);
 	// Mapa
 	auto* mapa = mngr_->addEntity();
 	mapa->addComponent<MapMngr>();
+	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Mapa.tmx");
 
 	//Imagen de fondo fija
 	/*auto* background = mngr_->addEntity();
@@ -158,16 +165,13 @@ void Game::init() {
 }
 
 void Game::update() {
-	//TODO HACER ESTO SIN IMPORTAR EL NUM DE HAMSTERS QUE HAYA
-
-
-	
+	//TODO HACER ESTO SIN IMPORTAR EL NUM DE HAMSTERS QUE HAYA	
 }
 void Game::start() {
 
 	// a boolean to exit the loop
 	bool exit = false;
-		SDL_Event event;
+	SDL_Event event;
 
 	//Cargamos tiled
 
@@ -214,7 +218,7 @@ void Game::start() {
 
 		sortEntities();
 
-		updateCamera();
+		//updateCamera();
 
 		sdlutils().clearRenderer();
 		mngr_->render();
@@ -228,38 +232,38 @@ void Game::start() {
 
 }
 
-void Game::updateCamera() {
-
-	Vector2D camPos;
-	int players(0);
-	auto& players_ = mngr_->getPlayers();
-
-	//Cámara sigue a los personajes
-	for (Entity* e : players_) {
-		auto& playerpos = e->getComponent<Transform>()->getPos();
-
-		// Operación para calcular el punto medio con más jugadores
-		camPos = camPos + playerpos;
-		players++;
-	}
-
-	camera_.x = (camPos.getX() / players) - camera_.w / 2;
-	camera_.y = (camPos.getY() / players) - camera_.h / 2;
-
-	// Bordes de la cámara
-	/*
-	if (camera_.x < 0)
-		camera_.x = 0;
-	if (camera_.y < 0)
-		camera_.y = 0;
-	if (camera_.x > camera_.w)
-		camera_.x = camera_.w;
-	if (camera_.h > camera_.h)
-		camera_.y = camera_.h;
-	*/
-
-	//std::cout << camera_.x << " " << camera_.y << "\n";
-}
+//void Game::updateCamera() {
+//
+//	Vector2D camPos;
+//	int players(0);
+//	auto& players_ = mngr_->getPlayers();
+//
+//	//Cámara sigue a los personajes
+//	for (Entity* e : players_) {
+//		auto& playerpos = e->getComponent<Transform>()->getPos();
+//
+//		// Operación para calcular el punto medio con más jugadores
+//		camPos = camPos + playerpos;
+//		players++;
+//	}
+//
+//	camera_.x = (camPos.getX() / players) - camera_.w / 2;
+//	camera_.y = (camPos.getY() / players) - camera_.h / 2;
+//
+//	// Bordes de la cámara
+//	/*
+//	if (camera_.x < 0)
+//		camera_.x = 0;
+//	if (camera_.y < 0)
+//		camera_.y = 0;
+//	if (camera_.x > camera_.w)
+//		camera_.x = camera_.w;
+//	if (camera_.h > camera_.h)
+//		camera_.y = camera_.h;
+//	*/
+//
+//	//std::cout << camera_.x << " " << camera_.y << "\n";
+//}
 //
 //bool myfunction(Entity* a, Entity* b) {
 //	std::cout << "MENOR QUE" << std::endl;
@@ -273,8 +277,8 @@ void Game::updateCamera() {
 void Game::sortEntities() {
 
 	auto& entities = mngr_->getEntities();
-
-	mergeSort(entities, 1, entities.size() - 1);
+	//Este 2 indica el numero de entidades a las que no afecta el mergeSort
+	mergeSort(entities, 2, entities.size() - 1);	//ERES UN PUTO NAZI DANLLES COMENTA EL PUTO CODIGO MAMAWEBO
 
 	/*
 		-------------DEBUG-----------

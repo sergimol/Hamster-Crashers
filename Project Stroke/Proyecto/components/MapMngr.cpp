@@ -34,12 +34,11 @@
 #include "../components/HeightObject.h"
 #include "../components//AnimHamsterStateMachine.h"
 
+#include "../ecs/Camera.h"
 
-void MapMngr::init() {
-	loadNewMap("resources/images/tiled/Mapa.tmx");
-}
 
 void MapMngr::loadNewMap(string map) {
+	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 
 	if (map_.load(map)) {
 
@@ -382,9 +381,10 @@ void MapMngr::loadNewMap(string map) {
 						dest.x = x * scale; dest.y = y * scale;
 						dest.w = dest.h = tilesDimensions_.x * scale;
 
-						Vector2D renderPos = Vector2D(dest.x - Game::camera_.x, dest.y - Game::camera_.y);
+						
+						/*Vector2D renderPos = Vector2D(dest.x - cam.x, dest.y - cam.y);
 						dest.x = renderPos.getX();
-						dest.y = renderPos.getY();
+						dest.y = renderPos.getY();*/
 
 						//COMPROBAR DE ALGUNA MANERA SI ES COLLIDER O KHE
 						if (globalIndexTile != 0 && index < 2)

@@ -26,9 +26,8 @@ private:
 public: 
 	MapMngr() {};
 	~MapMngr() {};
-	virtual void init() override;
 	void loadNewMap(string map);
-
+	SDL_Rect cam;
 	int scale = 6;
 
 };

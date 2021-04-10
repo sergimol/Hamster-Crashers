@@ -16,7 +16,6 @@ public:
 
 	virtual void endAbility() override;
 private:
-	SDL_Rect came_;
 	bool evil;
 	int dmg_;
 	int heal_;

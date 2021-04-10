@@ -14,6 +14,7 @@ EnemyAttack::EnemyAttack() :
 void EnemyAttack::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 }
 
 void EnemyAttack::update() {
@@ -40,11 +41,11 @@ void EnemyAttack::LaunchAttack() {
 		//Si esta flipeado...
 		if (flip)
 			//Le damos la vuelta al rect
-			attRect_.x = pos.getX() - attRect_.w + sizeW / 4 - Game::camera_.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
+			attRect_.x = pos.getX() - attRect_.w + sizeW / 4 - cam.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
 		else
-			attRect_.x = pos.getX() + sizeW - sizeW / 4 - Game::camera_.x;
+			attRect_.x = pos.getX() + sizeW - sizeW / 4 - cam.x;
 
-		attRect_.y = pos.getY() + sizeH / 4 - Game::camera_.y;
+		attRect_.y = pos.getY() + sizeH / 4 - cam.y;
 
 		//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
@@ -79,8 +80,8 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 		SDL_Rect allyRect;
 		allyRect.h = eTR->getH();
 		allyRect.w = eTR->getW();
-		allyRect.x = eTR->getPos().getX() - Game::camera_.x;
-		allyRect.y = eTR->getPos().getY() - Game::camera_.y;
+		allyRect.x = eTR->getPos().getX() - cam.x;
+		allyRect.y = eTR->getPos().getY() - cam.y;
 
 
 		//Y comprobamos si colisiona

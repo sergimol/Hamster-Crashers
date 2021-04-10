@@ -43,6 +43,7 @@ class ContactDamage;
 class AnimHamsterStateMachine;
 class KeyGame;
 class HeightObject;
+class Camera;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -86,7 +87,8 @@ class HeightObject;
 	ContactDamage,\
 	AnimHamsterStateMachine,\
 	KeyGame,\
-	HeightObject
+	HeightObject,\
+	Camera
 
 // groups
 
@@ -102,10 +104,12 @@ struct Hamster1;
 struct Hamster2;
 struct Hamster3;
 struct Hamster4;
+struct Camera__;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
-					Hamster4
+					Hamster4, \
+					Camera__
 
 
 //systems

@@ -12,6 +12,7 @@ void GhostCtrl::init() {
 	mv_ = entity_->getComponent<Movement>();
 	assert(mv_ != nullptr);
 	st_ = entity_->getComponent<HamsterStateMachine>()->getState();
+	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 }
 
 
@@ -35,7 +36,7 @@ void GhostCtrl::update() {
 
 void GhostCtrl::render() {
 	if (show) {
-		Vector2D renderPos = Vector2D(tr_->getPos().getX() - Game::camera_.x, tr_->getPos().getY() + tr_->getZ() - Game::camera_.y);
+		Vector2D renderPos = Vector2D(tr_->getPos().getX() - cam.x, tr_->getPos().getY() + tr_->getZ() - cam.y);
 		SDL_Rect dest = build_sdlrect(renderPos, KEY_WIDHT, KEY_HEIGHT);
 		tx_->render(dest);
 	}

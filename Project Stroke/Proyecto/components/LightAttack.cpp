@@ -17,6 +17,7 @@ void LightAttack::init() {
 	assert(hms_ != nullptr);
 
 	player_ = entity_->getComponent<EntityAttribs>()->getNumber();
+	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 }
 
 void LightAttack::update() {
@@ -50,8 +51,8 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 			SDL_Rect rectEnemy;
 			rectEnemy.h = eTR->getH();
 			rectEnemy.w = eTR->getW();
-			rectEnemy.x = eTR->getPos().getX() - Game::camera_.x;
-			rectEnemy.y = eTR->getPos().getY() - Game::camera_.y;
+			rectEnemy.x = eTR->getPos().getX() - cam.x;
+			rectEnemy.y = eTR->getPos().getY() - cam.y;
 
 			//Y comprobamos si colisiona
 			if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
@@ -146,11 +147,11 @@ void LightAttack::attack() {
 		//Si esta flipeado...
 		if (flip)
 			//Le damos la vuelta al rect
-			attRect_.x = pos.getX() - attRect_.w + sizeW / 4 - Game::camera_.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
+			attRect_.x = pos.getX() - attRect_.w + sizeW / 4 - cam.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
 		else
-			attRect_.x = pos.getX() + sizeW - sizeW / 4 - Game::camera_.x;
+			attRect_.x = pos.getX() + sizeW - sizeW / 4 - cam.x;
 
-		attRect_.y = pos.getY() + sizeH / 4 - Game::camera_.y;
+		attRect_.y = pos.getY() + sizeH / 4 - cam.y;
 
 		//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 		//A�adimos a los combos

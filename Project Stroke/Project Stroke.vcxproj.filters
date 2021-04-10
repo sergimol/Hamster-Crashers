@@ -213,6 +213,9 @@
     <ClCompile Include="Proyecto\components\HeightObject.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\ecs\Camera.cpp">
+      <Filter>Archivos de origen\ecs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\components\Bounce.h">
@@ -427,6 +430,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\HeightObject.h">
       <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\ecs\Camera.h">
+      <Filter>Archivos de encabezado\ecs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
