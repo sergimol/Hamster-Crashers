@@ -215,6 +215,7 @@
     </ClCompile>
     <ClCompile Include="Proyecto\ecs\Camera.cpp">
       <Filter>Archivos de origen\ecs</Filter>
+    </ClCompile>
     <ClCompile Include="Proyecto\components\Swallow.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
@@ -435,6 +436,7 @@
     </ClInclude>
     <ClInclude Include="Proyecto\ecs\Camera.h">
       <Filter>Archivos de encabezado\ecs</Filter>
+    </ClInclude>
     <ClInclude Include="Proyecto\components\Swallow.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
