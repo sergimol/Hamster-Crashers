@@ -5,6 +5,7 @@
 #include "Knockback.h"
 #include "EnemyStun.h"
 #include "AnimHamsterStateMachine.h"
+#include "Swallow.h"
 
 LightAttack::LightAttack() :
 	hms_(nullptr), tr_(nullptr), cooldown_(350), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
@@ -30,7 +31,17 @@ void LightAttack::update() {
 	if (entity_->getComponent<AnimHamsterStateMachine>()->getState() == HamStatesAnim::LIGHTATTACK1)
 	{
 		if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+		{
+
 			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK1, false);
+
+			/*if(attackOrder_ == 0)
+				entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK1, false);
+			else
+				entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK2, false);*/
+
+		}
+
 	}
 }
 
@@ -65,56 +76,66 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 				canHit = true;
 
 				EntityAttribs* enmAttribs = ents[i]->getComponent<EntityAttribs>();
+				Swallow* playerSwallow = entity_->getComponent<Swallow>();
+
+				//Si puede tragar, el enemigo tiene la mitad de la vida y es fin de combo - probabilidad de tragar
+				if (finCombo && playerSwallow != nullptr && enmAttribs->getLife() <= enmAttribs->getMaxLife() / 2 && playerSwallow->canSwallow()) {
+					enmAttribs->recieveDmg(enmAttribs->getLife()); // Esta puesto asi y no con setlife para que se vea la barra bajar
+					playerAttribs->heal(playerSwallow->healQuantity());
+					//Movida de animación
+				}
+				else {
+					//Si puede envenenar
+					if (playerAttribs->getCanPoison()) {
+						// Número aleatorio para ver si envenena o no
+						float i = sdlutils().rand().nextInt(1, 100);
+						//Si i es menor que la probabilidad, envenena al enemigo
+						if (i <= playerAttribs->getPoisonProb()) {
+							enmAttribs->poison();
+						}
+					}
+
+					auto& enmStateM = ents[i]->getComponent<EnemyStateMachine>()->getState();
+
+					if (enmStateM != EnemyStates::ENM_DEAD) {
+						//Si tiene stun, se aplica
+						EnemyStun* enmStun = ents[i]->getComponent<EnemyStun>();
+						if (enmStun != nullptr && enmStun->isActive()) {
+
+							//Si no estaba aturdido ya
+							if (enmStateM != EnemyStates::ENM_STUNNED) {
+								//Aturdimos al enemigo
+								enmStateM = EnemyStates::ENM_STUNNED;
+								//Desactivamos componente de seguimiento de jugador
+								FollowPlayer* flwPlayer = ents[i]->getComponent<FollowPlayer>();
+								if (flwPlayer != nullptr)
+									flwPlayer->setActive(false);
+							}
+							//Reiniciamos tiempo de stun
+							enmStun->restartStunTime();
+						}
+					}
+
+					//Si tiene Knockback, se aplica
+					Knockback* enmKnockback = ents[i]->getComponent<Knockback>();
+					if (enmKnockback != nullptr) {
+						//Damos la vuelta si es atacado por detras
+						auto& enmFlip = eTR->getFlip();
+						if (enmFlip == tr_->getFlip())
+							enmFlip = !enmFlip;
+
+						if (finCombo) {
+							enmKnockback->setKnockbackDistance(50);
+							enmKnockback->knockback();
+							enmKnockback->setKnockbackDistance(5);
+						}
+						else
+							enmKnockback->knockback();
+					}
+				}
+
 				//Le restamos la vida al enemigo
 				enmAttribs->recieveDmg(dmg);
-
-				//Si puede envenenar
-				if(playerAttribs->getCanPoison()){
-					// Número aleatorio para ver si envenena o no
-					float i = sdlutils().rand().nextInt(1, 100);
-					//Si i es menor que la probabilidad, envenena al enemigo
-					if (i <= playerAttribs->getPoisonProb()) {
-						enmAttribs->poison();
-					}
-				}
-	
-				auto& enmStateM = ents[i]->getComponent<EnemyStateMachine>()->getState();
-
-				if (enmStateM != EnemyStates::ENM_DEAD) {
-					//Si tiene stun, se aplica
-					EnemyStun* enmStun = ents[i]->getComponent<EnemyStun>();
-					if (enmStun != nullptr && enmStun->isActive()) {
-
-						//Si no estaba aturdido ya
-						if (enmStateM != EnemyStates::ENM_STUNNED) {
-							//Aturdimos al enemigo
-							enmStateM = EnemyStates::ENM_STUNNED;
-							//Desactivamos componente de seguimiento de jugador
-							FollowPlayer* flwPlayer = ents[i]->getComponent<FollowPlayer>();
-							if (flwPlayer != nullptr)
-								flwPlayer->setActive(false);
-						}
-						//Reiniciamos tiempo de stun
-						enmStun->restartStunTime();
-					}
-				}
-
-				//Si tiene Knockback, se aplica
-				Knockback* enmKnockback = ents[i]->getComponent<Knockback>();
-				if (enmKnockback != nullptr) {
-					//Damos la vuelta si es atacado por detras
-					auto& enmFlip = eTR->getFlip();
-					if (enmFlip == tr_->getFlip())
-						enmFlip = !enmFlip;
-
-					if (finCombo) {
-						enmKnockback->setKnockbackDistance(50);
-						enmKnockback->knockback();
-						enmKnockback->setKnockbackDistance(5);
-					}
-					else
-						enmKnockback->knockback();
-				}
 			}
 		}
 	}
@@ -169,7 +190,16 @@ void LightAttack::attack() {
 		//this.anims.play(pegarse)
 
 		//GESTION DE LA ANIMACION
-		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK1, true);
+		if (attackOrder_ == 0)
+		{
+			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK1, true);
+			attackOrder_++;
+		}
+		else
+		{
+			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK2, true);
+			attackOrder_--;
+		}
 
 		DEBUG_isAttacking_ = true;
 		time_ = sdlutils().currRealTime();

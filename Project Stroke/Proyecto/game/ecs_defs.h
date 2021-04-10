@@ -44,6 +44,7 @@ class AnimHamsterStateMachine;
 class KeyGame;
 class HeightObject;
 class Camera;
+class Swallow;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -85,6 +86,7 @@ class Camera;
 	HeightObject, \
 	Possesion,\
 	ContactDamage,\
+	Swallow,\
 	AnimHamsterStateMachine,\
 	KeyGame,\
 	HeightObject,\

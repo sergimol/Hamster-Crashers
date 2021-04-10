@@ -223,7 +223,7 @@
       "duration": 5,
       "cols": 10,
       "rows": 11,
-      "frameUpdate": 100,
+      "frameUpdate": 70,
       "loop": 1,
       "chain": ""
     },
@@ -234,7 +234,7 @@
       "duration": 5,
       "cols": 10,
       "rows": 11,
-      "frameUpdate": 100,
+      "frameUpdate": 70,
       "loop": 1,
       "chain": ""
     },
@@ -245,7 +245,7 @@
       "duration": 6,
       "cols": 10,
       "rows": 11,
-      "frameUpdate": 100,
+      "frameUpdate": 50,
       "loop": 1,
       "chain": ""
     },
@@ -256,7 +256,7 @@
       "duration": 6,
       "cols": 10,
       "rows": 11,
-      "frameUpdate": 100,
+      "frameUpdate": 70,
       "loop": 1,
       "chain": ""
     },

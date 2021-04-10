@@ -44,5 +44,7 @@ public:
 		else if (currentState == HamStates::ABILITY) return "ability";
 		else return"catastrofe";
 	};
+
+	virtual void update();
 };
 

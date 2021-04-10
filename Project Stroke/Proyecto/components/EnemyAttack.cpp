@@ -6,6 +6,7 @@
 #include "ControlHandler.h"
 #include "StrongAttack.h"
 #include "LightAttack.h"
+#include "AnimHamsterStateMachine.h"
 
 EnemyAttack::EnemyAttack() :
 	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),

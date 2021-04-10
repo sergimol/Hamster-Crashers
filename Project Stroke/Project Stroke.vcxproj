@@ -174,6 +174,7 @@
     <ClCompile Include="Proyecto\components\Roll.cpp" />
     <ClCompile Include="Proyecto\components\EnemyStun.cpp" />
     <ClCompile Include="Proyecto\components\Stun.cpp" />
+    <ClCompile Include="Proyecto\components\Swallow.cpp" />
     <ClCompile Include="Proyecto\components\TileRender.cpp" />
     <ClCompile Include="Proyecto\components\Turret.cpp" />
     <ClCompile Include="Proyecto\components\UI.cpp" />
@@ -234,6 +235,7 @@
     <ClInclude Include="Proyecto\components\Roll.h" />
     <ClInclude Include="Proyecto\components\EnemyStun.h" />
     <ClInclude Include="Proyecto\components\Stun.h" />
+    <ClInclude Include="Proyecto\components\Swallow.h" />
     <ClInclude Include="Proyecto\components\TileRender.h" />
     <ClInclude Include="Proyecto\components\Turret.h" />
     <ClInclude Include="Proyecto\components\UI.h" />

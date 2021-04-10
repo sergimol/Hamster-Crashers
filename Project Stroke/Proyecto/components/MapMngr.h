@@ -23,12 +23,23 @@ private:
 	tmx::Vector2u tilesDimensions_;	//Guarda las dimensiones de las tiles
 	Texture* tilesetsArr[2];
 	tmx::Map map_;
+
+	bool** collider;
+
+	Vector2D mapCoorsToSDLPoint(Vector2D coords);
+	Vector2D SDLPointToMapCoords(Vector2D p);
 public: 
-	MapMngr() {};
-	~MapMngr() {};
+	MapMngr();
+	~MapMngr();
+
+	virtual void init() override;
+	virtual void update() override;
 	void loadNewMap(string map);
+
+	void intersectWall();
 	SDL_Rect cam;
 	int scale = 6;
+	int filas, columnas;
 
 };
 

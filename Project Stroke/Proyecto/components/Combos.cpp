@@ -1,4 +1,5 @@
 #include "Combos.h"
+#include "AnimHamsterStateMachine.h"
 
 void Combos::init() {
 	grv_ = entity_->getComponent<Gravity>();
@@ -70,6 +71,18 @@ void Combos::update() {
 			grv_->setActive(true);
 		popUntilEmpty();
 	}
+
+	//Fin de animaciones de combos
+	if (entity_->getComponent<AnimHamsterStateMachine>()->getState() == HamStatesAnim::LIGHTCOMBO)
+	{
+		if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+		{
+
+			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTCOMBO, false);
+
+		}
+
+	}
 }
 
 void Combos::lightStrong() {
@@ -80,6 +93,8 @@ void Combos::lightStrong() {
 void Combos::fourConsecutives() {
 	if (cola_.back() == 0) {
 		//anim.play(finComboLigeros);
+		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTCOMBO, true);
+
 		if (cola_.front() == 2) {
 			//anim.play(finComboLigerosSalto);
 			grv_->setActive(true);

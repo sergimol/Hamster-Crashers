@@ -54,7 +54,7 @@ Game::~Game() {
 
 void Game::init() {
 
-	SDLUtils::init("Squeak Ship", 1920, 1080, "resources/config/hamsters.resources.json");
+	SDLUtils::init("Squeak Ship", 1920, 1010, "resources/config/hamsters.resources.json");
 
 	//Camara
 	camera_ = { 0,0,1920, 1080 };
