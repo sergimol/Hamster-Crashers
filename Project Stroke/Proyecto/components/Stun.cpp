@@ -1,7 +1,7 @@
 #include "Stun.h"
 
 Stun::Stun() :
-	hamState_(nullptr), cooldown_(750), time_(sdlutils().currRealTime()), hamCtrl_(nullptr), strAtt_(nullptr), lghtAtt_(nullptr) {}
+	hamState_(nullptr), cooldown_(300), time_(sdlutils().currRealTime()), hamCtrl_(nullptr), strAtt_(nullptr), lghtAtt_(nullptr) {}
 
 void Stun::init() {
 	hamState_ = entity_->getComponent<HamsterStateMachine>();

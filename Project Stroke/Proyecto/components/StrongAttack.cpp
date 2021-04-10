@@ -5,6 +5,8 @@
 #include "Knockback.h"
 #include "EnemyStun.h"
 #include "Swallow.h"
+#include "AnimHamsterStateMachine.h"
+
 
 StrongAttack::StrongAttack() :
 	hms_(nullptr), tr_(nullptr), cooldown_(500), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
@@ -26,6 +28,15 @@ void StrongAttack::update() {
 	//Deja de mostrar el collider
 	if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
 		DEBUG_isAttacking_ = false;
+	}
+
+	//Fin Animacion
+	if (entity_->getComponent<AnimHamsterStateMachine>()->getState() == HamStatesAnim::STRONGATTACK )
+	{
+		if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+		{
+			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STRONGATTACK, false);
+		}
 	}
 }
 
@@ -172,6 +183,8 @@ void StrongAttack::attack() {
 			attackSound_.play();
 
 		//this.anims.play(pegarse)
+		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STRONGATTACK, true);
+
 
 		DEBUG_isAttacking_ = true;
 		time_ = sdlutils().currRealTime();

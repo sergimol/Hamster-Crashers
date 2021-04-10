@@ -30,7 +30,17 @@ void LightAttack::update() {
 	if (entity_->getComponent<AnimHamsterStateMachine>()->getState() == HamStatesAnim::LIGHTATTACK1)
 	{
 		if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+		{
+
 			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK1, false);
+
+			/*if(attackOrder_ == 0)
+				entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK1, false);
+			else
+				entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK2, false);*/
+
+		}
+
 	}
 }
 
@@ -179,7 +189,16 @@ void LightAttack::attack() {
 		//this.anims.play(pegarse)
 
 		//GESTION DE LA ANIMACION
-		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK1, true);
+		if (attackOrder_ == 0)
+		{
+			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK1, true);
+			attackOrder_++;
+		}
+		else
+		{
+			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK2, true);
+			attackOrder_--;
+		}
 
 		DEBUG_isAttacking_ = true;
 		time_ = sdlutils().currRealTime();

@@ -22,14 +22,24 @@ void AnimHamsterStateMachine::update()
 void AnimHamsterStateMachine::HandleAnimState()
 {
 	//idle
-	if (idle && !attack && !move)
+	if (idle && !lAttack && !move)
 		currentState = HamStatesAnim::IDLE;
 	//move
-	else if (move && !attack && !idle)
+	if (move && !lAttack && !idle)
 		currentState = HamStatesAnim::MOVE;
-	//attack
-	else if (attack)
+	//light attack
+	if (lAttack && !sAttack)
 		currentState = HamStatesAnim::LIGHTATTACK1;
+	//strong attack
+	if (sAttack && !lAttack)
+		currentState = HamStatesAnim::STRONGATTACK;
+	//light combo
+	if (lCombo)
+		currentState = HamStatesAnim::LIGHTCOMBO;
+	//hitted
+	if (hit)
+		currentState = HamStatesAnim::HITTED;
+
 }
 
 //Cambia las animaciones dependiendo del estado del hamster
@@ -114,22 +124,24 @@ void AnimHamsterStateMachine::setAnimBool(HamStatesAnim h, bool b)
 		idle = b;
 		break;
 	case HamStatesAnim::LIGHTATTACK1:
-		attack = b;
+		lAttack = b;
+		attackOrder_ = 0;
 		break;
 	case HamStatesAnim::LIGHTATTACK2:
-		idle = b;
+		lAttack = b;
+		attackOrder_ = 1;
 		break;
 	case HamStatesAnim::LIGHTCOMBO:
-		idle = b;
+		lCombo = b;
 		break;
 	case HamStatesAnim::STRONGATTACK:
-		idle = b;
+		sAttack = b;
 		break;
 	case HamStatesAnim::STRONGCOMBO:
 		idle = b;
 		break;
 	case HamStatesAnim::HITTED:
-		idle = b;
+		hit = b;
 		break;
 	case HamStatesAnim::STUNNED:
 		idle = b;

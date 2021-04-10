@@ -25,10 +25,16 @@ private:
 	EntityAttribs* ent;
 	std::string id;
 
+	//VARIABLES AUXILIARES PARA ALGUNAS ANIMACIONES
+	int attackOrder_ = 0; //para los ataques ligeros
+
 	//BOOLEANOS PARA LAS ANIMACIONES, 1 POR ESTADO
 	bool idle;
 	bool move;
-	bool attack;
+	bool lAttack;
+	bool sAttack;
+	bool hit;
+	bool lCombo;
 
 public: 
 	AnimHamsterStateMachine() : currentState(HamStatesAnim::IDLE), lastState(HamStatesAnim::DEFAULT), anim(nullptr), ent(nullptr) {};

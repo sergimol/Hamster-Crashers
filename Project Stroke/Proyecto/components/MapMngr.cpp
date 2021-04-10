@@ -59,7 +59,7 @@ void MapMngr::init() {
 
 void MapMngr::update() {
 	//En cada iteracion comprueba si se pueden chocar o no los hamsters
-	intersectWall();
+	//intersectWall();
 }
 
 void MapMngr::loadNewMap(string map) {
