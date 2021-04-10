@@ -35,15 +35,6 @@ public:
 		return e;
 	}
 
-	Entity* addTileCollider() {
-		Entity* e = new Entity(this);
-		if (e != nullptr) {
-			e->resetGroups();
-			tiles_.emplace_back(e);
-		}
-		return e;
-	}
-
 	Entity* addMapHeight() {
 		Entity* e = new Entity(this);
 		if (e != nullptr) {
@@ -147,14 +138,10 @@ public:
 		return tiles_;
 	}
 
-	inline std::vector<Entity*>& getColliders() {
-		return tileCollider_;
-	}
 	
 	inline std::vector<Entity*>& getMapH() {
 		return mapHeights_;
 	}
-
 
 	void update();
 	void render();
@@ -163,7 +150,6 @@ private:
 
 	std::vector<Entity*> entities_;
 	std::vector<Entity*> tiles_;
-	std::vector<Entity*> tileCollider_;
 	std::vector<Entity*> mapHeights_;
 
 	std::array<Entity*, ecs::maxHdlr> hdlrs_;

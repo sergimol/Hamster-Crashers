@@ -14,9 +14,6 @@ Manager::~Manager() {
 	for (auto t : tiles_) {
 		delete t; t = nullptr;
 	}
-	for (auto tC : tileCollider_) {
-		delete tC; tC = nullptr;
-	}
 	for (auto mH : mapHeights_) {
 		delete mH; mH = nullptr;
 	}
