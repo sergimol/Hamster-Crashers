@@ -35,11 +35,10 @@ public:
 	MapMngr() {};
 	~MapMngr();
 
-	virtual void init() override;
 	void loadNewMap(string map);
 
+	SDL_Rect cam;
 	bool intersectWall(SDL_Rect hamster,int z);
-
 	int scale = 6;
 	int filas, columnas;
 

@@ -28,11 +28,12 @@ public:
 	void init();
 	void update();
 	void start();
-	void updateCamera();
+	//void updateCamera();
 	void sortEntities();
-	static SDL_Rect camera_;
 private:
 	std::unique_ptr<Manager> mngr_;
+	SDL_Rect camera_;
+
 	//std::vector<Entity*> players_; // vector de jugadores
 
 	void mergeSort(std::vector<Entity*>& vec, int l, int r);

@@ -30,6 +30,7 @@ private:
 	HamStates st_;
 	Movement* mv_;
 	Texture* tx_;
+	SDL_Rect cam;
 
 	const int KEY_WIDHT = 100;
 	const int KEY_HEIGHT = 100;

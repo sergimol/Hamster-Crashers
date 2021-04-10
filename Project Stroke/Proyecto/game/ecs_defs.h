@@ -43,6 +43,7 @@ class ContactDamage;
 class AnimHamsterStateMachine;
 class KeyGame;
 class HeightObject;
+class Camera;
 class Swallow;
 
 #define _CMPS_LIST_  \
@@ -88,7 +89,8 @@ class Swallow;
 	Swallow,\
 	AnimHamsterStateMachine,\
 	KeyGame,\
-	HeightObject
+	HeightObject,\
+	Camera
 
 // groups
 
@@ -104,11 +106,13 @@ struct Hamster1;
 struct Hamster2;
 struct Hamster3;
 struct Hamster4;
+struct Camera__;
 struct Map;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
 					Hamster4, \
+					Camera__, \
 					Map
 
 

@@ -6,6 +6,7 @@
 #include "../sdlutils/Texture.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../ecs/Entity.h"
+#include "../ecs/Camera.h"
 #include "../game/Game.h"
 
 #include "Transform.h"
@@ -38,6 +39,7 @@ public:
 	}
 
 	void render() override {
+		SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 
 		//recurso
 		Vector2D auxTextFrame = Vector2D();
@@ -46,7 +48,7 @@ public:
 		SDL_Rect src = build_sdlrect(auxTextFrame, widthFrame, heightFrame);
 
 		//destino
-		Vector2D renderPos = Vector2D(tr_->getPos().getX() - Game::camera_.x, tr_->getPos().getY() - tr_->getZ() - Game::camera_.y);
+		Vector2D renderPos = Vector2D(tr_->getPos().getX() - cam.x, tr_->getPos().getY() - tr_->getZ() - cam.y);
 		SDL_Rect dest = build_sdlrect(renderPos, tr_->getW(), tr_->getH());
 
 

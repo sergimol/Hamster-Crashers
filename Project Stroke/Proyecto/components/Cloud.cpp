@@ -4,6 +4,7 @@
 #include "../ecs/Manager.h"
 #include "EntityAttribs.h"
 #include "../game/Game.h"
+#include "../ecs/Camera.h"
 
 void Cloud::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -11,7 +12,7 @@ void Cloud::init() {
 }
 
 void Cloud::update() {
-
+	SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 	//Cogemos todas las entidades del juego
 	auto& ents = entity_->getMngr()->getEntities();
 
@@ -25,15 +26,15 @@ void Cloud::update() {
 			SDL_Rect rectPlayer;
 			rectPlayer.h = tr_->getH();
 			rectPlayer.w = tr_->getW();
-			rectPlayer.x = tr_->getPos().getX() - Game::camera_.x;
-			rectPlayer.y = tr_->getPos().getY() - Game::camera_.y;
+			rectPlayer.x = tr_->getPos().getX() - cam.x;
+			rectPlayer.y = tr_->getPos().getY() - cam.y;
 
 			//Creamos su Rect
 			SDL_Rect rectEnemy;
 			rectEnemy.h = eTR->getH();
 			rectEnemy.w = eTR->getW();
-			rectEnemy.x = eTR->getPos().getX() - Game::camera_.x;
-			rectEnemy.y = eTR->getPos().getY() - Game::camera_.y;
+			rectEnemy.x = eTR->getPos().getX() - cam.x;
+			rectEnemy.y = eTR->getPos().getY() - cam.y;
 
 			//Y comprobamos si colisiona
 			if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {

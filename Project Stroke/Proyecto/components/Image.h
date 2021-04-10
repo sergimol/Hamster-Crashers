@@ -7,6 +7,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "EntityAttribs.h"
 #include "Transform.h"
+#include "../ecs/Camera.h"
 
 class Image : public Component {
 public:
@@ -24,7 +25,9 @@ public:
 	}
 
 	void render() override {
-		Vector2D renderPos = Vector2D(tr_->getPos().getX() - Game::camera_.x, tr_->getPos().getY() + tr_->getZ() - Game::camera_.y);
+		SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+
+		Vector2D renderPos = Vector2D(tr_->getPos().getX() - cam.x, tr_->getPos().getY() + tr_->getZ() - cam.y);
 		SDL_Rect dest = build_sdlrect(renderPos, tr_->getW(), tr_->getH());
 
 		SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 255, 0, 255);

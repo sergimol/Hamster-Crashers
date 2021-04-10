@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Archivos de origen">
@@ -213,6 +213,8 @@
     <ClCompile Include="Proyecto\components\HeightObject.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\ecs\Camera.cpp">
+      <Filter>Archivos de origen\ecs</Filter>
     <ClCompile Include="Proyecto\components\Swallow.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
@@ -431,6 +433,8 @@
     <ClInclude Include="Proyecto\components\HeightObject.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Proyecto\ecs\Camera.h">
+      <Filter>Archivos de encabezado\ecs</Filter>
     <ClInclude Include="Proyecto\components\Swallow.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>

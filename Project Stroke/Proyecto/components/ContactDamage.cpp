@@ -14,6 +14,7 @@ ContactDamage::ContactDamage(int danyo) :
 void ContactDamage::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 }
 
 void ContactDamage::update() {
@@ -36,8 +37,8 @@ void ContactDamage::updateRect() {
 
 	attRect_.w = sizeW;
 	attRect_.h = sizeH;
-	attRect_.x = pos.getX() - Game::camera_.x;
-	attRect_.y = pos.getY() - Game::camera_.y;
+	attRect_.x = pos.getX() - cam.x;
+	attRect_.y = pos.getY() - cam.y;
 
 	//Comprobamos si colisiona con alguno de los players
 
@@ -73,8 +74,8 @@ bool ContactDamage::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 		SDL_Rect allyRect;
 		allyRect.h = eTR->getH();
 		allyRect.w = eTR->getW();
-		allyRect.x = eTR->getPos().getX() - Game::camera_.x;
-		allyRect.y = eTR->getPos().getY() - Game::camera_.y;
+		allyRect.x = eTR->getPos().getX() - cam.x;
+		allyRect.y = eTR->getPos().getY() - cam.y;
 
 
 		//Y comprobamos si colisiona

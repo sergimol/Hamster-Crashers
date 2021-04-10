@@ -37,5 +37,7 @@ private:
 	long unsigned int cooldown_, time_;
 	SoundEffect& attackSound_, & hitSound_;
 	int player_;
-	int attackOrder_ = 0; //para hacer una animacion u otra
-};
+	SDL_Rect cam;
+	int attackOrder_ = 0;
+}
+;

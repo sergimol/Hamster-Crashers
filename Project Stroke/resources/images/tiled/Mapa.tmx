@@ -52,11 +52,11 @@
 235,0,0,0,0,0,0,0,0,0,0,235,235,235,235,235,235,235,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,235
 </data>
  </layer>
- <objectgroup id="3" name="entities" locked="1">
+ <objectgroup id="3" name="entities">
   <object id="8" name="sardinilla" x="29.0417" y="111.917"/>
-  <object id="13" name="enemigos" x="256" y="112"/>
+  <object id="13" name="enemigo" x="256" y="112"/>
  </objectgroup>
- <objectgroup id="5" name="Alturas">
+ <objectgroup id="5" name="Alturas" locked="1">
   <object id="15" name="0" x="0" y="0" width="175" height="175"/>
   <object id="17" name="100" x="175" y="0" width="112" height="175"/>
   <object id="18" name="0" x="287" y="0" width="350" height="175"/>

@@ -35,5 +35,6 @@ private:
 	long unsigned int time_;
 	SoundEffect& attackSound_, & hitSound_;
 	int dmg_;
+	SDL_Rect cam;
 }
 ;
