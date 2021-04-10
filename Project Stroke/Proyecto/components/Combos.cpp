@@ -1,5 +1,6 @@
 #include "Combos.h"
 #include "AnimHamsterStateMachine.h"
+#include "Transform.h"
 
 void Combos::init() {
 	grv_ = entity_->getComponent<Gravity>();
@@ -28,6 +29,7 @@ bool Combos::checkCombo(int action) {
 		else if (action == 0 && cola_.back() == 2) {
 			cola_.push(action);
 			grv_->setActive(false);
+			entity_->getComponent<Transform>()->getVelZ() = 0;
 		}
 		else { //Combo imposible -> cambio de acción
 			cola_.pop();

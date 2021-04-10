@@ -191,7 +191,7 @@ void StrongAttack::attack() {
 		time_ = sdlutils().currRealTime();
 		entity_->getComponent<Stroke>()->increaseChance(10, false);
 	}
-	else if (sdlutils().currRealTime() > time_ + cooldown_ / 2) {
-		state = HamStates::IDLE;
-	}
+	//else if (sdlutils().currRealTime() > time_ + cooldown_ / 2) {
+	//	state = HamStates::IDLE;
+	//}
 }

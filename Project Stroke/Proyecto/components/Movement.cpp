@@ -28,13 +28,10 @@ void Movement:: init() {
 }
 
 void Movement::updateKeymap(KEYS x, bool is) {
-	if (x != SPACE)
-	keymap.at(x) = is;
-	else if (!keymap.at(SPACE)) {
-		keymap.at(SPACE) = true;
-		entity_->getComponent<Stroke>()->increaseChance(2, false);
-	}
+	if(x != SPACE || !keymap.at(SPACE))
+		keymap.at(x) = is;
 }
+
 void Movement:: update() {
 
 	auto& vel = tr_->getVel();
@@ -75,11 +72,6 @@ void Movement:: update() {
 	//std:cout << "estoy decelerando supuestamente porque no decelero bien? who knows \n";
 
 		//ANIMACION DE IDLE
-		/*if (state != HamStates::IDLE && state != HamStates::INFARCTED)
-			anim_->play(sdlutils().anims().at("sardinilla_idle"));*/
-		if (state != HamStates::JUMPING && state != HamStates::INFARCTED && state != HamStates::STUNNED) state = HamStates::IDLE;
-
-		//ANIMACION DE IDLE
 		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, false);
 		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, true);
 
@@ -91,11 +83,6 @@ void Movement:: update() {
 
 		//cout << "Up: " << keymap.at(UP) << " DOWN: " << keymap.at(DOWN) << " LEFT: " << keymap.at(LEFT) << " RIGHT: " << keymap.at(RIGHT)
 		//	<< " DIR: " << dir.getX() << " " << dir.getY() << "\n";
-
-		//ANIMACION DE MOVIMIENTO
-		/*if (state != HamStates::MOVING && state != HamStates::INFARCTED)
-			anim_->play(sdlutils().anims().at("sardinilla_move"));*/
-		if (state != HamStates::JUMPING && state != HamStates::INFARCTED && state != HamStates::STUNNED) state = HamStates::MOVING;
 
 		//ANIMACION DE MOVIMIENTO
 		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, true);
@@ -117,26 +104,25 @@ void Movement:: update() {
 			// anim_->play(sdlutils().anims().at("sardinilla_chungo"));
 	}
 
-	if (hms_->canJump() && keymap.at(SPACE)) {		//Inicio del salto
-		entity_->getComponent<Combos>()->checkCombo(2);
-		velZ = jump_;
-		state = HamStates::JUMPING;
-		//timer = sdlutils().currRealTime();
-	}
-
 	//if (z > 0 && sdlutils().currRealTime() > timer + jumpTimer_) {			//Aceleracion del salto afectado por gravedad
 	//	 -= gravity_;
 	//	timer = sdlutils().currRealTime();
 	//}
 
-	if (z <= 0 && velZ < 0) {			//Final del salto	!!!!!!!!!(0 SE SUSTITUIRA POR LA Z DEL MAPA)!!!!!!!!
-		entity_->getComponent<Combos>()->popUntilEmpty();
-		keymap.at(SPACE) = false;
-		//velZ = 0;
-		//z = 0;
-		if(state != HamStates::INFARCTED)
-			state = HamStates::IDLE;
-		//timer = sdlutils().currRealTime();
+	// 0 se debería sustituir por la z mínima del mapa
+	if (z <= 0) {
+		// Inicio del salto
+		if (keymap.at(SPACE)) {
+			entity_->getComponent<Combos>()->checkCombo(2);
+			entity_->getComponent<Stroke>()->increaseChance(2, false);
+			velZ = jump_;
+			keymap.at(SPACE) = false;
+		}
+		// Fin del salto
+		if (velZ < 0) {
+			entity_->getComponent<Combos>()->popUntilEmpty();
+			/*keymap.at(SPACE) = false;*/
+		}
 	}
 }
 

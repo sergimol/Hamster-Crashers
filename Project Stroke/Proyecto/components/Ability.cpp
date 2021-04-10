@@ -23,7 +23,7 @@ void Ability::update() {
 	*/
 
 	if (active && sdlutils().currRealTime() > timer_ + cooldown_) {
-		if (!lastUsed && ih().keyDownEvent() && (state_ == HamStates::IDLE || state_ == HamStates::MOVING)) {
+		if (!lastUsed && ih().keyDownEvent() && state_ == HamStates::DEFAULT) {
 			if (ih().isKeyDown(key_)) {
 				timer_ = sdlutils().currRealTime();
 				action();

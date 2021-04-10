@@ -24,7 +24,7 @@ void Roll::init() {
 	keymap.insert({ DOWN, false });
 	keymap.insert({ RIGHT, false });
 	keymap.insert({ LEFT, false });
-	keymap.insert({ SPACE, false });
+	/*keymap.insert({ SPACE, false });*/
 
 }
 
@@ -59,12 +59,12 @@ void Roll::action()
 }
 
 void Roll::updateKeymap(KEYS x, bool is) {
-	if (x != SPACE)
+	/*if (x != SPACE)*/
 		keymap.at(x) = is;
-	else if (!keymap.at(SPACE)) {
+	/*else if (!keymap.at(SPACE)) {
 		keymap.at(SPACE) = true;
 		entity_->getComponent<Stroke>()->increaseChance(2, true);
-	}
+	}*/
 }
 
 void Roll::update() {
@@ -105,47 +105,9 @@ void Roll::update() {
 			goalVel_ = Vector2D(dir_.getX() * speed_.getX() * maxAccel, dir_.getY() * speed_.getY() * maxAccel);
 		}
 
-		if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {		//Deceleracion
-			//vel.setX(lerp(vel.getX(), 0, 0.25));
-			//vel.setY(lerp(vel.getY(), 0, 0.25));
-
-			//ANIMACION DE IDLE
-			if (state != HamStates::IDLE)
-				anim_->play(sdlutils().anims().at("sardinilla_ability"));
-			if (state != HamStates::JUMPING) 
-				state = HamStates::IDLE;
-
-		}
-		else if (hms_->canMove()) {		//Aceleracion
+		if (hms_->canMove()) {		//Aceleracion
 			vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.95));
 			vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.95));
-
-			//ANIMACION DE MOVIMIENTO
-			if (state != HamStates::MOVING)
-				anim_->play(sdlutils().anims().at("sardinilla_ability"));
-			if (state != HamStates::JUMPING) 
-				state = HamStates::MOVING;
-
-		}
-
-
-		if (hms_->canJump() && keymap.at(SPACE)) {		//Inicio del salto
-			velZ = jump_;
-			state = HamStates::JUMPING;
-		//	timer = sdlutils().currRealTime();
-		}
-
-		//if (z > 0 && sdlutils().currRealTime() > timer + jumpTimer_) {			//Aceleracion del salto afectado por gravedad
-		//	velZ -= gravity_;
-		//	timer = sdlutils().currRealTime();
-		//}
-
-		if (z <= 0 && velZ < 0) {			//Final del salto	!!!!!!!!!(0 SE SUSTITUIRA POR LA Z DEL MAPA)!!!!!!!!
-			keymap.at(SPACE) = false;
-			/*velZ = 0;
-			z = 0;*/
-			state = HamStates::IDLE;
-			/*timer = sdlutils().currRealTime();*/
 		}
 
 		//Si se colisiona..

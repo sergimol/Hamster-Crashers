@@ -4,6 +4,7 @@
 #include "../utils/Collisions.h"
 #include "../ecs/Manager.h"
 #include "HeightObject.h"
+#include "Transform.h"
 
 void Gravity::init() {
 	tr_ = entity_->getComponent<Transform>();

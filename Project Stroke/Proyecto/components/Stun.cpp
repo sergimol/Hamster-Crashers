@@ -25,7 +25,7 @@ void Stun::update() {
 			strAtt_->setActive(true);
 			lghtAtt_->setActive(true);
 			hamCtrl_->setActive(true);
-			state = HamStates::IDLE;
+			state = HamStates::DEFAULT;
 		}
 	}
 }

@@ -132,7 +132,7 @@ public:
 	inline bool isButtonUp(int controller, SDL_GameControllerButton button) {
 		if (controllers_[controller] == nullptr)
 			return false;
-		return (isButtonUpEvent_ && buttonStates_[controller][button]);
+		return (isButtonUpEvent_ && !buttonStates_[controller][button]);
 	}
 
 	inline bool isButtonDownEvent() {

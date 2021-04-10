@@ -133,6 +133,7 @@ void MapMngr::loadNewMap(string map) {
 							hamster1->addComponent<HamsterStateMachine>();
 							hamster1->addComponent<Movement>();
 							hamster1->addComponent<Gravity>();
+							hamster1->getComponent<Transform>()->setGravity(hamster1->getComponent<Gravity>());
 
 							//Ataques Basicos
 							hamster1->addComponent<LightAttack>();
@@ -199,6 +200,9 @@ void MapMngr::loadNewMap(string map) {
 							hamster2->addComponent<AnimHamsterStateMachine>();
 							hamster2->addComponent<HamsterStateMachine>();
 							hamster2->addComponent<Movement>();
+							hamster2->addComponent<Gravity>();
+							hamster2->getComponent<Transform>()->setGravity(hamster2->getComponent<Gravity>());
+
 
 							//Ataques basicos
 							hamster2->addComponent<LightAttack>();
@@ -252,6 +256,8 @@ void MapMngr::loadNewMap(string map) {
 							hamster3->addComponent<HamsterStateMachine>();
 							hamster3->addComponent<Movement>();
 							hamster3->addComponent<Gravity>();
+							hamster3->addComponent<Gravity>();
+							hamster3->getComponent<Transform>()->setGravity(hamster3->getComponent<Gravity>());
 
 							//Ataques basicos
 							hamster3->addComponent<LightAttack>();
@@ -305,6 +311,8 @@ void MapMngr::loadNewMap(string map) {
 							hamster4->addComponent<HamsterStateMachine>();
 							hamster4->addComponent<Movement>();
 							hamster4->addComponent<Gravity>();
+							hamster4->addComponent<Gravity>();
+							hamster4->getComponent<Transform>()->setGravity(hamster4->getComponent<Gravity>());
 
 							//Ataques basicos
 							hamster4->addComponent<LightAttack>();
@@ -342,22 +350,22 @@ void MapMngr::loadNewMap(string map) {
 
 						//TO DO
 						else if (name == "enemigo") {
-							//Enemigo de prueba con la imagen de canel�n
-							auto* enemy = mngr_->addEntity();
-							enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0);
-							enemy->addComponent<Transform>(
-								Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
-								Vector2D(), 240.0f, 370.0f, 0.0f)->getFlip() = true;
-							enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
-							enemy->setGroup<Enemy>(true);
-							enemy->addComponent<UI>("canelon", 4);
+							////Enemigo de prueba con la imagen de canel�n
+							//auto* enemy = mngr_->addEntity();
+							//enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0);
+							//enemy->addComponent<Transform>(
+							//	Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
+							//	Vector2D(), 240.0f, 370.0f, 0.0f)->getFlip() = true;
+							//enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
+							//enemy->setGroup<Enemy>(true);
+							//enemy->addComponent<UI>("canelon", 4);
 
-							enemy->addComponent<EnemyStateMachine>();
-							enemy->addComponent<EnemyAttack>();
-							enemy->addComponent<Knockback>();
-							enemy->addComponent<MovementSimple>();
-							enemy->addComponent<FollowPlayer>();
-							enemy->addComponent<EnemyStun>();
+							//enemy->addComponent<EnemyStateMachine>();
+							//enemy->addComponent<EnemyAttack>();
+							//enemy->addComponent<Knockback>();
+							//enemy->addComponent<MovementSimple>();
+							//enemy->addComponent<FollowPlayer>();
+							//enemy->addComponent<EnemyStun>();
 						}
 					}
 				}

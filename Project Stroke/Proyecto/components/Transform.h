@@ -4,6 +4,9 @@
 
 #include "../ecs/Component.h"
 #include "../utils/Vector2D.h"
+#include "../ecs/Entity.h"
+
+#include "Gravity.h"
 
 class Transform: public Component {
 public:
@@ -37,6 +40,9 @@ public:
 	{
 	}
 
+	void setGravity(Gravity* g) {
+		grv_ = g;
+	}
 
 	virtual ~Transform() {
 	}
@@ -94,7 +100,8 @@ public:
 
 
 	void update() override {
-		z_ += velZ_;
+		if(grv_ != nullptr && grv_->isActive())
+			z_ += velZ_;
 		//pos_.setY(pos_.getY() - z_);
 		pos_ = pos_ + vel_;		
 	}
@@ -104,6 +111,7 @@ public:
 private:
 	Vector2D pos_;
 	Vector2D vel_;
+	Gravity* grv_;
 	float width_;
 	float height_;
 	float rotation_;

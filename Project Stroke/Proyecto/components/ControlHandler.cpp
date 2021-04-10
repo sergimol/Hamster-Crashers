@@ -126,11 +126,11 @@ void ControlHandler::handleController() {
 		if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_A))
 		{
 			mov_->updateKeymap(Movement::SPACE, true);
-			if (roll_ != nullptr) roll_->updateKeymap(Roll::SPACE, true);
+			/*if (roll_ != nullptr) roll_->updateKeymap(Roll::SPACE, true);*/
 		}
 
 		//ATAQUE LIGERO
-		if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_X)) {
+		else if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_X)) {
 			lt_->attack();
 		}
 		//ATAQUE FUERTE
@@ -138,6 +138,13 @@ void ControlHandler::handleController() {
 			st_->attack();
 		}
 	}
+
+	/*if (ih().isButtonUpEvent()) {
+		if (ih().isButtonUp(player_, SDL_CONTROLLER_BUTTON_A))
+		{
+			mov_->updateKeymap(Movement::SPACE, false);
+		}
+	}*/
 }
 
 void ControlHandler::handleKeyboard() {
@@ -196,7 +203,7 @@ void ControlHandler::handleKeyboard() {
 	if (ih().isKeyDown(keymap.at(SPACE)))
 	{
 		mov_->updateKeymap(Movement::SPACE, true);
-		if (roll_ != nullptr) roll_->updateKeymap(Roll::SPACE, true);
+		/*if (roll_ != nullptr) roll_->updateKeymap(Roll::SPACE, true);*/
 
 	}
 	//el jump no necesita la parte para false

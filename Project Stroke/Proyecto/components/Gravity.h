@@ -1,6 +1,7 @@
 #pragma once
 #include "../ecs/Component.h"
-#include "../components/Transform.h"
+
+class Transform;
 
 class Gravity : public Component
 {
