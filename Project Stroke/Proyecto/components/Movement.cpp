@@ -6,7 +6,10 @@
 #include "../sdlutils/InputHandler.h"
 #include "../ecs/Entity.h"
 
-void Movement:: init() {
+//Para comprobar las colisiones
+#include "MapMngr.h"
+
+void Movement::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 
@@ -28,11 +31,11 @@ void Movement:: init() {
 }
 
 void Movement::updateKeymap(KEYS x, bool is) {
-	if(x != SPACE || !keymap.at(SPACE))
+	if (x != SPACE || !keymap.at(SPACE))
 		keymap.at(x) = is;
 }
 
-void Movement:: update() {
+void Movement::update() {
 
 	auto& vel = tr_->getVel();
 	auto& state = hms_->getState();
@@ -40,6 +43,10 @@ void Movement:: update() {
 	auto& velZ = tr_->getVelZ();
 
 	Vector2D dir = Vector2D(0, 0);
+
+	//Cogemos el mapa para comprobar luego las colisiones
+	auto map = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>();
+
 
 	if (keymap.at(UP)) {
 		dir.setY(-1.0f);
@@ -65,43 +72,56 @@ void Movement:: update() {
 
 	lastDir_ = dir; //Recogemos siempre la última dirección para quien la necesite
 
-	if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {		//Deceleracion
-		vel.setX(lerp(vel.getX(), 0, 0.25));
-		vel.setY(lerp(vel.getY(), 0, 0.25));
+	//Cojo el rect del player y le sumo la supuesta siguiente posicion
+	SDL_Rect rectPlayer{ tr_->getPos().getX() + goalVel_.getX(), tr_->getPos().getY() + goalVel_.getY(), tr_->getW(),tr_->getH() };
 
-	//std:cout << "estoy decelerando supuestamente porque no decelero bien? who knows \n";
+	//Si me voy a chocar con una pared...
+	if (map->intersectWall(rectPlayer, z)) {
+		//Dejo de moverme
+		vel.setX(0);
+		vel.setY(0);
 
-		//ANIMACION DE IDLE
+		//Y me quedo quieto
 		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, false);
 		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, true);
-
 	}
-	else if (hms_->canMove()) {		//Aceleracion
-		vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.9));
-		vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.9));
+	//Si no me voy a chocar...
+	else {
+		if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {		//Deceleracion
+			vel.setX(lerp(vel.getX(), 0, 0.25));
+			vel.setY(lerp(vel.getY(), 0, 0.25));
+			//std:cout << "estoy decelerando supuestamente porque no decelero bien? who knows \n";
+
+			//ANIMACION DE IDLE
+			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, false);
+			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, true);
+		}
+		else if (hms_->canMove()) {		//Aceleracion
+
+			vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.9));
+			vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.9));
 
 
-		//cout << "Up: " << keymap.at(UP) << " DOWN: " << keymap.at(DOWN) << " LEFT: " << keymap.at(LEFT) << " RIGHT: " << keymap.at(RIGHT)
-		//	<< " DIR: " << dir.getX() << " " << dir.getY() << "\n";
+			//cout << "Up: " << keymap.at(UP) << " DOWN: " << keymap.at(DOWN) << " LEFT: " << keymap.at(LEFT) << " RIGHT: " << keymap.at(RIGHT)
+			//	<< " DIR: " << dir.getX() << " " << dir.getY() << "\n";
 
-		//ANIMACION DE MOVIMIENTO
-		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, true);
-		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, false);
+			//ANIMACION DE MOVIMIENTO
+			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, true);
+			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, false);
+		}
+		else {
+			cout << "Estado : " << hms_->currentstate() << "\n";
+			//porque esta kaput el bixo
 
+			vel.setX(lerp(vel.getX(), 0, 0.25));
+			vel.setY(lerp(vel.getY(), 0, 0.25));
 
-	}
-	else  {
-		cout << "Estado : " << hms_->currentstate() << "\n";
-		//porque esta kaput el bixo
-		
-		vel.setX(lerp(vel.getX(), 0, 0.25));
-		vel.setY(lerp(vel.getY(), 0, 0.25));
-		
-		//ANIMACION DE MORIRSE
-		//if (state != HamStates::DEAD)
-		//	;// anim_->play(sdlutils().anims().at("sardinilla_morirse"));
-		//if (state != HamStates::INFARCTED)
-			// anim_->play(sdlutils().anims().at("sardinilla_chungo"));
+			//ANIMACION DE MORIRSE
+			//if (state != HamStates::DEAD)
+			//	;// anim_->play(sdlutils().anims().at("sardinilla_morirse"));
+			//if (state != HamStates::INFARCTED)
+				// anim_->play(sdlutils().anims().at("sardinilla_chungo"));
+		}
 	}
 
 	//if (z > 0 && sdlutils().currRealTime() > timer + jumpTimer_) {			//Aceleracion del salto afectado por gravedad
@@ -131,8 +151,8 @@ float Movement::lerp(float a, float b, float f)
 	return (a + f * (b - a));
 }
 
-void Movement::onEnable(){
-	if(tr_->getVel() == Vector2D(0,0))
+void Movement::onEnable() {
+	if (tr_->getVel() == Vector2D(0, 0))
 		anim_->play(sdlutils().anims().at("sardinilla_idle")); // Idle
 	else
 		anim_->play(sdlutils().anims().at("sardinilla_move")); //Movimiento

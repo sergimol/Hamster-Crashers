@@ -192,40 +192,9 @@ void Game::start() {
 			continue;
 		}
 
-		//Cutreria
-
-		//Cogemos la entidad del primer hamster
-		auto hamster1 = mngr_->getHandler<Hamster1>();
-
-		auto hamsterTr = hamster1->getComponent<Transform>();
-
-		Vector2D playerPos = hamster1->getComponent<Transform>()->getPos();
-
 		mngr_->update();
 		mngr_->refresh();
 
-		//Cogemos todos los tiles
-		auto hamsters = mngr_->getPlayers();
-		for (Entity* hamster : hamsters) {
-
-			//Cojo el transform de la colision
-			auto auxTr = hamster->getComponent<Transform>();
-
-			//Cogemos el mapa
-			auto map = mngr_->getHandler<Map>();
-
-			SDL_Rect playerRect;
-			playerRect.x = auxTr->getPos().getX();
-			playerRect.y = auxTr->getPos().getY();
-			playerRect.w = auxTr->getW();
-			playerRect.h = auxTr->getH();;
-
-			//Si choca con la colision más cercana
-			if (map->getComponent<MapMngr>()->intersectWall(playerRect, auxTr->getZ())) {
-				//Vuelves a tu posicion de inicio
-				hamster1->getComponent<Transform>()->setPos(playerPos);
-			}
-		}
 
 		sortEntities();
 
