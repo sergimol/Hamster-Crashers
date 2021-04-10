@@ -9,15 +9,12 @@
 Tile::Tile(Manager* mn, SDL_Rect src, SDL_Rect dst, Texture* text, bool colide) {
 	if (colide) {
 		auto tileCd = mn->addTileCollider();
+
 		//Añado un componente o lo que coño sea para que colisione
 		tileCd->addComponent<Transform>(Vector2D(dst.x, dst.y), Vector2D(0, 0), dst.w, dst.h, 0);
-
-		tileCd->addComponent<TileRender>(src, dst, text);
-
 	}
 	else {
 		auto tile = mn->addTile();
-
 		tile->addComponent<TileRender>(src, dst, text);
 	}
 }

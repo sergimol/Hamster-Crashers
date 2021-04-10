@@ -59,6 +59,9 @@ void Game::init() {
 	auto* mapa = mngr_->addEntity();
 	mapa->addComponent<MapMngr>();
 
+	//Metemos al mapa en el Handler de Map
+	mngr_->setHandler<Map>(mapa);
+
 	//Imagen de fondo fija
 	/*auto* background = mngr_->addEntity();
 	background->addComponent<Transform>(
@@ -198,16 +201,24 @@ void Game::start() {
 		mngr_->refresh();
 
 		//Cogemos todos los tiles
-		auto tileCollision = mngr_->getColliders();
-		for (Entity* col : tileCollision) {
+		auto hamsters = mngr_->getPlayers();
+		for (Entity* hamster : hamsters) {
 
 			//Cojo el transform de la colision
-			auto auxTr = col->getComponent<Transform>();
+			auto auxTr = hamster->getComponent<Transform>();
 
-			//Si choca con la colision
-			if (Collisions::collidesWithRotation(hamsterTr->getPos(), hamsterTr->getW(), hamsterTr->getH(), hamsterTr->getRot(), auxTr->getPos(), auxTr->getW(), auxTr->getH(), auxTr->getRot())) {
+			//Cogemos el mapa
+			auto map = mngr_->getHandler<Map>();
+
+			SDL_Rect playerRect;
+			playerRect.x = auxTr->getPos().getX();
+			playerRect.y = auxTr->getPos().getY();
+			playerRect.w = auxTr->getW();
+			playerRect.h = auxTr->getH();;
+
+			//Si choca con la colision más cercana
+			if (map->getComponent<MapMngr>()->intersectWall(playerRect, auxTr->getZ())) {
 				//Vuelves a tu posicion de inicio
-				//Hay que arreglar esto dios
 				hamster1->getComponent<Transform>()->setPos(playerPos);
 			}
 		}

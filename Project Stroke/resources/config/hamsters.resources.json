@@ -115,6 +115,10 @@
       "file": "resources/images/tiled/cubesTileset.png"
     },
     {
+      "id": "collisionTileset",
+      "file": "resources/images/tiled/collisionTileset.png"
+    },
+    {
       "id": "q",
       "file": "resources/images/tecla_Q.png"
     },

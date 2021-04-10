@@ -104,10 +104,12 @@ struct Hamster1;
 struct Hamster2;
 struct Hamster3;
 struct Hamster4;
+struct Map;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
-					Hamster4
+					Hamster4, \
+					Map
 
 
 //systems

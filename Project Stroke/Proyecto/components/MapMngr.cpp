@@ -35,15 +35,6 @@
 #include "../components//AnimHamsterStateMachine.h"
 #include "../components/Swallow.h"
 
-MapMngr::MapMngr() {
-	/*filas = rows;
-	columnas = cols;
-	casillas = new bool * [columnas];
-	for (int i = 0; i < columnas; i++)
-	{
-		casillas[i] = new bool[filas];
-	}*/
-}
 
 MapMngr::~MapMngr() {
 	for (int i = 0; i < columnas; i++)
@@ -57,11 +48,6 @@ void MapMngr::init() {
 	loadNewMap("resources/images/tiled/Mapa.tmx");
 }
 
-void MapMngr::update() {
-	//En cada iteracion comprueba si se pueden chocar o no los hamsters
-	//intersectWall();
-}
-
 void MapMngr::loadNewMap(string map) {
 
 	if (map_.load(map)) {
@@ -69,12 +55,25 @@ void MapMngr::loadNewMap(string map) {
 		mapDimensions_ = map_.getTileCount();
 		const auto& layers = map_.getLayers();
 
+		//Establecemos el tamaño de la matriz
+		filas = mapDimensions_.y;
+		columnas = mapDimensions_.x;
+		collider = new bool* [columnas];
+		for (int i = 0; i < columnas; i++)
+		{
+			collider[i] = new bool[filas] {false};
+		}
+
 		//Dimensiones de los tiles
 		tilesDimensions_ = map_.getTileSize();
 
 		int i = 0;
 		//Cargamos los tilesets y guardamos las texturas
 		const auto& tilesets = map_.getTilesets();
+
+		//Estblecemos el tamaño en funcion de los tilesets que tenga
+		tilesetsArr[tilesets.size()];
+
 		for (const auto& tileset : tilesets)
 		{
 			//Guardamos las texturas de los tilesets
@@ -168,11 +167,11 @@ void MapMngr::loadNewMap(string map) {
 							//Para acceder facilmente le metemos en Hamster1 de Handelers
 							mngr_->setHandler<Hamster1>(hamster1);
 
-							auto* cosodecosas = mngr_->addEntity();
+							/*auto* cosodecosas = mngr_->addEntity();
 							cosodecosas->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale + 300, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 256.0f, 0.0f);
-							cosodecosas->addComponent<ContactDamage>(10);
+							cosodecosas->addComponent<ContactDamage>(10);*/
 
 
 						}
@@ -411,17 +410,18 @@ void MapMngr::loadNewMap(string map) {
 						dest.x = renderPos.getX();
 						dest.y = renderPos.getY();
 
-						//COMPROBAR DE ALGUNA MANERA SI ES COLLIDER O KHE
-						if (globalIndexTile != 0 && index < 2)
-
+						if (globalIndexTile != 0 && index < tilesets.size()) {
 							//ESTO ES EL NOMBRE DE LA LAYER QUE SE CREE SOLO DE LAS COLISIONES
-							/*if (tileLayer.getName() == "Collision")
+							if (tileLayer.getName() == "Collision") {
+								//Si el leemos la capa de colisiones ponemos la matriz a true
+								collider[i][j] = true;
 								Tile(entity_->getMngr(), src, dest, tilesetsArr[index], true);
-							else
-								Tile(entity_->getMngr(), src, dest, tilesetsArr[index], false);*/
-
-								//Esto esta porque falta depurar lo de arriba, hay que eliminarlo
-							Tile(entity_->getMngr(), src, dest, tilesetsArr[index], false);
+							}
+							else {
+								//Si no es una capa de colisiones se renderiza sin más
+								Tile(entity_->getMngr(), src, dest, tilesetsArr[index], false);
+							}
+						}
 					}
 				}
 			}
@@ -429,34 +429,31 @@ void MapMngr::loadNewMap(string map) {
 	}
 }
 
-void MapMngr::intersectWall() {
+//Devuelve true si se está chocando con alguna colision
+bool MapMngr::intersectWall(SDL_Rect hamster, int z) {
 
-	//Cogemos a todos los jugadores
-	auto top = entity_->getMngr()->getPlayers();
+	//Cogemos arriba izquierda y abajo derecha
+	Vector2D topLeftCoords = SDLPointToMapCoords(Vector2D((hamster.x) / scale, (hamster.y - z) / scale));
+	Vector2D bottomRightCoords = SDLPointToMapCoords(Vector2D((hamster.x + hamster.w - 1) / scale, (hamster.y + hamster.h - 1 - z) / scale));
 
-	for (Entity* hamsters : top) {
-
-		auto rect = hamsters->getComponent<Transform>();
-		Vector2D topLeftCoords = SDLPointToMapCoords(rect->getPos());
-		Vector2D bottomRightCoords = SDLPointToMapCoords(Vector2D(rect->getPos().getX() + rect->getW() - 1, rect->getPos().getY() + rect->getH() - 1));
-
-		for (int x = topLeftCoords.getX(); x <= bottomRightCoords.getX(); x++) {
-			for (int y = topLeftCoords.getY(); y <= bottomRightCoords.getY(); y++) {
-				if (collider[x][y])
-					//Llama al movement y no se mueve na (Por ejemplo)
-					;
-			}
+	for (int x = topLeftCoords.getX(); x <= bottomRightCoords.getX(); x++) {
+		for (int y = topLeftCoords.getY(); y <= bottomRightCoords.getY(); y++) {
+			//Si hay una colision cercana...
+			if (collider[x][y])
+				//Se choca
+				return true;
 		}
 	}
+	//Si no se choca con nada devuelve false
+	return false;
 }
 
-
+//Devuelve la posicion en pantalla
 Vector2D MapMngr::mapCoorsToSDLPoint(Vector2D coords) {
-	//return Vector2D(coords.getX() * TAM_CELDA, coords.getY() * TAM_CELDA);
-	return Vector2D(0, 0);
+	return Vector2D(coords.getX() * TAM_CELDA, coords.getY() * TAM_CELDA);
 }
 
+//Devuelve la posicion del vector en coordenadas
 Vector2D MapMngr::SDLPointToMapCoords(Vector2D p) {
-	//return Vector2D(p.getX() / TAM_CELDA, p.getY() / TAM_CELDA);
-	return Vector2D(0, 0);
+	return Vector2D(p.getX() / TAM_CELDA, p.getY() / TAM_CELDA);
 }

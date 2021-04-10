@@ -16,27 +16,29 @@
 using namespace std;
 class Game;
 
+const int TAM_CELDA = 16;
+
 class MapMngr : public Component
 {
 private:
 	tmx::Vector2u mapDimensions_;	//Guarda las dimensiones del mapa
 	tmx::Vector2u tilesDimensions_;	//Guarda las dimensiones de las tiles
-	Texture* tilesetsArr[2];
+	Texture* tilesetsArr[1];
 	tmx::Map map_;
 
+	//Matriz de colisiones
 	bool** collider;
 
 	Vector2D mapCoorsToSDLPoint(Vector2D coords);
 	Vector2D SDLPointToMapCoords(Vector2D p);
 public: 
-	MapMngr();
+	MapMngr() {};
 	~MapMngr();
 
 	virtual void init() override;
-	virtual void update() override;
 	void loadNewMap(string map);
 
-	void intersectWall();
+	bool intersectWall(SDL_Rect hamster,int z);
 
 	int scale = 6;
 	int filas, columnas;
