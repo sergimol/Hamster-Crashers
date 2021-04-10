@@ -32,7 +32,6 @@ public:
 	MapMngr();
 	~MapMngr();
 
-	virtual void init() override;
 	virtual void update() override;
 	void loadNewMap(string map);
 
