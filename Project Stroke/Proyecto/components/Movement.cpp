@@ -72,27 +72,26 @@ void Movement::update() {
 
 	lastDir_ = dir; //Recogemos siempre la última dirección para quien la necesite
 
-
-
-
-	//Si no me voy a chocar...
-
 	if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {		//Deceleracion
 
 		vel.setX(lerp(vel.getX(), 0, 0.25));
 		vel.setY(lerp(vel.getY(), 0, 0.25));
-		//std:cout << "estoy decelerando supuestamente porque no decelero bien? who knows \n";
 
+		//ANIMACION DE IDLE
+		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, false);
+		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, true);
 	}
 	else if (hms_->canMove()) {		//Aceleracion
 
 		vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.9));
 		vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.9));
 
-
 		//cout << "Up: " << keymap.at(UP) << " DOWN: " << keymap.at(DOWN) << " LEFT: " << keymap.at(LEFT) << " RIGHT: " << keymap.at(RIGHT)
 		//	<< " DIR: " << dir.getX() << " " << dir.getY() << "\n";
 
+		//ANIMACION DE MOVIMIENTO
+		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, true);
+		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, false);
 	}
 	else {
 		cout << "Estado : " << hms_->currentstate() << "\n";
@@ -125,22 +124,18 @@ void Movement::update() {
 				goalVel_.setY(0);
 				vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.9));
 				vel.setY(0);
-
 			}
 			else {
 				//Probamos ignorando la X
 				rectPlayer.y = tr_->getPos().getY() + goalVel_.getY();
 				rectPlayer.x = tr_->getPos().getX();
 
-
 				if (!map->intersectWall(rectPlayer)) {
 					goalVel_.setX(0);
-
 					vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.9));
 					vel.setX(0);
-
-
 				}
+				//Para las esquinas. NO QUITAR
 				else {
 					//Dejo de moverme
 					vel.setX(0);
@@ -151,25 +146,9 @@ void Movement::update() {
 		else {
 			//Dejo de moverme
 			vel.setX(0);
-			vel.setY(0);
-
-
+			vel.setY(0);			
 		}
 	}
-
-
-	//Me cago en el puto lerp
-	if ((vel.getX() < -1 || vel.getX() > 1) || (vel.getY() < -1 || vel.getY() > 1)) {
-		//ANIMACION DE MOVIMIENTO
-		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, true);
-		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, false);
-	}
-	else {
-		//ANIMACION DE IDLE
-		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, false);
-		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, true);
-	}
-
 
 	//if (z > 0 && sdlutils().currRealTime() > timer + jumpTimer_) {			//Aceleracion del salto afectado por gravedad
 	//	 -= gravity_;

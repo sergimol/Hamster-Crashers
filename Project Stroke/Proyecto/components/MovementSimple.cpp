@@ -4,6 +4,9 @@
 #include "../sdlutils/InputHandler.h"
 #include "../ecs/Entity.h"
 
+//Para comprobar las colisiones
+#include "MapMngr.h"
+
 void MovementSimple:: init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
@@ -47,6 +50,9 @@ void MovementSimple:: update() {
 
 	Vector2D dir = Vector2D(0, 0);
 
+	//Cogemos el mapa para comprobar luego las colisiones
+	auto map = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>();
+
 	if (keymapSimple.at(UP)) {
 		dir.setY(-1.0f);
 	}
@@ -71,6 +77,7 @@ void MovementSimple:: update() {
 
 	lastDir_ = dir; //Recogemos siempre la última dirección para quien la necesite
 
+
 	if (!keymapSimple.at(UP) && !keymapSimple.at(DOWN) && !keymapSimple.at(LEFT) && !keymapSimple.at(RIGHT)) {		//Deceleracion
 		vel.setX(lerp(vel.getX(), 0, 0.25));
 		vel.setY(lerp(vel.getY(), 0, 0.25));
@@ -79,7 +86,6 @@ void MovementSimple:: update() {
 		
 		/*if (state != EnemyStates::ENM_IDLE)
 			anim_->play(Vector2D(0, 0), Vector2D(2, 0), 220);*/
-
 
 		/*if(state != EnemyStates::JUMPING) state = EnemyStates::IDLE;
 		*/
@@ -97,6 +103,50 @@ void MovementSimple:: update() {
 
 		//if(state != EnemyStates::JUMPING) state = EnemyStates::MOVING;
 	}
+
+	//Cojo el rect del player y le sumo la supuesta siguiente posicion
+	SDL_Rect rectPlayer{ tr_->getPos().getX() + vel.getX(), tr_->getPos().getY() + vel.getY(), tr_->getW(),tr_->getH() };
+
+	//Si me voy a chocar con una pared...
+	if (map->intersectWall(rectPlayer)) {
+
+		//Comprobamos si hay doble input
+		if (dir.getX() != 0 && dir.getY() != 0) {
+
+			//Probamos con ignorar el Y
+			rectPlayer.y = tr_->getPos().getY();
+
+			//Si con el Y bloqueado se mueve correctamente
+			if (!map->intersectWall(rectPlayer)) {
+				goalVel_.setY(0);
+				vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.9));
+				vel.setY(0);
+			}
+			else {
+				//Probamos ignorando la X
+				rectPlayer.y = tr_->getPos().getY() + goalVel_.getY();
+				rectPlayer.x = tr_->getPos().getX();
+
+				if (!map->intersectWall(rectPlayer)) {
+					goalVel_.setX(0);
+					vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.9));
+					vel.setX(0);
+				}
+				//Para las esquinas. NO QUITAR
+				else {
+					//Dejo de moverme
+					vel.setX(0);
+					vel.setY(0);
+				}
+			}
+		}
+		else {
+			//Dejo de moverme
+			vel.setX(0);
+			vel.setY(0);
+		}
+	}
+
 
 	if (keymapSimple.at(SPACE)) {		//Inicio del salto
 		velZ = jump_;
