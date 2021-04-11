@@ -27,7 +27,7 @@
 #include "../components/Gravity.h"
 #include "../components/Knockback.h"
 #include "../components/HeartUI.h"
-#include "../components/Possesion.h"
+#include "../components/PossesionGame.h"
 #include "../components/GhostCtrl.h"
 #include "../components/ContactDamage.h"
 #include "../components/HeightObject.h"
@@ -180,7 +180,7 @@ void MapMngr::loadNewMap(string map) {
 							hamster1->addComponent<HeartUI>("sardinilla", 0);
 
 							//Gestion de infartos
-							hamster1->addComponent<Possesion>();
+							hamster1->addComponent<PossesionGame>();
 							hamster1->addComponent<GhostCtrl>();
 							hamster1->addComponent<Stroke>();
 
@@ -201,6 +201,65 @@ void MapMngr::loadNewMap(string map) {
 								Vector2D(object.getPosition().x * scale + 300, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 256.0f, 0.0f);
 							cosodecosas->addComponent<ContactDamage>(10);*/
+
+							//-------------------------HAMSTER DE PRUEBA
+
+							auto* hamster2 = mngr_->addEntity();
+
+							hamster2->addComponent<Transform>(
+								Vector2D(object.getPosition().x* scale, object.getPosition().y* scale),
+								Vector2D(), 256.0f, 256.0f, 0.0f);
+
+							hamster2->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5), 1, 15);
+
+							hamster2->addComponent<Animator>(
+								&sdlutils().images().at("sardinillaSheet"),
+								86,
+								86,
+								3,
+								3,
+								220,
+								Vector2D(0, 0),
+								3
+								);
+
+							hamster2->addComponent<AnimHamsterStateMachine>();
+							hamster2->addComponent<HamsterStateMachine>();
+							hamster2->addComponent<Movement>();
+							hamster2->addComponent<Gravity>();
+							hamster2->getComponent<Transform>()->setGravity(hamster2->getComponent<Gravity>());
+
+							//Ataques Basicos
+							hamster2->addComponent<LightAttack>();
+							hamster2->addComponent<StrongAttack>();
+							hamster2->addComponent<Combos>();
+
+							//Habilidad
+							hamster2->addComponent<Roll>();
+
+							//Handlr
+							hamster2->addComponent<ControlHandler>(hamster2->getComponent<EntityAttribs>()->getNumber());
+
+							//Interfaz
+							hamster2->addComponent<UI>("sardinilla", 1);
+							hamster2->addComponent<HeartUI>("sardinilla", 1);
+
+							//Gestion de infartos
+							hamster2->addComponent<PossesionGame>();
+							hamster2->addComponent<GhostCtrl>();
+							hamster2->addComponent<Stroke>()->infarct();
+
+							hamster2->addComponent<Stun>();
+							hamster2->addComponent<Knockback>();
+							hamster2->addComponent<GetItem>();
+
+							hamster2->setGroup<Ally>(true);
+
+							//Lo a�adimos al vector de entidades
+							players.push_back(hamster2);
+
+							//Para acceder facilmente le metemos en Hamster1 de Handelers
+							mngr_->setHandler<Hamster1>(hamster2);
 
 
 						}
@@ -249,6 +308,8 @@ void MapMngr::loadNewMap(string map) {
 							hamster2->addComponent<HeartUI>("canelon", 0);
 
 							//Gestion de infarto
+							hamster2->addComponent<PossesionGame>();
+							hamster2->addComponent<GhostCtrl>();
 							hamster2->addComponent<Stroke>();
 
 							hamster2->addComponent<Stun>();
@@ -304,6 +365,8 @@ void MapMngr::loadNewMap(string map) {
 							hamster3->addComponent<HeartUI>("keta", 0);
 
 							//Gestion de infarto
+							hamster3->addComponent<PossesionGame>();
+							hamster3->addComponent<GhostCtrl>();
 							hamster3->addComponent<Stroke>();
 
 							hamster3->addComponent<Stun>();
@@ -327,7 +390,7 @@ void MapMngr::loadNewMap(string map) {
 							hamster4->addComponent<EntityAttribs>(100, 0.0, "monchi", Vector2D(7, 4.5), 3, 0);
 							//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
 							hamster4->addComponent<Animator>(
-								&sdlutils().images().at("monchiSheet"),
+								&sdlutils().images().at("sardinillaSheet"),
 								64,
 								64,
 								3,
@@ -337,6 +400,7 @@ void MapMngr::loadNewMap(string map) {
 								3
 								);
 
+							hamster4->addComponent<AnimHamsterStateMachine>();
 							hamster4->addComponent<HamsterStateMachine>();
 							hamster4->addComponent<Movement>();
 							hamster4->addComponent<Gravity>();
@@ -361,6 +425,8 @@ void MapMngr::loadNewMap(string map) {
 							hamster4->addComponent<HeartUI>("monchi", 0);
 
 							//Gestion de infarto
+							hamster4->addComponent<PossesionGame>();
+							hamster4->addComponent<GhostCtrl>();
 							hamster4->addComponent<Stroke>();
 
 							hamster4->addComponent<Stun>();

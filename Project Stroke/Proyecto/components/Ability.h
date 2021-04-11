@@ -37,6 +37,7 @@ public:
 	inline bool isAbilityActive() const { return active; };
 
 	void deactiveAbility();
+	void activateAbility();
 
 protected:
 	const SDL_Keycode key_ = SDLK_m;

@@ -43,3 +43,7 @@ void Ability::deactiveAbility() {
 		endAbility();
 	}
 }
+
+void Ability::activateAbility() {
+	active = true;
+}

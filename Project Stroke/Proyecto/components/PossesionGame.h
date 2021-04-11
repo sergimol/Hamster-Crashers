@@ -8,10 +8,10 @@
 
 using namespace std;
 
-class Possesion :public Component {
+class PossesionGame :public Component {
 public:
-	Possesion() : possesed(nullptr), lineH(&sdlutils().images().at("linea")), lineV(&sdlutils().images().at("lineaV")) {};
-	~Possesion() {};
+	PossesionGame() : possesed(nullptr), lineH(&sdlutils().images().at("linea")), lineV(&sdlutils().images().at("lineaV")) {};
+	~PossesionGame() {};
 
 	virtual void init() override;
 
@@ -27,11 +27,12 @@ public:
 
 	void reachedEnd();
 
+	void endPossesion();
+
 private:
 	void start();
 	void succesfulHit();
 	void failedHit();
-	void endPossesion();
 	void randomiseKey();
 
 	Entity* possesed, * keyGame;

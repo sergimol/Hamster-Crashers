@@ -2,7 +2,7 @@
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 #include "../utils/Collisions.h"
-#include "../components/Possesion.h"
+#include "../components/PossesionGame.h"
 #include "../components/Animator.h"
 
 
@@ -14,12 +14,8 @@ void GhostCtrl::init() {
 	st_ = entity_->getComponent<HamsterStateMachine>()->getState();
 }
 
-
-void GhostCtrl::onEnable() {
-	//Animacion
-}
-
 void GhostCtrl::update() {
+	//Busca entre el resto de hamsters uno al que pueda poseer
 	auto& hamsters = entity_->getMngr()->getPlayers();
 	for (Entity* e : hamsters) {
 		if (e != entity_ && !e->getComponent<HamsterStateMachine>()->cantBeTargeted()) {
@@ -34,6 +30,7 @@ void GhostCtrl::update() {
 }
 
 void GhostCtrl::render() {
+	//Si estamos en contacto con un posible "host" para poseer, muestra la imagen del botón
 	if (show) {
 	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 		Vector2D renderPos = Vector2D(tr_->getPos().getX() - cam.x, tr_->getPos().getY() + tr_->getZ() - cam.y);
@@ -54,7 +51,7 @@ void GhostCtrl::startPossesion(Entity* e) {
 	active_ = false;
 
 	//Activamos el minijuego
-	auto* poss = entity_->getComponent<Possesion>();
+	auto* poss = entity_->getComponent<PossesionGame>();
 
 	poss->setPossesed(e);
 	poss->setActive(true);

@@ -123,6 +123,18 @@
       "file": "resources/images/tecla_Q.png"
     },
     {
+      "id": "r",
+      "file": "resources/images/tecla_R.png"
+    },
+    {
+      "id": "a",
+      "file": "resources/images/tecla_A.png"
+    },
+    {
+      "id": "a2",
+      "file": "resources/images/tecla_A2.png"
+    },
+    {
       "id": "linea",
       "file": "resources/images/linea.png"
     },

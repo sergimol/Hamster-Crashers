@@ -35,6 +35,7 @@ private:
 	bool sAttack;
 	bool hit;
 	bool lCombo;
+	bool stroke;
 
 public: 
 	AnimHamsterStateMachine() : currentState(HamStatesAnim::IDLE), lastState(HamStatesAnim::DEFAULT), anim(nullptr), ent(nullptr) {};

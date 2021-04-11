@@ -1,26 +1,28 @@
-#include "Possesion.h"
+#include "PossesionGame.h"
 #include "UI.h"
 #include "Stroke.h"
 #include "../sdlutils/InputHandler.h"
 #include "KeyGame.h"
 #include "../ecs/Manager.h"
 
-void Possesion::init() {
+void PossesionGame::init() {
 	active_ = false;
 }
 
-void Possesion::render() {
+void PossesionGame::render() {
 	lineH->render(lineHPos);
 	lineV->render(lineVPos);
 }
 
 //Comprueba que la tecla sea pulsada y la keyGame esté chocando con el marcador
-void Possesion::update() {
+void PossesionGame::update() {
 	if (ih().keyDownEvent()) {
 		if (ih().isKeyDown(actualKey) && keyGame->getComponent<KeyGame>()->hitSkillCheck())
 			succesfulHit();
 		else
 			failedHit();
+
+
 	}
 //Si se muere o infarta el poseido, se acaba la posesion
 	if (possesedState->cantBeTargeted()) {
@@ -28,11 +30,11 @@ void Possesion::update() {
 	}
 }
 
-void Possesion::onEnable() {
+void PossesionGame::onEnable() {
 	start();
 }
 
-void Possesion::onDisable() {
+void PossesionGame::onDisable() {
 	mistakes = 0;
 	roundPassed = false;
 	failed = false;
@@ -40,7 +42,7 @@ void Possesion::onDisable() {
 	keyGame = nullptr;
 }
 
-void Possesion::start() {
+void PossesionGame::start() {
 	assert(possesed != nullptr);
 	//Tomamos el estado del poseído para comprobar que sigue vivo y no infartado mientras le ayudamos
 	possesedState = possesed->getComponent<HamsterStateMachine>();
@@ -61,7 +63,7 @@ void Possesion::start() {
 	randomiseKey();
 }
 
-void Possesion::reachedEnd() {
+void PossesionGame::reachedEnd() {
 	if (!roundPassed)
 		mistakes++;
 	
@@ -76,7 +78,7 @@ void Possesion::reachedEnd() {
 	}
 }
 
-void Possesion::succesfulHit() {
+void PossesionGame::succesfulHit() {
 	//Si no hemos fallado la prueba antes, se da por pasada
 	if(!failed) roundPassed = true;
 	
@@ -87,18 +89,21 @@ void Possesion::succesfulHit() {
 	str->decreaseChance();
 }
 
-void Possesion::failedHit() {
+void PossesionGame::failedHit() {
 	failed = true;
 }
 
 //Se elimina la key y se desactiva el componente al acabar
-void Possesion::endPossesion() {
-	keyGame->setActive(false);
+void PossesionGame::endPossesion() {
+	if (keyGame != nullptr) {
+		keyGame->setActive(false);
+		keyGame = nullptr;
+	}
 	this->setActive(false);
 }
 
 //Coge una key y su respectiva imagen aleatorias
-void Possesion::randomiseKey() {
+void PossesionGame::randomiseKey() {
 	auto rand = sdlutils().rand().nextInt(0, numKeys);
 	actualKey = keyCodes[rand];
 	keyGame->getComponent<KeyGame>()->setTexture(keyTextures[rand]);

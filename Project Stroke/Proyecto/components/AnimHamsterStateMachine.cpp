@@ -40,6 +40,9 @@ void AnimHamsterStateMachine::HandleAnimState()
 	if (hit)
 		currentState = HamStatesAnim::HITTED;
 
+	if (stroke)
+		currentState = HamStatesAnim::STROKE;
+
 }
 
 //Cambia las animaciones dependiendo del estado del hamster
@@ -150,7 +153,7 @@ void AnimHamsterStateMachine::setAnimBool(HamStatesAnim h, bool b)
 		idle = b;
 		break;
 	case HamStatesAnim::STROKE:
-		idle = b;
+		stroke = b;
 		break;
 	}
 }

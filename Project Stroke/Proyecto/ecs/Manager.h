@@ -143,9 +143,58 @@ public:
 		return mapHeights_;
 	}
 
+	inline std::vector<Entity*>& getDeadBodies() {
+		return deadBodies_;
+	}
+
 	void update();
 	void render();
 	void refresh();
+
+	void refreshDeadBodies() {
+		deadBodies_.erase( //
+			std::remove_if( //
+				deadBodies_.begin(), //
+				deadBodies_.end(), //
+				[](const Entity* e) { //
+					return !e->isActive();
+				}), //
+			deadBodies_.end());
+	}
+
+	void refreshEnemies() {
+		enemies_.erase( //
+			std::remove_if( //
+				enemies_.begin(), //
+				enemies_.end(), //
+				[](const Entity* e) { //
+					return !e->isActive();
+				}), //
+			enemies_.end());
+	}
+
+	void refreshPlayers() {
+		players_.erase( //
+			std::remove_if( //
+				players_.begin(), //
+				players_.end(), //
+				[](const Entity* e) { //
+					return !e->isActive();
+				}), //
+			players_.end());
+	}
+
+	void refreshObstacles() {
+		obstacles_.erase( //
+			std::remove_if( //
+				obstacles_.begin(), //
+				obstacles_.end(), //
+				[](const Entity* e) { //
+					return !e->isActive();
+				}), //
+			obstacles_.end());
+	}
+
 private:
 	std::vector<Entity*> entities_;
 	std::vector<Entity*> tiles_;

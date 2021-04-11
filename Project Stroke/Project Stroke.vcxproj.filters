@@ -207,9 +207,6 @@
     <ClCompile Include="Proyecto\components\GhostCtrl.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\Possesion.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
     <ClCompile Include="Proyecto\components\KeyGame.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
@@ -242,6 +239,15 @@
     </ClCompile>
     <ClCompile Include="Proyecto\components\FleeFromPlayer.cpp">
       <Filter>Archivos de origen\components\EnemyBehaviour\behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\InfarctedBody.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\PossesionGame.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\ReanimationGame.cpp">
+      <Filter>Archivos de origen\components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -440,9 +446,6 @@
     <ClInclude Include="Proyecto\components\GhostCtrl.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\Possesion.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Proyecto\components\KeyGame.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
@@ -475,6 +478,15 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\FleeFromPlayer.h">
       <Filter>Archivos de encabezado\Components\EnemyBehaviour\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\InfarctedBody.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\PossesionGame.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\ReanimationGame.h">
+      <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

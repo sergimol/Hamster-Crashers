@@ -37,7 +37,7 @@ class DeadBody;
 class Knockback;
 class HeartUI;
 class TileRender;
-class Possesion;
+class PossesionGame;
 class GhostCtrl;
 class ContactDamage;
 class AnimHamsterStateMachine;
@@ -47,6 +47,8 @@ class Camera;
 class Swallow;
 class EnemyBehaviour;
 class Behavior;
+class InfarctedBody;
+class ReanimationGame;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -85,7 +87,7 @@ class Behavior;
 	TileRender, \
 	GhostCtrl, \
 	HeightObject, \
-	Possesion,\
+	PossesionGame,\
 	ContactDamage,\
 	Swallow,\
 	AnimHamsterStateMachine,\
@@ -94,6 +96,9 @@ class Behavior;
 	Camera, \
 	EnemyBehaviour, \
 	Behavior
+	Camera, \
+	InfarctedBody, \
+	ReanimationGame
 
 
 //FollowPlayer, \
@@ -104,7 +109,9 @@ struct Enemy;
 struct Ally;
 struct Bullet_group;
 struct Item_group;
-#define _GRPS_LIST_  Enemy, Ally, Bullet_group, Item_group
+struct Dead;
+
+#define _GRPS_LIST_  Enemy, Ally, Bullet_group, Item_group, Dead
 
 // handlers
 //Creo que hay que hacer un handler por cada player

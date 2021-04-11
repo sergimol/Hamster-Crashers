@@ -6,13 +6,13 @@
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
 #include "Transform.h"
-#include "Possesion.h"
+#include "PossesionGame.h"
 
 using namespace std;
 
 class KeyGame : public Component {
 public:
-	KeyGame(SDL_Rect path, SDL_Rect hit, Possesion* p): trail(path), hitmarker(hit), poss_(p) {};
+	KeyGame(SDL_Rect path, SDL_Rect hit, PossesionGame* p): trail(path), hitmarker(hit), poss_(p) {};
 	~KeyGame() {};
 
 	virtual void init() override;
@@ -26,7 +26,7 @@ public:
 	inline void setTexture(Texture* txt) { tx_ = txt; };
 private:
 	Transform* tr_;
-	Possesion* poss_;
+	PossesionGame* poss_;
 	Texture* tx_;
 
 	SDL_Rect trail;

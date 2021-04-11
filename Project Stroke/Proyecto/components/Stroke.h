@@ -29,6 +29,8 @@ public:
 	//DEBUG ------ INFARTA AL HAMSTER
 	void infarct() { chance_ = 100; };
 
+	void restartChance() { chance_ = 0; };
+
 private:
 	HamsterStateMachine* hms_;
 	Ability* ab_;

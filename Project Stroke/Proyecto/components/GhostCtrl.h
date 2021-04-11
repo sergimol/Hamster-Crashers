@@ -17,8 +17,6 @@ public:
 
 	virtual void init() override;
 
-	virtual void onEnable() override;
-
 	virtual void update() override;
 
 	virtual void render() override;

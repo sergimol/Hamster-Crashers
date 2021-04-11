@@ -30,7 +30,7 @@
 #include "../components/Knockback.h"
 #include "../components/HeartUI.h"
 #include "../components/GhostCtrl.h"
-#include "../components/Possesion.h"
+#include "../components/PossesionGame.h"
 
 //PARA LAS COLISIONES CON TILE
 #include "../utils/Collisions.h"

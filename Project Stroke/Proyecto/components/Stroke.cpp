@@ -1,12 +1,13 @@
-#include "Stroke.h"
-#include "Roll.h"
-#include "Poison.h"
-#include "Pray.h"
-#include "Turret.h"
-#include "Gravity.h"
-#include "Image.h"
-#include "Animator.h"
-#include "GhostCtrl.h"
+#include "../components/Stroke.h"
+#include "../components/Roll.h"
+#include "../components/Poison.h"
+#include "../components/Pray.h"
+#include "../components/Turret.h"
+#include "../components/Gravity.h"
+#include "../components/Image.h"
+#include "../components/GhostCtrl.h"
+#include "../components/AnimHamsterStateMachine.h"
+#include "../components/ReanimationGame.h"
 
 void Stroke::init() {
 		hms_ = entity_->getComponent<HamsterStateMachine>();
@@ -14,10 +15,10 @@ void Stroke::init() {
 
 		tr_ = entity_->getComponent<Transform>();
 		assert(tr_ != nullptr);
-
+		
 		ab_ = entity_->getComponent<Roll>();
 
-		if(ab_ == nullptr) ab_ = entity_->getComponent<Pray>();
+		if (ab_ == nullptr) ab_ = entity_->getComponent<Pray>();
 		if (ab_ == nullptr) ab_ = entity_->getComponent<Poison>();
 		if (ab_ == nullptr) ab_ = entity_->getComponent<Turret>();
 
@@ -46,7 +47,7 @@ void Stroke::update() {
 		if (i <= chance_ + chanceFromAb_ && hms_->getState() != HamStates::INFARCTED) {
 			//TODO madremia que no lo podemos desactivar porque hay que quitarlo de la lsita de player y noseque algo habra que ahcer para que la camara no explote
 			//entity_->setActive(false);
-			//infarctHamster();
+			infarctHamster();
 			//TODO by Samuel necesito que por algún lugar llameis al método de Increase Latency de HeartUI para que se actualice la interfaz de la palpitaçao
 		}
 			
@@ -82,16 +83,29 @@ void Stroke::decreaseChance() {
 
 void Stroke::infarctHamster() {
 	//El personaje principal pasa a estar infartado
+	auto name = entity_->getComponent<EntityAttribs>()->getId();
+
 	hms_->getState() = HamStates::INFARCTED;
 	ab_->deactiveAbility();
-	entity_->getComponent<Animator>()->play(sdlutils().anims().at("sardinilla_idle_ghost"));
+	entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STROKE, true);
 	entity_->getComponent<GhostCtrl>()->setActive(true);
-	//GENERAR PERSONAJE INFARTADO
+	//GENERAR PERSONAJE INFARTADO ()
 
 	auto* deadBody = entity_->getMngr()->addEntity();
 	deadBody->addComponent<Transform>(tr_->getPos(), Vector2D(0,0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip());
-	deadBody->addComponent<Image>(&sdlutils().images().at("fighter"));
+	deadBody->addComponent<Animator>(&sdlutils().images().at("sardinillaSheet"),
+		86,
+		86,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3)->play(sdlutils().anims().at(name + "_stroke"));
 	deadBody->addComponent<Gravity>();
+	deadBody->addComponent<InfarctedBody>(entity_);
+	deadBody->addComponent<ReanimationGame>();
+
+	entity_->getMngr()->getDeadBodies().push_back(deadBody);
 
 	std::cout << "INFARTADO" << std::endl;
 }

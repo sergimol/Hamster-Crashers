@@ -29,7 +29,6 @@ void Roll::init() {
 }
 
 Roll::~Roll() {
-	//me follo a tu madre
 }
 
 float Roll::lerp(float a, float b, float f){
