@@ -24,5 +24,6 @@ public:
 private:
 	int dmg_;
 	Transform* tr_;
+	SDL_Rect cam;
 };
 

@@ -7,12 +7,12 @@
 void GetItem::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
-	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 }
 
 void GetItem::update() {
 	auto& ents = entity_->getMngr()->getEntities();
 
+	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 	for (Entity* e : ents) {
 		//Si la entidad es un item...
 		if (e->hasGroup<Item_group>()) {
@@ -47,7 +47,7 @@ void GetItem::update() {
 					this->entity_->getComponent<EntityAttribs>()->heal(NUTHP);
 					break;
 				default:
-						break;
+					break;
 				}
 				e->setActive(false);
 			}

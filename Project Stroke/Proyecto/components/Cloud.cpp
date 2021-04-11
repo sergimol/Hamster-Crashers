@@ -12,11 +12,11 @@ void Cloud::init() {
 }
 
 void Cloud::update() {
-	SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 	//Cogemos todas las entidades del juego
 	auto& ents = entity_->getMngr()->getEntities();
 
 	for (Entity* e : ents) {
+		cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 		//Si la entidad es un enemigo...
 		if (e->hasGroup<Enemy>()) {
 			//Cogemos el transform del enemigo

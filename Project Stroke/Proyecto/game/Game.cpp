@@ -61,6 +61,7 @@ void Game::init() {
 	auto* camera = mngr_->addEntity();
 	camera->addComponent<Camera>(camera_);
 	mngr_->setHandler<Camera__>(camera);
+
 	// Mapa
 	auto* mapa = mngr_->addEntity();
 	mapa->addComponent<MapMngr>();

@@ -12,7 +12,6 @@ void GhostCtrl::init() {
 	mv_ = entity_->getComponent<Movement>();
 	assert(mv_ != nullptr);
 	st_ = entity_->getComponent<HamsterStateMachine>()->getState();
-	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 }
 
 
@@ -36,6 +35,7 @@ void GhostCtrl::update() {
 
 void GhostCtrl::render() {
 	if (show) {
+	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 		Vector2D renderPos = Vector2D(tr_->getPos().getX() - cam.x, tr_->getPos().getY() + tr_->getZ() - cam.y);
 		SDL_Rect dest = build_sdlrect(renderPos, KEY_WIDHT, KEY_HEIGHT);
 		tx_->render(dest);
@@ -48,11 +48,11 @@ void GhostCtrl::startPossesion(Entity* e) {
 	entity_->getComponent<Animator>()->setActive(false);
 
 	//animacion meterse dentro?------
-	
+
 	//Paramos el componente para que deje de buscar jugadores
 	show = false;
 	active_ = false;
-	
+
 	//Activamos el minijuego
 	auto* poss = entity_->getComponent<Possesion>();
 

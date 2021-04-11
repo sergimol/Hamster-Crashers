@@ -115,9 +115,7 @@ void MapMngr::loadNewMap(string map) {
 							hamster1->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 256.0f, 0.0f);
-
 							hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5), 0, 15);
-
 							hamster1->addComponent<Animator>(
 								&sdlutils().images().at("sardinillaSheet"),
 								86,
@@ -128,7 +126,6 @@ void MapMngr::loadNewMap(string map) {
 								Vector2D(0, 0),
 								3
 								);
-
 							hamster1->addComponent<AnimHamsterStateMachine>();
 							hamster1->addComponent<HamsterStateMachine>();
 							hamster1->addComponent<Movement>();
@@ -348,24 +345,10 @@ void MapMngr::loadNewMap(string map) {
 						//ENEMIGO
 						//Faltan ifs especificando enemigos etc
 
-						//TO DO
-						else if (name == "enemigo") {
+						//Si leemos un enemigo que corrersponde a la sala que queremos cargar
+						else if (name == "enemigo" && object.getProperties().at(0).getIntValue() == Room) {
 							////Enemigo de prueba con la imagen de canel�n
-							//auto* enemy = mngr_->addEntity();
-							//enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0);
-							//enemy->addComponent<Transform>(
-							//	Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
-							//	Vector2D(), 240.0f, 370.0f, 0.0f)->getFlip() = true;
-							//enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
-							//enemy->setGroup<Enemy>(true);
-							//enemy->addComponent<UI>("canelon", 4);
-
-							//enemy->addComponent<EnemyStateMachine>();
-							//enemy->addComponent<EnemyAttack>();
-							//enemy->addComponent<Knockback>();
-							//enemy->addComponent<MovementSimple>();
-							//enemy->addComponent<FollowPlayer>();
-							//enemy->addComponent<EnemyStun>();
+							LoadEnemyRoom(object);
 						}
 					}
 				}
@@ -413,7 +396,7 @@ void MapMngr::loadNewMap(string map) {
 						dest.x = x * scale; dest.y = y * scale;
 						dest.w = dest.h = tilesDimensions_.x * scale;
 
-						
+
 						/*Vector2D renderPos = Vector2D(dest.x - cam.x, dest.y - cam.y);
 						dest.x = renderPos.getX();
 						dest.y = renderPos.getY();*/
@@ -464,4 +447,25 @@ Vector2D MapMngr::mapCoorsToSDLPoint(Vector2D coords) {
 //Devuelve la posicion del vector en coordenadas
 Vector2D MapMngr::SDLPointToMapCoords(Vector2D p) {
 	return Vector2D(p.getX() / TAM_CELDA, p.getY() / TAM_CELDA);
+}
+
+
+void MapMngr::LoadEnemyRoom(tmx::Object object) {
+	auto mngr_ = entity_->getMngr();
+
+	auto* enemy = mngr_->addEntity();
+	enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0);
+	enemy->addComponent<Transform>(
+		Vector2D(object.getPosition().x, object.getPosition().y),
+		Vector2D(), 240.0f, 370.0f, 0.0f)->getFlip() = true;
+	enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
+	enemy->setGroup<Enemy>(true);
+	enemy->addComponent<UI>("canelon", 4);
+
+	enemy->addComponent<EnemyStateMachine>();
+	enemy->addComponent<EnemyAttack>();
+	enemy->addComponent<Knockback>();
+	enemy->addComponent<MovementSimple>();
+	enemy->addComponent<FollowPlayer>();
+	enemy->addComponent<EnemyStun>();
 }

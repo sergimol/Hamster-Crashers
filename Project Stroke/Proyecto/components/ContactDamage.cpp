@@ -14,7 +14,6 @@ ContactDamage::ContactDamage(int danyo) :
 void ContactDamage::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
-	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 }
 
 void ContactDamage::update() {
@@ -29,6 +28,7 @@ void ContactDamage::update() {
 
 void ContactDamage::updateRect() {
 
+	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 	auto sizeW = tr_->getW();
 	auto sizeH = tr_->getH();
 	auto& pos = tr_->getPos();

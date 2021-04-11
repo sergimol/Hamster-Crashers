@@ -15,7 +15,6 @@ EnemyAttack::EnemyAttack() :
 void EnemyAttack::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
-	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 }
 
 void EnemyAttack::update() {
@@ -27,7 +26,7 @@ void EnemyAttack::update() {
 
 void EnemyAttack::LaunchAttack() {
 	if (sdlutils().currRealTime() > time_ + cooldown_) {
-
+		cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 		auto sizeW = tr_->getW();
 		auto sizeH = tr_->getH();
 		auto& pos = tr_->getPos();

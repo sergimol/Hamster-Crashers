@@ -31,8 +31,9 @@ private:
 
 	Vector2D mapCoorsToSDLPoint(Vector2D coords);
 	Vector2D SDLPointToMapCoords(Vector2D p);
+	tmx::Layer::Ptr objectsLayer;	//Guardamos la capa de entidades para poder leer los enemigos
 public: 
-	MapMngr() {};
+	MapMngr() : Room(0){};
 	~MapMngr();
 
 	void loadNewMap(string map);
@@ -41,6 +42,8 @@ public:
 	bool intersectWall(SDL_Rect hamster,int z);
 	int scale = 6;
 	int filas, columnas;
+	int Room;
 
+	void LoadEnemyRoom(tmx::Object object);
 };
 

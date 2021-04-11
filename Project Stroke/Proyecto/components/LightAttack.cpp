@@ -18,7 +18,6 @@ void LightAttack::init() {
 	assert(hms_ != nullptr);
 
 	player_ = entity_->getComponent<EntityAttribs>()->getNumber();
-	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 }
 
 void LightAttack::update() {
@@ -153,6 +152,7 @@ void LightAttack::render() {
 void LightAttack::attack() {
 	auto state = hms_->getState();
 	if (hms_->canAttack() && sdlutils().currRealTime() > time_ + cooldown_) {
+		cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 
 		auto sizeW = tr_->getW();
 		auto sizeH = tr_->getH();

@@ -20,7 +20,6 @@ void StrongAttack::init() {
 	assert(hms_ != nullptr);
 
 	player_ = entity_->getComponent<EntityAttribs>()->getNumber();
-	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 }
 
 void StrongAttack::update() {
@@ -32,7 +31,7 @@ void StrongAttack::update() {
 	}
 
 	//Fin Animacion
-	if (entity_->getComponent<AnimHamsterStateMachine>()->getState() == HamStatesAnim::STRONGATTACK )
+	if (entity_->getComponent<AnimHamsterStateMachine>()->getState() == HamStatesAnim::STRONGATTACK)
 	{
 		if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
 		{
@@ -44,6 +43,7 @@ void StrongAttack::update() {
 bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 	bool canHit = false;
 
+	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 	//Cogemos todas las entidades del juego
 	auto& ents = entity_->getMngr()->getEntities();
 
@@ -149,6 +149,7 @@ void StrongAttack::attack() {
 	auto state = hms_->getState();
 	if (hms_->canAttack() && sdlutils().currRealTime() > time_ + cooldown_) {
 
+		cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 		auto sizeW = tr_->getW();
 		auto sizeH = tr_->getH();
 		auto& pos = tr_->getPos();

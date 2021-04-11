@@ -2,9 +2,15 @@
 #include "Camera.h"
 
 void Camera::update() {
+	if (!followPlayers)
+		followPlayer();
+	else
+		Goto(CameraFollowPos);
+}
 
-	Vector2D camPos;
-	int players(0);
+void Camera::followPlayer() {
+	camPos = Vector2D();
+	players = 0;
 	auto& players_ = entity_->getMngr()->getPlayers();
 
 	//Cámara sigue a los personajes
@@ -15,11 +21,24 @@ void Camera::update() {
 		camPos = camPos + playerpos;
 		players++;
 	}
-
+	//Actualizamos la posicion de la camara
 	camera_.x = (camPos.getX() / players) - camera_.w / 2;
 	camera_.y = (camPos.getY() / players) - camera_.h / 2;
+}
 
-	// Bordes de la cámara
+void Camera::Goto(Vector2D objetive) {
+	if (camera_.x < objetive.getX()-5)
+		camera_.x++;
+	else if(camera_.x > objetive.getX() + 5)
+		camera_.x--;
+
+	if (camera_.y < objetive.getY() - 5)
+		camera_.y++;
+	else if(camera_.y > objetive.getY() + 5)
+		camera_.y--;
+}
+
+// Bordes de la cámara
 	/*
 	if (camera_.x < 0)
 		camera_.x = 0;
@@ -32,4 +51,3 @@ void Camera::update() {
 	*/
 
 	//std::cout << camera_.x << " " << camera_.y << "\n";
-}
