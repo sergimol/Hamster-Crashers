@@ -76,7 +76,7 @@ void Movement::update() {
 	SDL_Rect rectPlayer{ tr_->getPos().getX() + goalVel_.getX(), tr_->getPos().getY() + goalVel_.getY(), tr_->getW(),tr_->getH() };
 
 	//Si me voy a chocar con una pared...
-	if (map->intersectWall(rectPlayer, z)) {
+	if (map->intersectWall(rectPlayer)) {
 		//Dejo de moverme
 		vel.setX(0);
 		vel.setY(0);

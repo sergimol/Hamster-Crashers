@@ -38,7 +38,7 @@ public:
 	void loadNewMap(string map);
 
 	SDL_Rect cam;
-	bool intersectWall(SDL_Rect hamster,int z);
+	bool intersectWall(SDL_Rect hamster);
 	int scale = 6;
 	int filas, columnas;
 
