@@ -2,7 +2,7 @@
 #include "Stroke.h"
 
 AmbushPlayer::AmbushPlayer() :
-	mov_(nullptr), tr_(nullptr), rangeOffsetX_(500), rangeMinOffsetX_(450), rangeOffsetY_(100), rangeOffset_(50), lockedHamState_(nullptr), lockedHamster_(nullptr), hamsterTr_(nullptr) {
+	mov_(nullptr), tr_(nullptr), rangeX_(500), rangeY_(200), rangeOffsetX_(100), rangeOffsetY_(100), lockedHamState_(nullptr), lockedHamster_(nullptr), hamsterTr_(nullptr) {
 }
 
 void AmbushPlayer::init() {
@@ -50,10 +50,13 @@ bool AmbushPlayer::isWithinRange() {
 	int hamX = hamPos.getX(),
 		hamY = hamPos.getY() + hamsterTr_->getH(),
 		x = pos.getX(),
-		y = pos.getY() + tr_->getH();
+		y = pos.getY() + tr_->getH(),
+		xMidPoint = x + (width / 2),
+		hamMidPointX = hamX + hamWidth / 2,
+		distX = xMidPoint - hamMidPointX,
+		distY = y - hamY;
 
-	return((hamX /*+ rangeOffsetX_*/ + hamWidth * 2 >= x + width && hamX + hamWidth - rangeOffsetX_ <= x + width) &&
-		(hamY + rangeOffsetY_ >= y && hamY - rangeOffsetY_ / 10 <= y));
+	return((abs(distX) < rangeX_) && (abs(distY) < rangeY_));
 }
 
 void AmbushPlayer::behave() {
@@ -65,13 +68,19 @@ void AmbushPlayer::behave() {
 		}
 		auto& hamPos = hamsterTr_->getPos();
 		auto& pos = tr_->getPos();
-		int hamX = hamPos.getX(),
-			hamY = hamPos.getY() + hamsterTr_->getH(),
-			x = pos.getX(),
-			y = pos.getY() + tr_->getH();
 
 		auto width = tr_->getW();
 		auto hamWidth = hamsterTr_->getW();
+
+		int hamX = hamPos.getX(),
+			hamY = hamPos.getY() + hamsterTr_->getH(),
+			x = pos.getX(),
+			y = pos.getY() + tr_->getH(),
+			xMidPoint = x + (width / 2),
+			hamMidPointX = hamX + hamWidth / 2,
+			distX = xMidPoint - hamMidPointX,
+			distY = y - hamY;
+
 		auto& flip = tr_->getFlip();
 
 		if (x + width / 2 < hamX + hamWidth / 2)
@@ -79,55 +88,64 @@ void AmbushPlayer::behave() {
 		else
 			flip = true;
 
+		//para evitar que una instruccion se quede atascada entre el offset
+		mov_->updateKeymap(MovementSimple::RIGHT, false);
+		mov_->updateKeymap(MovementSimple::LEFT, false);
+		mov_->updateKeymap(MovementSimple::DOWN, false);
+		mov_->updateKeymap(MovementSimple::UP, false);
+
 		if (!isWithinRange()) {
 			// Movimiento del enemigo en base a pos del jugador
-			if (y < hamY - rangeOffsetY_ / 10)
+			
+		std:cout << "acercandome  \n";
+			if (y < hamY - rangeY_ / 10)
 				mov_->updateKeymap(MovementSimple::DOWN, true);
 			else
 				mov_->updateKeymap(MovementSimple::DOWN, false);
-			if (y > hamY + rangeOffsetY_)
+			if (y > hamY + rangeY_)
 				mov_->updateKeymap(MovementSimple::UP, true);
 			else
 				mov_->updateKeymap(MovementSimple::UP, false);
 
 
-			if (x > hamX + rangeOffsetX_)
+			if (x > hamX + rangeX_)
 				mov_->updateKeymap(MovementSimple::LEFT, true);
 			else
 				mov_->updateKeymap(MovementSimple::LEFT, false);
-			if (x < hamX - rangeOffsetX_ / 2 - tr_->getW() / 2)
+			if (x < hamX - rangeX_ / 2 - tr_->getW() / 2)
 				mov_->updateKeymap(MovementSimple::RIGHT, true);
 			else
 				mov_->updateKeymap(MovementSimple::RIGHT, false);
+			
 		}
 		else { // Si esta por debajo del rango, s emueve en la direccion contraia para mantener la distancia
 
-			mov_->updateKeymap(MovementSimple::RIGHT, false);
-			mov_->updateKeymap(MovementSimple::LEFT, false);
-			mov_->updateKeymap(MovementSimple::DOWN, false);
-			mov_->updateKeymap(MovementSimple::UP, false);
+			cout << "Esoty dentro\n";
+			//Parte Y
 
-			// Movimiento del enemigo en base a pos del jugador
-			/*
-			if (y < hamY - rangeOffsetY_ )
-				mov_->updateKeymap(MovementSimple::UP, true);
-			else
-				mov_->updateKeymap(MovementSimple::UP, false);
-			if (y > hamY + rangeOffsetY_)
+			if (distY > 0 && distY <= rangeY_ - rangeOffsetY_)
 				mov_->updateKeymap(MovementSimple::DOWN, true);
 			else
 				mov_->updateKeymap(MovementSimple::DOWN, false);
-			*/
+			if (distY < 0 && distY > -rangeY_ + rangeOffsetY_)
+				mov_->updateKeymap(MovementSimple::UP, true);
+			else
+				mov_->updateKeymap(MovementSimple::UP, false);
 
-			
-			if (x > hamX + rangeOffsetX_ - rangeOffset_)
+
+
+			//PARTE X
+			if (distX > 0 && distX <= rangeX_ - rangeOffsetX_)
 				mov_->updateKeymap(MovementSimple::RIGHT, true);
 			else
 				mov_->updateKeymap(MovementSimple::RIGHT, false);
-			if (x < hamX - rangeOffsetX_ / 2 - tr_->getW() / 2)
+			if (distX < 0 && distX > -rangeX_ + rangeOffsetX_)
 				mov_->updateKeymap(MovementSimple::LEFT, true);
 			else
-				mov_->updateKeymap(MovementSimple::	LEFT, false);
+				mov_->updateKeymap(MovementSimple::LEFT, false);
+
+			cout << distY;
+
 			
 
 		}

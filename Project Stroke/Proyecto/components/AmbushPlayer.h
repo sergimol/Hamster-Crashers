@@ -53,10 +53,10 @@ private:
 	
 	HamsterStateMachine* lockedHamState_;
 	
-	int rangeOffsetX_; // Esta movida habra que balancearla
-	int rangeMinOffsetX_; // Esta movida habra que balancearla
-	int rangeOffsetY_; // Esta movida habra que balancearla
-	int rangeOffset_; // un offset en el que permitamos que este ok qudarse quieto
+	int rangeX_; // Esta movida habra que balancearla
+	int rangeY_; // Esta movida habra que balancearla
+	int rangeOffsetX_; // un offset en el que permitamos que este ok qudarse quieto
+	int rangeOffsetY_; // un offset en el que permitamos que este ok qudarse quieto
 
 	EnemyAttack* enAtk_; //componente de ataque
 

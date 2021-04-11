@@ -383,7 +383,7 @@ void MapMngr::loadNewMap(string map) {
 							enemy->addComponent<EnemyAttack>();
 							enemy->addComponent<Knockback>();
 							enemy->addComponent<MovementSimple>();
-							enemy->addComponent<EnemyBehaviour>(new FleeFromPlayer());
+							enemy->addComponent<EnemyBehaviour>(new AmbushPlayer());
 							enemy->addComponent<EnemyStun>();
 						}
 					}
