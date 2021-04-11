@@ -69,6 +69,8 @@ void InfarctedBody::render() {
 
 // Reactivamos todo lo desactivado durante el infarto
 void InfarctedBody::reanimate() {
+	//Reactivamos el otro hamster
+	enableOtherHamster();
 	// Vuelve a tener disponible la habilidad
 	ab_->activateAbility();
 	// Animacion de desinfarto

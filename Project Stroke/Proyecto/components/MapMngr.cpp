@@ -565,8 +565,8 @@ void MapMngr::LoadEnemyRoom() {
 			enemy->addComponent<EnemyAttack>();
 			enemy->addComponent<Knockback>();
 			enemy->addComponent<MovementSimple>();
-			enemy->addComponent<FollowPlayer>();
-			enemy->addComponent<EnemyStun>();
+			/*enemy->addComponent<FollowPlayer>();
+			enemy->addComponent<EnemyStun>();*/
 		}
 	}
 	std::cout << Room << "\n";

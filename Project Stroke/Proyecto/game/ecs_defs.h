@@ -21,7 +21,7 @@ class DisableOnExit;
 class BulletHit;
 class ControlHandler;
 class MovementSimple;
-//class FollowPlayer;
+class FollowPlayer;
 class EnemyAttack;
 class EnemyStateMachine;
 class Poison;
@@ -95,11 +95,11 @@ class ReanimationGame;
 	HeightObject,\
 	Camera, \
 	EnemyBehaviour, \
-	Behavior
+	Behavior, \
 	Camera, \
 	InfarctedBody, \
-	ReanimationGame
-
+	ReanimationGame, \
+	FollowPlayer
 
 //FollowPlayer, \
 
