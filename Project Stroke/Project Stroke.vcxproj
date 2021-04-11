@@ -147,7 +147,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Proyecto\components\Ability.cpp" />
+    <ClCompile Include="Proyecto\components\AmbushPlayer.cpp" />
     <ClCompile Include="Proyecto\components\AnimHamsterStateMachine.cpp" />
+    <ClCompile Include="Proyecto\components\Behavior.cpp" />
     <ClCompile Include="Proyecto\components\BulletHit.cpp" />
     <ClCompile Include="Proyecto\components\Cloud.cpp" />
     <ClCompile Include="Proyecto\components\Combos.cpp" />
@@ -155,7 +157,9 @@
     <ClCompile Include="Proyecto\components\DisableOnExit.cpp" />
     <ClCompile Include="Proyecto\components\ControlHandler.cpp" />
     <ClCompile Include="Proyecto\components\EnemyAttack.cpp" />
+    <ClCompile Include="Proyecto\components\EnemyBehaviour.cpp" />
     <ClCompile Include="Proyecto\components\EnemyStateMachine.cpp" />
+    <ClCompile Include="Proyecto\components\FleeFromPlayer.cpp" />
     <ClCompile Include="Proyecto\components\FollowPlayer.cpp" />
     <ClCompile Include="Proyecto\components\GetItem.cpp" />
     <ClCompile Include="Proyecto\components\GhostCtrl.cpp" />
@@ -203,7 +207,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\components\Ability.h" />
+    <ClInclude Include="Proyecto\components\AmbushPlayer.h" />
     <ClInclude Include="Proyecto\components\AnimHamsterStateMachine.h" />
+    <ClInclude Include="Proyecto\components\Behavior.h" />
     <ClInclude Include="Proyecto\components\Bounce.h" />
     <ClInclude Include="Proyecto\components\BulletHit.h" />
     <ClInclude Include="Proyecto\components\Cloud.h" />
@@ -213,9 +219,11 @@
     <ClInclude Include="Proyecto\components\DeAcceleration.h" />
     <ClInclude Include="Proyecto\components\DisableOnExit.h" />
     <ClInclude Include="Proyecto\components\EnemyAttack.h" />
+    <ClInclude Include="Proyecto\components\EnemyBehaviour.h" />
     <ClInclude Include="Proyecto\components\EnemyStateMachine.h" />
     <ClInclude Include="Proyecto\components\FighterCtrl.h" />
     <ClInclude Include="Proyecto\components\Animator.h" />
+    <ClInclude Include="Proyecto\components\FleeFromPlayer.h" />
     <ClInclude Include="Proyecto\components\FollowPlayer.h" />
     <ClInclude Include="Proyecto\components\GetItem.h" />
     <ClInclude Include="Proyecto\components\GhostCtrl.h" />
