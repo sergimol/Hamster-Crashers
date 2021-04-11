@@ -21,7 +21,7 @@ class DisableOnExit;
 class BulletHit;
 class ControlHandler;
 class MovementSimple;
-class FollowPlayer;
+//class FollowPlayer;
 class EnemyAttack;
 class EnemyStateMachine;
 class Poison;
@@ -45,6 +45,8 @@ class KeyGame;
 class HeightObject;
 class Camera;
 class Swallow;
+class EnemyBehaviour;
+class Behavior;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -66,7 +68,6 @@ class Swallow;
 	Poison, \
 	ControlHandler, \
 	MovementSimple,\
-	FollowPlayer, \
 	EnemyAttack, \
 	Cloud, \
 	Item, \
@@ -90,7 +91,12 @@ class Swallow;
 	AnimHamsterStateMachine,\
 	KeyGame,\
 	HeightObject,\
-	Camera
+	Camera, \
+	EnemyBehaviour, \
+	Behavior
+
+
+//FollowPlayer, \
 
 // groups
 

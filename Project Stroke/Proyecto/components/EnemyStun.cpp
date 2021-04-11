@@ -6,9 +6,10 @@ EnemyStun::EnemyStun() :
 void EnemyStun::init() {
 	enmState_ = entity_->getComponent<EnemyStateMachine>();
 	assert(enmState_ != nullptr);
-
+	/*
 	flwPlayer_ = entity_->getComponent<FollowPlayer>();
 	assert(flwPlayer_ != nullptr);
+	*/
 }
 
 void EnemyStun::update() {
@@ -16,7 +17,7 @@ void EnemyStun::update() {
 	if (state == EnemyStates::ENM_STUNNED) {
 		//Deja de estar stunneado
 		if (sdlutils().currRealTime() > time_ + cooldown_) {
-			flwPlayer_->setActive(true);
+			//flwPlayer_->setActive(true);
 			state = EnemyStates::ENM_IDLE;
 		}
 	}

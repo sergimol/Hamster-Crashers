@@ -105,10 +105,14 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 							if (enmStateM != EnemyStates::ENM_STUNNED) {
 								//Aturdimos al enemigo
 								enmStateM = EnemyStates::ENM_STUNNED;
+
+								//TODO el stun del coso
 								//Desactivamos componente de seguimiento de jugador
+								/*
 								FollowPlayer* flwPlayer = ents[i]->getComponent<FollowPlayer>();
-								if (flwPlayer != nullptr)
-									flwPlayer->setActive(false);
+								if (flwPlayer != nullptr);
+								*/
+									//flwPlayer->setActive(false);
 							}
 							//Reiniciamos tiempo de stun
 							enmStun->restartStunTime();

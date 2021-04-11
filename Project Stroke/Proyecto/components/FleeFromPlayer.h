@@ -18,19 +18,20 @@
 #include "MovementSimple.h"
 #include "EnemyAttack.h"
 #include "Behavior.h"
+#include "EnemyBehaviour.h"
 
-class FollowPlayer : public Behavior {
+class FleeFromPlayer : public Behavior {
 public:
-	FollowPlayer();
+	FleeFromPlayer();
 
-	virtual ~FollowPlayer() {};
+	virtual ~FleeFromPlayer() {};
 
 	void init() override;
 	void behave();
 
 	void lockHamster();
 	void lockHamster(int id);
-	bool isWithinAttackRange();
+	bool isWithinRange();
 
 protected:
 private:
@@ -54,6 +55,7 @@ private:
 	
 	int rangeOffsetX_; // Esta movida habra que balancearla
 	int rangeOffsetY_; // Esta movida habra que balancearla
+	int rangeOffset_; // un offset en el que permitamos que este ok qudarse quieto
 
 	EnemyAttack* enAtk_; //componente de ataque
 

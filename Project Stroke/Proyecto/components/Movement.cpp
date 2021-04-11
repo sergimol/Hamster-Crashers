@@ -72,55 +72,81 @@ void Movement::update() {
 
 	lastDir_ = dir; //Recogemos siempre la última dirección para quien la necesite
 
-	//Cojo el rect del player y le sumo la supuesta siguiente posicion
-	SDL_Rect rectPlayer{ tr_->getPos().getX() + goalVel_.getX(), tr_->getPos().getY() + goalVel_.getY(), tr_->getW(),tr_->getH() };
+	if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {		//Deceleracion
 
-	//Si me voy a chocar con una pared...
-	if (map->intersectWall(rectPlayer, z)) {
-		//Dejo de moverme
-		vel.setX(0);
-		vel.setY(0);
+		vel.setX(lerp(vel.getX(), 0, 0.25));
+		vel.setY(lerp(vel.getY(), 0, 0.25));
 
-		//Y me quedo quieto
+		//ANIMACION DE IDLE
 		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, false);
 		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, true);
 	}
-	//Si no me voy a chocar...
+	else if (hms_->canMove()) {		//Aceleracion
+
+		vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.9));
+		vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.9));
+
+		//cout << "Up: " << keymap.at(UP) << " DOWN: " << keymap.at(DOWN) << " LEFT: " << keymap.at(LEFT) << " RIGHT: " << keymap.at(RIGHT)
+		//	<< " DIR: " << dir.getX() << " " << dir.getY() << "\n";
+
+		//ANIMACION DE MOVIMIENTO
+		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, true);
+		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, false);
+	}
 	else {
-		if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {		//Deceleracion
-			vel.setX(lerp(vel.getX(), 0, 0.25));
-			vel.setY(lerp(vel.getY(), 0, 0.25));
-			//std:cout << "estoy decelerando supuestamente porque no decelero bien? who knows \n";
+		cout << "Estado : " << hms_->currentstate() << "\n";
+		//porque esta kaput el bixo
 
-			//ANIMACION DE IDLE
-			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, false);
-			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, true);
-		}
-		else if (hms_->canMove()) {		//Aceleracion
+		vel.setX(lerp(vel.getX(), 0, 0.25));
+		vel.setY(lerp(vel.getY(), 0, 0.25));
 
-			vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.9));
-			vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.9));
+		//ANIMACION DE MORIRSE
+		//if (state != HamStates::DEAD)
+		//	;// anim_->play(sdlutils().anims().at("sardinilla_morirse"));
+		//if (state != HamStates::INFARCTED)
+			// anim_->play(sdlutils().anims().at("sardinilla_chungo"));
+	}
 
+	//Cojo el rect del player y le sumo la supuesta siguiente posicion
+	SDL_Rect rectPlayer{ tr_->getPos().getX() + vel.getX(), tr_->getPos().getY() + vel.getY(), tr_->getW(),tr_->getH() };
 
-			//cout << "Up: " << keymap.at(UP) << " DOWN: " << keymap.at(DOWN) << " LEFT: " << keymap.at(LEFT) << " RIGHT: " << keymap.at(RIGHT)
-			//	<< " DIR: " << dir.getX() << " " << dir.getY() << "\n";
+	//Si me voy a chocar con una pared...
+	if (map->intersectWall(rectPlayer)) {
 
-			//ANIMACION DE MOVIMIENTO
-			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, true);
-			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, false);
+		//Comprobamos si hay doble input
+		if (dir.getX() != 0 && dir.getY() != 0) {
+
+			//Probamos con ignorar el Y
+			rectPlayer.y = tr_->getPos().getY();
+
+			//Si con el Y bloqueado se mueve correctamente
+			if (!map->intersectWall(rectPlayer)) {
+				goalVel_.setY(0);
+				vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.9));
+				vel.setY(0);
+			}
+			else {
+				//Probamos ignorando la X
+				rectPlayer.y = tr_->getPos().getY() + goalVel_.getY();
+				rectPlayer.x = tr_->getPos().getX();
+
+				if (!map->intersectWall(rectPlayer)) {
+					goalVel_.setX(0);
+					vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.9));
+					vel.setX(0);
+				}
+				//Para las esquinas. NO QUITAR
+				else {
+					//Dejo de moverme
+					vel.setX(0);
+					vel.setY(0);
+				}
+			}
 		}
 		else {
-			cout << "Estado : " << hms_->currentstate() << "\n";
-			//porque esta kaput el bixo
-
-			vel.setX(lerp(vel.getX(), 0, 0.25));
-			vel.setY(lerp(vel.getY(), 0, 0.25));
-
-			//ANIMACION DE MORIRSE
-			//if (state != HamStates::DEAD)
-			//	;// anim_->play(sdlutils().anims().at("sardinilla_morirse"));
-			//if (state != HamStates::INFARCTED)
-				// anim_->play(sdlutils().anims().at("sardinilla_chungo"));
+			//Dejo de moverme
+			vel.setX(0);
+			vel.setY(0);			
 		}
 	}
 

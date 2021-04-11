@@ -15,7 +15,6 @@
 #include "../components/Pray.h"
 #include "../components/Combos.h"
 #include "../components/Turret.h"
-#include "../components/FollowPlayer.h"
 #include "../components/MovementSimple.h"
 #include "../components/EnemyAttack.h"
 #include "../components/EnemyStateMachine.h"
@@ -35,6 +34,10 @@
 #include "../components//AnimHamsterStateMachine.h"
 #include "../components/Swallow.h"
 #include "../ecs/Camera.h"
+#include "../components/EnemyBehaviour.h"
+#include "../components/FollowPlayer.h"
+#include "../components/AmbushPlayer.h"
+#include "../components/FleeFromPlayer.h"
 
 
 MapMngr::~MapMngr() {
@@ -445,11 +448,11 @@ void MapMngr::loadNewMap(string map) {
 }
 
 //Devuelve true si se está chocando con alguna colision
-bool MapMngr::intersectWall(SDL_Rect hamster, int z) {
+bool MapMngr::intersectWall(SDL_Rect hamster) {
 
 	//Cogemos arriba izquierda y abajo derecha
-	Vector2D topLeftCoords = SDLPointToMapCoords(Vector2D((hamster.x) / scale, (hamster.y - z) / scale));
-	Vector2D bottomRightCoords = SDLPointToMapCoords(Vector2D((hamster.x + hamster.w - 1) / scale, (hamster.y + hamster.h - 1 - z) / scale));
+	Vector2D topLeftCoords = SDLPointToMapCoords(Vector2D((hamster.x) / scale, (hamster.y) / scale));
+	Vector2D bottomRightCoords = SDLPointToMapCoords(Vector2D((hamster.x + hamster.w - 1) / scale, (hamster.y + hamster.h - 1) / scale));
 
 	for (int x = topLeftCoords.getX(); x <= bottomRightCoords.getX(); x++) {
 		for (int y = topLeftCoords.getY(); y <= bottomRightCoords.getY(); y++) {
