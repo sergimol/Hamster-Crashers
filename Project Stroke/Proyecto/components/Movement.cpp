@@ -130,7 +130,7 @@ void Movement::update() {
 	//}
 
 	// 0 se debería sustituir por la z mínima del mapa
-	if (z <= 0) {
+	if (z <= entity_->getComponent<Gravity>()->gimmeFloor()) {
 		// Inicio del salto
 		if (keymap.at(SPACE)) {
 			entity_->getComponent<Combos>()->checkCombo(2);
@@ -139,7 +139,7 @@ void Movement::update() {
 			keymap.at(SPACE) = false;
 		}
 		// Fin del salto
-		if (velZ < 0) {
+		if (velZ < entity_->getComponent<Gravity>()->gimmeFloor()) {
 			entity_->getComponent<Combos>()->popUntilEmpty();
 			/*keymap.at(SPACE) = false;*/
 		}

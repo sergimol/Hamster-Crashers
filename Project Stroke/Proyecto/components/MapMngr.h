@@ -11,7 +11,7 @@
 #include "../ecs/Manager.h"
 #include "../ecs/tile.h"
 
-
+#include "../utils/Collisions.h"
 
 using namespace std;
 class Game;
@@ -33,16 +33,18 @@ private:
 	Vector2D SDLPointToMapCoords(Vector2D p);
 	tmx::ObjectGroup* objectLayer;	//Guardamos la capa de entidades para poder leer los enemigos
 	int Room;					//Guarda la habitación en la que se encuentran los jugadores
+	std::vector<Entity*> roomTrigger;//Guarda todos los triggers de cambio de sala del mapa
 public: 
 	MapMngr() : Room(0) {};
 	~MapMngr();
 
 	void loadNewMap(string map);
-
+	void update()override;
 	SDL_Rect cam;
 	bool intersectWall(SDL_Rect hamster,int z);
 	int scale = 6;
 	int filas, columnas;
+	int getScale() { return scale; };
 
 	void LoadEnemyRoom();
 };

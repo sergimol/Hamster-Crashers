@@ -45,6 +45,22 @@ MapMngr::~MapMngr() {
 	delete[] collider;
 }
 
+void MapMngr::update() {
+	//	Comprobamos la colision con los triggers salas
+	auto& players = entity_->getMngr()->getPlayers();
+	int i = 0;
+	for (Entity* trigger : roomTrigger) {//Recorrer triggers
+		auto tr_ = roomTrigger[i]->getComponent<Transform>();
+		for (Entity* player : players) {
+			auto* pTr = player->getComponent<Transform>();
+			//	//Desactivar trigger o sacarlo de la lista jejeje soy un perrillo
+			if (Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), pTr->getPos(), pTr->getW(), pTr->getH())) {
+				LoadEnemyRoom();
+			}
+		}
+		i++;
+	}
+}
 
 void MapMngr::loadNewMap(string map) {
 	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
@@ -84,8 +100,8 @@ void MapMngr::loadNewMap(string map) {
 		{
 			if (layer->getType() == tmx::Layer::Type::Object)
 			{
-				objectLayer = &layer->getLayerAs<tmx::ObjectGroup>();
-				const auto& objects = objectLayer->getObjects();
+				const auto& objLayer = &layer->getLayerAs<tmx::ObjectGroup>();
+				const auto& objects = objLayer->getObjects();
 				if (layer->getName() == "Alturas") {
 					for (const auto& object : objects)
 					{
@@ -97,7 +113,20 @@ void MapMngr::loadNewMap(string map) {
 						/*entity_->getMngr()->getMapH().push_back(o);*/
 					}
 				}
-				else {
+				else if (layer->getName() == "Salas") {
+					//Guardamos todos los triggers de cambio de sala
+					for (const auto& object : objects)
+					{
+						auto* o = entity_->getMngr()->addEntity();
+						o->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+							Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f);
+						roomTrigger.push_back(o);
+					}
+				}
+				else if (layer->getName() == "entities") {
+					//Guardamos la capa de objetos
+					std::cout << layer->getName();
+					objectLayer = &layer->getLayerAs<tmx::ObjectGroup>();
 					for (const auto& object : objects)
 					{
 						//do stuff with object properties
@@ -342,14 +371,6 @@ void MapMngr::loadNewMap(string map) {
 							//Para acceder facilmente le metemos en Hamster4 de Handelers
 							mngr_->setHandler<Hamster4>(hamster4);
 						}
-						//ENEMIGO
-						//Faltan ifs especificando enemigos etc
-
-						//Si leemos un enemigo que corrersponde a la sala que queremos cargar
-						else if (name == "enemigo") {
-							////Enemigo de prueba con la imagen de canel�n
-							LoadEnemyRoom();
-						}
 					}
 				}
 			}
@@ -417,6 +438,9 @@ void MapMngr::loadNewMap(string map) {
 				}
 			}
 		}
+		//ENEMIGO
+		//Una vez terminamos de cargar todas las entidades y tiles de las CAPAS, cargamos los enemigos de la sala 0
+		LoadEnemyRoom();
 	}
 }
 
@@ -476,5 +500,6 @@ void MapMngr::LoadEnemyRoom() {
 			enemy->addComponent<EnemyStun>();
 		}
 	}
+	std::cout << Room << "\n";
 	Room++;	//Una vez cargamos a los enemigos de la habitacion incrementamos el contador para poder cargar los enemigos de la siguiente
 }

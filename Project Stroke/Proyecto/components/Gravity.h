@@ -12,9 +12,9 @@ public:
 
 	void init() override;
 
-void update() override;
-void onDisable() override;
-
+	void update() override;
+	void onDisable() override;
+	int gimmeFloor() { return floor; };
 private:
 	Transform* tr_;
 	float floor;

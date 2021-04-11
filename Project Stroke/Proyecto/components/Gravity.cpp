@@ -8,7 +8,7 @@
 
 void Gravity::init() {
 	tr_ = entity_->getComponent<Transform>();
-	assert(tr_!=nullptr);
+	assert(tr_ != nullptr);
 }
 
 void Gravity::update() {
@@ -23,15 +23,17 @@ void Gravity::update() {
 		velZ = 0;
 		z = floor;
 	}
-	
+	//Comprobamos la colision con los triggers de altura
 	auto& heights = entity_->getMngr()->getMapH();
+	int maxHigh = 0;
 	for (Entity* alt : heights) {
 		auto* aTr = alt->getComponent<Transform>();
-		if (Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), aTr->getPos(), aTr->getW(), aTr->getH())) {
-			floor = alt->getComponent<HeightObject>()->getZ();
-			return;
+		if (Collisions::collides(aTr->getPos(), aTr->getW(), aTr->getH(), tr_->getPos(), tr_->getW(), tr_->getH())) {
+			if (alt->getComponent<HeightObject>()->getZ() > maxHigh)
+				maxHigh = alt->getComponent<HeightObject>()->getZ();
 		}
 	}
+	floor = maxHigh;
 }
 
 void Gravity::onDisable() {
