@@ -1,11 +1,11 @@
-﻿#include "FollowPlayer.h"
+﻿#include "AmbushPlayer.h"
 #include "Stroke.h"
 
-FollowPlayer::FollowPlayer() :
-	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr), lockedHamster_(nullptr), hamsterTr_(nullptr) {
+AmbushPlayer::AmbushPlayer() :
+	mov_(nullptr), tr_(nullptr), rangeOffsetX_(500), rangeMinOffsetX_(450), rangeOffsetY_(100), rangeOffset_(50), lockedHamState_(nullptr), lockedHamster_(nullptr), hamsterTr_(nullptr) {
 }
 
-void FollowPlayer::init() {
+void AmbushPlayer::init() {
 	Entity* owEntity = owner_->getEntity();
 	mov_ = owEntity->getComponent<MovementSimple>();
 	assert(mov_ != nullptr);
@@ -26,7 +26,7 @@ void FollowPlayer::init() {
 
 
 //Fija a un hamster aleatorio
-void FollowPlayer::lockHamster() {
+void AmbushPlayer::lockHamster() {
 	int hamstId = sdlutils().rand().nextInt(0, hamsters_.size());
 	lockedHamster_ = hamsters_[hamstId];
 	hamsterTr_ = lockedHamster_->getComponent<Transform>();
@@ -34,14 +34,14 @@ void FollowPlayer::lockHamster() {
 }
 
 //Fija a un hamster concreto
-void FollowPlayer::lockHamster(int id) {
+void AmbushPlayer::lockHamster(int id) {
 	lockedHamster_ = hamsters_[id];
 	hamsterTr_ = lockedHamster_->getComponent<Transform>();
 	lockedHamState_ = lockedHamster_->getComponent<HamsterStateMachine>();
 }
 
 //Esta a rango de ataque
-bool FollowPlayer::isWithinAttackRange() {
+bool AmbushPlayer::isWithinRange() {
 	auto width = tr_->getW();
 	auto hamWidth = hamsterTr_->getW();
 
@@ -56,7 +56,7 @@ bool FollowPlayer::isWithinAttackRange() {
 		(hamY + rangeOffsetY_ >= y && hamY - rangeOffsetY_ / 10 <= y));
 }
 
-void FollowPlayer::behave() {
+void AmbushPlayer::behave() {
 	if ( lockedHamster_ != nullptr) {
 		// Cambia el foco si el actual muere o le da un infarto
 		auto& state = lockedHamState_->getState();
@@ -79,7 +79,7 @@ void FollowPlayer::behave() {
 		else
 			flip = true;
 
-		if (!isWithinAttackRange()) {
+		if (!isWithinRange()) {
 			// Movimiento del enemigo en base a pos del jugador
 			if (y < hamY - rangeOffsetY_ / 10)
 				mov_->updateKeymap(MovementSimple::DOWN, true);
@@ -100,14 +100,36 @@ void FollowPlayer::behave() {
 			else
 				mov_->updateKeymap(MovementSimple::RIGHT, false);
 		}
-		else { // Si est� a rango, no necesita moverse e intentara atacar
+		else { // Si esta por debajo del rango, s emueve en la direccion contraia para mantener la distancia
 
 			mov_->updateKeymap(MovementSimple::RIGHT, false);
 			mov_->updateKeymap(MovementSimple::LEFT, false);
 			mov_->updateKeymap(MovementSimple::DOWN, false);
 			mov_->updateKeymap(MovementSimple::UP, false);
 
-			enAtk_->LaunchAttack();
+			// Movimiento del enemigo en base a pos del jugador
+			/*
+			if (y < hamY - rangeOffsetY_ )
+				mov_->updateKeymap(MovementSimple::UP, true);
+			else
+				mov_->updateKeymap(MovementSimple::UP, false);
+			if (y > hamY + rangeOffsetY_)
+				mov_->updateKeymap(MovementSimple::DOWN, true);
+			else
+				mov_->updateKeymap(MovementSimple::DOWN, false);
+			*/
+
+			
+			if (x > hamX + rangeOffsetX_ - rangeOffset_)
+				mov_->updateKeymap(MovementSimple::RIGHT, true);
+			else
+				mov_->updateKeymap(MovementSimple::RIGHT, false);
+			if (x < hamX - rangeOffsetX_ / 2 - tr_->getW() / 2)
+				mov_->updateKeymap(MovementSimple::LEFT, true);
+			else
+				mov_->updateKeymap(MovementSimple::	LEFT, false);
+			
+
 		}
 	}
 }

@@ -15,7 +15,6 @@
 #include "../components/Pray.h"
 #include "../components/Combos.h"
 #include "../components/Turret.h"
-#include "../components/FollowPlayer.h"
 #include "../components/MovementSimple.h"
 #include "../components/EnemyAttack.h"
 #include "../components/EnemyStateMachine.h"
@@ -35,6 +34,10 @@
 #include "../components//AnimHamsterStateMachine.h"
 #include "../components/Swallow.h"
 #include "../ecs/Camera.h"
+#include "../components/EnemyBehaviour.h"
+#include "../components/FollowPlayer.h"
+#include "../components/AmbushPlayer.h"
+#include "../components/FleeFromPlayer.h"
 
 
 MapMngr::~MapMngr() {
@@ -366,6 +369,22 @@ void MapMngr::loadNewMap(string map) {
 							//enemy->addComponent<MovementSimple>();
 							//enemy->addComponent<FollowPlayer>();
 							//enemy->addComponent<EnemyStun>();
+							//Enemigo de prueba con la imagen de canel�n
+							auto* enemy = mngr_->addEntity();
+							enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0);
+							enemy->addComponent<Transform>(
+								Vector2D(sdlutils().width() / 2.0f + 400, sdlutils().height() / 2.0f - 100),
+								Vector2D(), 240.0f, 370.0f, 0.0f)->getFlip() = true;
+							enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
+							enemy->setGroup<Enemy>(true);
+							enemy->addComponent<UI>("canelon", 4);
+
+							enemy->addComponent<EnemyStateMachine>();
+							enemy->addComponent<EnemyAttack>();
+							enemy->addComponent<Knockback>();
+							enemy->addComponent<MovementSimple>();
+							enemy->addComponent<EnemyBehaviour>(new FleeFromPlayer());
+							enemy->addComponent<EnemyStun>();
 						}
 					}
 				}

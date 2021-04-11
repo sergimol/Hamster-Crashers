@@ -55,6 +55,18 @@
     <Filter Include="Archivos de origen\components">
       <UniqueIdentifier>{cc57e568-abf2-4c0f-943f-3b7765a988db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de origen\components\EnemyBehaviour">
+      <UniqueIdentifier>{8c651f9f-ee08-401e-a8e8-933a3cfd9d71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\EnemyBehaviour\behaviors">
+      <UniqueIdentifier>{7e8f4aff-4451-409a-9107-50136fe12caf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Components\EnemyBehaviour">
+      <UniqueIdentifier>{dae52a29-500a-42a5-ae03-9b29c987bf8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Components\EnemyBehaviour\Behavior">
+      <UniqueIdentifier>{bb4a9ca3-397d-4648-97ff-b19c14c64445}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -150,9 +162,6 @@
     <ClCompile Include="Proyecto\components\Poison.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\FollowPlayer.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
     <ClCompile Include="Proyecto\components\MovementSimple.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
@@ -218,6 +227,21 @@
     </ClCompile>
     <ClCompile Include="Proyecto\components\Swallow.cpp">
       <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Behavior.cpp">
+      <Filter>Archivos de origen\components\EnemyBehaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\EnemyBehaviour.cpp">
+      <Filter>Archivos de origen\components\EnemyBehaviour</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\FollowPlayer.cpp">
+      <Filter>Archivos de origen\components\EnemyBehaviour\behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\AmbushPlayer.cpp">
+      <Filter>Archivos de origen\components\EnemyBehaviour\behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\FleeFromPlayer.cpp">
+      <Filter>Archivos de origen\components\EnemyBehaviour\behaviors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -362,9 +386,6 @@
     <ClInclude Include="Proyecto\components\Poison.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\FollowPlayer.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Proyecto\components\MovementSimple.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
@@ -439,6 +460,21 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\Swallow.h">
       <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Behavior.h">
+      <Filter>Archivos de encabezado\Components\EnemyBehaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\EnemyBehaviour.h">
+      <Filter>Archivos de encabezado\Components\EnemyBehaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\FollowPlayer.h">
+      <Filter>Archivos de encabezado\Components\EnemyBehaviour\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\AmbushPlayer.h">
+      <Filter>Archivos de encabezado\Components\EnemyBehaviour\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\FleeFromPlayer.h">
+      <Filter>Archivos de encabezado\Components\EnemyBehaviour\Behavior</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
