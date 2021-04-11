@@ -84,8 +84,8 @@ void MapMngr::loadNewMap(string map) {
 		{
 			if (layer->getType() == tmx::Layer::Type::Object)
 			{
-				const auto& objectLayer = layer->getLayerAs<tmx::ObjectGroup>();
-				const auto& objects = objectLayer.getObjects();
+				objectLayer = &layer->getLayerAs<tmx::ObjectGroup>();
+				const auto& objects = objectLayer->getObjects();
 				if (layer->getName() == "Alturas") {
 					for (const auto& object : objects)
 					{
@@ -346,9 +346,9 @@ void MapMngr::loadNewMap(string map) {
 						//Faltan ifs especificando enemigos etc
 
 						//Si leemos un enemigo que corrersponde a la sala que queremos cargar
-						else if (name == "enemigo" && object.getProperties().at(0).getIntValue() == Room) {
+						else if (name == "enemigo") {
 							////Enemigo de prueba con la imagen de canel�n
-							LoadEnemyRoom(object);
+							LoadEnemyRoom();
 						}
 					}
 				}
@@ -450,22 +450,31 @@ Vector2D MapMngr::SDLPointToMapCoords(Vector2D p) {
 }
 
 
-void MapMngr::LoadEnemyRoom(tmx::Object object) {
-	auto mngr_ = entity_->getMngr();
+void MapMngr::LoadEnemyRoom() {
+	const auto& objects = objectLayer->getObjects();
 
-	auto* enemy = mngr_->addEntity();
-	enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0);
-	enemy->addComponent<Transform>(
-		Vector2D(object.getPosition().x, object.getPosition().y),
-		Vector2D(), 240.0f, 370.0f, 0.0f)->getFlip() = true;
-	enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
-	enemy->setGroup<Enemy>(true);
-	enemy->addComponent<UI>("canelon", 4);
+	for (const auto& object : objects)
+	{
+		auto& name = object.getName();
+		auto mngr_ = entity_->getMngr();
+		auto& prop = object.getProperties();
+		if (name == "enemigo" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
+			auto* enemy = mngr_->addEntity();
+			enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0);
+			enemy->addComponent<Transform>(
+				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+				Vector2D(), 240.0f, 370.0f, 0.0f)->getFlip() = true;
+			enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
+			enemy->setGroup<Enemy>(true);
+			enemy->addComponent<UI>("canelon", 4);
 
-	enemy->addComponent<EnemyStateMachine>();
-	enemy->addComponent<EnemyAttack>();
-	enemy->addComponent<Knockback>();
-	enemy->addComponent<MovementSimple>();
-	enemy->addComponent<FollowPlayer>();
-	enemy->addComponent<EnemyStun>();
+			enemy->addComponent<EnemyStateMachine>();
+			enemy->addComponent<EnemyAttack>();
+			enemy->addComponent<Knockback>();
+			enemy->addComponent<MovementSimple>();
+			enemy->addComponent<FollowPlayer>();
+			enemy->addComponent<EnemyStun>();
+		}
+	}
+	Room++;	//Una vez cargamos a los enemigos de la habitacion incrementamos el contador para poder cargar los enemigos de la siguiente
 }

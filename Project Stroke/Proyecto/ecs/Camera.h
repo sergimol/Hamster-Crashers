@@ -17,19 +17,8 @@
 #include "../components/Transform.h"
 #include <SDL_rect.h>
 
-
+const enum State { Players, GoingTo, Static };
 class Camera : public Component {
-public:
-
-	Camera(SDL_Rect cam) : camera_(cam),CameraFollowPos(Vector2D(-10000,-200)){}
-
-	virtual ~Camera() {}
-	void update() override;
-	SDL_Rect getCam() { return camera_; };
-	void setFollow(bool follow) { followPlayers = follow; };
-	//Para activar el setFollow
-	//entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setFollow(true);
-	Vector2D CameraFollowPos;	//Guarda el punto de la posición de la camara cuando lo lea
 private:
 	SDL_Rect camera_;
 	Vector2D camPos;
@@ -38,6 +27,22 @@ private:
 	void followPlayer();
 	void Goto(Vector2D);
 	bool followPlayers;		//Controla si quiero que la camara siga a los jugadores o a otro punto
+
+	State cameraState;
+public:
+
+	Camera(SDL_Rect cam) : camera_(cam), CameraFollowPos(Vector2D(-10000, -200)), cameraState(Players) {}
+
+	virtual ~Camera() {}
+	void update() override;
+	SDL_Rect getCam() { return camera_; };
+	//void changeState(enum state) { cameraState = state ; };
+	//Para activar el setFollow
+	//entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setFollow(true);
+	Vector2D CameraFollowPos;	//Guarda el punto de la posición de la camara cuando lo lea
+
+
+
 };
 
 /*

@@ -2,10 +2,12 @@
 #include "Camera.h"
 
 void Camera::update() {
-	if (!followPlayers)
+	if (cameraState == Players)
 		followPlayer();
-	else
+	else if (cameraState == GoingTo)
 		Goto(CameraFollowPos);
+	else if (cameraState == Static)
+		std::cout << "guguinga\n";
 }
 
 void Camera::followPlayer() {
@@ -27,14 +29,14 @@ void Camera::followPlayer() {
 }
 
 void Camera::Goto(Vector2D objetive) {
-	if (camera_.x < objetive.getX()-5)
+	if (camera_.x < objetive.getX() - 5)
 		camera_.x++;
-	else if(camera_.x > objetive.getX() + 5)
+	else if (camera_.x > objetive.getX() + 5)
 		camera_.x--;
 
 	if (camera_.y < objetive.getY() - 5)
 		camera_.y++;
-	else if(camera_.y > objetive.getY() + 5)
+	else if (camera_.y > objetive.getY() + 5)
 		camera_.y--;
 }
 
