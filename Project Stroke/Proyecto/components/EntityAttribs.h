@@ -73,6 +73,15 @@ public:
 	inline bool getPoisoned() {
 		return poisoned_;
 	}	
+	inline int getCriticProb() const {
+		return critProbability_;
+	}
+	inline int getCriticDmg() const {
+		return critDamage_;
+	}
+	inline void resetCriticProb() {
+		critProbability_ = 0.05;
+	}
 
 private:
 	HamsterStateMachine* hms_;

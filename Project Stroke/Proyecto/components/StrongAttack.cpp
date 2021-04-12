@@ -130,8 +130,16 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 							enmKnockback->knockback();
 					}
 
+					//Cogemos probabilidad de crítico
+					int criticProb = playerAttribs->getCriticProb();
+
 					//Le restamos la vida al enemigo
-					enmAttribs->recieveDmg(dmg * 1.5);
+					if (sdlutils().rand().nextInt(1, 10000) < criticProb * 100) {	//Comprobacion golpe crítico
+						enmAttribs->recieveDmg(dmg * playerAttribs->getCriticDmg() * 1.5);
+						playerAttribs->resetCriticProb();
+					}
+					else
+						enmAttribs->recieveDmg(dmg * 1.5);
 				}
 			}
 		}

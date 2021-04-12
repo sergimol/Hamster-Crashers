@@ -34,7 +34,7 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	attackRange_(range),
 	critProbability_(0.05),
 	maxCrit_(0.2),
-	critDamage_(1.0),
+	critDamage_(1.5),
 	velocity_(speed),
 	damage_(20),
 	poisonDamage_(2),

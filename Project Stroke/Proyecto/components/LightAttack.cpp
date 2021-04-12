@@ -137,8 +137,16 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 					}
 				}
 
+				//Cogemos probabilidad de crítico
+				int criticProb = playerAttribs->getCriticProb();
+
 				//Le restamos la vida al enemigo
-				enmAttribs->recieveDmg(dmg);
+				if (sdlutils().rand().nextInt(1, 10000) < criticProb * 100) {	//Comprobacion golpe crítico
+					enmAttribs->recieveDmg(dmg * playerAttribs->getCriticDmg());
+					playerAttribs->resetCriticProb();
+				}
+				else
+					enmAttribs->recieveDmg(dmg);
 			}
 		}
 	}
