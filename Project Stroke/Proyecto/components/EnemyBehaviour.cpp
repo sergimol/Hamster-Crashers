@@ -26,6 +26,13 @@ void EnemyBehaviour::init() {
 	bh_->init();
 }
 
+void EnemyBehaviour::SetBehavior(Behavior* bs) {
+	{
+		bh_ = bs;
+		bh_->init(); 
+	}
+}
+
 
 //Fija a un hamster aleatorio
 void EnemyBehaviour::lockHamster() {
