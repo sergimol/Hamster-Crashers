@@ -10,7 +10,6 @@ void Ability::init() {
 	anim_ = entity_->getComponent<Animator>();
 	assert(anim_ != nullptr);
 
-	state_ = st_->getState();
 }
 
 void Ability::update() {
@@ -21,19 +20,11 @@ void Ability::update() {
 	* De lo contrario, no sucede nada
 	* 
 	*/
-
-	if (active && sdlutils().currRealTime() > timer_ + cooldown_) {
-		if (!lastUsed && ih().keyDownEvent() && state_ == HamStates::DEFAULT) {
-			if (ih().isKeyDown(key_)) {
-				timer_ = sdlutils().currRealTime();
-				action();
-				lastUsed = true;
-			}
-		}
-		else if(lastUsed){
-			lastUsed = false;
-			endAbility();
-		}
+	auto& state = st_->getState();
+	if (onUse && state == HamStates::ABILITY && sdlutils().currRealTime() > timer_ + cooldown_) {
+		onUse = false;
+		endAbility();
+		state = HamStates::DEFAULT;
 	}
 }
 
@@ -41,9 +32,23 @@ void Ability::deactiveAbility() {
 	if (active) {
 		active = false;
 		endAbility();
+		auto& state = st_->getState();	
+		state == HamStates::DEFAULT;
 	}
 }
 
 void Ability::activateAbility() {
 	active = true;
+}
+
+void Ability::use() {
+	if (active && sdlutils().currRealTime() > timer_ + cooldown_) {
+		auto& state = st_->getState();
+		if (!onUse && state == HamStates::DEFAULT) {
+			timer_ = sdlutils().currRealTime();
+			state = HamStates::ABILITY;
+			action();
+			onUse = true;
+		}
+	}
 }

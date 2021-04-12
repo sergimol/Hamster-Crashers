@@ -64,7 +64,8 @@ void Pray::prayAbility() {
 				//Y comprobamos si colisiona
 				if (SDL_HasIntersection(&cam, &rectEnemy)) {
 					//Le restamos la vida al enemigo
-					if (state_ != HamStates::DEAD && e->getComponent<EntityAttribs>()->getLife() > 0) //deberia que valer con el DEAD que cuando muera desactive cosas
+					auto& state = st_->getState();
+					if (state != HamStates::DEAD && e->getComponent<EntityAttribs>()->getLife() > 0) //deberia que valer con el DEAD que cuando muera desactive cosas
 						e->getComponent<EntityAttribs>()->heal(heal_);
 				}
 			}

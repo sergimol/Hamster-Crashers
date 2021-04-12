@@ -147,7 +147,7 @@ void MapMngr::loadNewMap(string map) {
 							hamster1->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 256.0f, 0.0f);
-							hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5), 0, 15);
+							hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 0, 15);
 							hamster1->addComponent<Animator>(
 								&sdlutils().images().at("sardinillaSheet"),
 								86,
@@ -172,21 +172,22 @@ void MapMngr::loadNewMap(string map) {
 							//Habilidad
 							hamster1->addComponent<Roll>();
 
-							//Handlr
-							hamster1->addComponent<ControlHandler>(hamster1->getComponent<EntityAttribs>()->getNumber());
 
 							//Interfaz
-							hamster1->addComponent<UI>("sardinilla", 0);
-							hamster1->addComponent<HeartUI>("sardinilla", 0);
+							hamster1->addComponent<UI>(name, 0);
+							hamster1->addComponent<HeartUI>(name, 0);
 
 							//Gestion de infartos
 							hamster1->addComponent<PossesionGame>();
 							hamster1->addComponent<GhostCtrl>();
 							hamster1->addComponent<Stroke>();
 
-							hamster1->addComponent<Stun>();
 							hamster1->addComponent<Knockback>();
 							hamster1->addComponent<GetItem>();
+							
+							//Handlr
+							hamster1->addComponent<ControlHandler>(hamster1->getComponent<EntityAttribs>()->getNumber());
+							hamster1->addComponent<Stun>();
 
 							hamster1->setGroup<Ally>(true);
 
@@ -204,62 +205,63 @@ void MapMngr::loadNewMap(string map) {
 
 							//-------------------------HAMSTER DE PRUEBA
 
-							auto* hamster2 = mngr_->addEntity();
+							//auto* hamster2 = mngr_->addEntity();
 
-							hamster2->addComponent<Transform>(
-								Vector2D(object.getPosition().x* scale, object.getPosition().y* scale),
-								Vector2D(), 256.0f, 256.0f, 0.0f);
+							//hamster2->addComponent<Transform>(
+							//	Vector2D(object.getPosition().x* scale, object.getPosition().y* scale),
+							//	Vector2D(), 256.0f, 256.0f, 0.0f);
 
-							hamster2->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5), 1, 15);
+							//hamster2->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5), 1, 15);
 
-							hamster2->addComponent<Animator>(
-								&sdlutils().images().at("sardinillaSheet"),
-								86,
-								86,
-								3,
-								3,
-								220,
-								Vector2D(0, 0),
-								3
-								);
+							//hamster2->addComponent<Animator>(
+							//	&sdlutils().images().at("sardinillaSheet"),
+							//	86,
+							//	86,
+							//	3,
+							//	3,
+							//	220,
+							//	Vector2D(0, 0),
+							//	3
+							//	);
 
-							hamster2->addComponent<AnimHamsterStateMachine>();
-							hamster2->addComponent<HamsterStateMachine>();
-							hamster2->addComponent<Movement>();
-							hamster2->addComponent<Gravity>();
-							hamster2->getComponent<Transform>()->setGravity(hamster2->getComponent<Gravity>());
+							//hamster2->addComponent<AnimHamsterStateMachine>();
+							//hamster2->addComponent<HamsterStateMachine>();
+							//hamster2->addComponent<Movement>();
+							//hamster2->addComponent<Gravity>();
+							//hamster2->getComponent<Transform>()->setGravity(hamster2->getComponent<Gravity>());
 
-							//Ataques Basicos
-							hamster2->addComponent<LightAttack>();
-							hamster2->addComponent<StrongAttack>();
-							hamster2->addComponent<Combos>();
+							////Ataques Basicos
+							//hamster2->addComponent<LightAttack>();
+							//hamster2->addComponent<StrongAttack>();
+							//hamster2->addComponent<Combos>();
 
-							//Habilidad
-							hamster2->addComponent<Roll>();
+							////Habilidad
+							//hamster2->addComponent<Roll>();
 
-							//Handlr
-							hamster2->addComponent<ControlHandler>(hamster2->getComponent<EntityAttribs>()->getNumber());
 
-							//Interfaz
-							hamster2->addComponent<UI>("sardinilla", 1);
-							hamster2->addComponent<HeartUI>("sardinilla", 1);
+							////Interfaz
+							//hamster2->addComponent<UI>("sardinilla", 1);
+							//hamster2->addComponent<HeartUI>("sardinilla", 1);
 
-							//Gestion de infartos
-							hamster2->addComponent<PossesionGame>();
-							hamster2->addComponent<GhostCtrl>();
-							hamster2->addComponent<Stroke>()->infarct();
+							////Gestion de infartos
+							//hamster2->addComponent<PossesionGame>();
+							//hamster2->addComponent<GhostCtrl>();
+							//hamster2->addComponent<Stroke>()->infarct();
 
-							hamster2->addComponent<Stun>();
-							hamster2->addComponent<Knockback>();
-							hamster2->addComponent<GetItem>();
+							//hamster2->addComponent<Knockback>();
+							//hamster2->addComponent<GetItem>();
 
-							hamster2->setGroup<Ally>(true);
+							//hamster2->setGroup<Ally>(true);
+							//
+							////Handlr
+							//hamster2->addComponent<ControlHandler>(hamster2->getComponent<EntityAttribs>()->getNumber());
+							//hamster2->addComponent<Stun>();
 
-							//Lo a�adimos al vector de entidades
-							players.push_back(hamster2);
+							////Lo a�adimos al vector de entidades
+							//players.push_back(hamster2);
 
-							//Para acceder facilmente le metemos en Hamster1 de Handelers
-							mngr_->setHandler<Hamster1>(hamster2);
+							////Para acceder facilmente le metemos en Hamster1 de Handelers
+							//mngr_->setHandler<Hamster1>(hamster2);
 
 
 						}
@@ -272,7 +274,7 @@ void MapMngr::loadNewMap(string map) {
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 256.0f, 0.0f);
 
-							hamster2->addComponent<EntityAttribs>(100, 0.0, "canelon", Vector2D(7, 4.5), 1, 0);
+							hamster2->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 1, 0);
 
 							hamster2->addComponent<Animator>(
 								&sdlutils().images().at("canelonSheet"),
@@ -304,8 +306,8 @@ void MapMngr::loadNewMap(string map) {
 							hamster2->addComponent<ControlHandler>(hamster2->getComponent<EntityAttribs>()->getNumber());
 
 							//Interfaz
-							hamster2->addComponent<UI>("canelon", 0);
-							hamster2->addComponent<HeartUI>("canelon", 0);
+							hamster2->addComponent<UI>(name, 0);
+							hamster2->addComponent<HeartUI>(name, 0);
 
 							//Gestion de infarto
 							hamster2->addComponent<PossesionGame>();
@@ -330,7 +332,7 @@ void MapMngr::loadNewMap(string map) {
 							hamster3->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 256.0f, 0.0f);
-							hamster3->addComponent<EntityAttribs>(100, 0.0, "keta", Vector2D(7, 4.5), 2, 10);
+							hamster3->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 2, 10);
 							//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
 							hamster3->addComponent<Animator>(
 								&sdlutils().images().at("ketaSheet"),
@@ -361,8 +363,8 @@ void MapMngr::loadNewMap(string map) {
 							hamster3->addComponent<ControlHandler>(hamster3->getComponent<EntityAttribs>()->getNumber());
 
 							//Interfaz
-							hamster3->addComponent<UI>("keta", 0);
-							hamster3->addComponent<HeartUI>("keta", 0);
+							hamster3->addComponent<UI>(name, 0);
+							hamster3->addComponent<HeartUI>(name, 0);
 
 							//Gestion de infarto
 							hamster3->addComponent<PossesionGame>();
@@ -387,7 +389,7 @@ void MapMngr::loadNewMap(string map) {
 							hamster4->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 256.0f, 0.0f);
-							hamster4->addComponent<EntityAttribs>(100, 0.0, "monchi", Vector2D(7, 4.5), 3, 0);
+							hamster4->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 3, 0);
 							//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
 							hamster4->addComponent<Animator>(
 								&sdlutils().images().at("sardinillaSheet"),
@@ -421,8 +423,8 @@ void MapMngr::loadNewMap(string map) {
 							hamster4->addComponent<ControlHandler>(hamster4->getComponent<EntityAttribs>()->getNumber());
 
 							//Interfaz
-							hamster4->addComponent<UI>("monchi", 0);
-							hamster4->addComponent<HeartUI>("monchi", 0);
+							hamster4->addComponent<UI>(name, 0);
+							hamster4->addComponent<HeartUI>(name, 0);
 
 							//Gestion de infarto
 							hamster4->addComponent<PossesionGame>();

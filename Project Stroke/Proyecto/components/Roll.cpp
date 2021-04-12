@@ -11,8 +11,8 @@ void Roll::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 
-	hms_ = entity_->getComponent<HamsterStateMachine>();
-	assert(hms_ != nullptr);
+	st_ = entity_->getComponent<HamsterStateMachine>();
+	assert(st_ != nullptr);
 
 	anim_ = entity_->getComponent<Animator>();
 	assert(anim_ != nullptr);
@@ -69,7 +69,7 @@ void Roll::updateKeymap(KEYS x, bool is) {
 void Roll::update() {
 
 	Ability::update();
-	auto& state = hms_->getState();
+	auto& state = st_->getState();
 
 	if (rolling)
 	{
@@ -104,7 +104,7 @@ void Roll::update() {
 			goalVel_ = Vector2D(dir_.getX() * speed_.getX() * maxAccel, dir_.getY() * speed_.getY() * maxAccel);
 		}
 
-		if (hms_->canMove()) {		//Aceleracion
+		if (st_->canMove()) {		//Aceleracion
 			vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.95));
 			vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.95));
 		}

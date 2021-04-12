@@ -19,7 +19,7 @@ Turret::~Turret() {
 void Turret::update() {
 	Ability::update();
 
-	if (lastUsed) {
+	if (onUse) {
 		if (sdlutils().currRealTime() > cadenceTime + CADENCESHOT) {
 
 			//Crea la entidad
@@ -48,6 +48,7 @@ void Turret::update() {
 		}
 	}
 }
+
 void Turret::action() {
 	//Realizo las animaciones
 

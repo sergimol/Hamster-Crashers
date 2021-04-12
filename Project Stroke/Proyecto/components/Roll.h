@@ -9,7 +9,7 @@ class Roll : public Ability {
 public:
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 
-	Roll() : tr_(nullptr), hms_(nullptr), anim_(nullptr), speed_(), goalVel_(0, 0), dir_(0,0), timer(sdlutils().currRealTime()), rolling(false),
+	Roll() : speed_(), goalVel_(0, 0), dir_(0,0), timer(sdlutils().currRealTime()), rolling(false),
 		hitSound_(sdlutils().soundEffects().at("strong_attack")) 
 	{
 		cooldown_ = 5000;
@@ -40,9 +40,6 @@ private:
 	
 	long unsigned int timer;
 
-	Transform* tr_;
-	HamsterStateMachine* hms_;
-	Animator* anim_;
 	Vector2D speed_, goalVel_, dir_;
 
 	std::map<KEYS, bool> keymap;

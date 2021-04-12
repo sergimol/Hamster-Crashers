@@ -3,13 +3,30 @@
 #include "../sdlutils/InputHandler.h"
 #include "../ecs/Entity.h"
 
+using namespace std;
+
 void ControlHandler::init() {
 
 	mov_ = entity_->getComponent<Movement>();
 	assert(mov_ != nullptr);
+	
+	string id = entity_->getComponent<EntityAttribs>()->getId();
+	
+	if (id == "sardinilla") {
+		ab_ = entity_->getComponent<Roll>();
+		roll_ = entity_->getComponent<Roll>();
+	}
+	else if (id == "canelon")
+		ab_ = entity_->getComponent<Pray>();
+	else if (id == "keta")
+		ab_ = entity_->getComponent<Poison>();
+	else
+		ab_ = entity_->getComponent<Turret>();
 
-	roll_ = entity_->getComponent<Roll>();
+	assert(ab_ != nullptr);
 	//assert(roll_ != nullptr); PUEDE SER NULLPTR
+
+	
 
 	lt_ = entity_->getComponent<LightAttack>();
 	assert(lt_ != nullptr);
@@ -63,7 +80,7 @@ void ControlHandler::handleController() {
 	// MOVIMIENTO (Igual en un futuro se puede modificar para que vaya con el valor de los ejes)
 	// Por alguna razón el eje Y va del revés
 	// UP
-	if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) < 0) {
+	if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) < 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_UP)) {
 		mov_->updateKeymap(Movement::UP, true);
 		mov_->updateKeymap(Movement::DOWN, false);
 		if (roll_ != nullptr) {
@@ -72,7 +89,7 @@ void ControlHandler::handleController() {
 		}
 	}
 	//DOWN
-	else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) > 0)
+	else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) > 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_DOWN))
 	{
 		mov_->updateKeymap(Movement::UP, false);
 		mov_->updateKeymap(Movement::DOWN, true);
@@ -81,7 +98,7 @@ void ControlHandler::handleController() {
 			roll_->updateKeymap(Roll::DOWN, true);
 		}
 	}
-	else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) == 0)
+	else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) == 0 && ih().isButtonUp(player_, SDL_CONTROLLER_BUTTON_DPAD_UP) && ih().isButtonUp(player_, SDL_CONTROLLER_BUTTON_DPAD_DOWN))
 	{
 		mov_->updateKeymap(Movement::UP, false);
 		mov_->updateKeymap(Movement::DOWN, false);
@@ -92,7 +109,7 @@ void ControlHandler::handleController() {
 	}
 
 	//RIGHT
-	if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) > 0)
+	if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) > 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_RIGHT))
 	{
 		mov_->updateKeymap(Movement::RIGHT, true);
 		mov_->updateKeymap(Movement::LEFT, false);
@@ -102,7 +119,7 @@ void ControlHandler::handleController() {
 		}
 	}
 	//	LEFT
-	else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) < 0)
+	else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) < 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_LEFT))
 	{
 		mov_->updateKeymap(Movement::RIGHT, false);
 		mov_->updateKeymap(Movement::LEFT, true);
@@ -111,7 +128,7 @@ void ControlHandler::handleController() {
 			roll_->updateKeymap(Roll::LEFT, true);
 		}
 	}
-	else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) == 0)
+	else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) == 0 && ih().isButtonUp(player_, SDL_CONTROLLER_BUTTON_DPAD_LEFT) && ih().isButtonUp(player_, SDL_CONTROLLER_BUTTON_DPAD_RIGHT))
 	{
 		mov_->updateKeymap(Movement::RIGHT, false);
 		mov_->updateKeymap(Movement::LEFT, false);
@@ -136,6 +153,10 @@ void ControlHandler::handleController() {
 		//ATAQUE FUERTE
 		else if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_Y)) {
 			st_->attack();
+		}
+		//HABILIDAD
+		else if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)) {
+			ab_->use();
 		}
 	}
 
@@ -216,6 +237,10 @@ void ControlHandler::handleKeyboard() {
 		//ATAQUE FUERTE
 		else if (ih().getMouseButtonState(InputHandler::MOUSEBUTTON::RIGHT) == 1) {
 			st_->attack();
+		}
+		//HABILIDAD
+		else if (ih().getMouseButtonState(InputHandler::MOUSEBUTTON::MIDDLE) == 1) {
+			ab_->use();
 		}
 	}
 }

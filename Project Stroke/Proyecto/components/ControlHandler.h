@@ -8,6 +8,9 @@
 //las cosas que controla
 #include "Movement.h"
 #include "Roll.h"
+#include "Pray.h"
+#include "Turret.h"
+#include "Poison.h"
 #include "LightAttack.h"
 #include "StrongAttack.h"
 
@@ -23,6 +26,7 @@ public:
 		roll_(nullptr),
 		lt_(nullptr),
 		st_(nullptr),
+		ab_(nullptr),
 		player_(player), // player es solo para decir que teclas le corresponde
 		hasController_(false) // true = el jugador tiene mando, false = no tiene 
 	{
@@ -44,6 +48,7 @@ private:
 	int player_;
 	Movement* mov_;
 	Roll* roll_;
+	Ability* ab_;
 	LightAttack* lt_;
 	StrongAttack* st_;
 	bool hasController_;

@@ -39,6 +39,8 @@ public:
 	void deactiveAbility();
 	void activateAbility();
 
+	void use();
+
 protected:
 	const SDL_Keycode key_ = SDLK_m;
 
@@ -46,9 +48,8 @@ protected:
 	HamsterStateMachine* st_;
 	Animator* anim_;
 	long unsigned int timer_, cooldown_; //Contador para ver CADA CUANTO puede usar una habilidad
-	HamStates state_;
 
 	bool active = true;
-	bool lastUsed = false;
+	bool onUse = false;
 };
 
