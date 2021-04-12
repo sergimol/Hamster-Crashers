@@ -43,6 +43,7 @@ private:
 	Transform* tr_;
 	HamsterStateMachine* hms_;
 	Animator* anim_;
+	Gravity* grav_;
 	Vector2D speed_, goalVel_, lastDir_;
 	
 	std::map<KEYS, bool> keymap;

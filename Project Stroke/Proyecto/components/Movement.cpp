@@ -22,6 +22,9 @@ void Movement::init() {
 	speed_ = entity_->getComponent<EntityAttribs>()->getVel();
 	assert(speed_ != Vector2D());
 
+	grav_ = entity_->getComponent<Gravity>();
+	assert(grav_ != nullptr);
+
 	keymap.insert({ UP, false });
 	keymap.insert({ DOWN, false });
 	keymap.insert({ RIGHT, false });
@@ -108,7 +111,7 @@ void Movement::update() {
 	}
 
 	//Cojo el rect del player y le sumo la supuesta siguiente posicion
-	SDL_Rect rectPlayer{ tr_->getPos().getX() + vel.getX(), tr_->getPos().getY() + vel.getY(), tr_->getW(),tr_->getH() };
+	SDL_Rect rectPlayer{ tr_->getPos().getX() + vel.getX(), tr_->getPos().getY() - grav_->getFloor() + vel.getY(), tr_->getW(),tr_->getH() };
 
 	//Si me voy a chocar con una pared...
 	if (map->intersectWall(rectPlayer)) {
@@ -117,7 +120,7 @@ void Movement::update() {
 		if (dir.getX() != 0 && dir.getY() != 0) {
 
 			//Probamos con ignorar el Y
-			rectPlayer.y = tr_->getPos().getY();
+			rectPlayer.y = tr_->getPos().getY() - grav_->getFloor();
 
 			//Si con el Y bloqueado se mueve correctamente
 			if (!map->intersectWall(rectPlayer)) {
@@ -127,7 +130,7 @@ void Movement::update() {
 			}
 			else {
 				//Probamos ignorando la X
-				rectPlayer.y = tr_->getPos().getY() + goalVel_.getY();
+				rectPlayer.y = tr_->getPos().getY() - grav_->getFloor() + goalVel_.getY();
 				rectPlayer.x = tr_->getPos().getX();
 
 				if (!map->intersectWall(rectPlayer)) {
@@ -156,7 +159,7 @@ void Movement::update() {
 	//}
 
 	// 0 se debería sustituir por la z mínima del mapa
-	if (z <= entity_->getComponent<Gravity>()->gimmeFloor()) {
+	if (z <= grav_->getFloor()) {
 		// Inicio del salto
 		if (keymap.at(SPACE)) {
 			entity_->getComponent<Combos>()->checkCombo(2);
@@ -165,7 +168,7 @@ void Movement::update() {
 			keymap.at(SPACE) = false;
 		}
 		// Fin del salto
-		if (velZ < entity_->getComponent<Gravity>()->gimmeFloor()) {
+		if (velZ < grav_->getFloor()) {
 			entity_->getComponent<Combos>()->popUntilEmpty();
 			/*keymap.at(SPACE) = false;*/
 		}

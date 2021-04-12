@@ -14,7 +14,7 @@ public:
 
 	void update() override;
 	void onDisable() override;
-	int gimmeFloor() { return floor; };
+	inline int getFloor() const { return floor; };
 private:
 	Transform* tr_;
 	float floor;

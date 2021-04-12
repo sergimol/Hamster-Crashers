@@ -160,8 +160,8 @@ void MapMngr::loadNewMap(string map) {
 								3
 								);
 							hamster1->addComponent<AnimHamsterStateMachine>();
-							hamster1->addComponent<Movement>();
 							hamster1->addComponent<Gravity>();
+							hamster1->addComponent<Movement>();							
 							hamster1->getComponent<Transform>()->setGravity(hamster1->getComponent<Gravity>());
 
 							//Ataques Basicos
