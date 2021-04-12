@@ -30,10 +30,7 @@ public:
 
 	void init() override;
 
-	void SetBehavior(Behavior* bs) {
-		bh_ = bs;
-		//bh_->init(); 
-	};
+	void SetBehavior(Behavior* bs);
 
 	void update() override;
 	virtual void onEnable() override;

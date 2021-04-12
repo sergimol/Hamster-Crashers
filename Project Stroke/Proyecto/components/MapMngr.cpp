@@ -137,7 +137,6 @@ void MapMngr::loadNewMap(string map) {
 						auto mngr_ = entity_->getMngr();
 
 						auto& players = mngr_->getPlayers();
-						auto& enemies = mngr_->getEnemies();
 						auto& obstacles = mngr_->getObstacles();
 
 						//SARDINILLA
@@ -147,7 +146,9 @@ void MapMngr::loadNewMap(string map) {
 							hamster1->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 256.0f, 0.0f);
-							hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 0, 15);
+							hamster1->addComponent<HamsterStateMachine>();
+
+							hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5), 0, 15);
 							hamster1->addComponent<Animator>(
 								&sdlutils().images().at("sardinillaSheet"),
 								86,
@@ -159,7 +160,6 @@ void MapMngr::loadNewMap(string map) {
 								3
 								);
 							hamster1->addComponent<AnimHamsterStateMachine>();
-							hamster1->addComponent<HamsterStateMachine>();
 							hamster1->addComponent<Movement>();
 							hamster1->addComponent<Gravity>();
 							hamster1->getComponent<Transform>()->setGravity(hamster1->getComponent<Gravity>());
@@ -208,8 +208,9 @@ void MapMngr::loadNewMap(string map) {
 							//auto* hamster2 = mngr_->addEntity();
 
 							//hamster2->addComponent<Transform>(
-							//	Vector2D(object.getPosition().x* scale, object.getPosition().y* scale),
+							//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 							//	Vector2D(), 256.0f, 256.0f, 0.0f);
+							//hamster2->addComponent<HamsterStateMachine>();
 
 							//hamster2->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5), 1, 15);
 
@@ -225,7 +226,6 @@ void MapMngr::loadNewMap(string map) {
 							//	);
 
 							//hamster2->addComponent<AnimHamsterStateMachine>();
-							//hamster2->addComponent<HamsterStateMachine>();
 							//hamster2->addComponent<Movement>();
 							//hamster2->addComponent<Gravity>();
 							//hamster2->getComponent<Transform>()->setGravity(hamster2->getComponent<Gravity>());
@@ -273,6 +273,7 @@ void MapMngr::loadNewMap(string map) {
 							hamster2->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 256.0f, 0.0f);
+							hamster2->addComponent<HamsterStateMachine>();
 
 							hamster2->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 1, 0);
 
@@ -288,7 +289,6 @@ void MapMngr::loadNewMap(string map) {
 								);
 
 							hamster2->addComponent<AnimHamsterStateMachine>();
-							hamster2->addComponent<HamsterStateMachine>();
 							hamster2->addComponent<Movement>();
 							hamster2->addComponent<Gravity>();
 							hamster2->getComponent<Transform>()->setGravity(hamster2->getComponent<Gravity>());
@@ -332,7 +332,9 @@ void MapMngr::loadNewMap(string map) {
 							hamster3->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 256.0f, 0.0f);
-							hamster3->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 2, 10);
+							hamster3->addComponent<HamsterStateMachine>();
+
+							hamster3->addComponent<EntityAttribs>(100, 0.0, "keta", Vector2D(7, 4.5), 2, 10);
 							//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
 							hamster3->addComponent<Animator>(
 								&sdlutils().images().at("ketaSheet"),
@@ -345,7 +347,6 @@ void MapMngr::loadNewMap(string map) {
 								3
 								);
 
-							hamster3->addComponent<HamsterStateMachine>();
 							hamster3->addComponent<Movement>();
 							hamster3->addComponent<Gravity>();
 							hamster3->addComponent<Gravity>();
@@ -389,7 +390,9 @@ void MapMngr::loadNewMap(string map) {
 							hamster4->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 256.0f, 0.0f);
-							hamster4->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 3, 0);
+							hamster4->addComponent<HamsterStateMachine>();
+
+							hamster4->addComponent<EntityAttribs>(100, 0.0, "monchi", Vector2D(7, 4.5), 3, 0);
 							//hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
 							hamster4->addComponent<Animator>(
 								&sdlutils().images().at("sardinillaSheet"),
@@ -403,7 +406,6 @@ void MapMngr::loadNewMap(string map) {
 								);
 
 							hamster4->addComponent<AnimHamsterStateMachine>();
-							hamster4->addComponent<HamsterStateMachine>();
 							hamster4->addComponent<Movement>();
 							hamster4->addComponent<Gravity>();
 							hamster4->addComponent<Gravity>();
@@ -546,6 +548,9 @@ Vector2D MapMngr::SDLPointToMapCoords(Vector2D p) {
 
 
 void MapMngr::LoadEnemyRoom() {
+
+	auto& enemies = entity_->getMngr()->getEnemies();
+
 	const auto& objects = objectLayer->getObjects();
 
 	for (const auto& object : objects)
@@ -555,18 +560,25 @@ void MapMngr::LoadEnemyRoom() {
 		auto& prop = object.getProperties();
 		if (name == "enemigo" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* enemy = mngr_->addEntity();
-			enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0);
 			enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 				Vector2D(), 240.0f, 370.0f, 0.0f)->getFlip() = true;
-			enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
-			enemy->setGroup<Enemy>(true);
-			enemy->addComponent<UI>("canelon", 4);
 
 			enemy->addComponent<EnemyStateMachine>();
+			enemy->setGroup<Enemy>(true);
+
+			enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0);
+
+			enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
+			enemy->addComponent<UI>("canelon", 4);
+
 			enemy->addComponent<EnemyAttack>();
 			enemy->addComponent<Knockback>();
 			enemy->addComponent<MovementSimple>();
+
+			enemy->addComponent<EnemyBehaviour>(new FollowPlayer());
+
+			enemies.push_back(enemy);
 			/*enemy->addComponent<FollowPlayer>();
 			enemy->addComponent<EnemyStun>();*/
 		}

@@ -1,4 +1,7 @@
 #include "EntityAttribs.h"
+#include "../ecs/Manager.h"
+#include "Transform.h"
+#include "Animator.h"
 
 EntityAttribs::EntityAttribs() :
 	health_(100),
@@ -60,7 +63,8 @@ void EntityAttribs::init() {
 		enmState_ = entity_->getComponent<EnemyStateMachine>();
 		//assert(enmState_ != nullptr);
 	}
-
+	tr_ = entity_->getComponent<Transform>();
+	assert(tr_ != nullptr);
 }
 
 void EntityAttribs::update() {
@@ -110,6 +114,8 @@ bool EntityAttribs::recieveDmg(int dmg) {
 
 			health_ = 0;
 			//Desactivamos la entidad
+			die();
+
 			//entity_->setActive(false);
 
 			return true;
@@ -119,6 +125,43 @@ bool EntityAttribs::recieveDmg(int dmg) {
 	}
 	return false;
 }
+
+void EntityAttribs::die() {
+
+	//Creamos una entidad
+	Entity* e = entity_->getMngr()->addEntity();
+
+	//Le metemos un transform para su posicion
+	e->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip());
+
+	//Y reproducimos la animacion de muerto
+	e->addComponent<Animator>(&sdlutils().images().at("sardinillaSheet"),
+		86,
+		86,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3)->play(sdlutils().anims().at("sardinilla_death"));
+
+	entity_->setActive(false);
+	//Si la persona que muere es un hamster...
+	if (!entity_->hasGroup<Enemy>()) {
+		//Ponemos su UI a 'Muerto'
+		e->addComponent<UI>(id_, entity_->getComponent<UI>()->getPosUI())->dep();
+		hms_->getState() = HamStates::DEAD;
+		entity_->getMngr()->refreshPlayers();
+	}
+	else {
+		e->addComponent<Dying>();
+		enmState_->getState() = EnemyStates::ENM_DEAD;
+		entity_->getMngr()->refreshEnemies();
+	}
+
+	//Desactivamos el componente del hasmter vivo
+
+}
+
 
 //Sana 'hp' unidades
 void EntityAttribs::heal(int hp) {

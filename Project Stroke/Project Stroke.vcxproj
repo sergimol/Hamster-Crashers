@@ -156,6 +156,7 @@
     <ClCompile Include="Proyecto\components\ContactDamage.cpp" />
     <ClCompile Include="Proyecto\components\DisableOnExit.cpp" />
     <ClCompile Include="Proyecto\components\ControlHandler.cpp" />
+    <ClCompile Include="Proyecto\components\Dying.cpp" />
     <ClCompile Include="Proyecto\components\EnemyAttack.cpp" />
     <ClCompile Include="Proyecto\components\EnemyBehaviour.cpp" />
     <ClCompile Include="Proyecto\components\EnemyStateMachine.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="Proyecto\components\ControlHandler.h" />
     <ClInclude Include="Proyecto\components\DeAcceleration.h" />
     <ClInclude Include="Proyecto\components\DisableOnExit.h" />
+    <ClInclude Include="Proyecto\components\Dying.h" />
     <ClInclude Include="Proyecto\components\EnemyAttack.h" />
     <ClInclude Include="Proyecto\components\EnemyBehaviour.h" />
     <ClInclude Include="Proyecto\components\EnemyStateMachine.h" />
