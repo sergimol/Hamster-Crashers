@@ -20,6 +20,9 @@ public:
 
 	Vector2D getBarPos() { return renderPosBar; };
 
+	//Getters auxiliares
+	inline int getPosUI() { return position; };
+
 private:
 	//Texturas de la UI
 	Texture* face_;

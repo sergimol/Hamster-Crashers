@@ -44,6 +44,7 @@ void UI::render() {
 //Si el hamster muere cambiar textura a muerto
 void UI::dep() {
 	face_ = &sdlutils().images().at(name + "Head2");
+	dest3 = build_sdlrect(renderPosBar, 0, bar_->height() * scale);
 }
 
 void UI::bar(float objetivo) {

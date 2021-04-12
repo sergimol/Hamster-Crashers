@@ -4,6 +4,7 @@
 
 #include "../ecs/Entity.h"
 #include "UI.h"
+#include "Dying.h"
 #include "HeartUI.h"
 #include "HamsterStateMachine.h"
 #include "EnemyStateMachine.h"
@@ -30,6 +31,8 @@ public:
 	void addCritProbability(float probability);
 
 	void poison();
+
+	void die();
 
 	inline void setLife(int life) { health_ = life; };
 
@@ -75,6 +78,7 @@ private:
 	HamsterStateMachine* hms_;
 	EnemyStateMachine*  enmState_;
 	Texture* hmsText_;
+	Transform* tr_;
 	
 	int health_;
 	int maxHealth_;

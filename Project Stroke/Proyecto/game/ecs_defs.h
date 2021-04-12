@@ -49,6 +49,7 @@ class EnemyBehaviour;
 class Behavior;
 class InfarctedBody;
 class ReanimationGame;
+class Dying;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -99,6 +100,7 @@ class ReanimationGame;
 	Camera, \
 	InfarctedBody, \
 	ReanimationGame, \
+	Dying, \
 	FollowPlayer
 
 //FollowPlayer, \
