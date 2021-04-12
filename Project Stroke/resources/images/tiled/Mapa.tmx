@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="left-up" width="40" height="11" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="21">
+<map version="1.4" tiledversion="2020.10.30" orientation="orthogonal" renderorder="left-up" width="40" height="11" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="29">
  <tileset firstgid="1" name="floorTileset" tilewidth="16" tileheight="16" tilecount="126" columns="18">
   <image source="floorTileset.png" width="288" height="112"/>
  </tileset>
@@ -54,6 +54,16 @@
  </layer>
  <objectgroup id="3" name="entities">
   <object id="8" name="sardinilla" x="29.0417" y="111.917"/>
+  <object id="23" name="enemigo" x="144" y="128">
+   <properties>
+    <property name="sala" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="26" name="enemigo" x="272" y="128">
+   <properties>
+    <property name="sala" type="int" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="7" name="Salas">
   <object id="26" name="1" x="176" y="0" width="13" height="174.5"/>
@@ -61,7 +71,7 @@
  <objectgroup id="8" name="PuntosCamara">
   <object id="27" name="1" x="489" y="77.5" width="24" height="19"/>
  </objectgroup>
- <objectgroup id="5" name="Alturas">
+ <objectgroup id="5" name="Alturas" locked="1">
   <object id="15" name="0" x="0" y="0" width="176" height="175"/>
   <object id="17" name="100" x="176" y="0" width="112" height="175"/>
   <object id="18" name="0" x="288" y="0" width="349" height="175"/>

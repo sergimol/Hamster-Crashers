@@ -569,6 +569,5 @@ void MapMngr::LoadEnemyRoom() {
 			enemy->addComponent<EnemyStun>();*/
 		}
 	}
-	std::cout << Room << "\n";
 	Room++;	//Una vez cargamos a los enemigos de la habitacion incrementamos el contador para poder cargar los enemigos de la siguiente
 }
