@@ -565,6 +565,7 @@ void MapMngr::LoadEnemyRoom() {
 			enemy->addComponent<EnemyAttack>();
 			enemy->addComponent<Knockback>();
 			enemy->addComponent<MovementSimple>();
+			enemy->addComponent<EnemyBehaviour>(new FollowPlayer());
 			/*enemy->addComponent<FollowPlayer>();
 			enemy->addComponent<EnemyStun>();*/
 		}
