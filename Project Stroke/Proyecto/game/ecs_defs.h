@@ -50,6 +50,7 @@ class Behavior;
 class InfarctedBody;
 class ReanimationGame;
 class Dying;
+class CheckCollisions;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -101,6 +102,7 @@ class Dying;
 	InfarctedBody, \
 	ReanimationGame, \
 	Dying, \
+	CheckCollisions, \
 	FollowPlayer
 
 //FollowPlayer, \

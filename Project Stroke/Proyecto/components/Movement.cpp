@@ -47,10 +47,6 @@ void Movement::update() {
 
 	Vector2D dir = Vector2D(0, 0);
 
-	//Cogemos el mapa para comprobar luego las colisiones
-	auto map = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>();
-
-
 	if (keymap.at(UP)) {
 		dir.setY(-1.0f);
 	}
@@ -110,8 +106,33 @@ void Movement::update() {
 			// anim_->play(sdlutils().anims().at("sardinilla_chungo"));
 	}
 
+	tryToMove(dir, goalVel_);
+
+	//SALTO
+	if (z <= grav_->getFloor()) {
+		// Inicio del salto
+		if (keymap.at(SPACE)) {
+			entity_->getComponent<Combos>()->checkCombo(2);
+			entity_->getComponent<Stroke>()->increaseChance(2, false);
+			velZ = jump_;
+			keymap.at(SPACE) = false;
+		}
+		// Fin del salto
+		if (velZ < grav_->getFloor()) {
+			entity_->getComponent<Combos>()->popUntilEmpty();
+			/*keymap.at(SPACE) = false;*/
+		}
+	}
+}
+
+void Movement::tryToMove(Vector2D dir, Vector2D goalVel) {
 	//Cojo el rect del player y le sumo la supuesta siguiente posicion
+	auto& vel = tr_->getVel();
 	SDL_Rect rectPlayer{ tr_->getPos().getX() + vel.getX(), tr_->getPos().getY() - grav_->getFloor() + vel.getY(), tr_->getW(),tr_->getH() };
+
+
+	//Cogemos el mapa para comprobar luego las colisiones
+	auto map = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>();
 
 	//Si me voy a chocar con una pared...
 	if (map->intersectWall(rectPlayer)) {
@@ -124,18 +145,18 @@ void Movement::update() {
 
 			//Si con el Y bloqueado se mueve correctamente
 			if (!map->intersectWall(rectPlayer)) {
-				goalVel_.setY(0);
-				vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.9));
+				goalVel.setY(0);
+				vel.setX(lerp(goalVel.getX(), vel.getX(), 0.9));
 				vel.setY(0);
 			}
 			else {
 				//Probamos ignorando la X
-				rectPlayer.y = tr_->getPos().getY() - grav_->getFloor() + goalVel_.getY();
+				rectPlayer.y = tr_->getPos().getY() - grav_->getFloor() + goalVel.getY();
 				rectPlayer.x = tr_->getPos().getX();
 
 				if (!map->intersectWall(rectPlayer)) {
-					goalVel_.setX(0);
-					vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.9));
+					goalVel.setX(0);
+					vel.setY(lerp(goalVel.getY(), vel.getY(), 0.9));
 					vel.setX(0);
 				}
 				//Para las esquinas. NO QUITAR
@@ -149,28 +170,7 @@ void Movement::update() {
 		else {
 			//Dejo de moverme
 			vel.setX(0);
-			vel.setY(0);			
-		}
-	}
-
-	//if (z > 0 && sdlutils().currRealTime() > timer + jumpTimer_) {			//Aceleracion del salto afectado por gravedad
-	//	 -= gravity_;
-	//	timer = sdlutils().currRealTime();
-	//}
-
-	// 0 se debería sustituir por la z mínima del mapa
-	if (z <= grav_->getFloor()) {
-		// Inicio del salto
-		if (keymap.at(SPACE)) {
-			entity_->getComponent<Combos>()->checkCombo(2);
-			entity_->getComponent<Stroke>()->increaseChance(2, false);
-			velZ = jump_;
-			keymap.at(SPACE) = false;
-		}
-		// Fin del salto
-		if (velZ < grav_->getFloor()) {
-			entity_->getComponent<Combos>()->popUntilEmpty();
-			/*keymap.at(SPACE) = false;*/
+			vel.setY(0);
 		}
 	}
 }

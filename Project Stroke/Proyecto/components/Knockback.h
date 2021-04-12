@@ -14,11 +14,12 @@ class Knockback : public Component {
 public:
 	Knockback();
 
-	virtual ~Knockback() {}
+	virtual ~Knockback() {};
 
 	void init() override;
 	void knockback();
 	inline void setKnockbackDistance(int val) { knockbackVel_ = val; }
+	inline int getKnockback() { return knockbackVel_; }
 
 private:
 	Transform* tr_;

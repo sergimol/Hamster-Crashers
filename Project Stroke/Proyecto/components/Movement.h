@@ -27,6 +27,8 @@ public:
 
 	void updateKeymap(KEYS x, bool is);
 
+	void tryToMove(Vector2D dir, Vector2D goalVel);
+
 	float lerp(float a, float b, float f);
 
 	virtual void onEnable() override;
