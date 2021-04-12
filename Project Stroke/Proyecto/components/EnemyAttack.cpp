@@ -142,6 +142,7 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 		}
 
 	}
+	entity_->getMngr()->refreshPlayers();
 	return canHit;
 }
 

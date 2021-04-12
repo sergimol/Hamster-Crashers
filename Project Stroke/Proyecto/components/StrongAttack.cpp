@@ -45,7 +45,7 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 
 	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 	//Cogemos todas las entidades del juego
-	auto& ents = entity_->getMngr()->getEntities();
+	auto& ents = entity_->getMngr()->getEnemies();
 
 	for (int i = 0; i < ents.size(); ++i) {
 		//Si la entidad es un enemigo...
@@ -136,6 +136,7 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 			}
 		}
 	}
+	entity_->getMngr()->refreshEnemies();
 	return canHit;
 }
 

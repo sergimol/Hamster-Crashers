@@ -150,12 +150,10 @@ void EntityAttribs::die() {
 		//Ponemos su UI a 'Muerto'
 		e->addComponent<UI>(id_, entity_->getComponent<UI>()->getPosUI())->dep();
 		hms_->getState() = HamStates::DEAD;
-		entity_->getMngr()->refreshPlayers();
 	}
 	else {
 		e->addComponent<Dying>();
 		enmState_->getState() = EnemyStates::ENM_DEAD;
-		entity_->getMngr()->refreshEnemies();
 	}
 
 	//Desactivamos el componente del hasmter vivo

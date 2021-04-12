@@ -48,7 +48,7 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 	bool canHit = false;
 
 	//Cogemos todas las entidades del juego
-	auto& ents = entity_->getMngr()->getEntities();
+	auto& ents = entity_->getMngr()->getEnemies();
 
 	for (int i = 0; i < ents.size(); ++i) {
 		//Si la entidad es un enemigo...
@@ -142,6 +142,7 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 			}
 		}
 	}
+	entity_->getMngr()->refreshEnemies();
 	return canHit;
 }
 
