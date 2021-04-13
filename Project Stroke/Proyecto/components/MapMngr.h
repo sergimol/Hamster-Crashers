@@ -31,10 +31,13 @@ private:
 
 	Vector2D mapCoorsToSDLPoint(Vector2D coords);
 	Vector2D SDLPointToMapCoords(Vector2D p);
-	tmx::ObjectGroup* objectLayer;	//Guardamos la capa de entidades para poder leer los enemigos
-	int Room;					//Guarda la habitación en la que se encuentran los jugadores
-	std::vector<Entity*> roomTrigger;//Guarda todos los triggers de cambio de sala del mapa
-public: 
+	tmx::ObjectGroup* objectLayer;		//Guardamos la capa de entidades para poder leer los enemigos
+	int Room;							//Guarda la habitación en la que se encuentran los jugadores
+	int numberEnemyRoom;				//Guarda la cantidad de enemigos que hay por sala
+	//void Refresh();
+
+	std::vector<tmx::Object> TriggerftCamera;
+public:
 	MapMngr() : Room(0) {};
 	~MapMngr();
 
@@ -47,5 +50,6 @@ public:
 	int getScale() { return scale; };
 
 	void LoadEnemyRoom();
+	void reduceNumberEnemyRoom() { numberEnemyRoom--; };
 };
 

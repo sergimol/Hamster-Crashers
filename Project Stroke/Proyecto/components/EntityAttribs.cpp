@@ -154,6 +154,7 @@ void EntityAttribs::die() {
 	else {
 		e->addComponent<Dying>();
 		enmState_->getState() = EnemyStates::ENM_DEAD;
+		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala
 	}
 
 	//Desactivamos el componente del hasmter vivo

@@ -51,17 +51,27 @@ MapMngr::~MapMngr() {
 void MapMngr::update() {
 	//	Comprobamos la colision con los triggers salas
 	auto& players = entity_->getMngr()->getPlayers();
-	int i = 0;
-	for (Entity* trigger : roomTrigger) {//Recorrer triggers
-		auto tr_ = roomTrigger[i]->getComponent<Transform>();
+	for (tmx::Object trigger : TriggerftCamera) {//Recorrer triggers
+		auto& getProp = trigger.getProperties();
 		for (Entity* player : players) {
 			auto* pTr = player->getComponent<Transform>();
-			//	//Desactivar trigger o sacarlo de la lista jejeje soy un perrillo
-			if (Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), pTr->getPos(), pTr->getW(), pTr->getH())) {
+			if (player->getComponent<HamsterStateMachine>()->getState() != HamStates::INFARCTED && Collisions::collides(pTr->getPos(), pTr->getW(), pTr->getH(), Vector2D(trigger.getPosition().x, trigger.getPosition().y) * scale, trigger.getAABB().width * scale, trigger.getAABB().height * scale)) {
 				LoadEnemyRoom();
+				if (getProp[0].getIntValue() != -1 || getProp[1].getIntValue() != -1) {
+					entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setGoToTracker(true);
+					entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamFollowPos(Vector2D(getProp[0].getIntValue(), getProp[1].getIntValue()) * scale);
+					entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::GoingTo);
+				}
+				//Borrar el punto de la camara del vector
+				TriggerftCamera.pop_back();
 			}
 		}
-		i++;
+	}
+	//Si el estado de la camara es "Static" aka luchando con enemigos, y la cantidad de enemigos en la habitación es 0, volvemos a "Player1s"
+	if (entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamState() == State::Static && numberEnemyRoom == 0) {
+		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamFollowPos(Vector2D(-1, -1));	//Se pasa el punto medio de los jugadores
+		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setGoToTracker(false);					//Se fija la transicion al punto medio de los jugadores al terminar GoTo
+		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::GoingTo);			//Se cambia el estado de la camara a GoTo
 	}
 }
 
@@ -110,7 +120,7 @@ void MapMngr::loadNewMap(string map) {
 					{
 						auto* o = entity_->getMngr()->addMapHeight();
 						o->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-							Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f);
+							Vector2D(), 0.0f, 0.0f, 0.0f);
 						o->addComponent<HeightObject>();
 						o->getComponent<HeightObject>()->setZ(stoi(object.getName()));
 						/*entity_->getMngr()->getMapH().push_back(o);*/
@@ -118,14 +128,22 @@ void MapMngr::loadNewMap(string map) {
 				}
 				else if (layer->getName() == "Salas") {
 					//Guardamos todos los triggers de cambio de sala
-					for (const auto& object : objects)
+					for (auto object : objects)
 					{
-						auto* o = entity_->getMngr()->addEntity();
-						o->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-							Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f);
-						roomTrigger.push_back(o);
+						TriggerftCamera.push_back(object);
 					}
 				}
+				//else if (layer->getName() == "PuntosCamara") {
+				//	//Guardamos todos los triggers de cambio de sala
+				//	for (tmx::Object object : objects)
+				//	{
+				//		/*auto* o = entity_->getMngr()->addEntity();
+				//		o->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+				//			Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f);
+				//		o->addComponent<HeightObject>();
+				//		o->getComponent<HeightObject>()->setZ(stoi(object.getName()));*/
+				//	}
+				//}
 				else if (layer->getName() == "entities") {
 					//Guardamos la capa de objetos
 					std::cout << layer->getName();
@@ -161,7 +179,7 @@ void MapMngr::loadNewMap(string map) {
 								);
 							hamster1->addComponent<AnimHamsterStateMachine>();
 							hamster1->addComponent<Gravity>();
-							hamster1->addComponent<Movement>();							
+							hamster1->addComponent<Movement>();
 							hamster1->getComponent<Transform>()->setGravity(hamster1->getComponent<Gravity>());
 
 							//Ataques Basicos
@@ -184,7 +202,7 @@ void MapMngr::loadNewMap(string map) {
 
 							hamster1->addComponent<Knockback>();
 							hamster1->addComponent<GetItem>();
-							
+
 							//Handlr
 							hamster1->addComponent<ControlHandler>(hamster1->getComponent<EntityAttribs>()->getNumber());
 							hamster1->addComponent<Stun>();
@@ -552,12 +570,13 @@ void MapMngr::LoadEnemyRoom() {
 	auto& enemies = entity_->getMngr()->getEnemies();
 
 	const auto& objects = objectLayer->getObjects();
-
+	numberEnemyRoom = 0;	//Guarda el numero de enemigos por sala
 	for (const auto& object : objects)
 	{
 		auto& name = object.getName();
 		auto mngr_ = entity_->getMngr();
 		auto& prop = object.getProperties();
+
 		if (name == "enemigo" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* enemy = mngr_->addEntity();
 			enemy->addComponent<Transform>(
@@ -576,12 +595,24 @@ void MapMngr::LoadEnemyRoom() {
 			enemy->addComponent<Knockback>();
 			enemy->addComponent<MovementSimple>();
 
-			enemy->addComponent<EnemyBehaviour>(new FollowPlayer());
+			enemy->addComponent<EnemyBehaviour>(new AmbushPlayer());
 
 			enemies.push_back(enemy);
 			/*enemy->addComponent<FollowPlayer>();
 			enemy->addComponent<EnemyStun>();*/
+			numberEnemyRoom++;
 		}
 	}
 	Room++;	//Una vez cargamos a los enemigos de la habitacion incrementamos el contador para poder cargar los enemigos de la siguiente
 }
+
+//void MapMngr::Refresh() {
+//	roomTrigger.erase( //
+//		std::remove_if( //
+//			roomTrigger.begin(), //
+//			roomTrigger.end(), //
+//			[](const Entity* e) { //
+//				return !e->isActive();
+//			}), //
+//		roomTrigger.end());
+//}

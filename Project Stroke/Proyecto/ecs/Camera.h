@@ -26,20 +26,26 @@ private:
 	int players;
 
 	void followPlayer();
-	void Goto(Vector2D);
+	void Goto();
 	void StaticCamera();
 	bool followPlayers;		//Controla si quiero que la camara siga a los jugadores o a otro punto
-
+	Vector2D newObjetivo();
 	State cameraState;
+	bool GoToTracker;
 public:
 
-	Camera(SDL_Rect cam) : camera_(cam), CameraFollowPos(Vector2D(100, 150)), cameraState(Players) {}
+	Camera(SDL_Rect cam) : camera_(cam), CameraFollowPos(Vector2D()), cameraState(Players) {}
 
 	virtual ~Camera() {}
 	void update() override;
 	SDL_Rect getCam() { return camera_; };
+	void changeCamState(State estado) { cameraState = estado; };
+	void changeCamFollowPos(Vector2D objetive);
+	State getCamState() {return cameraState;};
 	//void changeState(enum state) { cameraState = state ; };
 	Vector2D CameraFollowPos;	//Guarda el punto de la posición de la camara cuando lo lea
+
+	void setGoToTracker(bool objetivo) {GoToTracker = objetivo;};
 
 
 
