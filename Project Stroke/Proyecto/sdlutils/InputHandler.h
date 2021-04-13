@@ -16,7 +16,9 @@ using namespace std;
 // Instead of a Singleton class, we could make it part of
 // SDLUtils as well.
 
-const int MAXPLAYERS = 4;
+const int MAXPLAYERS = 4,
+		  JOYSTICKDEADZONE = 10000,
+		  TRIGGERDEADZONE = 10000;
 
 class InputHandler: public Singleton<InputHandler> {
 
@@ -143,6 +145,10 @@ public:
 		return isButtonUpEvent_;
 	}
 
+	inline bool isAxisMotionEvent() {
+		return isAxisMotionEvent_;
+	}
+
 	inline float getAxisValue(int controller, SDL_GameControllerAxis axis) {
 		if (controllers_[controller] == nullptr)
 			return 0.0f;
@@ -197,6 +203,7 @@ private:
 		kbState_ = SDL_GetKeyboardState(0);
 		clearState();
 		actualControllers_ = 0;
+		totalControllers_ = 0;
 	}
 
 	inline void onKeyDown(const SDL_Event&) {
@@ -215,7 +222,7 @@ private:
 
 	inline void onAxisMotion(const SDL_Event& event) {
 		isAxisMotionEvent_ = true;
-		auto it = sysToGameId.find(event.cdevice.which - reconnections_);
+		auto it = sysToGameId.find(event.jaxis.which);
 		int controllerID = (*it).second;
 
 		Uint8 i = 0;
@@ -235,8 +242,8 @@ private:
 		float value;
 		// Si es joystick
 		if (axis < 4) {
-			if (event.jaxis.value > joystickDeadzone || event.jaxis.value < -joystickDeadzone)
-				value = event.jaxis.value * joystickNormalize;
+			if (event.jaxis.value > JOYSTICKDEADZONE || event.jaxis.value < -JOYSTICKDEADZONE)
+				value = event.jaxis.value / 32768.0;
 			else
 				value = 0;
 
@@ -257,7 +264,7 @@ private:
 		}
 		// Si es gatillo
 		else {
-			if (event.jaxis.value > triggerDeadzone)
+			if (event.jaxis.value > TRIGGERDEADZONE)
 				value = abs(event.jaxis.value);
 			else
 				value = 0;
@@ -294,17 +301,18 @@ private:
 
 		Uint8 i = 0;
 		bool found = false;
+		int id = sysToGameId.find(event.jaxis.which)->second;
 
 		// Encontramos el bot�n
 		while (!found && i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX) {
-			SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(controllers_[event.jaxis.which - reconnections_], (SDL_GameControllerButton)i);
+			SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(controllers_[id], (SDL_GameControllerButton)i);
 			if (b.value.button == event.cbutton.button)
 				found = true;
 			else
 				i++;
 		}
 
-		buttonStates_[event.jaxis.which - reconnections_][i] = true;
+		buttonStates_[id][i] = true;
 	}
 
 	inline void onButtonUp(const SDL_Event& event) {
@@ -312,34 +320,35 @@ private:
 
 		Uint8 i = 0;
 		bool found = false;
+		int id = sysToGameId.find(event.jaxis.which)->second;
 
 		// Encontramos el bot�n
 		while (!found && i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX) {
-			SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(controllers_[event.jaxis.which - reconnections_], (SDL_GameControllerButton)i);
+			SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(controllers_[id], (SDL_GameControllerButton)i);
 			if (b.value.button == event.cbutton.button)
 				found = true;
 			else
 				i++;
 		}
 
-		buttonStates_[event.jaxis.which - reconnections_][i] = false;
+		buttonStates_[id][i] = false;
 	}
 
 	// Añade un mando al juego
 	inline void onControllerAdded(const SDL_Event& event) {
 		if (actualControllers_ < MAXPLAYERS) {
-			int id = actualControllers_; // id fisica que recibe SDL
+			int id = totalControllers_; // id fisica que recibe SDL
 			int gId; // id dentro del juego
 			// Comprueba si el mando que se acaba de conectar es nuevo o reconectado
 			if (disconectedControllers_.empty()) 
-				gId = id;
+				gId = actualControllers_;
 			else {
 				gId = disconectedControllers_.front();
 				disconectedControllers_.pop();
-				reconnections_++;
 			}
 			initController(event.cdevice.which, gId);
 			actualControllers_++;
+			totalControllers_++;
 			sysToGameId.emplace(id, gId);
 			gameToSysId[gId] = id;
 		}
@@ -407,7 +416,7 @@ private:
 	map<int, int> sysToGameId;
 
 	int actualControllers_; // Numero de mandos conectados en el momento
-	Sint32 reconnections_ = 0; // Reconexiones de mandos que se han producido
+	int totalControllers_; // Numero de mandos conectados en total
 	
 	array<SDL_GameController*, 4> controllers_;
 	queue<int> disconectedControllers_;
@@ -415,12 +424,6 @@ private:
 	array<Vector2D*, 4> rightJoysticks_;
 	array<float, 4> leftTriggers_;
 	array<float, 4> rightTriggers_;
-
-
-
-	const double joystickNormalize = 1.0 / 32768.0;
-	const int joystickDeadzone = 3276;
-	const int triggerDeadzone = 3276;
 };
 
 // This macro defines a compact way for using the singleton InputHandler, instead of

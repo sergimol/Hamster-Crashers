@@ -559,28 +559,28 @@ void MapMngr::LoadEnemyRoom() {
 		auto mngr_ = entity_->getMngr();
 		auto& prop = object.getProperties();
 		if (name == "enemigo" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-			auto* enemy = mngr_->addEntity();
-			enemy->addComponent<Transform>(
-				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(), 240.0f, 370.0f, 0.0f)->getFlip() = true;
+			//auto* enemy = mngr_->addEntity();
+			//enemy->addComponent<Transform>(
+			//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+			//	Vector2D(), 240.0f, 370.0f, 0.0f)->getFlip() = true;
 
-			enemy->addComponent<EnemyStateMachine>();
-			enemy->setGroup<Enemy>(true);
+			//enemy->addComponent<EnemyStateMachine>();
+			//enemy->setGroup<Enemy>(true);
 
-			enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0);
+			//enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0);
 
-			enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
-			enemy->addComponent<UI>("canelon", 4);
+			//enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
+			//enemy->addComponent<UI>("canelon", 4);
 
-			enemy->addComponent<EnemyAttack>();
-			enemy->addComponent<Knockback>();
-			enemy->addComponent<MovementSimple>();
+			//enemy->addComponent<EnemyAttack>();
+			//enemy->addComponent<Knockback>();
+			//enemy->addComponent<MovementSimple>();
 
-			enemy->addComponent<EnemyBehaviour>(new FollowPlayer());
+			//enemy->addComponent<EnemyBehaviour>(new FollowPlayer());
 
-			enemies.push_back(enemy);
-			/*enemy->addComponent<FollowPlayer>();
-			enemy->addComponent<EnemyStun>();*/
+			//enemies.push_back(enemy);
+			///*enemy->addComponent<FollowPlayer>();
+			//enemy->addComponent<EnemyStun>();*/
 		}
 	}
 	Room++;	//Una vez cargamos a los enemigos de la habitacion incrementamos el contador para poder cargar los enemigos de la siguiente
