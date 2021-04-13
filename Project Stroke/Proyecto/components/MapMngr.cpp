@@ -171,6 +171,7 @@ void MapMngr::loadNewMap(string map) {
 
 							//Habilidad
 							hamster1->addComponent<Roll>();
+							//hamster1->addComponent<Turret>();
 
 
 							//Interfaz

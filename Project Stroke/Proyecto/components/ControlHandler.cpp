@@ -20,13 +20,14 @@ void ControlHandler::init() {
 		ab_ = entity_->getComponent<Pray>();
 	else if (id == "keta")
 		ab_ = entity_->getComponent<Poison>();
-	else
+	else 
 		ab_ = entity_->getComponent<Turret>();
 
 	assert(ab_ != nullptr);
 	//assert(roll_ != nullptr); PUEDE SER NULLPTR
 
-	
+	hms_ = entity_->getComponent<HamsterStateMachine>();
+	assert(hms_ != nullptr);
 
 	lt_ = entity_->getComponent<LightAttack>();
 	assert(lt_ != nullptr);
@@ -137,7 +138,9 @@ void ControlHandler::handleController() {
 		}
 	}
 
-	if (ih().isButtonDownEvent()) {
+	auto& state = hms_->getState();
+
+	if (state != HamStates::DEAD && state != HamStates::INFARCTED && ih().isButtonDownEvent()) {
 		//JUMP
 		if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_A))
 		{
@@ -146,11 +149,11 @@ void ControlHandler::handleController() {
 		}
 
 		//ATAQUE LIGERO
-		else if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_X)) {
+		else if (state != HamStates::ABILITY && ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_X)) {
 			lt_->attack();
 		}
 		//ATAQUE FUERTE
-		else if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_Y)) {
+		else if (state != HamStates::ABILITY && ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_Y)) {
 			st_->attack();
 		}
 		//HABILIDAD
@@ -228,13 +231,15 @@ void ControlHandler::handleKeyboard() {
 	}
 	//el jump no necesita la parte para false
 
+	auto& state = hms_->getState();
+
 	//ATAQUE LIGERO
-	if (ih().mouseButtonEvent()) {
-		if (ih().getMouseButtonState(InputHandler::MOUSEBUTTON::LEFT) == 1) {
+	if (state != HamStates::DEAD && state != HamStates::INFARCTED && ih().mouseButtonEvent()) {
+		if (state != HamStates::ABILITY && ih().getMouseButtonState(InputHandler::MOUSEBUTTON::LEFT) == 1) {
 			lt_->attack();
 		}
 		//ATAQUE FUERTE
-		else if (ih().getMouseButtonState(InputHandler::MOUSEBUTTON::RIGHT) == 1) {
+		else if (state != HamStates::ABILITY && ih().getMouseButtonState(InputHandler::MOUSEBUTTON::RIGHT) == 1) {
 			st_->attack();
 		}
 		//HABILIDAD

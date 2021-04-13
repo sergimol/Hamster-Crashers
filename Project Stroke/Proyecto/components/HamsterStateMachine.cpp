@@ -18,4 +18,5 @@ void HamsterStateMachine::update() {
 		}
 	}
 
+	//std::cout << currentstate() << std::endl;
 }

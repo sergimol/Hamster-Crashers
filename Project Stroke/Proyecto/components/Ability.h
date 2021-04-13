@@ -13,9 +13,9 @@
 
 class Ability : public Component {
 public:
-	Ability() : tr_(nullptr), st_(nullptr), timer_(0), cooldown_(1000) {};
+	Ability() : tr_(nullptr), st_(nullptr), timer_(-1000), cooldown_(1000) {};
 
-	Ability(int cd) : tr_(nullptr), st_(nullptr), timer_(0), cooldown_(cd) {};
+	Ability(int cd) : tr_(nullptr), st_(nullptr), timer_(-cd), cooldown_(cd) {};
 
 	virtual ~Ability() {};
 
