@@ -43,6 +43,8 @@ private:
 	//hamster al que va a perseguir* en verdad solo queremos la propiedad tranform ahora mismo pero
 	// mas adelante es posible que nos interese conocer estados o componentes oportunos, por ahora no ahce daño verdad¿?¿
 	std::vector<Entity*> hamsters_;
+	int hamsId_;
+	//std::vector<> 
 	MovementSimple* mov_; //Igual esto es major al reves, que el movement coja los datos del follow y se mueva en la dir que le indique
 	
 	Transform* tr_;
