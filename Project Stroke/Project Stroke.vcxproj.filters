@@ -55,17 +55,113 @@
     <Filter Include="Archivos de origen\components">
       <UniqueIdentifier>{cc57e568-abf2-4c0f-943f-3b7765a988db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de origen\components\EnemyBehaviour">
-      <UniqueIdentifier>{8c651f9f-ee08-401e-a8e8-933a3cfd9d71}</UniqueIdentifier>
+    <Filter Include="Archivos de encabezado\Components\UI">
+      <UniqueIdentifier>{9bcc58f2-bb8b-4b73-84e0-b1cd685256b0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de origen\components\EnemyBehaviour\behaviors">
-      <UniqueIdentifier>{7e8f4aff-4451-409a-9107-50136fe12caf}</UniqueIdentifier>
+    <Filter Include="Archivos de encabezado\Components\Entity">
+      <UniqueIdentifier>{bef933ef-2f8f-447f-8007-2153a156af79}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de encabezado\Components\EnemyBehaviour">
+    <Filter Include="Archivos de encabezado\Components\Entity\Hamster">
+      <UniqueIdentifier>{49ccbfaf-4606-4c6c-8720-717fe4cb9b7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Components\Entity\Hamster\Attack">
+      <UniqueIdentifier>{7ea27e57-fc20-4d0a-989f-92f7752d3011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Components\Entity\Hamster\Ability">
+      <UniqueIdentifier>{5bc79384-cf4a-46aa-8eef-8463b47c95d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Components\Entity\Hamster\Stroke">
+      <UniqueIdentifier>{d1531467-982a-42b0-aede-f5720ace0bbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Components\Entity\Hamster\Stroke\Ghost">
+      <UniqueIdentifier>{e4378805-a497-4a6a-8ca2-1956b9790901}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Components\Entity\Hamster\States">
+      <UniqueIdentifier>{da8ca142-9609-4db0-8231-e55d99589286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Components\Entity\Enemy">
+      <UniqueIdentifier>{483c5496-b835-4cf5-b248-e607fa990331}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour">
       <UniqueIdentifier>{dae52a29-500a-42a5-ae03-9b29c987bf8f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de encabezado\Components\EnemyBehaviour\Behavior">
+    <Filter Include="Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\Behavior">
       <UniqueIdentifier>{bb4a9ca3-397d-4648-97ff-b19c14c64445}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Components\Entity\Enemy\Attack">
+      <UniqueIdentifier>{6d5cca36-d6aa-48fd-9364-3ee050cc65d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Components\Animation">
+      <UniqueIdentifier>{c90c510b-7bbc-4678-816a-473acc357553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Components\Tile">
+      <UniqueIdentifier>{6e7b52ae-0e56-47b3-8b59-a070b50a30a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Components\Entity\Hamster\Movement&amp;Control">
+      <UniqueIdentifier>{c24ffe65-56b6-4af1-832a-2b2709e5c574}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Components\Manager">
+      <UniqueIdentifier>{4fb59f33-102b-4287-ad71-337087a5a075}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Components\Entity\Enemy\Movement">
+      <UniqueIdentifier>{5c06214c-55e0-416b-9564-f822b1938dca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\UI">
+      <UniqueIdentifier>{62d4f261-ab06-4454-9528-f5d715526ce2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Animation">
+      <UniqueIdentifier>{ce4f5e55-3514-4a44-91cb-c8b974c26ba5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Entity">
+      <UniqueIdentifier>{bcd5bcca-e887-4c62-9438-366fe8c97558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Tile">
+      <UniqueIdentifier>{5074a19e-02ab-4de8-8796-a8fede2442de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Entity\Hamster">
+      <UniqueIdentifier>{7a299e46-7185-4725-b8a8-2ca9159755a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Entity\Enemy">
+      <UniqueIdentifier>{58326678-9339-4289-98b5-7c110be101b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Entity\Enemy\EnemyBehaviour">
+      <UniqueIdentifier>{8c651f9f-ee08-401e-a8e8-933a3cfd9d71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Entity\Enemy\EnemyBehaviour\behaviors">
+      <UniqueIdentifier>{7e8f4aff-4451-409a-9107-50136fe12caf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Entity\Enemy\Attack">
+      <UniqueIdentifier>{52d1d656-a90a-4cc5-9db6-6c4c2ad6a328}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Entity\Hamster\Ability">
+      <UniqueIdentifier>{1fbd1b51-1c4b-4840-9ac7-f63de3c70791}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Manager">
+      <UniqueIdentifier>{1f1de19d-aa3b-4251-8283-49c78b37511b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Entity\Hamster\Attack">
+      <UniqueIdentifier>{e3fcc184-90c1-45eb-9140-f9effd2cdfc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Entity\Hamster\Movement&amp;Control">
+      <UniqueIdentifier>{156116ab-0cbf-41f4-95d1-b6a608dbab32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Entity\Hamster\States">
+      <UniqueIdentifier>{c3c6fcde-ba8f-461e-bc52-1b9ec8e96430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Components\Entity\Enemy\States">
+      <UniqueIdentifier>{fd0432fa-8520-46d8-a237-18380e71eb75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Entity\Enemy\States">
+      <UniqueIdentifier>{87296505-fea3-45cd-82ec-c1a4b6700f34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Entity\Hamster\Stroke">
+      <UniqueIdentifier>{cd58013b-0955-4b19-be98-31cdd446f9b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Entity\Hamster\Stroke\Ghost">
+      <UniqueIdentifier>{6d818b1c-9e64-491b-bfb3-a02a03e3db19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Entity\Enemy\Movement">
+      <UniqueIdentifier>{5166e008-1972-477a-9602-0ac907cdb176}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -108,173 +204,152 @@
     <ClCompile Include="Proyecto\json\JSONValue.cpp">
       <Filter>Archivos de origen\json</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\Image.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\LightAttack.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\Movement.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\StrongAttack.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\Stroke.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\Ability.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\Transform.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\UI.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\HamsterStateMachine.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\Roll.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\Pray.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\EntityAttribs.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\Combos.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\Turret.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\DisableOnExit.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\BulletHit.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
     <ClCompile Include="Proyecto\sdlutils\Animation.cpp">
       <Filter>Archivos de origen\SDLutils</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\Poison.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\MovementSimple.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\EnemyAttack.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\EnemyStateMachine.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\Cloud.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\MapMngr.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\ControlHandler.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\GetItem.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\EnemyStun.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\Knockback.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\Gravity.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\HeartUI.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\Stun.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\TileRender.cpp">
-      <Filter>Archivos de origen\components</Filter>
     </ClCompile>
     <ClCompile Include="Proyecto\ecs\Tile.cpp">
       <Filter>Archivos de origen\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\GhostCtrl.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\KeyGame.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\ContactDamage.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\AnimHamsterStateMachine.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyecto\components\HeightObject.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
     <ClCompile Include="Proyecto\ecs\Camera.cpp">
       <Filter>Archivos de origen\ecs</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\Swallow.cpp">
-      <Filter>Archivos de origen\components</Filter>
-    </ClCompile>
     <ClCompile Include="Proyecto\components\Behavior.cpp">
-      <Filter>Archivos de origen\components\EnemyBehaviour</Filter>
+      <Filter>Archivos de origen\components\Entity\Enemy\EnemyBehaviour</Filter>
     </ClCompile>
     <ClCompile Include="Proyecto\components\EnemyBehaviour.cpp">
-      <Filter>Archivos de origen\components\EnemyBehaviour</Filter>
+      <Filter>Archivos de origen\components\Entity\Enemy\EnemyBehaviour</Filter>
     </ClCompile>
     <ClCompile Include="Proyecto\components\FollowPlayer.cpp">
-      <Filter>Archivos de origen\components\EnemyBehaviour\behaviors</Filter>
+      <Filter>Archivos de origen\components\Entity\Enemy\EnemyBehaviour\behaviors</Filter>
     </ClCompile>
     <ClCompile Include="Proyecto\components\AmbushPlayer.cpp">
-      <Filter>Archivos de origen\components\EnemyBehaviour\behaviors</Filter>
+      <Filter>Archivos de origen\components\Entity\Enemy\EnemyBehaviour\behaviors</Filter>
     </ClCompile>
     <ClCompile Include="Proyecto\components\FleeFromPlayer.cpp">
-      <Filter>Archivos de origen\components\EnemyBehaviour\behaviors</Filter>
+      <Filter>Archivos de origen\components\Entity\Enemy\EnemyBehaviour\behaviors</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\InfarctedBody.cpp">
-      <Filter>Archivos de origen\components</Filter>
+    <ClCompile Include="Proyecto\components\Ability.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Ability</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\PossesionGame.cpp">
-      <Filter>Archivos de origen\components</Filter>
+    <ClCompile Include="Proyecto\components\Turret.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Ability</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\ReanimationGame.cpp">
-      <Filter>Archivos de origen\components</Filter>
+    <ClCompile Include="Proyecto\components\Cloud.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Ability</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Pray.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Ability</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Roll.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Ability</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Swallow.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Ability</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Poison.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Ability</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\AnimHamsterStateMachine.cpp">
+      <Filter>Archivos de origen\components\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\BulletHit.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Ability</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Combos.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\ContactDamage.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\ControlHandler.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Movement&amp;Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\DisableOnExit.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Ability</Filter>
     </ClCompile>
     <ClCompile Include="Proyecto\components\Dying.cpp">
-      <Filter>Archivos de origen\components</Filter>
+      <Filter>Archivos de origen\components\Entity\Hamster\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\EnemyAttack.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\EnemyStateMachine.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\EnemyStun.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\EntityAttribs.cpp">
+      <Filter>Archivos de origen\components\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\GetItem.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\GhostCtrl.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Stroke\Ghost</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Gravity.cpp">
+      <Filter>Archivos de origen\components\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\HamsterStateMachine.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\HeartUI.cpp">
+      <Filter>Archivos de origen\components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\HeightObject.cpp">
+      <Filter>Archivos de origen\components\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Image.cpp">
+      <Filter>Archivos de origen\components\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\KeyGame.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Stroke</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\InfarctedBody.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Stroke</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Knockback.cpp">
+      <Filter>Archivos de origen\components\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\LightAttack.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\MapMngr.cpp">
+      <Filter>Archivos de origen\components\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Movement.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Movement&amp;Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\MovementSimple.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\PossesionGame.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Stroke\Ghost</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\ReanimationGame.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Stroke</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Stroke.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Stroke</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\StrongAttack.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Stun.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\TileRender.cpp">
+      <Filter>Archivos de origen\components\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\UI.cpp">
+      <Filter>Archivos de origen\components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Transform.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Proyecto\components\Bounce.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\DeAcceleration.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\FighterCtrl.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\Image.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\KeyBoardCtrl.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\Rectangle.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\Transform.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
       <Filter>Archivos de encabezado\SDLutils</Filter>
     </ClInclude>
@@ -344,155 +419,164 @@
     <ClInclude Include="Proyecto\json\JSONValue.h">
       <Filter>Archivos de encabezado\json</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\Movement.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\LightAttack.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\StrongAttack.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\Stroke.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\UI.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\HamsterStateMachine.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\Animator.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\Roll.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\Ability.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\Pray.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\EntityAttribs.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\Combos.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\Turret.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\DisableOnExit.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\BulletHit.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Proyecto\sdlutils\Animation.h">
       <Filter>Archivos de encabezado\SDLutils</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\Poison.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\MovementSimple.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\EnemyAttack.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\EnemyStateMachine.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\Cloud.h">
-      <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\ecs\System.h">
       <Filter>Archivos de encabezado\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\MapMngr.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\ControlHandler.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\Item.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\GetItem.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\EnemyStun.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\Knockback.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\Gravity.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\HeartUI.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Proyecto\utils\checkML.h">
       <Filter>Archivos de origen\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\Stun.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\TileRender.h">
-      <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\ecs\Tile.h">
       <Filter>Archivos de encabezado\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\GhostCtrl.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\KeyGame.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\ContactDamage.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\AnimHamsterStateMachine.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyecto\components\HeightObject.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Proyecto\ecs\Camera.h">
       <Filter>Archivos de encabezado\ecs</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\Swallow.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Proyecto\components\Behavior.h">
-      <Filter>Archivos de encabezado\Components\EnemyBehaviour</Filter>
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\EnemyBehaviour.h">
-      <Filter>Archivos de encabezado\Components\EnemyBehaviour</Filter>
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\FollowPlayer.h">
-      <Filter>Archivos de encabezado\Components\EnemyBehaviour\Behavior</Filter>
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\Behavior</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\AmbushPlayer.h">
-      <Filter>Archivos de encabezado\Components\EnemyBehaviour\Behavior</Filter>
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\Behavior</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\FleeFromPlayer.h">
-      <Filter>Archivos de encabezado\Components\EnemyBehaviour\Behavior</Filter>
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\Behavior</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\InfarctedBody.h">
-      <Filter>Archivos de encabezado\Components</Filter>
+    <ClInclude Include="Proyecto\components\Ability.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Ability</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\PossesionGame.h">
-      <Filter>Archivos de encabezado\Components</Filter>
+    <ClInclude Include="Proyecto\components\Cloud.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Ability</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\ReanimationGame.h">
-      <Filter>Archivos de encabezado\Components</Filter>
+    <ClInclude Include="Proyecto\components\Poison.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Ability</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Turret.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Ability</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Swallow.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Ability</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Pray.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Ability</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Roll.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Ability</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Stroke.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Stroke</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Animator.h">
+      <Filter>Archivos de encabezado\Components\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\AnimHamsterStateMachine.h">
+      <Filter>Archivos de encabezado\Components\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Combos.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\BulletHit.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Ability</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\EnemyAttack.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\EnemyStun.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\GhostCtrl.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Stroke\Ghost</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\ContactDamage.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\ControlHandler.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Movement&amp;Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\DisableOnExit.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Ability</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\Dying.h">
-      <Filter>Archivos de encabezado\Components</Filter>
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\EntityAttribs.h">
+      <Filter>Archivos de encabezado\Components\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\GetItem.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Gravity.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\HamsterStateMachine.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\HeartUI.h">
+      <Filter>Archivos de encabezado\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Image.h">
+      <Filter>Archivos de encabezado\Components\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\InfarctedBody.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Stroke</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Knockback.h">
+      <Filter>Archivos de encabezado\Components\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\UI.h">
+      <Filter>Archivos de encabezado\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Transform.h">
+      <Filter>Archivos de encabezado\Components\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\LightAttack.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\MapMngr.h">
+      <Filter>Archivos de encabezado\Components\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\HeightObject.h">
+      <Filter>Archivos de encabezado\Components\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Item.h">
+      <Filter>Archivos de encabezado\Components\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\TileRender.h">
+      <Filter>Archivos de encabezado\Components\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\KeyGame.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Stroke</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Movement.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Movement&amp;Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\PossesionGame.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Stroke\Ghost</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Rectangle.h">
+      <Filter>Archivos de encabezado\Components\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Stun.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\StrongAttack.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\ReanimationGame.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Stroke</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\MovementSimple.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\EnemyStateMachine.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
