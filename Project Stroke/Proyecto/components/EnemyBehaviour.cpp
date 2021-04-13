@@ -29,7 +29,7 @@ void EnemyBehaviour::init() {
 void EnemyBehaviour::SetBehavior(Behavior* bs) {
 	{
 		bh_ = bs;
-		bh_->init(); 
+		bh_->init();
 	}
 }
 
@@ -66,6 +66,7 @@ bool EnemyBehaviour::isWithinAttackRange() {
 }
 
 void EnemyBehaviour::update() {
+
 	//ejecuta el metodo de behavior que le dice como comportarse (atacar, como moverse, cuando, el hace las condiciones el resto nos olvidamos)
 	bh_->behave();
 	//tambien seria oportuno que esta misma clase hiciese los cambios de bh_, aunque suene y parezca raro que sea este objeto el que indique cual es

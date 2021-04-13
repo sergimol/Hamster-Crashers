@@ -13,6 +13,7 @@
 #include "Poison.h"
 #include "LightAttack.h"
 #include "StrongAttack.h"
+#include "HamsterStateMachine.h"
 
 
 /*Esta clase es la encargada de filtar los inputs
@@ -27,6 +28,7 @@ public:
 		lt_(nullptr),
 		st_(nullptr),
 		ab_(nullptr),
+		hms_(nullptr),
 		player_(player), // player es solo para decir que teclas le corresponde
 		hasController_(false) // true = el jugador tiene mando, false = no tiene 
 	{
@@ -51,6 +53,7 @@ private:
 	Ability* ab_;
 	LightAttack* lt_;
 	StrongAttack* st_;
+	HamsterStateMachine* hms_;
 	bool hasController_;
 
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };

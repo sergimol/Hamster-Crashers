@@ -20,13 +20,14 @@ void ControlHandler::init() {
 		ab_ = entity_->getComponent<Pray>();
 	else if (id == "keta")
 		ab_ = entity_->getComponent<Poison>();
-	else
+	else 
 		ab_ = entity_->getComponent<Turret>();
 
 	assert(ab_ != nullptr);
 	//assert(roll_ != nullptr); PUEDE SER NULLPTR
 
-	
+	hms_ = entity_->getComponent<HamsterStateMachine>();
+	assert(hms_ != nullptr);
 
 	lt_ = entity_->getComponent<LightAttack>();
 	assert(lt_ != nullptr);
@@ -77,67 +78,71 @@ void ControlHandler::setController(bool hasController) {
 
 // Métododos que manejan el input según sea con mando o con teclado
 void ControlHandler::handleController() {
-	// MOVIMIENTO (Igual en un futuro se puede modificar para que vaya con el valor de los ejes)
-	// Por alguna razón el eje Y va del revés
-	// UP
-	if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) < 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_UP)) {
-		mov_->updateKeymap(Movement::UP, true);
-		mov_->updateKeymap(Movement::DOWN, false);
-		if (roll_ != nullptr) {
-			roll_->updateKeymap(Roll::UP, true);
-			roll_->updateKeymap(Roll::DOWN, false);
+	if (ih().isAxisMotionEvent()) {
+		// MOVIMIENTO (Igual en un futuro se puede modificar para que vaya con el valor de los ejes)
+		// Por alguna razón el eje Y va del revés
+		// UP
+		if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) < 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_UP)) {
+			mov_->updateKeymap(Movement::UP, true);
+			mov_->updateKeymap(Movement::DOWN, false);
+			if (roll_ != nullptr) {
+				roll_->updateKeymap(Roll::UP, true);
+				roll_->updateKeymap(Roll::DOWN, false);
+			}
 		}
-	}
-	//DOWN
-	else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) > 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_DOWN))
-	{
-		mov_->updateKeymap(Movement::UP, false);
-		mov_->updateKeymap(Movement::DOWN, true);
-		if (roll_ != nullptr) {
-			roll_->updateKeymap(Roll::UP, false);
-			roll_->updateKeymap(Roll::DOWN, true);
+		//DOWN
+		else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) > 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_DOWN))
+		{
+			mov_->updateKeymap(Movement::UP, false);
+			mov_->updateKeymap(Movement::DOWN, true);
+			if (roll_ != nullptr) {
+				roll_->updateKeymap(Roll::UP, false);
+				roll_->updateKeymap(Roll::DOWN, true);
+			}
 		}
-	}
-	else 
-	{
-		mov_->updateKeymap(Movement::UP, false);
-		mov_->updateKeymap(Movement::DOWN, false);
-		if (roll_ != nullptr) {
-			roll_->updateKeymap(Roll::UP, false);
-			roll_->updateKeymap(Roll::DOWN, false);
+		else
+		{
+			mov_->updateKeymap(Movement::UP, false);
+			mov_->updateKeymap(Movement::DOWN, false);
+			if (roll_ != nullptr) {
+				roll_->updateKeymap(Roll::UP, false);
+				roll_->updateKeymap(Roll::DOWN, false);
+			}
+		}
+
+		//RIGHT
+		if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) > 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_RIGHT))
+		{
+			mov_->updateKeymap(Movement::RIGHT, true);
+			mov_->updateKeymap(Movement::LEFT, false);
+			if (roll_ != nullptr) {
+				roll_->updateKeymap(Roll::RIGHT, true);
+				roll_->updateKeymap(Roll::LEFT, false);
+			}
+		}
+		//	LEFT
+		else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) < 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_LEFT))
+		{
+			mov_->updateKeymap(Movement::RIGHT, false);
+			mov_->updateKeymap(Movement::LEFT, true);
+			if (roll_ != nullptr) {
+				roll_->updateKeymap(Roll::RIGHT, false);
+				roll_->updateKeymap(Roll::LEFT, true);
+			}
+		}
+		else {
+			mov_->updateKeymap(Movement::RIGHT, false);
+			mov_->updateKeymap(Movement::LEFT, false);
+			if (roll_ != nullptr) {
+				roll_->updateKeymap(Roll::RIGHT, false);
+				roll_->updateKeymap(Roll::LEFT, false);
+			}
 		}
 	}
 
-	//RIGHT
-	if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) > 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_RIGHT))
-	{
-		mov_->updateKeymap(Movement::RIGHT, true);
-		mov_->updateKeymap(Movement::LEFT, false);
-		if (roll_ != nullptr) {
-			roll_->updateKeymap(Roll::RIGHT, true);
-			roll_->updateKeymap(Roll::LEFT, false);
-		}
-	}
-	//	LEFT
-	else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) < 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_LEFT))
-	{
-		mov_->updateKeymap(Movement::RIGHT, false);
-		mov_->updateKeymap(Movement::LEFT, true);
-		if (roll_ != nullptr) {
-			roll_->updateKeymap(Roll::RIGHT, false);
-			roll_->updateKeymap(Roll::LEFT, true);
-		}
-	}
-	else {
-		mov_->updateKeymap(Movement::RIGHT, false);
-		mov_->updateKeymap(Movement::LEFT, false);
-		if (roll_ != nullptr) {
-			roll_->updateKeymap(Roll::RIGHT, false);
-			roll_->updateKeymap(Roll::LEFT, false);
-		}
-	}
+	auto& state = hms_->getState();
 
-	if (ih().isButtonDownEvent()) {
+	if (state != HamStates::DEAD && state != HamStates::INFARCTED && ih().isButtonDownEvent()) {
 		//JUMP
 		if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_A))
 		{
@@ -146,11 +151,11 @@ void ControlHandler::handleController() {
 		}
 
 		//ATAQUE LIGERO
-		else if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_X)) {
+		else if (state != HamStates::ABILITY && ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_X)) {
 			lt_->attack();
 		}
 		//ATAQUE FUERTE
-		else if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_Y)) {
+		else if (state != HamStates::ABILITY && ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_Y)) {
 			st_->attack();
 		}
 		//HABILIDAD
@@ -228,13 +233,15 @@ void ControlHandler::handleKeyboard() {
 	}
 	//el jump no necesita la parte para false
 
+	auto& state = hms_->getState();
+
 	//ATAQUE LIGERO
-	if (ih().mouseButtonEvent()) {
-		if (ih().getMouseButtonState(InputHandler::MOUSEBUTTON::LEFT) == 1) {
+	if (state != HamStates::DEAD && state != HamStates::INFARCTED && ih().mouseButtonEvent()) {
+		if (state != HamStates::ABILITY && ih().getMouseButtonState(InputHandler::MOUSEBUTTON::LEFT) == 1) {
 			lt_->attack();
 		}
 		//ATAQUE FUERTE
-		else if (ih().getMouseButtonState(InputHandler::MOUSEBUTTON::RIGHT) == 1) {
+		else if (state != HamStates::ABILITY && ih().getMouseButtonState(InputHandler::MOUSEBUTTON::RIGHT) == 1) {
 			st_->attack();
 		}
 		//HABILIDAD

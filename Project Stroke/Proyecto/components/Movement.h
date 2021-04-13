@@ -36,6 +36,10 @@ public:
 
 	Vector2D getLastDir() { return lastDir_; };
 
+	inline void setSpeed(Vector2D newSp) {
+		speed_ = newSp;
+	}
+
 protected:
 private:
 

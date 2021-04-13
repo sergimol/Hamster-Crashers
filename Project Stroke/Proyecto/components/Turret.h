@@ -16,13 +16,15 @@ public:
 
 	virtual ~Turret();
 
-	virtual void update();
+	void init() override;
+	void update() override;
 
 	//Ejecuta la habilidad en funcion del hamster que sea
-	virtual void action();
-
+	void action() override;
+	void endAbility() override;
 
 private:
-	float cadenceTime;
-	float x;
+	Vector2D actualSpeed_;
+	float cadenceTime_;
+	float x_;
 };
