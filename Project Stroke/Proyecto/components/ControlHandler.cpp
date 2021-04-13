@@ -98,7 +98,7 @@ void ControlHandler::handleController() {
 			roll_->updateKeymap(Roll::DOWN, true);
 		}
 	}
-	else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) == 0 && ih().isButtonUp(player_, SDL_CONTROLLER_BUTTON_DPAD_UP) && ih().isButtonUp(player_, SDL_CONTROLLER_BUTTON_DPAD_DOWN))
+	else 
 	{
 		mov_->updateKeymap(Movement::UP, false);
 		mov_->updateKeymap(Movement::DOWN, false);
@@ -128,8 +128,7 @@ void ControlHandler::handleController() {
 			roll_->updateKeymap(Roll::LEFT, true);
 		}
 	}
-	else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) == 0 && ih().isButtonUp(player_, SDL_CONTROLLER_BUTTON_DPAD_LEFT) && ih().isButtonUp(player_, SDL_CONTROLLER_BUTTON_DPAD_RIGHT))
-	{
+	else {
 		mov_->updateKeymap(Movement::RIGHT, false);
 		mov_->updateKeymap(Movement::LEFT, false);
 		if (roll_ != nullptr) {
