@@ -58,29 +58,37 @@ public:
 	inline std::string getId() const {
 		return id_;
 	}
-	inline void setPoisonProb(float prob) {
-		poisonProbability_ = prob;
-	}
-	inline bool getCanPoison() { 
-		return canPoison_; 
-	}
-	inline void activatePoison(bool b) {
-		canPoison_ = b;
+	inline bool getCanPoison() {
+		return canPoison_;
 	}
 	inline float getPoisonProb() {
 		return poisonProbability_;
 	}
 	inline bool getPoisoned() {
 		return poisoned_;
-	}	
+	}
 	inline int getCriticProb() const {
 		return critProbability_;
 	}
 	inline int getCriticDmg() const {
 		return critDamage_;
 	}
+	inline bool checkInvulnerability() {
+		return (invincible_ || abilityInvul_);
+	}
+
+	//Setters
+	inline void setPoisonProb(float prob) {
+		poisonProbability_ = prob;
+	}
+	inline void activatePoison(bool b) {
+		canPoison_ = b;
+	}
 	inline void resetCriticProb() {
 		critProbability_ = 0.05;
+	}
+	inline void setAbilityInvul(bool b) {
+		abilityInvul_ = b;
 	}
 
 private:
@@ -102,6 +110,7 @@ private:
 	float strokeResist_;
 	float attackRange_;
 	float cadence_;
+	bool abilityInvul_; 
 
 	//Variables para tener invulnerabilidad tras una habilidad
 	bool invincible_;

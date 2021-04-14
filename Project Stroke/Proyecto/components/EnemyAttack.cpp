@@ -72,8 +72,8 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 	auto& ents = entity_->getMngr()->getPlayers();
 
 	for (int i = 0; i < ents.size(); ++i) {
-		//Si la entidad es un enemigo...
-			//Cogemos el transform del enemigo
+		//Si la entidad es un aliado...
+			//Cogemos el transform del aliado
 		auto eTR = ents[i]->getComponent<Transform>();
 
 		//Creamos su Rect
@@ -83,9 +83,10 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 		allyRect.x = eTR->getPos().getX() - cam.x;
 		allyRect.y = eTR->getPos().getY() - cam.y;
 
+		EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
 
-		//Y comprobamos si colisiona
-		if (SDL_HasIntersection(&enemyRect, &allyRect)) {
+		//Y comprobamos si colisiona y si no es invulnerable
+		if (!eAttribs->checkInvulnerability() && SDL_HasIntersection(&enemyRect, &allyRect)) {
 			int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
 			//if (finCombo) {
 			//	if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.01); //Aumentar probabilidad critico
@@ -93,7 +94,7 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 			//}
 			canHit = true;
 			//Le restamos la vida al aliado
-			ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg);
+			eAttribs->recieveDmg(dmg);
 
 			auto& hamStateM = ents[i]->getComponent<HamsterStateMachine>()->getState();
 
@@ -141,7 +142,6 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 				ents[i]->getComponent<Movement>()->tryToMove(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0));
 			}
 		}
-
 	}
 	entity_->getMngr()->refreshPlayers();
 	return canHit;

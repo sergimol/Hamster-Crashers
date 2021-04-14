@@ -54,6 +54,9 @@ void Roll::action()
 			tr_->getVel() = dir_ * iniAccel;
 		}
 		anim_->play(sdlutils().anims().at("sardinilla_ability"));
+
+		//Mete invulnerabilidad durante la habilidad
+		entity_->getComponent<EntityAttribs>()->setAbilityInvul(true);
 	}
 }
 
@@ -146,19 +149,20 @@ bool Roll::checkCollisions()
 			//Creamos su "collider"
 			SDL_Rect rectPlayer = build_sdlrect(pTr->getPos(), pTr->getW(), pTr->getH());
 
+			EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
+
 			//Comprobamos si hay colision
-			if (SDL_HasIntersection(&rectPlayer, &rectEnemy))
+			if (!eAttribs->checkInvulnerability() && SDL_HasIntersection(&rectPlayer, &rectEnemy))
 			{
 				//he puesto que le matas de una 
 				//creo que lo suyo seria stunnearlo y quitar la mitad de la vida o asi
-				int dmg = ents[i]->getComponent<EntityAttribs>()->getMaxLife();
-				if (ents[i]->getComponent<EntityAttribs>()->getLife() > 0)
+				int dmg = eAttribs->getMaxLife();
+				if (eAttribs->getLife() > 0)
 				{
-					ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg);
+					eAttribs->recieveDmg(dmg);
 					hit = true;
 				}
 			}
-
 		}
 	}
 
@@ -169,4 +173,5 @@ void Roll::endAbility() {
 	entity_->getComponent<Movement>()->setActive(true);
 	rolling = false;
 	tr_->getVel() = Vector2D(0,0);
+	entity_->getComponent<EntityAttribs>()->setAbilityInvul(false);
 }

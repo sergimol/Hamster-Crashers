@@ -60,8 +60,11 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 			rectEnemy.x = eTR->getPos().getX() - cam.x;
 			rectEnemy.y = eTR->getPos().getY() - cam.y;
 
-			//Y comprobamos si colisiona
-			if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
+			EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
+
+			//Y comprobamos si colisiona y si no es invulnerable
+			if (!eAttribs->checkInvulnerability() && SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
+
 				EntityAttribs* playerAttribs = entity_->getComponent<EntityAttribs>();
 				int dmg = playerAttribs->getDmg();
 				if (finCombo) {
@@ -70,12 +73,11 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 				}
 				canHit = true;
 
-				EntityAttribs* enmAttribs = ents[i]->getComponent<EntityAttribs>();
 				Swallow* playerSwallow = entity_->getComponent<Swallow>();
 
 				//Si puede tragar, el enemigo tiene la mitad de la vida y es fin de combo - probabilidad de tragar
-				if (finCombo && playerSwallow != nullptr && enmAttribs->getLife() <= enmAttribs->getMaxLife() / 2 && playerSwallow->canSwallow()) {
-					enmAttribs->recieveDmg(enmAttribs->getLife()); // Esta puesto asi y no con setlife para que se vea la barra bajar
+				if (finCombo && playerSwallow != nullptr && eAttribs->getLife() <= eAttribs->getMaxLife() / 2 && playerSwallow->canSwallow()) {
+					eAttribs->recieveDmg(eAttribs->getLife()); // Esta puesto asi y no con setlife para que se vea la barra bajar
 					playerAttribs->heal(playerSwallow->healQuantity());
 					//Movida de animación
 				}
@@ -86,7 +88,7 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 						float i = sdlutils().rand().nextInt(1, 100);
 						//Si i es menor que la probabilidad, envenena al enemigo
 						if (i <= playerAttribs->getPoisonProb()) {
-							enmAttribs->poison();
+							eAttribs->poison();
 						}
 					}
 
@@ -135,11 +137,11 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 
 					//Le restamos la vida al enemigo
 					if (sdlutils().rand().nextInt(1, 10000) < criticProb * 100) {	//Comprobacion golpe crítico
-						enmAttribs->recieveDmg(dmg * playerAttribs->getCriticDmg() * 1.5);
+						eAttribs->recieveDmg(dmg * playerAttribs->getCriticDmg() * 1.5);
 						playerAttribs->resetCriticProb();
 					}
 					else
-						enmAttribs->recieveDmg(dmg * 1.5);
+						eAttribs->recieveDmg(dmg * 1.5);
 				}
 			}
 		}

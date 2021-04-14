@@ -6,51 +6,67 @@
 EntityAttribs::EntityAttribs() :
 	health_(100),
 	maxHealth_(100),
+	velocity_(Vector2D(7, 3.5)),
 	strokeResist_(0.0),
 	attackRange_(0.0),
+	cadence_(0.0),
+	damage_(20),
+
 	critProbability_(0.05),
 	maxCrit_(0.2),
 	critDamage_(1.0),
+
 	poisonDamage_(2),
-	velocity_(Vector2D(7, 3.5)),
-	cadence_(0.0),
-	damage_(20),
 	poisonProbability_(0.0),
 	canPoison_(poisonProbability_ > 0),
-	poisonCD_(7000),
-	updateCD_(1500),
-	invincible_(false),
-	poisonTime_(sdlutils().currRealTime()),
-	invincibilityTime_(sdlutils().currRealTime()),
-	hms_(nullptr),
 	poisoned_(false),
-	enmState_(nullptr)
+	poisonTime_(sdlutils().currRealTime()),
+	poisonCD_(7000),
+	timeLastUpdate_(sdlutils().currRealTime()),
+	updateCD_(1500),
+
+	invincible_(false),
+	invincibilityTime_(sdlutils().currRealTime()),
+	abilityInvul_(false),
+
+	hms_(nullptr),
+	hmsText_(nullptr),
+	enmState_(nullptr),
+	tr_(nullptr)
 {}
 
 EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb) :
+	playerNumber_(number),
+	id_(id),
 	health_(life),
 	maxHealth_(life),
+	velocity_(speed),
 	strokeResist_(0.0),
 	attackRange_(range),
+	cadence_(0.0),
+	damage_(20),
+
 	critProbability_(0.05),
 	maxCrit_(0.2),
 	critDamage_(1.5),
-	velocity_(speed),
-	damage_(20),
+	
 	poisonDamage_(2),
-	poisonCD_(7000),
-	updateCD_(1500),
 	poisonProbability_(poisonProb),
 	canPoison_(poisonProbability_ > 0),
-	invincible_(false),
-	hms_(nullptr),
-	id_(id),
-	cadence_(0.0),
 	poisoned_(false),
 	poisonTime_(sdlutils().currRealTime()),
+	poisonCD_(7000),
+	timeLastUpdate_(sdlutils().currRealTime()),
+	updateCD_(1500),
+
+	invincible_(false),
 	invincibilityTime_(sdlutils().currRealTime()),
+	abilityInvul_(false),
+
+	hms_(nullptr),
+	hmsText_(nullptr),
 	enmState_(nullptr),
-	playerNumber_(number)
+	tr_(nullptr)
 {}
 
 void EntityAttribs::init() {
@@ -73,7 +89,7 @@ void EntityAttribs::update() {
 		invincible_ = false;
 	}
 	//Timer de envenenamiento
-	else if (poisoned_) {
+	if (poisoned_) {
 		//cada x segundos
 		if (sdlutils().currRealTime() >= timeLastUpdate_ + updateCD_) {
 			//Daño por veneno
