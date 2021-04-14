@@ -39,7 +39,7 @@ void Camera::Goto() {
 
 	bool check1 = false;
 	bool check2 = false;
-	int speed = 6;
+	int speed = 4;
 	if (camera_.x < CamStaticPos.getX() - 12 - camera_.w / 2)
 		camera_.x = camera_.x + speed;
 	else if (camera_.x > CamStaticPos.getX() + 12 - camera_.w / 2)
