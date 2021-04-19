@@ -3,6 +3,7 @@
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 #include "EntityAttribs.h"
+#include "../utils/Collisions.h"
 
 BulletHit::BulletHit() : dmg_(DMG) {
 }
@@ -16,38 +17,27 @@ void BulletHit::init() {
 }
 
 void BulletHit::update() {
-
 	//Cogemos todas las entidades del juego
-	auto& ents = entity_->getMngr()->getEntities();
+	auto& ents = entity_->getMngr()->getEnemies();
 
 	for (Entity* e : ents) {
-		//Si la entidad es un enemigo...
-		if (e->hasGroup<Enemy>()) {
-			//Cogemos el transform del enemigo
-			auto eTR = e->getComponent<Transform>();
+		cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+		//Cogemos el transform del enemigo
+		auto eTR = e->getComponent<Transform>();
 
-			//Creamos nuestroRect
-			SDL_Rect rectPlayer;
-			rectPlayer.h = tr_->getH();
-			rectPlayer.w = tr_->getW();
-			rectPlayer.x = tr_->getPos().getX();
-			rectPlayer.y = tr_->getPos().getY();
 
-			//Creamos su Rect
-			SDL_Rect rectEnemy;
-			rectEnemy.h = eTR->getH();
-			rectEnemy.w = eTR->getW();
-			rectEnemy.x = eTR->getPos().getX();
-			rectEnemy.y = eTR->getPos().getY();
+		Vector2D newPos = Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
 
-			//Y comprobamos si colisiona
-			if (SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
-				//Le restamos la vida al enemigo
-				e->getComponent<EntityAttribs>()->recieveDmg(dmg_);
+		Vector2D otherPos = Vector2D(tr_->getPos().getX() - cam.x, tr_->getPos().getY() - cam.y);
 
-				//Desactivamos la bala(aunque hay que destruirla)
-				entity_->setActive(false);
-			}
+		//Y comprobamos si colisiona
+		if (Collisions::collides(otherPos, tr_->getW(), tr_->getH(), newPos, eTR->getW(), eTR->getH())) {
+			//Le restamos la vida al enemigo
+			e->getComponent<EntityAttribs>()->recieveDmg(dmg_);
+
+			//Desactivamos la bala
+			entity_->setActive(false);
+			entity_->getMngr()->refreshEnemies();
 		}
 	}
 }
