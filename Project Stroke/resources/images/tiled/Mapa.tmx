@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="left-up" width="40" height="11" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="21">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="left-up" width="40" height="11" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="22">
  <tileset firstgid="1" name="floorTileset" tilewidth="16" tileheight="16" tilecount="126" columns="18">
   <image source="floorTileset.png" width="288" height="112"/>
  </tileset>
@@ -44,8 +44,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,235,235,235,235,235,235,235,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 235,235,235,235,235,235,235,235,235,235,235,0,0,0,0,0,0,0,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,
-235,0,0,0,0,0,235,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,235,
-235,0,0,0,0,0,235,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,235,
+235,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,235,
+235,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,235,
 235,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,235,
 235,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,235,
 235,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,235,
@@ -60,6 +60,11 @@
    </properties>
   </object>
   <object id="33" name="enemigo" x="16" y="96" width="27.2727" height="44.9091">
+   <properties>
+    <property name="sala" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="21" name="firstBoss" x="212" y="20" width="23.2727" height="32">
    <properties>
     <property name="sala" type="int" value="1"/>
    </properties>

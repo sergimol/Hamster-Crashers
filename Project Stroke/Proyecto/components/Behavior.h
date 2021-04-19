@@ -18,7 +18,7 @@
 //Esta clase es meramente virtual sirve como estrutura para hacer los comportamientos de los enemigos a cada cual ams complejo no se va a ser la repera
 class Behavior {
 public:
-	virtual void behave() = 0;
+	virtual void behave() = 0;//Es el update de behavior
 	virtual void init() {
 	}
 	virtual ~Behavior(){}

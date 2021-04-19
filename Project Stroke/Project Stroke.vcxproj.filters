@@ -163,6 +163,18 @@
     <Filter Include="Archivos de origen\components\Entity\Enemy\Movement">
       <UniqueIdentifier>{5166e008-1972-477a-9602-0ac907cdb176}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\BossBehaviour">
+      <UniqueIdentifier>{5b0dd226-2306-4274-a6d3-663118682abb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Entity\Enemy\EnemyBehaviour\BossBehavior">
+      <UniqueIdentifier>{fa4c0b31-1ffd-429a-a381-c6fcc9d33422}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Components\Entity\Enemy\Attack\BossAttack">
+      <UniqueIdentifier>{3646b632-8da0-4a63-a030-10332080fc1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\Entity\Enemy\Attack\BossAttack">
+      <UniqueIdentifier>{8a2bd0dd-e5f6-42ec-ba66-8144e633bce3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -347,6 +359,12 @@
     </ClCompile>
     <ClCompile Include="Proyecto\components\Transform.cpp">
       <Filter>Archivos de origen\components\Entity\Hamster</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\FirstBossBehaviour.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\EnemyBehaviour\BossBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\FirstBossAttack.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\Attack\BossAttack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -577,6 +595,12 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\EnemyStateMachine.h">
       <Filter>Archivos de encabezado\Components\Entity\Enemy\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\FirstBossBehaviour.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\BossBehaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\FirstBossAttack.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\Attack\BossAttack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

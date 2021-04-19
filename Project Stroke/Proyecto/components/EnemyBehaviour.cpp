@@ -13,7 +13,10 @@ void EnemyBehaviour::init() {
 	assert(tr_ != nullptr);
 
 	enAtk_ = entity_->getComponent<EnemyAttack>();
-	assert(enAtk_ != nullptr);
+	if (enAtk_ == nullptr) {
+		bossAtk_ = entity_->getComponent<FirstBossAttack>();
+		assert(bossAtk_ != nullptr);
+	}
 
 	hamsters_ = entity_->getMngr()->getPlayers();
 

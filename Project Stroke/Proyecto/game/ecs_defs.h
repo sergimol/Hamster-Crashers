@@ -51,6 +51,8 @@ class InfarctedBody;
 class ReanimationGame;
 class Dying;
 class CheckCollisions;
+class FirstBossBehaviour;
+class FirstBossAttack;
 class BackGround;
 
 #define _CMPS_LIST_  \
@@ -104,6 +106,8 @@ class BackGround;
 	ReanimationGame, \
 	Dying, \
 	CheckCollisions, \
+	FirstBossAttack, \
+	FirstBossBehaviour, \
 	FollowPlayer, \
 	BackGround
 

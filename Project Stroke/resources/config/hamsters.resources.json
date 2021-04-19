@@ -99,6 +99,10 @@
       "file": "resources/images/sardinilla_spritesheet.png"
     },
     {
+      "id": "firstBoss",
+      "file": "resources/images/boss1.png"
+    },
+    {
       "id": "background",
       "file": "resources/images/background.png"
     },

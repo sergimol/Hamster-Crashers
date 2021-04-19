@@ -128,7 +128,7 @@ void AmbushPlayer::behave() {
 			if (!isWithinRange()) {
 				// Movimiento del enemigo en base a pos del jugador
 
-			std:cout << "acercandome  \n";
+			//std:cout << "acercandome  \n";
 				if (y < hamY - rangeY_ / 10)
 					mov_->updateKeymap(MovementSimple::DOWN, true);
 				else
@@ -151,7 +151,7 @@ void AmbushPlayer::behave() {
 			}
 			else { // Si esta por debajo del rango, s emueve en la direccion contraia para mantener la distancia
 
-				cout << "Esoty dentro\n";
+				//cout << "Esoty dentro\n";
 				//Parte Y
 
 				if (distY > 0 && distY <= rangeY_ - rangeOffsetY_)
@@ -175,7 +175,7 @@ void AmbushPlayer::behave() {
 				else
 					mov_->updateKeymap(MovementSimple::LEFT, false);
 
-				cout << distY;
+				//cout << distY;
 			}
 		}
 	}

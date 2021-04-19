@@ -21,6 +21,7 @@
 #include "EntityAttribs.h"
 #include "MovementSimple.h"
 #include "EnemyAttack.h"
+#include "FirstBossAttack.h"
 #include "Behavior.h"
 
 class EnemyBehaviour : public Component {
@@ -50,6 +51,9 @@ public:
 
 	EnemyAttack* getEnAtk() {
 		return enAtk_; //componente de ataque
+	}
+	FirstBossAttack* getBossAtk() {
+		return bossAtk_; //componente de ataque
 	}
 
 	std::vector<Entity*> getHamstervector() {
@@ -89,6 +93,7 @@ public:
 
 protected: //ahora mismo solo funcionan como private
 	EnemyAttack* enAtk_; //componente de ataque
+	FirstBossAttack* bossAtk_;
 	//hamster al que va a perseguir* en verdad solo queremos la propiedad tranform ahora mismo pero
 	// mas adelante es posible que nos interese conocer estados o componentes oportunos, por ahora no ahce daño verdad¿?¿
 	std::vector<Entity*> hamsters_;
