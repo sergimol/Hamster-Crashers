@@ -74,7 +74,7 @@
   </object>
  </objectgroup>
  <objectgroup id="8" name="PuntosCamara"/>
- <objectgroup id="5" name="Alturas">
+ <objectgroup id="5" name="Alturas" locked="1">
   <object id="15" name="0" x="0" y="0" width="176" height="175"/>
   <object id="17" name="100" x="176" y="0" width="112" height="175"/>
   <object id="18" name="0" x="288" y="0" width="349" height="175"/>

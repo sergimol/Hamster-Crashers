@@ -51,7 +51,8 @@ public:
 		//std::cout << renderPos.getX() << " " << renderPos.getY() << "\n";
 	}
 
-private:
+	virtual void update() {};
+protected:
 	Transform* tr_;
 	Texture* tex_;
 };

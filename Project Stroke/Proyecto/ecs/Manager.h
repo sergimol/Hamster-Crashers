@@ -34,6 +34,15 @@ public:
 		}
 		return e;
 	}
+	
+	Entity* addBackGround() {
+		Entity* e = new Entity(this);
+		if (e != nullptr) {
+			e->resetGroups();
+			bgs_.emplace_back(e);
+		}
+		return e;
+	}
 
 	Entity* addMapHeight() {
 		Entity* e = new Entity(this);
@@ -137,7 +146,10 @@ public:
 	inline std::vector<Entity*>& getTiles() {
 		return tiles_;
 	}
-
+	
+	inline std::vector<Entity*>& getBgs() {
+		return bgs_;
+	}
 	
 	inline std::vector<Entity*>& getMapH() {
 		return mapHeights_;
@@ -214,6 +226,7 @@ private:
 	std::vector<Entity*> entities_;
 	std::vector<Entity*> tiles_;
 	std::vector<Entity*> mapHeights_;
+	std::vector<Entity*> bgs_;
 
 	std::array<Entity*, ecs::maxHdlr> hdlrs_;
 	std::array<std::unique_ptr<System>, ecs::maxSystem> sys_;

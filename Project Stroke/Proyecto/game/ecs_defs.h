@@ -51,6 +51,7 @@ class InfarctedBody;
 class ReanimationGame;
 class Dying;
 class CheckCollisions;
+class BackGround;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -103,13 +104,14 @@ class CheckCollisions;
 	ReanimationGame, \
 	Dying, \
 	CheckCollisions, \
-	FollowPlayer
+	FollowPlayer, \
+	BackGround
 
 //FollowPlayer, \
 
 // groups
 
-struct Enemy; 
+struct Enemy;
 struct Ally;
 struct Bullet_group;
 struct Item_group;

@@ -17,6 +17,9 @@ Manager::~Manager() {
 	for (auto mH : mapHeights_) {
 		delete mH; mH = nullptr;
 	}
+	for (auto bG : bgs_) {
+		delete bG; bG = nullptr;
+	}
 }
 
 void Manager::refresh() {
@@ -41,9 +44,18 @@ void Manager::update() {
 	auto n = entities_.size();
 	for (auto i = 0u; i < n; i++)
 		entities_[i]->update();
+	
+	auto b = bgs_.size();
+	for (auto i = 0u; i < b; i++)
+		bgs_[i]->update();
 }
 
 void Manager::render() {
+	//RENDERIZA FONDOS
+	auto b = bgs_.size();
+	for (auto i = 0u; i < b; i++)
+		bgs_[i]->render();
+
 	//RENDERIZA TILES
 	auto w = tiles_.size();
 	for (auto i = 0u; i < w; i++)

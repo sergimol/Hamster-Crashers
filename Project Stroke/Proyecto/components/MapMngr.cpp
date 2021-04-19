@@ -38,6 +38,7 @@
 #include "../components/FollowPlayer.h"
 #include "../components/AmbushPlayer.h"
 #include "../components/FleeFromPlayer.h"
+#include "../components/BackGround.h"
 
 
 MapMngr::~MapMngr() {
@@ -108,6 +109,10 @@ void MapMngr::loadNewMap(string map) {
 			tilesetsArr[i] = &sdlutils().images().at(tileset.getName());	//El nombre del tileset en Tiled y la textura png DEBEN llamarse igual
 			i++;
 		}
+		
+		auto* o = entity_->getMngr()->addBackGround();
+		o->addComponent<Transform>(Vector2D(0,0), Vector2D(0, 0), 5000, 15000, 0.0, 1, 1);
+		o->addComponent<BackGround>(&sdlutils().images().at("MAYONESITO"), 80);
 
 		for (const auto& layer : layers)
 		{
@@ -120,10 +125,9 @@ void MapMngr::loadNewMap(string map) {
 					{
 						auto* o = entity_->getMngr()->addMapHeight();
 						o->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-							Vector2D(), 0.0f, 0.0f, 0.0f,1,1);
+							Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 1, 1);
 						o->addComponent<HeightObject>();
 						o->getComponent<HeightObject>()->setZ(stoi(object.getName()));
-						/*entity_->getMngr()->getMapH().push_back(o);*/
 					}
 				}
 				else if (layer->getName() == "Salas") {
@@ -163,7 +167,7 @@ void MapMngr::loadNewMap(string map) {
 
 							hamster1->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-								Vector2D(), 256.0f, 256.0f, 0.0f,0.9f,0.85f);
+								Vector2D(), 256.0f, 256.0f, 0.0f, 0.9f, 0.85f);
 							hamster1->addComponent<HamsterStateMachine>();
 
 							hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5), 0, 15);
@@ -293,7 +297,7 @@ void MapMngr::loadNewMap(string map) {
 
 							hamster2->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-								Vector2D(), 256.0f, 256.0f, 0.0f,0.8f,0.8f);
+								Vector2D(), 256.0f, 256.0f, 0.0f, 0.8f, 0.8f);
 							hamster2->addComponent<HamsterStateMachine>();
 
 							hamster2->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 1, 0);
@@ -352,7 +356,7 @@ void MapMngr::loadNewMap(string map) {
 							auto* hamster3 = mngr_->addEntity();
 							hamster3->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-								Vector2D(), 256.0f, 256.0f, 0.0f,0.8f,0.8f);
+								Vector2D(), 256.0f, 256.0f, 0.0f, 0.8f, 0.8f);
 							hamster3->addComponent<HamsterStateMachine>();
 
 							hamster3->addComponent<EntityAttribs>(100, 0.0, "keta", Vector2D(7, 4.5), 2, 10);
@@ -410,7 +414,7 @@ void MapMngr::loadNewMap(string map) {
 							auto* hamster4 = mngr_->addEntity();
 							hamster4->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-								Vector2D(), 256.0f, 256.0f, 0.0f,0.9f,0.9f);
+								Vector2D(), 256.0f, 256.0f, 0.0f, 0.9f, 0.9f);
 							hamster4->addComponent<HamsterStateMachine>();
 
 							hamster4->addComponent<EntityAttribs>(100, 0.0, "monchi", Vector2D(7, 4.5), 3, 0);
@@ -584,7 +588,7 @@ void MapMngr::LoadEnemyRoom() {
 			auto* enemy = mngr_->addEntity();
 			enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(), 240.0f, 370.0f, 0.0f,0.8f,0.8f)->getFlip() = true;
+				Vector2D(), 240.0f, 370.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
 
 			enemy->addComponent<EnemyStateMachine>();
 			enemy->setGroup<Enemy>(true);

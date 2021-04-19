@@ -141,6 +141,10 @@
     {
       "id": "lineaV",
       "file": "resources/images/lineaV.png"
+    },
+    {
+      "id": "MAYONESITO",
+      "file": "resources/images/UI/mayonesaParallax.png"
     }
   ],
 

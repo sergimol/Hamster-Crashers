@@ -41,7 +41,8 @@ public:
 	inline SDL_Rect getCam() const{ return camera_; };
 	void changeCamState(State estado) { cameraState = estado; };
 	void changeCamFollowPos(Vector2D objetive);
-	State getCamState() {return cameraState;};
+	inline State getCamState() {return cameraState;};
+	inline Vector2D getCamPos() { return camPos; };
 	//void changeState(enum state) { cameraState = state ; };
 	Vector2D CameraFollowPos;	//Guarda el punto de la posición de la camara cuando lo lea
 
