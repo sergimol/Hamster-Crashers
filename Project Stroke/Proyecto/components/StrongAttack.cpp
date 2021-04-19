@@ -53,17 +53,12 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 			//Cogemos el transform del enemigo
 			auto eTR = ents[i]->getComponent<Transform>();
 
-			//Creamos su Rect
-			SDL_Rect rectEnemy;
-			rectEnemy.h = eTR->getH();
-			rectEnemy.w = eTR->getW();
-			rectEnemy.x = eTR->getPos().getX() - cam.x;
-			rectEnemy.y = eTR->getPos().getY() - cam.y;
+			Vector2D newPos = Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
 
 			EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
 
 			//Y comprobamos si colisiona y si no es invulnerable
-			if (!eAttribs->checkInvulnerability() && SDL_HasIntersection(&rectPlayer, &rectEnemy)) {
+			if (!eAttribs->checkInvulnerability() && Collisions::collides(Vector2D(rectPlayer.x, rectPlayer.y), rectPlayer.w, rectPlayer.h, newPos, eTR->getW(), eTR->getH())) {
 
 				EntityAttribs* playerAttribs = entity_->getComponent<EntityAttribs>();
 				int dmg = playerAttribs->getDmg();

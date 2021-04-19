@@ -147,6 +147,10 @@ public:
 		return deadBodies_;
 	}
 
+	inline std::vector<Entity*>& getItems() {
+		return items_;
+	}
+
 	void update();
 	void render();
 	void refresh();
@@ -195,6 +199,17 @@ public:
 			obstacles_.end());
 	}
 
+	void refreshItems() {
+		items_.erase( //
+			std::remove_if( //
+				obstacles_.begin(), //
+				obstacles_.end(), //
+				[](const Entity* e) { //
+					return !e->isActive();
+				}), //
+			obstacles_.end());
+	}
+
 private:
 	std::vector<Entity*> entities_;
 	std::vector<Entity*> tiles_;
@@ -208,5 +223,6 @@ private:
 	std::vector<Entity*> enemies_; // EJEMPLO
 	std::vector<Entity*> obstacles_; // EJEMPLO
 	std::vector<Entity*> deadBodies_;
+	std::vector<Entity*> items_;
 };
 
