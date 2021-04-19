@@ -7,6 +7,7 @@
 #include "Animator.h"
 #include "EntityAttribs.h"
 #include "EnemyStateMachine.h"
+#include "../utils/checkML.h"
 
 class MovementSimple : public Component {
 public:

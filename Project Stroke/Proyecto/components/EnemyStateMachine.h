@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../ecs/Component.h"
+#include "../utils/checkML.h"
 
 const enum class EnemyStates { ENM_IDLE, ENM_DEAD, ENM_STUNNED, ENM_MOVING, ENM_ATTACK };
 

@@ -6,6 +6,7 @@
 #include "../sdlutils/InputHandler.h"
 #include <map>
 #include <cmath>
+#include "../utils/checkML.h"
 
 #include "../ecs/Component.h"
 #include "../sdlutils/InputHandler.h"
@@ -26,7 +27,7 @@ class EnemyBehaviour : public Component {
 protected:
 public:
 	EnemyBehaviour(Behavior* auxbh);
-	virtual ~EnemyBehaviour() {}
+	virtual ~EnemyBehaviour() { delete bh_; };
 
 	void init() override;
 

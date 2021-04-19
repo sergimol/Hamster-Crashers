@@ -6,6 +6,7 @@
 #include "../sdlutils/InputHandler.h"
 #include <map>
 #include <cmath>
+#include "../utils/checkML.h"
 
 #include "../components/Transform.h"
 #include "../components/HamsterStateMachine.h"
