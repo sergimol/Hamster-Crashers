@@ -86,7 +86,7 @@ bool FirstBossBehaviour::isWithinAttackRange() {
 	int hamX = hamPos.getX(),
 		x = pos.getX();
 
-	return(hamX /*+ rangeOffsetX_*/ + hamWidth * 2 >= x + width && hamX + hamWidth - rangeOffsetX_ <= x + width);
+	return(hamX /*+ rangeOffsetX_*/ + hamWidth /**2*/ >= x + 3*width/4 && hamX /*+ hamWidth*/ /*- rangeOffsetX_ */<= x + 1*width/4);
 }
 
 void FirstBossBehaviour::behave() {
@@ -116,11 +116,11 @@ void FirstBossBehaviour::behave() {
 			if (!isWithinAttackRange()) {
 				// Movimiento del enemigo en base a pos del jugador
 
-				if (x > hamX + rangeOffsetX_)
+				if (x > hamX + tr_->getW() / 4 /*+ rangeOffsetX_*/)
 					mov_->updateKeymap(MovementSimple::LEFT, true);
 				else
 					mov_->updateKeymap(MovementSimple::LEFT, false);
-				if (x < hamX - rangeOffsetX_ / 2 - tr_->getW() / 2)
+				if (x < hamX/* - rangeOffsetX_ / 2 */- tr_->getW()/ 4)
 					mov_->updateKeymap(MovementSimple::RIGHT, true);
 				else
 					mov_->updateKeymap(MovementSimple::RIGHT, false);
@@ -136,7 +136,7 @@ void FirstBossBehaviour::behave() {
 				mov_->updateKeymap(MovementSimple::UP, false);
 
 				if (sdlutils().currRealTime() > waitingTime_ + waitingCD_) {
-					bossAtk_->LaunchAttack(hamsterTr_->getPos().getX() - hamsterTr_->getW());// Parámetro para el calculo de la pos
+					bossAtk_->LaunchAttack();
 					//lockHamster();
 					waitingTime_ = sdlutils().currRealTime();
 				}

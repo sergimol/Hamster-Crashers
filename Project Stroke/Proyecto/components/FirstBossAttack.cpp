@@ -37,7 +37,8 @@ void FirstBossAttack::update() {
 
 			//Cogemos el rect completo del jefe
 
-			attRect_.y = pos.getY(); //Pos inicial de esquina arriba
+			attRect_.x = pos.getX() - cam.x;
+			attRect_.y = pos.getY() -cam.y; //Pos inicial de esquina arriba
 
 			//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
@@ -65,13 +66,9 @@ void FirstBossAttack::update() {
 	}
 }
 
-void FirstBossAttack::LaunchAttack(int hamX) {
+void FirstBossAttack::LaunchAttack() {
 	if (sdlutils().currRealTime() > time_ + cooldown_) {
 		//Comienza el ciclo completo de ataque
-
-		//Generamos el rect de ataque
-		attRect_.x = hamX - tr_->getW() - 300;
-
 
 		attackStarted_ = true;
 		stunStarted_ = false;

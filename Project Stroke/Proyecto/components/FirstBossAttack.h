@@ -25,7 +25,7 @@ public:
 	void render() override;
 
 	bool CheckCollisions(const SDL_Rect& enemyRect, bool finCombo);
-	void LaunchAttack(int hamX);
+	void LaunchAttack();
 
 	inline bool getAttackStarted() {
 		return attackStarted_;
