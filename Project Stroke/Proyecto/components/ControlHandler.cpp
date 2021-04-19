@@ -14,7 +14,7 @@ void ControlHandler::init() {
 	
 	if (id == "sardinilla") {
 		ab_ = entity_->getComponent<Roll>();
-		ab_ = entity_->getComponent<Turret>();
+		//ab_ = entity_->getComponent<Turret>();
 		roll_ = entity_->getComponent<Roll>();
 	}
 	else if (id == "canelon")
