@@ -7,6 +7,7 @@
 #include "StrongAttack.h"
 #include "LightAttack.h"
 #include "AnimHamsterStateMachine.h"
+#include "AnimHamsterStateMachine.h"
 
 EnemyAttack::EnemyAttack() :
 	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
@@ -76,17 +77,13 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 			//Cogemos el transform del aliado
 		auto eTR = ents[i]->getComponent<Transform>();
 
-		//Creamos su Rect
-		SDL_Rect allyRect;
-		allyRect.h = eTR->getH();
-		allyRect.w = eTR->getW();
-		allyRect.x = eTR->getPos().getX() - cam.x;
-		allyRect.y = eTR->getPos().getY() - cam.y;
+		Vector2D newPos = Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
+		Vector2D enemyPos = Vector2D(enemyRect.x, enemyRect.y);
 
 		EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
 
 		//Y comprobamos si colisiona y si no es invulnerable
-		if (!eAttribs->checkInvulnerability() && SDL_HasIntersection(&enemyRect, &allyRect)) {
+		if (!eAttribs->checkInvulnerability() && Collisions::collides(newPos, eTR->getW(), eTR->getH(), enemyPos, enemyRect.w, enemyRect.h)) {
 			int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
 			//if (finCombo) {
 			//	if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.01); //Aumentar probabilidad critico

@@ -2,6 +2,7 @@
 #include "Movement.h"
 #include "Animator.h"
 #include "Stroke.h"
+#include "../utils/Collisions.h"
 
 
 //Roll::Roll() : Ability() {
@@ -31,21 +32,21 @@ void Roll::init() {
 Roll::~Roll() {
 }
 
-float Roll::lerp(float a, float b, float f){
+float Roll::lerp(float a, float b, float f) {
 	return (a + f * (b - a));
 }
 
-void Roll::action() 
+void Roll::action()
 {
-	if (entity_->getComponent<Movement>()->isActive()){
+	if (entity_->getComponent<Movement>()->isActive()) {
 		entity_->getComponent<Movement>()->setActive(false);
-		
+
 		rolling = true;
-		
+
 		dir_ = entity_->getComponent<Movement>()->getLastDir();
-		
+
 		if (dir_ == Vector2D(0, 0)) {
-			if(tr_->getFlip())
+			if (tr_->getFlip())
 				tr_->getVel().setX(-iniAccel);
 			else
 				tr_->getVel().setX(iniAccel);
@@ -62,7 +63,7 @@ void Roll::action()
 
 void Roll::updateKeymap(KEYS x, bool is) {
 	/*if (x != SPACE)*/
-		keymap.at(x) = is;
+	keymap.at(x) = is;
 	/*else if (!keymap.at(SPACE)) {
 		keymap.at(SPACE) = true;
 		entity_->getComponent<Stroke>()->increaseChance(2, true);
@@ -131,39 +132,35 @@ bool Roll::checkCollisions()
 	bool hit = false;
 
 	//Cogemos todas las entidades
-	auto& ents = entity_->getMngr()->getEntities();
+	auto& ents = entity_->getMngr()->getEnemies();
 
 	//Recorremos la lista de componentes
 	for (int i = 0; i < ents.size(); ++i)
 	{
 		//Si es un enemigo
-		if (ents[i]->hasGroup<Enemy>())
-		{
+
 			//Cogemos el transform del enemigo
-			auto eTr = ents[i]->getComponent<Transform>();
-			//Creamos su "collider"
-			SDL_Rect rectEnemy = build_sdlrect(eTr->getPos(), eTr->getW(), eTr->getH());
+		auto eTr = ents[i]->getComponent<Transform>();
 
-			//Cogemos el transform del jugador
-			auto pTr = entity_->getComponent<Transform>();
-			//Creamos su "collider"
-			SDL_Rect rectPlayer = build_sdlrect(pTr->getPos(), pTr->getW(), pTr->getH());
+		//Cogemos el transform del jugador
+		auto pTr = entity_->getComponent<Transform>();
 
-			EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
+		EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
 
-			//Comprobamos si hay colision
-			if (!eAttribs->checkInvulnerability() && SDL_HasIntersection(&rectPlayer, &rectEnemy))
+		//Comprobamos si hay colision
+		if (!eAttribs->checkInvulnerability() && Collisions::collides(pTr->getPos(), pTr->getW(), pTr->getH(), eTr->getPos(), eTr->getW(), eTr->getH()))
+		{
+			//he puesto que le matas de una 
+			//creo que lo suyo seria stunnearlo y quitar la mitad de la vida o asi
+			int dmg = eAttribs->getMaxLife();
+			if (eAttribs->getLife() > 0)
 			{
-				//he puesto que le matas de una 
-				//creo que lo suyo seria stunnearlo y quitar la mitad de la vida o asi
-				int dmg = eAttribs->getMaxLife();
-				if (eAttribs->getLife() > 0)
-				{
-					eAttribs->recieveDmg(dmg);
-					hit = true;
-				}
+				eAttribs->recieveDmg(dmg);
+				hit = true;
+				entity_->getMngr()->refreshEnemies();
 			}
 		}
+
 	}
 
 	return hit;
@@ -172,6 +169,6 @@ bool Roll::checkCollisions()
 void Roll::endAbility() {
 	entity_->getComponent<Movement>()->setActive(true);
 	rolling = false;
-	tr_->getVel() = Vector2D(0,0);
+	tr_->getVel() = Vector2D(0, 0);
 	entity_->getComponent<EntityAttribs>()->setAbilityInvul(false);
 }

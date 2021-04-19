@@ -190,6 +190,8 @@ void MapMngr::loadNewMap(string map) {
 							//Habilidad
 							hamster1->addComponent<Roll>();
 							//hamster1->addComponent<Turret>();
+							//hamster1->addComponent<Poison>(10000);
+							//hamster1->addComponent<Pray>(100, 100);
 
 
 							//Interfaz
