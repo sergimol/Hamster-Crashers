@@ -38,7 +38,7 @@ public:
 
 	virtual ~Camera() {}
 	void update() override;
-	SDL_Rect getCam() { return camera_; };
+	inline SDL_Rect getCam() const{ return camera_; };
 	void changeCamState(State estado) { cameraState = estado; };
 	void changeCamFollowPos(Vector2D objetive);
 	State getCamState() {return cameraState;};
@@ -46,8 +46,6 @@ public:
 	Vector2D CameraFollowPos;	//Guarda el punto de la posición de la camara cuando lo lea
 
 	void setGoToTracker(bool objetivo) {GoToTracker = objetivo;};
-
-
 
 };
 
