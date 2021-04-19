@@ -46,7 +46,7 @@ void Turret::update() {
 
 			bala->addComponent<Transform>(
 				tr_->getPos() + Vector2D(tr_->getW() / 2 + x_ * OFFSETX, tr_->getH() / 2 - OFFSETY),
-				Vector2D(x_, 0.0f) * BULLETSPEED, 10.0f, 10.0f, 0.0f);
+				Vector2D(x_, 0.0f) * BULLETSPEED, 10.0f, 10.0f, 0.0f,1,1);
 
 			bala->addComponent<Image>(&sdlutils().images().at("bullet"));
 

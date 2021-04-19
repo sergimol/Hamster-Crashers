@@ -40,7 +40,7 @@ void Poison::action() {
 
 	cloud->addComponent<Transform>(
 		tr_->getPos() + Vector2D(tr_->getW() / 2 + x * COFFSETX, tr_->getH() / 2),
-		Vector2D(x, 0.0f) * CBULLETSPEED, 10.0f, 10.0f, 0.0f);
+		Vector2D(x, 0.0f) * CBULLETSPEED, 10.0f, 10.0f, 0.0f,1,1);
 
 	cloud->addComponent<Image>(&sdlutils().images().at("bullet"));
 

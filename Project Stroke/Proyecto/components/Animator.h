@@ -43,13 +43,15 @@ public:
 
 		//recurso
 		Vector2D auxTextFrame = Vector2D();
-		auxTextFrame.setX(widthFrame * textureFrame.getX());
-		auxTextFrame.setY(heightFrame * textureFrame.getY());
-		SDL_Rect src = build_sdlrect(auxTextFrame, widthFrame, heightFrame);
+		auxTextFrame.setX(widthFrame * textureFrame.getX() + (widthFrame * (1 - tr_->getScaleW()) / 2));
+		auxTextFrame.setY(heightFrame * textureFrame.getY() + (heightFrame * (1 - tr_->getScaleH()) / 2));
+
+		//Multiplicamos por el 'Scale' para que cada uno tenga su tamanyo
+		SDL_Rect src = build_sdlrect(auxTextFrame, widthFrame * tr_->getScaleW(), heightFrame * tr_->getScaleH());
 
 		//destino
 		Vector2D renderPos = Vector2D(tr_->getPos().getX() - cam.x, tr_->getPos().getY() - tr_->getZ() - cam.y);
-		SDL_Rect dest = build_sdlrect(renderPos, tr_->getW(), tr_->getH());
+		SDL_Rect dest = build_sdlrect(renderPos, tr_->getW()*tr_->getScaleW(), tr_->getH()*tr_->getScaleH());
 
 
 		SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 255, 0, 255);
@@ -105,7 +107,7 @@ public:
 	}
 
 	//Metodo que cambia de animacion sobre la spritesheet actual
-	void play(Animation actualAnim) 
+	void play(Animation actualAnim)
 	{
 		frameUpdate = actualAnim.frameUpdate();
 		startFrame = actualAnim.startFrame();
@@ -118,12 +120,12 @@ public:
 		idChain = actualAnim.chain();
 	}
 
-	
+
 
 	//Devuelve true o false en funcion si la animacion ha llegado al ultimo frame o no
-	bool OnAnimationFrameEnd() 
+	bool OnAnimationFrameEnd()
 	{
-		return animCont == animDuration-1;
+		return animCont == animDuration - 1;
 	}
 
 	//Devuelve true o false en funcion de si la animacion ha llegado al frame del parametro
@@ -155,7 +157,7 @@ private:
 	int heightFrame;
 
 	//Filas y Columnas totales de la spritesheet
-	int cols; 
+	int cols;
 	int rows;
 
 
