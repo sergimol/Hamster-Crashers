@@ -120,7 +120,7 @@ void MapMngr::loadNewMap(string map) {
 					{
 						auto* o = entity_->getMngr()->addMapHeight();
 						o->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-							Vector2D(), 0.0f, 0.0f, 0.0f);
+							Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f);
 						o->addComponent<HeightObject>();
 						o->getComponent<HeightObject>()->setZ(stoi(object.getName()));
 						/*entity_->getMngr()->getMapH().push_back(o);*/
