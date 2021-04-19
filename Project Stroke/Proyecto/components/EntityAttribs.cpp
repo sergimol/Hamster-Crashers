@@ -49,7 +49,7 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	critProbability_(0.05),
 	maxCrit_(0.2),
 	critDamage_(1.5),
-	
+
 	poisonDamage_(2),
 	poisonProbability_(poisonProb),
 	canPoison_(poisonProbability_ > 0),
@@ -104,42 +104,39 @@ void EntityAttribs::update() {
 
 //Resta el da�o y devuelve true si ha muerto
 bool EntityAttribs::recieveDmg(int dmg) {
-	if (!invincible_) {
-		health_ -= dmg;
-		//Timer de invulnerabilidad
-		invincibilityTime_ = sdlutils().currRealTime();
-		invincible_ = true;
-		//Actualizamos la healthBar
-		if (entity_->hasComponent<UI>())
-			entity_->getComponent<UI>()->bar(-dmg);
-		std::cout << "me cago en tus muertos" << health_ << std::endl;
-		//Si la vida ha bajado de 0...
-		if (health_ <= 0) {
-			if (hms_ != nullptr) {
-				hms_->getState() = HamStates::DEAD;
-			}
-			else if (enmState_ != nullptr) {
-				enmState_->getState() = EnemyStates::ENM_DEAD;
-			}
-			//Actualizamos UI
-			if (entity_->hasComponent<UI>())
-				entity_->getComponent<UI>()->dep();
-			//Actualizamos UI
-			if (entity_->hasComponent<HeartUI>())
-				entity_->getComponent<HeartUI>()->dep();
-
-			health_ = 0;
-			//Desactivamos la entidad
-			die();
-
-			//entity_->setActive(false);
-
-			return true;
+	health_ -= dmg;
+	//Timer de invulnerabilidad
+	invincibilityTime_ = sdlutils().currRealTime();
+	invincible_ = true;
+	//Actualizamos la healthBar
+	if (entity_->hasComponent<UI>())
+		entity_->getComponent<UI>()->bar(-dmg);
+	std::cout << "me cago en tus muertos" << health_ << std::endl;
+	//Si la vida ha bajado de 0...
+	if (health_ <= 0) {
+		if (hms_ != nullptr) {
+			hms_->getState() = HamStates::DEAD;
 		}
-		else
-			return false;
+		else if (enmState_ != nullptr) {
+			enmState_->getState() = EnemyStates::ENM_DEAD;
+		}
+		//Actualizamos UI
+		if (entity_->hasComponent<UI>())
+			entity_->getComponent<UI>()->dep();
+		//Actualizamos UI
+		if (entity_->hasComponent<HeartUI>())
+			entity_->getComponent<HeartUI>()->dep();
+
+		health_ = 0;
+		//Desactivamos la entidad
+		die();
+
+		//entity_->setActive(false);
+
+		return true;
 	}
-	return false;
+	else
+		return false;
 }
 
 void EntityAttribs::die() {

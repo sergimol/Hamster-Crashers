@@ -51,6 +51,8 @@ class InfarctedBody;
 class ReanimationGame;
 class Dying;
 class CheckCollisions;
+class FirstBossBehaviour;
+class FirstBossAttack;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -103,6 +105,8 @@ class CheckCollisions;
 	ReanimationGame, \
 	Dying, \
 	CheckCollisions, \
+	FirstBossAttack, \
+	FirstBossBehaviour, \
 	FollowPlayer
 
 //FollowPlayer, \
