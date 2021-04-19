@@ -92,7 +92,7 @@ void Stroke::infarctHamster() {
 	//GENERAR PERSONAJE INFARTADO ()
 
 	auto* deadBody = entity_->getMngr()->addEntity();
-	deadBody->addComponent<Transform>(tr_->getPos(), Vector2D(0,0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip());
+	deadBody->addComponent<Transform>(tr_->getPos(), Vector2D(0,0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip(),tr_->getScaleW(),tr_->getScaleH());
 	deadBody->addComponent<Animator>(&sdlutils().images().at("sardinillaSheet"),
 		86,
 		86,

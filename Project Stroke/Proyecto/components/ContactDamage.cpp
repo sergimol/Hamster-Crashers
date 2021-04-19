@@ -6,6 +6,7 @@
 #include "ControlHandler.h"
 #include "StrongAttack.h"
 #include "ContactDamage.h"
+#include "../utils/Collisions.h"
 
 ContactDamage::ContactDamage(int danyo) :
 	tr_(nullptr), attRect_(), DEBUG_isAttacking_(false),
@@ -70,18 +71,13 @@ bool ContactDamage::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 			//Cogemos el transform del player
 		auto eTR = ents[i]->getComponent<Transform>();
 
-		//Creamos su Rect 
-		SDL_Rect allyRect;
-		allyRect.h = eTR->getH();
-		allyRect.w = eTR->getW();
-		allyRect.x = eTR->getPos().getX() - cam.x;
-		allyRect.y = eTR->getPos().getY() - cam.y;
-
+		Vector2D newPos = new Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
+		Vector2D enemyPos = new Vector2D(enemyRect.x, enemyRect.y);
 
 		//Y comprobamos si colisiona
 		//es can attacks porque coninciden lso estados
 		//TODO si se cambian lso estados DEAD STUNNED INFARTED hayq eu cambiar este booleano por otro ams combeniente
-		if (ents[i]->getComponent<HamsterStateMachine>()->canAttack() && SDL_HasIntersection(&enemyRect, &allyRect)) {
+		if (ents[i]->getComponent<HamsterStateMachine>()->canAttack() && Collisions::collides(newPos, eTR->getW(), eTR->getH(), enemyPos, enemyRect.w, enemyRect.h)) {
 			//TODO no voy a definir una entidad ahora
 			//int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
 			//if (finCombo) {
@@ -132,14 +128,15 @@ bool ContactDamage::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 				//Damos la vuelta si es atacado por detras
 
 				//DEPENDE DE LA posicion de X y el width al medio
-				attRect_.x;
-				attRect_.w;
-				allyRect.w;
-				allyRect.x;
+				//attRect_.x;
+				//attRect_.w;
+				//allyRect.w;
+				//allyRect.x;
+				//allyRect.x;
 
 				//MIRADNOA AL DERECHA ES !flip, izquierda es flip, por default quuiero que sea !flip
 				auto& hamFlip = eTR->getFlip();
-				if (attRect_.x + (attRect_.w / 2) > allyRect.x + (allyRect.w / 2)) //esta a ala izquierda entonces !flip
+				if (attRect_.x + (attRect_.w / 2) > eTR->getPos().getX() + (eTR->getW() / 2)) //esta a ala izquierda entonces !flip
 					hamFlip = false;
 				else
 					hamFlip = true;

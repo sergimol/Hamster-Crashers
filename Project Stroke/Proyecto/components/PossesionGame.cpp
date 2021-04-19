@@ -58,7 +58,7 @@ void PossesionGame::start() {
 
 	//Crea la entidad del QuickTimeEvent
 	keyGame = entity_->getMngr()->addEntity();																											
-	keyGame->addComponent<Transform>(Vector2D(aux.getX() + LINE_OFFSET_X, aux.getY() + V_LINE_OFFSET_Y), Vector2D(BOX_INI_VEL_X, 0), BOX_SIZE_X, BOX_SIZE_Y, 0); 
+	keyGame->addComponent<Transform>(Vector2D(aux.getX() + LINE_OFFSET_X, aux.getY() + V_LINE_OFFSET_Y), Vector2D(BOX_INI_VEL_X, 0), BOX_SIZE_X, BOX_SIZE_Y, 0,1,1); 
 	keyGame->addComponent<KeyGame>(lineHPos, lineVPos, this);
 	randomiseKey();
 }

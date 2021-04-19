@@ -8,14 +8,14 @@
 
 #include "Gravity.h"
 
-class Transform: public Component {
+class Transform : public Component {
 public:
 	Transform() :
-			pos_(), vel_(), width_(), height_(), rotation_(), z_(), flip_(){
+		pos_(), vel_(), width_(), height_(), rotation_(), z_(), flip_(),scaleCollideW(),scaleCollideH() {
 	}
 
 	Transform(Vector2D pos, Vector2D vel, float width, float height,
-		float rotation) :
+		float rotation, float scaleW, float scaleH) :
 		pos_(pos), //
 		vel_(vel), //
 		width_(width), //
@@ -23,12 +23,14 @@ public:
 		rotation_(rotation),
 		z_(0),
 		velZ_(0),
-		flip_(false)
+		flip_(false),
+		scaleCollideW(scaleW),
+		scaleCollideH(scaleH)
 	{
 	}
 
 	Transform(Vector2D pos, Vector2D vel, float width, float height,
-		float rotation, float z, bool flip) :
+		float rotation, float z, bool flip, float scaleW, float scaleH) :
 		pos_(pos), //
 		vel_(vel), //
 		width_(width), //
@@ -36,7 +38,9 @@ public:
 		rotation_(rotation),
 		z_(z),
 		velZ_(0),
-		flip_(flip)
+		flip_(flip),
+		scaleCollideW(scaleW),
+		scaleCollideH(scaleH)
 	{
 	}
 
@@ -54,7 +58,7 @@ public:
 	float& getZ() {
 		return z_;
 	}
-	
+
 	float& getVelZ() {
 		return velZ_;
 	}
@@ -87,6 +91,14 @@ public:
 		return rotation_;
 	}
 
+	float getScaleW() const {
+		return scaleCollideW;
+	}
+
+	float getScaleH() const {
+		return scaleCollideH;
+	}
+
 	void setRot(float rot) {
 		rotation_ = rot;
 	}
@@ -100,10 +112,10 @@ public:
 
 
 	void update() override {
-		if(grv_ != nullptr && grv_->isActive())
+		if (grv_ != nullptr && grv_->isActive())
 			z_ += velZ_;
 		//pos_.setY(pos_.getY() - z_);
-		pos_ = pos_ + vel_;		
+		pos_ = pos_ + vel_;
 	}
 
 
@@ -118,5 +130,7 @@ private:
 	float z_;
 	float velZ_;
 	bool flip_;
+	float scaleCollideW;
+	float scaleCollideH;
 };
 

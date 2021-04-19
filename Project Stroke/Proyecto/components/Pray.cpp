@@ -7,6 +7,7 @@
 #include "EntityAttribs.h"
 #include "Transform.h"
 #include "../ecs/Camera.h"
+#include "../utils/Collisions.h"
 
 Pray::Pray(int dmg, int heal) : Ability(WAIT), dmg_(dmg), heal_(heal), evil(true){
 };
@@ -33,15 +34,10 @@ void Pray::prayAbility() {
 				//Cogemos el transform del enemigo
 				auto eTR = e->getComponent<Transform>();
 
-				//Creamos su Rect
-				SDL_Rect rectEnemy;
-				rectEnemy.h = eTR->getH();
-				rectEnemy.w = eTR->getW();
-				rectEnemy.x = eTR->getPos().getX();
-				rectEnemy.y = eTR->getPos().getY();
+				Vector2D newPos = Vector2D(eTR->getPos().getX(), eTR->getPos().getY());
 
 				//Y comprobamos si colisiona
-				if (SDL_HasIntersection(&cam, &rectEnemy)) {
+				if (Collisions::collides(newPos, eTR->getW(), eTR->getH(), Vector2D(cam.x, cam.y), cam.w, cam.h)) {
 					//Le restamos la vida al enemigo
 					e->getComponent<EntityAttribs>()->recieveDmg(dmg_);
 					//entity_->getComponent<Life>()->recieveDmg(dmg_);
@@ -54,15 +50,10 @@ void Pray::prayAbility() {
 				//Cogemos el transform del enemigo
 				auto eTR = e->getComponent<Transform>();
 
-				//Creamos su Rect
-				SDL_Rect rectEnemy;
-				rectEnemy.h = eTR->getH();
-				rectEnemy.w = eTR->getW();
-				rectEnemy.x = eTR->getPos().getX();
-				rectEnemy.y = eTR->getPos().getY();
+				Vector2D newPos = Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
 
 				//Y comprobamos si colisiona
-				if (SDL_HasIntersection(&cam, &rectEnemy)) {
+				if (Collisions::collides(newPos, eTR->getW(), eTR->getH(), Vector2D(cam.x, cam.y), cam.w, cam.h)) {
 					//Le restamos la vida al enemigo
 					auto& state = st_->getState();
 					if (state != HamStates::DEAD && e->getComponent<EntityAttribs>()->getLife() > 0) //deberia que valer con el DEAD que cuando muera desactive cosas
