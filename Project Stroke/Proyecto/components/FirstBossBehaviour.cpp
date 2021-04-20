@@ -142,5 +142,8 @@ void FirstBossBehaviour::behave() {
 				}
 			}
 		}
+		else {
+			waitingTime_ = sdlutils().currRealTime();
+		}
 	}
 }

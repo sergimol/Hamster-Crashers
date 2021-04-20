@@ -11,7 +11,7 @@
 FirstBossAttack::FirstBossAttack() :
 	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
 	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")),
-	attackStarted_(false), hitTime_(0), beforeHitCD_(1500), afterHitCD_(4250), stunStarted_(false) {}
+	attackStarted_(false), hitTime_(0), beforeHitCD_(1000), afterHitCD_(4250), stunStarted_(false) {}
 
 void FirstBossAttack::init() {
 	tr_ = entity_->getComponent<Transform>();
