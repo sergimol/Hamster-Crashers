@@ -55,6 +55,7 @@ class FirstBossBehaviour;
 class FirstBossAttack;
 class BackGround;
 class Parallax;
+class NewScene;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -111,6 +112,7 @@ class Parallax;
 	FirstBossBehaviour, \
 	FollowPlayer, \
 	BackGround, \
+	NewScene, \
 	Parallax
 
 //FollowPlayer, \

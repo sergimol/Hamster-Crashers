@@ -53,5 +53,6 @@ public:
 
 	void LoadEnemyRoom();
 	void reduceNumberEnemyRoom() { numberEnemyRoom--; };
+	void newSceneTrigger(string newName, const tmx::Object& obj);
 };
 

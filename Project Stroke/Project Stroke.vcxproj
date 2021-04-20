@@ -177,6 +177,7 @@
     <ClCompile Include="Proyecto\components\KeyGame.cpp" />
     <ClCompile Include="Proyecto\components\Knockback.cpp" />
     <ClCompile Include="Proyecto\components\MapMngr.cpp" />
+    <ClCompile Include="Proyecto\components\NewScene.cpp" />
     <ClCompile Include="Proyecto\components\Parallax.cpp" />
     <ClCompile Include="Proyecto\components\Poison.cpp" />
     <ClCompile Include="Proyecto\components\MovementSimple.cpp" />
@@ -248,6 +249,7 @@
     <ClInclude Include="Proyecto\components\KeyGame.h" />
     <ClInclude Include="Proyecto\components\Knockback.h" />
     <ClInclude Include="Proyecto\components\MapMngr.h" />
+    <ClInclude Include="Proyecto\components\NewScene.h" />
     <ClInclude Include="Proyecto\components\Parallax.h" />
     <ClInclude Include="Proyecto\components\Poison.h" />
     <ClInclude Include="Proyecto\components\MovementSimple.h" />

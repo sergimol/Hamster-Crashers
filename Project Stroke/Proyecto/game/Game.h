@@ -12,10 +12,10 @@
 #include "tmxlite/TileLayer.hpp"
 #include "tmxlite/ObjectGroup.hpp"
 
-
 // when you are not using the methods of a class, just
 // say that it exists, that saves time when parsing files
 
+using namespace std;
 
 
 
@@ -38,5 +38,6 @@ private:
 
 	void mergeSort(std::vector<Entity*>& vec, int l, int r);
 	void merge(std::vector<Entity*>& vec, int l, int m, int r);
+	void changeScene(string newScene);
 };
 

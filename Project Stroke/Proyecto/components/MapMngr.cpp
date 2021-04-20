@@ -44,6 +44,7 @@
 #include "../components/FairStrokeStrategy.h"
 #include "../components/RandomStrokeStrategy.h"
 #include "../components/Parallax.h"
+#include "../components/NewScene.h"
 
 
 
@@ -117,7 +118,7 @@ void MapMngr::loadNewMap(string map) {
 			tilesetsArr[i] = &sdlutils().images().at(tileset.getName());	//El nombre del tileset en Tiled y la textura png DEBEN llamarse igual
 			i++;
 		}
-		
+
 		//Fondos
 		/*auto* o = entity_->getMngr()->addBackGround();
 		o->addComponent<Transform>(Vector2D(0,0), Vector2D(0, 0), 100, 1080, 0.0, 1, 1);
@@ -125,7 +126,7 @@ void MapMngr::loadNewMap(string map) {
 		auto* o = entity_->getMngr()->addEntity();
 		o->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 100, 1080, 0.0, 1, 1);
 		//Para meter un fondo meter esto                              velocidad  tamaño            posicion
-		o->addComponent<Parallax>(&sdlutils().images().at("MAYONESITO"), 80, Vector2D(1920, 1080), Vector2D(0,0));
+		o->addComponent<Parallax>(&sdlutils().images().at("MAYONESITO"), 80, Vector2D(1920, 1080), Vector2D(0, 0));
 
 		for (const auto& layer : layers)
 		{
@@ -166,10 +167,14 @@ void MapMngr::loadNewMap(string map) {
 					std::cout << layer->getName();
 
 					objectLayer = &layer->getLayerAs<tmx::ObjectGroup>();
-					
-					for (const auto& object : objects){
-						if(object.getName() == "sardinilla" || object.getName() == "canelon" || object.getName() == "keta" || object.getName() == "monchi")
+
+					for (const auto& object : objects) {
+						if (object.getName() == "sardinilla" || object.getName() == "canelon" || object.getName() == "keta" || object.getName() == "monchi")
 							addHamster(object);
+						else if (object.getName() == "newScene") {
+
+							newSceneTrigger(object.getProperties()[0].getStringValue(), object);
+						}
 					}
 				}
 			}
@@ -374,7 +379,7 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 	hamster1->addComponent<Combos>();
 
 	//Habilidad
-	if(name == "sardinilla") hamster1->addComponent<Roll>(); 
+	if (name == "sardinilla") hamster1->addComponent<Roll>();
 	else if (name == "canelon") hamster1->addComponent<Pray>(100, 100);
 	else if (name == "keta") hamster1->addComponent<Poison>(10000);
 	else hamster1->addComponent<Turret>();
@@ -421,3 +426,11 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 //			}), //
 //		roomTrigger.end());
 //}
+void MapMngr::newSceneTrigger(string newScene, const tmx::Object& object) {
+
+	//Creamos una entidad
+	auto trigger = entity_->getMngr()->addEntity();
+	trigger->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 1, 1);
+	trigger->addComponent<NewScene>(newScene);
+}

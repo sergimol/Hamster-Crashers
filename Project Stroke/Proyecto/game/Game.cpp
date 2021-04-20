@@ -68,7 +68,10 @@ void Game::init() {
 	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Mapa.tmx");
 
 	//Metemos al mapa en el Handler de Map
+
 	mngr_->setHandler<Map>(mapa);
+
+	
 
 	//Imagen de fondo fija
 	/*auto* background = mngr_->addEntity();
@@ -169,7 +172,7 @@ void Game::init() {
 }
 
 void Game::update() {
-	//TODO HACER ESTO SIN IMPORTAR EL NUM DE HAMSTERS QUE HAYA	
+
 }
 void Game::start() {
 
@@ -197,7 +200,7 @@ void Game::start() {
 		mngr_->refresh();
 
 
-		sortEntities();
+		//sortEntities();
 
 		//updateCamera();
 
@@ -340,5 +343,9 @@ void Game::merge(vector<Entity*>& vec, int l, int m, int r) {
 		j++;
 		k++;
 	}
+}
+
+void Game::changeScene(string newScene) {
+	
 }
 
