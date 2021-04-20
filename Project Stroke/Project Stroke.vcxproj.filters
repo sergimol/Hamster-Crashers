@@ -625,8 +625,8 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\RandomStrokeStrategy.h">
       <Filter>Archivos de encabezado\Components\Entity\Hamster\Stroke</Filter>
-    <ClInclude Include="Proyecto\components\StrokeStrategy.h">
     </ClInclude>
+    <ClInclude Include="Proyecto\components\StrokeStrategy.h">
       <Filter>Archivos de encabezado\Components\Entity\Hamster\Stroke</Filter>
     </ClInclude>
   </ItemGroup>
