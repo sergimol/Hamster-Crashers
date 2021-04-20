@@ -25,16 +25,22 @@ private:
 	void updateRelativePos();
 
 	//Comprueba que el parallax se ha movido hasta alguna
-	//de las posiciones relaticas
-	bool checkRelativePos();
+	//actualiza las posiciones en ese caso
+	void checkRelativePos();
 
 	//Accesos a Transforms de los 3 fondos
 	Transform* leftTr_;
 	Transform* centerTr_;
 	Transform* rightTr_;
 
+	//Tamaño textura
+	Vector2D texSize_;
+
+	//Posicion relativa de los backgrounds
+	Vector2D texPos_;
+
 public:
-	Parallax(Texture* im, float vel);
+	Parallax(Texture* im, float vel, Vector2D size, Vector2D pos);
 	virtual ~Parallax() {};
 	virtual void update();
 	virtual void init();

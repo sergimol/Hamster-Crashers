@@ -7,64 +7,63 @@
 
 
 
-Parallax::Parallax(Texture* im, float vel) 
+Parallax::Parallax(Texture* im, float vel, Vector2D size, Vector2D pos)
 {
-	//CREAMOS LOS 3 FONDOS
-	//izquierda
-
 	tex_ = im;
 	pxVel_ = vel;
-	
+	texSize_ = size;
+	texPos_ = pos;
 }
 
+//CREA LOS 3 BACKGROUNDS
 void Parallax::init()
 {
-	
 	auto backLeft = entity_->getMngr()->addBackGround();
-	backLeft->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 100, 1080, 0.0, 1, 1);
+	backLeft->addComponent<Transform>(Vector2D(texPos_.getX(), texPos_.getY()), Vector2D(0, 0), texSize_.getX(), texSize_.getY(), 
+											   0.0, 1, 1);
 	backLeft->addComponent<BackGround>(tex_, pxVel_);
 	leftTr_ = backLeft->getComponent<Transform>();
+	assert(leftTr_ != nullptr);
 	//central
 	auto backCenter = entity_->getMngr()->addBackGround();
-	backCenter->addComponent<Transform>(Vector2D(100, 0), Vector2D(0, 0), 100, 1080, 0.0, 1, 1);
+	backCenter->addComponent<Transform>(Vector2D(texPos_.getX() + texSize_.getX(), texPos_.getY()), Vector2D(0, 0), texSize_.getX(), texSize_.getY()
+												 , 0.0, 1, 1);
 	backCenter->addComponent<BackGround>(tex_, pxVel_);
 	centerTr_ = backCenter->getComponent<Transform>();
+	assert(centerTr_ != nullptr);
 	//derecha
 	auto backRight = entity_->getMngr()->addBackGround();
-	backRight->addComponent<Transform>(Vector2D(200, 0), Vector2D(0, 0), 100, 1080, 0.0, 1, 1);
+	backRight->addComponent<Transform>(Vector2D(texPos_.getX() + texSize_.getX()*2, texPos_.getY()), Vector2D(0, 0), texSize_.getX(), texSize_.getY(),
+												0.0, 1, 1);
 	backRight->addComponent<BackGround>(tex_, pxVel_);
 	rightTr_ = backRight->getComponent<Transform>();
+	assert(rightTr_ != nullptr);
 }
 
 void Parallax::update()
 {
-	//Cogemos la posicion anterior de la camara
-	Vector2D antPos = camPos_;
-
-	//Cogemos la posicion actual de la camara
-	camPos_ = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamPos();
-
 
 	//Comprobamos si ha llegado a alguna de las posiciones relativas y actualizamos
-	if (checkRelativePos())
-		updateRelativePos();
+	checkRelativePos();
 
 }
 
-void Parallax::updateRelativePos()
+void Parallax::checkRelativePos()
 {
-	/*targetLeftPos = tr_->getPos().getX() - tr_->getW();
-	targetRightPos = tr_->getPos().getX() + tr_->getW();
-	actualLeftPos = targetLeftPos;
-	actualRightPos = targetRightPos;*/
-}
+	camPos_ = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamPos();
+	if (camPos_.getX() >= rightTr_->getPos().getX())
+	{
+		
+		leftTr_->setPos(Vector2D(leftTr_->getPos().getX() + leftTr_->getW(), 0));
+		centerTr_->setPos(Vector2D(centerTr_->getPos().getX() + centerTr_->getW(), 0));
+		rightTr_->setPos(Vector2D(rightTr_->getPos().getX() + rightTr_->getW(), 0));
 
-bool Parallax::checkRelativePos()
-{
-	/*float originPos = tr_->getPos().getX();
-	if (originPos <= targetLeftPos || originPos >= targetRightPos)
-		return true;
-	else
-		return false;*/
-	return true;
+	}
+	else if(camPos_.getX() <= centerTr_->getPos().getX())
+	{
+		leftTr_->setPos(Vector2D(leftTr_->getPos().getX() - leftTr_->getW(), 0));
+		centerTr_->setPos(Vector2D(centerTr_->getPos().getX() - centerTr_->getW(), 0));
+		rightTr_->setPos(Vector2D(rightTr_->getPos().getX() - rightTr_->getW(), 0));
+	}
+	
 }

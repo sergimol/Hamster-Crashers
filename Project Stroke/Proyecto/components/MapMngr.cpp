@@ -124,7 +124,8 @@ void MapMngr::loadNewMap(string map) {
 		o->addComponent<BackGround>(&sdlutils().images().at("MAYONESITO"), 80);*/
 		auto* o = entity_->getMngr()->addEntity();
 		o->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 100, 1080, 0.0, 1, 1);
-		o->addComponent<Parallax>(&sdlutils().images().at("MAYONESITO"), 80);
+		//Para meter un fondo meter esto                              velocidad  tamaño            posicion
+		o->addComponent<Parallax>(&sdlutils().images().at("MAYONESITO"), 80, Vector2D(1920, 1080), Vector2D(0,0));
 
 		for (const auto& layer : layers)
 		{
