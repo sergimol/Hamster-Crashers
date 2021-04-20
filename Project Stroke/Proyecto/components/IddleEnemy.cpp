@@ -1,13 +1,12 @@
-﻿#include "FollowPlayer.h"
+﻿#include "IddleEnemy.h"
 #include "Stroke.h"
 #include "FleeFromPlayer.h"
-#include "IddleEnemy.h"
 
-FollowPlayer::FollowPlayer() :
+IddleEnemy::IddleEnemy() :
 	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr), lockedHamster_(nullptr), hamsterTr_(nullptr), hamsId_(-1) {
 }
 
-void FollowPlayer::init() {
+void IddleEnemy::init() {
 	Entity* owEntity = owner_->getEntity();
 	mov_ = owEntity->getComponent<MovementSimple>();
 	assert(mov_ != nullptr);
@@ -20,15 +19,21 @@ void FollowPlayer::init() {
 
 	hamsters_ = owEntity->getMngr()->getPlayers();
 
-	lockHamster(); // De momento un hamster concreto para manejar mejor
+	//el puto iddle no necesita hacer lock hamster lockHamster(); // De momento un hamster concreto para manejar mejor
+	/*
 	assert(lockedHamster_ != nullptr);
 	assert(lockedHamState_ != nullptr);
 	assert(hamsterTr_ != nullptr);
+	*/
+
+	//poner todo a false
+
+	//se supone que los para >:C
 }
 
 
 //Fija a un hamster en orden desde el siguiente al último elegido
-void FollowPlayer::lockHamster() {
+void IddleEnemy::lockHamster() {
 	//Variable que contralará el recorrido de los hamsters
 	int start;
 	if (hamsId_ + 1 == hamsters_.size()) {
@@ -57,7 +62,7 @@ void FollowPlayer::lockHamster() {
 		if (hamsId_ == -1)
 			hamsId_ = 0;
 	}
-	//Si ninguno esta activo se cambia a iddle
+	//Si ninguno esta activo pone todo a null
 	if (lockedHamster_ == nullptr) {
 		lockedHamState_ = nullptr;
 		hamsterTr_ = nullptr;
@@ -66,14 +71,14 @@ void FollowPlayer::lockHamster() {
 }
 
 //Fija a un hamster concreto
-void FollowPlayer::lockHamster(int id) {
+void IddleEnemy::lockHamster(int id) {
 	lockedHamster_ = hamsters_[id];
 	hamsterTr_ = lockedHamster_->getComponent<Transform>();
 	lockedHamState_ = lockedHamster_->getComponent<HamsterStateMachine>();
 }
 
 //Esta a rango de ataque
-bool FollowPlayer::isWithinAttackRange() {
+bool IddleEnemy::isWithinAttackRange() {
 	auto width = tr_->getW();
 	auto hamWidth = hamsterTr_->getW();
 
@@ -88,69 +93,14 @@ bool FollowPlayer::isWithinAttackRange() {
 		(hamY + rangeOffsetY_ >= y && hamY - rangeOffsetY_ / 10 <= y));
 }
 
-void FollowPlayer::behave() {
+void IddleEnemy::behave() {
+	//no hay nada esta iddle es un fideo
+	//que se yo imagina que estamos en un solo jugador, si esta infartado no se le puede traquear pos los bichos se paran, y aqui lo que decimos es que intenten lockear a alguien ahsta que puedan, aka cuando se recupere de un infarto, danlles te lo he puesto todo en un linea porque vas a ser tu quien lo lea con carinyo el nene
 
-	Entity* owEntity = owner_->getEntity();
-	if (owEntity->getComponent<EntityAttribs>()->getLife() <= 40 ) {
-		owner_->SetBehavior(new FleeFromPlayer);
-		return;
-	}
-	else if (lockedHamster_ != nullptr) {
-
-		// Cambia el foco si el actual muere o le da un infarto
-		auto& state = lockedHamState_->getState();
-		if (lockedHamState_->cantBeTargeted()) {
-			lockHamster();
-		}
-		else { // si no cambia de hamster marcado
-			auto& hamPos = hamsterTr_->getPos();
-			auto& pos = tr_->getPos();
-			int hamX = hamPos.getX(),
-				hamY = hamPos.getY() + hamsterTr_->getH(),
-				x = pos.getX(),
-				y = pos.getY() + tr_->getH();
-
-			auto width = tr_->getW();
-			auto hamWidth = hamsterTr_->getW();
-			auto& flip = tr_->getFlip();
-
-			if (x + width / 2 < hamX + hamWidth / 2)
-				flip = false;
-			else
-				flip = true;
-
-			if (!isWithinAttackRange()) {
-				// Movimiento del enemigo en base a pos del jugador
-				if (y < hamY - rangeOffsetY_ / 10)
-					mov_->updateKeymap(MovementSimple::DOWN, true);
-				else
-					mov_->updateKeymap(MovementSimple::DOWN, false);
-				if (y > hamY + rangeOffsetY_)
-					mov_->updateKeymap(MovementSimple::UP, true);
-				else
-					mov_->updateKeymap(MovementSimple::UP, false);
-
-
-				if (x > hamX + rangeOffsetX_)
-					mov_->updateKeymap(MovementSimple::LEFT, true);
-				else
-					mov_->updateKeymap(MovementSimple::LEFT, false);
-				if (x < hamX - rangeOffsetX_ / 2 - tr_->getW() / 2)
-					mov_->updateKeymap(MovementSimple::RIGHT, true);
-				else
-					mov_->updateKeymap(MovementSimple::RIGHT, false);
-			}
-			else { // Si est� a rango, no necesita moverse e intentara atacar
-
-				mov_->updateKeymap(MovementSimple::RIGHT, false);
-				mov_->updateKeymap(MovementSimple::LEFT, false);
-				mov_->updateKeymap(MovementSimple::DOWN, false);
-				mov_->updateKeymap(MovementSimple::UP, false);
-
-				enAtk_->LaunchAttack();
-			}
-		}
-	}
+	mov_->updateKeymap(MovementSimple::DOWN, false);
+	mov_->updateKeymap(MovementSimple::UP, false);
+	mov_->updateKeymap(MovementSimple::LEFT, false);
+	mov_->updateKeymap(MovementSimple::RIGHT, false);
 }
 
 /*

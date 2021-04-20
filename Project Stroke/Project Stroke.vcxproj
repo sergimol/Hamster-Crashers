@@ -173,6 +173,7 @@
     <ClCompile Include="Proyecto\components\HamsterStateMachine.cpp" />
     <ClCompile Include="Proyecto\components\HeartUI.cpp" />
     <ClCompile Include="Proyecto\components\HeightObject.cpp" />
+    <ClCompile Include="Proyecto\components\IddleEnemy.cpp" />
     <ClCompile Include="Proyecto\components\Image.cpp" />
     <ClCompile Include="Proyecto\components\InfarctedBody.cpp" />
     <ClCompile Include="Proyecto\components\KeyGame.cpp" />
@@ -245,6 +246,7 @@
     <ClInclude Include="Proyecto\components\HamsterStateMachine.h" />
     <ClInclude Include="Proyecto\components\HeartUI.h" />
     <ClInclude Include="Proyecto\components\HeightObject.h" />
+    <ClInclude Include="Proyecto\components\IddleEnemy.h" />
     <ClInclude Include="Proyecto\components\Image.h" />
     <ClInclude Include="Proyecto\components\InfarctedBody.h" />
     <ClInclude Include="Proyecto\components\Item.h" />

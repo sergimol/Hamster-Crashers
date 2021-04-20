@@ -384,6 +384,9 @@
     <ClCompile Include="Proyecto\components\CollisionDetec.cpp">
       <Filter>Archivos de origen\components\Entity\Hamster\Movement&amp;Control</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\IddleEnemy.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\EnemyBehaviour\behaviors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -640,6 +643,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\NewScene.h">
       <Filter>Archivos de encabezado\Components\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\IddleEnemy.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\Behavior</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

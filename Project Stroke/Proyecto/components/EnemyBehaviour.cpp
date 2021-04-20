@@ -30,10 +30,12 @@ void EnemyBehaviour::init() {
 }
 
 void EnemyBehaviour::SetBehavior(Behavior* bs) {
-	{
-		bh_ = bs;
-		bh_->init();
-	}
+	
+	if (bh_ != nullptr)
+	delete bh_;
+	bh_ = bs;
+	bh_->setOwner(this);
+	bh_->init();
 }
 
 
