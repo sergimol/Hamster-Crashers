@@ -167,7 +167,7 @@ void MapMngr::loadNewMap(string map) {
 					objectLayer = &layer->getLayerAs<tmx::ObjectGroup>();
 					
 					for (const auto& object : objects){
-						if(object.getName() != "enemigo" && object.getName() != "firstBoss")
+						if(object.getName() == "sardinilla" || object.getName() == "canelon" || object.getName() == "keta" || object.getName() == "monchi")
 							addHamster(object);
 					}
 				}
@@ -388,7 +388,7 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 	hamster1->addComponent<GhostCtrl>();
 	//ES NECESARIO PASAR LA ESTRATEGIA QUE DEBE USAR EL STROKE O SE VA A LA PUTA (RandomStrokeStrategy o FairStrokeStrategy)
 	RandomStrokeStrategy* rndStr = new RandomStrokeStrategy();
-	hamster1->addComponent<Stroke>()->setStrategy(rndStr);
+	hamster1->addComponent<Stroke>(rndStr);
 
 	hamster1->addComponent<Knockback>();
 	hamster1->addComponent<GetItem>();
