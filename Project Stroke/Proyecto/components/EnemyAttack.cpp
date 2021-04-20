@@ -7,7 +7,6 @@
 #include "StrongAttack.h"
 #include "LightAttack.h"
 #include "AnimHamsterStateMachine.h"
-#include "AnimHamsterStateMachine.h"
 
 EnemyAttack::EnemyAttack() :
 	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
@@ -136,7 +135,7 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 					hamFlip = !hamFlip;
 
 				hamKnockback->knockback();
-				ents[i]->getComponent<Movement>()->tryToMove(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0));
+				ents[i]->getComponent<CollisionDetec>()->tryToMove(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0));
 			}
 		}
 	}

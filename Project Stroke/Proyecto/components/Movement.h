@@ -8,6 +8,7 @@
 #include "HamsterStateMachine.h"
 #include "Animator.h"
 #include "EntityAttribs.h"
+#include "CollisionDetec.h"
 
 class Movement : public Component {
 public:
@@ -15,7 +16,7 @@ public:
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 
 	Movement() :
-		tr_(nullptr), hms_(nullptr), anim_(nullptr), speed_(), goalVel_(0, 0), lastDir_(1,0), timer(sdlutils().currRealTime()) {
+		tr_(nullptr), hms_(nullptr), anim_(nullptr), speed_(), goalVel_(0, 0), grav_(nullptr), lastDir_(1,0), timer(sdlutils().currRealTime()) {
 	}
 
 	virtual ~Movement() {
@@ -26,10 +27,6 @@ public:
 	void update() override;
 
 	void updateKeymap(KEYS x, bool is);
-
-	void tryToMove(Vector2D dir, Vector2D goalVel);
-
-	float lerp(float a, float b, float f);
 
 	virtual void onEnable() override;
 	virtual void onDisable() override;
@@ -47,6 +44,7 @@ private:
 	long unsigned int timer;
 
 	Transform* tr_;
+	CollisionDetec* col_;
 	HamsterStateMachine* hms_;
 	Animator* anim_;
 	Gravity* grav_;

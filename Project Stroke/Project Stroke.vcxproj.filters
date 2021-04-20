@@ -381,6 +381,9 @@
     <ClCompile Include="Proyecto\components\NewScene.cpp">
       <Filter>Archivos de origen\components\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\CollisionDetec.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Movement&amp;Control</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -631,6 +634,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\StrokeStrategy.h">
       <Filter>Archivos de encabezado\Components\Entity\Hamster\Stroke</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\CollisionDetec.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Movement&amp;Control</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\NewScene.h">
       <Filter>Archivos de encabezado\Components\Entity</Filter>

@@ -44,6 +44,7 @@
 #include "../components/FairStrokeStrategy.h"
 #include "../components/RandomStrokeStrategy.h"
 #include "../components/Parallax.h"
+#include "../components/CollisionDetec.h"
 #include "../components/NewScene.h"
 
 
@@ -306,6 +307,8 @@ void MapMngr::LoadEnemyRoom() {
 
 			enemy->addComponent<EnemyAttack>();
 			enemy->addComponent<Knockback>();
+			enemy->addComponent<Gravity>();
+			enemy->addComponent<CollisionDetec>();
 			enemy->addComponent<MovementSimple>();
 
 			enemy->addComponent<EnemyBehaviour>(new AmbushPlayer());
@@ -370,6 +373,7 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 		);
 	hamster1->addComponent<AnimHamsterStateMachine>();
 	hamster1->addComponent<Gravity>();
+	hamster1->addComponent<CollisionDetec>();
 	hamster1->addComponent<Movement>();
 	hamster1->getComponent<Transform>()->setGravity(hamster1->getComponent<Gravity>());
 

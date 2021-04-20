@@ -50,10 +50,10 @@ class Behavior;
 class InfarctedBody;
 class ReanimationGame;
 class Dying;
-class CheckCollisions;
 class FirstBossBehaviour;
 class FirstBossAttack;
 class BackGround;
+class CollisionDetec;
 class Parallax;
 class NewScene;
 
@@ -107,11 +107,11 @@ class NewScene;
 	InfarctedBody, \
 	ReanimationGame, \
 	Dying, \
-	CheckCollisions, \
 	FirstBossAttack, \
 	FirstBossBehaviour, \
 	FollowPlayer, \
 	BackGround, \
+	CollisionDetec, \
 	NewScene, \
 	Parallax
 
