@@ -50,10 +50,10 @@ class Behavior;
 class InfarctedBody;
 class ReanimationGame;
 class Dying;
-class CheckCollisions;
 class FirstBossBehaviour;
 class FirstBossAttack;
 class BackGround;
+class CollisionDetec;
 class Parallax;
 
 #define _CMPS_LIST_  \
@@ -106,11 +106,11 @@ class Parallax;
 	InfarctedBody, \
 	ReanimationGame, \
 	Dying, \
-	CheckCollisions, \
 	FirstBossAttack, \
 	FirstBossBehaviour, \
 	FollowPlayer, \
 	BackGround, \
+	CollisionDetec, \
 	Parallax
 
 //FollowPlayer, \
