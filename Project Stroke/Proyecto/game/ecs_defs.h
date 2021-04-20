@@ -54,6 +54,7 @@ class CheckCollisions;
 class FirstBossBehaviour;
 class FirstBossAttack;
 class BackGround;
+class Parallax;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -109,7 +110,8 @@ class BackGround;
 	FirstBossAttack, \
 	FirstBossBehaviour, \
 	FollowPlayer, \
-	BackGround
+	BackGround, \
+	Parallax
 
 //FollowPlayer, \
 

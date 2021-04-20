@@ -366,6 +366,12 @@
     <ClCompile Include="Proyecto\components\FirstBossAttack.cpp">
       <Filter>Archivos de origen\components\Entity\Enemy\Attack\BossAttack</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\BackGround.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Parallax.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -601,6 +607,12 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\FirstBossAttack.h">
       <Filter>Archivos de encabezado\Components\Entity\Enemy\Attack\BossAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\BackGround.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Parallax.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

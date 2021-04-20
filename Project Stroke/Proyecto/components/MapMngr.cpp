@@ -41,6 +41,9 @@
 #include "../components/FirstBossBehaviour.h"
 #include "../components/FirstBossAttack.h"
 #include "../components/BackGround.h"
+#include "../components/Parallax.h"
+
+
 
 
 
@@ -113,9 +116,13 @@ void MapMngr::loadNewMap(string map) {
 			i++;
 		}
 		
-		auto* o = entity_->getMngr()->addBackGround();
-		o->addComponent<Transform>(Vector2D(0,0), Vector2D(0, 0), 5000, 15000, 0.0, 1, 1);
-		o->addComponent<BackGround>(&sdlutils().images().at("MAYONESITO"), 80);
+		//Fondos
+		/*auto* o = entity_->getMngr()->addBackGround();
+		o->addComponent<Transform>(Vector2D(0,0), Vector2D(0, 0), 100, 1080, 0.0, 1, 1);
+		o->addComponent<BackGround>(&sdlutils().images().at("MAYONESITO"), 80);*/
+		auto* o = entity_->getMngr()->addEntity();
+		o->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 100, 1080, 0.0, 1, 1);
+		o->addComponent<Parallax>(&sdlutils().images().at("MAYONESITO"), 80);
 
 		for (const auto& layer : layers)
 		{
@@ -171,6 +178,7 @@ void MapMngr::loadNewMap(string map) {
 							hamster1->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 256.0f, 0.0f, 0.9f, 0.85f);
+
 							hamster1->addComponent<HamsterStateMachine>();
 
 							hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla", Vector2D(7, 4.5), 0, 15);
