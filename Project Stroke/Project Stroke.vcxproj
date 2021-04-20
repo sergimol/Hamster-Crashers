@@ -161,6 +161,7 @@
     <ClCompile Include="Proyecto\components\EnemyAttack.cpp" />
     <ClCompile Include="Proyecto\components\EnemyBehaviour.cpp" />
     <ClCompile Include="Proyecto\components\EnemyStateMachine.cpp" />
+    <ClCompile Include="Proyecto\components\FairStrokeStrategy.cpp" />
     <ClCompile Include="Proyecto\components\FirstBossAttack.cpp" />
     <ClCompile Include="Proyecto\components\FirstBossBehaviour.cpp" />
     <ClCompile Include="Proyecto\components\FleeFromPlayer.cpp" />
@@ -180,6 +181,7 @@
     <ClCompile Include="Proyecto\components\MovementSimple.cpp" />
     <ClCompile Include="Proyecto\components\PossesionGame.cpp" />
     <ClCompile Include="Proyecto\components\Pray.cpp" />
+    <ClCompile Include="Proyecto\components\RandomStrokeStrategy.cpp" />
     <ClCompile Include="Proyecto\components\ReanimationGame.cpp" />
     <ClCompile Include="Proyecto\components\Roll.cpp" />
     <ClCompile Include="Proyecto\components\EnemyStun.cpp" />
@@ -228,6 +230,7 @@
     <ClInclude Include="Proyecto\components\EnemyBehaviour.h" />
     <ClInclude Include="Proyecto\components\EnemyStateMachine.h" />
     <ClInclude Include="Proyecto\components\Animator.h" />
+    <ClInclude Include="Proyecto\components\FairStrokeStrategy.h" />
     <ClInclude Include="Proyecto\components\FirstBossAttack.h" />
     <ClInclude Include="Proyecto\components\FirstBossBehaviour.h" />
     <ClInclude Include="Proyecto\components\FleeFromPlayer.h" />
@@ -248,9 +251,11 @@
     <ClInclude Include="Proyecto\components\MovementSimple.h" />
     <ClInclude Include="Proyecto\components\PossesionGame.h" />
     <ClInclude Include="Proyecto\components\Pray.h" />
+    <ClInclude Include="Proyecto\components\RandomStrokeStrategy.h" />
     <ClInclude Include="Proyecto\components\ReanimationGame.h" />
     <ClInclude Include="Proyecto\components\Roll.h" />
     <ClInclude Include="Proyecto\components\EnemyStun.h" />
+    <ClInclude Include="Proyecto\components\StrokeStrategy.h" />
     <ClInclude Include="Proyecto\components\Stun.h" />
     <ClInclude Include="Proyecto\components\Swallow.h" />
     <ClInclude Include="Proyecto\components\TileRender.h" />

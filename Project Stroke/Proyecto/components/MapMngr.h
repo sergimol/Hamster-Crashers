@@ -37,6 +37,8 @@ private:
 	//void Refresh();
 
 	std::vector<tmx::Object> TriggerftCamera;
+
+	void addHamster(const tmx::Object& obj);
 public:
 	MapMngr() : Room(0) {};
 	~MapMngr();

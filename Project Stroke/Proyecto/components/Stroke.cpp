@@ -26,6 +26,31 @@ void Stroke::init() {
 }
 
 void Stroke::update() {
+	
+	checkChance();
+	//std::cout << chance_ << " " << chanceFromAb_ << std::endl;
+}
+
+void Stroke::increaseChance(int n, bool fromAbility) {
+	if (!fromAbility) {
+		ss_->increaseChanceNORMAL(n, chance_);
+	}
+	else {
+		ss_->increaseChanceAB(n, chanceFromAb_);
+	}
+	
+	timeLastIncrease_ = sdlutils().currRealTime();
+	//std::cout << chance_ + " " + chanceFromAb_ << std::endl;
+}
+
+
+void Stroke::decreaseChance() {
+	if (chance_ > 0) {
+		chance_ -= (chance_ * DECREASEPERCENTAGE) / 100;
+	}
+}
+
+void Stroke::checkChance() {
 	int t = sdlutils().currRealTime();
 	// Comprobación de la reducción de la probabilidad
 	if (t >= timeLastIncrease_ + TIMETODECREASE && t >= timeLastDecrease_ + TIMEBETWEENDECREASES) {
@@ -42,42 +67,17 @@ void Stroke::update() {
 	// Comprobamos que haya pasado el tiempo suficiente entre actualizaciones
 	if (t >= timeLastUpdate_ + UPDATETIME) {
 		// Número aleatorio para ver si infarta o no
-		int i = r_.nextInt(1, 100);
+		//int i = r_.nextInt(1, 100);
 		// Si i es menor que la probabilidad, infarta
-		if (i <= chance_ + chanceFromAb_ && hms_->getState() != HamStates::INFARCTED) {
+		if (hms_->getState() != HamStates::INFARCTED && ss_->checkChance(chance_, chanceFromAb_) ) {
 			//TODO madremia que no lo podemos desactivar porque hay que quitarlo de la lsita de player y noseque algo habra que ahcer para que la camara no explote
 			//entity_->setActive(false);
 			infarctHamster();
 			//TODO by Samuel necesito que por algún lugar llameis al método de Increase Latency de HeartUI para que se actualice la interfaz de la palpitaçao
 		}
-			
+
 
 		timeLastUpdate_ = t;
-	}
-
-	//std::cout << chance_ << " " << chanceFromAb_ << std::endl;
-}
-
-void Stroke::increaseChance(int n, bool fromAbility) {
-	if (!fromAbility) {
-		chance_ += n;
-		if(chance_ > MAXCHANCE)
-			chance_ = MAXCHANCE;
-	}
-	else {
-		chanceFromAb_ += n;
-		if(chanceFromAb_ > MAXAB)
-			chanceFromAb_ = MAXAB;
-	}
-	
-	timeLastIncrease_ = sdlutils().currRealTime();
-	//std::cout << chance_ + " " + chanceFromAb_ << std::endl;
-}
-
-
-void Stroke::decreaseChance() {
-	if (chance_ > 0) {
-		chance_ -= (chance_ * DECREASEPERCENTAGE) / 100;
 	}
 }
 
@@ -86,14 +86,17 @@ void Stroke::infarctHamster() {
 	auto name = entity_->getComponent<EntityAttribs>()->getId();
 
 	hms_->getState() = HamStates::INFARCTED;
+	//Evitamos el uso de la habilidad
 	ab_->deactiveAbility();
+	//Animacion del fantasma
 	entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STROKE, true);
+	//Activamos el control del fantasma
 	entity_->getComponent<GhostCtrl>()->setActive(true);
+	
 	//GENERAR PERSONAJE INFARTADO ()
-
 	auto* deadBody = entity_->getMngr()->addEntity();
 	deadBody->addComponent<Transform>(tr_->getPos(), Vector2D(0,0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip(),tr_->getScaleW(),tr_->getScaleH());
-	deadBody->addComponent<Animator>(&sdlutils().images().at("sardinillaSheet"),
+	deadBody->addComponent<Animator>(&sdlutils().images().at(name + "Sheet"),
 		86,
 		86,
 		3,
@@ -107,5 +110,14 @@ void Stroke::infarctHamster() {
 
 	entity_->getMngr()->getDeadBodies().push_back(deadBody);
 
+	//Reseteamos chances
+	chance_ = 0;
+	chanceFromAb_ = 0;
+
 	std::cout << "INFARTADO" << std::endl;
 }
+
+void Stroke::setStrategy(StrokeStrategy* ss) { 
+	if(ss_ != nullptr) delete ss_;
+	ss_ = ss; 
+};
