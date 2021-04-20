@@ -3,7 +3,8 @@
 
 StrongFollowPlayer::StrongFollowPlayer() :
 	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr), lockedHamster_(nullptr),
-	hamsterTr_(nullptr), hamsId_(-1), enAtk_(nullptr) {
+	hamsterTr_(nullptr), hamsId_(-1), enStrongAtk_(nullptr), enAtk_(nullptr), attackCount_(0), hasHitTime_(sdlutils().currRealTime()),
+	hitCD_(1500) {
 }
 
 void StrongFollowPlayer::init() {
@@ -14,7 +15,9 @@ void StrongFollowPlayer::init() {
 	tr_ = owEntity->getComponent<Transform>();
 	assert(tr_ != nullptr);
 
-	enAtk_ = owEntity->getComponent<EnemyStrongAttack>();
+	enStrongAtk_ = owEntity->getComponent<EnemyStrongAttack>();
+	assert(enStrongAtk_ != nullptr);
+	enAtk_ = owEntity->getComponent<EnemyAttack>();
 	assert(enAtk_ != nullptr);
 
 	hamsters_ = owEntity->getMngr()->getPlayers();
@@ -83,7 +86,7 @@ bool StrongFollowPlayer::isWithinAttackRange() {
 		x = pos.getX(),
 		y = pos.getY() + tr_->getH();
 
-	return((hamX /*+ rangeOffsetX_*/ + hamWidth * 2 >= x + width && hamX + hamWidth - rangeOffsetX_ <= x + width + width / 2) &&
+	return((hamX /*+ rangeOffsetX_*/ + hamWidth * 2 >= x + width && hamX + hamWidth - rangeOffsetX_ <= x + width /*+ width / 2*/) &&
 		(hamY + rangeOffsetY_ >= y && hamY - rangeOffsetY_ / 10 <= y));
 }
 
@@ -132,16 +135,44 @@ void StrongFollowPlayer::behave() {
 				else
 					mov_->updateKeymap(MovementSimple::RIGHT, false);
 			}
-			else { // Si est� a rango, se mueve e intentara atacar
-
-				/*mov_->updateKeymap(MovementSimple::RIGHT, false);
-				mov_->updateKeymap(MovementSimple::LEFT, false);
-				mov_->updateKeymap(MovementSimple::DOWN, false);
-				mov_->updateKeymap(MovementSimple::UP, false);*/
-
-				if (!enAtk_->getAttackStarted())
-					enAtk_->LaunchAttack();
+			else if (attackCount_ < 2 && sdlutils().currRealTime() > hasHitTime_ + hitCD_) { // Si esta a rango, se mueve e intentara atacar
+				lightAttack();
 			}
+			else if (sdlutils().currRealTime() > hasHitTime_ + hitCD_) { // ataque fuerte
+				strongAttack(flip);
+			}
+		}
+	}
+}
+
+void StrongFollowPlayer::strongAttack(bool f) {
+	if (!enStrongAtk_->getAttackStarted() && enStrongAtk_->LaunchAttack()) {
+
+		if (f) {
+			mov_->updateKeymap(MovementSimple::RIGHT, true);
+			mov_->updateKeymap(MovementSimple::LEFT, false);
+		}
+			
+		else {
+			mov_->updateKeymap(MovementSimple::RIGHT, false);
+			mov_->updateKeymap(MovementSimple::LEFT, true);
+		}
+
+
+		hasHitTime_ = sdlutils().currRealTime();
+		attackCount_ = 0;
+	}
+}
+void StrongFollowPlayer::lightAttack() {
+	if (!enStrongAtk_->getAttackStarted()) {
+		mov_->updateKeymap(MovementSimple::RIGHT, false);
+		mov_->updateKeymap(MovementSimple::LEFT, false);
+		mov_->updateKeymap(MovementSimple::DOWN, false);
+		mov_->updateKeymap(MovementSimple::UP, false);
+
+		if (enAtk_->LaunchAttack()) {
+			hasHitTime_ = sdlutils().currRealTime();
+			attackCount_++;
 		}
 	}
 }

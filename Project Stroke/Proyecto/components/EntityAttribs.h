@@ -15,7 +15,7 @@ class EntityAttribs: public Component {
 public:
 	EntityAttribs();
 
-	EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb);
+	EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg);
 
 	virtual ~EntityAttribs() {
 	}

@@ -10,7 +10,7 @@
 
 EnemyAttack::EnemyAttack() :
 	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
-	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {}
+	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")){}
 
 void EnemyAttack::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -24,7 +24,7 @@ void EnemyAttack::update() {
 	}
 }
 
-void EnemyAttack::LaunchAttack() {
+bool EnemyAttack::LaunchAttack() {
 	if (sdlutils().currRealTime() > time_ + cooldown_) {
 		cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 		auto sizeW = tr_->getW();
@@ -62,7 +62,11 @@ void EnemyAttack::LaunchAttack() {
 
 		DEBUG_isAttacking_ = true;
 		time_ = sdlutils().currRealTime();
+
+		return true;
 	}
+	else
+		return false;
 }
 
 bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {

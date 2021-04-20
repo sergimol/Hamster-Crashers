@@ -302,7 +302,7 @@ void MapMngr::LoadEnemyRoom() {
 			enemy->addComponent<EnemyStateMachine>();
 			enemy->setGroup<Enemy>(true);
 
-			enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0);
+			enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 5);
 
 			enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
 			enemy->addComponent<UI>("canelon", 4);
@@ -329,12 +329,13 @@ void MapMngr::LoadEnemyRoom() {
 			enemy->addComponent<EnemyStateMachine>();
 			enemy->setGroup<Enemy>(true);
 
-			enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0);
+			enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 5);
 
 			enemy->addComponent<Image>(&sdlutils().images().at("enemigoFuerte"));
 			enemy->addComponent<UI>("canelon", 4);
 
 			enemy->addComponent<EnemyStrongAttack>();
+			enemy->addComponent<EnemyAttack>();
 			enemy->addComponent<Knockback>();
 			enemy->addComponent<MovementSimple>();
 
@@ -346,29 +347,29 @@ void MapMngr::LoadEnemyRoom() {
 			numberEnemyRoom++;
 		}
 		else if (name == "firstBoss" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-			auto* enemy = mngr_->addEntity();
-			enemy->addComponent<Transform>(
-				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(),/* 5*23.27f*/256.0f, /*5*32.0f*/256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
+			//auto* enemy = mngr_->addEntity();
+			//enemy->addComponent<Transform>(
+			//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+			//	Vector2D(),/* 5*23.27f*/256.0f, /*5*32.0f*/256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
 
-			enemy->addComponent<EnemyStateMachine>();
-			enemy->setGroup<Enemy>(true);
+			//enemy->addComponent<EnemyStateMachine>();
+			//enemy->setGroup<Enemy>(true);
 
-			enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0);
+			//enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0);
 
-			enemy->addComponent<Image>(&sdlutils().images().at("firstBoss"));
-			enemy->addComponent<UI>("canelon", 4);
+			//enemy->addComponent<Image>(&sdlutils().images().at("firstBoss"));
+			//enemy->addComponent<UI>("canelon", 4);
 
-			enemy->addComponent<FirstBossAttack>();
-			enemy->addComponent<Knockback>();
-			enemy->addComponent<MovementSimple>();
+			//enemy->addComponent<FirstBossAttack>();
+			//enemy->addComponent<Knockback>();
+			//enemy->addComponent<MovementSimple>();
 
-			enemy->addComponent<EnemyBehaviour>(new FirstBossBehaviour());
+			//enemy->addComponent<EnemyBehaviour>(new FirstBossBehaviour());
 
-			enemies.push_back(enemy);
-			/*enemy->addComponent<FollowPlayer>();
-			enemy->addComponent<EnemyStun>();*/
-			numberEnemyRoom++;
+			//enemies.push_back(enemy);
+			///*enemy->addComponent<FollowPlayer>();
+			//enemy->addComponent<EnemyStun>();*/
+			//numberEnemyRoom++;
 		}
 	}
 	Room++;	//Una vez cargamos a los enemigos de la habitacion incrementamos el contador para poder cargar los enemigos de la siguiente
@@ -387,7 +388,7 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 		Vector2D(), 256.0f, 256.0f, 0.0f, 0.9f, 0.85f);
 	hamster1->addComponent<HamsterStateMachine>();
 
-	hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 0, 15);
+	hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 0, 15, 20);
 	hamster1->addComponent<Animator>(
 		&sdlutils().images().at(name + "Sheet"),
 		86,

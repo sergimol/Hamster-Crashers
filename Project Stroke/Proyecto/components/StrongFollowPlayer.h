@@ -18,6 +18,7 @@
 #include "EntityAttribs.h"
 #include "MovementSimple.h"
 #include "EnemyStrongAttack.h"
+#include "EnemyAttack.h"
 #include "Behavior.h"
 
 class StrongFollowPlayer : public Behavior {
@@ -32,6 +33,9 @@ public:
 	void lockHamster();
 	void lockHamster(int id);
 	bool isWithinAttackRange();
+
+	void strongAttack(bool f);
+	void lightAttack();
 
 protected:
 private:
@@ -55,10 +59,15 @@ private:
 
 	HamsterStateMachine* lockedHamState_;
 
+	int attackCount_;
+	float hasHitTime_;
+	float hitCD_;
+
 	int rangeOffsetX_; // Esta movida habra que balancearla
 	int rangeOffsetY_; // Esta movida habra que balancearla
 
-	EnemyStrongAttack* enAtk_; //componente de ataque
+	EnemyStrongAttack* enStrongAtk_; //componente de ataque
+	EnemyAttack* enAtk_; //componente de ataque
 
 };
 
