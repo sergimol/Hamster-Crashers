@@ -95,6 +95,10 @@
       "file": "resources/images/UI/canelonHead2.png"
     },
     {
+      "id": "enemigoFuerte",
+      "file": "resources/images/enemigo_fuerte.png"
+    },
+    {
       "id": "sardinillaSheet",
       "file": "resources/images/sardinilla_spritesheet.png"
     },

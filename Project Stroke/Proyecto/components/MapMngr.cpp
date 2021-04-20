@@ -40,6 +40,8 @@
 #include "../components/FleeFromPlayer.h"
 #include "../components/FirstBossBehaviour.h"
 #include "../components/FirstBossAttack.h"
+#include "../components/EnemyStrongAttack.h"
+#include "../components/StrongFollowPlayer.h"
 #include "../components/BackGround.h"
 #include "../components/FairStrokeStrategy.h"
 #include "../components/RandomStrokeStrategy.h"
@@ -312,6 +314,31 @@ void MapMngr::LoadEnemyRoom() {
 			enemy->addComponent<MovementSimple>();
 
 			enemy->addComponent<EnemyBehaviour>(new AmbushPlayer());
+
+			enemies.push_back(enemy);
+			/*enemy->addComponent<FollowPlayer>();
+			enemy->addComponent<EnemyStun>();*/
+			numberEnemyRoom++;
+		}
+		else if (name == "enemigoFuerte" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
+			auto* enemy = mngr_->addEntity();
+			enemy->addComponent<Transform>(
+				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+				Vector2D(), 240.0f, 370.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
+
+			enemy->addComponent<EnemyStateMachine>();
+			enemy->setGroup<Enemy>(true);
+
+			enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0);
+
+			enemy->addComponent<Image>(&sdlutils().images().at("enemigoFuerte"));
+			enemy->addComponent<UI>("canelon", 4);
+
+			enemy->addComponent<EnemyStrongAttack>();
+			enemy->addComponent<Knockback>();
+			enemy->addComponent<MovementSimple>();
+
+			enemy->addComponent<EnemyBehaviour>(new StrongFollowPlayer());
 
 			enemies.push_back(enemy);
 			/*enemy->addComponent<FollowPlayer>();

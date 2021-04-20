@@ -2,7 +2,8 @@
 #include "Stroke.h"
 
 EnemyBehaviour::EnemyBehaviour(Behavior* auxbh) :
-	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr), lockedHamster_(nullptr), hamsterTr_(nullptr), bh_(auxbh) {
+	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr), lockedHamster_(nullptr),
+	hamsterTr_(nullptr), bh_(auxbh), bossAtk_(nullptr), enStrongAtk_(nullptr) {
 }
 
 void EnemyBehaviour::init() {
@@ -13,10 +14,10 @@ void EnemyBehaviour::init() {
 	assert(tr_ != nullptr);
 
 	enAtk_ = entity_->getComponent<EnemyAttack>();
-	if (enAtk_ == nullptr) {
-		bossAtk_ = entity_->getComponent<FirstBossAttack>();
-		assert(bossAtk_ != nullptr);
-	}
+	bossAtk_ = entity_->getComponent<FirstBossAttack>();
+	enStrongAtk_ = entity_->getComponent<EnemyStrongAttack>();
+
+	assert(bossAtk_ != nullptr || enAtk_ != nullptr || enStrongAtk_ != nullptr);
 
 	hamsters_ = entity_->getMngr()->getPlayers();
 
