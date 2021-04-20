@@ -11,7 +11,7 @@
 FirstBossAttack::FirstBossAttack() :
 	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
 	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")),
-	attackStarted_(false), hitTime_(0), beforeHitCD_(1500), afterHitCD_(4250), stunStarted_(false) {}
+	attackStarted_(false), hitTime_(0), beforeHitCD_(1000), afterHitCD_(4250), stunStarted_(false) {}
 
 void FirstBossAttack::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -37,7 +37,8 @@ void FirstBossAttack::update() {
 
 			//Cogemos el rect completo del jefe
 
-			attRect_.y = pos.getY(); //Pos inicial de esquina arriba
+			attRect_.x = pos.getX() - cam.x;
+			attRect_.y = pos.getY() -cam.y; //Pos inicial de esquina arriba
 
 			//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
@@ -65,13 +66,9 @@ void FirstBossAttack::update() {
 	}
 }
 
-void FirstBossAttack::LaunchAttack(int hamX) {
+void FirstBossAttack::LaunchAttack() {
 	if (sdlutils().currRealTime() > time_ + cooldown_) {
 		//Comienza el ciclo completo de ataque
-
-		//Generamos el rect de ataque
-		attRect_.x = hamX - tr_->getW() - 300;
-
 
 		attackStarted_ = true;
 		stunStarted_ = false;

@@ -64,7 +64,7 @@
     <property name="sala" type="int" value="1"/>
    </properties>
   </object>
-  <object id="21" name="firstBoss" x="212" y="20" width="23.2727" height="32">
+  <object id="21" name="firstBoss" x="212" y="0" width="23.2727" height="32">
    <properties>
     <property name="sala" type="int" value="1"/>
    </properties>

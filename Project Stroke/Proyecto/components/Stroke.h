@@ -7,14 +7,16 @@
 
 #include "HamsterStateMachine.h"
 #include "Ability.h"
+#include "StrokeStrategy.h"
 //#include "Transform.h"
 
 class Stroke: public Component {
 public:
 	Stroke() :
-			hms_(nullptr), ab_(nullptr) {
+			hms_(nullptr), ab_(nullptr), ss_(nullptr), tr_(nullptr) {
 	}
 	virtual ~Stroke() {
+		if (ss_ != nullptr) delete ss_; ss_ = nullptr;
 	}
 	void init() override;
 
@@ -26,12 +28,17 @@ public:
 
 	void infarctHamster();
 
+	void setStrategy(StrokeStrategy* ss);
+
 	//DEBUG ------ INFARTA AL HAMSTER
-	void infarct() { chance_ = 100; };
+	void INFARCT() { chance_ = 100; };
 
 	void restartChance() { chance_ = 0; };
 
 private:
+	void checkChance();
+
+	StrokeStrategy* ss_;
 	HamsterStateMachine* hms_;
 	Ability* ab_;
 	Transform* tr_;
@@ -52,7 +59,6 @@ private:
 		timeLastIncrease_ = 0,
 		// Tiempo de la última reducción
 		timeLastDecrease_ = 0;
-	// Generador de números aleatorios
-	RandomNumberGenerator& r_ = sdlutils().rand();
+
 };
 

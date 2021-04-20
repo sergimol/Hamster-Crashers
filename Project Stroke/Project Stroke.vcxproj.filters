@@ -372,6 +372,12 @@
     <ClCompile Include="Proyecto\components\Parallax.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\FairStrokeStrategy.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Stroke</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\RandomStrokeStrategy.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Stroke</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -613,6 +619,15 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\Parallax.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\FairStrokeStrategy.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Stroke</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\RandomStrokeStrategy.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Stroke</Filter>
+    <ClInclude Include="Proyecto\components\StrokeStrategy.h">
+    </ClInclude>
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Stroke</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
