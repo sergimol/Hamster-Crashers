@@ -29,7 +29,7 @@ class EnemyBehaviour : public Component {
 protected:
 public:
 	EnemyBehaviour(Behavior* auxbh);
-	virtual ~EnemyBehaviour() { delete bh_; };
+	virtual ~EnemyBehaviour() { if (bh_ != nullptr) delete bh_; };
 
 	void init() override;
 

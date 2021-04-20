@@ -1,5 +1,8 @@
 ﻿#include "AmbushPlayer.h"
 #include "Stroke.h"
+#include "IddleEnemy.h"
+#include "FollowPlayer.h"
+#include "FleeFromPlayer.h"
 
 AmbushPlayer::AmbushPlayer() :
 	mov_(nullptr), tr_(nullptr), rangeX_(500), rangeY_(200), rangeOffsetX_(100), rangeOffsetY_(100), lockedHamState_(nullptr), lockedHamster_(nullptr), hamsterTr_(nullptr), hamsId_(-1) {
@@ -57,17 +60,43 @@ void AmbushPlayer::lockHamster() {
 	}
 	//Si ninguno esta activo pone todo a null
 	if (lockedHamster_ == nullptr) {
-		lockedHamState_ = nullptr;
-		hamsterTr_ = nullptr;
-		hamsId_ = -1;
+		owner_->SetBehavior(new IddleEnemy); //y chinpong
 	}
 }
 
 //Fija a un hamster concreto
-void AmbushPlayer::lockHamster(int id) {
-	lockedHamster_ = hamsters_[id];
-	hamsterTr_ = lockedHamster_->getComponent<Transform>();
-	lockedHamState_ = lockedHamster_->getComponent<HamsterStateMachine>();
+void AmbushPlayer::lockHamster(int id) {	//Variable que contralará el recorrido de los hamsters
+	int start;
+	if (hamsId_ + 1 == hamsters_.size()) {
+		start = 0;
+	}
+	else {
+		start = hamsId_ + 1;
+	}
+
+	//Va comprobando cual es elegible;
+	lockedHamster_ = nullptr;
+	for (int i = start; i != hamsId_ && lockedHamster_ == nullptr; i++) {
+		//Si puede ser elegido
+		lockedHamState_ = hamsters_[i]->getComponent<HamsterStateMachine>();
+		if (!lockedHamState_->cantBeTargeted()) {
+			//Elige hamster
+			hamsId_ = i;
+			lockedHamster_ = hamsters_[i];
+			hamsterTr_ = lockedHamster_->getComponent<Transform>();
+		}
+		//Si llega al final, da la vuelta
+		if (i + 1 == hamsters_.size()) {
+			i = 0;
+		}
+		//Si es -1, entra en el ciclo de ids
+		if (hamsId_ == -1)
+			hamsId_ = 0;
+	}
+	//Si ninguno esta activo pone todo a null
+	if (lockedHamster_ == nullptr) {
+		owner_->SetBehavior(new IddleEnemy); //y chinpong
+	}
 }
 
 //Esta a rango de ataque
@@ -90,7 +119,12 @@ bool AmbushPlayer::isWithinRange() {
 }
 
 void AmbushPlayer::behave() {
-	if (lockedHamster_ != nullptr) {
+	Entity* owEntity = owner_->getEntity();
+	if (owEntity->getComponent<EntityAttribs>()->getLife() <= 40) {
+		owner_->SetBehavior(new FleeFromPlayer);
+		return;
+	}
+	else if (lockedHamster_ != nullptr) {
 		// Cambia el foco si el actual muere o le da un infarto
 		auto& state = lockedHamState_->getState();
 		if (lockedHamState_->cantBeTargeted()) {

@@ -1,5 +1,8 @@
 ﻿#include "FleeFromPlayer.h"
 #include "Stroke.h"
+#include "IddleEnemy.h"
+#include "FollowPlayer.h"
+#include "AmbushPlayer.h"
 
 FleeFromPlayer::FleeFromPlayer() :
 	mov_(nullptr), tr_(nullptr), rangeOffsetX_(600), rangeOffsetY_(100), rangeOffset_(50), lockedHamState_(nullptr), lockedHamster_(nullptr), hamsterTr_(nullptr), hamsId_(-1) {
@@ -57,9 +60,7 @@ void FleeFromPlayer::lockHamster() {
 	}
 	//Si ninguno esta activo pone todo a null
 	if (lockedHamster_ == nullptr) {
-		lockedHamState_ = nullptr;
-		hamsterTr_ = nullptr;
-		hamsId_ = -1;
+		owner_->SetBehavior(new IddleEnemy); //y chinpong
 	}
 }
 
