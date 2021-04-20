@@ -66,14 +66,17 @@ void FirstBossAttack::update() {
 	}
 }
 
-void FirstBossAttack::LaunchAttack() {
+bool FirstBossAttack::LaunchAttack() {
 	if (sdlutils().currRealTime() > time_ + cooldown_) {
 		//Comienza el ciclo completo de ataque
 
 		attackStarted_ = true;
 		stunStarted_ = false;
 		hitTime_ = sdlutils().currRealTime();
+		return true;
 	}
+	else
+		return false;
 }
 
 bool FirstBossAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {

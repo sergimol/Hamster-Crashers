@@ -35,7 +35,7 @@ EntityAttribs::EntityAttribs() :
 	tr_(nullptr)
 {}
 
-EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb) :
+EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg) :
 	playerNumber_(number),
 	id_(id),
 	health_(life),
@@ -44,7 +44,7 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	strokeResist_(0.0),
 	attackRange_(range),
 	cadence_(0.0),
-	damage_(20),
+	damage_(dmg),
 
 	critProbability_(0.05),
 	maxCrit_(0.2),

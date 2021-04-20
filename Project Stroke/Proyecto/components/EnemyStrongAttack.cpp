@@ -69,11 +69,14 @@ void EnemyStrongAttack::update() {
 	}
 }
 
-void EnemyStrongAttack::LaunchAttack() {
+bool EnemyStrongAttack::LaunchAttack() {
 	if (sdlutils().currRealTime() > time_ + cooldown_) {
 		attackStarted_ = true;
 		durationTime_ = sdlutils().currRealTime();
+		return true;
 	}
+	else
+		return false;
 }
 
 bool EnemyStrongAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
@@ -101,7 +104,7 @@ bool EnemyStrongAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo
 			//}
 			canHit = true;
 			//Le restamos la vida al aliado
-			eAttribs->recieveDmg(dmg / 5);
+			eAttribs->recieveDmg(dmg / 6);
 
 			auto& hamStateM = ents[i]->getComponent<HamsterStateMachine>()->getState();
 
