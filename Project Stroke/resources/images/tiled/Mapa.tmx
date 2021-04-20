@@ -54,7 +54,7 @@
  </layer>
  <objectgroup id="3" name="entities">
   <object id="8" name="sardinilla" x="29.0417" y="111.917"/>
-  <object id="29" name="enemigo" x="464" y="80" width="27.2727" height="44.9091">
+  <object id="29" name="enemigoFuerte" x="464" y="80" width="27.2727" height="44.9091">
    <properties>
     <property name="sala" type="int" value="1"/>
    </properties>

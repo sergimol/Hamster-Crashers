@@ -52,6 +52,8 @@ class ReanimationGame;
 class Dying;
 class FirstBossBehaviour;
 class FirstBossAttack;
+class EnemyStrongAttack;
+class StrongFollowPlayer;
 class BackGround;
 class CollisionDetec;
 class Parallax;
@@ -113,6 +115,8 @@ class NewScene;
 	BackGround, \
 	CollisionDetec, \
 	NewScene, \
+	StrongFollowPlayer, \
+	EnemyStrongAttack, \
 	Parallax
 
 //FollowPlayer, \

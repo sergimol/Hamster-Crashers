@@ -387,6 +387,12 @@
     <ClCompile Include="Proyecto\components\IddleEnemy.cpp">
       <Filter>Archivos de origen\components\Entity\Enemy\EnemyBehaviour\behaviors</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\StrongFollowPlayer.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\EnemyBehaviour\behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\EnemyStrongAttack.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\Attack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -645,6 +651,12 @@
       <Filter>Archivos de encabezado\Components\Entity</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\IddleEnemy.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\EnemyStrongAttack.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\StrongFollowPlayer.h">
       <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\Behavior</Filter>
     </ClInclude>
   </ItemGroup>
