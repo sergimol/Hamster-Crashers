@@ -260,10 +260,13 @@ bool MapMngr::intersectWall(SDL_Rect hamster) {
 
 	for (int x = topLeftCoords.getX(); x <= bottomRightCoords.getX(); x++) {
 		for (int y = topLeftCoords.getY(); y <= bottomRightCoords.getY(); y++) {
-			//Si hay una colision cercana...
-			if (collider[x][y])
-				//Se choca
-				return true;
+			if (x < columnas || y < filas) {
+				//Si hay una colision cercana...
+				if (collider[x][y])
+					//Se choca
+					return true;
+
+			}
 		}
 	}
 	//Si no se choca con nada devuelve false
@@ -297,7 +300,7 @@ void MapMngr::LoadEnemyRoom() {
 			auto* enemy = mngr_->addEntity();
 			enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(), 240.0f, 370.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
+				Vector2D(), 240.0f, 370.0f, 0.0f, 1,1)->getFlip() = true;
 
 			enemy->addComponent<EnemyStateMachine>();
 			enemy->setGroup<Enemy>(true);
@@ -313,7 +316,7 @@ void MapMngr::LoadEnemyRoom() {
 			enemy->addComponent<CollisionDetec>();
 			enemy->addComponent<MovementSimple>();
 
-			enemy->addComponent<EnemyBehaviour>(new FollowPlayer());
+			//enemy->addComponent<EnemyBehaviour>(new FollowPlayer());
 
 			enemies.push_back(enemy);
 			/*enemy->addComponent<FollowPlayer>();
@@ -324,7 +327,7 @@ void MapMngr::LoadEnemyRoom() {
 			auto* enemy = mngr_->addEntity();
 			enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(), 240.0f, 370.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
+				Vector2D(), 240.0f, 370.0f, 0.0f, 1,1)->getFlip() = true;
 
 			enemy->addComponent<EnemyStateMachine>();
 			enemy->setGroup<Enemy>(true);
@@ -385,7 +388,7 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 
 	hamster1->addComponent<Transform>(
 		Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale),
-		Vector2D(), 256.0f, 256.0f, 0.0f, 0.9f, 0.85f);
+		Vector2D(), 256.0f, 256.0f, 0.0f, 1,1);
 	hamster1->addComponent<HamsterStateMachine>();
 
 	hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 0, 15, 20);

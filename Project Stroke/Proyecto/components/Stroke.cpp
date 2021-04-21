@@ -52,7 +52,7 @@ void Stroke::decreaseChance() {
 
 void Stroke::checkChance() {
 	int t = sdlutils().currRealTime();
-	// Comprobación de la reducción de la probabilidad
+	// Comprobaciï¿½n de la reducciï¿½n de la probabilidad
 	if (t >= timeLastIncrease_ + TIMETODECREASE && t >= timeLastDecrease_ + TIMEBETWEENDECREASES) {
 		chance_--;
 		chanceFromAb_--;
@@ -66,14 +66,14 @@ void Stroke::checkChance() {
 
 	// Comprobamos que haya pasado el tiempo suficiente entre actualizaciones
 	if (t >= timeLastUpdate_ + UPDATETIME) {
-		// Número aleatorio para ver si infarta o no
+		// Nï¿½mero aleatorio para ver si infarta o no
 		//int i = r_.nextInt(1, 100);
 		// Si i es menor que la probabilidad, infarta
 		if (hms_->getState() != HamStates::INFARCTED && ss_->checkChance(chance_, chanceFromAb_) ) {
 			//TODO madremia que no lo podemos desactivar porque hay que quitarlo de la lsita de player y noseque algo habra que ahcer para que la camara no explote
 			//entity_->setActive(false);
 			infarctHamster();
-			//TODO by Samuel necesito que por algún lugar llameis al método de Increase Latency de HeartUI para que se actualice la interfaz de la palpitaçao
+			//TODO by Samuel necesito que por algï¿½n lugar llameis al mï¿½todo de Increase Latency de HeartUI para que se actualice la interfaz de la palpitaï¿½ao
 		}
 
 

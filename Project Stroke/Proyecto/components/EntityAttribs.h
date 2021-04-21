@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../ecs/Component.h"
-
 #include "../ecs/Entity.h"
 #include "UI.h"
 #include "Dying.h"
@@ -10,6 +9,7 @@
 #include "EnemyStateMachine.h"
 
 const int INVINCIBLECD = 200;
+const int MARGINTOATTACK = 70;
 
 class EntityAttribs: public Component {
 public:

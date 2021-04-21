@@ -14,6 +14,8 @@
 #include "HamsterStateMachine.h"
 #include "EnemyStateMachine.h"
 #include "../game/Game.h"
+#include <cmath>
+
 
 class LightAttack : public Component {
 public:
