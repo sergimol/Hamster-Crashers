@@ -12,7 +12,7 @@ class BulletHit : public Component {
 
 public:
 
-	BulletHit();
+	BulletHit(float pos);
 
 	virtual ~BulletHit();
 
@@ -23,5 +23,6 @@ private:
 	int dmg_;
 	Transform* tr_;
 	SDL_Rect cam;
+	float y;
 };
 

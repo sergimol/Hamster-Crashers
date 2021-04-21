@@ -5,7 +5,7 @@
 #include "EntityAttribs.h"
 #include "../utils/Collisions.h"
 
-BulletHit::BulletHit() : dmg_(DMG) {
+BulletHit::BulletHit(float posY) : dmg_(DMG), y(posY) {
 }
 
 BulletHit::~BulletHit() {
@@ -32,12 +32,17 @@ void BulletHit::update() {
 
 		//Y comprobamos si colisiona
 		if (Collisions::collides(otherPos, tr_->getW(), tr_->getH(), newPos, eTR->getW(), eTR->getH())) {
-			//Le restamos la vida al enemigo
-			e->getComponent<EntityAttribs>()->recieveDmg(dmg_);
 
-			//Desactivamos la bala
-			entity_->setActive(false);
-			entity_->getMngr()->refreshEnemies();
+			//Si estás dentro del margen de la profundidad...
+			if (abs((y) - (eTR->getPos().getY() + eTR->getH())) < 40) {
+
+				//Le restamos la vida al enemigo
+				e->getComponent<EntityAttribs>()->recieveDmg(dmg_);
+
+				//Desactivamos la bala
+				entity_->setActive(false);
+				entity_->getMngr()->refreshEnemies();
+			}
 		}
 	}
 }

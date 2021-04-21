@@ -57,7 +57,7 @@ void ControlHandler::init() {
 
 //el update recibe todos los input de SDL los filtra y envia la respuesta a la clase
 void ControlHandler::update() {
-	// Si el jugador tiene asignado un mando llama al método que controla el input de mando
+	// Si el jugador tiene asignado un mando llama al mï¿½todo que controla el input de mando
 	if (ih().playerHasController(player_)) {
 		handleController();
 	}
@@ -77,11 +77,11 @@ void ControlHandler::setController(bool hasController) {
 }
 
 
-// Métododos que manejan el input según sea con mando o con teclado
+// Mï¿½tododos que manejan el input segï¿½n sea con mando o con teclado
 void ControlHandler::handleController() {
 	if (ih().isAxisMotionEvent()) {
 		// MOVIMIENTO (Igual en un futuro se puede modificar para que vaya con el valor de los ejes)
-		// Por alguna razón el eje Y va del revés
+		// Por alguna razï¿½n el eje Y va del revï¿½s
 		// UP
 		if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) < 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_UP)) {
 			mov_->updateKeymap(Movement::UP, true);

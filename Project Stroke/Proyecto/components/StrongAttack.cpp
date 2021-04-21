@@ -59,84 +59,86 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 
 			//Y comprobamos si colisiona y si no es invulnerable
 			if (!eAttribs->checkInvulnerability() && Collisions::collides(Vector2D(rectPlayer.x, rectPlayer.y), rectPlayer.w, rectPlayer.h, newPos, eTR->getW(), eTR->getH())) {
+				if (abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < MARGINTOATTACK) {
 
-				EntityAttribs* playerAttribs = entity_->getComponent<EntityAttribs>();
-				int dmg = playerAttribs->getDmg();
-				if (finCombo) {
-					if (!canHit) playerAttribs->addCritProbability(0.02); //Aumentar probabilidad critico
-					//Empujar y stunn al enemigo 
-				}
-				canHit = true;
-
-				Swallow* playerSwallow = entity_->getComponent<Swallow>();
-
-				//Si puede tragar, el enemigo tiene la mitad de la vida y es fin de combo - probabilidad de tragar
-				if (finCombo && playerSwallow != nullptr && eAttribs->getLife() <= eAttribs->getMaxLife() / 2 && playerSwallow->canSwallow()) {
-					eAttribs->recieveDmg(eAttribs->getLife()); // Esta puesto asi y no con setlife para que se vea la barra bajar
-					playerAttribs->heal(playerSwallow->healQuantity());
-					//Movida de animación
-				}
-				else {
-					//Si puede envenenar
-					if (playerAttribs->getCanPoison()) {
-						// Número aleatorio para ver si envenena o no
-						float i = sdlutils().rand().nextInt(1, 100);
-						//Si i es menor que la probabilidad, envenena al enemigo
-						if (i <= playerAttribs->getPoisonProb()) {
-							eAttribs->poison();
-						}
+					EntityAttribs* playerAttribs = entity_->getComponent<EntityAttribs>();
+					int dmg = playerAttribs->getDmg();
+					if (finCombo) {
+						if (!canHit) playerAttribs->addCritProbability(0.02); //Aumentar probabilidad critico
+						//Empujar y stunn al enemigo 
 					}
+					canHit = true;
 
-					auto& enmStateM = ents[i]->getComponent<EnemyStateMachine>()->getState();
+					Swallow* playerSwallow = entity_->getComponent<Swallow>();
 
-					if (enmStateM != EnemyStates::ENM_DEAD) {
-						//Si tiene stun, se aplica
-						EnemyStun* enmStun = ents[i]->getComponent<EnemyStun>();
-						if (enmStun != nullptr && enmStun->isActive()) {
-
-							//Si no estaba aturdido ya
-							if (enmStateM != EnemyStates::ENM_STUNNED) {
-								//Aturdimos al enemigo
-								enmStateM = EnemyStates::ENM_STUNNED;
-								//Desactivamos componente de seguimiento de jugador
-								/*
-								FollowPlayer* flwPlayer = ents[i]->getComponent<FollowPlayer>();
-								if (flwPlayer != nullptr)
-									flwPlayer->setActive(false);
-								*/
+					//Si puede tragar, el enemigo tiene la mitad de la vida y es fin de combo - probabilidad de tragar
+					if (finCombo && playerSwallow != nullptr && eAttribs->getLife() <= eAttribs->getMaxLife() / 2 && playerSwallow->canSwallow()) {
+						eAttribs->recieveDmg(eAttribs->getLife()); // Esta puesto asi y no con setlife para que se vea la barra bajar
+						playerAttribs->heal(playerSwallow->healQuantity());
+						//Movida de animación
+					}
+					else {
+						//Si puede envenenar
+						if (playerAttribs->getCanPoison()) {
+							// Número aleatorio para ver si envenena o no
+							float i = sdlutils().rand().nextInt(1, 100);
+							//Si i es menor que la probabilidad, envenena al enemigo
+							if (i <= playerAttribs->getPoisonProb()) {
+								eAttribs->poison();
 							}
-							//Reiniciamos tiempo de stun
-							enmStun->restartStunTime();
 						}
-					}
 
-					//Si tiene Knockback, se aplica
-					Knockback* enmKnockback = ents[i]->getComponent<Knockback>();
-					if (enmKnockback != nullptr) {
-						//Damos la vuelta si es atacado por detras
-						auto& enmFlip = eTR->getFlip();
-						if (enmFlip == tr_->getFlip())
-							enmFlip = !enmFlip;
+						auto& enmStateM = ents[i]->getComponent<EnemyStateMachine>()->getState();
 
-						if (finCombo) {
-							enmKnockback->setKnockbackDistance(50);
-							enmKnockback->knockback();
-							enmKnockback->setKnockbackDistance(5);
+						if (enmStateM != EnemyStates::ENM_DEAD) {
+							//Si tiene stun, se aplica
+							EnemyStun* enmStun = ents[i]->getComponent<EnemyStun>();
+							if (enmStun != nullptr && enmStun->isActive()) {
+
+								//Si no estaba aturdido ya
+								if (enmStateM != EnemyStates::ENM_STUNNED) {
+									//Aturdimos al enemigo
+									enmStateM = EnemyStates::ENM_STUNNED;
+									//Desactivamos componente de seguimiento de jugador
+									/*
+									FollowPlayer* flwPlayer = ents[i]->getComponent<FollowPlayer>();
+									if (flwPlayer != nullptr)
+										flwPlayer->setActive(false);
+									*/
+								}
+								//Reiniciamos tiempo de stun
+								enmStun->restartStunTime();
+							}
+						}
+
+						//Si tiene Knockback, se aplica
+						Knockback* enmKnockback = ents[i]->getComponent<Knockback>();
+						if (enmKnockback != nullptr) {
+							//Damos la vuelta si es atacado por detras
+							auto& enmFlip = eTR->getFlip();
+							if (enmFlip == tr_->getFlip())
+								enmFlip = !enmFlip;
+
+							if (finCombo) {
+								enmKnockback->setKnockbackDistance(50);
+								enmKnockback->knockback();
+								enmKnockback->setKnockbackDistance(5);
+							}
+							else
+								enmKnockback->knockback();
+						}
+
+						//Cogemos probabilidad de crítico
+						int criticProb = playerAttribs->getCriticProb();
+
+						//Le restamos la vida al enemigo
+						if (sdlutils().rand().nextInt(1, 10000) < criticProb * 100) {	//Comprobacion golpe crítico
+							eAttribs->recieveDmg(dmg * playerAttribs->getCriticDmg() * 1.5);
+							playerAttribs->resetCriticProb();
 						}
 						else
-							enmKnockback->knockback();
+							eAttribs->recieveDmg(dmg * 1.5);
 					}
-
-					//Cogemos probabilidad de crítico
-					int criticProb = playerAttribs->getCriticProb();
-
-					//Le restamos la vida al enemigo
-					if (sdlutils().rand().nextInt(1, 10000) < criticProb * 100) {	//Comprobacion golpe crítico
-						eAttribs->recieveDmg(dmg * playerAttribs->getCriticDmg() * 1.5);
-						playerAttribs->resetCriticProb();
-					}
-					else
-						eAttribs->recieveDmg(dmg * 1.5);
 				}
 			}
 		}

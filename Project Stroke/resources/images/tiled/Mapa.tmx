@@ -69,9 +69,9 @@
     <property name="sala" type="int" value="1"/>
    </properties>
   </object>
-  <object id="22" name="newScene" x="597.03" y="80.8788" width="30.606" height="44.9091">
+  <object id="22" name="newScene" x="584.363" y="98.2121" width="30.606" height="44.9091">
    <properties>
-    <property name="newMap" value="Mapa2"/>
+    <property name="newMap" value="Mapa2.tmx"/>
    </properties>
   </object>
  </objectgroup>

@@ -20,7 +20,7 @@ void NewScene::update() {
 		//Cogemos la camara para hacer bien las colisiones
 		SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 
-		if (!Collisions::collides(Vector2D(hamsterTr->getPos().getX()-cam.x , hamsterTr->getPos().getY()-cam.y), hamsterTr->getW(), hamsterTr->getH(),
+		if (!Collisions::collides(hamsterTr->getPos(), hamsterTr->getW(), hamsterTr->getH(),
 			tr_->getPos(), tr_->getW(), tr_->getH())) {
 			canChange = false;
 		}

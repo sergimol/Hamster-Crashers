@@ -52,7 +52,7 @@ void Turret::update() {
 
 			bala->addComponent<DisableOnExit>();
 
-			bala->addComponent<BulletHit>();
+			bala->addComponent<BulletHit>(tr_->getPos().getY() + tr_->getH());
 
 			bala->setGroup<Bullet_group>(true);
 
