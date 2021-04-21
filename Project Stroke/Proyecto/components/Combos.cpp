@@ -5,6 +5,8 @@
 void Combos::init() {
 	grv_ = entity_->getComponent<Gravity>();
 	assert(grv_ != nullptr);
+	anim_ = entity_->getComponent<AnimHamsterStateMachine>();
+	assert(anim_ != nullptr);
 }
 
 bool Combos::checkCombo(int action) {
@@ -14,6 +16,7 @@ bool Combos::checkCombo(int action) {
 	{
 	case 0:							//Lista vacia
 		cola_.push(action);
+		firstActionAnim(action);
 		break;
 	case 1:							//Si hay ataques almacenados se comprueban los combos
 		if (action == cola_.back() && action != 2) cola_.push(action);
@@ -30,10 +33,12 @@ bool Combos::checkCombo(int action) {
 			cola_.push(action);
 			grv_->setActive(false);
 			entity_->getComponent<Transform>()->getVelZ() = 0;
+			anim_->setAnimBool(HamStatesAnim::LIGHTATTACK1, true);
 		}
 		else { //Combo imposible -> cambio de acción
 			cola_.pop();
 			cola_.push(action);
+			firstActionAnim(action);
 		}
 		break;
 	case 2:					//3ª acción de combo
@@ -45,6 +50,7 @@ bool Combos::checkCombo(int action) {
 		else {
 			popUntilEmpty();
 			cola_.push(action);
+			firstActionAnim(action);
 		}
 		break;
 	case 3:
@@ -59,6 +65,7 @@ bool Combos::checkCombo(int action) {
 		else {
 			popUntilEmpty();
 			cola_.push(action);
+			firstActionAnim(action);
 		}
 		break;
 	default:
@@ -75,12 +82,12 @@ void Combos::update() {
 	}
 
 	//Fin de animaciones de combos
-	if (entity_->getComponent<AnimHamsterStateMachine>()->getState() == HamStatesAnim::LIGHTCOMBO)
+	if (anim_->getState() == HamStatesAnim::LIGHTCOMBO)
 	{
 		if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
 		{
 
-			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTCOMBO, false);
+			anim_->setAnimBool(HamStatesAnim::LIGHTCOMBO, false);
 
 		}
 
@@ -88,27 +95,25 @@ void Combos::update() {
 }
 
 void Combos::lightStrong() {
-	//anim.play(finCombo);
+	anim_->setAnimBool(HamStatesAnim::STRONGCOMBO, true);
 	popUntilEmpty();
 }
 
 void Combos::fourConsecutives() {
 	if (cola_.back() == 0) {
-		//anim.play(finComboLigeros);
-		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTCOMBO, true);
 
 		if (cola_.front() == 2) {
-			//anim.play(finComboLigerosSalto);
 			grv_->setActive(true);
 		}
+		anim_->setAnimBool(HamStatesAnim::LIGHTCOMBO, true);
 	}
 	else;
-		//anim.play(finComboFuertes);
+		anim_->setAnimBool(HamStatesAnim::STRONGCOMBO, true);
 	popUntilEmpty();
 }
 
 void Combos::jumpStrong() {
-	//anim.play(pabajo)
+	anim_->setAnimBool(HamStatesAnim::STRONGATTACK, true);
 	if (!grv_->isActive())
 		grv_->setActive(true);
 
@@ -120,3 +125,20 @@ void Combos::popUntilEmpty() {
 		cola_.pop();
 }
 
+// Comprueba y llama a la animación que corresponda al entrar la primera acción
+void Combos::firstActionAnim(int action) {
+	switch (action)
+	{
+	case 0:
+		anim_->setAnimBool(HamStatesAnim::LIGHTATTACK1, true);
+		break;
+	case 1:
+		anim_->setAnimBool(HamStatesAnim::STRONGATTACK, true);
+		break;
+	case 2:
+		anim_->setAnimBool(HamStatesAnim::JUMPUP, true);
+		break;
+	default:
+		break;
+	}
+}

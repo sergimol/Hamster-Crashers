@@ -56,5 +56,9 @@ public:
 
 	void setAnimBool(HamStatesAnim h, bool b);
 
+	bool isOnAttack() {
+		return(currentState == HamStatesAnim::LIGHTATTACK1 || currentState == HamStatesAnim::LIGHTATTACK2 || currentState == HamStatesAnim::LIGHTCOMBO
+			|| currentState == HamStatesAnim::STRONGATTACK || currentState == HamStatesAnim::STRONGCOMBO);
+	}
 };
 
