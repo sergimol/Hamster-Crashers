@@ -2,12 +2,9 @@
 #include "Movement.h"
 #include "Animator.h"
 #include "Stroke.h"
-#include "../utils/Collisions.h"
+#include "CollisionDetec.h"
 
 
-//Roll::Roll() : Ability() {
-//
-//};
 void Roll::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
@@ -21,19 +18,16 @@ void Roll::init() {
 	speed_ = entity_->getComponent<EntityAttribs>()->getVel();
 	assert(speed_ != Vector2D());
 
+	col_ = entity_->getComponent<CollisionDetec>();
+	assert(col_ != nullptr);
+
 	keymap.insert({ UP, false });
 	keymap.insert({ DOWN, false });
 	keymap.insert({ RIGHT, false });
 	keymap.insert({ LEFT, false });
-	/*keymap.insert({ SPACE, false });*/
-
 }
 
 Roll::~Roll() {
-}
-
-float Roll::lerp(float a, float b, float f) {
-	return (a + f * (b - a));
 }
 
 void Roll::action()
@@ -62,12 +56,7 @@ void Roll::action()
 }
 
 void Roll::updateKeymap(KEYS x, bool is) {
-	/*if (x != SPACE)*/
 	keymap.at(x) = is;
-	/*else if (!keymap.at(SPACE)) {
-		keymap.at(SPACE) = true;
-		entity_->getComponent<Stroke>()->increaseChance(2, true);
-	}*/
 }
 
 void Roll::update() {
@@ -80,11 +69,6 @@ void Roll::update() {
 		auto& vel = tr_->getVel();
 		auto& z = tr_->getZ();
 		auto& velZ = tr_->getVelZ();
-
-		/*if (!keymap.at(SPACE) && ih().isKeyDown(SDLK_SPACE)) {
-			keymap.at(SPACE) = true;
-			entity_->getComponent<Stroke>()->increaseChance(2, true);
-		}*/
 
 		if (keymap.at(UP)) {
 			dir_.setY(-1.0f);
@@ -109,21 +93,16 @@ void Roll::update() {
 		}
 
 		if (st_->canMove()) {		//Aceleracion
-			vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.95));
-			vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.95));
+			vel.setX(col_->lerp(goalVel_.getX(), vel.getX(), 0.95));
+			vel.setY(col_->lerp(goalVel_.getY(), vel.getY(), 0.95));
 		}
 
+		col_->tryToMove(dir_, goalVel_);
 		//Si se colisiona..
 		if (checkCollisions())
 			//Suena el hit y le pega
 			hitSound_.play();
 	}
-	//else if(!entity_->getComponent<Movement>()->isActive())
-	//{
-	//	/*auto& vel = tr_->getVel();
-	//	vel = Vector2D();*/
-	//	entity_->getComponent<Movement>()->setActive(true);
-	//}
 }
 
 bool Roll::checkCollisions()
