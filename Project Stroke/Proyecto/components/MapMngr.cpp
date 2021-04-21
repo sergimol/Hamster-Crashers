@@ -260,12 +260,11 @@ bool MapMngr::intersectWall(SDL_Rect hamster) {
 
 	for (int x = topLeftCoords.getX(); x <= bottomRightCoords.getX(); x++) {
 		for (int y = topLeftCoords.getY(); y <= bottomRightCoords.getY(); y++) {
-			if (x < columnas || y < filas) {
+			if (x < columnas && y < filas && x >= 0 && y >= 0) {
 				//Si hay una colision cercana...
 				if (collider[x][y])
 					//Se choca
 					return true;
-
 			}
 		}
 	}
