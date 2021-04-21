@@ -153,6 +153,10 @@
     {
       "id": "MAYONESITO",
       "file": "resources/images/UI/mayonesaParallax.png"
+    },
+    {
+      "id": "breakablePlaceHolder",
+      "file": "resources/images/breakable.png"
     }
   ],
 
@@ -383,6 +387,17 @@
       "duration": 13,
       "cols": 10,
       "rows": 11,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": ""
+    },
+    {
+      "id": "breakObject",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 13,
+      "cols": 16,
+      "rows": 1,
       "frameUpdate": 100,
       "loop": 0,
       "chain": ""

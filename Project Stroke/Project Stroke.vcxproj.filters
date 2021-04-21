@@ -393,6 +393,9 @@
     <ClCompile Include="Proyecto\components\EnemyStrongAttack.cpp">
       <Filter>Archivos de origen\components\Entity\Enemy\Attack</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\Breakable.cpp">
+      <Filter>Archivos de origen\components\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -658,6 +661,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\StrongFollowPlayer.h">
       <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Breakable.h">
+      <Filter>Archivos de encabezado\Components\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
