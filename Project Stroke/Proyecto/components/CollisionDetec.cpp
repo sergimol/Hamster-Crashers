@@ -19,7 +19,7 @@ void CollisionDetec::init() {
 void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel) {
 	//Cojo el rect del player y le sumo la supuesta siguiente posicion
 	auto& vel = tr_->getVel();
-	SDL_Rect rectPlayer{ tr_->getPos().getX() + vel.getX(), tr_->getPos().getY() - grav_->getFloor() + vel.getY(), tr_->getW(),tr_->getH() };
+	SDL_Rect rectPlayer{ tr_->getPos().getX() + vel.getX(), tr_->getPos().getY() + vel.getY(), tr_->getW(),tr_->getH() };
 
 
 	//Cogemos el mapa para comprobar luego las colisiones
@@ -34,7 +34,7 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel) {
 		if (dir.getX() != 0 && dir.getY() != 0) {
 
 			//Probamos con ignorar el Y
-			rectPlayer.y = tr_->getPos().getY() - grav_->getFloor();
+			rectPlayer.y = tr_->getPos().getY();
 
 			//Si con el Y bloqueado se mueve correctamente
 			if (!map->intersectWall(rectPlayer)) {
@@ -44,7 +44,7 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel) {
 			}
 			else {
 				//Probamos ignorando la X
-				rectPlayer.y = tr_->getPos().getY() - grav_->getFloor() + goalVel.getY();
+				rectPlayer.y = tr_->getPos().getY() + goalVel.getY();
 				rectPlayer.x = tr_->getPos().getX();
 
 				if (!map->intersectWall(rectPlayer)) {
@@ -66,6 +66,9 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel) {
 			vel.setY(0);
 		}
 	}
+
+	if (rectPlayer.y + rectPlayer.h > map->getMaxH()) 
+		vel.setY(0);	
 
 	//Comprobacion para los límites de la cámara
 	if (rectPlayer.x < cam.x || rectPlayer.x + rectPlayer.w > cam.x + cam.w)

@@ -54,7 +54,7 @@
 
 
 MapMngr::~MapMngr() {
-	for (int i = 0; i < columnas; i++)
+	for (int i = 0; i < mapDimensions_.x; i++)
 	{
 		delete[] collider[i];
 	}
@@ -97,12 +97,10 @@ void MapMngr::loadNewMap(string map) {
 		const auto& layers = map_.getLayers();
 
 		//Establecemos el tamaño de la matriz
-		filas = mapDimensions_.y;
-		columnas = mapDimensions_.x;
-		collider = new bool* [columnas];
-		for (int i = 0; i < columnas; i++)
+		collider = new bool* [mapDimensions_.x];
+		for (int i = 0; i < mapDimensions_.x; i++)
 		{
-			collider[i] = new bool[filas] {false};
+			collider[i] = new bool[mapDimensions_.y] {false};
 		}
 
 		//Dimensiones de los tiles
@@ -194,7 +192,7 @@ void MapMngr::loadNewMap(string map) {
 
 						//Guardamos el indice global del tile (nos servir� para saber en qu� tileset se encuentra)
 						auto tileList = tileLayer.getTiles();
-						auto globalIndexTile = tileList[i + j * mapDimensions_.x].ID;	//filas+columna*elementos_enuna_fila
+						auto globalIndexTile = tileList[i + j * mapDimensions_.x].ID;	//mapDimensions_.y+columna*elementos_enuna_fila
 
 					//Necesitamos saber a cual de los tilesets pertenece esa posicion
 						while (globalIndexTile > tilesets[index].getLastGID()) {
@@ -260,7 +258,7 @@ bool MapMngr::intersectWall(SDL_Rect hamster) {
 
 	for (int x = topLeftCoords.getX(); x <= bottomRightCoords.getX(); x++) {
 		for (int y = topLeftCoords.getY(); y <= bottomRightCoords.getY(); y++) {
-			if (x < columnas && y < filas && x >= 0 && y >= 0) {
+			if (x < mapDimensions_.x && y < mapDimensions_.y && x >= 0 && y >= 0) {
 				//Si hay una colision cercana...
 				if (collider[x][y])
 					//Se choca

@@ -35,7 +35,7 @@ private:
 	int Room;							//Guarda la habitación en la que se encuentran los jugadores
 	int numberEnemyRoom;				//Guarda la cantidad de enemigos que hay por sala
 	//void Refresh();
-
+	int scale = 6;
 	std::vector<tmx::Object> TriggerftCamera;
 
 	void addHamster(const tmx::Object& obj);
@@ -47,9 +47,9 @@ public:
 	void update()override;
 	SDL_Rect cam;
 	bool intersectWall(SDL_Rect hamster);
-	int scale = 6;
-	int filas, columnas;
+
 	int getScale() { return scale; };
+	inline int getMaxH() { return mapDimensions_.y * TAM_CELDA * scale; };
 
 	void LoadEnemyRoom();
 	void reduceNumberEnemyRoom() { numberEnemyRoom--; };
