@@ -24,7 +24,7 @@ void Movement::init() {
 
 	grav_ = entity_->getComponent<Gravity>();
 	assert(grav_ != nullptr);
-	
+
 	col_ = entity_->getComponent<CollisionDetec>();
 	assert(col_ != nullptr);
 
@@ -93,16 +93,20 @@ void Movement::update() {
 		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, false);
 	}
 	else {
-		cout << "Estado : " << hms_->currentstate() << "\n";
 		//porque esta kaput el bixo
 
 		vel.setX(col_->lerp(vel.getX(), 0, 0.25));
 		vel.setY(col_->lerp(vel.getY(), 0, 0.25));
 	}
 
-	col_->tryToMove(dir, goalVel_);
+	SDL_Rect rectPlayer{ tr_->getPos().getX() + vel.getX(), tr_->getPos().getY() + vel.getY(), tr_->getW(),tr_->getH() };	//Nueva pos
 
-	//SALTO
+	col_->tryToMove(dir, goalVel_, rectPlayer);		//Intenta moverse
+	grav_->checkHeight(rectPlayer);					//Comprobamos que no tenga que subir un escalon
+
+	if (grav_->getStuck()) vel.setX(0);				//Si lo tiene que subir y no salta no se mueve en x
+
+//SALTO
 	if (z <= grav_->getFloor()) {
 		// Inicio del salto
 		if (keymap.at(SPACE)) {

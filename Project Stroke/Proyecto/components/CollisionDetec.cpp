@@ -16,12 +16,10 @@ void CollisionDetec::init() {
 	assert(grav_ != nullptr);
 }
 
-void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel) {
+void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPlayer) {
 	//Cojo el rect del player y le sumo la supuesta siguiente posicion
 	auto& vel = tr_->getVel();
-	SDL_Rect rectPlayer{ tr_->getPos().getX() + vel.getX(), tr_->getPos().getY() + vel.getY(), tr_->getW(),tr_->getH() };
-
-
+	
 	//Cogemos el mapa para comprobar luego las colisiones
 	auto map = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>();
 

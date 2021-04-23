@@ -23,7 +23,7 @@ public:
 
 	void update() override {};
 
-	void tryToMove(Vector2D dir, Vector2D goalVel);
+	void tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPlayer);
 
 	float lerp(float a, float b, float f);
 

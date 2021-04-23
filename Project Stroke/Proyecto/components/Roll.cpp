@@ -97,7 +97,8 @@ void Roll::update() {
 			vel.setY(col_->lerp(goalVel_.getY(), vel.getY(), 0.95));
 		}
 
-		col_->tryToMove(dir_, goalVel_);
+		SDL_Rect rectPlayer{ tr_->getPos().getX() + dir_.getX(), tr_->getPos().getY() + dir_.getY(), tr_->getW(),tr_->getH() };	//Nueva pos
+		col_->tryToMove(dir_, goalVel_, rectPlayer);
 		//Si se colisiona..
 		if (checkCollisions())
 			//Suena el hit y le pega
