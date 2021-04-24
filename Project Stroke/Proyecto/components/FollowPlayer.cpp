@@ -4,11 +4,16 @@
 #include "IddleEnemy.h"
 
 FollowPlayer::FollowPlayer() :
-	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr), lockedHamster_(nullptr), hamsterTr_(nullptr), hamsId_(-1) {
+	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr), 
+	lockedHamster_(nullptr), hamsterTr_(nullptr), enmState_(nullptr), hamsId_(-1) {
 }
 
 void FollowPlayer::init() {
 	Entity* owEntity = owner_->getEntity();
+
+	enmState_ = owEntity->getComponent<EnemyStateMachine>();
+	assert(enmState_ != nullptr);
+
 	mov_ = owEntity->getComponent<MovementSimple>();
 	assert(mov_ != nullptr);
 
@@ -102,7 +107,7 @@ void FollowPlayer::behave() {
 		if (lockedHamState_->cantBeTargeted()) {
 			lockHamster();
 		}
-		else { // si no cambia de hamster marcado
+		else if (enmState_->getState() != EnemyStates::ENM_STUNNED){ // si no cambia de hamster marcado y no está aturdido
 			auto& hamPos = hamsterTr_->getPos();
 			auto& pos = tr_->getPos();
 			int hamX = hamPos.getX(),

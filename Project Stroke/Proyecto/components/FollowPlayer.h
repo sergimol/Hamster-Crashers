@@ -18,6 +18,7 @@
 #include "EntityAttribs.h"
 #include "MovementSimple.h"
 #include "EnemyAttack.h"
+#include "EnemyStateMachine.h"
 #include "Behavior.h"
 
 class FollowPlayer : public Behavior {
@@ -60,5 +61,6 @@ private:
 
 	EnemyAttack* enAtk_; //componente de ataque
 
+	EnemyStateMachine* enmState_;
 };
 

@@ -19,6 +19,7 @@
 #include "MovementSimple.h"
 #include "EnemyStrongAttack.h"
 #include "EnemyAttack.h"
+#include "EnemyStateMachine.h"
 #include "Behavior.h"
 
 class StrongFollowPlayer : public Behavior {
@@ -69,5 +70,6 @@ private:
 	EnemyStrongAttack* enStrongAtk_; //componente de ataque
 	EnemyAttack* enAtk_; //componente de ataque
 
+	EnemyStateMachine* enmState_;
 };
 

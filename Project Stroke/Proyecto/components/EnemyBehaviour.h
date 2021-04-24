@@ -95,6 +95,10 @@ public:
 		return entity_;
 	}
 
+	Behavior* getBehavior() {
+		return bh_;
+	}
+
 protected: //ahora mismo solo funcionan como private
 	EnemyAttack* enAtk_; //componente de ataque
 	FirstBossAttack* bossAtk_;

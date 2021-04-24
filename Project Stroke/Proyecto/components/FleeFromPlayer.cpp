@@ -5,11 +5,16 @@
 #include "AmbushPlayer.h"
 
 FleeFromPlayer::FleeFromPlayer() :
-	mov_(nullptr), tr_(nullptr), rangeOffsetX_(600), rangeOffsetY_(100), rangeOffset_(50), lockedHamState_(nullptr), lockedHamster_(nullptr), hamsterTr_(nullptr), hamsId_(-1) {
+	mov_(nullptr), tr_(nullptr), rangeOffsetX_(600), rangeOffsetY_(100), rangeOffset_(50), lockedHamState_(nullptr),
+	lockedHamster_(nullptr), hamsterTr_(nullptr), hamsId_(-1), enmState_(nullptr){
 }
 
 void FleeFromPlayer::init() {
 	Entity* owEntity = owner_->getEntity();
+
+	enmState_ = owEntity->getComponent<EnemyStateMachine>();
+	assert(enmState_ != nullptr);
+
 	mov_ = owEntity->getComponent<MovementSimple>();
 	assert(mov_ != nullptr);
 
@@ -96,7 +101,7 @@ void FleeFromPlayer::behave() {
 		if (lockedHamState_->cantBeTargeted()) {
 			lockHamster(); // Habr�a que hacerlo quitando el actual para que no repita
 		}
-		else {
+		else if (enmState_->getState() != EnemyStates::ENM_STUNNED) {
 			auto& hamPos = hamsterTr_->getPos();
 			auto& pos = tr_->getPos();
 

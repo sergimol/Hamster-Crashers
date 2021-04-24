@@ -13,7 +13,8 @@
 #include "EntityAttribs.h"
 #include "Transform.h"
 #include "EnemyStateMachine.h"
-#include "FollowPlayer.h"
+#include "MovementSimple.h"
+#include "EnemyBehaviour.h"
 
 class EnemyStun : public Component {
 public:
@@ -30,7 +31,10 @@ public:
 
 private:
 	EnemyStateMachine* enmState_;
-	FollowPlayer* flwPlayer_;
+	MovementSimple* simpMov_;
+	//EnemyBehaviour* enBehave_;
 	long unsigned int cooldown_, time_;
+
+	bool movCancelled_;
 }
 ;
