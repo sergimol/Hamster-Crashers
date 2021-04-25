@@ -128,7 +128,7 @@ class EnemyMother;
 	menuButtonManager,\
 	Transition, \
 	GameStates, \
-	EnemyMother
+	EnemyMother, \
 	TriggerScene
 
 //FollowPlayer, \
