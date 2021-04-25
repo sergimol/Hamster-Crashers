@@ -60,7 +60,7 @@ class Parallax;
 class NewScene;
 class Transition;
 class MenuButton;
-
+class menuButtonManager;
 #define _CMPS_LIST_  \
 	Transform,\
 	HamsterStateMachine, \
@@ -121,7 +121,8 @@ class MenuButton;
 	EnemyStrongAttack, \
 	Parallax, \
 	Transition,\
-	MenuButton
+	MenuButton,\
+menuButtonManager
 
 //FollowPlayer, \
 

@@ -32,7 +32,7 @@
 #include "../components/GhostCtrl.h"
 #include "../components/PossesionGame.h"
 #include "../components/Transition.h"
-#include "../components/MenuButton.h"
+#include "../components/menuButtonManager.h"
 
 //PARA LAS COLISIONES CON TILE
 #include "../utils/Collisions.h"
@@ -57,15 +57,9 @@ Game::~Game() {
 void Game::init() {
 
 	SDLUtils::init("Squeak Ship", 1920, 1010, "resources/config/hamsters.resources.json");
-	//MENU
-	//Camara
-	camera_ = { 0,0,1920, 1080 };
-	auto* camera = mngr_->addEntity();
-	camera->addComponent<Camera>(camera_);
-	mngr_->setHandler<Camera__>(camera);
-
-	auto* button = mngr_->addEntity();
-	button->addComponent<MenuButton>("local", Vector2D(50, 50));
+	//MENU	
+	auto* mainMenu = mngr_->addEntity();
+	mainMenu->addComponent<menuButtonManager>("mainMenu");
 
 
 	/*
@@ -266,6 +260,6 @@ void Game::merge(vector<Entity*>& vec, int l, int m, int r) {
 }
 
 void Game::changeScene(string newScene) {
-	
+
 }
 

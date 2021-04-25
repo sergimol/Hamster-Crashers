@@ -183,6 +183,7 @@
     <ClCompile Include="Proyecto\components\Knockback.cpp" />
     <ClCompile Include="Proyecto\components\MapMngr.cpp" />
     <ClCompile Include="Proyecto\components\MenuButton.cpp" />
+    <ClCompile Include="Proyecto\components\menuButtonManager.cpp" />
     <ClCompile Include="Proyecto\components\NewScene.cpp" />
     <ClCompile Include="Proyecto\components\Parallax.cpp" />
     <ClCompile Include="Proyecto\components\Poison.cpp" />
@@ -263,6 +264,7 @@
     <ClInclude Include="Proyecto\components\Knockback.h" />
     <ClInclude Include="Proyecto\components\MapMngr.h" />
     <ClInclude Include="Proyecto\components\MenuButton.h" />
+    <ClInclude Include="Proyecto\components\menuButtonManager.h" />
     <ClInclude Include="Proyecto\components\NewScene.h" />
     <ClInclude Include="Proyecto\components\Parallax.h" />
     <ClInclude Include="Proyecto\components\Poison.h" />

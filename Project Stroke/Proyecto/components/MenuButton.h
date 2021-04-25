@@ -17,7 +17,6 @@ public:
 	void render() override;
 
 	void selected();
-	void deselected();
 	void pressed();
 
 	//Getters auxiliares
@@ -40,5 +39,5 @@ private:
 	//Posiciones de los destRects
 	Vector2D renderCoords;
 
-	int scale;
+	bool buttonSelected;
 };
