@@ -399,6 +399,9 @@
     <ClCompile Include="Proyecto\components\Transition.cpp">
       <Filter>Archivos de origen\components\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\AnimEnemyStateMachine.cpp">
+      <Filter>Archivos de origen\components\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -670,6 +673,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\Transition.h">
       <Filter>Archivos de encabezado\Components\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\AnimEnemyStateMachine.h">
+      <Filter>Archivos de encabezado\Components\Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
