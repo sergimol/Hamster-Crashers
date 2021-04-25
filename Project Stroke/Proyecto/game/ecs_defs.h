@@ -63,6 +63,7 @@ class TriggerScene;
 class MenuButton;
 class menuButtonManager;
 class GameStates;
+class EnemyMother;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -127,6 +128,7 @@ class GameStates;
 	menuButtonManager,\
 	Transition, \
 	GameStates, \
+	EnemyMother
 	TriggerScene
 
 //FollowPlayer, \
@@ -151,14 +153,16 @@ struct Camera__;
 struct Map;
 struct LevelHandlr;
 struct StateMachine;
+struct Mother;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
 					Hamster4, \
 					Camera__, \
 					Map, \
+					StateMachine, \
 					LevelHandlr, \
-					StateMachine
+					Mother
 
 
 //systems

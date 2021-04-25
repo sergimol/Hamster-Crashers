@@ -413,6 +413,9 @@
     </ClCompile>
     <ClCompile Include="Proyecto\components\GameStates.cpp">
       <Filter>Archivos de origen\components\StateMachine</Filter>
+      </ClCompile>
+    <ClCompile Include="Proyecto\components\EnemyMother.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Proyecto\components\TriggerScene.cpp">
       <Filter>Archivos de origen\components\Entity</Filter>
@@ -700,6 +703,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\GameStates.h">
       <Filter>Archivos de encabezado\Components\StateMachine</Filter>
+      </ClCompile>
+    <ClInclude Include="Proyecto\components\EnemyMother.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\TriggerScene.h">
       <Filter>Archivos de encabezado\Components\Entity</Filter>
