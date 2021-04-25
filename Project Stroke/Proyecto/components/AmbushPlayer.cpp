@@ -5,7 +5,8 @@
 #include "FleeFromPlayer.h"
 
 AmbushPlayer::AmbushPlayer() :
-	 rangeX_(500), rangeY_(200), rangeOffsetX_(100), rangeOffsetY_(100) {
+	mov_(nullptr), tr_(nullptr), rangeX_(500), rangeY_(200), rangeOffsetX_(100), rangeOffsetY_(100),
+	lockedHamState_(nullptr), lockedHamster_(nullptr), hamsterTr_(nullptr), hamsId_(-1), enmState_(nullptr){
 }
 
 void AmbushPlayer::init() {
@@ -24,10 +25,84 @@ void AmbushPlayer::init() {
 	assert(enAtk_ != nullptr);
 
 	hamsters_ = owEntity->getMngr()->getPlayers();
+
+	lockHamster(); // De momento un hamster concreto para manejar mejor
+	assert(lockedHamster_ != nullptr);
+	assert(lockedHamState_ != nullptr);
+	assert(hamsterTr_ != nullptr);
 }
 
 
+//Fija a un hamster en orden desde el siguiente al último elegido
+void AmbushPlayer::lockHamster() {
+	//Variable que contralará el recorrido de los hamsters
+	int start;
+	if (hamsId_ + 1 == hamsters_.size()) {
+		start = 0;
+	}
+	else {
+		start = hamsId_ + 1;
+	}
 
+	//Va comprobando cual es elegible;
+	lockedHamster_ = nullptr;
+	for (int i = start; i != hamsId_ && lockedHamster_ == nullptr; i++) {
+		//Si puede ser elegido
+		lockedHamState_ = hamsters_[i]->getComponent<HamsterStateMachine>();
+		if (!lockedHamState_->cantBeTargeted()) {
+			//Elige hamster
+			hamsId_ = i;
+			lockedHamster_ = hamsters_[i];
+			hamsterTr_ = lockedHamster_->getComponent<Transform>();
+		}
+		//Si llega al final, da la vuelta
+		if (i + 1 == hamsters_.size()) {
+			i = 0;
+		}
+		//Si es -1, entra en el ciclo de ids
+		if (hamsId_ == -1)
+			hamsId_ = 0;
+	}
+	//Si ninguno esta activo pone todo a null
+	if (lockedHamster_ == nullptr) {
+		owner_->SetBehavior(new IddleEnemy); //y chinpong
+	}
+}
+
+//Fija a un hamster concreto
+void AmbushPlayer::lockHamster(int id) {	//Variable que contralará el recorrido de los hamsters
+	int start;
+	if (hamsId_ + 1 == hamsters_.size()) {
+		start = 0;
+	}
+	else {
+		start = hamsId_ + 1;
+	}
+
+	//Va comprobando cual es elegible;
+	lockedHamster_ = nullptr;
+	for (int i = start; i != hamsId_ && lockedHamster_ == nullptr; i++) {
+		//Si puede ser elegido
+		lockedHamState_ = hamsters_[i]->getComponent<HamsterStateMachine>();
+		if (!lockedHamState_->cantBeTargeted()) {
+			//Elige hamster
+			hamsId_ = i;
+			lockedHamster_ = hamsters_[i];
+			hamsterTr_ = lockedHamster_->getComponent<Transform>();
+		}
+		//Si llega al final, da la vuelta
+		if (i + 1 == hamsters_.size()) {
+			i = 0;
+		}
+		//Si es -1, entra en el ciclo de ids
+		if (hamsId_ == -1)
+			hamsId_ = 0;
+	}
+	//Si ninguno esta activo pone todo a null
+	if (lockedHamster_ == nullptr) {
+		owner_->SetBehavior(new IddleEnemy); //y chinpong
+	}
+}
 
 //Esta a rango de ataque
 bool AmbushPlayer::isWithinRange() {
@@ -58,7 +133,7 @@ void AmbushPlayer::behave() {
 		// Cambia el foco si el actual muere o le da un infarto
 		auto& state = lockedHamState_->getState();
 		if (lockedHamState_->cantBeTargeted()) {
-			//TODO Le pedira a madre que le asigne nuevo objetivo/ comportamiento
+			lockHamster(); // Habr�a que hacerlo quitando el actual para que no repita
 		}
 		else if (enmState_->getState() != EnemyStates::ENM_STUNNED) {
 			auto& hamPos = hamsterTr_->getPos();

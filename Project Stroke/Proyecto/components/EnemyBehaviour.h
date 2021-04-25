@@ -39,14 +39,12 @@ public:
 	virtual void onEnable() override;
 	virtual void onDisable() override;
 
-	//void lockHamster();
+	void lockHamster();
 	void lockHamster(int id);
 	bool isWithinAttackRange();
 
-	//para attackMetods & ambushMetods
-	void setHamId(int hId, std::list<Entity*>::iterator it, char l);
 
-	void die();
+
 	//getters es posible que algunos sean prescindibles// nada es una salvajada me arrepiento pero diego del futuro TODO
 
 	//----------------------------------------------------------
@@ -121,8 +119,5 @@ protected: //ahora mismo solo funcionan como private
 	int rangeOffsetY_; // Esta movida habra que balancearla
 	Behavior* bh_; //el behavior
 
-	int hamId_;
-	std::list<Entity*>::iterator listIterator;
-	char list;
 };
 

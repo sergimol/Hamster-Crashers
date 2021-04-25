@@ -62,7 +62,6 @@ class Transition;
 class MenuButton;
 class menuButtonManager;
 class GameStates;
-class EnemyMother;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -126,8 +125,7 @@ class EnemyMother;
 	MenuButton,\
 	menuButtonManager,\
 	Transition, \
-	GameStates, \
-	EnemyMother
+	GameStates
 
 //FollowPlayer, \
 
@@ -151,7 +149,6 @@ struct Camera__;
 struct Map;
 struct Trans;
 struct StateMachine;
-struct Mother;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
@@ -159,8 +156,7 @@ struct Mother;
 					Camera__, \
 					Map, \
 					Trans, \
-					StateMachine, \
-					Mother
+					StateMachine
 
 
 //systems

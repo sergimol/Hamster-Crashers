@@ -163,7 +163,6 @@
     <ClCompile Include="Proyecto\components\Dying.cpp" />
     <ClCompile Include="Proyecto\components\EnemyAttack.cpp" />
     <ClCompile Include="Proyecto\components\EnemyBehaviour.cpp" />
-    <ClCompile Include="Proyecto\components\EnemyMother.cpp" />
     <ClCompile Include="Proyecto\components\EnemyStateMachine.cpp" />
     <ClCompile Include="Proyecto\components\EnemyStrongAttack.cpp" />
     <ClCompile Include="Proyecto\components\FairStrokeStrategy.cpp" />
@@ -244,7 +243,6 @@
     <ClInclude Include="Proyecto\components\Dying.h" />
     <ClInclude Include="Proyecto\components\EnemyAttack.h" />
     <ClInclude Include="Proyecto\components\EnemyBehaviour.h" />
-    <ClInclude Include="Proyecto\components\EnemyMother.h" />
     <ClInclude Include="Proyecto\components\EnemyStateMachine.h" />
     <ClInclude Include="Proyecto\components\Animator.h" />
     <ClInclude Include="Proyecto\components\EnemyStrongAttack.h" />
