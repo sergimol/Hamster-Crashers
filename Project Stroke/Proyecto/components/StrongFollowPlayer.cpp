@@ -2,9 +2,9 @@
 #include "Stroke.h"
 
 StrongFollowPlayer::StrongFollowPlayer() :
-	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr), lockedHamster_(nullptr),
-	hamsterTr_(nullptr), hamsId_(-1), enStrongAtk_(nullptr), enAtk_(nullptr), attackCount_(0), hasHitTime_(sdlutils().currRealTime()),
-	hitCD_(1500), enmState_(nullptr) {
+	 rangeOffsetX_(250), rangeOffsetY_(100),
+	enStrongAtk_(nullptr), enAtk_(nullptr), attackCount_(0), hasHitTime_(sdlutils().currRealTime()),
+	hitCD_(1500) {
 }
 
 void StrongFollowPlayer::init() {
