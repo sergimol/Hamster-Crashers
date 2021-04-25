@@ -52,7 +52,7 @@ void Roll::action()
 		anim_->play(sdlutils().anims().at("sardinilla_ability"));
 
 		//Mete invulnerabilidad durante la habilidad
-		entity_->getComponent<EntityAttribs>()->setAbilityInvul(true);
+		entity_->getComponent<EntityAttribs>()->setInvincibility(true);
 	}
 }
 
@@ -151,5 +151,5 @@ void Roll::endAbility() {
 	entity_->getComponent<Movement>()->setActive(true);
 	rolling = false;
 	tr_->getVel() = Vector2D(0, 0);
-	entity_->getComponent<EntityAttribs>()->setAbilityInvul(false);
+	entity_->getComponent<EntityAttribs>()->setInvincibility(false);
 }

@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <cassert>
 
+#include "../game/Game.h"
 #include "../ecs/Component.h"
 #include "../ecs/Entity.h"
 #include "../sdlutils/InputHandler.h"
@@ -12,7 +13,7 @@
 #include "EntityAttribs.h"
 #include "Transform.h"
 #include "HamsterStateMachine.h"
-#include "../game/Game.h"
+#include "EntityAttribs.h"
 
 class FirstBossAttack : public Component {
 public:
@@ -33,6 +34,8 @@ public:
 
 private:
 	Transform* tr_;
+	EntityAttribs* eAttribs_;
+
 	SDL_Rect attRect_;
 	Animator* anim_;
 	bool DEBUG_isAttacking_;

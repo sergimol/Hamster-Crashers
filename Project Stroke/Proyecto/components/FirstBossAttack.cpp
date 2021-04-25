@@ -11,11 +11,14 @@
 FirstBossAttack::FirstBossAttack() :
 	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
 	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")),
-	attackStarted_(false), hitTime_(0), beforeHitCD_(1000), afterHitCD_(4250), stunStarted_(false) {}
+	attackStarted_(false), hitTime_(0), beforeHitCD_(1000), afterHitCD_(4250), stunStarted_(false), eAttribs_(nullptr) {}
 
 void FirstBossAttack::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+
+	eAttribs_ = entity_->getComponent<EntityAttribs>();
+	assert(eAttribs_ != nullptr);
 }
 
 void FirstBossAttack::update() {
@@ -38,7 +41,7 @@ void FirstBossAttack::update() {
 			//Cogemos el rect completo del jefe
 
 			attRect_.x = pos.getX() - cam.x;
-			attRect_.y = pos.getY() -cam.y; //Pos inicial de esquina arriba
+			attRect_.y = pos.getY() - cam.y; //Pos inicial de esquina arriba
 
 			//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
@@ -58,8 +61,11 @@ void FirstBossAttack::update() {
 
 			stunStarted_ = true;
 		}
-
-		if (stunStarted_ && sdlutils().currRealTime() > hitTime_ + afterHitCD_) {
+		else if (eAttribs_->checkInvulnerability() && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
+			eAttribs_->setInvincibility(false);
+		}
+		else if (stunStarted_ && sdlutils().currRealTime() > hitTime_ + afterHitCD_) {
+			eAttribs_->setInvincibility(true);
 			attackStarted_ = false;
 			stunStarted_ = false;
 		}
