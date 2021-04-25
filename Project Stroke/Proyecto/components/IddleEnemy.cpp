@@ -12,65 +12,7 @@ void IddleEnemy::init() {
 	tr_ = owEntity->getComponent<Transform>();
 	assert(tr_ != nullptr);
 
-
-	//el puto iddle no necesita hacer lock hamster lockHamster(); // De momento un hamster concreto para manejar mejor
-	/*
-	assert(lockedHamster_ != nullptr);
-	assert(lockedHamState_ != nullptr);
-	assert(hamsterTr_ != nullptr);
-	*/
-
-	//poner todo a false
-
-	//se supone que los para >:C
 }
-
-
-//Fija a un hamster en orden desde el siguiente al último elegido
-void IddleEnemy::lockHamster() {
-	//Variable que contralará el recorrido de los hamsters
-	int start;
-	if (hamsId_ + 1 == hamsters_.size()) {
-		start = 0;
-	}
-	else {
-		start = hamsId_ + 1;
-	}
-
-	//Va comprobando cual es elegible;
-	lockedHamster_ = nullptr;
-	for (int i = start; i != hamsId_ && lockedHamster_ == nullptr; i++) {
-		//Si puede ser elegido
-		lockedHamState_ = hamsters_[i]->getComponent<HamsterStateMachine>();
-		if (!lockedHamState_->cantBeTargeted()) {
-			//Elige hamster
-			hamsId_ = i;
-			lockedHamster_ = hamsters_[i];
-			hamsterTr_ = lockedHamster_->getComponent<Transform>();
-		}
-		//Si llega al final, da la vuelta
-		if (i + 1 == hamsters_.size()) {
-			i = 0;
-		}
-		//Si es -1, entra en el ciclo de ids
-		if (hamsId_ == -1)
-			hamsId_ = 0;
-	}
-	//Si ninguno esta activo pone todo a null
-	if (lockedHamster_ == nullptr) {
-		lockedHamState_ = nullptr;
-		hamsterTr_ = nullptr;
-		hamsId_ = -1;
-	}
-}
-
-//Fija a un hamster concreto
-void IddleEnemy::lockHamster(int id) {
-	lockedHamster_ = hamsters_[id];
-	hamsterTr_ = lockedHamster_->getComponent<Transform>();
-	lockedHamState_ = lockedHamster_->getComponent<HamsterStateMachine>();
-}
-
 
 void IddleEnemy::behave() {
 	//no hay nada esta iddle es un fideo
@@ -81,19 +23,3 @@ void IddleEnemy::behave() {
 	mov_->updateKeymap(MovementSimple::LEFT, false);
 	mov_->updateKeymap(MovementSimple::RIGHT, false);
 }
-
-/*
-void FollowPlayer::onEnable() {
-	lockHamster();
-}
-
-void FollowPlayer::onDisable() {
-
-	mov_->updateKeymap(MovementSimple::RIGHT, false);
-	mov_->updateKeymap(MovementSimple::LEFT, false);
-	mov_->updateKeymap(MovementSimple::DOWN, false);
-	mov_->updateKeymap(MovementSimple::UP, false);
-
-	lockedHamster_ = nullptr;
-}
-*/

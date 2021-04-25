@@ -1,6 +1,7 @@
 #include "EnemyMother.h"
 #include "FollowPLayer.h"
 #include "AmbushPlayer.h"
+#include "iddleEnemy.h"
 
 EnemyMother::EnemyMother() : numPlayers(0), numEnemies(0) {}
 
@@ -27,7 +28,7 @@ void EnemyMother::asingEnemies() {
 	for (auto i = 0u; i < n; i++) {
 		// encontrar player alive
 		int objetive = i % numPlayers;
-		while (objetivesList.at(objetive)->hmSt_->cantBeTargeted() && objetive < numPlayers) {
+		while (objetive < numPlayers && objetivesList.at(objetive)->hmSt_->cantBeTargeted()) {
 			objetive++;
 		}
 		if (objetive < numPlayers) {
@@ -97,8 +98,8 @@ void EnemyMother::cleanListHamAmbush(int i) {
 	for (auto y = 0u; y < n; y++) {
 		waiting.push_back(objetivesList.at(i)->ambushing.back());
 		objetivesList.at(i)->ambushing.pop_back();
-		//TODO poner las entitades en behavior iddle
-
+		//Tponer las entitades en behavior iddle
+		waiting.back()->getComponent<EnemyBehaviour>()->SetBehavior(new IddleEnemy());
 	}
 }
 void EnemyMother::cleanListHamAttacking(int i) {
@@ -106,7 +107,8 @@ void EnemyMother::cleanListHamAttacking(int i) {
 	for (auto y = 0u; y < n; y++) {
 		waiting.push_back(objetivesList.at(i)->atacking.back());
 		objetivesList.at(i)->atacking.pop_back();
-		//TODO poner las entitades en behavior iddle
+		//poner las entitades en behavior iddle
+		waiting.back()->getComponent<EnemyBehaviour>()->SetBehavior(new IddleEnemy());
 	}
 }
 

@@ -8,6 +8,7 @@
 #include "../components/GhostCtrl.h"
 #include "../components/AnimHamsterStateMachine.h"
 #include "../components/ReanimationGame.h"
+#include "EnemyMother.h"
 
 void Stroke::init() {
 		hms_ = entity_->getComponent<HamsterStateMachine>();
@@ -84,6 +85,22 @@ void Stroke::checkChance() {
 void Stroke::infarctHamster() {
 	//El personaje principal pasa a estar infartado
 	auto name = entity_->getComponent<EntityAttribs>()->getId();
+	//Los enemigos que le seguian dejan de hacerlo
+	auto& ents = entity_->getMngr()->getPlayers();
+
+	
+	int i = 0;
+	while (i < ents.size()) {
+		if (entity_ == ents[i]) {
+			entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->cleanListHam(i);
+			i = ents.size();
+		}
+		++i;
+	}
+	
+
+	//TODO si alguien se le ocurre manera mejor para comprobar la id (posicion en el array de players, que la comente o que la ponga en todos los bucles que he ido haciendo de este tipo, son las 6 de la mañana y no quiero seguir viviendo)
+
 
 	hms_->getState() = HamStates::INFARCTED;
 	//Evitamos el uso de la habilidad

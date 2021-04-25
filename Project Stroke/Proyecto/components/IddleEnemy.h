@@ -29,9 +29,6 @@ public:
 	void init() override;
 	void behave();
 
-	void lockHamster();
-	void lockHamster(int id);
-
 protected:
 private:
 	std::vector<Entity*> hamsters_;

@@ -57,10 +57,7 @@ void AmbushPlayer::behave() {
 	else if (lockedHamster_ != nullptr) {
 		// Cambia el foco si el actual muere o le da un infarto
 		auto& state = lockedHamState_->getState();
-		if (lockedHamState_->cantBeTargeted()) {
-			//TODO Le pedira a madre que le asigne nuevo objetivo/ comportamiento
-		}
-		else if (enmState_->getState() != EnemyStates::ENM_STUNNED) {
+		if (!lockedHamState_->cantBeTargeted() && enmState_->getState() != EnemyStates::ENM_STUNNED) {
 			auto& hamPos = hamsterTr_->getPos();
 			auto& pos = tr_->getPos();
 

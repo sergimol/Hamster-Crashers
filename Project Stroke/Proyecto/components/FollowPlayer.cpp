@@ -53,8 +53,10 @@ void FollowPlayer::behave() {
 
 	Entity* owEntity = owner_->getEntity();
 	if (owEntity->getComponent<EntityAttribs>()->getLife() <= 40 ) {
+		/*
 		owner_->SetBehavior(new FleeFromPlayer);
 		return;
+		*/
 	}
 	else if (lockedHamster_ != nullptr) {
 
