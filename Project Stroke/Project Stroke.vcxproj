@@ -195,6 +195,7 @@
     <ClCompile Include="Proyecto\components\Stun.cpp" />
     <ClCompile Include="Proyecto\components\Swallow.cpp" />
     <ClCompile Include="Proyecto\components\TileRender.cpp" />
+    <ClCompile Include="Proyecto\components\Transition.cpp" />
     <ClCompile Include="Proyecto\components\Turret.cpp" />
     <ClCompile Include="Proyecto\components\UI.cpp" />
     <ClCompile Include="Proyecto\components\EntityAttribs.cpp" />
@@ -273,6 +274,7 @@
     <ClInclude Include="Proyecto\components\Stun.h" />
     <ClInclude Include="Proyecto\components\Swallow.h" />
     <ClInclude Include="Proyecto\components\TileRender.h" />
+    <ClInclude Include="Proyecto\components\Transition.h" />
     <ClInclude Include="Proyecto\components\Turret.h" />
     <ClInclude Include="Proyecto\components\UI.h" />
     <ClInclude Include="Proyecto\components\EntityAttribs.h" />

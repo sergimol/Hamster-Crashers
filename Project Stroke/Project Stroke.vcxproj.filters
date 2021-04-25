@@ -396,6 +396,9 @@
     <ClCompile Include="Proyecto\components\Breakable.cpp">
       <Filter>Archivos de origen\components\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\Transition.cpp">
+      <Filter>Archivos de origen\components\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -663,6 +666,9 @@
       <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\Behavior</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\Breakable.h">
+      <Filter>Archivos de encabezado\Components\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Transition.h">
       <Filter>Archivos de encabezado\Components\Entity</Filter>
     </ClInclude>
   </ItemGroup>

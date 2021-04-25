@@ -31,6 +31,7 @@
 #include "../components/HeartUI.h"
 #include "../components/GhostCtrl.h"
 #include "../components/PossesionGame.h"
+#include "../components/Transition.h"
 
 //PARA LAS COLISIONES CON TILE
 #include "../utils/Collisions.h"
@@ -67,9 +68,14 @@ void Game::init() {
 	mapa->addComponent<MapMngr>();
 	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Mapa.tmx");
 
+	mngr_->setHandler<Map>(mapa);
+
+	// Transition
+	auto* levelMngr = mngr_->addEntity();
+	levelMngr->addComponent<Transition>(&sdlutils().images().at("transition"));
 	//Metemos al mapa en el Handler de Map
 
-	mngr_->setHandler<Map>(mapa);
+	mngr_->setHandler<Trans>(levelMngr);
 
 	
 

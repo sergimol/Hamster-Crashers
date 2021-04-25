@@ -32,6 +32,7 @@ Roll::~Roll() {
 
 void Roll::action()
 {
+
 	if (entity_->getComponent<Movement>()->isActive()) {
 		entity_->getComponent<Movement>()->setActive(false);
 

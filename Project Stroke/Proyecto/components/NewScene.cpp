@@ -37,6 +37,7 @@ void NewScene::update() {
 void NewScene::render() {
 	SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 255, 0, 255);
 }
+
 void NewScene::ChangeScene() {
 
 	//Desactivamos todas las entidades (Salvo la cámara)

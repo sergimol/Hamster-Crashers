@@ -157,6 +157,10 @@
     {
       "id": "breakablePlaceHolder",
       "file": "resources/images/breakable.png"
+    },
+    {
+      "id": "transition",
+      "file": "resources/images/blackBackground.png"
     }
   ],
 

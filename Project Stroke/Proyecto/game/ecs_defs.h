@@ -58,6 +58,7 @@ class BackGround;
 class CollisionDetec;
 class Parallax;
 class NewScene;
+class Transition;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -117,7 +118,8 @@ class NewScene;
 	NewScene, \
 	StrongFollowPlayer, \
 	EnemyStrongAttack, \
-	Parallax
+	Parallax, \
+	Transition
 
 //FollowPlayer, \
 
@@ -139,12 +141,14 @@ struct Hamster3;
 struct Hamster4;
 struct Camera__;
 struct Map;
+struct Trans;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
 					Hamster4, \
 					Camera__, \
-					Map
+					Map, \
+					Trans
 
 
 //systems

@@ -97,6 +97,14 @@ public:
 	inline SDL_Texture* getSDLText() {
 		return texture_;
 	}
+
+	inline void setAlpha(Uint8 alpha) {
+		SDL_SetTextureAlphaMod(texture_, alpha);
+	}
+
+	inline void setBlendMode(SDL_BlendMode blending) {
+		SDL_SetTextureBlendMode(texture_, blending);
+	}
 private:
 
 	// Construct from text
