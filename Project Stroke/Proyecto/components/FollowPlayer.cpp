@@ -4,8 +4,7 @@
 #include "IddleEnemy.h"
 
 FollowPlayer::FollowPlayer() :
-	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr), 
-	lockedHamster_(nullptr), hamsterTr_(nullptr), enmState_(nullptr), hamsId_(-1) {
+	 rangeOffsetX_(250), rangeOffsetY_(100) {
 }
 
 void FollowPlayer::init() {
@@ -23,59 +22,16 @@ void FollowPlayer::init() {
 	enAtk_ = owEntity->getComponent<EnemyAttack>();
 	assert(enAtk_ != nullptr);
 
-	hamsters_ = owEntity->getMngr()->getPlayers();
+	hamsters_ = owEntity->getMngr()->getPlayers(); //no la necesitamos pero es que me da pereza tocar el lockHamster
 
+	/* Ya no, ahora dependemos de mama para que nos diga a quien vamos a fijar
 	lockHamster(); // De momento un hamster concreto para manejar mejor
 	assert(lockedHamster_ != nullptr);
 	assert(lockedHamState_ != nullptr);
 	assert(hamsterTr_ != nullptr);
+	*/
 }
 
-
-//Fija a un hamster en orden desde el siguiente al último elegido
-void FollowPlayer::lockHamster() {
-	//Variable que contralará el recorrido de los hamsters
-	int start;
-	if (hamsId_ + 1 == hamsters_.size()) {
-		start = 0;
-	}
-	else {
-		start = hamsId_ + 1;
-	}
-
-	//Va comprobando cual es elegible;
-	lockedHamster_ = nullptr;
-	for (int i = start; i != hamsId_ && lockedHamster_ == nullptr; i++) {
-		//Si puede ser elegido
-		lockedHamState_ = hamsters_[i]->getComponent<HamsterStateMachine>();
-		if (!lockedHamState_->cantBeTargeted()) {
-			//Elige hamster
-			hamsId_ = i;
-			lockedHamster_ = hamsters_[i];
-			hamsterTr_ = lockedHamster_->getComponent<Transform>();
-		}
-		//Si llega al final, da la vuelta
-		if (i + 1 == hamsters_.size()) {
-			i = 0;
-		}
-		//Si es -1, entra en el ciclo de ids
-		if (hamsId_ == -1)
-			hamsId_ = 0;
-	}
-	//Si ninguno esta activo se cambia a iddle
-	if (lockedHamster_ == nullptr) {
-		lockedHamState_ = nullptr;
-		hamsterTr_ = nullptr;
-		hamsId_ = -1;
-	}
-}
-
-//Fija a un hamster concreto
-void FollowPlayer::lockHamster(int id) {
-	lockedHamster_ = hamsters_[id];
-	hamsterTr_ = lockedHamster_->getComponent<Transform>();
-	lockedHamState_ = lockedHamster_->getComponent<HamsterStateMachine>();
-}
 
 //Esta a rango de ataque
 bool FollowPlayer::isWithinAttackRange() {
@@ -105,7 +61,11 @@ void FollowPlayer::behave() {
 		// Cambia el foco si el actual muere o le da un infarto
 		auto& state = lockedHamState_->getState();
 		if (lockedHamState_->cantBeTargeted()) {
-			lockHamster();
+			//le pedira a su madre que le reasigne objetivo
+			//TODO MOM
+			//se pone en iddle (como parte de codigo defensivo, ya que
+			//al entrar en al lista por defecto deberia de estar en iddle)
+			owner_->SetBehavior(new IddleEnemy); //y chinpong
 		}
 		else if (enmState_->getState() != EnemyStates::ENM_STUNNED){ // si no cambia de hamster marcado y no está aturdido
 			auto& hamPos = hamsterTr_->getPos();
