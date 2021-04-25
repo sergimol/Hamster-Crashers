@@ -5,7 +5,6 @@
 #include <map>
 #include "../sdlutils/SDLUtils.h"
 #include "Transform.h"
-#include "Gravity.h"
 
 class CollisionDetec : public Component {
 public:
@@ -30,6 +29,5 @@ public:
 private:
 
 	Transform* tr_;
-	Gravity* grav_;
 };
 

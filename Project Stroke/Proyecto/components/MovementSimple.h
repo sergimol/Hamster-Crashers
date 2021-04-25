@@ -7,6 +7,7 @@
 #include "Animator.h"
 #include "EntityAttribs.h"
 #include "EnemyStateMachine.h"
+#include "CollisionDetec.h"
 #include "../utils/checkML.h"
 
 class MovementSimple : public Component {
@@ -15,7 +16,7 @@ public:
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 
 	MovementSimple() :
-		tr_(nullptr), speed_(), enmState_(nullptr), goalVel_(0, 0), lastDir_(1,0), timer(sdlutils().currRealTime()) {
+		tr_(nullptr), speed_(), enmState_(nullptr), goalVel_(0, 0), lastDir_(1,0), timer(sdlutils().currRealTime()), colDetec_(nullptr) {
 	}
 
 	virtual ~MovementSimple() {
@@ -45,6 +46,8 @@ private:
 	//Animator* anim_;
 	Vector2D speed_, goalVel_, lastDir_;
 	
-	std::map<KEYS, bool> keymapSimple;
+	std::map<KEYS, bool> keymapSimple_;
+
+	CollisionDetec* colDetec_;
 };
 

@@ -11,9 +11,6 @@
 void CollisionDetec::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
-
-	grav_ = entity_->getComponent<Gravity>();
-	assert(grav_ != nullptr);
 }
 
 void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPlayer) {
