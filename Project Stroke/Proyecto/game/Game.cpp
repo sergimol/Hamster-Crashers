@@ -1,4 +1,3 @@
-// This file is part of the course TPV2@UCM - Samir Genaim
 
 #include "Game.h"
 
@@ -107,9 +106,6 @@ void Game::init() {
 	//levelMngr->addComponent<NewScene>();
 	//Metemos al levelMngr en el Handler de levelMngr
 	mngr_->setHandler<LevelHandlr>(levelMngr);
-
-	mngr_->setHandler<Trans>(levelMngr);
-
 	
 
 	//Imagen de fondo fija
