@@ -413,6 +413,7 @@
     </ClCompile>
     <ClCompile Include="Proyecto\components\menuButtonManager.cpp">
       <Filter>Archivos de origen\components\UI</Filter>
+    </ClCompile>
     <ClCompile Include="Proyecto\components\GameStates.cpp">
       <Filter>Archivos de origen\components\StateMachine</Filter>
       </ClCompile>
@@ -698,7 +699,8 @@
       <Filter>Archivos de encabezado\Components\UI</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\menuButtonManager.h">
-      <Filter>Archivos de encabezado\Components\UI</Filter>
+      <Filter>Archivos de encabezado\Components\StateMachine</Filter>
+    </ClInclude>
     <ClInclude Include="Proyecto\components\GameStates.h">
       <Filter>Archivos de encabezado\Components\StateMachine</Filter>
       </ClCompile>
