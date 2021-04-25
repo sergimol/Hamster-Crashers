@@ -175,6 +175,12 @@
     <Filter Include="Archivos de origen\components\Entity\Enemy\Attack\BossAttack">
       <UniqueIdentifier>{8a2bd0dd-e5f6-42ec-ba66-8144e633bce3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Components\StateMachine">
+      <UniqueIdentifier>{452c2501-e7b8-445e-a96b-3d468b6efd8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\components\StateMachine">
+      <UniqueIdentifier>{39428833-c9e5-427c-ba1c-d756e38d9555}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -407,6 +413,8 @@
     </ClCompile>
     <ClCompile Include="Proyecto\components\menuButtonManager.cpp">
       <Filter>Archivos de origen\components\UI</Filter>
+    <ClCompile Include="Proyecto\components\GameStates.cpp">
+      <Filter>Archivos de origen\components\StateMachine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -688,6 +696,8 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\menuButtonManager.h">
       <Filter>Archivos de encabezado\Components\UI</Filter>
+    <ClInclude Include="Proyecto\components\GameStates.h">
+      <Filter>Archivos de encabezado\Components\StateMachine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

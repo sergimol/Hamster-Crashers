@@ -61,6 +61,8 @@ class NewScene;
 class Transition;
 class MenuButton;
 class menuButtonManager;
+class GameStates;
+
 #define _CMPS_LIST_  \
 	Transform,\
 	HamsterStateMachine, \
@@ -120,9 +122,10 @@ class menuButtonManager;
 	StrongFollowPlayer, \
 	EnemyStrongAttack, \
 	Parallax, \
-	Transition,\
 	MenuButton,\
-	menuButtonManager
+	menuButtonManager,\
+	Transition, \
+	GameStates
 
 //FollowPlayer, \
 
@@ -145,13 +148,15 @@ struct Hamster4;
 struct Camera__;
 struct Map;
 struct Trans;
+struct StateMachine;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
 					Hamster4, \
 					Camera__, \
 					Map, \
-					Trans
+					Trans, \
+					StateMachine
 
 
 //systems
