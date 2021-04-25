@@ -37,7 +37,11 @@ class EnemyMother : public Component {
 protected:
 public:
 	EnemyMother();
-	virtual ~EnemyMother() {};
+	virtual ~EnemyMother() {
+		for (int i = 0; i < numPlayers; i++) {
+			delete objetivesList.at(i);
+		}
+	};
 
 	void init() override;
 	void update() override;

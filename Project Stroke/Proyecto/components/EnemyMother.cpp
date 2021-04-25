@@ -119,24 +119,6 @@ void EnemyMother::changeFromAttackToAmbush() {
 	
 }
 
-//Fija a un hamster aleatorio
-/*
-void EnemyMother::lockHamster() {
-	int hamstId = sdlutils().rand().nextInt(0, hamsters_.size());
-	lockedHamster_ = hamsters_[hamstId];
-	hamsterTr_ = lockedHamster_->getComponent<Transform>();
-	lockedHamState_ = lockedHamster_->getComponent<HamsterStateMachine>();
-}
-*/
-
-//Fija a un hamster concreto
-/*
-void EnemyMother::lockHamster(int id) {
-	lockedHamster_ = hamsters_[id];
-	hamsterTr_ = lockedHamster_->getComponent<Transform>();
-	lockedHamState_ = lockedHamster_->getComponent<HamsterStateMachine>();
-}
-*/
 
 void EnemyMother::removeFromAttackList(int hamid, std::list<Entity*>::iterator it) {
 	it = objetivesList.at(hamid)->atacking.erase(it); //si se ha morido se quita, no se cambia ni nada, la lista se actualiza sola
