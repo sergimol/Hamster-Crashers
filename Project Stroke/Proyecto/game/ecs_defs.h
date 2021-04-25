@@ -126,7 +126,7 @@ class GameStates;
 	MenuButton,\
 	menuButtonManager,\
 	Transition, \
-	GameStates
+	GameStates, \
 	TriggerScene
 
 //FollowPlayer, \
@@ -157,7 +157,7 @@ struct StateMachine;
 					Hamster4, \
 					Camera__, \
 					Map, \
-					LevelHandlr
+					LevelHandlr, \
 					StateMachine
 
 
