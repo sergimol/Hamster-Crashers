@@ -59,6 +59,7 @@ class CollisionDetec;
 class Parallax;
 class NewScene;
 class Transition;
+class MenuButton;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -119,7 +120,8 @@ class Transition;
 	StrongFollowPlayer, \
 	EnemyStrongAttack, \
 	Parallax, \
-	Transition
+	Transition,\
+	MenuButton
 
 //FollowPlayer, \
 

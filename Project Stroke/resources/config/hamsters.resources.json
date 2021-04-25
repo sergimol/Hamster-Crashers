@@ -161,6 +161,22 @@
     {
       "id": "transition",
       "file": "resources/images/blackBackground.png"
+    },
+    {
+      "id": "localButton",
+      "file": "resources/images/menuSprites/localButton.png"
+    },
+    {
+      "id": "onlineButton",
+      "file": "resources/images/menuSprites/onlineButton.png"
+    },
+    {
+      "id": "optionsButton",
+      "file": "resources/images/menuSprites/optionsButton.png"
+    },
+    {
+      "id": "quitButton",
+      "file": "resources/images/menuSprites/quitButton.png"
     }
   ],
 
@@ -401,6 +417,28 @@
       "startFrameY": 0,
       "duration": 13,
       "cols": 16,
+      "rows": 1,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": ""
+    },
+    {
+      "id": "menuInit",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 17,
+      "cols": 112,
+      "rows": 1,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": ""
+    },
+    {
+      "id": "menuStatic",
+      "startFrameX": 18,
+      "startFrameY": 0,
+      "duration": 95,
+      "cols": 112,
       "rows": 1,
       "frameUpdate": 100,
       "loop": 0,
