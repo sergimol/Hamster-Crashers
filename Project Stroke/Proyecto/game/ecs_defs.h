@@ -122,7 +122,7 @@ class menuButtonManager;
 	Parallax, \
 	Transition,\
 	MenuButton,\
-menuButtonManager
+	menuButtonManager
 
 //FollowPlayer, \
 

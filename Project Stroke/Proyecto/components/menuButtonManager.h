@@ -3,9 +3,9 @@
 
 #include "../ecs/Component.h"
 #include "../ecs/Entity.h"
+#include "../ecs/Manager.h"
 
 #include "../sdlutils/SDLUtils.h"
-#include "EntityAttribs.h"
 #include "../sdlutils/InputHandler.h"
 
 #include "MenuButton.h"
@@ -17,11 +17,8 @@ public:
 	menuButtonManager(string menu);
 	virtual ~menuButtonManager() {};
 
+	void init() override;
 	void update() override;
-
-	void selected();
-	void deselected();
-	void pressed();
 
 
 private:

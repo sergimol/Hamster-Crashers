@@ -167,16 +167,32 @@
       "file": "resources/images/menuSprites/localButton.png"
     },
     {
+      "id": "localButtonEnter",
+      "file": "resources/images/menuSprites/localButtonEnter.png"
+    },
+    {
       "id": "onlineButton",
       "file": "resources/images/menuSprites/onlineButton.png"
+    },
+    {
+      "id": "onlineButtonEnter",
+      "file": "resources/images/menuSprites/onlineButtonEnter.png"
     },
     {
       "id": "optionsButton",
       "file": "resources/images/menuSprites/optionsButton.png"
     },
     {
+      "id": "optionsButtonEnter",
+      "file": "resources/images/menuSprites/optionsButtonEnter.png"
+    },
+    {
       "id": "quitButton",
       "file": "resources/images/menuSprites/quitButton.png"
+    },
+    {
+      "id": "quitButtonEnter",
+      "file": "resources/images/menuSprites/quitButtonEnter.png"
     },
     {
       "id": "soldier1",
@@ -435,7 +451,7 @@
       "rows": 1,
       "frameUpdate": 100,
       "loop": 0,
-      "chain": ""
+      "chain": "menuStatic"
     },
     {
       "id": "menuStatic",
@@ -445,7 +461,7 @@
       "cols": 112,
       "rows": 1,
       "frameUpdate": 100,
-      "loop": 0,
+      "loop": 1,
       "chain": ""
     },
     {

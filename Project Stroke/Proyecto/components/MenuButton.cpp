@@ -4,8 +4,8 @@
 MenuButton::MenuButton(std::string n, Vector2D position) :
 	name(n),
 	button_(&sdlutils().images().at(n + "Button")),
-	//	buttonEnter_(&sdlutils().images().at(n + "ButtonEnter")),
-		//buttonPressed_(&sdlutils().images().at(n + "ButtonPressed")),
+	buttonEnter_(&sdlutils().images().at(n + "ButtonEnter")),
+	//buttonPressed_(&sdlutils().images().at(n + "ButtonPressed")),
 	mainText(button_),
 	renderCoords(position)
 {
@@ -21,7 +21,7 @@ void MenuButton::render() {
 
 	if (!buttonSelected)
 		mainText = button_;
-	buttonSelected = false;	//Despues de renderizar, devolvemos el estado normal
+	//buttonSelected = false;	//Despues de renderizar, devolvemos el estado normal
 }
 
 void MenuButton::selected() {
@@ -31,4 +31,5 @@ void MenuButton::selected() {
 
 void MenuButton::pressed() {
 	mainText = buttonPressed_;
+	std::cout << "Mamawebaaaaso";
 }

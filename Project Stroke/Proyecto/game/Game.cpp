@@ -57,8 +57,25 @@ Game::~Game() {
 void Game::init() {
 
 	SDLUtils::init("Squeak Ship", 1920, 1010, "resources/config/hamsters.resources.json");
+
+	camera_ = { 0,0,1920, 1080 };
+	auto* camera = mngr_->addEntity();
+	camera->addComponent<Camera>(camera_);
+	mngr_->setHandler<Camera__>(camera);
+
 	//MENU	
 	auto* mainMenu = mngr_->addEntity();
+	/*mainMenu->addComponent<Animator>(
+		&sdlutils().images().at("menuSheet"),
+		1920,
+		1080,
+		1,
+		1,
+		220,
+		Vector2D(0, 0),
+		3
+		);*/
+	//mainMenu->addComponent<ControlHandler>(0);
 	mainMenu->addComponent<menuButtonManager>("mainMenu");
 
 
