@@ -32,6 +32,7 @@
 #include "../components/GhostCtrl.h"
 #include "../components/PossesionGame.h"
 #include "../components/Transition.h"
+#include "../components/GameStates.h"
 
 //PARA LAS COLISIONES CON TILE
 #include "../utils/Collisions.h"
@@ -62,6 +63,11 @@ void Game::init() {
 	auto* camera = mngr_->addEntity();
 	camera->addComponent<Camera>(camera_);
 	mngr_->setHandler<Camera__>(camera);
+
+	// Máquina de estados
+	auto* stateMachine = mngr_->addEntity();
+	stateMachine->addComponent<GameStates>();
+	mngr_->setHandler<StateMachine>(stateMachine);
 
 	// Mapa
 	auto* mapa = mngr_->addEntity();

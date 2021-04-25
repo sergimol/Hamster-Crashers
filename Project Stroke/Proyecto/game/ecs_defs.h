@@ -59,6 +59,7 @@ class CollisionDetec;
 class Parallax;
 class NewScene;
 class Transition;
+class GameStates;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -119,7 +120,8 @@ class Transition;
 	StrongFollowPlayer, \
 	EnemyStrongAttack, \
 	Parallax, \
-	Transition
+	Transition, \
+	GameStates
 
 //FollowPlayer, \
 
@@ -142,13 +144,15 @@ struct Hamster4;
 struct Camera__;
 struct Map;
 struct Trans;
+struct StateMachine;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
 					Hamster4, \
 					Camera__, \
 					Map, \
-					Trans
+					Trans, \
+					StateMachine
 
 
 //systems
