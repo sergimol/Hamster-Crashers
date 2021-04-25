@@ -2,7 +2,9 @@
 #include "Stroke.h"
 #include "FleeFromPlayer.h"
 
-IddleEnemy::IddleEnemy() {}
+IddleEnemy::IddleEnemy() :
+	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr), lockedHamster_(nullptr), hamsterTr_(nullptr), hamsId_(-1) {
+}
 
 void IddleEnemy::init() {
 	Entity* owEntity = owner_->getEntity();
@@ -12,6 +14,10 @@ void IddleEnemy::init() {
 	tr_ = owEntity->getComponent<Transform>();
 	assert(tr_ != nullptr);
 
+	enAtk_ = owEntity->getComponent<EnemyAttack>();
+	assert(enAtk_ != nullptr);
+
+	hamsters_ = owEntity->getMngr()->getPlayers();
 
 	//el puto iddle no necesita hacer lock hamster lockHamster(); // De momento un hamster concreto para manejar mejor
 	/*
@@ -71,6 +77,21 @@ void IddleEnemy::lockHamster(int id) {
 	lockedHamState_ = lockedHamster_->getComponent<HamsterStateMachine>();
 }
 
+//Esta a rango de ataque
+bool IddleEnemy::isWithinAttackRange() {
+	auto width = tr_->getW();
+	auto hamWidth = hamsterTr_->getW();
+
+	auto& hamPos = hamsterTr_->getPos();
+	auto& pos = tr_->getPos();
+	int hamX = hamPos.getX(),
+		hamY = hamPos.getY() + hamsterTr_->getH(),
+		x = pos.getX(),
+		y = pos.getY() + tr_->getH();
+
+	return((hamX /*+ rangeOffsetX_*/ + hamWidth * 2 >= x + width && hamX + hamWidth - rangeOffsetX_ <= x + width) &&
+		(hamY + rangeOffsetY_ >= y && hamY - rangeOffsetY_ / 10 <= y));
+}
 
 void IddleEnemy::behave() {
 	//no hay nada esta iddle es un fideo

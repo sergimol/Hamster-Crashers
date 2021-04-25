@@ -34,7 +34,6 @@
 #include "../components/Transition.h"
 #include "../components/menuButtonManager.h"
 #include "../components/GameStates.h"
-#include "../components/EnemyMother.h"
 
 //PARA LAS COLISIONES CON TILE
 #include "../utils/Collisions.h"
@@ -88,11 +87,6 @@ void Game::init() {
 	auto* stateMachine = mngr_->addEntity();
 	stateMachine->addComponent<GameStates>();
 	mngr_->setHandler<StateMachine>(stateMachine);
-	
-	//EnemyMother
-	auto* mother = mngr_->addEntity();
-	mother->addComponent<EnemyMother>();
-	mngr_->setHandler<Mother>(mother);
 
 	// Mapa
 	auto* mapa = mngr_->addEntity();

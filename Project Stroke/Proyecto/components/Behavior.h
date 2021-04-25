@@ -22,21 +22,11 @@ public:
 	virtual void init() {
 	}
 	virtual ~Behavior(){}
-	virtual void setOwner(EnemyBehaviour* ow);
-	virtual void setObjetive();
-
+	virtual void setOwner(EnemyBehaviour* ow) {
+		owner_ = ow;
+	}
 protected:
 	EnemyBehaviour* owner_; //le pediremos acceso a todas las componentes que vaya a necesitar cada Behavior para no sobrecargar
 							//aqui es mi pregunta de si es necesaria inclusion circular o no, con un par de chapuzas sera no circular
-	
-	int hamsId_ = 0; //creo que lo voy a quitar
-	MovementSimple* mov_; //Igual esto es major al reves, que el movement coja los datos del follow y se mueva en la dir que le indique
-
-	Transform* tr_;
-	Transform* hamsterTr_;
-
-	Entity* lockedHamster_;
-
-	HamsterStateMachine* lockedHamState_;
 };
 

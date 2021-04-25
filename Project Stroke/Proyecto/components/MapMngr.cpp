@@ -35,7 +35,6 @@
 #include "../components/Swallow.h"
 #include "../ecs/Camera.h"
 #include "../components/EnemyBehaviour.h"
-#include "../components/IddleEnemy.h"
 #include "../components/FollowPlayer.h"
 #include "../components/AmbushPlayer.h"
 #include "../components/FleeFromPlayer.h"
@@ -49,7 +48,6 @@
 #include "../components/Parallax.h"
 #include "../components/CollisionDetec.h"
 #include "../components/NewScene.h"
-#include "../components/EnemyMother.h"
 
 
 
@@ -296,38 +294,6 @@ void MapMngr::LoadEnemyRoom() {
 		auto& prop = object.getProperties();
 
 		if (name == "enemigo" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-			for (int i = 0; i < 8; i++) {
-
-			auto* enemy = mngr_->addEntity();
-			enemy->addComponent<Transform>(
-				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(), 240.0f, 370.0f, 0.0f, 1,1)->getFlip() = true;
-
-			enemy->addComponent<EnemyStateMachine>();
-			enemy->setGroup<Enemy>(true);
-
-			enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 5);
-
-			enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
-			enemy->addComponent<UI>("canelon", 4);
-
-			enemy->addComponent<EnemyAttack>();
-			enemy->addComponent<Knockback>();
-			enemy->addComponent<Gravity>();
-			enemy->addComponent<CollisionDetec>();
-			enemy->addComponent<MovementSimple>();
-
-			enemy->addComponent<EnemyBehaviour>(new IddleEnemy());
-
-			enemies.push_back(enemy);
-			//anyadir a los cuidados de la madre
-			mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addEnemy(enemy);
-			/*enemy->addComponent<FollowPlayer>();
-			enemy->addComponent<EnemyStun>();*/
-			numberEnemyRoom++;
-			}
-		}
-		else if (name == "enemigoFuerte" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			//auto* enemy = mngr_->addEntity();
 			//enemy->addComponent<Transform>(
 			//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
@@ -338,25 +304,22 @@ void MapMngr::LoadEnemyRoom() {
 
 			//enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 5);
 
-			//enemy->addComponent<Image>(&sdlutils().images().at("enemigoFuerte"));
+			//enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
 			//enemy->addComponent<UI>("canelon", 4);
 
-			//enemy->addComponent<EnemyStrongAttack>();
 			//enemy->addComponent<EnemyAttack>();
 			//enemy->addComponent<Knockback>();
+			//enemy->addComponent<Gravity>();
+			//enemy->addComponent<CollisionDetec>();
 			//enemy->addComponent<MovementSimple>();
 
-			//enemy->addComponent<EnemyBehaviour>(new IddleEnemy());
+			//enemy->addComponent<EnemyBehaviour>(new FollowPlayer());
 
 			//enemies.push_back(enemy);
-
-			////anyadir a los cuidados de la madre
-			//mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addEnemy(enemy);
-			///*enemy->addComponent<FollowPlayer>();
-			//enemy->addComponent<EnemyStun>();*/
+			//enemy->addComponent<EnemyStun>();
 			//numberEnemyRoom++;
 		}
-		else if (name == "firstBoss" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
+		else if (name == "enemigoFuerte" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			//auto* enemy = mngr_->addEntity();
 			//enemy->addComponent<Transform>(
 			//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
@@ -474,9 +437,6 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 	//Lo a�adimos al vector de entidades
 	players.push_back(hamster1);
 
-	//añadirlo tmb a la lista de control de enemyMother
-	mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addObjetive(hamster1);
-	
 	//Para acceder facilmente le metemos en Hamster1 de Handelers
 	if (name == "sardinilla") mngr_->setHandler<Hamster1>(hamster1);
 	else if (name == "canelon") mngr_->setHandler<Hamster2>(hamster1);
