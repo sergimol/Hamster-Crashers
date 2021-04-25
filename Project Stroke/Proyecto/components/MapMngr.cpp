@@ -47,7 +47,7 @@
 #include "../components/RandomStrokeStrategy.h"
 #include "../components/Parallax.h"
 #include "../components/CollisionDetec.h"
-#include "../components/NewScene.h"
+#include "../components/TriggerScene.h"
 
 
 
@@ -461,5 +461,5 @@ void MapMngr::newSceneTrigger(string newScene, const tmx::Object& object) {
 	auto trigger = entity_->getMngr()->addEntity();
 	trigger->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 1, 1);
-	trigger->addComponent<NewScene>(newScene);
+	trigger->addComponent<TriggerScene>(newScene);
 }

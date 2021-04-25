@@ -378,9 +378,6 @@
     <ClCompile Include="Proyecto\components\RandomStrokeStrategy.cpp">
       <Filter>Archivos de origen\components\Entity\Hamster\Stroke</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\NewScene.cpp">
-      <Filter>Archivos de origen\components\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="Proyecto\components\CollisionDetec.cpp">
       <Filter>Archivos de origen\components\Entity\Hamster\Movement&amp;Control</Filter>
     </ClCompile>
@@ -401,6 +398,12 @@
     </ClCompile>
     <ClCompile Include="Proyecto\components\AnimEnemyStateMachine.cpp">
       <Filter>Archivos de origen\components\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\TriggerScene.cpp">
+      <Filter>Archivos de origen\components\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\ImageSecuence.cpp">
+      <Filter>Archivos de origen\components\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -656,9 +659,6 @@
     <ClInclude Include="Proyecto\components\CollisionDetec.h">
       <Filter>Archivos de encabezado\Components\Entity\Hamster\Movement&amp;Control</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\NewScene.h">
-      <Filter>Archivos de encabezado\Components\Entity</Filter>
-    </ClInclude>
     <ClInclude Include="Proyecto\components\IddleEnemy.h">
       <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\Behavior</Filter>
     </ClInclude>
@@ -676,6 +676,12 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\AnimEnemyStateMachine.h">
       <Filter>Archivos de encabezado\Components\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\TriggerScene.h">
+      <Filter>Archivos de encabezado\Components\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\ImageSecuence.h">
+      <Filter>Archivos de encabezado\Components\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

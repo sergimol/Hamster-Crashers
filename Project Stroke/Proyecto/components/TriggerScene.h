@@ -6,12 +6,12 @@
 
 using namespace std;
 
-class NewScene : public Component {
+class TriggerScene : public Component {
 public:
-	NewScene(string newScene) :nameScene(newScene),  canChange(true) {
+	TriggerScene(string newScene) :nameScene(newScene),  canChange(true) {
 	};
 	
-	virtual ~NewScene() {};
+	virtual ~TriggerScene() {};
 
 	virtual void init() override;
 
@@ -23,7 +23,5 @@ private:
 	string nameScene;
 	Transform* tr_;
 	bool canChange;
-
-	void ChangeScene();
 };
 

@@ -67,18 +67,17 @@ void Game::init() {
 	auto* mapa = mngr_->addEntity();
 	mapa->addComponent<MapMngr>();
 	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Mapa.tmx");
-
+	//Metemos al mapa en el Handler de Map
 	mngr_->setHandler<Map>(mapa);
 
-	// Transition
-	auto* levelMngr = mngr_->addEntity();
+	// LevelMngr: lleva a cabo la transicion entre niveles
+	auto* levelMngr = mngr_->addFrontGround();
 	levelMngr->addComponent<Transition>(&sdlutils().images().at("transition"));
-	//Metemos al mapa en el Handler de Map
-
-	mngr_->setHandler<Trans>(levelMngr);
+	//levelMngr->addComponent<NewScene>();
+	//Metemos al levelMngr en el Handler de levelMngr
+	mngr_->setHandler<LevelHandlr>(levelMngr);
 
 	
-
 	//Imagen de fondo fija
 	/*auto* background = mngr_->addEntity();
 	background->addComponent<Transform>(
