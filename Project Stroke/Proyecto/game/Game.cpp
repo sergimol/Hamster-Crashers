@@ -32,6 +32,8 @@
 #include "../components/GhostCtrl.h"
 #include "../components/PossesionGame.h"
 #include "../components/Transition.h"
+#include "../components/menuButtonManager.h"
+#include "../components/GameStates.h"
 
 //PARA LAS COLISIONES CON TILE
 #include "../utils/Collisions.h"
@@ -57,11 +59,34 @@ void Game::init() {
 
 	SDLUtils::init("Squeak Ship", 1920, 1010, "resources/config/hamsters.resources.json");
 
+
+	//MENU	
+	/*auto* mainMenu = mngr_->addEntity();
+	/*mainMenu->addComponent<Animator>(
+		&sdlutils().images().at("menuSheet"),
+		1920,
+		1080,
+		1,
+		1,
+		220,
+		Vector2D(0, 0),
+		3
+		);*/
+	//mainMenu->addComponent<ControlHandler>(0);
+	//mainMenu->addComponent<menuButtonManager>("mainMenu");
+	
+
+	
 	//Camara
 	camera_ = { 0,0,1920, 1080 };
 	auto* camera = mngr_->addEntity();
 	camera->addComponent<Camera>(camera_);
 	mngr_->setHandler<Camera__>(camera);
+
+	// Máquina de estados
+	auto* stateMachine = mngr_->addEntity();
+	stateMachine->addComponent<GameStates>();
+	mngr_->setHandler<StateMachine>(stateMachine);
 
 	// Mapa
 	auto* mapa = mngr_->addEntity();
@@ -77,7 +102,10 @@ void Game::init() {
 	//Metemos al levelMngr en el Handler de levelMngr
 	mngr_->setHandler<LevelHandlr>(levelMngr);
 
+	mngr_->setHandler<Trans>(levelMngr);
+
 	
+
 	//Imagen de fondo fija
 	/*auto* background = mngr_->addEntity();
 	background->addComponent<Transform>(
@@ -351,6 +379,6 @@ void Game::merge(vector<Entity*>& vec, int l, int m, int r) {
 }
 
 void Game::changeScene(string newScene) {
-	
+
 }
 

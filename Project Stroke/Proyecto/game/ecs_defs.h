@@ -60,6 +60,9 @@ class Parallax;
 class ImageSecuence;
 class Transition;
 class TriggerScene;
+class MenuButton;
+class menuButtonManager;
+class GameStates;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -120,7 +123,10 @@ class TriggerScene;
 	StrongFollowPlayer, \
 	EnemyStrongAttack, \
 	Parallax, \
+	MenuButton,\
+	menuButtonManager,\
 	Transition, \
+	GameStates
 	TriggerScene
 
 //FollowPlayer, \
@@ -144,6 +150,7 @@ struct Hamster4;
 struct Camera__;
 struct Map;
 struct LevelHandlr;
+struct StateMachine;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
@@ -151,6 +158,7 @@ struct LevelHandlr;
 					Camera__, \
 					Map, \
 					LevelHandlr
+					StateMachine
 
 
 //systems
