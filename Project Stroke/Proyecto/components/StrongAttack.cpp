@@ -59,7 +59,9 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 
 			//Y comprobamos si colisiona y si no es invulnerable
 			if (!eAttribs->checkInvulnerability() && Collisions::collides(Vector2D(rectPlayer.x, rectPlayer.y), rectPlayer.w, rectPlayer.h, newPos, eTR->getW(), eTR->getH())) {
-				if (abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < MARGINTOATTACK) {
+				
+				//Comprobamos si está en la misma Z o relativamente cerca
+				if (eAttribs->ignoresMargin() || (abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < MARGINTOATTACK)) {
 
 					EntityAttribs* playerAttribs = entity_->getComponent<EntityAttribs>();
 					int dmg = playerAttribs->getDmg();

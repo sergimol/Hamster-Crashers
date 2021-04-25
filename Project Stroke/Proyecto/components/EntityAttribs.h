@@ -14,8 +14,8 @@ const int MARGINTOATTACK = 70;
 class EntityAttribs: public Component {
 public:
 	EntityAttribs();
-
 	EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg);
+	EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty);
 
 	virtual ~EntityAttribs() {
 	}
@@ -74,7 +74,10 @@ public:
 		return critDamage_;
 	}
 	inline bool checkInvulnerability() {
-		return (invincible_ || abilityInvul_);
+		return (afterDamageInvul_ || invincibility_);
+	}
+	inline bool ignoresMargin() {
+		return ignoreMargin_;
 	}
 
 	//Setters
@@ -87,8 +90,8 @@ public:
 	inline void resetCriticProb() {
 		critProbability_ = 0.05;
 	}
-	inline void setAbilityInvul(bool b) {
-		abilityInvul_ = b;
+	inline void setInvincibility(bool i) {
+		invincibility_ = i;
 	}
 
 private:
@@ -109,12 +112,13 @@ private:
 	float critDamage_;
 	float strokeResist_;
 	float attackRange_;
+	bool ignoreMargin_;
 	float cadence_;
-	bool abilityInvul_; 
 
 	//Variables para tener invulnerabilidad tras una habilidad
-	bool invincible_;
-	float invincibilityTime_;
+	bool invincibility_;
+	bool afterDamageInvul_;
+	float damageInvulTime_;
 
 	bool canPoison_;
 	bool poisoned_;

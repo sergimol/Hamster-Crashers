@@ -11,6 +11,7 @@ EntityAttribs::EntityAttribs() :
 	attackRange_(0.0),
 	cadence_(0.0),
 	damage_(20),
+	ignoreMargin_(false),
 
 	critProbability_(0.05),
 	maxCrit_(0.2),
@@ -25,9 +26,9 @@ EntityAttribs::EntityAttribs() :
 	timeLastUpdate_(sdlutils().currRealTime()),
 	updateCD_(1500),
 
-	invincible_(false),
-	invincibilityTime_(sdlutils().currRealTime()),
-	abilityInvul_(false),
+	invincibility_(false),
+	afterDamageInvul_(false),
+	damageInvulTime_(sdlutils().currRealTime()),
 
 	hms_(nullptr),
 	hmsText_(nullptr),
@@ -45,6 +46,7 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	attackRange_(range),
 	cadence_(0.0),
 	damage_(dmg),
+	ignoreMargin_(false),
 
 	critProbability_(0.05),
 	maxCrit_(0.2),
@@ -59,9 +61,44 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	timeLastUpdate_(sdlutils().currRealTime()),
 	updateCD_(1500),
 
-	invincible_(false),
-	invincibilityTime_(sdlutils().currRealTime()),
-	abilityInvul_(false),
+	invincibility_(false),
+	afterDamageInvul_(false),
+	damageInvulTime_(sdlutils().currRealTime()),
+
+	hms_(nullptr),
+	hmsText_(nullptr),
+	enmState_(nullptr),
+	tr_(nullptr)
+{}
+
+EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty) :
+	playerNumber_(number),
+	id_(id),
+	health_(life),
+	maxHealth_(life),
+	velocity_(speed),
+	strokeResist_(0.0),
+	attackRange_(range),
+	cadence_(0.0),
+	damage_(dmg),
+	ignoreMargin_(igMargin),
+
+	critProbability_(0.05),
+	maxCrit_(0.2),
+	critDamage_(1.5),
+
+	poisonDamage_(2),
+	poisonProbability_(poisonProb),
+	canPoison_(poisonProbability_ > 0),
+	poisoned_(false),
+	poisonTime_(sdlutils().currRealTime()),
+	poisonCD_(7000),
+	timeLastUpdate_(sdlutils().currRealTime()),
+	updateCD_(1500),
+
+	invincibility_(invincibilty),
+	afterDamageInvul_(false),
+	damageInvulTime_(sdlutils().currRealTime()),
 
 	hms_(nullptr),
 	hmsText_(nullptr),
@@ -85,8 +122,8 @@ void EntityAttribs::init() {
 
 void EntityAttribs::update() {
 	//Timer de invencibilidad
-	if (invincible_ && sdlutils().currRealTime() > invincibilityTime_ + INVINCIBLECD) {
-		invincible_ = false;
+	if (afterDamageInvul_ && sdlutils().currRealTime() > damageInvulTime_ + INVINCIBLECD) {
+		afterDamageInvul_ = false;
 	}
 	//Timer de envenenamiento
 	if (poisoned_) {
@@ -106,8 +143,8 @@ void EntityAttribs::update() {
 bool EntityAttribs::recieveDmg(int dmg) {
 	health_ -= dmg;
 	//Timer de invulnerabilidad
-	invincibilityTime_ = sdlutils().currRealTime();
-	invincible_ = true;
+	damageInvulTime_ = sdlutils().currRealTime();
+	afterDamageInvul_ = true;
 	//Actualizamos la healthBar
 	if (entity_->hasComponent<UI>())
 		entity_->getComponent<UI>()->bar(-dmg);
@@ -145,7 +182,7 @@ void EntityAttribs::die() {
 	Entity* e = entity_->getMngr()->addEntity();
 
 	//Le metemos un transform para su posicion
-	e->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip(),tr_->getScaleW(),tr_->getScaleH());
+	e->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip(), tr_->getScaleW(), tr_->getScaleH());
 
 	//Y reproducimos la animacion de muerto
 	e->addComponent<Animator>(&sdlutils().images().at("sardinillaSheet"),

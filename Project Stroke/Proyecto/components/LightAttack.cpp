@@ -65,7 +65,7 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 			if (!eAttribs->checkInvulnerability() && Collisions::collides(Vector2D(rectPlayer.x, rectPlayer.y), rectPlayer.w, rectPlayer.h, newPos, eTR->getW(), eTR->getH())) {
 
 				//Comprobamos si está en la misma Z o relativamente cerca
-				if (abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < MARGINTOATTACK) {
+				if (eAttribs->ignoresMargin() || (abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < MARGINTOATTACK)) {
 					EntityAttribs* playerAttribs = entity_->getComponent<EntityAttribs>();
 					int dmg = playerAttribs->getDmg();
 					if (finCombo) {

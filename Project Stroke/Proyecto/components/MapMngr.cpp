@@ -100,7 +100,7 @@ void MapMngr::loadNewMap(string map) {
 		collider = new bool* [mapDimensions_.x];
 		for (int i = 0; i < mapDimensions_.x; i++)
 		{
-			collider[i] = new bool[mapDimensions_.y] {false};
+			collider[i] = new bool[mapDimensions_.y]{ false };
 		}
 
 		//Dimensiones de los tiles
@@ -349,18 +349,17 @@ void MapMngr::LoadEnemyRoom() {
 			auto* enemy = mngr_->addEntity();
 			enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(),/* 5*23.27f*/256.0f, 5*256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
+				Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
 
 			enemy->addComponent<EnemyStateMachine>();
 			enemy->setGroup<Enemy>(true);
 
-			enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20);
+			enemy->addComponent<EntityAttribs>(700, 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true);
 
 			enemy->addComponent<Image>(&sdlutils().images().at("firstBoss"));
 			enemy->addComponent<UI>("canelon", 4);
 
 			enemy->addComponent<FirstBossAttack>();
-			enemy->addComponent<Knockback>();
 			enemy->addComponent<MovementSimple>();
 
 			enemy->addComponent<EnemyBehaviour>(new FirstBossBehaviour());
@@ -383,7 +382,7 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 
 	hamster1->addComponent<Transform>(
 		Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale),
-		Vector2D(), 256.0f, 256.0f, 0.0f, 1,1);
+		Vector2D(), 256.0f, 256.0f, 0.0f, 1, 1);
 	hamster1->addComponent<HamsterStateMachine>();
 
 	hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 0, 15, 20);
