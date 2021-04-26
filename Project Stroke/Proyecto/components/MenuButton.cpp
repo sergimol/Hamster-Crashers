@@ -1,32 +1,50 @@
 #include "MenuButton.h"
 
 
-MenuButton::MenuButton(std::string n, Vector2D position) :
-	name(n),
-	button_(&sdlutils().images().at(n + "Button")),
-	buttonEnter_(&sdlutils().images().at(n + "ButtonEnter")),
-	//buttonPressed_(&sdlutils().images().at(n + "ButtonPressed")),
-	mainText(button_),
-	renderCoords(position)
+MenuButton::MenuButton(std::string n, Vector2D position, int stateNum) :
+	buttonName_(n),
+	renderCoords_(position),
+	stateNumber_(stateNum)
 {
-	dest.x = renderCoords.getX();
-	dest.y = renderCoords.getY();
-	dest.w = mainText->width();
-	dest.h = mainText->height();
+	button_ = &sdlutils().images().at(buttonName_ + "Button");
+	buttonEnter_ = &sdlutils().images().at(buttonName_ + "ButtonEnter");
+
+	mainText = button_;
+
+	dest_.x = renderCoords_.getX();
+	dest_.y = renderCoords_.getY();
+	dest_.w = mainText->width();
+	dest_.h = mainText->height();
+}
+
+void MenuButton::init() {
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
 }
 
 void MenuButton::render() {
-	//Renderizamos el boton
-	mainText->render(dest);
+	if ((int)state_->getState() == stateNumber_) {
+		
+		/*if (!buttonSelected_)
+			mainText = button_;*/
+		
+		//Renderizamos el boton
+		if (!buttonSelected_)
+			button_->render(dest_);
+		else
+			buttonEnter_->render(dest_);
 
-	if (!buttonSelected)
-		mainText = button_;
-	//buttonSelected = false;	//Despues de renderizar, devolvemos el estado normal
+		//buttonSelected_ = false;	//Despues de renderizar, devolvemos el estado normal
+	}
 }
 
 void MenuButton::selected() {
 	mainText = buttonEnter_;
-	buttonSelected = true;
+	buttonSelected_ = true;
+}
+
+void MenuButton::exited() {
+	mainText = button_;
+	buttonSelected_ = false;
 }
 
 void MenuButton::pressed() {

@@ -10,16 +10,17 @@
 
 #include "MenuButton.h"
 
-class menuButtonManager : public Component {
+class MenuButtonManager: public Component{
 public:
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 
-	menuButtonManager(string menu);
-	virtual ~menuButtonManager() {};
+	MenuButtonManager(string menu);
+	virtual ~MenuButtonManager() {};
 
 	void init() override;
 	void update() override;
 
+	void updateKeymap(KEYS x, bool is);
 
 private:
 	string MenuMode;
@@ -31,7 +32,6 @@ private:
 	Vector2D buttonsMagnitude;
 	vector<Entity*> buttons;
 
-	void updateKeymap(KEYS x, bool is);
 
 	//Input
 	std::map<KEYS, bool> keymap;

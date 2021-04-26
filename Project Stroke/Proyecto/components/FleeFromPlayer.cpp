@@ -5,8 +5,7 @@
 #include "AmbushPlayer.h"
 
 FleeFromPlayer::FleeFromPlayer() :
-	mov_(nullptr), tr_(nullptr), rangeOffsetX_(600), rangeOffsetY_(100), rangeOffset_(50), lockedHamState_(nullptr),
-	lockedHamster_(nullptr), hamsterTr_(nullptr), hamsId_(-1), enmState_(nullptr){
+	 rangeOffsetX_(600), rangeOffsetY_(100), rangeOffset_(50) {
 }
 
 void FleeFromPlayer::init() {

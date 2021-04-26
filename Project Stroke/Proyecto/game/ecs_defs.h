@@ -57,13 +57,15 @@ class StrongFollowPlayer;
 class BackGround;
 class CollisionDetec;
 class Parallax;
-class NewScene;
+class ImageSecuence;
 class Transition;
+class TriggerScene;
 class MenuButton;
-class menuButtonManager;
+class MenuButtonManager;
 class GameStates;
 class ShadowFollow;
 class Shadow;
+class EnemyMother;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -120,15 +122,17 @@ class Shadow;
 	FollowPlayer, \
 	BackGround, \
 	CollisionDetec, \
-	NewScene, \
+	ImageSecuence, \
 	StrongFollowPlayer, \
 	EnemyStrongAttack, \
 	Parallax, \
 	MenuButton,\
-	menuButtonManager,\
+	MenuButtonManager,\
 	Transition, \
 	GameStates, \
+	EnemyMother, \
 	ShadowFollow, \
+	TriggerScene
 	Shadow
 
 // groups
@@ -149,16 +153,20 @@ struct Hamster3;
 struct Hamster4;
 struct Camera__;
 struct Map;
-struct Trans;
+struct LevelHandlr;
 struct StateMachine;
+struct Mother;
+struct PauseMenu;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
 					Hamster4, \
 					Camera__, \
 					Map, \
-					Trans, \
-					StateMachine
+					StateMachine, \
+					LevelHandlr, \
+					Mother, \
+					PauseMenu
 
 
 //systems

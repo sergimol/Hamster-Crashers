@@ -1,4 +1,3 @@
-// This file is part of the course TPV2@UCM - Samir Genaim
 
 #include "Game.h"
 
@@ -34,6 +33,7 @@
 #include "../components/Transition.h"
 #include "../components/menuButtonManager.h"
 #include "../components/GameStates.h"
+#include "../components/EnemyMother.h"
 
 //PARA LAS COLISIONES CON TILE
 #include "../utils/Collisions.h"
@@ -59,9 +59,13 @@ void Game::init() {
 
 	SDLUtils::init("Squeak Ship", 1920, 1010, "resources/config/hamsters.resources.json");
 
+	//Máquina de estados
+	auto* stateMachine = mngr_->addEntity();
+	stateMachine->addComponent<GameStates>();
+	mngr_->setHandler<StateMachine>(stateMachine);
 
 	//MENU	
-	/*auto* mainMenu = mngr_->addEntity();
+	auto* pauseMenu = mngr_->addEntity();
 	/*mainMenu->addComponent<Animator>(
 		&sdlutils().images().at("menuSheet"),
 		1920,
@@ -72,9 +76,8 @@ void Game::init() {
 		Vector2D(0, 0),
 		3
 		);*/
-	//mainMenu->addComponent<ControlHandler>(0);
-	//mainMenu->addComponent<menuButtonManager>("mainMenu");
-	
+	pauseMenu->addComponent<MenuButtonManager>("pauseMenu");	//mainMenu, pauseMenu o hamsterMenu
+	mngr_->setHandler<PauseMenu>(pauseMenu);
 
 	
 	//Camara
@@ -83,25 +86,26 @@ void Game::init() {
 	camera->addComponent<Camera>(camera_);
 	mngr_->setHandler<Camera__>(camera);
 
-	// Máquina de estados
-	auto* stateMachine = mngr_->addEntity();
-	stateMachine->addComponent<GameStates>();
-	mngr_->setHandler<StateMachine>(stateMachine);
+	 
+	
+	//EnemyMother
+	auto* mother = mngr_->addEntity();
+	mother->addComponent<EnemyMother>();
+	mngr_->setHandler<Mother>(mother);
 
 	// Mapa
 	auto* mapa = mngr_->addEntity();
 	mapa->addComponent<MapMngr>();
 	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Mapa.tmx");
-
+	//Metemos al mapa en el Handler de Map
 	mngr_->setHandler<Map>(mapa);
 
-	// Transition
-	auto* levelMngr = mngr_->addEntity();
+	// LevelMngr: lleva a cabo la transicion entre niveles
+	auto* levelMngr = mngr_->addFrontGround();
 	levelMngr->addComponent<Transition>(&sdlutils().images().at("transition"));
 	//Metemos al mapa en el Handler de Map
 
-	mngr_->setHandler<Trans>(levelMngr);
-	
+	mngr_->setHandler<LevelHandlr>(levelMngr);	
 }
 
 void Game::update() {

@@ -127,6 +127,10 @@
       "file": "resources/images/tiled/collisionTileset.png"
     },
     {
+      "id": "demoTileset",
+      "file": "resources/images/tiled/demoTileset.png"
+    },
+    {
       "id": "q",
       "file": "resources/images/tecla_Q.png"
     },
@@ -201,6 +205,54 @@
     {
       "id": "shadow",
       "file": "resources/images/shadow.png"
+    },
+    {
+      "id": "sardinillaButton",
+      "file": "resources/images/menuSprites/sardinillaButton.png"
+    },
+    {
+      "id": "sardinillaButtonEnter",
+      "file": "resources/images/menuSprites/sardinillaButtonEnter.png"
+    },
+    {
+      "id": "ketaButton",
+      "file": "resources/images/menuSprites/ketaButton.png"
+    },
+    {
+      "id": "ketaButtonEnter",
+      "file": "resources/images/menuSprites/ketaButtonEnter.png"
+    },
+    {
+      "id": "monchiButton",
+      "file": "resources/images/menuSprites/monchiButton.png"
+    },
+    {
+      "id": "monchiButtonEnter",
+      "file": "resources/images/menuSprites/monchiButtonEnter.png"
+    },
+    {
+      "id": "canelonButton",
+      "file": "resources/images/menuSprites/canelonButton.png"
+    },
+    {
+      "id": "canelonButtonEnter",
+      "file": "resources/images/menuSprites/canelonButtonEnter.png"
+    },
+    {
+      "id": "level1background1",
+      "file": "resources/images/backgrounds/level1/level1parallax1.jpg"
+    },
+    {
+      "id": "level1background2",
+      "file": "resources/images/backgrounds/level1/level1parallax2.png"
+    },
+    {
+      "id": "level1background3",
+      "file": "resources/images/backgrounds/level1/level1parallax3.png"
+    },
+    {
+      "id": "level1background4",
+      "file": "resources/images/backgrounds/level1/level1parallax4.png"
     }
   ],
 
@@ -318,7 +370,7 @@
       "id": "sardinilla_light_combo",
       "startFrameX": 7,
       "startFrameY": 1,
-      "duration": 6,
+      "duration": 7,
       "cols": 10,
       "rows": 11,
       "frameUpdate": 50,
@@ -329,7 +381,7 @@
       "id": "sardinilla_strong_attack",
       "startFrameX": 3,
       "startFrameY": 2,
-      "duration": 6,
+      "duration": 7,
       "cols": 10,
       "rows": 11,
       "frameUpdate": 70,
@@ -340,10 +392,10 @@
       "id": "sardinilla_strong_combo",
       "startFrameX": 9,
       "startFrameY": 2,
-      "duration": 9,
+      "duration": 10,
       "cols": 10,
       "rows": 11,
-      "frameUpdate": 100,
+      "frameUpdate": 60,
       "loop": 1,
       "chain": ""
     },

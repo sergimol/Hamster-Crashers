@@ -16,7 +16,7 @@
 using namespace std;
 class Game;
 
-const int TAM_CELDA = 16;
+const int TAM_CELDA = 64;
 
 class MapMngr : public Component
 {
@@ -35,7 +35,7 @@ private:
 	int Room;							//Guarda la habitación en la que se encuentran los jugadores
 	int numberEnemyRoom;				//Guarda la cantidad de enemigos que hay por sala
 	//void Refresh();
-	int scale = 6;
+	int scale = 3.8;
 	std::vector<tmx::Object> TriggerftCamera;
 
 	void addHamster(const tmx::Object& obj);

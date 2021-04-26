@@ -12,6 +12,7 @@ public:
 	enum States
 	{
 		MAINMENU,
+		SELECTION,
 		PAUSE,
 		RUNNING,
 		CREDITS

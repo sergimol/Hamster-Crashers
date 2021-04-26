@@ -1,9 +1,10 @@
 #include "EnemyBehaviour.h"
 #include "Stroke.h"
+#include "EnemyMother.h"
 
 EnemyBehaviour::EnemyBehaviour(Behavior* auxbh) :
 	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr), lockedHamster_(nullptr),
-	hamsterTr_(nullptr), bh_(auxbh), bossAtk_(nullptr), enStrongAtk_(nullptr) {
+	hamsterTr_(nullptr), bh_(auxbh), bossAtk_(nullptr), enStrongAtk_(nullptr), hamId_(NULL), list(NULL) {
 }
 
 void EnemyBehaviour::init() {
@@ -21,10 +22,10 @@ void EnemyBehaviour::init() {
 
 	hamsters_ = entity_->getMngr()->getPlayers();
 
-	lockHamster(); // De momento un hamster concreto para manejar mejor
-	assert(lockedHamster_ != nullptr);
-	assert(lockedHamState_ != nullptr);
-	assert(hamsterTr_ != nullptr);
+	//le pregunta a madre a quien debe fijar //le va a pasar la id del hamster y listo
+	int id = 0;
+	//ya debe de saber cual es la id
+	lockHamster(id); // De momento un hamster concreto para manejar mejor
 
 	bh_->setOwner(this);
 	bh_->init();
@@ -37,15 +38,6 @@ void EnemyBehaviour::SetBehavior(Behavior* bs) {
 	bh_ = bs;
 	bh_->setOwner(this);
 	bh_->init();
-}
-
-
-//Fija a un hamster aleatorio
-void EnemyBehaviour::lockHamster() {
-	int hamstId = sdlutils().rand().nextInt(0, hamsters_.size());
-	lockedHamster_ = hamsters_[hamstId];
-	hamsterTr_ = lockedHamster_->getComponent<Transform>();
-	lockedHamState_ = lockedHamster_->getComponent<HamsterStateMachine>();
 }
 
 //Fija a un hamster concreto
@@ -81,7 +73,7 @@ void EnemyBehaviour::update() {
 
 
 void EnemyBehaviour::onEnable() {
-	lockHamster();
+	//lockHamster();
 }
 
 void EnemyBehaviour::onDisable() {
@@ -92,4 +84,27 @@ void EnemyBehaviour::onDisable() {
 	mov_->updateKeymap(MovementSimple::UP, false);
 
 	lockedHamster_ = nullptr;
+}
+
+void EnemyBehaviour::setHamId(int hId, std::list<Entity*>::iterator it, char l) {
+	hamId_ = hId;
+	listIterator = it; //es para luego hacer el quitado de la lista que no es una pila, si no un vector del que s epueden quitar o meter entidades desde cualquier direccion
+	lockHamster(hId);
+	bh_->setObjetive();
+	list = l;
+}
+void EnemyBehaviour::die() {
+	if (list == 'a') {
+		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAttackList(hamId_, listIterator);
+	}
+	else if (list == 'b') {
+		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAmbushList(hamId_, listIterator);
+	}
+	//tiene que distinguir que tipo de behavior tiene,
+	//madre de dios no hay manera de comprobarlo directamente esto es muy doloroso
+	//if (bh_ == )
+}
+void EnemyBehaviour::changeToAmbush() {
+	if (list == 'a')
+	entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->changeFromAttackToAmbush(hamId_, listIterator);
 }
