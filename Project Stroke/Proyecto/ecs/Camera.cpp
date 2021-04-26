@@ -14,8 +14,6 @@ void Camera::update() {
 }
 
 void Camera::checkBounds() {
-	entity_->getMngr()
-
 
 	if (camera_.x < 0)
 		camera_.x = 0;
@@ -25,7 +23,7 @@ void Camera::checkBounds() {
 	if (camera_.y < -205)
 		camera_.y = -205;
 	else if (camera_.y + camera_.h > 384 * 3.8f)
-		camera_.y = (350 * 3.8f) - camera_.h;
+		camera_.y = (384 * 3.8f) - camera_.h;
 }
 
 void Camera::followPlayer() {
@@ -37,7 +35,7 @@ void Camera::followPlayer() {
 	for (Entity* e : players_) {
 		auto& playerpos = e->getComponent<Transform>()->getPos();
 		// Operación para calcular el punto medio con más jugadores
-		camPos = camPos + playerpos;
+		camPos = camPos + playerpos + Vector2D(e->getComponent<Transform>()->getW(), e->getComponent<Transform>()->getH()) / 2;
 		players++;
 	}
 	//Actualizamos la posicion de la camara
@@ -91,7 +89,7 @@ Vector2D Camera::newObjetivo() {
 	for (Entity* e : players_) {
 		auto& playerpos = e->getComponent<Transform>()->getPos();
 		// Operación para calcular el punto medio con más jugadores
-		camPos = camPos + playerpos;
+		camPos = camPos + playerpos + Vector2D(e->getComponent<Transform>()->getW(), e->getComponent<Transform>()->getH()) / 2;
 		players++;
 	}
 	//Actualizamos la posicion central de los 4 jugadores
@@ -102,7 +100,7 @@ Vector2D Camera::newObjetivo() {
 	if (CameraFollowPos.getX() == -1 || CameraFollowPos.getY() == -1)
 		CamStaticPos = playerMidPos;
 	else
-		CamStaticPos = ((playerMidPos + CameraFollowPos) / 2);
+		CamStaticPos = ((playerMidPos / 4 + CameraFollowPos));
 
 	return CamStaticPos;
 }
