@@ -127,6 +127,10 @@
       "file": "resources/images/tiled/collisionTileset.png"
     },
     {
+      "id": "demoTileset",
+      "file": "resources/images/tiled/demoTileset.png"
+    },
+    {
       "id": "q",
       "file": "resources/images/tecla_Q.png"
     },
