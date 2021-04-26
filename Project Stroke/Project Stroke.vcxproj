@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -163,6 +163,7 @@
     <ClCompile Include="Proyecto\components\Dying.cpp" />
     <ClCompile Include="Proyecto\components\EnemyAttack.cpp" />
     <ClCompile Include="Proyecto\components\EnemyBehaviour.cpp" />
+    <ClCompile Include="Proyecto\components\EnemyMother.cpp" />
     <ClCompile Include="Proyecto\components\EnemyStateMachine.cpp" />
     <ClCompile Include="Proyecto\components\EnemyStrongAttack.cpp" />
     <ClCompile Include="Proyecto\components\FairStrokeStrategy.cpp" />
@@ -183,9 +184,9 @@
     <ClCompile Include="Proyecto\components\KeyGame.cpp" />
     <ClCompile Include="Proyecto\components\Knockback.cpp" />
     <ClCompile Include="Proyecto\components\MapMngr.cpp" />
+    <ClCompile Include="Proyecto\components\ImageSecuence.cpp" />
     <ClCompile Include="Proyecto\components\MenuButton.cpp" />
     <ClCompile Include="Proyecto\components\menuButtonManager.cpp" />
-    <ClCompile Include="Proyecto\components\NewScene.cpp" />
     <ClCompile Include="Proyecto\components\Parallax.cpp" />
     <ClCompile Include="Proyecto\components\Poison.cpp" />
     <ClCompile Include="Proyecto\components\MovementSimple.cpp" />
@@ -200,6 +201,7 @@
     <ClCompile Include="Proyecto\components\Swallow.cpp" />
     <ClCompile Include="Proyecto\components\TileRender.cpp" />
     <ClCompile Include="Proyecto\components\Transition.cpp" />
+    <ClCompile Include="Proyecto\components\TriggerScene.cpp" />
     <ClCompile Include="Proyecto\components\Turret.cpp" />
     <ClCompile Include="Proyecto\components\UI.cpp" />
     <ClCompile Include="Proyecto\components\EntityAttribs.cpp" />
@@ -243,6 +245,7 @@
     <ClInclude Include="Proyecto\components\Dying.h" />
     <ClInclude Include="Proyecto\components\EnemyAttack.h" />
     <ClInclude Include="Proyecto\components\EnemyBehaviour.h" />
+    <ClInclude Include="Proyecto\components\EnemyMother.h" />
     <ClInclude Include="Proyecto\components\EnemyStateMachine.h" />
     <ClInclude Include="Proyecto\components\Animator.h" />
     <ClInclude Include="Proyecto\components\EnemyStrongAttack.h" />
@@ -265,9 +268,9 @@
     <ClInclude Include="Proyecto\components\KeyGame.h" />
     <ClInclude Include="Proyecto\components\Knockback.h" />
     <ClInclude Include="Proyecto\components\MapMngr.h" />
+    <ClInclude Include="Proyecto\components\ImageSecuence.h" />
     <ClInclude Include="Proyecto\components\MenuButton.h" />
     <ClInclude Include="Proyecto\components\menuButtonManager.h" />
-    <ClInclude Include="Proyecto\components\NewScene.h" />
     <ClInclude Include="Proyecto\components\Parallax.h" />
     <ClInclude Include="Proyecto\components\Poison.h" />
     <ClInclude Include="Proyecto\components\MovementSimple.h" />
@@ -283,6 +286,7 @@
     <ClInclude Include="Proyecto\components\Swallow.h" />
     <ClInclude Include="Proyecto\components\TileRender.h" />
     <ClInclude Include="Proyecto\components\Transition.h" />
+    <ClInclude Include="Proyecto\components\TriggerScene.h" />
     <ClInclude Include="Proyecto\components\Turret.h" />
     <ClInclude Include="Proyecto\components\UI.h" />
     <ClInclude Include="Proyecto\components\EntityAttribs.h" />

@@ -48,6 +48,10 @@ void Manager::update() {
 	auto b = bgs_.size();
 	for (auto i = 0u; i < b; i++)
 		bgs_[i]->update();
+
+	auto f = fgs_.size();
+	for (auto i = 0u; i < f; i++)
+		fgs_[i]->update();
 }
 
 void Manager::render() {
@@ -65,4 +69,9 @@ void Manager::render() {
 	auto n = entities_.size();
 	for (auto i = 0u; i < n; i++)
 		entities_[i]->render();
+
+	//RENDERIZA POR DELANTE
+	auto f = fgs_.size();
+	for (auto i = 0u; i < f; i++)
+		fgs_[i]->render();
 }

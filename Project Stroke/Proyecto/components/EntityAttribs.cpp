@@ -2,6 +2,8 @@
 #include "../ecs/Manager.h"
 #include "Transform.h"
 #include "Animator.h"
+#include "EnemyBehaviour.h"
+#include "EnemyMother.h"
 
 EntityAttribs::EntityAttribs() :
 	health_(100),
@@ -153,9 +155,23 @@ bool EntityAttribs::recieveDmg(int dmg) {
 	if (health_ <= 0) {
 		if (hms_ != nullptr) {
 			hms_->getState() = HamStates::DEAD;
+			auto& ents = entity_->getMngr()->getPlayers();
+			
+			int i = 0;
+			while ( i < ents.size() ) {
+				if (entity_ == ents[i]) {
+					entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->cleanListHam(i);
+					i = ents.size();
+				}
+				++i;
+			}
 		}
 		else if (enmState_ != nullptr) {
 			enmState_->getState() = EnemyStates::ENM_DEAD;
+			//TODO
+			//aqui distingimos la meurte de un enemigo como tal
+			//posibilidades, ambushing o attacking
+			entity_->getComponent<EnemyBehaviour>()->die();
 		}
 		//Actualizamos UI
 		if (entity_->hasComponent<UI>())
@@ -202,6 +218,7 @@ void EntityAttribs::die() {
 		hms_->getState() = HamStates::DEAD;
 	}
 	else {
+		
 		e->addComponent<Dying>();
 		enmState_->getState() = EnemyStates::ENM_DEAD;
 		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala
