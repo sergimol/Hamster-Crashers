@@ -132,7 +132,7 @@ class EnemyMother;
 	GameStates, \
 	EnemyMother, \
 	ShadowFollow, \
-	TriggerScene
+	TriggerScene, \
 	Shadow
 
 // groups
