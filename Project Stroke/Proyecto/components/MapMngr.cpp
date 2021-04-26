@@ -126,17 +126,17 @@ void MapMngr::loadNewMap(string map) {
 		auto* o = entity_->getMngr()->addBackGround();
 		o->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 		//Para meter un fondo meter esto									velocidad		tamaño       posicion
-		o->addComponent<Parallax>(&sdlutils().images().at("level1background1"), 40, Vector2D(1920, 1459), Vector2D(0, -205));
+		o->addComponent<Parallax>(&sdlutils().images().at("level1background1"), 30, Vector2D(1920, 1459), Vector2D(0, -205));
 		
 		auto* p = entity_->getMngr()->addBackGround();
 		p->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 		//Para meter un fondo meter esto                              velocidad  tamaño            posicion
-		p->addComponent<Parallax>(&sdlutils().images().at("level1background2"), 60, Vector2D(1920, 1459), Vector2D(0, -205));
+		p->addComponent<Parallax>(&sdlutils().images().at("level1background2"), 20, Vector2D(1920, 1459), Vector2D(0, -205));
 		
 		auto* q = entity_->getMngr()->addBackGround();
 		q->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 		//Para meter un fondo meter esto                              velocidad  tamaño            posicion
-		q->addComponent<Parallax>(&sdlutils().images().at("level1background3"), 80, Vector2D(1920, 1459), Vector2D(0, -205));
+		q->addComponent<Parallax>(&sdlutils().images().at("level1background3"), 10, Vector2D(1920, 1459), Vector2D(0, -205));
 
 		for (const auto& layer : layers)
 		{
