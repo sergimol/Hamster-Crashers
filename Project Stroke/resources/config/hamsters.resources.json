@@ -229,6 +229,22 @@
     {
       "id": "canelonButtonEnter",
       "file": "resources/images/menuSprites/canelonButtonEnter.png"
+    },
+    {
+      "id": "level1background1",
+      "file": "resources/images/backgrounds/level1/level1parallax1.png"
+    },
+    {
+      "id": "level1background2",
+      "file": "resources/images/backgrounds/level1/level1parallax2.png"
+    },
+    {
+      "id": "level1background3",
+      "file": "resources/images/backgrounds/level1/level1parallax3.png"
+    },
+    {
+      "id": "level1background4",
+      "file": "resources/images/backgrounds/level1/level1parallax4.png"
     }
   ],
 
