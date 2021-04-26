@@ -59,9 +59,13 @@ void Game::init() {
 
 	SDLUtils::init("Squeak Ship", 1920, 1010, "resources/config/hamsters.resources.json");
 
+	//Máquina de estados
+	auto* stateMachine = mngr_->addEntity();
+	stateMachine->addComponent<GameStates>();
+	mngr_->setHandler<StateMachine>(stateMachine);
 
 	//MENU	
-	auto* mainMenu = mngr_->addEntity();
+	auto* pauseMenu = mngr_->addEntity();
 	/*mainMenu->addComponent<Animator>(
 		&sdlutils().images().at("menuSheet"),
 		1920,
@@ -72,20 +76,17 @@ void Game::init() {
 		Vector2D(0, 0),
 		3
 		);*/
-	mainMenu->addComponent<menuButtonManager>("mainMenu");	//mainMenu, pauseMenu o hamsterMenu
-	
+	pauseMenu->addComponent<MenuButtonManager>("pauseMenu");	//mainMenu, pauseMenu o hamsterMenu
+	mngr_->setHandler<PauseMenu>(pauseMenu);
 
-	/*
+	
 	//Camara
 	camera_ = { 0,0,1920, 1080 };
 	auto* camera = mngr_->addEntity();
 	camera->addComponent<Camera>(camera_);
 	mngr_->setHandler<Camera__>(camera);
 
-	// Máquina de estados
-	auto* stateMachine = mngr_->addEntity();
-	stateMachine->addComponent<GameStates>();
-	mngr_->setHandler<StateMachine>(stateMachine);
+	 
 	
 	//EnemyMother
 	auto* mother = mngr_->addEntity();
@@ -104,105 +105,7 @@ void Game::init() {
 	levelMngr->addComponent<Transition>(&sdlutils().images().at("transition"));
 	//Metemos al mapa en el Handler de Map
 
-	mngr_->setHandler<Trans>(levelMngr);*/
-	
-
-	//Imagen de fondo fija
-	/*auto* background = mngr_->addEntity();
-	background->addComponent<Transform>(
-		Vector2D(0, 0),
-		Vector2D(), 1920.0f, 1010.0f, 0.0f);
-
-	background->addComponent<Image>(&sdlutils().images().at("background"));*/
-
-	/*
-	* SI VAIS A TESTEAR CON MENOS HÁMSTERS, NO QUITEIS EL CÓDIGO, COMENTADLO
-	*/
-
-
-	//auto& players = mngr_->getPlayers();
-
-	////Sardinilla (P1)
-	//auto* hamster2 = mngr_->addEntity();
-	//hamster2->addComponent<Transform>(
-	//	Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
-	//	Vector2D(), 256.0f, 256.0f, 0.0f);
-	//hamster2->addComponent<EntityAttribs>(100, 0.0, "sardinilla2", Vector2D(7, 4.5));
-	////hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
-	//hamster2->addComponent<Animator>(
-	//	&sdlutils().images().at("sardinillaSheet"),
-	//	64,
-	//	64,
-	//	3,
-	//	3,
-	//	220,
-	//	Vector2D(0, 0),
-	//	3
-	//	);
-	//hamster2->addComponent<HamsterStateMachine>();
-
-	//hamster2->addComponent<Movement>();
-	//hamster2->addComponent<LightAttack>();
-	//hamster2->addComponent<StrongAttack>();
-	//hamster2->addComponent<UI>("sardinilla", 1);
-	////hamster2->addComponent<HeartUI>("sardinilla", 1);
-	////hamster1->addComponent<Pray>(30, 50);
-	////hamster1->addComponent<Turret>();
-	//hamster2->addComponent<Roll>();
-	//hamster2->addComponent<Possesion>();
-	//hamster2->addComponent<GhostCtrl>();
-	//hamster2->addComponent<Stroke>();
-	//hamster2->addComponent<Combos>();
-	//hamster2->setGroup<Ally>(true);
-	//hamster2->addComponent<ControlHandler>(2);
-	//hamster2->addComponent<Stun>();
-	//hamster2->addComponent<Knockback>();
-	//hamster2->addComponent<GetItem>();
-	//hamster2->addComponent<Gravity>();
-	//players.push_back(hamster2);
-
-	/*
-	* SI VAIS A TESTEAR CON MENOS HÁMSTERS, NO QUITEIS EL CÓDIGO, COMENTADLO
-	*/
-
-	//Sardinilla (P2)
-	//auto* hamster1 = mngr_->addEntity();
-	//hamster1->addComponent<Transform>(
-	//	Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
-	//	Vector2D(), 256.0f, 256.0f, 0.0f);
-	//hamster1->addComponent<EntityAttribs>(100, 0.0, "sardinilla2", Vector2D(7, 4.5));
-	////hamster1->addComponent<Image>(&sdlutils().images().at("sardinilla"));
-	//hamster1->addComponent<Animator>(
-	//	&sdlutils().images().at("sardinillaSheet"),
-	//	64,
-	//	64,
-	//	3,
-	//	3,
-	//	220,
-	//	Vector2D(0, 0),
-	//	3
-	//	);
-	//hamster1->addComponent<HamsterStateMachine>();
-
-	//hamster1->addComponent<Movement>();
-	//hamster1->addComponent<LightAttack>();
-	//hamster1->addComponent<StrongAttack>();
-	//hamster1->addComponent<UI>("sardinilla", 2);
-	////hamster2->addComponent<HeartUI>("sardinilla", 1);
-	////hamster1->addComponent<Pray>(30, 50);
-	////hamster1->addComponent<Turret>();
-	//hamster1->addComponent<Roll>();
-	//hamster1->addComponent<Possesion>();
-	//hamster1->addComponent<GhostCtrl>();
-	//hamster1->addComponent<Stroke>();
-	//hamster1->addComponent<Combos>();
-	//hamster1->setGroup<Ally>(true);
-	//hamster1->addComponent<ControlHandler>(2);
-	//hamster1->addComponent<Stun>();
-	//hamster1->addComponent<Knockback>();
-	//hamster1->addComponent<GetItem>();
-	//hamster1->addComponent<Gravity>();
-	//players.push_back(hamster1);
+	//mngr_->setHandler<Trans>(levelMngr);	
 }
 
 void Game::update() {

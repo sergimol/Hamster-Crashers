@@ -61,7 +61,7 @@ class ImageSecuence;
 class Transition;
 class TriggerScene;
 class MenuButton;
-class menuButtonManager;
+class MenuButtonManager;
 class GameStates;
 class EnemyMother;
 
@@ -125,7 +125,7 @@ class EnemyMother;
 	EnemyStrongAttack, \
 	Parallax, \
 	MenuButton,\
-	menuButtonManager,\
+	MenuButtonManager,\
 	Transition, \
 	GameStates, \
 	EnemyMother, \
@@ -154,6 +154,7 @@ struct Map;
 struct LevelHandlr;
 struct StateMachine;
 struct Mother;
+struct PauseMenu;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
@@ -162,7 +163,8 @@ struct Mother;
 					Map, \
 					StateMachine, \
 					LevelHandlr, \
-					Mother
+					Mother, \
+					PauseMenu
 
 
 //systems

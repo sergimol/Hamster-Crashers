@@ -408,12 +408,9 @@
     <ClCompile Include="Proyecto\components\MenuButton.cpp">
       <Filter>Archivos de origen\components\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\menuButtonManager.cpp">
-      <Filter>Archivos de origen\components\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Proyecto\components\GameStates.cpp">
       <Filter>Archivos de origen\components\StateMachine</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="Proyecto\components\EnemyMother.cpp">
       <Filter>Archivos de origen\components\Entity\Enemy</Filter>
     </ClCompile>
@@ -422,6 +419,9 @@
     </ClCompile>
     <ClCompile Include="Proyecto\components\ImageSecuence.cpp">
       <Filter>Archivos de origen\components\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\MenuButtonManager.cpp">
+      <Filter>Archivos de origen\components\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -698,12 +698,9 @@
     <ClInclude Include="Proyecto\components\MenuButton.h">
       <Filter>Archivos de encabezado\Components\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\menuButtonManager.h">
-      <Filter>Archivos de encabezado\Components\StateMachine</Filter>
-    </ClInclude>
     <ClInclude Include="Proyecto\components\GameStates.h">
       <Filter>Archivos de encabezado\Components\StateMachine</Filter>
-      </ClCompile>
+    </ClInclude>
     <ClInclude Include="Proyecto\components\EnemyMother.h">
       <Filter>Archivos de encabezado\Components\Entity\Enemy</Filter>
     </ClInclude>
@@ -712,6 +709,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\ImageSecuence.h">
       <Filter>Archivos de encabezado\Components\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\MenuButtonManager.h">
+      <Filter>Archivos de encabezado\Components\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

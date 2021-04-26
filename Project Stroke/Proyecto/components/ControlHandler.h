@@ -14,6 +14,8 @@
 #include "LightAttack.h"
 #include "StrongAttack.h"
 #include "HamsterStateMachine.h"
+#include "GameStates.h"
+#include "MenuButtonManager.h"
 
 
 /*Esta clase es la encargada de filtar los inputs
@@ -54,6 +56,8 @@ private:
 	LightAttack* lt_;
 	StrongAttack* st_;
 	HamsterStateMachine* hms_;
+	GameStates* states_;
+	MenuButtonManager* pause_;
 	bool hasController_;
 
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
