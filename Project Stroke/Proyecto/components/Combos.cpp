@@ -19,7 +19,15 @@ bool Combos::checkCombo(int action) {
 		firstActionAnim(action);
 		break;
 	case 1:							//Si hay ataques almacenados se comprueban los combos
-		if (action == cola_.back() && action != 2) cola_.push(action);
+		if (action == cola_.back() && action != 2) {
+			cola_.push(action);
+			if (action == 0) {
+				// Animación de segundo ligero
+			}
+			else {
+				// Animación de segundo fuerte
+			}
+		}
 		else if (action == 1) { //Si entra uno fuerte
 			if (cola_.back() == 0) {
 				lightStrong(); //Fin Combo L + S
@@ -42,7 +50,15 @@ bool Combos::checkCombo(int action) {
 		}
 		break;
 	case 2:					//3ª acción de combo
-		if (action == cola_.back()) cola_.push(action);
+		if (action == cola_.back()) { 
+			cola_.push(action);
+			if (action == 0) {
+				// Animación de tercero ligero
+			}
+			else {
+				// Animación de tercero fuerte
+			}
+		}
 		else if (action == 1 && cola_.front() == 2) { //Si entra fuerte a cbo salto, acaba
 			jumpStrong();
 			finCombo = true;
