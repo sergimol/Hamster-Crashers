@@ -48,7 +48,6 @@
 #include "../components/RandomStrokeStrategy.h"
 #include "../components/Parallax.h"
 #include "../components/CollisionDetec.h"
-#include "../components/NewScene.h"
 #include "../components/Shadow.h"
 #include "../components/EnemyMother.h"
 #include "../components/TriggerScene.h"
@@ -432,14 +431,19 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 
 	//Habilidad
 	if (name == "sardinilla")
-		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), Vector2D(), 86 * scale, 86 * scale, 0.0f,0.5,0.5);
+		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), 
+			Vector2D(), 86 * scale, 86 * scale, 0.0f,0.5,0.5);
 	else if (name == "canelon")
-		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
+		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), 
+			Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
 	else if (name == "keta")
-		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
+		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), 
+			Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
 	else
-		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
+		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), 
+			Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
 
+	Transform* tr = hamster1->getComponent<Transform>();
 	hamster1->addComponent<HamsterStateMachine>();
 
 	hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 0, 15, 20);
@@ -458,7 +462,8 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 	hamster1->addComponent<CollisionDetec>();
 	hamster1->addComponent<Movement>();
 	
-	tr->setGravity(hamster1->getComponent<Gravity>());
+	Gravity* g = hamster1->getComponent<Gravity>();
+	tr->setGravity(g);
 
 	//Ataques Basicos
 	hamster1->addComponent<LightAttack>();

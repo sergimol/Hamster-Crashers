@@ -12,7 +12,7 @@
 class Transform : public Component {
 public:
 	Transform() :
-		pos_(), vel_(), width_(), height_(), rotation_(), z_(), flip_(), scaleCollideW(), scaleCollideH() {
+		pos_(), vel_(), width_(), height_(), rotation_(), z_(), flip_(), scaleCollideW(), scaleCollideH(), grv_(nullptr) {
 	}
 
 	Transform(Vector2D pos, Vector2D vel, float width, float height,
@@ -26,7 +26,8 @@ public:
 		velZ_(0),
 		flip_(false),
 		scaleCollideW(scaleW),
-		scaleCollideH(scaleH)
+		scaleCollideH(scaleH),
+		grv_(nullptr)
 	{
 		rectCollide.w = (width_ * scaleCollideW);
 		rectCollide.h = (height_ * scaleCollideH);
@@ -45,7 +46,8 @@ public:
 		velZ_(0),
 		flip_(flip),
 		scaleCollideW(scaleW),
-		scaleCollideH(scaleH)
+		scaleCollideH(scaleH),
+		grv_(nullptr)
 	{
 		rectCollide.w = (width_ * scaleCollideW);
 		rectCollide.h = (height_ * scaleCollideH);

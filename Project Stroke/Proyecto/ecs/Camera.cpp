@@ -15,9 +15,6 @@ void Camera::update() {
 }
 
 void Camera::checkBounds() {
-	entity_->getMngr()
-
-
 	if (camera_.x < 0)
 		camera_.x = 0;
 	else if (camera_.x + camera_.w > 5100 * 3.8f)
