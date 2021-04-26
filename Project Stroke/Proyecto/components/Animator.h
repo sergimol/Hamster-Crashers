@@ -43,15 +43,15 @@ public:
 
 		//recurso
 		Vector2D auxTextFrame = Vector2D();
-		auxTextFrame.setX(widthFrame * textureFrame.getX() + (widthFrame * (1 - tr_->getScaleW()) / 2));
-		auxTextFrame.setY(heightFrame * textureFrame.getY() + (heightFrame * (1 - tr_->getScaleH()) / 2));
+		auxTextFrame.setX(widthFrame * textureFrame.getX());
+		auxTextFrame.setY(heightFrame * textureFrame.getY());
 
 		//Multiplicamos por el 'Scale' para que cada uno tenga su tamanyo
-		SDL_Rect src = build_sdlrect(auxTextFrame, widthFrame * tr_->getScaleW(), heightFrame * tr_->getScaleH());
+		SDL_Rect src = build_sdlrect(auxTextFrame, widthFrame, heightFrame);
 
 		//destino
 		Vector2D renderPos = Vector2D(tr_->getPos().getX() - cam.x, tr_->getPos().getY() - tr_->getZ() - cam.y);
-		SDL_Rect dest = build_sdlrect(renderPos, tr_->getW()*tr_->getScaleW(), tr_->getH()*tr_->getScaleH());
+		SDL_Rect dest = build_sdlrect(renderPos, tr_->getW(), tr_->getH());
 
 
 		SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 255, 0, 255);

@@ -127,12 +127,12 @@ void MapMngr::loadNewMap(string map) {
 		o->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 		//Para meter un fondo meter esto									velocidad		tamaño       posicion
 		o->addComponent<Parallax>(&sdlutils().images().at("level1background1"), 30, Vector2D(1920, 1459), Vector2D(0, -205));
-		
+
 		auto* p = entity_->getMngr()->addBackGround();
 		p->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 		//Para meter un fondo meter esto                              velocidad  tamaño            posicion
 		p->addComponent<Parallax>(&sdlutils().images().at("level1background2"), 20, Vector2D(1920, 1459), Vector2D(0, -205));
-		
+
 		auto* q = entity_->getMngr()->addBackGround();
 		q->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 		//Para meter un fondo meter esto                              velocidad  tamaño            posicion
@@ -335,7 +335,7 @@ void MapMngr::LoadEnemyRoom() {
 				*/
 		}
 		else if (name == "enemigoFuerte" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-			
+
 			for (int i = 0; i < 8; i++) {
 				auto* enemy = mngr_->addEntity();
 				enemy->addComponent<Transform>(
@@ -427,9 +427,17 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 
 	auto* hamster1 = mngr_->addEntity();
 
-	hamster1->addComponent<Transform>(
-		Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale),
-		Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
+
+	//Habilidad
+	if (name == "sardinilla")
+		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), Vector2D(), 86 * scale, 86 * scale, 0.0f,0.5,0.5);
+	else if (name == "canelon")
+		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
+	else if (name == "keta")
+		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
+	else
+		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
+
 	hamster1->addComponent<HamsterStateMachine>();
 
 	hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 0, 15, 20);
@@ -486,7 +494,7 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 
 	//añadirlo tmb a la lista de control de enemyMother
 	mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addObjetive(hamster1);
-	
+
 	//Para acceder facilmente le metemos en Hamster1 de Handelers
 	if (name == "sardinilla") mngr_->setHandler<Hamster1>(hamster1);
 	else if (name == "canelon") mngr_->setHandler<Hamster2>(hamster1);

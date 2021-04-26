@@ -32,7 +32,6 @@ Roll::~Roll() {
 
 void Roll::action()
 {
-
 	if (entity_->getComponent<Movement>()->isActive()) {
 		entity_->getComponent<Movement>()->setActive(false);
 
@@ -51,6 +50,10 @@ void Roll::action()
 		}
 		anim_->play(sdlutils().anims().at("sardinilla_ability"));
 
+		SDL_Rect rectPlayer = tr_->getRectCollide();
+		rectPlayer.x += tr_->getVel().getX();
+		rectPlayer.y += tr_->getVel().getY();
+		col_->tryToMove(tr_->getVel(), goalVel_, rectPlayer);
 		//Mete invulnerabilidad durante la habilidad
 		entity_->getComponent<EntityAttribs>()->setInvincibility(true);
 	}
@@ -98,8 +101,10 @@ void Roll::update() {
 			vel.setY(col_->lerp(goalVel_.getY(), vel.getY(), 0.95));
 		}
 
-		SDL_Rect rectPlayer{ tr_->getPos().getX() + dir_.getX(), tr_->getPos().getY() + dir_.getY(), tr_->getW(),tr_->getH() };	//Nueva pos
-		col_->tryToMove(dir_, goalVel_, rectPlayer);
+		SDL_Rect rectPlayer = tr_->getRectCollide();
+		rectPlayer.x += vel.getX();
+		rectPlayer.y += vel.getY();
+		col_->tryToMove(vel, goalVel_, rectPlayer);
 		//Si se colisiona..
 		if (checkCollisions())
 			//Suena el hit y le pega

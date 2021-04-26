@@ -14,7 +14,6 @@
 #include "Entity.h"
 #include "Manager.h"
 #include "../utils/Vector2D.h"
-#include "../components/Transform.h"
 #include <SDL_rect.h>
 #include "../components/MapMngr.h"
 

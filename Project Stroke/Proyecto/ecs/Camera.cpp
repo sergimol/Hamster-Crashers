@@ -1,5 +1,6 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 #include "Camera.h"
+#include "../components/Transform.h"
 
 void Camera::update() {
 	if (cameraState == Players)
