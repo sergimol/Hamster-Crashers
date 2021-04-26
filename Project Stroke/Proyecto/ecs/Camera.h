@@ -31,6 +31,7 @@ private:
 	Vector2D newObjetivo();
 	State cameraState;
 	bool GoToTracker;
+	void checkBounds();
 public:
 
 	Camera(SDL_Rect cam) : camera_(cam), CameraFollowPos(Vector2D()), cameraState(Players) {}
@@ -46,6 +47,7 @@ public:
 	Vector2D CameraFollowPos;	//Guarda el punto de la posición de la camara cuando lo lea
 
 	void setGoToTracker(bool objetivo) {GoToTracker = objetivo;};
+	
 
 };
 

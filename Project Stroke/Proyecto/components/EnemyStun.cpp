@@ -1,4 +1,5 @@
 #include "EnemyStun.h"
+#include "EnemyBehaviour.h"
 
 EnemyStun::EnemyStun() :
 	enmState_(nullptr), cooldown_(1500), time_(sdlutils().currRealTime()), simpMov_(nullptr), movCancelled_(false) {}
@@ -39,4 +40,5 @@ void EnemyStun::update() {
 
 void EnemyStun::restartStunTime() {
 	time_ = sdlutils().currRealTime(); 
+	entity_->getComponent<EnemyBehaviour>()->changeToAmbush();
 }

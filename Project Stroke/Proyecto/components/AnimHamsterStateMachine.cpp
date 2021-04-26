@@ -9,6 +9,9 @@ void AnimHamsterStateMachine::init()
 	ent = entity_->getComponent<EntityAttribs>();
 	assert(ent != nullptr);
 	id = ent->getId();
+
+	//variables auxiliares de animaciones
+	attackOrder_ = true;
 }
 
 void AnimHamsterStateMachine::update()
@@ -29,13 +32,17 @@ void AnimHamsterStateMachine::HandleAnimState()
 		currentState = HamStatesAnim::MOVE;
 	//light attack
 	if (lAttack && !sAttack)
-		currentState = HamStatesAnim::LIGHTATTACK1;
+		currentState = HamStatesAnim::LIGHTATTACK;
+
 	//strong attack
 	if (sAttack && !lAttack)
 		currentState = HamStatesAnim::STRONGATTACK;
 	//light combo
 	if (lCombo)
 		currentState = HamStatesAnim::LIGHTCOMBO;
+	//strong combo
+	if (sCombo)
+		currentState = HamStatesAnim::STRONGCOMBO;
 	//hitted
 	if (hit)
 		currentState = HamStatesAnim::HITTED;
@@ -70,11 +77,13 @@ void AnimHamsterStateMachine::CheckAnimState()
 		case HamStatesAnim::JUMPDOWN:
 			anim->play(sdlutils().anims().at(id + "_idle")); //CAMBIAR
 			break;
-		case HamStatesAnim::LIGHTATTACK1:
-			anim->play(sdlutils().anims().at(id + "_light_attack1"));
-			break;
-		case HamStatesAnim::LIGHTATTACK2:
-			anim->play(sdlutils().anims().at(id + "_light_attack2"));
+		case HamStatesAnim::LIGHTATTACK:
+			//Dependiendo del ataque de le toque playea uo u otro
+			if (attackOrder_)
+				anim->play(sdlutils().anims().at(id + "_light_attack1"));
+			else
+				anim->play(sdlutils().anims().at(id + "_light_attack2"));
+			attackOrder_ = !attackOrder_;
 			break;
 		case HamStatesAnim::LIGHTCOMBO:
 			anim->play(sdlutils().anims().at(id + "_light_combo"));
@@ -126,13 +135,8 @@ void AnimHamsterStateMachine::setAnimBool(HamStatesAnim h, bool b)
 	case HamStatesAnim::JUMPDOWN:
 		idle = b;
 		break;
-	case HamStatesAnim::LIGHTATTACK1:
+	case HamStatesAnim::LIGHTATTACK:
 		lAttack = b;
-		attackOrder_ = 0;
-		break;
-	case HamStatesAnim::LIGHTATTACK2:
-		lAttack = b;
-		attackOrder_ = 1;
 		break;
 	case HamStatesAnim::LIGHTCOMBO:
 		lCombo = b;
@@ -141,7 +145,7 @@ void AnimHamsterStateMachine::setAnimBool(HamStatesAnim h, bool b)
 		sAttack = b;
 		break;
 	case HamStatesAnim::STRONGCOMBO:
-		idle = b;
+		sCombo = b;
 		break;
 	case HamStatesAnim::HITTED:
 		hit = b;

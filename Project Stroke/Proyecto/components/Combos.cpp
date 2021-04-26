@@ -19,7 +19,17 @@ bool Combos::checkCombo(int action) {
 		firstActionAnim(action);
 		break;
 	case 1:							//Si hay ataques almacenados se comprueban los combos
-		if (action == cola_.back() && action != 2) cola_.push(action);
+		if (action == cola_.back() && action != 2) {
+			cola_.push(action);
+			if (action == 0) {
+				// Animación de segundo ligero
+				anim_->setAnimBool(HamStatesAnim::LIGHTATTACK, true);
+			}
+			else {
+				// Animación de segundo fuerte
+				anim_->setAnimBool(HamStatesAnim::STRONGATTACK, true);
+			}
+		}
 		else if (action == 1) { //Si entra uno fuerte
 			if (cola_.back() == 0) {
 				lightStrong(); //Fin Combo L + S
@@ -32,8 +42,9 @@ bool Combos::checkCombo(int action) {
 		else if (action == 0 && cola_.back() == 2) {
 			cola_.push(action);
 			grv_->setActive(false);
+			anim_->setAnimBool(HamStatesAnim::LIGHTATTACK, true);
 			entity_->getComponent<Transform>()->getVelZ() = 0;
-			anim_->setAnimBool(HamStatesAnim::LIGHTATTACK1, true);
+			
 		}
 		else { //Combo imposible -> cambio de acción
 			cola_.pop();
@@ -42,7 +53,17 @@ bool Combos::checkCombo(int action) {
 		}
 		break;
 	case 2:					//3ª acción de combo
-		if (action == cola_.back()) cola_.push(action);
+		if (action == cola_.back()) { 
+			cola_.push(action);
+			if (action == 0) {
+				// Animación de tercero ligero
+				anim_->setAnimBool(HamStatesAnim::LIGHTATTACK, true);
+			}
+			else {
+				// Animación de tercero fuerte
+				anim_->setAnimBool(HamStatesAnim::STRONGATTACK, true);
+			}
+		}
 		else if (action == 1 && cola_.front() == 2) { //Si entra fuerte a cbo salto, acaba
 			jumpStrong();
 			finCombo = true;
@@ -92,6 +113,16 @@ void Combos::update() {
 		}
 
 	}
+	else if(anim_->getState() == HamStatesAnim::STRONGCOMBO)
+	{
+		if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+		{
+
+			anim_->setAnimBool(HamStatesAnim::STRONGCOMBO, false);
+
+		}
+
+	}
 }
 
 void Combos::lightStrong() {
@@ -107,7 +138,7 @@ void Combos::fourConsecutives() {
 		}
 		anim_->setAnimBool(HamStatesAnim::LIGHTCOMBO, true);
 	}
-	else;
+	else
 		anim_->setAnimBool(HamStatesAnim::STRONGCOMBO, true);
 	popUntilEmpty();
 }
@@ -130,7 +161,7 @@ void Combos::firstActionAnim(int action) {
 	switch (action)
 	{
 	case 0:
-		anim_->setAnimBool(HamStatesAnim::LIGHTATTACK1, true);
+		anim_->setAnimBool(HamStatesAnim::LIGHTATTACK, true);
 		break;
 	case 1:
 		anim_->setAnimBool(HamStatesAnim::STRONGATTACK, true);

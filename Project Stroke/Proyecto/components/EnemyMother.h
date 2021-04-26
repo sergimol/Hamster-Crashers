@@ -68,7 +68,7 @@ public:
 	void asingEnemies();
 	void orderAttack();
 	/*Change de entiity from attacking list to ambush list when stunned or out of combat*/
-	void changeFromAttackToAmbush();
+	void changeFromAttackToAmbush(int hamid, std::list<Entity*>::iterator it);
 	//
 	void removeFromAttackList(int hamid, std::list<Entity*>::iterator it);
 	void removeFromAmbushList(int hamid, std::list<Entity*>::iterator it);

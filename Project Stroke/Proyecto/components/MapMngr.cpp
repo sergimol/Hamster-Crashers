@@ -48,6 +48,8 @@
 #include "../components/RandomStrokeStrategy.h"
 #include "../components/Parallax.h"
 #include "../components/CollisionDetec.h"
+#include "../components/NewScene.h"
+#include "../components/Shadow.h"
 #include "../components/EnemyMother.h"
 #include "../components/TriggerScene.h"
 
@@ -64,6 +66,7 @@ MapMngr::~MapMngr() {
 }
 
 void MapMngr::update() {
+	auto* camera = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
 	//	Comprobamos la colision con los triggers salas
 	auto& players = entity_->getMngr()->getPlayers();
 	for (tmx::Object trigger : TriggerftCamera) {//Recorrer triggers
@@ -73,9 +76,9 @@ void MapMngr::update() {
 			if (player->getComponent<HamsterStateMachine>()->getState() != HamStates::INFARCTED && Collisions::collides(pTr->getPos(), pTr->getW(), pTr->getH(), Vector2D(trigger.getPosition().x, trigger.getPosition().y) * scale, trigger.getAABB().width * scale, trigger.getAABB().height * scale)) {
 				LoadEnemyRoom();
 				if (getProp[0].getIntValue() != -1 || getProp[1].getIntValue() != -1) {
-					entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setGoToTracker(true);
-					entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamFollowPos(Vector2D(getProp[0].getIntValue(), getProp[1].getIntValue()) * scale);
-					entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::GoingTo);
+					camera->setGoToTracker(true);
+					camera->changeCamFollowPos(Vector2D(getProp[0].getIntValue(), getProp[1].getIntValue()) * scale);
+					camera->changeCamState(State::GoingTo);
 				}
 				//Borrar el punto de la camara del vector
 				TriggerftCamera.pop_back();
@@ -83,10 +86,10 @@ void MapMngr::update() {
 		}
 	}
 	//Si el estado de la camara es "Static" aka luchando con enemigos, y la cantidad de enemigos en la habitación es 0, volvemos a "Player1s"
-	if (entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamState() == State::Static && numberEnemyRoom == 0) {
-		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamFollowPos(Vector2D(-1, -1));	//Se pasa el punto medio de los jugadores
-		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setGoToTracker(false);					//Se fija la transicion al punto medio de los jugadores al terminar GoTo
-		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::GoingTo);			//Se cambia el estado de la camara a GoTo
+	if (camera->getCamState() == State::Static && numberEnemyRoom == 0) {
+		camera->changeCamFollowPos(Vector2D(-1, -1));	//Se pasa el punto medio de los jugadores
+		camera->setGoToTracker(false);					//Se fija la transicion al punto medio de los jugadores al terminar GoTo
+		camera->changeCamState(State::GoingTo);			//Se cambia el estado de la camara a GoTo
 	}
 }
 
@@ -150,8 +153,7 @@ void MapMngr::loadNewMap(string map) {
 						auto* o = entity_->getMngr()->addMapHeight();
 						o->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 							Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 1, 1);
-						o->addComponent<HeightObject>();
-						o->getComponent<HeightObject>()->setZ(stoi(object.getName()));
+						o->addComponent<HeightObject>()->setZ(stoi(object.getName()));
 					}
 				}
 				else if (layer->getName() == "Salas") {
@@ -303,7 +305,7 @@ void MapMngr::LoadEnemyRoom() {
 		auto& prop = object.getProperties();
 
 		if (name == "enemigo" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-				/*
+				
 			for (int i = 0; i < 8; i++) {
 				auto* enemy = mngr_->addEntity();
 				enemy->addComponent<Transform>(
@@ -332,7 +334,7 @@ void MapMngr::LoadEnemyRoom() {
 				//enemy->addComponent<EnemyStun>();
 				numberEnemyRoom++;
 			}
-				*/
+				
 		}
 		else if (name == "enemigoFuerte" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 
@@ -361,8 +363,8 @@ void MapMngr::LoadEnemyRoom() {
 
 				//anyadir a los cuidados de la madre
 				mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addEnemy(enemy);
-				/*enemy->addComponent<FollowPlayer>();
-				enemy->addComponent<EnemyStun>();*/
+				
+				enemy->addComponent<EnemyStun>();
 				numberEnemyRoom++;
 			}
 		}
@@ -455,7 +457,8 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 	hamster1->addComponent<Gravity>();
 	hamster1->addComponent<CollisionDetec>();
 	hamster1->addComponent<Movement>();
-	hamster1->getComponent<Transform>()->setGravity(hamster1->getComponent<Gravity>());
+	
+	tr->setGravity(hamster1->getComponent<Gravity>());
 
 	//Ataques Basicos
 	hamster1->addComponent<LightAttack>();
@@ -477,7 +480,7 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 	hamster1->addComponent<PossesionGame>();
 	hamster1->addComponent<GhostCtrl>();
 	//ES NECESARIO PASAR LA ESTRATEGIA QUE DEBE USAR EL STROKE O SE VA A LA PUTA (RandomStrokeStrategy o FairStrokeStrategy)
-	RandomStrokeStrategy* rndStr = new RandomStrokeStrategy();
+	FairStrokeStrategy* rndStr = new FairStrokeStrategy();
 	hamster1->addComponent<Stroke>(rndStr);
 
 	hamster1->addComponent<Knockback>();

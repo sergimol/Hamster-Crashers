@@ -124,6 +124,14 @@ public:
 		vel_ = velNew;
 	}
 
+	void setFloor(int f) {
+		floor_ = f;
+	}
+
+	int getFloor() {
+		return floor_;
+	}
+
 	void update() override {
 		if (grv_ != nullptr && grv_->isActive())
 			z_ += velZ_;
@@ -158,5 +166,7 @@ private:
 	float scaleCollideW;
 	float scaleCollideH;
 	SDL_Rect rectCollide;
+	//Z del suelo en el que se encuentra
+	int floor_;
 };
 
