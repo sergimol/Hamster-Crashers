@@ -29,7 +29,7 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 		if (dir.getX() != 0 && dir.getY() != 0) {
 
 			//Probamos con ignorar el Y
-			rectPlayer.y = tr_->getPos().getY();
+			rectPlayer.y = tr_->getRectCollide().y;
 
 			//Si con el Y bloqueado se mueve correctamente
 			if (!map->intersectWall(rectPlayer)) {
@@ -39,8 +39,8 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 			}
 			else {
 				//Probamos ignorando la X
-				rectPlayer.y = tr_->getPos().getY() + goalVel.getY();
-				rectPlayer.x = tr_->getPos().getX();
+				rectPlayer.y = tr_->getRectCollide().y + goalVel.getY();
+				rectPlayer.x = tr_->getRectCollide().x;
 
 				if (!map->intersectWall(rectPlayer)) {
 					goalVel.setX(0);

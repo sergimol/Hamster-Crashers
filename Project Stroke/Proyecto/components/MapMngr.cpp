@@ -319,8 +319,6 @@ void MapMngr::LoadEnemyRoom() {
 		auto& prop = object.getProperties();
 
 		if (name == "enemigo" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-
-			for (int i = 0; i < 8; i++) {
 				auto* enemy = mngr_->addEntity();
 				enemy->addComponent<Transform>(
 					Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
@@ -345,14 +343,11 @@ void MapMngr::LoadEnemyRoom() {
 				enemies.push_back(enemy);
 				//anyadir a los cuidados de la madre
 				mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addEnemy(enemy);
-				//enemy->addComponent<EnemyStun>();
+
+				enemy->addComponent<EnemyStun>();
 				numberEnemyRoom++;
-			}
-
 		}
-		else if (name == "enemigoFuerte" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-
-			for (int i = 0; i < 8; i++) {
+		else if (name == "enemigoFuerte" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS	
 				auto* enemy = mngr_->addEntity();
 				enemy->addComponent<Transform>(
 					Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
@@ -380,7 +375,6 @@ void MapMngr::LoadEnemyRoom() {
 
 				enemy->addComponent<EnemyStun>();
 				numberEnemyRoom++;
-			}
 		}
 		else if (name == "firstBoss" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			//auto* enemy = mngr_->addEntity();
@@ -442,10 +436,22 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 
 	auto* hamster1 = mngr_->addEntity();
 
-	auto* tr = hamster1->addComponent<Transform>(
-		Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale),
-		Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
-	hamster1->addComponent<Shadow>();
+
+	//Habilidad
+	if (name == "sardinilla")
+		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), 
+			Vector2D(), 86 * scale, 86 * scale, 0.0f,0.5,0.5);
+	else if (name == "canelon")
+		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), 
+			Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
+	else if (name == "keta")
+		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), 
+			Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
+	else
+		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), 
+			Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
+
+	Transform* tr = hamster1->getComponent<Transform>();
 	hamster1->addComponent<HamsterStateMachine>();
 
 	hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 0, 15, 20);

@@ -105,11 +105,12 @@ void MovementSimple::update() {
 			//if(state != EnemyStates::JUMPING) state = EnemyStates::MOVING;
 	}
 
-	//Cojo el rect del player y le sumo la supuesta siguiente posicion
-	SDL_Rect rectPlayer{ tr_->getPos().getX() + vel.getX(), tr_->getPos().getY() + vel.getY(), tr_->getW(),tr_->getH() };
-
 	//Si me voy a chocar con una pared...
 	if (colDetec_ != nullptr) {
+		//Cojo el rect del player y le sumo la supuesta siguiente posicion
+		SDL_Rect rectPlayer = tr_->getRectCollide();
+		rectPlayer.x += vel.getX();
+		rectPlayer.y += vel.getY();
 		colDetec_->tryToMove(dir, goalVel_, rectPlayer);
 	}
 

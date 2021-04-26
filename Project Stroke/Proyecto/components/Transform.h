@@ -5,13 +5,14 @@
 #include "../ecs/Component.h"
 #include "../utils/Vector2D.h"
 #include "../ecs/Entity.h"
+#include "../ecs/Camera.h"
 
 #include "Gravity.h"
 
 class Transform : public Component {
 public:
 	Transform() :
-		pos_(), vel_(), width_(), height_(), rotation_(), z_(), flip_(),scaleCollideW(),scaleCollideH() {
+		pos_(), vel_(), width_(), height_(), rotation_(), z_(), flip_(), scaleCollideW(), scaleCollideH(), grv_(nullptr) {
 	}
 
 	Transform(Vector2D pos, Vector2D vel, float width, float height,
@@ -25,8 +26,13 @@ public:
 		velZ_(0),
 		flip_(false),
 		scaleCollideW(scaleW),
-		scaleCollideH(scaleH)
+		scaleCollideH(scaleH),
+		grv_(nullptr)
 	{
+		rectCollide.w = (width_ * scaleCollideW);
+		rectCollide.h = (height_ * scaleCollideH);
+		rectCollide.x = pos.getX() + (width * ((1 - scaleCollideW) / 2));
+		rectCollide.y = pos.getY() + (height * ((1 - scaleCollideH) / 2));
 	}
 
 	Transform(Vector2D pos, Vector2D vel, float width, float height,
@@ -40,8 +46,13 @@ public:
 		velZ_(0),
 		flip_(flip),
 		scaleCollideW(scaleW),
-		scaleCollideH(scaleH)
+		scaleCollideH(scaleH),
+		grv_(nullptr)
 	{
+		rectCollide.w = (width_ * scaleCollideW);
+		rectCollide.h = (height_ * scaleCollideH);
+		rectCollide.x = pos.getX() + (width * ((1 - scaleCollideW) / 2));
+		rectCollide.y = pos.getY() + (height * ((1 - scaleCollideH) / 2));
 	}
 
 	void setGravity(Gravity* g) {
@@ -99,6 +110,10 @@ public:
 		return scaleCollideH;
 	}
 
+	SDL_Rect getRectCollide() const {
+		return rectCollide;
+	}
+
 	void setRot(float rot) {
 		rotation_ = rot;
 	}
@@ -106,6 +121,7 @@ public:
 	void setPos(Vector2D posNew) {
 		pos_ = posNew;
 	}
+
 	void setVel(Vector2D velNew) {
 		vel_ = velNew;
 	}
@@ -121,11 +137,23 @@ public:
 	void update() override {
 		if (grv_ != nullptr && grv_->isActive())
 			z_ += velZ_;
-		//pos_.setY(pos_.getY() - z_);
 		pos_ = pos_ + vel_;
+
+		rectCollide.x = pos_.getX() + (width_ * ((1 - scaleCollideW) / 2));
+		rectCollide.y = pos_.getY() + (height_ * ((1 - scaleCollideH) / 2));
 	}
 
+	void render() override {
+		Vector2D p = Vector2D(rectCollide.x - entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam().x,
+			rectCollide.y - entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam().y);
+		SDL_Rect loc = rectCollide;
+		loc.x = p.getX();
+		loc.y = p.getY();
 
+		SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 0, 0, 255);
+
+		SDL_RenderDrawRect(sdlutils().renderer(), &loc);
+	}
 
 private:
 	Vector2D pos_;
@@ -139,6 +167,7 @@ private:
 	bool flip_;
 	float scaleCollideW;
 	float scaleCollideH;
+	SDL_Rect rectCollide;
 	//Z del suelo en el que se encuentra
 	int floor_;
 };
