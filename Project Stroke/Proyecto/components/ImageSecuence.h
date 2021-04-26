@@ -32,4 +32,6 @@ private:
 	bool next = false;
 
 	SDL_Rect imageRect;
+
+	Transition* trans_;
 };

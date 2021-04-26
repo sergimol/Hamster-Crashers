@@ -23,24 +23,26 @@ void ImageSecuence::init() {
 	imageRect.y = 0;
 	imageRect.w = sdlutils().width();
 	imageRect.h = sdlutils().height();
+
+	trans_ = entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>();
 }
 
 void ImageSecuence::update() {
 
-	if (ih().keyDownEvent()) {
-		if (!keyTextures.empty() && !entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->isFading()) {
-			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->startFadeIn();
+	if (!trans_->isFading() && ih().keyDownEvent()) {
+		if (!keyTextures.empty()) {
+			trans_->startFadeIn();
 			next = true;
 		}
 	}
 
-	if (next && !entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->isFading()) {
+	if (next && !trans_->isFadingOut()) {
 		keyTextures.pop();
 		next = false;
 	}
 
-	if (keyTextures.empty() && !entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->isFading()) {
-		entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->createMap();
+	if (keyTextures.empty() && !trans_->isFadingOut()) {
+		trans_->createMap();
 		entity_->setActive(false);
 	}
 }
