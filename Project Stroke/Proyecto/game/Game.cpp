@@ -61,7 +61,7 @@ void Game::init() {
 
 
 	//MENU	
-	/*auto* mainMenu = mngr_->addEntity();
+	auto* mainMenu = mngr_->addEntity();
 	/*mainMenu->addComponent<Animator>(
 		&sdlutils().images().at("menuSheet"),
 		1920,
@@ -72,11 +72,10 @@ void Game::init() {
 		Vector2D(0, 0),
 		3
 		);*/
-	//mainMenu->addComponent<ControlHandler>(0);
-	//mainMenu->addComponent<menuButtonManager>("mainMenu");
+	mainMenu->addComponent<menuButtonManager>("mainMenu");	//mainMenu, pauseMenu o hamsterMenu
 	
 
-	
+	/*
 	//Camara
 	camera_ = { 0,0,1920, 1080 };
 	auto* camera = mngr_->addEntity();
@@ -100,7 +99,7 @@ void Game::init() {
 	levelMngr->addComponent<Transition>(&sdlutils().images().at("transition"));
 	//Metemos al mapa en el Handler de Map
 
-	mngr_->setHandler<Trans>(levelMngr);
+	mngr_->setHandler<Trans>(levelMngr);*/
 	
 }
 

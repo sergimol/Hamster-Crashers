@@ -11,7 +11,7 @@
 
 class MenuButton : public Component {
 public:
-	MenuButton(std::string n, Vector2D position);
+	MenuButton(std::string n,  Vector2D position);
 	virtual ~MenuButton() {};
 
 	void render() override;
@@ -24,7 +24,7 @@ public:
 
 private:
 	//Nombre del personaje que contiene la UI, todo en minusculas
-	std::string name;
+	std::string buttonName;
 	//Numero del boton en el menu
 	int buttonNumber;
 

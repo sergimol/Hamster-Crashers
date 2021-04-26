@@ -197,6 +197,38 @@
     {
       "id": "soldier1",
       "file": "resources/images/enemies/level1/soldier1sheet.png"
+    },
+    {
+      "id": "sardinillaButton",
+      "file": "resources/images/menuSprites/sardinillaButton.png"
+    },
+    {
+      "id": "sardinillaButtonEnter",
+      "file": "resources/images/menuSprites/sardinillaButtonEnter.png"
+    },
+    {
+      "id": "ketaButton",
+      "file": "resources/images/menuSprites/ketaButton.png"
+    },
+    {
+      "id": "ketaButtonEnter",
+      "file": "resources/images/menuSprites/ketaButtonEnter.png"
+    },
+    {
+      "id": "monchiButton",
+      "file": "resources/images/menuSprites/monchiButton.png"
+    },
+    {
+      "id": "monchiButtonEnter",
+      "file": "resources/images/menuSprites/monchiButtonEnter.png"
+    },
+    {
+      "id": "canelonButton",
+      "file": "resources/images/menuSprites/canelonButton.png"
+    },
+    {
+      "id": "canelonButtonEnter",
+      "file": "resources/images/menuSprites/canelonButtonEnter.png"
     }
   ],
 

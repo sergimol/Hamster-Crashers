@@ -2,13 +2,14 @@
 
 
 MenuButton::MenuButton(std::string n, Vector2D position) :
-	name(n),
-	button_(&sdlutils().images().at(n + "Button")),
-	buttonEnter_(&sdlutils().images().at(n + "ButtonEnter")),
-	//buttonPressed_(&sdlutils().images().at(n + "ButtonPressed")),
-	mainText(button_),
+	buttonName(n),
 	renderCoords(position)
 {
+	button_ = &sdlutils().images().at(buttonName + "Button");
+	buttonEnter_ = &sdlutils().images().at(buttonName + "ButtonEnter");
+
+	mainText = button_;
+
 	dest.x = renderCoords.getX();
 	dest.y = renderCoords.getY();
 	dest.w = mainText->width();
