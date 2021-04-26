@@ -73,7 +73,7 @@ void EnemyMother::orderAttack() {
 				objetivesList.at(i)->atacking.back()->getComponent<EnemyBehaviour>()->SetBehavior(new FollowPlayer());
 				//darle el iterador y el hamster id a behavior porque lo va a necesitar
 				objetivesList.at(i)->atacking.back()->getComponent<EnemyBehaviour>()->setHamId
-					(i,--objetivesList.at(i)->atacking.end(), 'a');
+					(i, --objetivesList.at(i)->atacking.end(), 'a');
 			}
 		}
 		
@@ -114,11 +114,25 @@ void EnemyMother::cleanListHamAttacking(int i) {
 
 /*Cambia a un eneigo en concreto de attack to ambush*/
 void EnemyMother::changeFromAttackToAmbush(int hamid, std::list<Entity*>::iterator it) {
+	
+	
+	//coloca el bicho en ambush al final
+	objetivesList.at(hamid)->ambushing.push_back(*it);
+	//lo saca de la lista attacking
+	removeFromAttackList(hamid, it);
+
+	//poner las entitades en behavior attack correspondiente
+	objetivesList.at(hamid)->ambushing.back()->getComponent<EnemyBehaviour>()->SetBehavior(new AmbushPlayer());
+	//darle el iterador y el hamster id a behavior porque lo va a necesitar
+	objetivesList.at(hamid)->ambushing.back()->getComponent<EnemyBehaviour>()->setHamId
+	(hamid, --objetivesList.at(hamid)->ambushing.end(), 'b');
+	//yasta
 
 }
 
 
 void EnemyMother::removeFromAttackList(int hamid, std::list<Entity*>::iterator it) {
+	
 	it = objetivesList.at(hamid)->atacking.erase(it); //si se ha morido se quita, no se cambia ni nada, la lista se actualiza sola
 }
 

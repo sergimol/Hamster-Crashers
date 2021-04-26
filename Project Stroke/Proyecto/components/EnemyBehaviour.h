@@ -47,6 +47,8 @@ public:
 	void setHamId(int hId, std::list<Entity*>::iterator it, char l);
 
 	void die();
+
+	void changeToAmbush();
 	//getters es posible que algunos sean prescindibles// nada es una salvajada me arrepiento pero diego del futuro TODO
 
 	//----------------------------------------------------------

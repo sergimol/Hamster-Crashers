@@ -361,8 +361,8 @@ void MapMngr::LoadEnemyRoom() {
 
 				//anyadir a los cuidados de la madre
 				mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addEnemy(enemy);
-				/*enemy->addComponent<FollowPlayer>();
-				enemy->addComponent<EnemyStun>();*/
+				
+				enemy->addComponent<EnemyStun>();
 				numberEnemyRoom++;
 			}
 		}
