@@ -170,6 +170,7 @@
     <ClCompile Include="Proyecto\components\FirstBossAttack.cpp" />
     <ClCompile Include="Proyecto\components\FirstBossBehaviour.cpp" />
     <ClCompile Include="Proyecto\components\FleeFromPlayer.cpp" />
+    <ClCompile Include="Proyecto\components\ShadowFollow.cpp" />
     <ClCompile Include="Proyecto\components\FollowPlayer.cpp" />
     <ClCompile Include="Proyecto\components\GameStates.cpp" />
     <ClCompile Include="Proyecto\components\GetItem.cpp" />
@@ -196,6 +197,7 @@
     <ClCompile Include="Proyecto\components\ReanimationGame.cpp" />
     <ClCompile Include="Proyecto\components\Roll.cpp" />
     <ClCompile Include="Proyecto\components\EnemyStun.cpp" />
+    <ClCompile Include="Proyecto\components\Shadow.cpp" />
     <ClCompile Include="Proyecto\components\StrongFollowPlayer.cpp" />
     <ClCompile Include="Proyecto\components\Stun.cpp" />
     <ClCompile Include="Proyecto\components\Swallow.cpp" />
@@ -253,6 +255,7 @@
     <ClInclude Include="Proyecto\components\FirstBossAttack.h" />
     <ClInclude Include="Proyecto\components\FirstBossBehaviour.h" />
     <ClInclude Include="Proyecto\components\FleeFromPlayer.h" />
+    <ClInclude Include="Proyecto\components\ShadowFollow.h" />
     <ClInclude Include="Proyecto\components\FollowPlayer.h" />
     <ClInclude Include="Proyecto\components\GameStates.h" />
     <ClInclude Include="Proyecto\components\GetItem.h" />
@@ -280,6 +283,7 @@
     <ClInclude Include="Proyecto\components\ReanimationGame.h" />
     <ClInclude Include="Proyecto\components\Roll.h" />
     <ClInclude Include="Proyecto\components\EnemyStun.h" />
+    <ClInclude Include="Proyecto\components\Shadow.h" />
     <ClInclude Include="Proyecto\components\StrokeStrategy.h" />
     <ClInclude Include="Proyecto\components\StrongFollowPlayer.h" />
     <ClInclude Include="Proyecto\components\Stun.h" />

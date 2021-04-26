@@ -411,6 +411,12 @@
     <ClCompile Include="Proyecto\components\GameStates.cpp">
       <Filter>Archivos de origen\components\StateMachine</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\ShadowFollow.cpp">
+      <Filter>Archivos de origen\components\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Shadow.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster</Filter>
+    </ClCompile>
     <ClCompile Include="Proyecto\components\EnemyMother.cpp">
       <Filter>Archivos de origen\components\Entity\Enemy</Filter>
     </ClCompile>
@@ -700,6 +706,12 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\GameStates.h">
       <Filter>Archivos de encabezado\Components\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\ShadowFollow.h">
+      <Filter>Archivos de encabezado\Components\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Shadow.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\EnemyMother.h">
       <Filter>Archivos de encabezado\Components\Entity\Enemy</Filter>

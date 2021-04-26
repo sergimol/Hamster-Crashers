@@ -1,5 +1,6 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 #include "Camera.h"
+#include "../components/Transform.h"
 
 void Camera::update() {
 	if (cameraState == Players)
@@ -8,6 +9,21 @@ void Camera::update() {
 		Goto();
 	else if (cameraState == Static)
 		StaticCamera();
+
+	checkBounds();
+
+}
+
+void Camera::checkBounds() {
+	if (camera_.x < 0)
+		camera_.x = 0;
+	else if (camera_.x + camera_.w > 5100 * 3.8f)
+		camera_.x = (5100 * 3.8f) - camera_.w;
+
+	if (camera_.y < -205)
+		camera_.y = -205;
+	else if (camera_.y + camera_.h > 384 * 3.8f)
+		camera_.y = (350 * 3.8f) - camera_.h;
 }
 
 void Camera::followPlayer() {

@@ -41,7 +41,7 @@ private:
 	Texture* tx_;
 	float alphaCalc;
 
-	const float FADE_SPEED = 0.07;
+	const float FADE_SPEED = 7;
 
 	bool fadingOut;
 	bool fadingIn;

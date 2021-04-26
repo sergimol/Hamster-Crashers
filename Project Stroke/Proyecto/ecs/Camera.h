@@ -14,7 +14,6 @@
 #include "Entity.h"
 #include "Manager.h"
 #include "../utils/Vector2D.h"
-#include "../components/Transform.h"
 #include <SDL_rect.h>
 #include "../components/MapMngr.h"
 
@@ -32,6 +31,7 @@ private:
 	Vector2D newObjetivo();
 	State cameraState;
 	bool GoToTracker;
+	void checkBounds();
 public:
 
 	Camera(SDL_Rect cam) : camera_(cam), CameraFollowPos(Vector2D()), cameraState(Players) {}
@@ -47,6 +47,7 @@ public:
 	Vector2D CameraFollowPos;	//Guarda el punto de la posición de la camara cuando lo lea
 
 	void setGoToTracker(bool objetivo) {GoToTracker = objetivo;};
+	
 
 };
 

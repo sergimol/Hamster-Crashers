@@ -96,7 +96,7 @@ void Game::init() {
 	// Mapa
 	auto* mapa = mngr_->addEntity();
 	mapa->addComponent<MapMngr>();
-	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Mapa.tmx");
+	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Lvl1javi.tmx");
 	//Metemos al mapa en el Handler de Map
 	mngr_->setHandler<Map>(mapa);
 

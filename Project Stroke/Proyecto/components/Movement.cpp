@@ -98,8 +98,10 @@ void Movement::update() {
 		vel.setX(col_->lerp(vel.getX(), 0, 0.25));
 		vel.setY(col_->lerp(vel.getY(), 0, 0.25));
 	}
-
-	SDL_Rect rectPlayer{ tr_->getPos().getX() + vel.getX(), tr_->getPos().getY() + vel.getY(), tr_->getW(),tr_->getH() };	//Nueva pos
+	//1-0.85/2
+	SDL_Rect rectPlayer = tr_->getRectCollide();
+	rectPlayer.x += vel.getX();
+	rectPlayer.y += vel.getY();
 
 	col_->tryToMove(dir, goalVel_, rectPlayer);		//Intenta moverse
 	grav_->checkHeight(rectPlayer);					//Comprobamos que no tenga que subir un escalon
