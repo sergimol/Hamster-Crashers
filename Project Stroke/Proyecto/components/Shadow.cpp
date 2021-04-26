@@ -12,6 +12,7 @@ void Shadow::init() {
 	shadow_->addComponent<Image>(&sdlutils().images().at("shadow"));
 	shadow_->addComponent<ShadowFollow>(tr_);
 }
+
 //SIMPLEMENTE SE LLAMA A SU RENDER Y UPDATE
 void Shadow::render() {
 	shadow_->render();
