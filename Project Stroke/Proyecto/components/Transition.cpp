@@ -92,7 +92,8 @@ void Transition::sceneTransition() {
 	//Desactivamos todas las entidades (Salvo la cámara)
 	for (Entity* e : entity_->getMngr()->getEntities()) {
 		//Si la entidad que voy a coger no es la camara...
-		if (e->getMngr()->getHandler<Camera__>() != e && e->getMngr()->getHandler<LevelHandlr>() != e)
+		if (e->getMngr()->getHandler<Camera__>() != e && e->getMngr()->getHandler<LevelHandlr>() != e 
+			&& e->getMngr()->getHandler<StateMachine>() != e && e->getMngr()->getHandler<Mother>() != e)
 			//La elimino
 			e->setActive(false);
 	}
