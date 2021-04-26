@@ -24,4 +24,3 @@ private:
 	Transform* tr_;
 	bool canChange;
 };
-

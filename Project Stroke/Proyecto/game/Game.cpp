@@ -105,7 +105,7 @@ void Game::init() {
 	levelMngr->addComponent<Transition>(&sdlutils().images().at("transition"));
 	//Metemos al mapa en el Handler de Map
 
-	//mngr_->setHandler<Trans>(levelMngr);	
+	mngr_->setHandler<LevelHandlr>(levelMngr);	
 }
 
 void Game::update() {

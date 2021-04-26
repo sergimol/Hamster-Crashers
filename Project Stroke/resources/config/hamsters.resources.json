@@ -127,6 +127,10 @@
       "file": "resources/images/tiled/collisionTileset.png"
     },
     {
+      "id": "demoTileset",
+      "file": "resources/images/tiled/demoTileset.png"
+    },
+    {
       "id": "q",
       "file": "resources/images/tecla_Q.png"
     },
@@ -232,7 +236,7 @@
     },
     {
       "id": "level1background1",
-      "file": "resources/images/backgrounds/level1/level1parallax1.png"
+      "file": "resources/images/backgrounds/level1/level1parallax1.jpg"
     },
     {
       "id": "level1background2",

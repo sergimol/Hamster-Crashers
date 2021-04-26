@@ -18,23 +18,23 @@ void Transition::init() {
 }
 
 void Transition::update() {
-	if (fadingIn)
-		fadeIn();
-
 	if (fadingOut)
 		fadeOut();
+
+	if (fadingIn)
+		fadeIn();
 
 }
 
 void Transition::render() {
-	if (fadingOut || fadingIn) {
+	if (fadingIn || fadingOut) {
 		tx_->render(blackRect);
 	}
 }
 
 
-void Transition::fadeIn() {
-	//FADE IN
+void Transition::fadeOut() {
+	//FADE out
 
 // Comprueba si hay textura
 	if (tx_) {
@@ -58,8 +58,8 @@ void Transition::fadeIn() {
 	}
 }
 
-void Transition::fadeOut() {
-	//FADE OUT
+void Transition::fadeIn() {
+	//FADE IN
 
 // Comprueba si hay textura
 	if (tx_) {
@@ -77,7 +77,7 @@ void Transition::fadeOut() {
 	if (alpha <= SDL_ALPHA_TRANSPARENT) {
 		alpha = SDL_ALPHA_TRANSPARENT;
 		alphaCalc = (float)SDL_ALPHA_TRANSPARENT;
-		fadingOut = false;
+		fadingIn = false;
 	}
 }
 
@@ -92,7 +92,9 @@ void Transition::sceneTransition() {
 	//Desactivamos todas las entidades (Salvo la cámara)
 	for (Entity* e : entity_->getMngr()->getEntities()) {
 		//Si la entidad que voy a coger no es la camara...
-		if (e->getMngr()->getHandler<Camera__>() != e && e->getMngr()->getHandler<LevelHandlr>() != e)
+		if (e->getMngr()->getHandler<Camera__>() != e && e->getMngr()->getHandler<LevelHandlr>() != e 
+			&& e->getMngr()->getHandler<StateMachine>() != e && e->getMngr()->getHandler<Mother>() != e
+			&& e->getMngr()->getHandler<PauseMenu>() != e)
 			//La elimino
 			e->setActive(false);
 	}
@@ -115,8 +117,6 @@ void Transition::sceneTransition() {
 	//Y creamos uno nuevo
 	auto* images = entity_->getMngr()->addEntity();
 	images->addComponent<ImageSecuence>(nameScene_);
-
-
 }
 
 void Transition::createMap() {
@@ -129,6 +129,10 @@ void Transition::createMap() {
 	entity_->getMngr()->setHandler<Map>(mapa);
 }
 
+bool Transition::isFadingOut() {
+	return fadingOut;
+}
+
 bool Transition::isFading() {
-	return fadingIn;
+	return fadingIn || fadingOut;
 }
