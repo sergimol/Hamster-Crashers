@@ -461,9 +461,8 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 	hamster1->addComponent<Gravity>();
 	hamster1->addComponent<CollisionDetec>();
 	hamster1->addComponent<Movement>();
-	
-	Gravity* g = hamster1->getComponent<Gravity>();
-	tr->setGravity(g);
+
+	tr->setGravity(hamster1->getComponent<Gravity>());
 
 	//Ataques Basicos
 	hamster1->addComponent<LightAttack>();
