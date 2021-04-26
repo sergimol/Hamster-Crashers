@@ -303,7 +303,7 @@ void MapMngr::LoadEnemyRoom() {
 		auto& prop = object.getProperties();
 
 		if (name == "enemigo" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-				/*
+				
 			for (int i = 0; i < 8; i++) {
 				auto* enemy = mngr_->addEntity();
 				enemy->addComponent<Transform>(
@@ -332,7 +332,7 @@ void MapMngr::LoadEnemyRoom() {
 				//enemy->addComponent<EnemyStun>();
 				numberEnemyRoom++;
 			}
-				*/
+				
 		}
 		else if (name == "enemigoFuerte" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			
