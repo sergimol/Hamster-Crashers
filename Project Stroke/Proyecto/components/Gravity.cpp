@@ -28,9 +28,13 @@ void Gravity::checkHeight(SDL_Rect& playerPos) {
 	int maxHigh = 0;
 	for (Entity* alt : heights) {
 		auto* aTr = alt->getComponent<Transform>();
-		if (Collisions::collides(aTr->getPos(), aTr->getW(), aTr->getH(), Vector2D(playerPos.x, playerPos.y), playerPos.w, playerPos.h) && alt->getComponent<HeightObject>()->getZ() > maxHigh)
+		if (Collisions::collides(aTr->getPos(), aTr->getW(), aTr->getH(), Vector2D(playerPos.x, playerPos.y), playerPos.w, playerPos.h) && alt->getComponent<HeightObject>()->getZ() > maxHigh) {
 			maxHigh = alt->getComponent<HeightObject>()->getZ();
+		}
 	}
+
+	//Se actualiza el suelo actual del transform
+	tr_->setFloor(maxHigh);
 
 	//Si va a subir y no salta stuck=true, si ha subido más que el escalón actualizamos floor_
 	stuck_ = false;

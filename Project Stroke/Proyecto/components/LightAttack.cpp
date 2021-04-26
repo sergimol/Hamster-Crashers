@@ -28,12 +28,12 @@ void LightAttack::update() {
 	}
 
 	//Fin animacion
-	if (entity_->getComponent<AnimHamsterStateMachine>()->getState() == HamStatesAnim::LIGHTATTACK1)
+	if (entity_->getComponent<AnimHamsterStateMachine>()->getState() == HamStatesAnim::LIGHTATTACK)
 	{
 		if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
 		{
 
-			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK1, false);
+			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK, false);
 
 			/*if(attackOrder_ == 0)
 				entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK1, false);

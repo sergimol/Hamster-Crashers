@@ -63,6 +63,8 @@ class TriggerScene;
 class MenuButton;
 class MenuButtonManager;
 class GameStates;
+class ShadowFollow;
+class Shadow;
 class EnemyMother;
 
 #define _CMPS_LIST_  \
@@ -129,9 +131,9 @@ class EnemyMother;
 	Transition, \
 	GameStates, \
 	EnemyMother, \
-	TriggerScene
-
-//FollowPlayer, \
+	ShadowFollow, \
+	TriggerScene, \
+	Shadow
 
 // groups
 

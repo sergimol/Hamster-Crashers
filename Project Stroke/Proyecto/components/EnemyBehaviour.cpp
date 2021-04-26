@@ -104,3 +104,7 @@ void EnemyBehaviour::die() {
 	//madre de dios no hay manera de comprobarlo directamente esto es muy doloroso
 	//if (bh_ == )
 }
+void EnemyBehaviour::changeToAmbush() {
+	if (list == 'a')
+	entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->changeFromAttackToAmbush(hamId_, listIterator);
+}
