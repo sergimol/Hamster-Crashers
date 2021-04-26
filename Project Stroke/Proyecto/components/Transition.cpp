@@ -93,7 +93,8 @@ void Transition::sceneTransition() {
 	for (Entity* e : entity_->getMngr()->getEntities()) {
 		//Si la entidad que voy a coger no es la camara...
 		if (e->getMngr()->getHandler<Camera__>() != e && e->getMngr()->getHandler<LevelHandlr>() != e 
-			&& e->getMngr()->getHandler<StateMachine>() != e && e->getMngr()->getHandler<Mother>() != e)
+			&& e->getMngr()->getHandler<StateMachine>() != e && e->getMngr()->getHandler<Mother>() != e
+			&& e->getMngr()->getHandler<PauseMenu>() != e)
 			//La elimino
 			e->setActive(false);
 	}
