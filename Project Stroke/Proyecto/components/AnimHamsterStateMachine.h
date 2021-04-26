@@ -8,7 +8,7 @@
 const enum class HamStatesAnim {
 	IDLE, MOVE, ABILITY,
 	JUMPUP, JUMPDOWN,
-	LIGHTATTACK1, LIGHTATTACK2, LIGHTCOMBO,
+	LIGHTATTACK, LIGHTCOMBO,
 	STRONGATTACK, STRONGCOMBO,
 	HITTED, STUNNED, DEAD,
 	STROKE, GHOST,
@@ -26,7 +26,7 @@ private:
 	std::string id;
 
 	//VARIABLES AUXILIARES PARA ALGUNAS ANIMACIONES
-	int attackOrder_ = 0; //para los ataques ligeros
+	bool attackOrder_ = true; //para los ataques ligeros //true 1 false 2
 
 	//BOOLEANOS PARA LAS ANIMACIONES, 1 POR ESTADO
 	bool idle;
@@ -35,6 +35,7 @@ private:
 	bool sAttack;
 	bool hit;
 	bool lCombo;
+	bool sCombo;
 	bool stroke;
 
 public: 
@@ -57,7 +58,7 @@ public:
 	void setAnimBool(HamStatesAnim h, bool b);
 
 	bool isOnAttack() {
-		return(currentState == HamStatesAnim::LIGHTATTACK1 || currentState == HamStatesAnim::LIGHTATTACK2 || currentState == HamStatesAnim::LIGHTCOMBO
+		return(currentState == HamStatesAnim::LIGHTATTACK || currentState == HamStatesAnim::LIGHTCOMBO
 			|| currentState == HamStatesAnim::STRONGATTACK || currentState == HamStatesAnim::STRONGCOMBO);
 	}
 };
