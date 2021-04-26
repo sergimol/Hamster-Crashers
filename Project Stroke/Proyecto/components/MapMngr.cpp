@@ -303,12 +303,12 @@ void MapMngr::LoadEnemyRoom() {
 		auto& prop = object.getProperties();
 
 		if (name == "enemigo" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-				/*
-			for (int i = 0; i < 8; i++) {
+				
+			for (int i = 0; i < 4; i++) {
 				auto* enemy = mngr_->addEntity();
 				enemy->addComponent<Transform>(
 					Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-					Vector2D(), 240.0f, 370.0f, 0.0f, 1,1)->getFlip() = true;
+					Vector2D(), 240.0f, 370.0f, 0.0f, 1, 1)->getFlip() = true;
 
 				enemy->addComponent<EnemyStateMachine>();
 				enemy->setGroup<Enemy>(true);
@@ -329,14 +329,15 @@ void MapMngr::LoadEnemyRoom() {
 				enemies.push_back(enemy);
 				//anyadir a los cuidados de la madre
 				mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addEnemy(enemy);
-				//enemy->addComponent<EnemyStun>();
+
+				enemy->addComponent<EnemyStun>();
 				numberEnemyRoom++;
 			}
-				*/
+				
 		}
 		else if (name == "enemigoFuerte" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			
-			for (int i = 0; i < 8; i++) {
+			for (int i = 0; i < 4; i++) {
 				auto* enemy = mngr_->addEntity();
 				enemy->addComponent<Transform>(
 					Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
