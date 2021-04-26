@@ -62,6 +62,8 @@ class Transition;
 class MenuButton;
 class menuButtonManager;
 class GameStates;
+class ShadowFollow;
+class Shadow;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -125,9 +127,9 @@ class GameStates;
 	MenuButton,\
 	menuButtonManager,\
 	Transition, \
-	GameStates
-
-//FollowPlayer, \
+	GameStates, \
+	ShadowFollow, \
+	Shadow
 
 // groups
 

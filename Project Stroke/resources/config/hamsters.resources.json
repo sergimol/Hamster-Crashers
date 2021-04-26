@@ -197,6 +197,10 @@
     {
       "id": "soldier1",
       "file": "resources/images/enemies/level1/soldier1sheet.png"
+    },
+    {
+      "id": "shadow",
+      "file": "resources/images/shadow.png"
     }
   ],
 
