@@ -14,16 +14,6 @@ private:
 	//Posicion de la camara
 	Vector2D camPos_;
 
-	//Posicion (x) del parallax de la izquierda
-	float targetLeftPos;
-	float actualLeftPos;
-	//Posicion (x) del parallax de la derecha
-	float targetRightPos;
-	float actualRightPos;
-
-	//Actualiza las posiciones relativas
-	void updateRelativePos();
-
 	//Comprueba que el parallax se ha movido hasta alguna
 	//actualiza las posiciones en ese caso
 	void checkRelativePos();

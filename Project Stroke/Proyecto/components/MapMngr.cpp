@@ -123,13 +123,20 @@ void MapMngr::loadNewMap(string map) {
 		}
 
 		//Fondos
-		/*auto* o = entity_->getMngr()->addBackGround();
-		o->addComponent<Transform>(Vector2D(0,0), Vector2D(0, 0), 100, 1080, 0.0, 1, 1);
-		o->addComponent<BackGround>(&sdlutils().images().at("MAYONESITO"), 80);*/
-		auto* o = entity_->getMngr()->addEntity();
-		o->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 100, 1080, 0.0, 1, 1);
+		auto* o = entity_->getMngr()->addBackGround();
+		o->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
+		//Para meter un fondo meter esto									velocidad		tamaño       posicion
+		o->addComponent<Parallax>(&sdlutils().images().at("level1background1"), 40, Vector2D(1920, 1459), Vector2D(0, -205));
+		
+		auto* p = entity_->getMngr()->addBackGround();
+		p->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 		//Para meter un fondo meter esto                              velocidad  tamaño            posicion
-		o->addComponent<Parallax>(&sdlutils().images().at("MAYONESITO"), 80, Vector2D(1920, 1080), Vector2D(0, 0));
+		p->addComponent<Parallax>(&sdlutils().images().at("level1background2"), 60, Vector2D(1920, 1459), Vector2D(0, -205));
+		
+		auto* q = entity_->getMngr()->addBackGround();
+		q->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
+		//Para meter un fondo meter esto                              velocidad  tamaño            posicion
+		q->addComponent<Parallax>(&sdlutils().images().at("level1background3"), 80, Vector2D(1920, 1459), Vector2D(0, -205));
 
 		for (const auto& layer : layers)
 		{
@@ -422,7 +429,7 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 
 	hamster1->addComponent<Transform>(
 		Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale),
-		Vector2D(), 256.0f, 256.0f, 0.0f, 1, 1);
+		Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
 	hamster1->addComponent<HamsterStateMachine>();
 
 	hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 0, 15, 20);
