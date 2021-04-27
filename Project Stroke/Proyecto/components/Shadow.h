@@ -13,7 +13,7 @@
 
 class Shadow : public Component {
 public:
-	Shadow(bool isHamster) :shadow_(nullptr), tr_(nullptr), isHamster_(isHamster) {};
+	Shadow(bool isHamster, bool useCollision) :shadow_(nullptr), tr_(nullptr), isHamster_(isHamster), useCollision_(useCollision) {};
 	virtual ~Shadow() { delete shadow_; shadow_ = nullptr; };
 	virtual void init() override;
 	virtual void render() override;
@@ -22,7 +22,7 @@ private:
 	Entity* shadow_;
 	Transform* tr_;
 
-	bool isHamster_;
+	bool isHamster_, useCollision_;
 
 	HamStates hamS_; 
 	EnemyStates enemyS_;

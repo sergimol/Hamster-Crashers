@@ -15,7 +15,7 @@ void Shadow::init() {
 	shadow_->addComponent<Transform>(Vector2D(tr_->getPos().getX(), tr_->getPos().getY()),
 		Vector2D(), tr_->getW(), tr_->getH() / 3, 0.0f, 0, 1);
 	shadow_->addComponent<Image>(&sdlutils().images().at("shadow"));
-	shadow_->addComponent<ShadowFollow>(tr_);
+	shadow_->addComponent<ShadowFollow>(tr_, useCollision_);
 }
 
 //SIMPLEMENTE SE LLAMA A SU RENDER Y UPDATE
