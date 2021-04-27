@@ -34,10 +34,7 @@ void LightAttack::update() {
 	{
 		if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
 		{
-
 			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK, false);
-
-
 		}
 
 	}
