@@ -28,6 +28,10 @@ void Stun::update() {
 			state = HamStates::DEFAULT;
 		}
 	}
+	else if (!hamCtrl_->isActive() && state == HamStates::INFARCTED) {
+		//Recupera el control si recibe un infarto
+		hamCtrl_->setActive(true);
+	}
 }
 
 void Stun::restartStunTime() {
