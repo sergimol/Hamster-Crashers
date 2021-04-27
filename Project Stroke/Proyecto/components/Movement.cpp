@@ -89,6 +89,7 @@ void Movement::update() {
 		}
 		else if (hms_->canMove()) {		//Aceleracion
 
+			
 			vel.setX(col_->lerp(goalVel_.getX(), vel.getX(), 0.9));
 			vel.setY(col_->lerp(goalVel_.getY(), vel.getY(), 0.9));
 
