@@ -34,7 +34,6 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 			//Si con el Y bloqueado se mueve correctamente
 			if (!map->intersectWall(rectPlayer)) {
 				goalVel.setY(0);
-				vel.setX(lerp(goalVel.getX(), vel.getX(), 0.9));
 				vel.setY(0);
 			}
 			else {
@@ -44,7 +43,6 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 
 				if (!map->intersectWall(rectPlayer)) {
 					goalVel.setX(0);
-					vel.setY(lerp(goalVel.getY(), vel.getY(), 0.9));
 					vel.setX(0);
 				}
 				//Para las esquinas. NO QUITAR
