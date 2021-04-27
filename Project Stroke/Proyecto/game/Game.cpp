@@ -83,7 +83,7 @@ void Game::init() {
 
 	
 	//Camara
-	camera_ = { 0,0,1920, 1080 };
+	camera_ = { 0,0,sdlutils().width(), sdlutils().height() };
 	auto* camera = mngr_->addEntity();
 	camera->addComponent<Camera>(camera_);
 	mngr_->setHandler<Camera__>(camera);

@@ -39,7 +39,7 @@ private:
 	int RoundsPerRoom;					//Guarda la cantidad de rondas que hay en una sala
 	int RoundsCount = 0;
 	//void Refresh();
-	int scale = 3.8;
+	int scale = 3;
 
 	std::queue<tmx::Object> TriggerftCamera;
 

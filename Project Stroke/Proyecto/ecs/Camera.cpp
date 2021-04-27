@@ -1,6 +1,12 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 #include "Camera.h"
 #include "../components/Transform.h"
+//#include "../components/MapMngr.h"
+
+void Camera::init() {
+	map_ = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>();
+	assert(map_ != nullptr);
+}
 
 void Camera::update() {
 	if (cameraState == Players)
@@ -11,20 +17,24 @@ void Camera::update() {
 		StaticCamera();
 
 	checkBounds();
-
 }
 
 void Camera::checkBounds() {
 
-	if (camera_.x < 0)
+	if (camera_.x < 0) {
 		camera_.x = 0;
-	else if (camera_.x + camera_.w > 5100 * 3.8f)
-		camera_.x = (5100 * 3.8f) - camera_.w;
+	}
+	else if (camera_.x + camera_.w > 5100 * map_->getScale()) {
+		camera_.x = (5100 * map_->getScale()) - camera_.w;
+	}
 
 	if (camera_.y < -205)
 		camera_.y = -205;
-	else if (camera_.y + camera_.h > 384 * 3.2f)
-		camera_.y = (384 * 3.2f) - camera_.h;
+	else if (camera_.y + camera_.h > 384 * map_->getScale())
+		camera_.y = (384 * map_->getScale()) - camera_.h;
+
+	camPos.setX(camera_.x + camera_.w / 2);
+	camPos.setY(camera_.y + camera_.h / 2);
 }
 
 void Camera::followPlayer() {

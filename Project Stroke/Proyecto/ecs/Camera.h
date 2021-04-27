@@ -32,11 +32,13 @@ private:
 	State cameraState;
 	bool GoToTracker;
 	void checkBounds();
+	MapMngr* map_;
 public:
 
-	Camera(SDL_Rect cam) : camera_(cam), CameraFollowPos(Vector2D()), cameraState(Players) {}
+	Camera(SDL_Rect cam) : camera_(cam), CameraFollowPos(Vector2D()), cameraState(State::Players), map_(nullptr) {}
 
 	virtual ~Camera() {}
+	void init() override;
 	void update() override;
 	inline SDL_Rect getCam() const{ return camera_; };
 	void changeCamState(State estado) { cameraState = estado; };
