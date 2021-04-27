@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ShadowFollow.h"
+#include "HamsterStateMachine.h"
 
 /*
 *	Crea y controla la sombra del jugador de manera independiente al Manager, para lograr
@@ -19,4 +20,5 @@ public:
 private:
 	Entity* shadow_;
 	Transform* tr_;
+	HamStates state_;
 };
