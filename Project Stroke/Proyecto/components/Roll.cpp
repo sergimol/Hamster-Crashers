@@ -53,7 +53,7 @@ void Roll::action()
 		SDL_Rect rectPlayer = tr_->getRectCollide();
 		rectPlayer.x += tr_->getVel().getX();
 		rectPlayer.y += tr_->getVel().getY();
-		col_->tryToMove(tr_->getVel(), goalVel_, rectPlayer);
+		col_->tryToMove(dir_, goalVel_, rectPlayer);
 		//Mete invulnerabilidad durante la habilidad
 		entity_->getComponent<EntityAttribs>()->setInvincibility(true);
 	}
@@ -104,7 +104,7 @@ void Roll::update() {
 		SDL_Rect rectPlayer = tr_->getRectCollide();
 		rectPlayer.x += vel.getX();
 		rectPlayer.y += vel.getY();
-		col_->tryToMove(vel, goalVel_, rectPlayer);
+		col_->tryToMove(dir_, goalVel_, rectPlayer);
 		//Si se colisiona..
 		if (checkCollisions())
 			//Suena el hit y le pega
