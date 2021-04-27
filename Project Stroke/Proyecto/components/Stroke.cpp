@@ -36,14 +36,16 @@ void Stroke::update() {
 }
 
 void Stroke::increaseChance(int n, bool fromAbility) {
-	if (!fromAbility) {
-		ss_->increaseChanceNORMAL(n, chance_);
+	if (hms_->getState() != HamStates::INFARCTED) {
+		if (!fromAbility) {
+			ss_->increaseChanceNORMAL(n, chance_);
+		}
+		else {
+			ss_->increaseChanceAB(n, chanceFromAb_);
+		}
+
+		timeLastIncrease_ = sdlutils().currRealTime();
 	}
-	else {
-		ss_->increaseChanceAB(n, chanceFromAb_);
-	}
-	
-	timeLastIncrease_ = sdlutils().currRealTime();
 	//std::cout << chance_ + " " + chanceFromAb_ << std::endl;
 }
 
