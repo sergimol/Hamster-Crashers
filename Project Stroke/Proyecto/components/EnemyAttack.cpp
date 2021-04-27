@@ -7,6 +7,8 @@
 #include "StrongAttack.h"
 #include "LightAttack.h"
 #include "AnimHamsterStateMachine.h"
+#include "AnimEnemyStateMachine.h"
+
 
 EnemyAttack::EnemyAttack() :
 	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
@@ -22,6 +24,21 @@ void EnemyAttack::update() {
 	if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
 		DEBUG_isAttacking_ = false;
 	}
+
+	//Fin animacion
+	if (entity_->getComponent<AnimEnemyStateMachine>() != nullptr)
+	{
+		if (entity_->getComponent<AnimEnemyStateMachine>()->getState() == EnemyStatesAnim::ATTACK)
+		{
+			if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+			{
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
+
+			}
+
+		}
+	}
+	
 }
 
 bool EnemyAttack::LaunchAttack() {
@@ -58,7 +75,10 @@ bool EnemyAttack::LaunchAttack() {
 			//Suena el attackSound
 			attackSound_.play();
 
-		//this.anims.play(pegarse)
+		//ANIMACION DE ATTAQUE
+		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, true);
+
+
 
 		DEBUG_isAttacking_ = true;
 		time_ = sdlutils().currRealTime();
