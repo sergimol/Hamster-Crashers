@@ -20,7 +20,7 @@ void EnemyStun::init() {
 }
 
 void EnemyStun::update() {
-	if (state_->getState() == GameStates::RUNNING) {
+	if (state_->getState() != GameStates::PAUSE) {
 		auto& state = enmState_->getState();
 		if (state == EnemyStates::ENM_STUNNED) {
 			if (!movCancelled_) {

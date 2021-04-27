@@ -30,7 +30,7 @@ void Stroke::init() {
 }
 
 void Stroke::update() {
-	if(state_->getState() == GameStates::RUNNING)
+	if(state_->getState() != GameStates::PAUSE)
 		checkChance();
 	//std::cout << chance_ << " " << chanceFromAb_ << std::endl;
 }

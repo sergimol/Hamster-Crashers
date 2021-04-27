@@ -74,7 +74,7 @@ public:
 
 	//para actualizar la textura
 	void update() override {
-		if (state_->getState() != GameStates::PAUSE && state_->getState() != GameStates::MAINMENU) {
+		if (state_->getState() != GameStates::PAUSE) {
 			if (sdlutils().currRealTime() >= lastTime + frameUpdate)
 			{
 

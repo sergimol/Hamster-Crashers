@@ -21,7 +21,7 @@ void Transition::init() {
 }
 
 void Transition::update() {
-	if (state_->getState() == GameStates::RUNNING) {
+	if (state_->getState() != GameStates::PAUSE) {
 		if (fadingOut)
 			fadeOut();
 

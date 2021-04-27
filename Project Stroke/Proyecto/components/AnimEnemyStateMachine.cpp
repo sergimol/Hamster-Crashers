@@ -15,7 +15,7 @@ void AnimEnemyStateMachine::init()
 
 void AnimEnemyStateMachine::update()
 {
-	if (gState_->getState() == GameStates::RUNNING) {
+	if (gState_->getState() != GameStates::PAUSE) {
 		HandleAnimState();
 		CheckAnimState();
 	}

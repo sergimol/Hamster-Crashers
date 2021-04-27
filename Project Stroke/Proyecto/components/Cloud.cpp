@@ -14,7 +14,7 @@ void Cloud::init() {
 }
 
 void Cloud::update() {
-	if (state_->getState() == GameStates::RUNNING) {
+	if (state_->getState() != GameStates::PAUSE) {
 		//Cogemos todas las entidades del juego
 		auto& ents = entity_->getMngr()->getEnemies();
 

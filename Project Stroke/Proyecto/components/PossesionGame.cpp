@@ -19,7 +19,7 @@ void PossesionGame::render() {
 
 //Comprueba que la tecla sea pulsada y la keyGame esté chocando con el marcador
 void PossesionGame::update() {
-	if (state_->getState() == GameStates::RUNNING) {
+	if (state_->getState() != GameStates::PAUSE) {
 		if (ih().keyDownEvent()) {
 			if (ih().isKeyDown(actualKey) && keyGame->getComponent<KeyGame>()->hitSkillCheck())
 				succesfulHit();

@@ -67,7 +67,7 @@ void EnemyMother::orderAttack() {
 
 		auto z = objetivesList.at(i)->atacking.size();
 		for (int y = z; y < 2; y++) {
-			//se puede aï¿½adir
+			//se puede añadir
 			auto n = objetivesList.at(i)->ambushing.size();
 			if (n != 0) { // hay enemigos disponibles
 				objetivesList.at(i)->atacking.push_back(objetivesList.at(i)->ambushing.front());
@@ -147,12 +147,14 @@ void EnemyMother::removeFromAmbushList(int hamid, std::list<Entity*>::iterator i
 }
 
 void EnemyMother::update() {
-	if (numPlayers > 0) {		
-	    if (state_->getState() == GameStates::RUNNING) {
-		    asingEnemies();
-            orderAttack();
+	if (numPlayers > 0) {
+		if (state_->getState() != GameStates::PAUSE) {
+		
+			asingEnemies();
+			orderAttack();
+		}
 	}
-	//no queria hacerlo asi pero es para salir del truyo, (no localizo la parte exacta en al que un hamster muere y poder identificarlo), oi si coï¿½o que coï¿½o
+	//no queria hacerlo asi pero es para salir del truyo, (no localizo la parte exacta en al que un hamster muere y poder identificarlo), oi si coño que coño
 }
 
 

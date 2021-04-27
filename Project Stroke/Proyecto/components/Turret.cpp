@@ -32,7 +32,7 @@ void Turret::init() {
 }
 
 void Turret::update() {
-	if (state_->getState() == GameStates::RUNNING) {
+	if (state_->getState() != GameStates::PAUSE) {
 		Ability::update();
 
 		if (onUse_) {

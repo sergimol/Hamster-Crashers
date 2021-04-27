@@ -22,7 +22,7 @@ void EnemyStrongAttack::init() {
 }
 
 void EnemyStrongAttack::update() {
-	if (state_->getState() == GameStates::RUNNING) {
+	if (state_->getState() != GameStates::PAUSE) {
 		//Deja de mostrar el collider
 		if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
 			DEBUG_isAttacking_ = false;

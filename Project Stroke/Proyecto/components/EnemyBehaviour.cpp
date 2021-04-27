@@ -69,7 +69,7 @@ bool EnemyBehaviour::isWithinAttackRange() {
 
 void EnemyBehaviour::update() {
 	//ejecuta el metodo de behavior que le dice como comportarse (atacar, como moverse, cuando, el hace las condiciones el resto nos olvidamos)
-	if(state_->getState() == GameStates::RUNNING)
+	if(state_->getState() != GameStates::PAUSE)
 		bh_->behave();
 	//tambien seria oportuno que esta misma clase hiciese los cambios de bh_, aunque suene y parezca raro que sea este objeto el que indique cual es
 	//el siguiente comportamiento/Behavior no es algo tan descabezado.. <3

@@ -20,7 +20,7 @@ void GhostCtrl::init() {
 }
 
 void GhostCtrl::update() {
-	if (state_->getState() == GameStates::RUNNING) {
+	if (state_->getState() != GameStates::PAUSE) {
 		//Busca entre el resto de hamsters uno al que pueda poseer
 		auto& hamsters = entity_->getMngr()->getPlayers();
 		for (Entity* e : hamsters) {

@@ -182,7 +182,7 @@ void ControlHandler::handleController() {
 		}
 	}
 
-	else if (gameState == GameStates::PAUSE || gameState == GameStates::MAINMENU) {
+	else if (gameState == GameStates::PAUSE) {
 		if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) < 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_UP)) {
 			pause_->updateKeymap(MenuButtonManager::UP, true);
 			pause_->updateKeymap(MenuButtonManager::DOWN, false);
@@ -222,7 +222,7 @@ void ControlHandler::handleController() {
 		else
 			pause_->updateKeymap(MenuButtonManager::SPACE, false);
 
-		if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_START) && gameState == GameStates::PAUSE) {
+		if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_START)) {
 			states_->setState(GameStates::RUNNING);
 		}
 	}
@@ -237,7 +237,7 @@ void ControlHandler::handleKeyboard() {
 			mov_->updateKeymap(Movement::UP, true);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::UP, true);
 		}
-		else if (gameState == GameStates::PAUSE || gameState == GameStates::MAINMENU)
+		else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::UP, true);
 	}
 	else if (ih().isKeyUp(keymap.at(UP)))
@@ -246,7 +246,7 @@ void ControlHandler::handleKeyboard() {
 			mov_->updateKeymap(Movement::UP, false);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::UP, false);
 		}
-		else if (gameState == GameStates::PAUSE || gameState == GameStates::MAINMENU)
+		else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::UP, false);
 	}
 	//DOWN
@@ -256,7 +256,7 @@ void ControlHandler::handleKeyboard() {
 			mov_->updateKeymap(Movement::DOWN, true);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::DOWN, true);
 		}
-		else if (gameState == GameStates::PAUSE || gameState == GameStates::MAINMENU)
+		else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::DOWN, true);
 
 	}
@@ -266,7 +266,7 @@ void ControlHandler::handleKeyboard() {
 			mov_->updateKeymap(Movement::DOWN, false);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::DOWN, false);
 		}
-		else if (gameState == GameStates::PAUSE || gameState == GameStates::MAINMENU)
+		else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::DOWN, false);
 
 	}
@@ -277,7 +277,7 @@ void ControlHandler::handleKeyboard() {
 			mov_->updateKeymap(Movement::RIGHT, true);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::RIGHT, true);
 		}
-		else if (gameState == GameStates::PAUSE || gameState == GameStates::MAINMENU)
+		else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::RIGHT, true);
 
 	}
@@ -287,7 +287,7 @@ void ControlHandler::handleKeyboard() {
 			mov_->updateKeymap(Movement::RIGHT, false);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::RIGHT, false);
 		}
-		else if (gameState == GameStates::PAUSE || gameState == GameStates::MAINMENU)
+		else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::RIGHT, false);
 	}
 	//	LEFT
@@ -297,7 +297,7 @@ void ControlHandler::handleKeyboard() {
 			mov_->updateKeymap(Movement::LEFT, true);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::LEFT, true);
 		}
-		else if (gameState == GameStates::PAUSE || gameState == GameStates::MAINMENU)
+		else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::LEFT, true);
 
 	}
@@ -307,7 +307,7 @@ void ControlHandler::handleKeyboard() {
 			mov_->updateKeymap(Movement::LEFT, false);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::LEFT, false);
 		}
-		else if (gameState == GameStates::PAUSE || gameState == GameStates::MAINMENU)
+		else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::LEFT, false);
 	}
 	//el jump no necesita que se le pase el false
@@ -317,7 +317,7 @@ void ControlHandler::handleKeyboard() {
 			mov_->updateKeymap(Movement::SPACE, true);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::LEFT, true);
 		}
-		else if (gameState == GameStates::PAUSE || gameState == GameStates::MAINMENU)
+		else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::SPACE, true);
 
 	}
