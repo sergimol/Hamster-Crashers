@@ -102,6 +102,8 @@ void AnimEnemyStateMachine::setAnimBool(EnemyStatesAnim h, bool b)
 	case EnemyStatesAnim::JUMPDOWN:
 		idle = b;
 		break;
+	case EnemyStatesAnim::ATTACK:
+		lAttack = b;
 	case EnemyStatesAnim::STRONGATTACK:
 		sAttack = b;
 		break;

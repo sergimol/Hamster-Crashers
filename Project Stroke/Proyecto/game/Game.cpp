@@ -77,6 +77,8 @@ void Game::init() {
 		3
 		);*/
 	pauseMenu->addComponent<MenuButtonManager>("pauseMenu");	//mainMenu, pauseMenu o hamsterMenu
+	//mainMenu->addComponent<MenuButtonManager>("mainMenu", &sdlutils().images().at("mainMenuBlank"));	//mainMenu, pauseMenu o hamsterMenu
+	//hamstersMenu->addComponent<MenuButtonManager>("hamsterMenu", &sdlutils().images().at("hamsterSelectorBlank"));	//mainMenu, pauseMenu o hamsterMenu
 	mngr_->setHandler<PauseMenu>(pauseMenu);
 
 	
@@ -105,7 +107,7 @@ void Game::init() {
 	levelMngr->addComponent<Transition>(&sdlutils().images().at("transition"));
 	//Metemos al mapa en el Handler de Map
 
-	mngr_->setHandler<LevelHandlr>(levelMngr);	
+	mngr_->setHandler<LevelHandlr>(levelMngr);
 }
 
 void Game::update() {
@@ -128,7 +130,7 @@ void Game::start() {
 		while (SDL_PollEvent(&event))
 			ih().update(event);
 
-		if (ih().isKeyDown(SDL_SCANCODE_ESCAPE)) {
+		if (ih().onQuit()) {
 			exit = true;
 			continue;
 		}
@@ -199,7 +201,7 @@ void Game::sortEntities() {
 
 	auto& entities = mngr_->getEntities();
 	//Este 2 indica el numero de entidades a las que no afecta el mergeSort
-	mergeSort(entities, 2, entities.size() - 1);	//ERES UN PUTO NAZI DANLLES COMENTA EL PUTO CODIGO MAMAWEBO
+	mergeSort(entities, 2, entities.size() - 1);	
 
 	/*
 		-------------DEBUG-----------

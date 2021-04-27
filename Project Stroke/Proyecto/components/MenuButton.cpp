@@ -23,11 +23,11 @@ void MenuButton::init() {
 
 void MenuButton::render() {
 	if ((int)state_->getState() == stateNumber_) {
-		
+
 		/*if (!buttonSelected_)
 			mainText = button_;*/
-		
-		//Renderizamos el boton
+
+			//Renderizamos el boton
 		if (!buttonSelected_)
 			button_->render(dest_);
 		else
@@ -40,6 +40,30 @@ void MenuButton::render() {
 void MenuButton::selected() {
 	mainText = buttonEnter_;
 	buttonSelected_ = true;
+	/*if (buttonName_ == "local") {
+		std::cout << "local\n";
+	}
+	else if (buttonName_ == "online") {
+		std::cout << "online\n";
+	}
+	else if (buttonName_ == "options") {
+		std::cout << "options\n";
+	}
+	else if (buttonName_ == "quit") {
+		std::cout << "quit\n";
+	}
+	else if (buttonName_ == "sardinilla") {
+		std::cout << "sardinilla\n";
+	}
+	else if (buttonName_ == "keta") {
+		std::cout << "keta\n";
+	}
+	else if (buttonName_ == "monchi") {
+		std::cout << "monchi\n";
+	}
+	else if (buttonName_ == "canelon") {
+		std::cout << "canelon\n";
+	}*/
 }
 
 void MenuButton::exited() {
@@ -49,5 +73,28 @@ void MenuButton::exited() {
 
 void MenuButton::pressed() {
 	mainText = buttonPressed_;
-	std::cout << "Mamawebaaaaso";
+	if (buttonName_ == "local") {
+		std::cout << "local\n";
+	}
+	else if (buttonName_ == "online") {
+		std::cout << "online\n";
+	}
+	else if (buttonName_ == "options") {
+		std::cout << "options\n";
+	}
+	else if (buttonName_ == "quit") {
+		std::cout << "quit\n";
+	}
+	else if (buttonName_ == "sardinilla") {
+		std::cout << "sardinilla\n";
+	}
+	else if (buttonName_ == "keta") {
+		std::cout << "keta\n";
+	}
+	else if (buttonName_ == "monchi") {
+		std::cout << "monchi\n";
+	}
+	else if (buttonName_ == "canelon") {
+		std::cout << "canelon\n";
+	}
 }

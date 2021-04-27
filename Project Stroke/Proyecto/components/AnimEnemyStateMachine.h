@@ -31,7 +31,6 @@ private:
 	//BOOLEANOS PARA LAS ANIMACIONES, 1 POR ESTADO
 	bool idle;
 	bool move;
-	bool flee;
 	bool lAttack;
 	bool sAttack;
 	bool hit;

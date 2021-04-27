@@ -3,6 +3,7 @@
 #include <cmath>
 #include "../sdlutils/InputHandler.h"
 #include "../ecs/Entity.h"
+#include "AnimEnemyStateMachine.h"
 
 //Para comprobar las colisiones
 #include "MapMngr.h"
@@ -34,7 +35,7 @@ void MovementSimple::init() {
 	keymapSimple_.insert({ SPACE, false });
 }
 
-// Activa el movimiento en la dirección indicada
+// Activa el movimiento en la direcciï¿½n indicada
 void MovementSimple::updateKeymap(KEYS x, bool is) {
 	if (!keymapSimple_.empty()) {
 
@@ -79,7 +80,7 @@ void MovementSimple::update() {
 			goalVel_ = Vector2D(dir.getX() * speed_.getX(), dir.getY() * speed_.getY());
 		}
 
-		lastDir_ = dir; //Recogemos siempre la última dirección para quien la necesite
+		lastDir_ = dir; //Recogemos siempre la ï¿½ltima direcciï¿½n para quien la necesite
 
 
 		if (!keymapSimple_.at(UP) && !keymapSimple_.at(DOWN) && !keymapSimple_.at(LEFT) && !keymapSimple_.at(RIGHT)) {		//Deceleracion
@@ -88,6 +89,12 @@ void MovementSimple::update() {
 
 			//ANIMACION DE IDLE
 
+		//ANIMACION DE IDLE
+		if (entity_->getComponent<AnimEnemyStateMachine>() != nullptr)
+		{
+			entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::MOVE, false);
+			entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::IDLE, true);
+		}
 			/*if (state != EnemyStates::ENM_IDLE)
 				anim_->play(Vector2D(0, 0), Vector2D(2, 0), 220);*/
 
@@ -101,6 +108,13 @@ void MovementSimple::update() {
 
 			//ANIMACION DE MOVIMIENTO
 
+		//ANIMACION DE MOVIMIENTO
+		if (entity_->getComponent<AnimEnemyStateMachine>() != nullptr)
+		{
+			entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::MOVE, true);
+			entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::IDLE, false);
+		}
+		
 			/*if (state != EnemyStates::ENM_MOVING)
 				anim_->play(Vector2D(0, 1), Vector2D(2, 2), 100);*/
 

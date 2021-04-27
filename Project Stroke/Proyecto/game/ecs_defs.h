@@ -41,6 +41,7 @@ class PossesionGame;
 class GhostCtrl;
 class ContactDamage;
 class AnimHamsterStateMachine;
+class AnimEnemyStateMachine;
 class KeyGame;
 class HeightObject;
 class Camera;
@@ -108,6 +109,7 @@ class EnemyMother;
 	ContactDamage,\
 	Swallow,\
 	AnimHamsterStateMachine,\
+	AnimEnemyStateMachine,\
 	KeyGame,\
 	HeightObject,\
 	Camera, \
