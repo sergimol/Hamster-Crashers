@@ -48,6 +48,7 @@
 #include "../components/RandomStrokeStrategy.h"
 #include "../components/Parallax.h"
 #include "../components/CollisionDetec.h"
+//#include "../components/NewScene.h"
 #include "../components/Shadow.h"
 #include "../components/EnemyMother.h"
 #include "../components/TriggerScene.h"
@@ -67,28 +68,41 @@ MapMngr::~MapMngr() {
 void MapMngr::update() {
 	auto* camera = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
 	//	Comprobamos la colision con los triggers salas
+	tmx::Object trigger;
 	auto& players = entity_->getMngr()->getPlayers();
-	for (tmx::Object trigger : TriggerftCamera) {//Recorrer triggers
-		auto& getProp = trigger.getProperties();
-		for (Entity* player : players) {
-			auto* pTr = player->getComponent<Transform>();
-			if (player->getComponent<HamsterStateMachine>()->getState() != HamStates::INFARCTED && Collisions::collides(pTr->getPos(), pTr->getW(), pTr->getH(), Vector2D(trigger.getPosition().x, trigger.getPosition().y) * scale, trigger.getAABB().width * scale, trigger.getAABB().height * scale)) {
-				LoadEnemyRoom();
-				if (getProp[0].getIntValue() != -1 || getProp[1].getIntValue() != -1) {
-					camera->setGoToTracker(true);
-					camera->changeCamFollowPos(Vector2D(getProp[0].getIntValue(), getProp[1].getIntValue()) * scale);
-					camera->changeCamState(State::GoingTo);
-				}
-				//Borrar el punto de la camara del vector
-				TriggerftCamera.pop_back();
+	if (!TriggerftCamera.empty())
+		trigger = TriggerftCamera.front(); //Recorrer triggers
+
+	auto& getProp = trigger.getProperties();
+	for (Entity* player : players) {
+		auto* pTr = player->getComponent<Transform>();
+		if (player->getComponent<HamsterStateMachine>()->getState() != HamStates::INFARCTED && Collisions::collides(pTr->getPos(), pTr->getW(), pTr->getH(), Vector2D(trigger.getPosition().x, trigger.getPosition().y) * scale, trigger.getAABB().width * scale, trigger.getAABB().height * scale)) {
+			RoundsPerRoom = getProp[2].getIntValue();
+			LoadEnemyRoom();
+			if (getProp[0].getIntValue() != -1 || getProp[1].getIntValue() != -1) {
+				camera->setGoToTracker(true);
+				camera->changeCamFollowPos(Vector2D(getProp[0].getIntValue(), getProp[1].getIntValue()) * scale);
+				camera->changeCamState(State::GoingTo);
 			}
+			//Borrar el punto de la camara del vector
+			TriggerftCamera.pop();
 		}
 	}
+
 	//Si el estado de la camara es "Static" aka luchando con enemigos, y la cantidad de enemigos en la habitación es 0, volvemos a "Player1s"
-	if (camera->getCamState() == State::Static && numberEnemyRoom == 0) {
-		camera->changeCamFollowPos(Vector2D(-1, -1));	//Se pasa el punto medio de los jugadores
-		camera->setGoToTracker(false);					//Se fija la transicion al punto medio de los jugadores al terminar GoTo
-		camera->changeCamState(State::GoingTo);			//Se cambia el estado de la camara a GoTo
+	if (camera->getCamState() == State::Static && numberEnemyRoom <= 0) {
+		numberEnemyRoom = 0;
+		if (RoundsPerRoom == RoundsCount) {
+			Room++;	//Una vez cargamos a los enemigos de la habitacion incrementamos el contador para poder cargar los enemigos de la siguiente
+			RoundsCount = 0;
+			camera->changeCamFollowPos(Vector2D(-1, -1));	//Se pasa el punto medio de los jugadores
+			camera->setGoToTracker(false);					//Se fija la transicion al punto medio de los jugadores al terminar GoTo
+			camera->changeCamState(State::GoingTo);			//Se cambia el estado de la camara a GoTo
+		}
+		else {
+			RoundsCount++;
+			LoadEnemyRoom();
+		}
 	}
 }
 
@@ -159,7 +173,7 @@ void MapMngr::loadNewMap(string map) {
 					//Guardamos todos los triggers de cambio de sala
 					for (auto object : objects)
 					{
-						TriggerftCamera.push_back(object);
+						TriggerftCamera.push(object);
 					}
 				}
 				//else if (layer->getName() == "PuntosCamara") {
@@ -255,7 +269,8 @@ void MapMngr::loadNewMap(string map) {
 		}
 		//ENEMIGO
 		//Una vez terminamos de cargar todas las entidades y tiles de las CAPAS, cargamos los enemigos de la sala 0
-		LoadEnemyRoom();
+		//LoadEnemyRoom();
+		Room = 1;
 	}
 }
 
@@ -303,9 +318,7 @@ void MapMngr::LoadEnemyRoom() {
 		auto mngr_ = entity_->getMngr();
 		auto& prop = object.getProperties();
 
-		if (name == "enemigo" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-				
-			for (int i = 0; i < 4; i++) {
+		if (name == "enemigo" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 				auto* enemy = mngr_->addEntity();
 				enemy->addComponent<Transform>(
 					Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
@@ -333,12 +346,8 @@ void MapMngr::LoadEnemyRoom() {
 
 				enemy->addComponent<EnemyStun>();
 				numberEnemyRoom++;
-			}
-				
 		}
-		else if (name == "enemigoFuerte" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-			
-			for (int i = 0; i < 4; i++) {
+		else if (name == "enemigoFuerte" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS	
 				auto* enemy = mngr_->addEntity();
 				enemy->addComponent<Transform>(
 					Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
@@ -363,12 +372,11 @@ void MapMngr::LoadEnemyRoom() {
 
 				//anyadir a los cuidados de la madre
 				mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addEnemy(enemy);
-				
+
 				enemy->addComponent<EnemyStun>();
 				numberEnemyRoom++;
-			}
 		}
-		else if (name == "firstBoss" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
+		else if (name == "firstBoss" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			//auto* enemy = mngr_->addEntity();
 			//enemy->addComponent<Transform>(
 			//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
@@ -394,7 +402,7 @@ void MapMngr::LoadEnemyRoom() {
 			//enemy->addComponent<EnemyStun>();
 			//numberEnemyRoom++;
 		}
-		else if (name == "firstBoss" && prop[0].getIntValue() == Room) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
+		else if (name == "firstBoss" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* enemy = mngr_->addEntity();
 			enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
@@ -418,7 +426,6 @@ void MapMngr::LoadEnemyRoom() {
 			numberEnemyRoom++;
 		}
 	}
-	Room++;	//Una vez cargamos a los enemigos de la habitacion incrementamos el contador para poder cargar los enemigos de la siguiente
 }
 
 void MapMngr::addHamster(const tmx::Object& obj) {

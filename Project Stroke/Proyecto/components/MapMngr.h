@@ -12,6 +12,8 @@
 #include "../ecs/tile.h"
 
 #include "../utils/Collisions.h"
+#include <vector>
+#include <queue>
 
 using namespace std;
 class Game;
@@ -34,9 +36,12 @@ private:
 	tmx::ObjectGroup* objectLayer;		//Guardamos la capa de entidades para poder leer los enemigos
 	int Room;							//Guarda la habitación en la que se encuentran los jugadores
 	int numberEnemyRoom;				//Guarda la cantidad de enemigos que hay por sala
+	int RoundsPerRoom;					//Guarda la cantidad de rondas que hay en una sala
+	int RoundsCount = 0;
 	//void Refresh();
 	int scale = 3.8;
-	std::vector<tmx::Object> TriggerftCamera;
+
+	std::queue<tmx::Object> TriggerftCamera;
 
 	void addHamster(const tmx::Object& obj);
 public:

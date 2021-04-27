@@ -15,6 +15,7 @@ void Camera::update() {
 }
 
 void Camera::checkBounds() {
+
 	if (camera_.x < 0)
 		camera_.x = 0;
 	else if (camera_.x + camera_.w > 5100 * 3.8f)
@@ -23,7 +24,7 @@ void Camera::checkBounds() {
 	if (camera_.y < -205)
 		camera_.y = -205;
 	else if (camera_.y + camera_.h > 384 * 3.8f)
-		camera_.y = (350 * 3.8f) - camera_.h;
+		camera_.y = (384 * 3.8f) - camera_.h;
 }
 
 void Camera::followPlayer() {
@@ -31,11 +32,11 @@ void Camera::followPlayer() {
 	players = 0;
 	auto& players_ = entity_->getMngr()->getPlayers();
 
-	//Cámara sigue a los personajes
+	//Cï¿½mara sigue a los personajes
 	for (Entity* e : players_) {
 		auto& playerpos = e->getComponent<Transform>()->getPos();
-		// Operación para calcular el punto medio con más jugadores
-		camPos = camPos + playerpos;
+		// Operaciï¿½n para calcular el punto medio con mï¿½s jugadores
+		camPos = camPos + playerpos + Vector2D(e->getComponent<Transform>()->getW(), e->getComponent<Transform>()->getH()) / 2;
 		players++;
 	}
 	//Actualizamos la posicion de la camara
@@ -78,7 +79,7 @@ void Camera::Goto() {
 }
 
 
-//Calcula el punto al que tiene que ir la camara con el punto de dirección dado
+//Calcula el punto al que tiene que ir la camara con el punto de direcciï¿½n dado
 Vector2D Camera::newObjetivo() {
 	Vector2D CamStaticPos;
 	camPos = Vector2D();
@@ -88,19 +89,19 @@ Vector2D Camera::newObjetivo() {
 	auto& players_ = entity_->getMngr()->getPlayers();
 	for (Entity* e : players_) {
 		auto& playerpos = e->getComponent<Transform>()->getPos();
-		// Operación para calcular el punto medio con más jugadores
-		camPos = camPos + playerpos;
+		// Operaciï¿½n para calcular el punto medio con mï¿½s jugadores
+		camPos = camPos + playerpos + Vector2D(e->getComponent<Transform>()->getW(), e->getComponent<Transform>()->getH()) / 2;
 		players++;
 	}
 	//Actualizamos la posicion central de los 4 jugadores
 	playerMidPos = Vector2D((camPos.getX() / players), (camPos.getY() / players));
 
-	//Dependiendo del valor de "CameraFollowPos" vamos a devolver el punto medio entre el punto que se pasa y la posición de los jugadores, o la posicion de los jugadores
+	//Dependiendo del valor de "CameraFollowPos" vamos a devolver el punto medio entre el punto que se pasa y la posiciï¿½n de los jugadores, o la posicion de los jugadores
 	//Calculamos un punto que se encuentra a 1/2 entre la posicion fija de la camara (objetive) y el punto medio de los 4 jugadores (playerMidPos)
 	if (CameraFollowPos.getX() == -1 || CameraFollowPos.getY() == -1)
 		CamStaticPos = playerMidPos;
 	else
-		CamStaticPos = ((playerMidPos + CameraFollowPos) / 2);
+		CamStaticPos = ((playerMidPos / 4 + CameraFollowPos));
 
 	return CamStaticPos;
 }
