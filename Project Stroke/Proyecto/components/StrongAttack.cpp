@@ -6,6 +6,8 @@
 #include "EnemyStun.h"
 #include "Swallow.h"
 #include "AnimHamsterStateMachine.h"
+#include "AnimEnemyStateMachine.h"
+
 
 
 StrongAttack::StrongAttack() :
@@ -96,6 +98,8 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 							//Si tiene stun, se aplica
 							EnemyStun* enmStun = ents[i]->getComponent<EnemyStun>();
 							if (enmStun != nullptr && enmStun->isActive()) {
+
+								ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
 
 								//Si no estaba aturdido ya
 								if (enmStateM != EnemyStates::ENM_STUNNED) {

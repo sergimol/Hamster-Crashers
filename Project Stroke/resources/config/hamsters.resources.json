@@ -396,7 +396,7 @@
       "duration": 7,
       "cols": 10,
       "rows": 11,
-      "frameUpdate": 70,
+      "frameUpdate": 50,
       "loop": 1,
       "chain": ""
     },

@@ -11,7 +11,7 @@
 
 
 LightAttack::LightAttack() :
-	hms_(nullptr), tr_(nullptr), cooldown_(350), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
+	hms_(nullptr), tr_(nullptr), cooldown_(250), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
 	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {}
 
 void LightAttack::init() {

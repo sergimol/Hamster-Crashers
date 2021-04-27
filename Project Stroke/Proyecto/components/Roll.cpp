@@ -3,6 +3,7 @@
 #include "Animator.h"
 #include "Stroke.h"
 #include "CollisionDetec.h"
+#include "AnimHamsterStateMachine.h"
 
 
 void Roll::init() {
@@ -51,7 +52,6 @@ void Roll::action()
 		else {
 			tr_->getVel() = dir_ * iniAccel;
 		}
-		anim_->play(sdlutils().anims().at("sardinilla_ability"));
 
 		SDL_Rect rectPlayer = tr_->getRectCollide();
 		rectPlayer.x += tr_->getVel().getX();
@@ -161,4 +161,7 @@ void Roll::endAbility() {
 	rolling = false;
 	tr_->getVel() = Vector2D(0, 0);
 	entity_->getComponent<EntityAttribs>()->setInvincibility(false);
+
+	//DESACTIVAMOS LA ANIMACION
+	entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::ABILITY, false);
 }

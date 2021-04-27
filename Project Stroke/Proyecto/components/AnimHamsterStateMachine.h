@@ -38,6 +38,7 @@ private:
 	bool lCombo;
 	bool sCombo;
 	bool stroke;
+	bool ability;
 
 public: 
 	AnimHamsterStateMachine() : currentState(HamStatesAnim::IDLE), lastState(HamStatesAnim::DEFAULT), anim(nullptr), ent(nullptr) {};
