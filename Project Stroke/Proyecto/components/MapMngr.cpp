@@ -48,7 +48,6 @@
 #include "../components/RandomStrokeStrategy.h"
 #include "../components/Parallax.h"
 #include "../components/CollisionDetec.h"
-//#include "../components/NewScene.h"
 #include "../components/Shadow.h"
 #include "../components/EnemyMother.h"
 #include "../components/TriggerScene.h"
@@ -143,17 +142,22 @@ void MapMngr::loadNewMap(string map) {
 		auto* o = entity_->getMngr()->addBackGround();
 		o->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 		//Para meter un fondo meter esto									velocidad		tamaño       posicion
-		o->addComponent<Parallax>(&sdlutils().images().at("level1background1"), 30, Vector2D(1920, 1459), Vector2D(0, -205));
+		o->addComponent<Parallax>(&sdlutils().images().at("level1background1"), 30, Vector2D(1920, 1459), Vector2D(0, -205), false);
 
 		auto* p = entity_->getMngr()->addBackGround();
 		p->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 		//Para meter un fondo meter esto                              velocidad  tamaño            posicion
-		p->addComponent<Parallax>(&sdlutils().images().at("level1background2"), 20, Vector2D(1920, 1459), Vector2D(0, -205));
+		p->addComponent<Parallax>(&sdlutils().images().at("level1background2"), 20, Vector2D(1920, 1459), Vector2D(0, -205), false);
 
 		auto* q = entity_->getMngr()->addBackGround();
 		q->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 		//Para meter un fondo meter esto                              velocidad  tamaño            posicion
-		q->addComponent<Parallax>(&sdlutils().images().at("level1background3"), 10, Vector2D(1920, 1459), Vector2D(0, -205));
+		q->addComponent<Parallax>(&sdlutils().images().at("level1background3"), 10, Vector2D(1920, 1459), Vector2D(0, -205), false);
+		
+		auto* r = entity_->getMngr()->addFrontGround();
+		r->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
+		//Para meter un fondo meter esto                              velocidad  tamaño            posicion
+		r->addComponent<Parallax>(&sdlutils().images().at("level1background4"), 10, Vector2D(1920, 1459), Vector2D(0, -205), true);
 
 		for (const auto& layer : layers)
 		{
@@ -188,7 +192,6 @@ void MapMngr::loadNewMap(string map) {
 						if (object.getName() == "sardinilla" || object.getName() == "canelon" || object.getName() == "keta" || object.getName() == "monchi")
 							addHamster(object);
 						else if (object.getName() == "newScene") {
-
 							newSceneTrigger(object.getProperties()[0].getStringValue(), object);
 						}
 					}
