@@ -34,6 +34,7 @@
 #include "../components/menuButtonManager.h"
 #include "../components/GameStates.h"
 #include "../components/EnemyMother.h"
+#include "../components/SoundManager.h"
 
 //PARA LAS COLISIONES CON TILE
 #include "../utils/Collisions.h"
@@ -64,6 +65,11 @@ void Game::init() {
 	stateMachine->addComponent<GameStates>();
 	mngr_->setHandler<StateMachine>(stateMachine);
 
+	//SoundSystem
+	auto* soundSystem = mngr_->addEntity();
+	soundSystem->addComponent<SoundManager>();
+	mngr_->setHandler<SoundManager>(soundSystem);
+    
 	//MENU		
 	auto* mainMenu = mngr_->addEntity();
 	/*mainMenu->addComponent<Animator>(
