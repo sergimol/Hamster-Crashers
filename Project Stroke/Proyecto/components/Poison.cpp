@@ -1,49 +1,45 @@
 #include "Poison.h"
-#include "Movement.h"
 #include "Animator.h"
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
-#include "../game/Game.h"
-#include "EntityAttribs.h"
 #include "Transform.h"
 #include "Image.h"
 #include "Cloud.h"
 
 Poison::Poison(int dmg) : Ability(CLOUDCD), dmg_(dmg) {
-	
 };
 
 Poison::~Poison() {
-
 }
 
 void Poison::update() {
 	Ability::update();
-	if (!onUse) {
-		if (cloud != nullptr)
-			cloud->setActive(false);
+	if (!onUse_) {
+		if (cloud_ != nullptr)
+			cloud_->setActive(false);
 	}
 }
 
 void Poison::render() {
-
-
 }
 void Poison::action() {
+
 	//Realizamos las animaciones
+
 	if (tr_->getFlip())
 		x = -1;
 	else
 		x = 1;
 
-	cloud = entity_->getMngr()->addEntity();
+	//Y creamos la nube
+	cloud_ = entity_->getMngr()->addEntity();
 
-	cloud->addComponent<Transform>(
+	cloud_->addComponent<Transform>(
 		tr_->getPos() + Vector2D(tr_->getW() / 2 + x * COFFSETX, tr_->getH() / 2),
 		Vector2D(x, 0.0f) * CBULLETSPEED, 10.0f, 10.0f, 0.0f,1,1);
 
-	cloud->addComponent<Image>(&sdlutils().images().at("bullet"));
+	cloud_->addComponent<Image>(&sdlutils().images().at("keta"));
 
-	cloud->addComponent<Cloud>(dmg_);
+	cloud_->addComponent<Cloud>(dmg_);
 }
 

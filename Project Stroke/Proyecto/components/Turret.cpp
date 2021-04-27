@@ -6,14 +6,12 @@
 #include "Image.h"
 #include "BulletHit.h"
 #include "Movement.h"
-/*#include "Animator.h"
-*/
+//#include "Animator.h"
 
 Turret::Turret() : Ability(CD), x_(0), cadenceTime_(sdlutils().currRealTime()) {
 };
 
 Turret::~Turret() {
-
 }
 
 void Turret::init() {
@@ -27,12 +25,13 @@ void Turret::init() {
 	assert(anim_ != nullptr);
 
 	actualSpeed_ = entity_->getComponent<EntityAttribs>()->getVel();
+	assert(actualSpeed_ != nullptr);
 }
 
 void Turret::update() {
 	Ability::update();
 
-	if (onUse) {
+	if (onUse_) {
 		if (sdlutils().currRealTime() > cadenceTime_ + CADENCESHOT) {
 
 			//Crea la entidad
@@ -43,7 +42,7 @@ void Turret::update() {
 			else
 				x_ = 1;
 
-
+			//Meto los componentes
 			bala->addComponent<Transform>(
 				tr_->getPos() + Vector2D(tr_->getW() / 2 + x_ * OFFSETX, tr_->getH() / 2 - OFFSETY),
 				Vector2D(x_, 0.0f) * BULLETSPEED, 10.0f, 10.0f, 0.0f,1,1);
@@ -57,18 +56,20 @@ void Turret::update() {
 			bala->setGroup<Bullet_group>(true);
 
 			cadenceTime_ = sdlutils().currRealTime();
-
 		}
 	}
 }
 
 void Turret::action() {
-	//Reduce vel a la mitad
+
+	//Reduce vel a la mitad mientras dispara
 	entity_->getComponent<Movement>()->setSpeed(actualSpeed_ / 2);
+
 	//Realizo las animaciones
 }
 
 void Turret::endAbility() {
+
 	//Vuelve a vel original
 	entity_->getComponent<Movement>()->setSpeed(actualSpeed_);
 }

@@ -4,7 +4,6 @@
 #include "../sdlutils/SDLUtils.h"
 //#include "../ecs/Manager.h"
 //#include "../ecs/Entity.h"
-
 #include "Animator.h"
 
 
@@ -22,10 +21,12 @@ public:
 private:
 	Animator* anim_;
 
-	bool animActive =false;
-	bool blinkActive = false;
-	int timer;
-	int blinksToDie = 0;
+	bool animActive_ =false;
+	bool blinkActive_ = false;
+	int timer_;
+	int blinksToDie_ = 0;
+
+	//Constantes
 	const int BLINK = 200,
 		TIMEBEFOREBLINK = 3000,
 		DEADCOUNT = 8;

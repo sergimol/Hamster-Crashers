@@ -30,8 +30,9 @@ private:
 	//Controla el boton activo dentro de la rejilla
 	Vector2D buttonsPosition;
 	Vector2D buttonsMagnitude;
-	vector<Entity*> buttons;
+	vector<vector<Entity*>> buttons;
 
+	long unsigned int timer_, cooldown_; //Contador para ver CADA CUANTO puede usar una habilidad
 
 	//Input
 	std::map<KEYS, bool> keymap;
