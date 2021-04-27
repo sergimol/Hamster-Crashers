@@ -52,6 +52,7 @@
 #include "../components/Shadow.h"
 #include "../components/EnemyMother.h"
 #include "../components/TriggerScene.h"
+#include "../components/AnimEnemyStateMachine.h"
 
 
 
@@ -322,14 +323,25 @@ void MapMngr::LoadEnemyRoom() {
 				auto* enemy = mngr_->addEntity();
 				enemy->addComponent<Transform>(
 					Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-					Vector2D(), 240.0f, 370.0f, 0.0f, 1, 1)->getFlip() = true;
+					Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1)->getFlip() = true;
 
 				enemy->addComponent<EnemyStateMachine>();
 				enemy->setGroup<Enemy>(true);
 
-				enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 5);
+				enemy->addComponent<EntityAttribs>(200, 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 5);
 
-				enemy->addComponent<Image>(&sdlutils().images().at("canelon"));
+				enemy->addComponent<Animator>(
+					&sdlutils().images().at("soldier1Sheet"),
+					86,
+					86,
+					3,
+					3,
+					220,
+					Vector2D(0, 0),
+					3
+					);
+				enemy->addComponent<AnimEnemyStateMachine>();
+
 				enemy->addComponent<UI>("canelon", 4);
 
 				enemy->addComponent<EnemyAttack>();
