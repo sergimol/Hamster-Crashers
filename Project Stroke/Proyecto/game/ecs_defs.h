@@ -159,6 +159,7 @@ struct LevelHandlr;
 struct StateMachine;
 struct Mother;
 struct PauseMenu;
+struct MainMenu;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
@@ -168,7 +169,8 @@ struct PauseMenu;
 					StateMachine, \
 					LevelHandlr, \
 					Mother, \
-					PauseMenu
+					PauseMenu, \
+					MainMenu
 
 
 //systems
