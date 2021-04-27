@@ -81,32 +81,36 @@ void Game::init() {
 	//hamstersMenu->addComponent<MenuButtonManager>("hamsterMenu", &sdlutils().images().at("hamsterSelectorBlank"));	//mainMenu, pauseMenu o hamsterMenu
 	mngr_->setHandler<PauseMenu>(pauseMenu);
 
-	
-	//Camara
-	camera_ = { 0,0,sdlutils().width(), sdlutils().height() };
-	auto* camera = mngr_->addEntity();
-	camera->addComponent<Camera>(camera_);
-	mngr_->setHandler<Camera__>(camera);
+	// Mapa
+	auto* mapa = mngr_->addEntity();
+	mngr_->setHandler<Map>(mapa);
 
-	 
+	//Cámara
+	auto* camera = mngr_->addEntity();
+	mngr_->setHandler<Camera__>(camera);
+	
+
+	//Componentes del mapa
+	mapa->addComponent<MapMngr>();
+
+	//Componentes de la cámara
+	camera_ = { 0,0,sdlutils().width(), sdlutils().height() };
+	camera->addComponent<Camera>(camera_);
+	
 	
 	//EnemyMother
 	auto* mother = mngr_->addEntity();
 	mother->addComponent<EnemyMother>();
 	mngr_->setHandler<Mother>(mother);
 
-	// Mapa
-	auto* mapa = mngr_->addEntity();
-	mapa->addComponent<MapMngr>();
-	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Lvl1javi.tmx");
-	//Metemos al mapa en el Handler de Map
-	mngr_->setHandler<Map>(mapa);
+	//Carga del mapa
+	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Lvl1javi.tmx");	 
 
 	// LevelMngr: lleva a cabo la transicion entre niveles
 	auto* levelMngr = mngr_->addFrontGround();
 	levelMngr->addComponent<Transition>(&sdlutils().images().at("transition"));
-	//Metemos al mapa en el Handler de Map
 
+	//Metemos al mapa en el Handler de Map
 	mngr_->setHandler<LevelHandlr>(levelMngr);
 }
 
