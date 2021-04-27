@@ -43,38 +43,40 @@ public:
 	}
 
 	void render() override {
-		SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+		if (state_->getState() != GameStates::MAINMENU) {
+			SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 
-		//recurso
-		Vector2D auxTextFrame = Vector2D();
-		auxTextFrame.setX(widthFrame * textureFrame.getX());
-		auxTextFrame.setY(heightFrame * textureFrame.getY());
+			//recurso
+			Vector2D auxTextFrame = Vector2D();
+			auxTextFrame.setX(widthFrame * textureFrame.getX());
+			auxTextFrame.setY(heightFrame * textureFrame.getY());
 
-		//Multiplicamos por el 'Scale' para que cada uno tenga su tamanyo
-		SDL_Rect src = build_sdlrect(auxTextFrame, widthFrame, heightFrame);
+			//Multiplicamos por el 'Scale' para que cada uno tenga su tamanyo
+			SDL_Rect src = build_sdlrect(auxTextFrame, widthFrame, heightFrame);
 
-		//destino
-		Vector2D renderPos = Vector2D(tr_->getPos().getX() - cam.x, tr_->getPos().getY() - tr_->getZ() - cam.y);
-		SDL_Rect dest = build_sdlrect(renderPos, tr_->getW(), tr_->getH());
-
-
-		SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 255, 0, 255);
-
-		SDL_RenderDrawRect(sdlutils().renderer(), &dest);
-
-		//Renderizado
-		if (tr_->getFlip())
-			tex_->render(src, dest, tr_->getRot(), nullptr, SDL_FLIP_HORIZONTAL);
-		else
-			tex_->render(src, dest, 0);
+			//destino
+			Vector2D renderPos = Vector2D(tr_->getPos().getX() - cam.x, tr_->getPos().getY() - tr_->getZ() - cam.y);
+			SDL_Rect dest = build_sdlrect(renderPos, tr_->getW(), tr_->getH());
 
 
-		//tex_->render(dest, tr_->getRot());
+			SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 255, 0, 255);
+
+			SDL_RenderDrawRect(sdlutils().renderer(), &dest);
+
+			//Renderizado
+			if (tr_->getFlip())
+				tex_->render(src, dest, tr_->getRot(), nullptr, SDL_FLIP_HORIZONTAL);
+			else
+				tex_->render(src, dest, 0);
+
+
+			//tex_->render(dest, tr_->getRot());
+		}
 	}
 
 	//para actualizar la textura
 	void update() override {
-		if (state_->getState() != GameStates::PAUSE) {
+		if (state_->getState() != GameStates::PAUSE && state_->getState() != GameStates::MAINMENU) {
 			if (sdlutils().currRealTime() >= lastTime + frameUpdate)
 			{
 

@@ -7,7 +7,10 @@ MenuButtonManager::MenuButtonManager(string menu) : MenuMode(menu) {}
 void MenuButtonManager::init() {
 
 	if (MenuMode == "mainMenu") {
-		buttonsMagnitude = Vector2D(2, 2); //4 botones, 2x2
+		/*
+		buttonsMagnitude = Vector2D(2, 2); //4 botones, 2x2*/
+		// Para la demo
+		buttonsMagnitude = Vector2D(2, 1); //2 botones, 2x1
 		buttons = vector<vector<Entity*>>(buttonsMagnitude.getX());
 		for (int i = 0; i < buttons.size(); ++i) {
 			buttons[i] = vector<Entity*>(buttonsMagnitude.getY());
@@ -19,17 +22,20 @@ void MenuButtonManager::init() {
 		localbutton->addComponent<MenuButton>("local", Vector2D(100, 550), 0);
 		buttons[0][0] = localbutton;
 
-		auto* onlinebutton = mngr_->addEntity();
+		/*auto* onlinebutton = mngr_->addEntity();
 		onlinebutton->addComponent<MenuButton>("online", Vector2D(100, 750), 0);
 		buttons[0][1] = onlinebutton;
 
 		auto* optionsbutton = mngr_->addEntity();
 		optionsbutton->addComponent<MenuButton>("options", Vector2D(1550, 650), 0);
-		buttons[1][0] = optionsbutton;
+		buttons[1][0] = optionsbutton;*/
 
 		auto* quitbutton = mngr_->addEntity();
-		quitbutton->addComponent<MenuButton>("quit", Vector2D(1550, 820), 0);
-		buttons[1][1] = quitbutton;
+		/*quitbutton->addComponent<MenuButton>("quit", Vector2D(1550, 820), 0);
+		buttons[1][1] = quitbutton;*/
+		// Para la demo
+		quitbutton->addComponent<MenuButton>("quit", Vector2D(1550, 550), 0);
+		buttons[1][0] = quitbutton;
 	}
 	else if (MenuMode == "pauseMenu") {
 		buttonsMagnitude = Vector2D(1, 3); //3 botones, 1x3
@@ -85,7 +91,7 @@ void MenuButtonManager::init() {
 	keymap.insert({ LEFT, false });
 	keymap.insert({ SPACE, false });
 
-	cooldown_ = 100;	//Wellcum
+	cooldown_ = 100;	
 }
 
 void MenuButtonManager::update() {
@@ -138,6 +144,6 @@ void MenuButtonManager::render() {
 
 }
 void MenuButtonManager::updateKeymap(KEYS x, bool is) {
-	if (x != SPACE || !keymap.at(SPACE))
+	//if (x != SPACE || !keymap.at(SPACE))
 		keymap.at(x) = is;
 }

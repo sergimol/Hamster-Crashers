@@ -2,7 +2,7 @@
 
 #include "ShadowFollow.h"
 #include "HamsterStateMachine.h"
-#include "EnemyStateMachine.h"
+#include "GameStates.h"
 
 /*
 *	Crea y controla la sombra del jugador de manera independiente al Manager, para lograr
@@ -26,4 +26,5 @@ private:
 
 	HamStates hamS_; 
 	EnemyStates enemyS_;
+	GameStates* gState_;
 };

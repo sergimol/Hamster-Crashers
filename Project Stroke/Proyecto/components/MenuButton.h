@@ -36,7 +36,6 @@ private:
 	Texture* button_;
 	Texture* buttonEnter_;
 	Texture* buttonPressed_;
-	Texture* mainText;
 	
 	GameStates* state_;
 

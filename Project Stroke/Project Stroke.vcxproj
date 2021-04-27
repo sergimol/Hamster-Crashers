@@ -198,6 +198,7 @@
     <ClCompile Include="Proyecto\components\Roll.cpp" />
     <ClCompile Include="Proyecto\components\EnemyStun.cpp" />
     <ClCompile Include="Proyecto\components\Shadow.cpp" />
+    <ClCompile Include="Proyecto\components\SoundManager.cpp" />
     <ClCompile Include="Proyecto\components\StrongFollowPlayer.cpp" />
     <ClCompile Include="Proyecto\components\Stun.cpp" />
     <ClCompile Include="Proyecto\components\Swallow.cpp" />
@@ -284,6 +285,7 @@
     <ClInclude Include="Proyecto\components\Roll.h" />
     <ClInclude Include="Proyecto\components\EnemyStun.h" />
     <ClInclude Include="Proyecto\components\Shadow.h" />
+    <ClInclude Include="Proyecto\components\SoundManager.h" />
     <ClInclude Include="Proyecto\components\StrokeStrategy.h" />
     <ClInclude Include="Proyecto\components\StrongFollowPlayer.h" />
     <ClInclude Include="Proyecto\components\Stun.h" />

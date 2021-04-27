@@ -4,7 +4,7 @@
 #include "IddleEnemy.h"
 
 FollowPlayer::FollowPlayer() :
-	 rangeOffsetX_(250), rangeOffsetY_(100) {
+	 rangeOffsetX_(250), rangeOffsetY_(50) {
 }
 
 void FollowPlayer::init() {
@@ -67,14 +67,7 @@ bool FollowPlayer::isWithinAttackRange() {
 
 void FollowPlayer::behave() {
 
-	Entity* owEntity = owner_->getEntity();
-	if (owEntity->getComponent<EntityAttribs>()->getLife() <= 40 ) {
-		/*
-		owner_->SetBehavior(new FleeFromPlayer);
-		return;
-		*/
-	}
-	else if (lockedHamster_ != nullptr) {
+	 if (lockedHamster_ != nullptr) {
 
 		// Cambia el foco si el actual muere o le da un infarto
 		auto& state = lockedHamState_->getState();

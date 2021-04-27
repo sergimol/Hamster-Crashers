@@ -33,57 +33,53 @@ void EnemyAttack::update() {
 			if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
 			{
 				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
+				cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+				//auto sizeW = tr_->getW();
+				//auto sizeH = tr_->getH();
+				//auto& pos = tr_->getPos();
+				auto pos = tr_->getRectCollide();
+				auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
 
+
+				attRect_.w = pos.w + pos.w * range;
+				attRect_.h = pos.h + pos.h * range;
+
+				auto flip = tr_->getFlip();
+
+				//Si esta flipeado...
+				if (flip)
+					//Le damos la vuelta al rect
+					attRect_.x = pos.x - attRect_.w + pos.w / 2 - cam.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
+				else
+					attRect_.x = pos.x + pos.w - pos.w / 2 - cam.x;
+
+				attRect_.y = pos.y /*+ sizeH / 4*/ - cam.y;
+
+				//Comprobamos si colisiona con alguno de los enemigos que tiene delante
+
+				//Si se colisiona..
+				if (CheckCollisions(attRect_, true))
+					//Suena el hit y le pega
+					hitSound_.play();
+				//Si no colisiona..
+				else
+					//Suena el attackSound
+					attackSound_.play();
+
+
+
+				DEBUG_isAttacking_ = true;
+				time_ = sdlutils().currRealTime();
 			}
 
 		}
 	}
-	
 }
 
 bool EnemyAttack::LaunchAttack() {
 	if (sdlutils().currRealTime() > time_ + cooldown_) {
-		cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-		//auto sizeW = tr_->getW();
-		//auto sizeH = tr_->getH();
-		//auto& pos = tr_->getPos();
-		auto pos = tr_->getRectCollide();
-		auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
-
-
-		attRect_.w = pos.w + pos.w * range;
-		attRect_.h = pos.h + pos.h * range;
-
-		auto flip = tr_->getFlip();
-
-		//Si esta flipeado...
-		if (flip)
-			//Le damos la vuelta al rect
-			attRect_.x = pos.x - attRect_.w + pos.w / 2 - cam.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
-		else
-			attRect_.x = pos.x + pos.w - pos.w / 2 - cam.x;
-
-		attRect_.y = pos.y /*+ sizeH / 4*/ - cam.y;
-
-		//Comprobamos si colisiona con alguno de los enemigos que tiene delante
-
-		//Si se colisiona..
-		if (CheckCollisions(attRect_, true))
-			//Suena el hit y le pega
-			hitSound_.play();
-		//Si no colisiona..
-		else
-			//Suena el attackSound
-			attackSound_.play();
-
 		//ANIMACION DE ATTAQUE
 		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, true);
-
-
-
-		DEBUG_isAttacking_ = true;
-		time_ = sdlutils().currRealTime();
-
 		return true;
 	}
 	else

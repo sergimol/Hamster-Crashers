@@ -34,7 +34,6 @@ void FirstBossAttack::update() {
 
 			//Telegrafiado hasta el ataque
 			if (!stunStarted_ && sdlutils().currRealTime() > hitTime_ + beforeHitCD_) {
-				cout << "Entró en ataque" << endl;
 				cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 				auto sizeW = tr_->getW();
 				auto& pos = tr_->getPos();
