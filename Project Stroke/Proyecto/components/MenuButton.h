@@ -6,6 +6,7 @@
 
 #include "../sdlutils/Texture.h"
 #include "../sdlutils/SDLUtils.h"
+#include "../sdlutils/InputHandler.h"
 #include "EntityAttribs.h"
 #include "GameStates.h"
 

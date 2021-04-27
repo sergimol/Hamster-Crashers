@@ -37,7 +37,7 @@ void Ability::deactiveAbility() {
 		active_ = false;
 		endAbility();
 		auto& state = st_->getState();	
-		state = HamStates::DEFAULT;
+		state = HamStates::INFARCTED;
 	}
 }
 
