@@ -27,6 +27,7 @@ void EnemyMother::addObjetive(Entity* hamster) {
 void EnemyMother::asingEnemies() {
 	auto n = waiting.size();
 	
+	
 	for (auto i = 0u; i < n; i++) {
 		// encontrar player alive
 		int objetive = i % numPlayers;
@@ -112,6 +113,9 @@ void EnemyMother::cleanListHamAttacking(int i) {
 		//poner las entitades en behavior iddle
 		waiting.back()->getComponent<EnemyBehaviour>()->SetBehavior(new IddleEnemy());
 	}
+
+	objetivesList.erase(i);
+	numPlayers--;
 }
 
 /*Cambia a un eneigo en concreto de attack to ambush*/
@@ -143,9 +147,12 @@ void EnemyMother::removeFromAmbushList(int hamid, std::list<Entity*>::iterator i
 }
 
 void EnemyMother::update() {
-	if (state_->getState() != GameStates::PAUSE) {
-		asingEnemies();
-		orderAttack();
+	if (numPlayers > 0) {
+		if (state_->getState() != GameStates::PAUSE) {
+		
+			asingEnemies();
+			orderAttack();
+		}
 	}
 	//no queria hacerlo asi pero es para salir del truyo, (no localizo la parte exacta en al que un hamster muere y poder identificarlo), oi si coño que coño
 }
