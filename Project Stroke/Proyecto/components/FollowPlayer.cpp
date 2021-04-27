@@ -4,7 +4,7 @@
 #include "IddleEnemy.h"
 
 FollowPlayer::FollowPlayer() :
-	 rangeOffsetX_(250), rangeOffsetY_(100) {
+	 rangeOffsetX_(250), rangeOffsetY_(50) {
 }
 
 void FollowPlayer::init() {
