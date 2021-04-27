@@ -40,6 +40,39 @@ void MenuButton::render() {
 void MenuButton::selected() {
 	mainText = buttonEnter_;
 	buttonSelected_ = true;
+	/*if (buttonName_ == "local") {
+		std::cout << "local\n";
+	}
+	else if (buttonName_ == "online") {
+		std::cout << "online\n";
+	}
+	else if (buttonName_ == "options") {
+		std::cout << "options\n";
+	}
+	else if (buttonName_ == "quit") {
+		std::cout << "quit\n";
+	}
+	else if (buttonName_ == "sardinilla") {
+		std::cout << "sardinilla\n";
+	}
+	else if (buttonName_ == "keta") {
+		std::cout << "keta\n";
+	}
+	else if (buttonName_ == "monchi") {
+		std::cout << "monchi\n";
+	}
+	else if (buttonName_ == "canelon") {
+		std::cout << "canelon\n";
+	}*/
+}
+
+void MenuButton::exited() {
+	mainText = button_;
+	buttonSelected_ = false;
+}
+
+void MenuButton::pressed() {
+	mainText = buttonPressed_;
 	if (buttonName_ == "local") {
 		std::cout << "local\n";
 	}
@@ -64,14 +97,4 @@ void MenuButton::selected() {
 	else if (buttonName_ == "canelon") {
 		std::cout << "canelon\n";
 	}
-}
-
-void MenuButton::exited() {
-	mainText = button_;
-	buttonSelected_ = false;
-}
-
-void MenuButton::pressed() {
-	mainText = buttonPressed_;
-
 }

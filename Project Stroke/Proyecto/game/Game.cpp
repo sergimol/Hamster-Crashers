@@ -77,6 +77,8 @@ void Game::init() {
 		3
 		);*/
 	pauseMenu->addComponent<MenuButtonManager>("pauseMenu");	//mainMenu, pauseMenu o hamsterMenu
+	//mainMenu->addComponent<MenuButtonManager>("mainMenu", &sdlutils().images().at("mainMenuBlank"));	//mainMenu, pauseMenu o hamsterMenu
+	//hamstersMenu->addComponent<MenuButtonManager>("hamsterMenu", &sdlutils().images().at("hamsterSelectorBlank"));	//mainMenu, pauseMenu o hamsterMenu
 	mngr_->setHandler<PauseMenu>(pauseMenu);
 
 	
@@ -105,7 +107,7 @@ void Game::init() {
 	levelMngr->addComponent<Transition>(&sdlutils().images().at("transition"));
 	//Metemos al mapa en el Handler de Map
 
-	mngr_->setHandler<LevelHandlr>(levelMngr);	
+	mngr_->setHandler<LevelHandlr>(levelMngr);
 }
 
 void Game::update() {

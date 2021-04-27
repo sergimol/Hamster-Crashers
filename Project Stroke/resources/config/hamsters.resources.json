@@ -253,6 +253,14 @@
     {
       "id": "level1background4",
       "file": "resources/images/backgrounds/level1/level1parallax4.png"
+    },
+    {
+      "id": "hamsterSelectorBlank",
+      "file": "resources/images/menuSprites/hamsterSelectorBlank.png"
+    },
+    {
+      "id": "mainMenuBlank",
+      "file": "resources/images/menuSprites/mainMenuBlank.png"
     }
   ],
 

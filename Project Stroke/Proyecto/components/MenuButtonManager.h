@@ -14,12 +14,14 @@ class MenuButtonManager: public Component{
 public:
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 
+	MenuButtonManager(string menu, Texture* bckgrnd);
 	MenuButtonManager(string menu);
+
 	virtual ~MenuButtonManager() {};
 
 	void init() override;
 	void update() override;
-
+	void render() override;
 	void updateKeymap(KEYS x, bool is);
 
 private:
@@ -36,4 +38,5 @@ private:
 
 	//Input
 	std::map<KEYS, bool> keymap;
+	Texture* background;
 };
