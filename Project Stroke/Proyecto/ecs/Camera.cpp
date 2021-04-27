@@ -23,8 +23,8 @@ void Camera::checkBounds() {
 
 	if (camera_.y < -205)
 		camera_.y = -205;
-	else if (camera_.y + camera_.h > 384 * 3.8f)
-		camera_.y = (384 * 3.8f) - camera_.h;
+	else if (camera_.y + camera_.h > 384 * 3.2f)
+		camera_.y = (384 * 3.2f) - camera_.h;
 }
 
 void Camera::followPlayer() {
@@ -56,7 +56,7 @@ void Camera::Goto() {
 
 	bool check1 = false;
 	bool check2 = false;
-	int speed = 4;
+	int speed = 6;
 	if (camera_.x < CamStaticPos.getX() - 12 - camera_.w / 2)
 		camera_.x = camera_.x + speed;
 	else if (camera_.x > CamStaticPos.getX() + 12 - camera_.w / 2)
