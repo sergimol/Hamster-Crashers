@@ -1,19 +1,15 @@
 #include "Pray.h"
-#include "Movement.h"
 #include "Animator.h"
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
-#include "../game/Game.h"
-#include "EntityAttribs.h"
 #include "Transform.h"
 #include "../ecs/Camera.h"
 #include "../utils/Collisions.h"
 
-Pray::Pray(int dmg, int heal) : Ability(WAIT), dmg_(dmg), heal_(heal), evil(true){
+Pray::Pray(int dmg, int heal) : Ability(WAIT), dmg_(dmg), heal_(heal), evil_(true){
 };
 
 Pray::~Pray() {
-
 }
 
 void Pray::action() {
@@ -26,11 +22,17 @@ void Pray::endAbility() {
 
 void Pray::prayAbility() {
 	auto& ents = entity_->getMngr()->getEntities();
+
+	//Cogemos la camara
 	SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+
 	for (Entity* e : ents) {
-		if (evil) {
+
+		if (evil_) {
+
 			//Si la entidad es un enemigo...
 			if (e->hasGroup<Enemy>()) {
+
 				//Cogemos el transform del enemigo
 				auto eTR = e->getComponent<Transform>();
 
@@ -38,15 +40,17 @@ void Pray::prayAbility() {
 
 				//Y comprobamos si colisiona
 				if (Collisions::collides(newPos, eTR->getW(), eTR->getH(), Vector2D(cam.x, cam.y), cam.w, cam.h)) {
+
 					//Le restamos la vida al enemigo
 					e->getComponent<EntityAttribs>()->recieveDmg(dmg_);
-					//entity_->getComponent<Life>()->recieveDmg(dmg_);
 				}
 			}
 		}
 		else {
+
 			//Si la entidad es un enemigo...
 			if (e->hasGroup<Ally>()) {
+
 				//Cogemos el transform del enemigo
 				auto eTR = e->getComponent<Transform>();
 
@@ -54,6 +58,7 @@ void Pray::prayAbility() {
 
 				//Y comprobamos si colisiona
 				if (Collisions::collides(newPos, eTR->getW(), eTR->getH(), Vector2D(cam.x, cam.y), cam.w, cam.h)) {
+
 					//Le restamos la vida al enemigo
 					auto& state = st_->getState();
 					if (state != HamStates::DEAD && e->getComponent<EntityAttribs>()->getLife() > 0) //deberia que valer con el DEAD que cuando muera desactive cosas
@@ -62,6 +67,6 @@ void Pray::prayAbility() {
 			}
 		}
 	}
-	evil = !evil;
+	evil_ = !evil_;
 }
 

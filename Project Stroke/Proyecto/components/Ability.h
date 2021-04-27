@@ -1,5 +1,4 @@
 #pragma once
-// This file is part of the course TPV2@UCM - Samir Genaim
 
 #include "../ecs/Component.h"
 #include "../ecs/Entity.h"
@@ -34,7 +33,7 @@ public:
 	
 	virtual void endAbility() {};
 
-	inline bool isAbilityActive() const { return active; };
+	inline bool isAbilityActive() const { return active_; };
 
 	void deactiveAbility();
 	void activateAbility();
@@ -49,7 +48,7 @@ protected:
 	Animator* anim_;
 	long unsigned int timer_, cooldown_; //Contador para ver CADA CUANTO puede usar una habilidad
 
-	bool active = true;
-	bool onUse = false;
+	bool active_ = true;
+	bool onUse_ = false;
 };
 

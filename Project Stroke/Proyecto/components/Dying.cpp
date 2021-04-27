@@ -1,36 +1,41 @@
 ﻿#include "Dying.h"
 
-
 void Dying::init() {
+
 	anim_ = entity_->getComponent<Animator>();
 	assert(anim_ != nullptr);
-	timer = sdlutils().currRealTime();
+
+	timer_ = sdlutils().currRealTime();
 }
 
 void Dying::update() {
 
-	if (!blinkActive && sdlutils().currRealTime() >= timer + TIMEBEFOREBLINK) {
-		blinkActive = true;
-		timer = sdlutils().currRealTime();
+	//Timer
+	if (!blinkActive_ && sdlutils().currRealTime() >= timer_ + TIMEBEFOREBLINK) {
+		blinkActive_ = true;
+		timer_ = sdlutils().currRealTime();
 	}
 
-	if (blinkActive && sdlutils().currRealTime() >= timer + BLINK) {
+	//Empieza a parpadear
+	if (blinkActive_ && sdlutils().currRealTime() >= timer_ + BLINK) {
 		blink();
 	}
-	if (blinksToDie > DEADCOUNT)
+
+	//Cuando se acaba el timer...
+	if (blinksToDie_ > DEADCOUNT)
 		//Desactivamos el componente
 		entity_->setActive(false);
 }
 
 void Dying::blink() {
 	//Se actualiza el tiempo
-	timer = sdlutils().currRealTime();
+	timer_ = sdlutils().currRealTime();
 
 	//Parpadea una vez
-	blinksToDie++;
+	blinksToDie_++;
 
-	animActive = !animActive;
+	animActive_ = !animActive_;
 	//Y activamos o desactivamos el animator para dar sensacion de parpadeo
-	anim_->setActive(animActive);
+	anim_->setActive(animActive_);
 
 }
