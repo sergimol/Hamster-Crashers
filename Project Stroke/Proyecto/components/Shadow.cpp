@@ -4,7 +4,10 @@ void Shadow::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 
-	state_ = entity_->getComponent<HamsterStateMachine>()->getState();
+	if(isHamster_)
+		hamS_ = entity_->getComponent<HamsterStateMachine>()->getState();
+	else
+		enemyS_ = entity_->getComponent<EnemyStateMachine>()->getState();
 
 	shadow_ = new Entity(entity_->getMngr());
 
@@ -21,6 +24,8 @@ void Shadow::render() {
 }
 
 void Shadow::update(){
-	if(state_ != HamStates::INFARCTED)
+	if(isHamster_ && hamS_ != HamStates::INFARCTED)
+		shadow_->update();
+	else if (!isHamster_)
 		shadow_->update();
 }

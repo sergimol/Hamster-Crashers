@@ -32,7 +32,7 @@ void InfarctedBody::init() {
 }
 
 void InfarctedBody::update() {
-	if (state_->getState() != GameStates::PAUSE) {
+	if (state_->getState() == GameStates::RUNNING) {
 		auto& hamsters = entity_->getMngr()->getPlayers();
 		for (Entity* e : hamsters) {
 			if (e != hamster && !e->getComponent<HamsterStateMachine>()->cantBeTargeted()) {
