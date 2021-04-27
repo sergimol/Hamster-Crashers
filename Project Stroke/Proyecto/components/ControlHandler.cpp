@@ -321,7 +321,7 @@ void ControlHandler::handleKeyboard() {
 			pause_->updateKeymap(MenuButtonManager::SPACE, true);
 
 	}
-	if (ih().isKeyDown(SDL_SCANCODE_P)) {
+	if (ih().isKeyDown(SDL_SCANCODE_ESCAPE)) {
 		if (gameState == GameStates::RUNNING) {
 			states_->setState(GameStates::PAUSE);
 		}

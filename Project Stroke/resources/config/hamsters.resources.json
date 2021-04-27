@@ -261,6 +261,10 @@
     {
       "id": "mainMenuBlank",
       "file": "resources/images/menuSprites/mainMenuBlank.png"
+    },
+    {
+      "id": "soldier1Sheet",
+      "file": "resources/images/soldier1_spritesheet.png"
     }
   ],
 

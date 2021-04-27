@@ -130,7 +130,7 @@ void Game::start() {
 		while (SDL_PollEvent(&event))
 			ih().update(event);
 
-		if (ih().isKeyDown(SDL_SCANCODE_ESCAPE)) {
+		if (ih().onQuit()) {
 			exit = true;
 			continue;
 		}
@@ -201,7 +201,7 @@ void Game::sortEntities() {
 
 	auto& entities = mngr_->getEntities();
 	//Este 2 indica el numero de entidades a las que no afecta el mergeSort
-	mergeSort(entities, 2, entities.size() - 1);	//ERES UN PUTO NAZI DANLLES COMENTA EL PUTO CODIGO MAMAWEBO
+	mergeSort(entities, 2, entities.size() - 1);	
 
 	/*
 		-------------DEBUG-----------

@@ -94,9 +94,15 @@ public:
 		case SDL_CONTROLLERDEVICEREMOVED:
 			onControllerRemoved(event);
 			break;
+		case SDL_QUIT:
+			isQuitEvent_ = true;
 		default:
 			break;
 		}
+	}
+
+	inline bool onQuit() {
+		return isQuitEvent_;
 	}
 
 	// keyboard
@@ -403,6 +409,7 @@ private:
 	bool isKeyDownEvent_;
 	bool isMouseMotionEvent_;
 	bool isMouseButtonEvent_;
+	bool isQuitEvent_ = false;
 	pair<Sint32, Sint32> mousePos_;
 	array<bool, 3> mbState_;
 	const Uint8 *kbState_;

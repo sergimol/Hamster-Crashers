@@ -3,6 +3,7 @@
 #include <cmath>
 #include "../sdlutils/InputHandler.h"
 #include "../ecs/Entity.h"
+#include "AnimEnemyStateMachine.h"
 
 //Para comprobar las colisiones
 #include "MapMngr.h"
@@ -84,6 +85,12 @@ void MovementSimple::update() {
 		vel.setY(lerp(vel.getY(), 0, 0.25));
 
 		//ANIMACION DE IDLE
+		if (entity_->getComponent<AnimEnemyStateMachine>() != nullptr)
+		{
+			entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::MOVE, false);
+			entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::IDLE, true);
+		}
+
 
 		/*if (state != EnemyStates::ENM_IDLE)
 			anim_->play(Vector2D(0, 0), Vector2D(2, 0), 220);*/
@@ -97,6 +104,12 @@ void MovementSimple::update() {
 		vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.9));
 
 		//ANIMACION DE MOVIMIENTO
+		if (entity_->getComponent<AnimEnemyStateMachine>() != nullptr)
+		{
+			entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::MOVE, true);
+			entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::IDLE, false);
+		}
+		
 
 		/*if (state != EnemyStates::ENM_MOVING)
 			anim_->play(Vector2D(0, 1), Vector2D(2, 2), 100);*/

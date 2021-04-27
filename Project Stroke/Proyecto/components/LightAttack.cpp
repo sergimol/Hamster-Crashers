@@ -6,6 +6,8 @@
 #include "EnemyStun.h"
 #include "AnimHamsterStateMachine.h"
 #include "Swallow.h"
+#include "AnimEnemyStateMachine.h"
+
 
 
 LightAttack::LightAttack() :
@@ -101,10 +103,14 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 							EnemyStun* enmStun = ents[i]->getComponent<EnemyStun>();
 							if (enmStun != nullptr && enmStun->isActive()) {
 
+								//ANIMACION DE HIT DEL ENEMIGO
+								ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
+
 								//Si no estaba aturdido ya
 								if (enmStateM != EnemyStates::ENM_STUNNED) {
 									//Aturdimos al enemigo
 									enmStateM = EnemyStates::ENM_STUNNED;
+
 
 									//TODO el stun del coso
 									//Desactivamos componente de seguimiento de jugador
