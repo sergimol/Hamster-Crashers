@@ -24,6 +24,9 @@ Manager::~Manager() {
 	for (auto fG : fgs_) {
 		delete fG; fG = nullptr;
 	}
+	for (auto mN : menus_) {
+		delete mN; mN = nullptr;
+	}
 }
 
 void Manager::refresh() {
