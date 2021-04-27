@@ -78,7 +78,7 @@ void MapMngr::update() {
 		auto* pTr = player->getComponent<Transform>();
 		if (player->getComponent<HamsterStateMachine>()->getState() != HamStates::INFARCTED && Collisions::collides(pTr->getPos(), pTr->getW(), pTr->getH(), Vector2D(trigger.getPosition().x, trigger.getPosition().y) * scale, trigger.getAABB().width * scale, trigger.getAABB().height * scale)) {
 			RoundsPerRoom = getProp[2].getIntValue();
-			LoadEnemyRoom();
+			loadEnemyRoom();
 			if (getProp[0].getIntValue() != -1 || getProp[1].getIntValue() != -1) {
 				camera->setGoToTracker(true);
 				camera->changeCamFollowPos(Vector2D(getProp[0].getIntValue(), getProp[1].getIntValue()) * scale);
@@ -101,7 +101,7 @@ void MapMngr::update() {
 		}
 		else {
 			RoundsCount++;
-			LoadEnemyRoom();
+			loadEnemyRoom();
 		}
 	}
 }
@@ -300,7 +300,7 @@ Vector2D MapMngr::SDLPointToMapCoords(Vector2D p) {
 }
 
 
-void MapMngr::LoadEnemyRoom() {
+void MapMngr::loadEnemyRoom() {
 
 	auto& enemies = entity_->getMngr()->getEnemies();
 
@@ -463,11 +463,11 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 	else
 		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), 
 			Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
-
+	
+	hamster1->addComponent<HamsterStateMachine>();
 	hamster1->addComponent<Shadow>();
 
 	Transform* tr = hamster1->getComponent<Transform>();
-	hamster1->addComponent<HamsterStateMachine>();
 
 	hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 0, 15, 20);
 	hamster1->addComponent<Animator>(
