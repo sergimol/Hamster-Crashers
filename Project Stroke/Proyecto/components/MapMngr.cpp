@@ -433,14 +433,12 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 	auto& name = obj.getName();
 	auto mngr_ = entity_->getMngr();
 	auto& players = mngr_->getPlayers();
-
 	auto* hamster1 = mngr_->addEntity();
-
 
 	//Habilidad
 	if (name == "sardinilla")
 		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), 
-			Vector2D(), 86 * scale, 86 * scale, 0.0f,0.5,0.5);
+			Vector2D(), 86 * scale, 86 * scale, 0.0f, 0.5, 0.5);
 	else if (name == "canelon")
 		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), 
 			Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
@@ -450,6 +448,8 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 	else
 		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), 
 			Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
+
+	hamster1->addComponent<Shadow>();
 
 	Transform* tr = hamster1->getComponent<Transform>();
 	hamster1->addComponent<HamsterStateMachine>();

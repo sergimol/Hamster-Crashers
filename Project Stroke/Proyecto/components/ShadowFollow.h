@@ -17,6 +17,9 @@ public:
 	virtual void update() override;
 
 private:
+	float lerp(float a, float b, float f);
+
+
 	Transform* tr_, *otherTr_;
 	float baseWidth_, baseHeight_, width_, height_;
 	bool anim_;
