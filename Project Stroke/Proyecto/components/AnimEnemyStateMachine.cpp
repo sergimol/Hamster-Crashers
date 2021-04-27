@@ -32,7 +32,7 @@ void AnimEnemyStateMachine::HandleAnimState()
 	if (move && !lAttack && !idle)
 		currentState = EnemyStatesAnim::MOVE;
 	//light attack
-	if (lAttack && !sAttack)
+	if (lAttack /*&& !sAttack*/)
 		currentState = EnemyStatesAnim::ATTACK;
 	//strong attack
 	if (sAttack && !lAttack)
@@ -64,8 +64,8 @@ void AnimEnemyStateMachine::CheckAnimState()
 		case EnemyStatesAnim::JUMPDOWN:
 			anim->play(sdlutils().anims().at(id + "_idle")); //CAMBIAR
 			break;
-		case EnemyStatesAnim::STRONGATTACK:
-			anim->play(sdlutils().anims().at(id + "_strong_attack"));
+		case EnemyStatesAnim::ATTACK:
+			anim->play(sdlutils().anims().at(id + "_attack"));
 			break;
 		case EnemyStatesAnim::HITTED:
 			anim->play(sdlutils().anims().at(id + "_hit"));

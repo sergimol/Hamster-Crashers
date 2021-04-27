@@ -147,7 +147,7 @@ void Combos::fourConsecutives() {
 }
 
 void Combos::jumpStrong() {
-	anim_->setAnimBool(HamStatesAnim::STRONGATTACK, true);
+	anim_->setAnimBool(HamStatesAnim::STRONGCOMBO, true);
 	if (!grv_->isActive())
 		grv_->setActive(true);
 

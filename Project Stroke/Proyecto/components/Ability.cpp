@@ -1,4 +1,5 @@
 #include "Ability.h"
+#include "AnimHamsterStateMachine.h"
 
 void Ability::init() {
 
@@ -37,7 +38,7 @@ void Ability::deactiveAbility() {
 		active_ = false;
 		endAbility();
 		auto& state = st_->getState();	
-		state = HamStates::DEFAULT;
+		state = HamStates::INFARCTED;
 	}
 }
 
@@ -55,6 +56,12 @@ void Ability::use() {
 			state = HamStates::ABILITY;
 			action();
 			onUse_ = true;
+
+			//LLAMAMOS LA ANIMACION DE LA HABILIDAD
+			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::ABILITY, true);
+
+			//PARA DESACTIVARLA, SE HACE DESDE CADA HABILIDAD, DE MANERA INDEPENDIENTE
+			//SOLO ESTA PUESTO EN EL ROLL
 		}
 	}
 }

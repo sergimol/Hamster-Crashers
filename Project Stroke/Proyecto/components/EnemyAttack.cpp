@@ -7,10 +7,12 @@
 #include "StrongAttack.h"
 #include "LightAttack.h"
 #include "AnimHamsterStateMachine.h"
+#include "AnimEnemyStateMachine.h"
+
 
 EnemyAttack::EnemyAttack() :
 	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
-	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")){}
+	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {}
 
 void EnemyAttack::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -22,30 +24,46 @@ void EnemyAttack::update() {
 	if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
 		DEBUG_isAttacking_ = false;
 	}
+
+	//Fin animacion
+	if (entity_->getComponent<AnimEnemyStateMachine>() != nullptr)
+	{
+		if (entity_->getComponent<AnimEnemyStateMachine>()->getState() == EnemyStatesAnim::ATTACK)
+		{
+			if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+			{
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
+
+			}
+
+		}
+	}
+	
 }
 
 bool EnemyAttack::LaunchAttack() {
 	if (sdlutils().currRealTime() > time_ + cooldown_) {
 		cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-		auto sizeW = tr_->getW();
-		auto sizeH = tr_->getH();
-		auto& pos = tr_->getPos();
+		//auto sizeW = tr_->getW();
+		//auto sizeH = tr_->getH();
+		//auto& pos = tr_->getPos();
+		auto pos = tr_->getRectCollide();
 		auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
 
 
-		attRect_.w = sizeW / 2 + sizeW / 2 * range;
-		attRect_.h = sizeH / 2 + sizeH / 2 * range;
+		attRect_.w = pos.w + pos.w * range;
+		attRect_.h = pos.h + pos.h * range;
 
 		auto flip = tr_->getFlip();
 
 		//Si esta flipeado...
 		if (flip)
 			//Le damos la vuelta al rect
-			attRect_.x = pos.getX() - attRect_.w + sizeW / 4 - cam.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
+			attRect_.x = pos.x - attRect_.w + pos.w / 2 - cam.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
 		else
-			attRect_.x = pos.getX() + sizeW - sizeW / 4 - cam.x;
+			attRect_.x = pos.x + pos.w - pos.w / 2 - cam.x;
 
-		attRect_.y = pos.getY() + sizeH / 4 - cam.y;
+		attRect_.y = pos.y /*+ sizeH / 4*/ - cam.y;
 
 		//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
@@ -58,7 +76,10 @@ bool EnemyAttack::LaunchAttack() {
 			//Suena el attackSound
 			attackSound_.play();
 
-		//this.anims.play(pegarse)
+		//ANIMACION DE ATTAQUE
+		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, true);
+
+
 
 		DEBUG_isAttacking_ = true;
 		time_ = sdlutils().currRealTime();
@@ -78,15 +99,16 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 	for (int i = 0; i < ents.size(); ++i) {
 		//Si la entidad es un aliado...
 			//Cogemos el transform del aliado
-		auto eTR = ents[i]->getComponent<Transform>();
+		auto hamsTR = ents[i]->getComponent<Transform>();
+		auto hamColRect = hamsTR->getRectCollide();
 
-		Vector2D newPos = Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
+		Vector2D newPos = Vector2D(hamColRect.x - cam.x, hamColRect.y - cam.y);
 		Vector2D enemyPos = Vector2D(enemyRect.x, enemyRect.y);
 
 		EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
 
 		//Y comprobamos si colisiona y si no es invulnerable
-		if (!eAttribs->checkInvulnerability() && Collisions::collides(newPos, eTR->getW(), eTR->getH(), enemyPos, enemyRect.w, enemyRect.h)) {
+		if (!eAttribs->checkInvulnerability() && Collisions::collides(newPos, hamColRect.w, hamColRect.h, enemyPos, enemyRect.w, enemyRect.h)) {
 			int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
 			//if (finCombo) {
 			//	if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.01); //Aumentar probabilidad critico
@@ -134,7 +156,7 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 			Knockback* hamKnockback = ents[i]->getComponent<Knockback>();
 			if (hamKnockback != nullptr && hamKnockback->isActive()) {
 				//Damos la vuelta si es atacado por detras
-				auto& hamFlip = eTR->getFlip();
+				auto& hamFlip = hamsTR->getFlip();
 				if (hamFlip == tr_->getFlip())
 					hamFlip = !hamFlip;
 

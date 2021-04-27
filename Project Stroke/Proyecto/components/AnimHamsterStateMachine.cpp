@@ -50,6 +50,9 @@ void AnimHamsterStateMachine::HandleAnimState()
 	//hitted
 	if (hit)
 		currentState = HamStatesAnim::HITTED;
+	//
+	if (ability)
+		currentState = HamStatesAnim::ABILITY;
 
 	if (stroke)
 		currentState = HamStatesAnim::STROKE;
@@ -131,7 +134,7 @@ void AnimHamsterStateMachine::setAnimBool(HamStatesAnim h, bool b)
 		move = b;
 		break;
 	case HamStatesAnim::ABILITY:
-		idle = b;
+		ability = b;
 		break;
 	case HamStatesAnim::JUMPUP:
 		idle = b;

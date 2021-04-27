@@ -1,6 +1,7 @@
 #include "EnemyBehaviour.h"
 #include "Stroke.h"
 #include "EnemyMother.h"
+#include "../utils/checkML.h"
 
 EnemyBehaviour::EnemyBehaviour(Behavior* auxbh) :
 	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr), lockedHamster_(nullptr),
@@ -37,7 +38,7 @@ void EnemyBehaviour::init() {
 void EnemyBehaviour::SetBehavior(Behavior* bs) {
 	
 	if (bh_ != nullptr)
-	delete bh_;
+		delete bh_;
 	bh_ = bs;
 	bh_->setOwner(this);
 	bh_->init();
@@ -99,9 +100,11 @@ void EnemyBehaviour::setHamId(int hId, std::list<Entity*>::iterator it, char l) 
 void EnemyBehaviour::die() {
 	if (list == 'a') {
 		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAttackList(hamId_, listIterator);
+		list = '0';
 	}
 	else if (list == 'b') {
 		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAmbushList(hamId_, listIterator);
+		list = '0';
 	}
 	//tiene que distinguir que tipo de behavior tiene,
 	//madre de dios no hay manera de comprobarlo directamente esto es muy doloroso

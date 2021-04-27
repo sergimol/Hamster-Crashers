@@ -4,8 +4,15 @@
 #include "FollowPlayer.h"
 #include "FleeFromPlayer.h"
 
+float RandomFloat(float a, float b) {
+	float random = ((float)rand()) / (float)RAND_MAX;
+	float diff = b - a;
+	float r = random * diff;
+	return a + r;
+}
+
 AmbushPlayer::AmbushPlayer() :
-	 rangeX_(500), rangeY_(200), rangeOffsetX_(100), rangeOffsetY_(100) {
+	 rangeX_(250 * 2 *RandomFloat(1, 2)), rangeY_(MARGINTOATTACK * 2 * RandomFloat(1, 2)), rangeOffsetX_(100), rangeOffsetY_(100) {
 }
 
 void AmbushPlayer::init() {
@@ -50,11 +57,8 @@ bool AmbushPlayer::isWithinRange() {
 
 void AmbushPlayer::behave() {
 	Entity* owEntity = owner_->getEntity();
-	if (owEntity->getComponent<EntityAttribs>()->getLife() <= 40) {
-		owner_->SetBehavior(new FleeFromPlayer);
-		return;
-	}
-	else if (lockedHamster_ != nullptr) {
+	
+	if (lockedHamster_ != nullptr) {
 		// Cambia el foco si el actual muere o le da un infarto
 		auto& state = lockedHamState_->getState();
 		if (!lockedHamState_->cantBeTargeted() && enmState_->getState() != EnemyStates::ENM_STUNNED) {

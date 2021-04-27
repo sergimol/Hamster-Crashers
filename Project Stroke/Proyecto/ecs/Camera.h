@@ -50,7 +50,7 @@ public:
 
 	void setGoToTracker(bool objetivo) {GoToTracker = objetivo;};
 	
-
+	inline void setMap(MapMngr* m) { map_ = m; };
 };
 
 /*

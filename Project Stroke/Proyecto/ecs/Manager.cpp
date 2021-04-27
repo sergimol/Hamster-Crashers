@@ -3,6 +3,7 @@
 #include "Manager.h"
 
 #include <algorithm>
+#include "../utils/checkML.h"
 
 Manager::Manager() {
 }
@@ -19,6 +20,9 @@ Manager::~Manager() {
 	}
 	for (auto bG : bgs_) {
 		delete bG; bG = nullptr;
+	}
+	for (auto fG : fgs_) {
+		delete fG; fG = nullptr;
 	}
 }
 

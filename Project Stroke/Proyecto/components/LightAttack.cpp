@@ -11,7 +11,7 @@
 
 
 LightAttack::LightAttack() :
-	hms_(nullptr), tr_(nullptr), cooldown_(350), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
+	hms_(nullptr), tr_(nullptr), cooldown_(250), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
 	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {}
 
 void LightAttack::init() {
@@ -37,10 +37,6 @@ void LightAttack::update() {
 
 			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK, false);
 
-			/*if(attackOrder_ == 0)
-				entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK1, false);
-			else
-				entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK2, false);*/
 
 		}
 
@@ -58,13 +54,14 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 		if (ents[i]->hasGroup<Enemy>()) {
 			//Cogemos el transform del enemigo
 			auto eTR = ents[i]->getComponent<Transform>();
+			auto eColRect = eTR->getRectCollide();
 
-			Vector2D newPos = Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
+			Vector2D newPos = Vector2D(eColRect.x - cam.x, eColRect.y - cam.y);
 
 			EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
 
 			//Y comprobamos si colisiona y si no es invulnerable
-			if (!eAttribs->checkInvulnerability() && Collisions::collides(Vector2D(rectPlayer.x, rectPlayer.y), rectPlayer.w, rectPlayer.h, newPos, eTR->getW(), eTR->getH())) {
+			if (!eAttribs->checkInvulnerability() && Collisions::collides(Vector2D(rectPlayer.x, rectPlayer.y), rectPlayer.w, rectPlayer.h, newPos, eColRect.w, eColRect.h)) {
 
 				//Comprobamos si está en la misma Z o relativamente cerca
 				if (eAttribs->ignoresMargin() || (abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < MARGINTOATTACK)) {
@@ -175,25 +172,27 @@ void LightAttack::attack() {
 		if (hms_->canAttack() && sdlutils().currRealTime() > time_ + cooldown_) {
 			cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 
-			auto sizeW = tr_->getW();
-			auto sizeH = tr_->getH();
-			auto& pos = tr_->getPos();
+			//auto sizeW = tr_->getW();
+			//auto sizeH = tr_->getH();
+			//auto& pos = tr_->getPos();
+			auto pos = tr_->getRectCollide();
+
 			auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
 
 
-			attRect_.w = sizeW / 2 + sizeW / 2 * range;
-			attRect_.h = sizeH / 2 + sizeH / 2 * range;
+			attRect_.w = pos.w + pos.w * range;
+			attRect_.h = pos.h + pos.h * range;
 
 			auto flip = tr_->getFlip();
 
 			//Si esta flipeado...
 			if (flip)
 				//Le damos la vuelta al rect
-				attRect_.x = pos.getX() - attRect_.w + sizeW / 4 - cam.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
+				attRect_.x = pos.x - attRect_.w + pos.w / 2 - cam.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
 			else
-				attRect_.x = pos.getX() + sizeW - sizeW / 4 - cam.x;
+				attRect_.x = pos.x + pos.w - pos.w / 2 - cam.x;
 
-			attRect_.y = pos.getY() + sizeH / 4 - cam.y;
+			attRect_.y = pos.y /*+ pos.h / 4*/ - cam.y;
 
 			//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 			//A�adimos a los combos

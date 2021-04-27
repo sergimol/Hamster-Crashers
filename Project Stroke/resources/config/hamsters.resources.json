@@ -392,7 +392,7 @@
       "duration": 7,
       "cols": 10,
       "rows": 11,
-      "frameUpdate": 70,
+      "frameUpdate": 50,
       "loop": 1,
       "chain": ""
     },
@@ -557,7 +557,7 @@
       "duration": 8,
       "cols": 6,
       "rows": 6,
-      "frameUpdate": 100,
+      "frameUpdate": 50,
       "loop": 0,
       "chain": ""
     },
@@ -590,8 +590,8 @@
       "duration": 8,
       "cols": 6,
       "rows": 6,
-      "frameUpdate": 100,
-      "loop": 1,
+      "frameUpdate": 60,
+      "loop": 0,
       "chain": ""
     }
 

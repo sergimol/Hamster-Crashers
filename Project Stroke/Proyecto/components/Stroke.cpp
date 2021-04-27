@@ -36,14 +36,16 @@ void Stroke::update() {
 }
 
 void Stroke::increaseChance(int n, bool fromAbility) {
-	if (!fromAbility) {
-		ss_->increaseChanceNORMAL(n, chance_);
+	if (hms_->getState() != HamStates::INFARCTED) {
+		if (!fromAbility) {
+			ss_->increaseChanceNORMAL(n, chance_);
+		}
+		else {
+			ss_->increaseChanceAB(n, chanceFromAb_);
+		}
+
+		timeLastIncrease_ = sdlutils().currRealTime();
 	}
-	else {
-		ss_->increaseChanceAB(n, chanceFromAb_);
-	}
-	
-	timeLastIncrease_ = sdlutils().currRealTime();
 	//std::cout << chance_ + " " + chanceFromAb_ << std::endl;
 }
 
@@ -105,9 +107,12 @@ void Stroke::infarctHamster() {
 	//TODO si alguien se le ocurre manera mejor para comprobar la id (posicion en el array de players, que la comente o que la ponga en todos los bucles que he ido haciendo de este tipo, son las 6 de la mañana y no quiero seguir viviendo)
 
 
-	hms_->getState() = HamStates::INFARCTED;
+	
 	//Evitamos el uso de la habilidad
 	ab_->deactiveAbility();
+	
+	//hms_->getState() = HamStates::INFARCTED;
+
 	//Animacion del fantasma
 	entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STROKE, true);
 	//Activamos el control del fantasma

@@ -48,7 +48,6 @@
 #include "../components/RandomStrokeStrategy.h"
 #include "../components/Parallax.h"
 #include "../components/CollisionDetec.h"
-//#include "../components/NewScene.h"
 #include "../components/Shadow.h"
 #include "../components/EnemyMother.h"
 #include "../components/TriggerScene.h"
@@ -79,7 +78,7 @@ void MapMngr::update() {
 		auto* pTr = player->getComponent<Transform>();
 		if (player->getComponent<HamsterStateMachine>()->getState() != HamStates::INFARCTED && Collisions::collides(pTr->getPos(), pTr->getW(), pTr->getH(), Vector2D(trigger.getPosition().x, trigger.getPosition().y) * scale, trigger.getAABB().width * scale, trigger.getAABB().height * scale)) {
 			RoundsPerRoom = getProp[2].getIntValue();
-			LoadEnemyRoom();
+			loadEnemyRoom();
 			if (getProp[0].getIntValue() != -1 || getProp[1].getIntValue() != -1) {
 				camera->setGoToTracker(true);
 				camera->changeCamFollowPos(Vector2D(getProp[0].getIntValue(), getProp[1].getIntValue()) * scale);
@@ -102,7 +101,7 @@ void MapMngr::update() {
 		}
 		else {
 			RoundsCount++;
-			LoadEnemyRoom();
+			loadEnemyRoom();
 		}
 	}
 }
@@ -143,17 +142,22 @@ void MapMngr::loadNewMap(string map) {
 		auto* o = entity_->getMngr()->addBackGround();
 		o->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 		//Para meter un fondo meter esto									velocidad		tamaño       posicion
-		o->addComponent<Parallax>(&sdlutils().images().at("level1background1"), 30, Vector2D(1920, 1459), Vector2D(0, -205));
+		o->addComponent<Parallax>(&sdlutils().images().at("level1background1"), 30, Vector2D(1920, 1459), Vector2D(0, -205), false);
 
 		auto* p = entity_->getMngr()->addBackGround();
 		p->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 		//Para meter un fondo meter esto                              velocidad  tamaño            posicion
-		p->addComponent<Parallax>(&sdlutils().images().at("level1background2"), 20, Vector2D(1920, 1459), Vector2D(0, -205));
+		p->addComponent<Parallax>(&sdlutils().images().at("level1background2"), 20, Vector2D(1920, 1459), Vector2D(0, -205), false);
 
 		auto* q = entity_->getMngr()->addBackGround();
 		q->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 		//Para meter un fondo meter esto                              velocidad  tamaño            posicion
-		q->addComponent<Parallax>(&sdlutils().images().at("level1background3"), 10, Vector2D(1920, 1459), Vector2D(0, -205));
+		q->addComponent<Parallax>(&sdlutils().images().at("level1background3"), 10, Vector2D(1920, 1459), Vector2D(0, -205), false);
+		
+		auto* r = entity_->getMngr()->addFrontGround();
+		r->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
+		//Para meter un fondo meter esto                              velocidad  tamaño            posicion
+		r->addComponent<Parallax>(&sdlutils().images().at("level1background4"), 10, Vector2D(1920, 1459), Vector2D(0, -205), true);
 
 		for (const auto& layer : layers)
 		{
@@ -188,7 +192,6 @@ void MapMngr::loadNewMap(string map) {
 						if (object.getName() == "sardinilla" || object.getName() == "canelon" || object.getName() == "keta" || object.getName() == "monchi")
 							addHamster(object);
 						else if (object.getName() == "newScene") {
-
 							newSceneTrigger(object.getProperties()[0].getStringValue(), object);
 						}
 					}
@@ -297,7 +300,7 @@ Vector2D MapMngr::SDLPointToMapCoords(Vector2D p) {
 }
 
 
-void MapMngr::LoadEnemyRoom() {
+void MapMngr::loadEnemyRoom() {
 
 	auto& enemies = entity_->getMngr()->getEnemies();
 
@@ -313,7 +316,7 @@ void MapMngr::LoadEnemyRoom() {
 				auto* enemy = mngr_->addEntity();
 				enemy->addComponent<Transform>(
 					Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-					Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1)->getFlip() = true;
+					Vector2D(), 86 * scale, 86 * scale, 0.0f, 0.4, 0.5)->getFlip() = true;
 
 				enemy->addComponent<EnemyStateMachine>();
 				enemy->setGroup<Enemy>(true);
@@ -350,59 +353,43 @@ void MapMngr::LoadEnemyRoom() {
 				numberEnemyRoom++;
 		}
 		else if (name == "enemigoFuerte" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS	
-				auto* enemy = mngr_->addEntity();
-				enemy->addComponent<Transform>(
-					Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-					Vector2D(), 240.0f, 370.0f, 0.0f, 1, 1)->getFlip() = true;
+				//auto* enemy = mngr_->addEntity();
+				//enemy->addComponent<Transform>(
+				//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+				//	Vector2D(), 240.0f, 370.0f, 0.0f, 1, 1)->getFlip() = true;
 
-				enemy->addComponent<EnemyStateMachine>();
-				enemy->setGroup<Enemy>(true);
+				//enemy->addComponent<EnemyStateMachine>();
+				//enemy->setGroup<Enemy>(true);
 
-				enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 5);
+				/*enemy->addComponent<EntityAttribs>(200, 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 5);
 
-				enemy->addComponent<Image>(&sdlutils().images().at("enemigoFuerte"));
-				enemy->addComponent<UI>("canelon", 4);
+				enemy->addComponent<Animator>(
+					&sdlutils().images().at("soldier1Sheet"),
+					86,
+					86,
+					3,
+					3,
+					220,
+					Vector2D(0, 0),
+					3
+					);
+				enemy->addComponent<AnimEnemyStateMachine>();
+				enemy->addComponent<UI>("canelon", 4);*/
 
-				//enemy->addComponent<EnemyStrongAttack>();
-				enemy->addComponent<EnemyAttack>();
-				enemy->addComponent<Knockback>();
-				enemy->addComponent<MovementSimple>();
+				////enemy->addComponent<EnemyStrongAttack>();
+				//enemy->addComponent<EnemyAttack>();
+				//enemy->addComponent<Knockback>();
+				//enemy->addComponent<MovementSimple>();
 
-				enemy->addComponent<EnemyBehaviour>(new IddleEnemy());
+				//enemy->addComponent<EnemyBehaviour>(new IddleEnemy());
 
-				enemies.push_back(enemy);
+				//enemies.push_back(enemy);
 
-				//anyadir a los cuidados de la madre
-				mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addEnemy(enemy);
+				////anyadir a los cuidados de la madre
+				//mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addEnemy(enemy);
 
-				enemy->addComponent<EnemyStun>();
-				numberEnemyRoom++;
-		}
-		else if (name == "firstBoss" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-			//auto* enemy = mngr_->addEntity();
-			//enemy->addComponent<Transform>(
-			//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-			//	Vector2D(), 240.0f, 370.0f, 0.0f, 1,1)->getFlip() = true;
-
-			//enemy->addComponent<EnemyStateMachine>();
-			//enemy->setGroup<Enemy>(true);
-
-			//enemy->addComponent<EntityAttribs>(200, 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 5);
-
-			//enemy->addComponent<Image>(&sdlutils().images().at("enemigoFuerte"));
-			//enemy->addComponent<UI>("canelon", 4);
-
-			//enemy->addComponent<EnemyStrongAttack>();
-			//enemy->addComponent<EnemyAttack>();
-			//enemy->addComponent<Knockback>();
-			//enemy->addComponent<CollisionDetec>();
-			//enemy->addComponent<MovementSimple>();
-
-			//enemy->addComponent<EnemyBehaviour>(new StrongFollowPlayer());
-
-			//enemies.push_back(enemy);
-			//enemy->addComponent<EnemyStun>();
-			//numberEnemyRoom++;
+				//enemy->addComponent<EnemyStun>();
+				//numberEnemyRoom++;
 		}
 		else if (name == "firstBoss" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* enemy = mngr_->addEntity();
@@ -450,11 +437,11 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 	else
 		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale), 
 			Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
-
+	
+	hamster1->addComponent<HamsterStateMachine>();
 	hamster1->addComponent<Shadow>();
 
 	Transform* tr = hamster1->getComponent<Transform>();
-	hamster1->addComponent<HamsterStateMachine>();
 
 	hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 4.5), 0, 15, 20);
 	hamster1->addComponent<Animator>(

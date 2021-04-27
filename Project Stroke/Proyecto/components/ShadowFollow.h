@@ -19,7 +19,7 @@ public:
 private:
 	float lerp(float a, float b, float f);
 
-
+	float pixelMargin;
 	Transform* tr_, *otherTr_;
 	float baseWidth_, baseHeight_, width_, height_;
 	bool anim_;

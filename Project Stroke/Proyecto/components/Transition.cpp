@@ -111,6 +111,9 @@ void Transition::sceneTransition() {
 
 	for (Entity* e : entity_->getMngr()->getBgs())
 		e->setActive(false);
+	
+	for (Entity* e : entity_->getMngr()->getFgs())
+		e->setActive(false);
 
 	entity_->getMngr()->refreshDeadBodies();
 	entity_->getMngr()->refreshEnemies();
@@ -131,6 +134,8 @@ void Transition::createMap() {
 
 	//Metemos al mapa en el Handler de Map
 	entity_->getMngr()->setHandler<Map>(mapa);
+
+	entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setMap(mapa->getComponent<MapMngr>());
 }
 
 bool Transition::isFadingOut() {

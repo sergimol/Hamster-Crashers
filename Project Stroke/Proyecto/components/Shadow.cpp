@@ -4,6 +4,8 @@ void Shadow::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 
+	state_ = entity_->getComponent<HamsterStateMachine>()->getState();
+
 	shadow_ = new Entity(entity_->getMngr());
 
 	//INICIALIZA SOMBRA CON VALORES DEL PADRE
@@ -19,5 +21,6 @@ void Shadow::render() {
 }
 
 void Shadow::update(){
-	shadow_->update();
+	if(state_ != HamStates::INFARCTED)
+		shadow_->update();
 }
