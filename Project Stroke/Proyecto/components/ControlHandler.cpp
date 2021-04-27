@@ -153,7 +153,7 @@ void ControlHandler::handleController() {
 		}
 
 		auto& hamState = hms_->getState();
-		cout << hms_->currentstate() << endl;
+		
 		if (ih().isButtonDownEvent()) {
 			if (hamState != HamStates::DEAD && hamState != HamStates::INFARCTED) {
 				//JUMP
