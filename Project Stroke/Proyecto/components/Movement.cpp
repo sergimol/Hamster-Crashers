@@ -92,7 +92,7 @@ void Movement::update() {
 			goalVel_ = Vector2D(dir.getX() * speed_.getX(), dir.getY() * speed_.getY());
 		}
 
-		lastDir_ = dir; //Recogemos siempre la última dirección para quien la necesite
+		lastDir_ = dir; //Recogemos siempre la ï¿½ltima direcciï¿½n para quien la necesite
 
 		if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {		//Deceleracion
 			if (col_ != nullptr) {

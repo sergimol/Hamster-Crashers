@@ -7,16 +7,17 @@
 #include "../sdlutils/Texture.h"
 #include "../sdlutils/SDLUtils.h"
 #include "EntityAttribs.h"
-
+const float MAXLATENCY = 700;
 
 class HeartUI : public Component {
 public:
 	HeartUI(std::string n, int pos);
 	virtual ~HeartUI() {};
-	
+
 	void update() override;
 	void render() override;
 	void dep();
+	void resurrection();
 	void increaseLatency(float aux);
 
 private:
@@ -30,13 +31,11 @@ private:
 	//Posiciones de los destRects
 	Vector2D renderPosHeart;
 	//Nombre del personaje que contiene la UI, todo en minusculas
-	std::string name;	
+	std::string name;
 
-	bool asciende;
-	bool desciende;
 	bool alive;
 	int scale;
 	int position;
 	float latency;
-	float timeAux;
+	float latencyAux;
 };
