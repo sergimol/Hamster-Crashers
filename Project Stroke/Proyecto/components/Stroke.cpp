@@ -43,6 +43,9 @@ void Stroke::increaseChance(int n, bool fromAbility) {
 		ss_->increaseChanceAB(n, chanceFromAb_);
 	}
 	
+	//Llamamos a la UI para que el corazon palpite más rapido
+	entity_->getComponent<HeartUI>()->increaseLatency(chanceFromAb_ + chance_);
+
 	timeLastIncrease_ = sdlutils().currRealTime();
 	//std::cout << chance_ + " " + chanceFromAb_ << std::endl;
 }
@@ -51,6 +54,9 @@ void Stroke::increaseChance(int n, bool fromAbility) {
 void Stroke::decreaseChance() {
 	if (chance_ > 0) {
 		chance_ -= (chance_ * DECREASEPERCENTAGE) / 100;
+
+		//Llamamos a la UI para que el corazon palpite más rapido
+		entity_->getComponent<HeartUI>()->increaseLatency(chanceFromAb_ + chance_);
 	}
 }
 
@@ -109,6 +115,9 @@ void Stroke::infarctHamster() {
 	//Evitamos el uso de la habilidad
 	ab_->deactiveAbility();
 	
+	//Y cambiamos la interfaz
+	entity_->getComponent<HeartUI>()->dep();
+
 	//hms_->getState() = HamStates::INFARCTED;
 
 	//Animacion del fantasma
