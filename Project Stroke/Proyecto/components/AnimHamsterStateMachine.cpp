@@ -9,6 +9,8 @@ void AnimHamsterStateMachine::init()
 	ent = entity_->getComponent<EntityAttribs>();
 	assert(ent != nullptr);
 	id = ent->getId();
+	gState_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(gState_ != nullptr);
 
 	//variables auxiliares de animaciones
 	attackOrder_ = true;
@@ -16,8 +18,10 @@ void AnimHamsterStateMachine::init()
 
 void AnimHamsterStateMachine::update()
 {
-	HandleAnimState();
-	CheckAnimState();
+	if (gState_->getState() != GameStates::PAUSE) {
+		HandleAnimState();
+		CheckAnimState();
+	}
 }
 
 

@@ -4,7 +4,7 @@
 
 EnemyBehaviour::EnemyBehaviour(Behavior* auxbh) :
 	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr), lockedHamster_(nullptr),
-	hamsterTr_(nullptr), bh_(auxbh), bossAtk_(nullptr), enStrongAtk_(nullptr), hamId_(NULL), list(NULL) {
+	hamsterTr_(nullptr), bh_(auxbh), bossAtk_(nullptr), enStrongAtk_(nullptr), hamId_(NULL), list(NULL), state_(nullptr) {
 }
 
 void EnemyBehaviour::init() {
@@ -13,6 +13,9 @@ void EnemyBehaviour::init() {
 
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
 
 	enAtk_ = entity_->getComponent<EnemyAttack>();
 	bossAtk_ = entity_->getComponent<FirstBossAttack>();
@@ -64,9 +67,9 @@ bool EnemyBehaviour::isWithinAttackRange() {
 }
 
 void EnemyBehaviour::update() {
-
 	//ejecuta el metodo de behavior que le dice como comportarse (atacar, como moverse, cuando, el hace las condiciones el resto nos olvidamos)
-	bh_->behave();
+	if(state_->getState() != GameStates::PAUSE)
+		bh_->behave();
 	//tambien seria oportuno que esta misma clase hiciese los cambios de bh_, aunque suene y parezca raro que sea este objeto el que indique cual es
 	//el siguiente comportamiento/Behavior no es algo tan descabezado.. <3
 }

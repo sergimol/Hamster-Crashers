@@ -28,6 +28,9 @@ void Movement::init() {
 	col_ = entity_->getComponent<CollisionDetec>();
 	assert(col_ != nullptr);
 
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
+
 	keymap.insert({ UP, false });
 	keymap.insert({ DOWN, false });
 	keymap.insert({ RIGHT, false });
@@ -43,84 +46,86 @@ void Movement::updateKeymap(KEYS x, bool is) {
 
 void Movement::update() {
 
-	auto& vel = tr_->getVel();
-	auto& state = hms_->getState();
-	auto& z = tr_->getZ();
-	auto& velZ = tr_->getVelZ();
+	if (state_->getState() != GameStates::PAUSE) {
+		auto& vel = tr_->getVel();
+		auto& state = hms_->getState();
+		auto& z = tr_->getZ();
+		auto& velZ = tr_->getVelZ();
 
-	Vector2D dir = Vector2D(0, 0);
+		Vector2D dir = Vector2D(0, 0);
 
-	if (keymap.at(UP)) {
-		dir.setY(-1.0f);
-	}
-	else if (keymap.at(DOWN)) {
-		dir.setY(1.0f);
-	}
-
-	if (keymap.at(RIGHT)) {
-		dir.setX(1.0f);
-		tr_->getFlip() = false;
-	}
-	else if (keymap.at(LEFT)) {
-		dir.setX(-1.0f);
-		tr_->getFlip() = true;
-	}
-
-	if (dir.magnitude() != 0) {
-		dir = dir.normalize();
-
-		goalVel_ = Vector2D(dir.getX() * speed_.getX(), dir.getY() * speed_.getY());
-	}
-
-	lastDir_ = dir; //Recogemos siempre la última dirección para quien la necesite
-
-	if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {		//Deceleracion
-
-		vel.setX(col_->lerp(vel.getX(), 0, 0.25));
-		vel.setY(col_->lerp(vel.getY(), 0, 0.25));
-
-		//ANIMACION DE IDLE
-		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, false);
-		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, true);
-	}
-	else if (hms_->canMove()) {		//Aceleracion
-
-		vel.setX(col_->lerp(goalVel_.getX(), vel.getX(), 0.9));
-		vel.setY(col_->lerp(goalVel_.getY(), vel.getY(), 0.9));
-
-		//ANIMACION DE MOVIMIENTO
-		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, true);
-		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, false);
-	}
-	else {
-		//porque esta kaput el bixo
-
-		vel.setX(col_->lerp(vel.getX(), 0, 0.25));
-		vel.setY(col_->lerp(vel.getY(), 0, 0.25));
-	}
-	//1-0.85/2
-	SDL_Rect rectPlayer = tr_->getRectCollide();
-	rectPlayer.x += vel.getX();
-	rectPlayer.y += vel.getY();
-
-	col_->tryToMove(dir, goalVel_, rectPlayer);		//Intenta moverse
-	grav_->checkHeight(rectPlayer);					//Comprobamos que no tenga que subir un escalon
-
-	if (grav_->getStuck()) vel.setX(0);				//Si lo tiene que subir y no salta no se mueve en x
-
-//SALTO
-	if (z <= grav_->getFloor()) {
-		// Inicio del salto
-		if (keymap.at(SPACE)) {
-			entity_->getComponent<Combos>()->checkCombo(2);
-			entity_->getComponent<Stroke>()->increaseChance(2, false);
-			velZ = jump_;
-			keymap.at(SPACE) = false;
+		if (keymap.at(UP)) {
+			dir.setY(-1.0f);
 		}
-		// Fin del salto
-		if (velZ < grav_->getFloor()) {
-			entity_->getComponent<Combos>()->popUntilEmpty();
-			/*keymap.at(SPACE) = false;*/
+		else if (keymap.at(DOWN)) {
+			dir.setY(1.0f);
+		}
+
+		if (keymap.at(RIGHT)) {
+			dir.setX(1.0f);
+			tr_->getFlip() = false;
+		}
+		else if (keymap.at(LEFT)) {
+			dir.setX(-1.0f);
+			tr_->getFlip() = true;
+		}
+
+		if (dir.magnitude() != 0) {
+			dir = dir.normalize();
+
+			goalVel_ = Vector2D(dir.getX() * speed_.getX(), dir.getY() * speed_.getY());
+		}
+
+		lastDir_ = dir; //Recogemos siempre la última dirección para quien la necesite
+
+		if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {		//Deceleracion
+
+			vel.setX(col_->lerp(vel.getX(), 0, 0.25));
+			vel.setY(col_->lerp(vel.getY(), 0, 0.25));
+
+			//ANIMACION DE IDLE
+			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, false);
+			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, true);
+		}
+		else if (hms_->canMove()) {		//Aceleracion
+
+			vel.setX(col_->lerp(goalVel_.getX(), vel.getX(), 0.9));
+			vel.setY(col_->lerp(goalVel_.getY(), vel.getY(), 0.9));
+
+			//ANIMACION DE MOVIMIENTO
+			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE, true);
+			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE, false);
+		}
+		else {
+			//porque esta kaput el bixo
+
+			vel.setX(col_->lerp(vel.getX(), 0, 0.25));
+			vel.setY(col_->lerp(vel.getY(), 0, 0.25));
+		}
+		//1-0.85/2
+		SDL_Rect rectPlayer = tr_->getRectCollide();
+		rectPlayer.x += vel.getX();
+		rectPlayer.y += vel.getY();
+
+		col_->tryToMove(dir, goalVel_, rectPlayer);		//Intenta moverse
+		grav_->checkHeight(rectPlayer);					//Comprobamos que no tenga que subir un escalon
+
+		if (grav_->getStuck()) vel.setX(0);				//Si lo tiene que subir y no salta no se mueve en x
+
+	//SALTO
+		if (z <= grav_->getFloor()) {
+			// Inicio del salto
+			if (keymap.at(SPACE)) {
+				entity_->getComponent<Combos>()->checkCombo(2);
+				entity_->getComponent<Stroke>()->increaseChance(2, false);
+				velZ = jump_;
+				keymap.at(SPACE) = false;
+			}
+			// Fin del salto
+			if (velZ < grav_->getFloor()) {
+				entity_->getComponent<Combos>()->popUntilEmpty();
+				/*keymap.at(SPACE) = false;*/
+			}
 		}
 	}
 }
@@ -136,4 +141,8 @@ void Movement::onDisable()
 {
 	auto& vel = tr_->getVel();
 	vel = Vector2D();
+}
+
+void Movement::onResume() {
+
 }

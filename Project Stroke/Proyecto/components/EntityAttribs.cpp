@@ -35,7 +35,8 @@ EntityAttribs::EntityAttribs() :
 	hms_(nullptr),
 	hmsText_(nullptr),
 	enmState_(nullptr),
-	tr_(nullptr)
+	tr_(nullptr),
+	state_(nullptr)
 {}
 
 EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg) :
@@ -70,7 +71,8 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	hms_(nullptr),
 	hmsText_(nullptr),
 	enmState_(nullptr),
-	tr_(nullptr)
+	tr_(nullptr),
+	state_(nullptr)
 {}
 
 EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty) :
@@ -120,23 +122,28 @@ void EntityAttribs::init() {
 	}
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
 }
 
 void EntityAttribs::update() {
-	//Timer de invencibilidad
-	if (afterDamageInvul_ && sdlutils().currRealTime() > damageInvulTime_ + INVINCIBLECD) {
-		afterDamageInvul_ = false;
-	}
-	//Timer de envenenamiento
-	if (poisoned_) {
-		//cada x segundos
-		if (sdlutils().currRealTime() >= timeLastUpdate_ + updateCD_) {
-			//Daño por veneno
-			recieveDmg(poisonDamage_);
-			timeLastUpdate_ = sdlutils().currRealTime();
+	if (state_->getState() != GameStates::PAUSE) {
+		//Timer de invencibilidad
+		if (afterDamageInvul_ && sdlutils().currRealTime() > damageInvulTime_ + INVINCIBLECD) {
+			afterDamageInvul_ = false;
 		}
-		if (sdlutils().currRealTime() >= poisonTime_ + poisonCD_) {
-			poisoned_ = false;
+		//Timer de envenenamiento
+		if (poisoned_) {
+			//cada x segundos
+			if (sdlutils().currRealTime() >= timeLastUpdate_ + updateCD_) {
+				//Daño por veneno
+				recieveDmg(poisonDamage_);
+				timeLastUpdate_ = sdlutils().currRealTime();
+			}
+			if (sdlutils().currRealTime() >= poisonTime_ + poisonCD_) {
+				poisoned_ = false;
+			}
 		}
 	}
 }
@@ -258,4 +265,11 @@ void EntityAttribs::poison() {
 	//int SDL_SetTextureColorMod(hmsText_, 96, 227, 70);
 	poisonTime_ = sdlutils().currRealTime();
 	poisoned_ = true;
+}
+
+void EntityAttribs::onResume() {
+	// Recalcula los timers para tener en cuenta la pausa
+	damageInvulTime_ += sdlutils().currRealTime() - damageInvulTime_;
+	timeLastUpdate_ += sdlutils().currRealTime() - timeLastUpdate_;
+	poisonTime_ += sdlutils().currRealTime() - poisonTime_;
 }

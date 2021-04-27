@@ -21,6 +21,9 @@ void Roll::init() {
 	col_ = entity_->getComponent<CollisionDetec>();
 	assert(col_ != nullptr);
 
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
+
 	keymap.insert({ UP, false });
 	keymap.insert({ DOWN, false });
 	keymap.insert({ RIGHT, false });
@@ -64,51 +67,52 @@ void Roll::updateKeymap(KEYS x, bool is) {
 }
 
 void Roll::update() {
+	if (state_->getState() != GameStates::PAUSE) {
+		Ability::update();
+		auto& state = st_->getState();
 
-	Ability::update();
-	auto& state = st_->getState();
+		if (rolling)
+		{
+			auto& vel = tr_->getVel();
+			auto& z = tr_->getZ();
+			auto& velZ = tr_->getVelZ();
 
-	if (rolling)
-	{
-		auto& vel = tr_->getVel();
-		auto& z = tr_->getZ();
-		auto& velZ = tr_->getVelZ();
+			if (keymap.at(UP)) {
+				dir_.setY(-1.0f);
+			}
+			else if (keymap.at(DOWN)) {
+				dir_.setY(1.0f);
+			}
 
-		if (keymap.at(UP)) {
-			dir_.setY(-1.0f);
+			if (keymap.at(RIGHT)) {
+				dir_.setX(1.0f);
+				tr_->getFlip() = false;
+			}
+			else if (keymap.at(LEFT)) {
+				dir_.setX(-1.0f);
+				tr_->getFlip() = true;
+			}
+
+			if (dir_.magnitude() != 0) {
+				dir_ = dir_.normalize();
+
+				goalVel_ = Vector2D(dir_.getX() * speed_.getX() * maxAccel, dir_.getY() * speed_.getY() * maxAccel);
+			}
+
+			if (st_->canMove()) {		//Aceleracion
+				vel.setX(col_->lerp(goalVel_.getX(), vel.getX(), 0.95));
+				vel.setY(col_->lerp(goalVel_.getY(), vel.getY(), 0.95));
+			}
+
+			SDL_Rect rectPlayer = tr_->getRectCollide();
+			rectPlayer.x += vel.getX();
+			rectPlayer.y += vel.getY();
+			col_->tryToMove(dir_, goalVel_, rectPlayer);
+			//Si se colisiona..
+			if (checkCollisions())
+				//Suena el hit y le pega
+				hitSound_.play();
 		}
-		else if (keymap.at(DOWN)) {
-			dir_.setY(1.0f);
-		}
-
-		if (keymap.at(RIGHT)) {
-			dir_.setX(1.0f);
-			tr_->getFlip() = false;
-		}
-		else if (keymap.at(LEFT)) {
-			dir_.setX(-1.0f);
-			tr_->getFlip() = true;
-		}
-
-		if (dir_.magnitude() != 0) {
-			dir_ = dir_.normalize();
-
-			goalVel_ = Vector2D(dir_.getX() * speed_.getX() * maxAccel, dir_.getY() * speed_.getY() * maxAccel);
-		}
-
-		if (st_->canMove()) {		//Aceleracion
-			vel.setX(col_->lerp(goalVel_.getX(), vel.getX(), 0.95));
-			vel.setY(col_->lerp(goalVel_.getY(), vel.getY(), 0.95));
-		}
-
-		SDL_Rect rectPlayer = tr_->getRectCollide();
-		rectPlayer.x += vel.getX();
-		rectPlayer.y += vel.getY();
-		col_->tryToMove(dir_, goalVel_, rectPlayer);
-		//Si se colisiona..
-		if (checkCollisions())
-			//Suena el hit y le pega
-			hitSound_.play();
 	}
 }
 

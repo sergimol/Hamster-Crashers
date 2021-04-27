@@ -2,12 +2,13 @@
 
 #include "../ecs/Component.h"
 #include "../sdlutils/Texture.h"
+#include "GameStates.h"
 
 using namespace std;
 
 class Transition : public Component {
 public:
-	Transition(Texture* tx) : tx_(tx), alpha(0), alphaCalc(0), fadingOut(false), fadingIn(false), change(false){
+	Transition(Texture* tx) : tx_(tx), alpha(0), alphaCalc(0), fadingOut(false), fadingIn(false), change(false), state_(nullptr){
 	}
 
 		virtual ~Transition() {}
@@ -51,6 +52,8 @@ private:
 	SDL_Rect blackRect;
 
 	string nameScene_;
+	
+	GameStates* state_;
 };
 
 

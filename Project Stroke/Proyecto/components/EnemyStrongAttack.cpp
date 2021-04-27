@@ -11,60 +11,65 @@
 EnemyStrongAttack::EnemyStrongAttack() :
 	tr_(nullptr), cooldown_(3000), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
 	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")),
-	durationTime_(sdlutils().currRealTime()), attackDurationCD_(2500), beforeHitCD_(500) {}
+	durationTime_(sdlutils().currRealTime()), attackDurationCD_(2500), beforeHitCD_(500), state_(nullptr) {}
 
 void EnemyStrongAttack::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
 }
 
 void EnemyStrongAttack::update() {
-	//Deja de mostrar el collider
-	if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
-		DEBUG_isAttacking_ = false;
-	}
-	if (attackStarted_) {
-		//Telegrafiado hasta el ataque
-		if (sdlutils().currRealTime() > durationTime_ + beforeHitCD_) {
-			cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-			auto sizeW = tr_->getW();
-			auto sizeH = tr_->getH();
-			auto& pos = tr_->getPos();
-			auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
-
-
-			attRect_.w = sizeW / 2 + sizeW / 2 * range;
-			attRect_.h = sizeH / 2 + sizeH / 2 * range;
-
-			auto flip = tr_->getFlip();
-
-			//Si esta flipeado...
-			if (flip)
-				//Le damos la vuelta al rect
-				attRect_.x = pos.getX() - attRect_.w + sizeW / 4 - cam.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
-			else
-				attRect_.x = pos.getX() + sizeW - sizeW / 4 - cam.x;
-
-			attRect_.y = pos.getY() + sizeH / 4 - cam.y;
-
-			//Comprobamos si colisiona con alguno de los enemigos que tiene delante
-
-			//Si se colisiona..
-			if (CheckCollisions(attRect_, true))
-				//Suena el hit y le pega
-				hitSound_.play();
-			//Si no colisiona..
-			else
-				//Suena el attackSound
-				attackSound_.play();
-
-			//this.anims.play(pegarse)
-
-			DEBUG_isAttacking_ = true;
+	if (state_->getState() != GameStates::PAUSE) {
+		//Deja de mostrar el collider
+		if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
+			DEBUG_isAttacking_ = false;
 		}
-		if (sdlutils().currRealTime() > durationTime_ + attackDurationCD_) {
-			attackStarted_ = false;
-			time_ = sdlutils().currRealTime();
+		if (attackStarted_) {
+			//Telegrafiado hasta el ataque
+			if (sdlutils().currRealTime() > durationTime_ + beforeHitCD_) {
+				cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+				auto sizeW = tr_->getW();
+				auto sizeH = tr_->getH();
+				auto& pos = tr_->getPos();
+				auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
+
+
+				attRect_.w = sizeW / 2 + sizeW / 2 * range;
+				attRect_.h = sizeH / 2 + sizeH / 2 * range;
+
+				auto flip = tr_->getFlip();
+
+				//Si esta flipeado...
+				if (flip)
+					//Le damos la vuelta al rect
+					attRect_.x = pos.getX() - attRect_.w + sizeW / 4 - cam.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
+				else
+					attRect_.x = pos.getX() + sizeW - sizeW / 4 - cam.x;
+
+				attRect_.y = pos.getY() + sizeH / 4 - cam.y;
+
+				//Comprobamos si colisiona con alguno de los enemigos que tiene delante
+
+				//Si se colisiona..
+				if (CheckCollisions(attRect_, true))
+					//Suena el hit y le pega
+					hitSound_.play();
+				//Si no colisiona..
+				else
+					//Suena el attackSound
+					attackSound_.play();
+
+				//this.anims.play(pegarse)
+
+				DEBUG_isAttacking_ = true;
+			}
+			if (sdlutils().currRealTime() > durationTime_ + attackDurationCD_) {
+				attackStarted_ = false;
+				time_ = sdlutils().currRealTime();
+			}
 		}
 	}
 }
@@ -166,4 +171,9 @@ void EnemyStrongAttack::render() {
 
 		SDL_RenderDrawRect(sdlutils().renderer(), &attRect_);
 	}
+}
+
+void EnemyStrongAttack::onResume() {
+	durationTime_ += sdlutils().currRealTime() - durationTime_;
+	time_ += sdlutils().currRealTime() - time_;
 }

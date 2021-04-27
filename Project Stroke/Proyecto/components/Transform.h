@@ -8,11 +8,12 @@
 #include "../ecs/Camera.h"
 
 #include "Gravity.h"
+#include "GameStates.h"
 
 class Transform : public Component {
 public:
 	Transform() :
-		pos_(), vel_(), width_(), height_(), rotation_(), z_(), flip_(), scaleCollideW(), scaleCollideH(), grv_(nullptr) {
+		pos_(), vel_(), width_(), height_(), rotation_(), z_(), flip_(), scaleCollideW(), scaleCollideH(), grv_(nullptr), state_(nullptr) {
 	}
 
 	Transform(Vector2D pos, Vector2D vel, float width, float height,
@@ -53,6 +54,11 @@ public:
 		rectCollide.h = (height_ * scaleCollideH);
 		rectCollide.x = pos.getX() + (width * ((1 - scaleCollideW) / 2));
 		rectCollide.y = pos.getY() + (height * ((1 - scaleCollideH) / 2));
+	}
+
+	void init() override {
+		state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+		assert(state_ != nullptr);
 	}
 
 	void setGravity(Gravity* g) {
@@ -135,12 +141,14 @@ public:
 	}
 
 	void update() override {
-		if (grv_ != nullptr && grv_->isActive())
-			z_ += velZ_;
-		pos_ = pos_ + vel_;
+		if (state_->getState() != GameStates::PAUSE) {
+			if (grv_ != nullptr && grv_->isActive())
+				z_ += velZ_;
+			pos_ = pos_ + vel_;
 
-		rectCollide.x = pos_.getX() + (width_ * ((1 - scaleCollideW) / 2));
-		rectCollide.y = pos_.getY() + (height_ * ((1 - scaleCollideH) / 2));
+			rectCollide.x = pos_.getX() + (width_ * ((1 - scaleCollideW) / 2));
+			rectCollide.y = pos_.getY() + (height_ * ((1 - scaleCollideH) / 2));
+		}
 	}
 
 	void render() override {
@@ -159,6 +167,7 @@ private:
 	Vector2D pos_;
 	Vector2D vel_;
 	Gravity* grv_;
+	GameStates* state_;
 	float width_;
 	float height_;
 	float rotation_;

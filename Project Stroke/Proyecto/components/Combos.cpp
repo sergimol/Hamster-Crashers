@@ -1,5 +1,4 @@
 #include "Combos.h"
-#include "AnimHamsterStateMachine.h"
 #include "Transform.h"
 
 void Combos::init() {
@@ -7,6 +6,8 @@ void Combos::init() {
 	assert(grv_ != nullptr);
 	anim_ = entity_->getComponent<AnimHamsterStateMachine>();
 	assert(anim_ != nullptr);
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
 }
 
 bool Combos::checkCombo(int action) {
@@ -96,32 +97,34 @@ bool Combos::checkCombo(int action) {
 }
 
 void Combos::update() {
-	if (!cola_.empty() && sdlutils().currRealTime() - lastAttack_ > CADENCE) {
-		if (!grv_->isActive())
-			grv_->setActive(true);
-		popUntilEmpty();
-	}
-
-	//Fin de animaciones de combos
-	if (anim_->getState() == HamStatesAnim::LIGHTCOMBO)
-	{
-		if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
-		{
-
-			anim_->setAnimBool(HamStatesAnim::LIGHTCOMBO, false);
-
+	if (state_->getState() != GameStates::PAUSE) {
+		if (!cola_.empty() && sdlutils().currRealTime() - lastAttack_ > CADENCE) {
+			if (!grv_->isActive())
+				grv_->setActive(true);
+			popUntilEmpty();
 		}
 
-	}
-	else if(anim_->getState() == HamStatesAnim::STRONGCOMBO)
-	{
-		if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+		//Fin de animaciones de combos
+		if (anim_->getState() == HamStatesAnim::LIGHTCOMBO)
 		{
+			if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+			{
 
-			anim_->setAnimBool(HamStatesAnim::STRONGCOMBO, false);
+				anim_->setAnimBool(HamStatesAnim::LIGHTCOMBO, false);
+
+			}
 
 		}
+		else if (anim_->getState() == HamStatesAnim::STRONGCOMBO)
+		{
+			if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+			{
 
+				anim_->setAnimBool(HamStatesAnim::STRONGCOMBO, false);
+
+			}
+
+		}
 	}
 }
 
@@ -172,4 +175,8 @@ void Combos::firstActionAnim(int action) {
 	default:
 		break;
 	}
+}
+
+void Combos::onResume() {
+	lastAttack_ += sdlutils().currRealTime() - lastAttack_;
 }

@@ -9,17 +9,19 @@
 
 class Dying : public Component {
 public:
-	Dying(){};
+	Dying(): state_(nullptr){};
 
 	virtual ~Dying() {};
 
 	void init() override;
 	void update() override;
-	
+	void onResume() override;
+
 	void blink() ;
 
 private:
 	Animator* anim_;
+	GameStates* state_;
 
 	bool animActive_ =false;
 	bool blinkActive_ = false;

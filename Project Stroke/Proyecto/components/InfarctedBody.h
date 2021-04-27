@@ -3,6 +3,7 @@
 #include "../ecs/Component.h"
 #include "../ecs/Entity.h"
 #include "Ability.h"
+#include "GameStates.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../components/HamsterStateMachine.h"
 
@@ -32,6 +33,7 @@ private:
 	Ability* ab_;
 	Transform* tr_;
 	Texture* tx_;
+	GameStates* state_;
 
 	//Mantiene el estado del hamster QUE TE ESTÁ REVIVIENDO
 	HamStates otherState;

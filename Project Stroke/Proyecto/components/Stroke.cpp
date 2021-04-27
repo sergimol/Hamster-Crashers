@@ -24,11 +24,14 @@ void Stroke::init() {
 		if (ab_ == nullptr) ab_ = entity_->getComponent<Turret>();
 
 		assert(ab_ != nullptr);
+
+		state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+		assert(state_ != nullptr);
 }
 
 void Stroke::update() {
-	
-	checkChance();
+	if(state_->getState() != GameStates::PAUSE)
+		checkChance();
 	//std::cout << chance_ << " " << chanceFromAb_ << std::endl;
 }
 
@@ -132,6 +135,12 @@ void Stroke::infarctHamster() {
 	chanceFromAb_ = 0;
 
 	std::cout << "INFARTADO" << std::endl;
+}
+
+void Stroke::onResume() {
+	timeLastUpdate_ += sdlutils().currRealTime() - timeLastUpdate_;
+	timeLastIncrease_ += sdlutils().currRealTime() - timeLastIncrease_;
+	timeLastDecrease_ += sdlutils().currRealTime() - timeLastDecrease_;
 }
 
 void Stroke::setStrategy(StrokeStrategy* ss) { 

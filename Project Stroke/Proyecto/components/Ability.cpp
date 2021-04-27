@@ -10,19 +10,24 @@ void Ability::init() {
 
 	anim_ = entity_->getComponent<Animator>();
 	assert(anim_ != nullptr);
+
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
 }
 
 void Ability::update() {
-	/*
-	* Cada "cooldown" milisegundos, se comprueba que se pueda activar la habilidad
-	* Si la habilidad estaba activa, se desactiva
-	* De lo contrario, no sucede nada
-	*/
-	auto& state = st_->getState();
-	if (onUse_ && state == HamStates::ABILITY && sdlutils().currRealTime() > timer_ + cooldown_) {
-		onUse_ = false;
-		endAbility();
-		state = HamStates::DEFAULT;
+	if (state_->getState() != GameStates::PAUSE) {
+		/*
+		* Cada "cooldown" milisegundos, se comprueba que se pueda activar la habilidad
+		* Si la habilidad estaba activa, se desactiva
+		* De lo contrario, no sucede nada
+		*/
+		auto& state = st_->getState();
+		if (onUse_ && state == HamStates::ABILITY && sdlutils().currRealTime() > timer_ + cooldown_) {
+			onUse_ = false;
+			endAbility();
+			state = HamStates::DEFAULT;
+		}
 	}
 }
 
@@ -32,7 +37,7 @@ void Ability::deactiveAbility() {
 		active_ = false;
 		endAbility();
 		auto& state = st_->getState();	
-		state == HamStates::DEFAULT;
+		state = HamStates::DEFAULT;
 	}
 }
 
@@ -52,4 +57,9 @@ void Ability::use() {
 			onUse_ = true;
 		}
 	}
+}
+
+void Ability::onResume() {
+	timer_ += sdlutils().currRealTime() - timer_;
+	//cooldown_ += sdlutils().currRealTime() - cooldown_;
 }

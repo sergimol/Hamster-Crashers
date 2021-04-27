@@ -7,12 +7,13 @@
 #include "../sdlutils/SDLUtils.h"
 #include "Transform.h"
 #include "PossesionGame.h"
+#include "GameStates.h"
 
 using namespace std;
 
 class KeyGame : public Component {
 public:
-	KeyGame(SDL_Rect path, SDL_Rect hit, PossesionGame* p): trail(path), hitmarker(hit), poss_(p) {};
+	KeyGame(SDL_Rect path, SDL_Rect hit, PossesionGame* p): trail(path), hitmarker(hit), poss_(p), state_(nullptr) {};
 	~KeyGame() {};
 
 	virtual void init() override;
@@ -28,6 +29,7 @@ private:
 	Transform* tr_;
 	PossesionGame* poss_;
 	Texture* tx_;
+	GameStates* state_;
 
 	SDL_Rect trail;
 	SDL_Rect hitmarker;

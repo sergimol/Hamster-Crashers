@@ -15,15 +15,19 @@ void Transition::init() {
 	blackRect.y = 0;
 	blackRect.w = sdlutils().width();
 	blackRect.h = sdlutils().height();
+
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
 }
 
 void Transition::update() {
-	if (fadingOut)
-		fadeOut();
+	if (state_->getState() != GameStates::PAUSE) {
+		if (fadingOut)
+			fadeOut();
 
-	if (fadingIn)
-		fadeIn();
-
+		if (fadingIn)
+			fadeIn();
+	}
 }
 
 void Transition::render() {

@@ -9,6 +9,9 @@ void KeyGame::init() {
 	assert(poss_ != nullptr);
 
 	iniPos = tr_->getPos();
+
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
 }
 
 void KeyGame::render() {
@@ -17,7 +20,7 @@ void KeyGame::render() {
 }
 
 void KeyGame::update() {
-	if (tr_->getPos().getX() > trail.x + trail.w) {
+	if (state_->getState() != GameStates::PAUSE && tr_->getPos().getX() > trail.x + trail.w) {
 		goBack();
 	}
 }

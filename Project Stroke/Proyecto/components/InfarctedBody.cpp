@@ -26,34 +26,39 @@ void InfarctedBody::init() {
 	if (ab_ == nullptr) ab_ = hamster->getComponent<Turret>();
 
 	assert(ab_ != nullptr);
+
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
 }
 
 void InfarctedBody::update() {
-	auto& hamsters = entity_->getMngr()->getPlayers();
-	for (Entity* e : hamsters) {
-		if (e != hamster && !e->getComponent<HamsterStateMachine>()->cantBeTargeted()) {
-			auto* oTr = e->getComponent<Transform>();
-			assert(oTr != nullptr);
-			show = Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), oTr->getPos(), oTr->getW(), oTr->getH());
-			if (show && ih().isKeyDown(key)) {
-				//Activamos el minijuego
-				entity_->getComponent<ReanimationGame>()->setActive(true);
-				//Pasamos a estar siendo revividos
-				reviving = true;
-				//Y deshabilitamos al que revive
-				disableOtherHamster(e);
+	if (state_->getState() != GameStates::PAUSE) {
+		auto& hamsters = entity_->getMngr()->getPlayers();
+		for (Entity* e : hamsters) {
+			if (e != hamster && !e->getComponent<HamsterStateMachine>()->cantBeTargeted()) {
+				auto* oTr = e->getComponent<Transform>();
+				assert(oTr != nullptr);
+				show = Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), oTr->getPos(), oTr->getW(), oTr->getH());
+				if (show && ih().isKeyDown(key)) {
+					//Activamos el minijuego
+					entity_->getComponent<ReanimationGame>()->setActive(true);
+					//Pasamos a estar siendo revividos
+					reviving = true;
+					//Y deshabilitamos al que revive
+					disableOtherHamster(e);
+				}
 			}
 		}
-	}
-	//En caso de que el estado del hamster que nos revive cambie, se cancela el minijuego
-	if (reviving) {
-		if (otherState != HamStates::DEFAULT) {
-			//Permitimos al otro moverse
-			enableOtherHamster();
-			//Se acaba el minijuego
-			entity_->getComponent<ReanimationGame>()->setActive(false);
-			//Dejamos de ser revividos
-			reviving = false;
+		//En caso de que el estado del hamster que nos revive cambie, se cancela el minijuego
+		if (reviving) {
+			if (otherState != HamStates::DEFAULT) {
+				//Permitimos al otro moverse
+				enableOtherHamster();
+				//Se acaba el minijuego
+				entity_->getComponent<ReanimationGame>()->setActive(false);
+				//Dejamos de ser revividos
+				reviving = false;
+			}
 		}
 	}
 }

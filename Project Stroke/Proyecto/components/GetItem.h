@@ -17,7 +17,7 @@ const int NUTHP = 10;
 
 class GetItem : public Component {
 public:
-	GetItem() :  tr_(nullptr) {};
+	GetItem() :  tr_(nullptr), state_(nullptr) {};
 
 	virtual ~GetItem() {};
 
@@ -28,5 +28,6 @@ public:
 private:
 	Transform* tr_;
 	SDL_Rect cam;
+	GameStates* state_;
 };
 

@@ -37,6 +37,7 @@ private:
 
 	Entity* possesed, * keyGame;
 	HamsterStateMachine* possesedState;
+	GameStates* state_;
 
 	SDL_Rect lineHPos, lineVPos;
 

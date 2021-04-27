@@ -11,32 +11,37 @@ void ReanimationGame::init() {
 
 	infarct_ = entity_->getComponent<InfarctedBody>();
 	assert(infarct_ != nullptr);
+
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
 }
 
 void ReanimationGame::update() {
-	if (ih().keyDownEvent()) {
-		if (ih().isKeyDown(key) && !down) {
-			down = true;
-			progress += BEAT;
+	if (state_->getState() != GameStates::PAUSE) {
+		if (ih().keyDownEvent()) {
+			if (ih().isKeyDown(key) && !down) {
+				down = true;
+				progress += BEAT;
+			}
 		}
-	}
-	else if (ih().keyUpEvent()) {
-		if (ih().isKeyUp(key) && down) {
-			down = false;
+		else if (ih().keyUpEvent()) {
+			if (ih().isKeyUp(key) && down) {
+				down = false;
+			}
 		}
-	}
 
-	if (sdlutils().currRealTime() > timer + TIME_BETWEEN_DROPS) {
-		if (progress > 0)
-			progress -= DROP;
-		else
-			progress = 0;
+		if (sdlutils().currRealTime() > timer + TIME_BETWEEN_DROPS) {
+			if (progress > 0)
+				progress -= DROP;
+			else
+				progress = 0;
 
-		timer = sdlutils().currRealTime();
-	}
+			timer = sdlutils().currRealTime();
+		}
 
-	if (progress >= MAX_PROGRESS) {
-		endGame();
+		if (progress >= MAX_PROGRESS) {
+			endGame();
+		}
 	}
 
 }
@@ -59,4 +64,8 @@ void ReanimationGame::endGame() {
 	active_ = false;
 	//Reanimamos al hamster
 	infarct_->reanimate();
+}
+
+void ReanimationGame::onResume() {
+	timer += sdlutils().currRealTime() - timer;
 }

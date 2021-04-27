@@ -24,7 +24,8 @@ public:
 
 	void init() override;
 	void update() override;
-	
+	void onResume() override;
+
 	void restartStunTime();
 	
 	inline void setStunCooldown(long unsigned cd) { cooldown_ = cd; }
@@ -32,6 +33,7 @@ public:
 private:
 	EnemyStateMachine* enmState_;
 	MovementSimple* simpMov_;
+	GameStates* state_;
 	//EnemyBehaviour* enBehave_;
 	long unsigned int cooldown_, time_;
 

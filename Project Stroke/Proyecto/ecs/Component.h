@@ -46,6 +46,9 @@ public:
 	virtual void onEnable() {
 	}
 
+	virtual void onResume() {
+	}
+
 protected:
 	Entity *entity_;
 	bool active_;

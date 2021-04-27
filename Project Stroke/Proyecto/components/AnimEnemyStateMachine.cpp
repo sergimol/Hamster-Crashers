@@ -9,12 +9,16 @@ void AnimEnemyStateMachine::init()
 	ent = entity_->getComponent<EntityAttribs>();
 	assert(ent != nullptr);
 	id = ent->getId();
+	gState_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(gState_ != nullptr);
 }
 
 void AnimEnemyStateMachine::update()
 {
-	HandleAnimState();
-	CheckAnimState();
+	if (gState_->getState() != GameStates::PAUSE) {
+		HandleAnimState();
+		CheckAnimState();
+	}
 }
 
 

@@ -116,6 +116,7 @@ protected: //ahora mismo solo funcionan como private
 	Transform* hamsterTr_;
 
 	Entity* lockedHamster_;
+	GameStates* state_;
 
 	HamsterStateMachine* lockedHamState_;
 

@@ -7,6 +7,9 @@
 
 void PossesionGame::init() {
 	active_ = false;
+
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
 }
 
 void PossesionGame::render() {
@@ -16,17 +19,19 @@ void PossesionGame::render() {
 
 //Comprueba que la tecla sea pulsada y la keyGame esté chocando con el marcador
 void PossesionGame::update() {
-	if (ih().keyDownEvent()) {
-		if (ih().isKeyDown(actualKey) && keyGame->getComponent<KeyGame>()->hitSkillCheck())
-			succesfulHit();
-		else
-			failedHit();
+	if (state_->getState() != GameStates::PAUSE) {
+		if (ih().keyDownEvent()) {
+			if (ih().isKeyDown(actualKey) && keyGame->getComponent<KeyGame>()->hitSkillCheck())
+				succesfulHit();
+			else
+				failedHit();
 
 
-	}
-//Si se muere o infarta el poseido, se acaba la posesion
-	if (possesedState->cantBeTargeted()) {
-		endPossesion();
+		}
+		//Si se muere o infarta el poseido, se acaba la posesion
+		if (possesedState->cantBeTargeted()) {
+			endPossesion();
+		}
 	}
 }
 

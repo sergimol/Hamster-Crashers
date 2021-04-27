@@ -75,3 +75,17 @@ void Manager::render() {
 	for (auto i = 0u; i < f; i++)
 		fgs_[i]->render();
 }
+
+void Manager::resume() {
+	auto n = entities_.size();
+	for (auto i = 0u; i < n; i++)
+		entities_[i]->resume();
+
+	auto b = bgs_.size();
+	for (auto i = 0u; i < b; i++)
+		bgs_[i]->resume();
+
+	auto f = fgs_.size();
+	for (auto i = 0u; i < f; i++)
+		fgs_[i]->resume();
+}

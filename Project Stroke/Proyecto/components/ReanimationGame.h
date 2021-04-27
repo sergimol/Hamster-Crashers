@@ -1,21 +1,24 @@
 #pragma once
 
 #include "InfarctedBody.h"
+#include "GameStates.h"
 
 
 class ReanimationGame : public Component
 {
 public:
-	ReanimationGame(): txUp_(&sdlutils().images().at("a")), txDown_(&sdlutils().images().at("a2")) {};
+	ReanimationGame(): txUp_(&sdlutils().images().at("a")), txDown_(&sdlutils().images().at("a2")), state_(nullptr) {};
 	~ReanimationGame() {};
 
-	virtual void init() override;
+	void init() override;
 
-	virtual void update() override;
+	void update() override;
 
-	virtual void render() override;
+	void render() override;
 
-	virtual void onDisable() override;
+	void onDisable() override;
+
+	void onResume() override;
 private:
 	void endGame();
 
@@ -43,7 +46,7 @@ private:
 	SDL_Rect buttonPos;
 	const SDL_Keycode key = SDLK_a;
 
-	
+	GameStates* state_;
 
 };
 

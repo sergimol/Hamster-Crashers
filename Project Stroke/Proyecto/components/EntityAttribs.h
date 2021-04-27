@@ -24,6 +24,8 @@ public:
 
 	void update() override;
 
+	void onResume() override;
+
 	bool recieveDmg(int dmg);
 
 	void heal(int hp);
@@ -99,6 +101,7 @@ private:
 	EnemyStateMachine*  enmState_;
 	Texture* hmsText_;
 	Transform* tr_;
+	GameStates* state_;
 	
 	int health_;
 	int maxHealth_;

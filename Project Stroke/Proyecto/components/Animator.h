@@ -11,6 +11,7 @@
 
 #include "Transform.h"
 #include "EntityAttribs.h"
+#include "GameStates.h"
 
 class Animator : public Component {
 public:
@@ -26,7 +27,8 @@ public:
 		frameUpdate(f), //
 		lastTime(sdlutils().currRealTime()), //
 		animCont(0), //
-		animDuration(dur) //
+		animDuration(dur), //
+		state_(nullptr)
 	{
 	}
 	virtual ~Animator() {
@@ -36,6 +38,8 @@ public:
 		tr_ = entity_->getComponent<Transform>();
 		assert(tr_ != nullptr);
 
+		state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+		assert(state_ != nullptr);
 	}
 
 	void render() override {
@@ -70,40 +74,45 @@ public:
 
 	//para actualizar la textura
 	void update() override {
-
-		if (sdlutils().currRealTime() >= lastTime + frameUpdate)
-		{
-
-			lastTime = sdlutils().currRealTime();
-
-			//SI NO SE HA ACABADO LA ANIMACION
-			if (animCont < animDuration - 1)
+		if (state_->getState() != GameStates::PAUSE) {
+			if (sdlutils().currRealTime() >= lastTime + frameUpdate)
 			{
-				//Si no hemos llegado al final de una fila seguimos avanzando
-				if (textureFrame.getX() < cols - 1)
-				{
-					textureFrame.setX(textureFrame.getX() + 1);
-				}
-				//Si llegamos al final de la fila cambiamos
-				else
-				{
-					textureFrame.setX(0);
-					textureFrame.setY(textureFrame.getY() + 1);
-				}
-				animCont++;
-			}
-			//SI SE HA ACABADO Y HAY QUE LOOPEAR
-			else if (looped)
-			{
-				animCont = 0;
-				textureFrame.setX(startFrame.getX());
-				textureFrame.setY(startFrame.getY());
-			}
-			//SI HAY QUE ENCADENAR OTRA ANIMACION
-			else if (idChain != "")
-				play(sdlutils().anims().at(idChain));
 
+				lastTime = sdlutils().currRealTime();
+
+				//SI NO SE HA ACABADO LA ANIMACION
+				if (animCont < animDuration - 1)
+				{
+					//Si no hemos llegado al final de una fila seguimos avanzando
+					if (textureFrame.getX() < cols - 1)
+					{
+						textureFrame.setX(textureFrame.getX() + 1);
+					}
+					//Si llegamos al final de la fila cambiamos
+					else
+					{
+						textureFrame.setX(0);
+						textureFrame.setY(textureFrame.getY() + 1);
+					}
+					animCont++;
+				}
+				//SI SE HA ACABADO Y HAY QUE LOOPEAR
+				else if (looped)
+				{
+					animCont = 0;
+					textureFrame.setX(startFrame.getX());
+					textureFrame.setY(startFrame.getY());
+				}
+				//SI HAY QUE ENCADENAR OTRA ANIMACION
+				else if (idChain != "")
+					play(sdlutils().anims().at(idChain));
+
+			}
 		}
+	}
+
+	void onResume() override {
+		lastTime += sdlutils().currRealTime() - lastTime;
 	}
 
 	//Metodo que cambia de animacion sobre la spritesheet actual
@@ -138,6 +147,7 @@ private:
 	//Variables de recursos
 	Transform* tr_;
 	Texture* tex_;
+	GameStates* state_;
 
 	//Timers para actualizar la spritsheet
 	Uint32 lastTime;

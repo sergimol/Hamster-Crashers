@@ -3,12 +3,14 @@
 #include "AmbushPlayer.h"
 #include "iddleEnemy.h"
 
-EnemyMother::EnemyMother() : numPlayers(0), numEnemies(0) {}
+EnemyMother::EnemyMother() : numPlayers(0), numEnemies(0), state_(nullptr) {}
 
 void EnemyMother::init() { 
 	hamsters_ = entity_->getMngr()->getPlayers();
 	enemys_ = entity_->getMngr()->getEnemies();
 
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
 }
 
 void EnemyMother::addObjetive(Entity* hamster) {
@@ -141,9 +143,10 @@ void EnemyMother::removeFromAmbushList(int hamid, std::list<Entity*>::iterator i
 }
 
 void EnemyMother::update() {
-	asingEnemies();
-	orderAttack();
-
+	if (state_->getState() != GameStates::PAUSE) {
+		asingEnemies();
+		orderAttack();
+	}
 	//no queria hacerlo asi pero es para salir del truyo, (no localizo la parte exacta en al que un hamster muere y poder identificarlo), oi si coño que coño
 }
 

@@ -103,4 +103,6 @@ protected: //ahora mismo solo funcionan como private
 	std::map<int, Objetivo*> objetivesList;
 	int numPlayers;
 	int numEnemies;
+
+	GameStates* state_;
 };

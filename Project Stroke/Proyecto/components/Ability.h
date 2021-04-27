@@ -18,15 +18,16 @@ public:
 
 	virtual ~Ability() {};
 
-	virtual void init() override;
+	void init() override;
 
-	virtual void update() override;
+	void update() override;
 
-	virtual void render() override {};
+	void render() override {};
 
-	//virtual void onEnable() override {};
+	void onResume() override;
+	//void onEnable() override {};
 
-	//virtual void onDisable() override {};
+	//void onDisable() override {};
 
 	//Ejecuta la habilidad en funcion del hamster que sea
 	virtual void action() = 0;
@@ -46,6 +47,7 @@ protected:
 	Transform* tr_;
 	HamsterStateMachine* st_;
 	Animator* anim_;
+	GameStates* state_;
 	long unsigned int timer_, cooldown_; //Contador para ver CADA CUANTO puede usar una habilidad
 
 	bool active_ = true;

@@ -4,6 +4,7 @@
 #include "../ecs/Entity.h"
 #include "Transform.h"
 #include "../sdlutils/SDLUtils.h"
+#include "GameStates.h"
 
 class DisableOnExit : public Component {
 
@@ -19,5 +20,6 @@ public:
 
 private:
 	Transform* tr_;
+	GameStates* state_;
 };
 

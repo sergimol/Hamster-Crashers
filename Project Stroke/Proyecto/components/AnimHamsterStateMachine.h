@@ -23,6 +23,7 @@ private:
 	HamStatesAnim lastState;
 	Animator* anim;
 	EntityAttribs* ent;
+	GameStates* gState_;
 	std::string id;
 
 	//VARIABLES AUXILIARES PARA ALGUNAS ANIMACIONES

@@ -13,7 +13,7 @@
 class Stroke: public Component {
 public:
 	Stroke(StrokeStrategy* ss) :
-			hms_(nullptr), ab_(nullptr), ss_(ss), tr_(nullptr) {
+			hms_(nullptr), ab_(nullptr), ss_(ss), tr_(nullptr), state_(nullptr) {
 	}
 	virtual ~Stroke() {
 		if (ss_ != nullptr) delete ss_; ss_ = nullptr;
@@ -21,6 +21,8 @@ public:
 	void init() override;
 
 	void update() override;
+
+	void onResume() override;
 
 	void increaseChance(int n, bool fromAbility);
 
@@ -42,6 +44,7 @@ private:
 	HamsterStateMachine* hms_;
 	Ability* ab_;
 	Transform* tr_;
+	GameStates* state_;
 
 	const int UPDATETIME = 5000, // Tiempo entre comprobaciones de infarto
 		//MAXAB = 65, // Máximo de probabilidad de infarto que se puede recibir por habilidades

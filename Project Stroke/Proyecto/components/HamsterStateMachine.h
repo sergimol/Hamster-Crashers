@@ -3,6 +3,7 @@
 #include "../ecs/Component.h"
 #include "../ecs/Entity.h"
 #include "Gravity.h"
+#include "GameStates.h"
 #include <string>
 
 const enum class HamStates { DEFAULT, INFARCTED, ABILITY, STUNNED, DEAD};
@@ -11,8 +12,9 @@ class HamsterStateMachine : public Component
 {
 private:
 	HamStates currentState;
+	GameStates* state_;
 public: 
-	HamsterStateMachine() : currentState(HamStates::DEFAULT) {};
+	HamsterStateMachine() : currentState(HamStates::DEFAULT), state_(nullptr) {};
 	~HamsterStateMachine() {};
 	
 	inline HamStates& getState() { return currentState; };
@@ -40,5 +42,7 @@ public:
 	};
 
 	virtual void update();
+
+	void init() override;
 };
 

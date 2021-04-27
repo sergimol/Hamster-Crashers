@@ -9,21 +9,28 @@
 void GhostCtrl::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+
 	mv_ = entity_->getComponent<Movement>();
 	assert(mv_ != nullptr);
+
 	st_ = entity_->getComponent<HamsterStateMachine>()->getState();
+
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
 }
 
 void GhostCtrl::update() {
-	//Busca entre el resto de hamsters uno al que pueda poseer
-	auto& hamsters = entity_->getMngr()->getPlayers();
-	for (Entity* e : hamsters) {
-		if (e != entity_ && !e->getComponent<HamsterStateMachine>()->cantBeTargeted()) {
-			auto* oTr = e->getComponent<Transform>();
-			assert(oTr != nullptr);
-			show = Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), oTr->getPos(), oTr->getW(), oTr->getH());
-			if (show && ih().isKeyDown(key)) {
-				startPossesion(e);
+	if (state_->getState() != GameStates::PAUSE) {
+		//Busca entre el resto de hamsters uno al que pueda poseer
+		auto& hamsters = entity_->getMngr()->getPlayers();
+		for (Entity* e : hamsters) {
+			if (e != entity_ && !e->getComponent<HamsterStateMachine>()->cantBeTargeted()) {
+				auto* oTr = e->getComponent<Transform>();
+				assert(oTr != nullptr);
+				show = Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), oTr->getPos(), oTr->getW(), oTr->getH());
+				if (show && ih().isKeyDown(key)) {
+					startPossesion(e);
+				}
 			}
 		}
 	}

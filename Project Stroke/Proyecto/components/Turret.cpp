@@ -26,36 +26,41 @@ void Turret::init() {
 
 	actualSpeed_ = entity_->getComponent<EntityAttribs>()->getVel();
 	assert(actualSpeed_ != nullptr);
+
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
 }
 
 void Turret::update() {
-	Ability::update();
+	if (state_->getState() != GameStates::PAUSE) {
+		Ability::update();
 
-	if (onUse_) {
-		if (sdlutils().currRealTime() > cadenceTime_ + CADENCESHOT) {
+		if (onUse_) {
+			if (sdlutils().currRealTime() > cadenceTime_ + CADENCESHOT) {
 
-			//Crea la entidad
-			auto bala = entity_->getMngr()->addEntity();
+				//Crea la entidad
+				auto bala = entity_->getMngr()->addEntity();
 
-			if (entity_->getComponent<Transform>()->getFlip())
-				x_ = -1;
-			else
-				x_ = 1;
+				if (entity_->getComponent<Transform>()->getFlip())
+					x_ = -1;
+				else
+					x_ = 1;
 
-			//Meto los componentes
-			bala->addComponent<Transform>(
-				tr_->getPos() + Vector2D(tr_->getW() / 2 + x_ * OFFSETX, tr_->getH() / 2 - OFFSETY),
-				Vector2D(x_, 0.0f) * BULLETSPEED, 10.0f, 10.0f, 0.0f,1,1);
+				//Meto los componentes
+				bala->addComponent<Transform>(
+					tr_->getPos() + Vector2D(tr_->getW() / 2 + x_ * OFFSETX, tr_->getH() / 2 - OFFSETY),
+					Vector2D(x_, 0.0f) * BULLETSPEED, 10.0f, 10.0f, 0.0f, 1, 1);
 
-			bala->addComponent<Image>(&sdlutils().images().at("bullet"));
+				bala->addComponent<Image>(&sdlutils().images().at("bullet"));
 
-			bala->addComponent<DisableOnExit>();
+				bala->addComponent<DisableOnExit>();
 
-			bala->addComponent<BulletHit>(tr_->getPos().getY() + tr_->getH());
+				bala->addComponent<BulletHit>(tr_->getPos().getY() + tr_->getH());
 
-			bala->setGroup<Bullet_group>(true);
+				bala->setGroup<Bullet_group>(true);
 
-			cadenceTime_ = sdlutils().currRealTime();
+				cadenceTime_ = sdlutils().currRealTime();
+			}
 		}
 	}
 }

@@ -179,6 +179,7 @@ public:
 	void update();
 	void render();
 	void refresh();
+	void resume();
 
 	void refreshDeadBodies() {
 		deadBodies_.erase( //

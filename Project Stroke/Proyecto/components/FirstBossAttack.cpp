@@ -11,7 +11,7 @@
 FirstBossAttack::FirstBossAttack() :
 	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
 	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")),
-	attackStarted_(false), hitTime_(0), beforeHitCD_(1000), afterHitCD_(4250), stunStarted_(false), eAttribs_(nullptr) {}
+	attackStarted_(false), hitTime_(0), beforeHitCD_(1000), afterHitCD_(4250), stunStarted_(false), eAttribs_(nullptr), state_(nullptr) {}
 
 void FirstBossAttack::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -19,55 +19,60 @@ void FirstBossAttack::init() {
 
 	eAttribs_ = entity_->getComponent<EntityAttribs>();
 	assert(eAttribs_ != nullptr);
+
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
 }
 
 void FirstBossAttack::update() {
-	//Deja de mostrar el collider
-	if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
-		DEBUG_isAttacking_ = false;
-	}
-	if (attackStarted_) {
-
-		//Telegrafiado hasta el ataque
-		if (!stunStarted_ && sdlutils().currRealTime() > hitTime_ + beforeHitCD_) {
-			cout << "Entró en ataque" << endl;
-			cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-			auto sizeW = tr_->getW();
-			auto& pos = tr_->getPos();
-
-			attRect_.w = sizeW; //Esto que cuadre con la mano cuando sea
-			attRect_.h = sdlutils().height();
-
-			//Cogemos el rect completo del jefe
-
-			attRect_.x = pos.getX() - cam.x;
-			attRect_.y = pos.getY() - cam.y; //Pos inicial de esquina arriba
-
-			//Comprobamos si colisiona con alguno de los enemigos que tiene delante
-
-			//Si se colisiona..
-			if (CheckCollisions(attRect_, true))
-				//Suena el hit y le pega
-				hitSound_.play();
-			//Si no colisiona..
-			else
-				//Suena el attackSound
-				attackSound_.play();
-
-			//this.anims.play(pegarse)
-
-			DEBUG_isAttacking_ = true;
-			time_ = sdlutils().currRealTime();
-
-			stunStarted_ = true;
+	if (state_->getState() != GameStates::PAUSE) {
+		//Deja de mostrar el collider
+		if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
+			DEBUG_isAttacking_ = false;
 		}
-		else if (eAttribs_->checkInvulnerability() && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
-			eAttribs_->setInvincibility(false);
-		}
-		else if (stunStarted_ && sdlutils().currRealTime() > hitTime_ + afterHitCD_) {
-			eAttribs_->setInvincibility(true);
-			attackStarted_ = false;
-			stunStarted_ = false;
+		if (attackStarted_) {
+
+			//Telegrafiado hasta el ataque
+			if (!stunStarted_ && sdlutils().currRealTime() > hitTime_ + beforeHitCD_) {
+				cout << "Entró en ataque" << endl;
+				cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+				auto sizeW = tr_->getW();
+				auto& pos = tr_->getPos();
+
+				attRect_.w = sizeW; //Esto que cuadre con la mano cuando sea
+				attRect_.h = sdlutils().height();
+
+				//Cogemos el rect completo del jefe
+
+				attRect_.x = pos.getX() - cam.x;
+				attRect_.y = pos.getY() - cam.y; //Pos inicial de esquina arriba
+
+				//Comprobamos si colisiona con alguno de los enemigos que tiene delante
+
+				//Si se colisiona..
+				if (CheckCollisions(attRect_, true))
+					//Suena el hit y le pega
+					hitSound_.play();
+				//Si no colisiona..
+				else
+					//Suena el attackSound
+					attackSound_.play();
+
+				//this.anims.play(pegarse)
+
+				DEBUG_isAttacking_ = true;
+				time_ = sdlutils().currRealTime();
+
+				stunStarted_ = true;
+			}
+			else if (eAttribs_->checkInvulnerability() && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
+				eAttribs_->setInvincibility(false);
+			}
+			else if (stunStarted_ && sdlutils().currRealTime() > hitTime_ + afterHitCD_) {
+				eAttribs_->setInvincibility(true);
+				attackStarted_ = false;
+				stunStarted_ = false;
+			}
 		}
 	}
 }
@@ -176,4 +181,9 @@ void FirstBossAttack::render() {
 
 		SDL_RenderDrawRect(sdlutils().renderer(), &attRect_);
 	}
+}
+
+void FirstBossAttack::onResume() {
+	hitTime_ += sdlutils().currRealTime() - hitTime_;
+	time_ += sdlutils().currRealTime() - time_;
 }

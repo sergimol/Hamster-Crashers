@@ -14,6 +14,7 @@
 #include "Transform.h"
 #include "HamsterStateMachine.h"
 #include "EntityAttribs.h"
+#include "GameStates.h"
 
 class FirstBossAttack : public Component {
 public:
@@ -24,6 +25,7 @@ public:
 	void init() override;
 	void update() override;
 	void render() override;
+	void onResume() override;
 
 	bool CheckCollisions(const SDL_Rect& enemyRect, bool finCombo);
 	bool LaunchAttack();
@@ -49,5 +51,6 @@ private:
 
 	bool attackStarted_;
 	bool stunStarted_;
+	GameStates* state_;
 }
 ;

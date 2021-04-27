@@ -122,6 +122,13 @@ public:
 		}
 	}
 
+	void resume() {
+		std::size_t n = components_.size();
+		for (auto i = 0u; i < n; i++) {
+			if (components_[i]->isActive()) components_[i]->onResume();
+		}
+	}
+
 	//bool operator< (Entity* a);
 	//bool comparador(Entity* a, Entity* b);
 

@@ -32,7 +32,7 @@ public:
 
 	virtual void onEnable() override;
 	virtual void onDisable() override;
-
+	void onResume() override;
 	Vector2D getLastDir() { return lastDir_; };
 
 protected:
@@ -49,5 +49,7 @@ private:
 	std::map<KEYS, bool> keymapSimple_;
 
 	CollisionDetec* colDetec_;
+
+	GameStates* state_;
 };
 
