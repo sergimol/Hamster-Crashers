@@ -80,6 +80,10 @@ public:
 		return velZ_;
 	}
 
+	void setVelZ(float velZ) {
+		velZ_ = velZ;
+	}
+
 	Vector2D& getPos() {
 		return pos_;
 	}

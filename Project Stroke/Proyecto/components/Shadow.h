@@ -24,7 +24,6 @@ private:
 
 	bool isHamster_, useCollision_;
 
-	HamStates hamS_; 
-	EnemyStates enemyS_;
+	HamsterStateMachine* hamS_;
 	GameStates* gState_;
 };

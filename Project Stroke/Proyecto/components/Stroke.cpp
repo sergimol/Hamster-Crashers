@@ -8,6 +8,7 @@
 #include "../components/GhostCtrl.h"
 #include "../components/AnimHamsterStateMachine.h"
 #include "../components/ReanimationGame.h"
+#include "../components/CollisionDetec.h"
 #include "EnemyMother.h"
 
 void Stroke::init() {
@@ -120,7 +121,7 @@ void Stroke::infarctHamster() {
 	
 	//GENERAR PERSONAJE INFARTADO ()
 	auto* deadBody = entity_->getMngr()->addEntity();
-	deadBody->addComponent<Transform>(tr_->getPos(), Vector2D(0,0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip(),tr_->getScaleW(),tr_->getScaleH());
+	auto* tr = deadBody->addComponent<Transform>(tr_->getPos(), Vector2D(0,0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip(),tr_->getScaleW(),tr_->getScaleH());
 	deadBody->addComponent<Animator>(&sdlutils().images().at(name + "Sheet"),
 		86,
 		86,
@@ -129,7 +130,10 @@ void Stroke::infarctHamster() {
 		220,
 		Vector2D(0, 0),
 		3)->play(sdlutils().anims().at(name + "_stroke"));
+	tr->setVelZ(tr_->getVelZ());
+	deadBody->addComponent<CollisionDetec>();
 	deadBody->addComponent<Gravity>();
+	deadBody->addComponent<Movement>();
 	deadBody->addComponent<InfarctedBody>(entity_);
 	deadBody->addComponent<ReanimationGame>();
 

@@ -10,9 +10,7 @@ void Shadow::init() {
 	shadow_ = new Entity(entity_->getMngr());
 
 	if (isHamster_)
-		hamS_ = entity_->getComponent<HamsterStateMachine>()->getState();
-	else
-		enemyS_ = entity_->getComponent<EnemyStateMachine>()->getState();
+		hamS_ = entity_->getComponent<HamsterStateMachine>();
 
 
 	//INICIALIZA SOMBRA CON VALORES DEL PADRE
@@ -30,7 +28,7 @@ void Shadow::render() {
 
 void Shadow::update() {
 	if (gState_->getState() == GameStates::RUNNING) {
-		if (isHamster_ && hamS_ != HamStates::INFARCTED)
+		if (isHamster_ && hamS_->getState() != HamStates::INFARCTED)
 			shadow_->update();
 		else if (!isHamster_)
 			shadow_->update();

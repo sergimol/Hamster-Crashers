@@ -319,6 +319,7 @@ void MapMngr::loadEnemyRoom() {
 					Vector2D(), 86 * scale, 86 * scale, 0.0f, 0.4, 0.5)->getFlip() = true;
 
 				enemy->addComponent<EnemyStateMachine>();
+				//1º: False porque no es un hamster //2º: True porque usa de referencia el rect de colision
 				enemy->addComponent<Shadow>(false, true);
 				
 				enemy->setGroup<Enemy>(true);
@@ -441,6 +442,7 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 			Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
 	
 	hamster1->addComponent<HamsterStateMachine>();
+	//1º: True, porque es un hamster //2º: False, porque usa de referencia el rect del Animator
 	hamster1->addComponent<Shadow>(true, false);
 
 	Transform* tr = hamster1->getComponent<Transform>();
