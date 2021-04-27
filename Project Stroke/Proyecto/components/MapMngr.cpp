@@ -361,7 +361,7 @@ void MapMngr::loadEnemyRoom() {
 				//enemy->addComponent<EnemyStateMachine>();
 				//enemy->setGroup<Enemy>(true);
 
-				enemy->addComponent<EntityAttribs>(200, 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 5);
+				/*enemy->addComponent<EntityAttribs>(200, 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 5);
 
 				enemy->addComponent<Animator>(
 					&sdlutils().images().at("soldier1Sheet"),
@@ -374,7 +374,7 @@ void MapMngr::loadEnemyRoom() {
 					3
 					);
 				enemy->addComponent<AnimEnemyStateMachine>();
-				enemy->addComponent<UI>("canelon", 4);
+				enemy->addComponent<UI>("canelon", 4);*/
 
 				////enemy->addComponent<EnemyStrongAttack>();
 				//enemy->addComponent<EnemyAttack>();
