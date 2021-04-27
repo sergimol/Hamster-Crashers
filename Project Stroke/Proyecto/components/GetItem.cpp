@@ -14,7 +14,7 @@ void GetItem::init() {
 }
 
 void GetItem::update() {
-	if (state_->getState() != GameStates::PAUSE) {
+	if (state_->getState() == GameStates::RUNNING) {
 		auto& ents = entity_->getMngr()->getItems();
 
 		cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();

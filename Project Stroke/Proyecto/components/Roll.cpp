@@ -67,7 +67,7 @@ void Roll::updateKeymap(KEYS x, bool is) {
 }
 
 void Roll::update() {
-	if (state_->getState() != GameStates::PAUSE) {
+	if (state_->getState() == GameStates::RUNNING) {
 		Ability::update();
 		auto& state = st_->getState();
 

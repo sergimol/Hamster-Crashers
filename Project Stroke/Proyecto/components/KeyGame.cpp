@@ -20,7 +20,7 @@ void KeyGame::render() {
 }
 
 void KeyGame::update() {
-	if (state_->getState() != GameStates::PAUSE && tr_->getPos().getX() > trail.x + trail.w) {
+	if (state_->getState() == GameStates::RUNNING && tr_->getPos().getX() > trail.x + trail.w) {
 		goBack();
 	}
 }

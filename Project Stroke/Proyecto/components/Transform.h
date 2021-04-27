@@ -141,7 +141,7 @@ public:
 	}
 
 	void update() override {
-		if (state_->getState() != GameStates::PAUSE) {
+		if (state_->getState() == GameStates::RUNNING) {
 			if (grv_ != nullptr && grv_->isActive())
 				z_ += velZ_;
 			pos_ = pos_ + vel_;
