@@ -304,22 +304,6 @@
 
   "sounds": [
     {
-      "id": "paddle_hit",
-      "file": "resources/sound/paddle_hit.wav"
-    },
-    {
-      "id": "wall_hit",
-      "file": "resources/sound/wall_hit.wav"
-    },
-    {
-      "id": "fire",
-      "file": "resources/sound/fire.wav"
-    },
-    {
-      "id": "thrust",
-      "file": "resources/sound/thrust.wav"
-    },
-    {
       "id": "light_attack",
       "file": "resources/sound/light_attack.wav"
     },
@@ -330,6 +314,18 @@
     {
       "id": "hit",
       "file": "resources/sound/hit.wav"
+    },
+    {
+      "id": "hit0",
+      "file": "resources/sound/hit/hit0.mp3"
+    },
+    {
+      "id": "dep0",
+      "file": "resources/sound/dep/dep0.mp3"
+    },
+    {
+      "id": "dep1",
+      "file": "resources/sound/dep/dep1.mp3"
     }
   ],
 
