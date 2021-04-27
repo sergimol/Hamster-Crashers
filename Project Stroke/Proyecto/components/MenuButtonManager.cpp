@@ -18,7 +18,7 @@ void MenuButtonManager::init() {
 
 		auto mngr_ = entity_->getMngr();
 
-		auto* localbutton = mngr_->addEntity();
+		auto* localbutton = mngr_->addMenu();
 		localbutton->addComponent<MenuButton>("local", Vector2D(100, 550), 0);
 		buttons[0][0] = localbutton;
 
@@ -30,7 +30,7 @@ void MenuButtonManager::init() {
 		optionsbutton->addComponent<MenuButton>("options", Vector2D(1550, 650), 0);
 		buttons[1][0] = optionsbutton;*/
 
-		auto* quitbutton = mngr_->addEntity();
+		auto* quitbutton = mngr_->addMenu();
 		/*quitbutton->addComponent<MenuButton>("quit", Vector2D(1550, 820), 0);
 		buttons[1][1] = quitbutton;*/
 		// Para la demo
@@ -46,15 +46,15 @@ void MenuButtonManager::init() {
 
 		auto mngr_ = entity_->getMngr();
 
-		auto* localbutton = mngr_->addEntity();
+		auto* localbutton = mngr_->addMenu();
 		localbutton->addComponent<MenuButton>("local", Vector2D(800, 300), 2);
 		buttons[0][0] = localbutton;
 
-		auto* onlinebutton = mngr_->addEntity();
+		auto* onlinebutton = mngr_->addMenu();
 		onlinebutton->addComponent<MenuButton>("online", Vector2D(800, 470), 2);
 		buttons[0][1] = onlinebutton;
 
-		auto* optionsbutton = mngr_->addEntity();
+		auto* optionsbutton = mngr_->addMenu();
 		optionsbutton->addComponent<MenuButton>("options", Vector2D(870, 650), 2);
 		buttons[0][2] = optionsbutton;
 	}
@@ -66,19 +66,19 @@ void MenuButtonManager::init() {
 		}
 		auto mngr_ = entity_->getMngr();
 
-		auto* sardinillabutton = mngr_->addEntity();
+		auto* sardinillabutton = mngr_->addMenu();
 		sardinillabutton->addComponent<MenuButton>("sardinilla", Vector2D(50, 50), 1);
 		buttons[0][0] = sardinillabutton;
 
-		auto* ketabutton = mngr_->addEntity();
+		auto* ketabutton = mngr_->addMenu();
 		ketabutton->addComponent<MenuButton>("keta", Vector2D(500, 50), 1);
 		buttons[1][0] = ketabutton;
 
-		auto* monchibutton = mngr_->addEntity();
+		auto* monchibutton = mngr_->addMenu();
 		monchibutton->addComponent<MenuButton>("monchi", Vector2D(950, 50), 1);
 		buttons[2][0] = monchibutton;
 
-		auto* canelonbutton = mngr_->addEntity();
+		auto* canelonbutton = mngr_->addMenu();
 		canelonbutton->addComponent<MenuButton>("canelon", Vector2D(1400, 50), 1);
 		buttons[3][0] = canelonbutton;
 	}
