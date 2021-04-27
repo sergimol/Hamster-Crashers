@@ -36,17 +36,17 @@ void Stroke::update() {
 }
 
 void Stroke::increaseChance(int n, bool fromAbility) {
-	if (!fromAbility) {
-		ss_->increaseChanceNORMAL(n, chance_);
-	}
-	else {
-		ss_->increaseChanceAB(n, chanceFromAb_);
-	}
-	
-	//Llamamos a la UI para que el corazon palpite más rapido
-	entity_->getComponent<HeartUI>()->increaseLatency(chanceFromAb_ + chance_);
+	if (hms_->getState() != HamStates::INFARCTED) {
+		if (!fromAbility) {
+			ss_->increaseChanceNORMAL(n, chance_);
+		}
+		else {
+			ss_->increaseChanceAB(n, chanceFromAb_);
+		}
+	    entity_->getComponent<HeartUI>()->increaseLatency(chanceFromAb_ + chance_);
 
-	timeLastIncrease_ = sdlutils().currRealTime();
+		timeLastIncrease_ = sdlutils().currRealTime();
+	}
 	//std::cout << chance_ + " " + chanceFromAb_ << std::endl;
 }
 

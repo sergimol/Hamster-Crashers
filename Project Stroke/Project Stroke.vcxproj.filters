@@ -429,6 +429,9 @@
     <ClCompile Include="Proyecto\components\MenuButtonManager.cpp">
       <Filter>Archivos de origen\components\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\SoundManager.cpp">
+      <Filter>Archivos de origen\components\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -723,6 +726,9 @@
       <Filter>Archivos de encabezado\Components\Entity</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\MenuButtonManager.h">
+      <Filter>Archivos de encabezado\Components\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\SoundManager.h">
       <Filter>Archivos de encabezado\Components\Manager</Filter>
     </ClInclude>
   </ItemGroup>
