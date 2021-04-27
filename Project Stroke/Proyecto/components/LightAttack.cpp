@@ -37,10 +37,6 @@ void LightAttack::update() {
 
 			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK, false);
 
-			/*if(attackOrder_ == 0)
-				entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK1, false);
-			else
-				entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK2, false);*/
 
 		}
 
