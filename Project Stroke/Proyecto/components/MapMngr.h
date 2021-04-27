@@ -39,7 +39,7 @@ private:
 	int RoundsPerRoom;					//Guarda la cantidad de rondas que hay en una sala
 	int RoundsCount = 0;
 	//void Refresh();
-	int scale = 3;
+	const int scale = 3;
 
 	std::queue<tmx::Object> TriggerftCamera;
 
@@ -54,9 +54,10 @@ public:
 	bool intersectWall(SDL_Rect hamster);
 
 	int getScale() { return scale; };
+	int getCellSize() { return TAM_CELDA; };
 	inline int getMaxH() { return mapDimensions_.y * TAM_CELDA * scale; };
 
-	void LoadEnemyRoom();
+	void loadEnemyRoom();
 	void reduceNumberEnemyRoom() { numberEnemyRoom--; };
 	void newSceneTrigger(string newName, const tmx::Object& obj);
 };

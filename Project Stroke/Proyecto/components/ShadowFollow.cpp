@@ -4,6 +4,10 @@ void ShadowFollow::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 	
+	auto* mngr = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>();
+
+	pixelMargin = mngr->getCellSize();
+
 	baseWidth_ = tr_->getW();
 	baseHeight_ = tr_->getH();
 
@@ -12,7 +16,7 @@ void ShadowFollow::init() {
 
 void ShadowFollow::update() {
 	//ESCALA DE LA SOMBRA EN FUNCIÓN DE LA ALTURA
-	float new_scale = (otherTr_->getFloor() + 1) / (otherTr_->getZ() + 1);
+	float new_scale = 1 / ((otherTr_->getZ() - otherTr_->getFloor() + 1) / pixelMargin);
 
 	if (new_scale < 0) new_scale = 0;
 	else if (new_scale > 1) new_scale = 1;

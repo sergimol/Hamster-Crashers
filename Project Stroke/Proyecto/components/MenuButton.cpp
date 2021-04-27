@@ -79,11 +79,14 @@ void MenuButton::pressed() {
 	else if (buttonName_ == "online") {
 		std::cout << "online\n";
 	}
+	else if (buttonName_ == "resume") {
+		state_->setState(GameStates::RUNNING);
+	}
 	else if (buttonName_ == "options") {
 		std::cout << "options\n";
 	}
 	else if (buttonName_ == "quit") {
-		std::cout << "quit\n";
+		ih().onQuit();
 	}
 	else if (buttonName_ == "sardinilla") {
 		std::cout << "sardinilla\n";
