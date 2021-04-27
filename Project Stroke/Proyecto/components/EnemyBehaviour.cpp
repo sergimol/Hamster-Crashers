@@ -1,6 +1,7 @@
 #include "EnemyBehaviour.h"
 #include "Stroke.h"
 #include "EnemyMother.h"
+#include "../utils/checkML.h"
 
 EnemyBehaviour::EnemyBehaviour(Behavior* auxbh) :
 	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr), lockedHamster_(nullptr),
@@ -37,7 +38,7 @@ void EnemyBehaviour::init() {
 void EnemyBehaviour::SetBehavior(Behavior* bs) {
 	
 	if (bh_ != nullptr)
-	delete bh_;
+		delete bh_;
 	bh_ = bs;
 	bh_->setOwner(this);
 	bh_->init();

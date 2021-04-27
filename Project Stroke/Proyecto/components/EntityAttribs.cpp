@@ -208,14 +208,14 @@ void EntityAttribs::die() {
 	e->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip(), tr_->getScaleW(), tr_->getScaleH());
 
 	//Y reproducimos la animacion de muerto
-	e->addComponent<Animator>(&sdlutils().images().at("sardinillaSheet"),
+	e->addComponent<Animator>(&sdlutils().images().at(id_ + "Sheet"),
 		86,
 		86,
 		3,
 		3,
 		220,
 		Vector2D(0, 0),
-		3)->play(sdlutils().anims().at("sardinilla_death"));
+		3)->play(sdlutils().anims().at(id_+"_death"));
 
 	entity_->setActive(false);
 	//Si la persona que muere es un hamster...
