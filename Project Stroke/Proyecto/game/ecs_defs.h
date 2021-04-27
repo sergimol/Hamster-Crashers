@@ -162,6 +162,7 @@ struct StateMachine;
 struct Mother;
 struct PauseMenu;
 struct SoundManager;
+struct MainMenu;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
@@ -172,7 +173,8 @@ struct SoundManager;
 					LevelHandlr, \
 					Mother, \
 					PauseMenu,\
-					SoundManager
+					SoundManager, \
+					MainMenu
 
 
 //systems

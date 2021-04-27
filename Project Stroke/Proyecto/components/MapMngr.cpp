@@ -319,6 +319,8 @@ void MapMngr::loadEnemyRoom() {
 					Vector2D(), 86 * scale, 86 * scale, 0.0f, 0.4, 0.5)->getFlip() = true;
 
 				enemy->addComponent<EnemyStateMachine>();
+				enemy->addComponent<Shadow>(false, true);
+				
 				enemy->setGroup<Enemy>(true);
 
 				enemy->addComponent<EntityAttribs>(200, 0.0, "soldier1", Vector2D(3.6, 2), 0, 0, 5);
@@ -439,7 +441,7 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 			Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
 	
 	hamster1->addComponent<HamsterStateMachine>();
-	hamster1->addComponent<Shadow>();
+	hamster1->addComponent<Shadow>(true, false);
 
 	Transform* tr = hamster1->getComponent<Transform>();
 
