@@ -13,7 +13,7 @@
 
 class Shadow : public Component {
 public:
-	Shadow(bool isHamster, bool useCollision) :shadow_(nullptr), tr_(nullptr), isHamster_(isHamster), useCollision_(useCollision) {};
+	Shadow(bool isHamster, bool useCollision) :shadow_(nullptr), tr_(nullptr), isHamster_(isHamster), useCollision_(useCollision), gState_(nullptr){};
 	virtual ~Shadow() { delete shadow_; shadow_ = nullptr; };
 	virtual void init() override;
 	virtual void render() override;
