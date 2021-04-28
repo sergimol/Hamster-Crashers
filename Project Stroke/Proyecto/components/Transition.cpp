@@ -22,7 +22,7 @@ void Transition::init() {
 }
 
 void Transition::update() {
-	if (state_->getState() == GameStates::RUNNING || state_->getState() == GameStates::MAINMENU) {
+	if (state_->getState() == GameStates::RUNNING || state_->getState() == GameStates::CONTROLS) {
 		if (fadingOut)
 			fadeOut();
 

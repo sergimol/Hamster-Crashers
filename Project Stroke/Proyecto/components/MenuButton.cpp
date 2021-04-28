@@ -74,6 +74,7 @@ void MenuButton::pressed() {
 	if (buttonName_ == "local") {
 		entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("controls", false);
 		//state_->setState(GameStates::RUNNING);
+		state_->setState(GameStates::CONTROLS);
 		entity_->getMngr()->getHandler<MainMenu>()->getComponent<MenuButtonManager>()->updateKeymap(MenuButtonManager::SPACE, false);
 	}
 	else if (buttonName_ == "online") {

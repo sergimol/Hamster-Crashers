@@ -43,7 +43,7 @@ public:
 	}
 
 	void render() override {
-		if (state_->getState() != GameStates::MAINMENU) {
+		if (state_->getState() != GameStates::MAINMENU && state_->getState() != GameStates::CONTROLS) {
 			SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 
 			//recurso

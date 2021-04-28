@@ -22,7 +22,7 @@ void Shadow::init() {
 
 //SIMPLEMENTE SE LLAMA A SU RENDER Y UPDATE
 void Shadow::render() {
-	if (gState_->getState() != GameStates::MAINMENU)
+	if (gState_->getState() != GameStates::MAINMENU && gState_->getState() != GameStates::CONTROLS)
 		shadow_->render();
 }
 
