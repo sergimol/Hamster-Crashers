@@ -11,8 +11,7 @@
 
 
 EnemyAttack::EnemyAttack() :
-	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
-	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {}
+	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false) {}
 
 void EnemyAttack::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -70,12 +69,13 @@ bool EnemyAttack::LaunchAttack() {
 		//Si se colisiona..
 		if (CheckCollisions(attRect_, true))
 			//Suena el hit y le pega
-			hitSound_.play();
+			//hitSound_.play();
+			std::cout << "Hacer que se reproduzca sonido en enemyattack";
 		//Si no colisiona..
 		else
 			//Suena el attackSound
-			attackSound_.play();
-
+			//attackSound_.play();
+			std::cout << "Hacer que se reproduzca sonido en enemyattack";
 		//ANIMACION DE ATTAQUE
 		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, true);
 

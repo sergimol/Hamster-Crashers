@@ -10,7 +10,6 @@
 
 FirstBossAttack::FirstBossAttack() :
 	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
-	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")),
 	attackStarted_(false), hitTime_(0), beforeHitCD_(1000), afterHitCD_(4250), stunStarted_(false), eAttribs_(nullptr), state_(nullptr) {}
 
 void FirstBossAttack::init() {
@@ -52,11 +51,13 @@ void FirstBossAttack::update() {
 				//Si se colisiona..
 				if (CheckCollisions(attRect_, true))
 					//Suena el hit y le pega
-					hitSound_.play();
+					//hitSound_.play();
+					std::cout << "Hacer que se reproduzca sonido en firstbossattack";
 				//Si no colisiona..
 				else
 					//Suena el attackSound
-					attackSound_.play();
+					//attackSound_.play();
+					std::cout << "Hacer que se reproduzca sonido en firstbossattack";
 
 				//this.anims.play(pegarse)
 

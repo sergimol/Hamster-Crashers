@@ -11,8 +11,7 @@
 
 
 LightAttack::LightAttack() :
-	hms_(nullptr), tr_(nullptr), cooldown_(250), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
-	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")) {}
+	hms_(nullptr), tr_(nullptr), cooldown_(250), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false) {}
 
 void LightAttack::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -201,11 +200,13 @@ void LightAttack::attack() {
 			//Si se colisiona..
 			if (CheckCollisions(attRect_, finCombo))
 				//Suena el hit y le pega
-				hitSound_.play();
+				//hitSound_.play();
+				std::cout << "Hacer que se reproduzca sonido en lightattack";
 			//Si no colisiona..
 			else
 				//Suena el attackSound
-				attackSound_.play();
+				//attackSound_.play();
+				std::cout << "Hacer que se reproduzca sonido en lightattack";
 
 			//this.anims.play(pegarse)
 

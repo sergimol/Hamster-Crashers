@@ -10,8 +10,7 @@ class Roll : public Ability {
 public:
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 
-	Roll() : speed_(), goalVel_(0, 0), dir_(0,0), timer(sdlutils().currRealTime()), rolling(false),
-		hitSound_(sdlutils().soundEffects().at("strong_attack")), col_(nullptr)
+	Roll() : speed_(), goalVel_(0, 0), dir_(0,0), timer(sdlutils().currRealTime()), rolling(false), col_(nullptr)
 	{
 		cooldown_ = 5000;
 	};
@@ -43,8 +42,6 @@ private:
 	CollisionDetec* col_;
 
 	std::map<KEYS, bool> keymap;
-
-	SoundEffect& hitSound_;
 
 	bool checkCollisions();
 };

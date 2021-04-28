@@ -304,29 +304,106 @@
 
   "sounds": [
     {
-      "id": "light_attack",
-      "file": "resources/sound/light_attack.wav"
+      "id": "light0",
+      "file": "resources/sound/hit/light/light0.wav"
     },
     {
-      "id": "strong_attack",
-      "file": "resources/sound/strong_attack.wav"
+      "id": "light1",
+      "file": "resources/sound/hit/light/light1.wav"
     },
     {
-      "id": "hit",
-      "file": "resources/sound/hit.wav"
+      "id": "light2",
+      "file": "resources/sound/hit/light/light2.wav"
     },
     {
-      "id": "hit0",
-      "file": "resources/sound/hit/hit0.mp3"
+      "id": "light3",
+      "file": "resources/sound/hit/light/light3.wav"
+    },
+    {
+      "id": "light4",
+      "file": "resources/sound/hit/light/light4.wav"
+    },
+    {
+      "id": "light5",
+      "file": "resources/sound/hit/light/light5.wav"
+    },
+    {
+      "id": "light6",
+      "file": "resources/sound/hit/light/light6.wav"
+    },
+    {
+      "id": "light7",
+      "file": "resources/sound/hit/light/light7.wav"
+    },
+    {
+      "id": "light8",
+      "file": "resources/sound/hit/light/light8.wav"
+    },
+    {
+      "id": "light9",
+      "file": "resources/sound/hit/light/light9.wav"
+    },
+    {
+      "id": "light10",
+      "file": "resources/sound/hit/light/light10.wav"
+    },
+    {
+      "id": "strong0",
+      "file": "resources/sound/hit/strong/strong0.wav"
+    },
+    {
+      "id": "strong1",
+      "file": "resources/sound/hit/strong/strong1.wav"
+    },
+    {
+      "id": "strong2",
+      "file": "resources/sound/hit/strong/strong2.wav"
+    },
+    {
+      "id": "attack0",
+      "file": "resources/sound/attack/attack0.wav"
+    },
+    {
+      "id": "attack1",
+      "file": "resources/sound/attack/attack1.wav"
+    },
+    {
+      "id": "attack2",
+      "file": "resources/sound/attack/attack2.wav"
+    },
+    {
+      "id": "attack3",
+      "file": "resources/sound/attack/attack3.wav"
+    },
+    {
+      "id": "attack4",
+      "file": "resources/sound/attack/attack4.wav"
     },
     {
       "id": "dep0",
-      "file": "resources/sound/dep/dep0.mp3"
+      "file": "resources/sound/dep/dep0.wav"
     },
     {
       "id": "dep1",
-      "file": "resources/sound/dep/dep1.mp3"
+      "file": "resources/sound/dep/dep1.wav"
+    },
+    {
+      "id": "dep2",
+      "file": "resources/sound/dep/dep2.wav"
+    },
+    {
+      "id": "heartattack0",
+      "file": "resources/sound/heartattack/heartattack0.wav"
+    },
+    {
+      "id": "heartattack1",
+      "file": "resources/sound/heartattack/heartattack1.wav"
+    },
+    {
+      "id": "heartattack2",
+      "file": "resources/sound/heartattack/heartattack2.wav"
     }
+
   ],
 
   "anims": [

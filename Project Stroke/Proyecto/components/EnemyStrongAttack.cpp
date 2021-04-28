@@ -10,7 +10,6 @@
 
 EnemyStrongAttack::EnemyStrongAttack() :
 	tr_(nullptr), cooldown_(3000), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
-	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")),
 	durationTime_(sdlutils().currRealTime()), attackDurationCD_(2500), beforeHitCD_(500), state_(nullptr) {}
 
 void EnemyStrongAttack::init() {
@@ -56,11 +55,13 @@ void EnemyStrongAttack::update() {
 				//Si se colisiona..
 				if (CheckCollisions(attRect_, true))
 					//Suena el hit y le pega
-					hitSound_.play();
+					//hitSound_.play();
+				std::cout << "Hacer que se reproduzca sonido en enemyStrongattack";
 				//Si no colisiona..
 				else
 					//Suena el attackSound
-					attackSound_.play();
+					//attackSound_.play();
+				std::cout << "Hacer que se reproduzca sonido en enemyStrongattack";
 
 				//this.anims.play(pegarse)
 

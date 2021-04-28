@@ -16,24 +16,55 @@ public:
 private:
 	int randomNum;
 
-	void hit();
+	void lighthit();
+
+	void stronghit();
 
 	void attack();
 
-	void jump();
-
 	void dep();
+
+	void heartattack();
 
 	int pickRandom(int max);
 
 
 	//SOUND LIST AND CHANNELS
 	int hits = 0;
-	SoundEffect* hit0;
+	SoundEffect* light0;
+	SoundEffect* light1;
+	SoundEffect* light2;
+	SoundEffect* light3;
+	SoundEffect* light4;
+	SoundEffect* light5;
+	SoundEffect* light6;
+	SoundEffect* light7;
+	SoundEffect* light8;
+	SoundEffect* light9;
+	SoundEffect* light10;
 
-	int deps = 1;
+	SoundEffect* strong0;
+	SoundEffect* strong1;
+	SoundEffect* strong2;
+
+	int attacks = 1;
+	SoundEffect* attack0;
+	SoundEffect* attack1;
+	SoundEffect* attack2;
+	SoundEffect* attack3;
+	SoundEffect* attack4;
+
+
+	int deps = 2;
 	SoundEffect* dep0;
 	SoundEffect* dep1;
+	SoundEffect* dep2;
+
+	int heartattacks = 3;
+	SoundEffect* heartattack0;
+	SoundEffect* heartattack1;
+	SoundEffect* heartattack2;
+
 
 };
 

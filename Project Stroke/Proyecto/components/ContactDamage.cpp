@@ -9,8 +9,7 @@
 #include "../utils/Collisions.h"
 
 ContactDamage::ContactDamage(int danyo) :
-	tr_(nullptr), attRect_(), DEBUG_isAttacking_(false),
-	attackSound_(sdlutils().soundEffects().at("light_attack")), hitSound_(sdlutils().soundEffects().at("hit")), dmg_(danyo) {}
+	tr_(nullptr), attRect_(), DEBUG_isAttacking_(false), dmg_(danyo) {}
 
 void ContactDamage::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -46,7 +45,8 @@ void ContactDamage::updateRect() {
 	//Si se colisiona..
 	if (CheckCollisions(attRect_, true))
 		//Suena el hit y le pega
-		hitSound_.play();
+		//hitSound_.play();
+		std::cout << "Hacer que se reproduzca sonido en contactDamage";
 	//Si no colisiona..
 	else
 		//NO  NO QUIERO Suena el attackSound

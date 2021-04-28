@@ -111,7 +111,8 @@ void Roll::update() {
 			//Si se colisiona..
 			if (checkCollisions())
 				//Suena el hit y le pega
-				hitSound_.play();
+				//hitSound_.play();
+				std::cout << "Hacer que se reproduzca sonido en roll";
 		}
 	}
 }

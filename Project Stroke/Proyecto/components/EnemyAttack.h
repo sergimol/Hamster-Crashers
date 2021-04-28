@@ -34,7 +34,6 @@ private:
 	Animator* anim_;
 	bool DEBUG_isAttacking_;
 	long unsigned int cooldown_, time_;
-	SoundEffect& attackSound_, & hitSound_;
 	SDL_Rect cam;
 }
 ;

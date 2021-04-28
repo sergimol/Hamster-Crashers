@@ -36,7 +36,6 @@ private:
 	HamsterStateMachine* hms_;
 	bool DEBUG_isAttacking_;
 	long unsigned int cooldown_, time_;
-	SoundEffect& attackSound_, & hitSound_;
 	int player_;
 	SDL_Rect cam;
 }
