@@ -175,7 +175,7 @@ bool FirstBossAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) 
 }
 
 void FirstBossAttack::render() {
-	if (DEBUG_isAttacking_) {
+	if (DEBUG_isAttacking_ && debug) {
 		SDL_SetRenderDrawColor(sdlutils().renderer(), 255, 170, 0, 255);
 
 		SDL_RenderDrawRect(sdlutils().renderer(), &attRect_);

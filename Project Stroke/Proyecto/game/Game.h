@@ -16,9 +16,7 @@
 // say that it exists, that saves time when parsing files
 
 using namespace std;
-
-
-
+static bool debug = true;
 class Manager;
 
 class Game {
@@ -30,6 +28,7 @@ public:
 	void start();
 	//void updateCamera();
 	void sortEntities();
+
 private:
 	std::unique_ptr<Manager> mngr_;
 	SDL_Rect camera_;

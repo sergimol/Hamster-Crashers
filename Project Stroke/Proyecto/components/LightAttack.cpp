@@ -155,7 +155,7 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 }
 
 void LightAttack::render() {
-	if (DEBUG_isAttacking_) {
+	if (DEBUG_isAttacking_ && debug) {
 		SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 212, 255, 255);
 
 		SDL_RenderDrawRect(sdlutils().renderer(), &attRect_);

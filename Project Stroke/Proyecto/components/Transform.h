@@ -161,10 +161,11 @@ public:
 		SDL_Rect loc = rectCollide;
 		loc.x = p.getX();
 		loc.y = p.getY();
+		if (debug) {
+			SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 0, 0, 255);
 
-		SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 0, 0, 255);
-
-		SDL_RenderDrawRect(sdlutils().renderer(), &loc);
+			SDL_RenderDrawRect(sdlutils().renderer(), &loc);
+		}
 	}
 
 private:
