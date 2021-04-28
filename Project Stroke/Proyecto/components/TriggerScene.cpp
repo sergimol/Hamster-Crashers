@@ -30,7 +30,7 @@ void TriggerScene::update() {
 	//Si todos los hamsters estan en el trigger
 	if (canChange)
 		//Cambio de escena
-		entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene(nameScene);
+		entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene(nameScene, true);
 	else
 		canChange = true;
 }

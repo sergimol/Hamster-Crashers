@@ -25,7 +25,8 @@ private:
 	stack<Texture*> keyTextures;
 
 	const string level1 = "Mapa.tmx",
-		level2 = "Mapa2.tmx";
+		level2 = "Mapa2.tmx",
+		controls = "controls";
 
 	string newScene_;
 

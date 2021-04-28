@@ -15,7 +15,8 @@ public:
 		SELECTION,
 		PAUSE,
 		RUNNING,
-		CREDITS
+		CREDITS,
+		CONTROLS
 	};
 
 	GameStates(): state_() {};

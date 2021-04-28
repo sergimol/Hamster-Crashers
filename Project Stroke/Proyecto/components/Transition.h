@@ -23,7 +23,7 @@ public:
 
 	inline void startFadeOut() { fadingIn = true; fadingOut = false;};
 
-	void changeScene(string nameScene);
+	void changeScene(string nameScene, bool changeMap);
 
 	void sceneTransition();
 
@@ -42,12 +42,14 @@ private:
 	Texture* tx_;
 	float alphaCalc;
 
-	const float FADE_SPEED = 7;
+	const float FADE_SPEED = 1;
 
 	bool fadingOut;
 	bool fadingIn;
 
 	bool change;
+
+	bool changeMap_;
 
 	SDL_Rect blackRect;
 

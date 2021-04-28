@@ -16,6 +16,9 @@ ImageSecuence::ImageSecuence(string newScene) {
 		keyTextures.push(&sdlutils().images().at("keta"));
 		keyTextures.push(&sdlutils().images().at("canelon"));
 	}
+	else if (newScene == controls) {
+		keyTextures.push(&sdlutils().images().at("controles"));
+	}
 }
 
 void ImageSecuence::init() {
@@ -28,22 +31,24 @@ void ImageSecuence::init() {
 }
 
 void ImageSecuence::update() {
-
-	if (!trans_->isFading() && (ih().keyDownEvent()|| ih().isButtonDownEvent())) {
-		if (!keyTextures.empty()) {
-			trans_->startFadeIn();
-			next = true;
+	if (entity_->isActive()) {
+		if (!trans_->isFading() && (ih().keyDownEvent() || ih().isButtonDownEvent())) {
+			if (!keyTextures.empty()) {
+				trans_->startFadeIn();
+				next = true;
+			}
 		}
-	}
 
-	if (next && !trans_->isFadingOut()) {
-		keyTextures.pop();
-		next = false;
-	}
+		if (next && !trans_->isFadingOut()) {
+			keyTextures.pop();
+			next = false;
+		}
 
-	if (keyTextures.empty() && !trans_->isFadingOut()) {
-		trans_->createMap();
-		entity_->setActive(false);
+		if (keyTextures.empty() && !trans_->isFadingOut()) {
+			entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>()->setState(GameStates::RUNNING);
+			trans_->createMap();
+			entity_->setActive(false);
+		}
 	}
 }
 

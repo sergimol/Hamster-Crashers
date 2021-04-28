@@ -273,6 +273,10 @@
     {
       "id": "soldier1Sheet",
       "file": "resources/images/soldier1_spritesheet.png"
+    },
+    {
+      "id": "controles",
+      "file": "resources/images/controles.png"
     }
   ],
 

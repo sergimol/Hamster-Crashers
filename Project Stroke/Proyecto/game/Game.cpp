@@ -70,6 +70,13 @@ void Game::init() {
 	auto* soundSystem = mngr_->addEntity();
 	soundSystem->addComponent<SoundManager>();
 	mngr_->setHandler<SoundManager>(soundSystem);
+
+	// LevelMngr: lleva a cabo la transicion entre niveles
+	auto* levelMngr = mngr_->addFrontGround();
+	levelMngr->addComponent<Transition>(&sdlutils().images().at("transition"));
+
+	//Metemos al mapa en el Handler de Map
+	mngr_->setHandler<LevelHandlr>(levelMngr);
     
 	//MENU		
 	auto* mainMenu = mngr_->addMenu();
@@ -106,8 +113,7 @@ void Game::init() {
 	//Componentes de la cámara
 	camera_ = { 0,0,sdlutils().width(), sdlutils().height() };
 	camera->addComponent<Camera>(camera_);
-	
-	
+
 	//EnemyMother
 	auto* mother = mngr_->addEntity();
 	mother->addComponent<EnemyMother>();
@@ -116,12 +122,6 @@ void Game::init() {
 	//Carga del mapa
 	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Lvl1javi.tmx");	 
 
-	// LevelMngr: lleva a cabo la transicion entre niveles
-	auto* levelMngr = mngr_->addFrontGround();
-	levelMngr->addComponent<Transition>(&sdlutils().images().at("transition"));
-
-	//Metemos al mapa en el Handler de Map
-	mngr_->setHandler<LevelHandlr>(levelMngr);
 }
 
 void Game::update() {

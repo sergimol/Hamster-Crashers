@@ -1,5 +1,6 @@
 #include "MenuButtonManager.h"
 #include "BackGround.h"
+#include "Transition.h"
 
 MenuButtonManager::MenuButtonManager(string menu, Texture* bckgrd) :MenuMode(menu), background(bckgrd) {}
 MenuButtonManager::MenuButtonManager(string menu) : MenuMode(menu) {}
@@ -62,7 +63,6 @@ void MenuButtonManager::init() {
 		// Para la demo
 		quitbutton->addComponent<MenuButton>("quit", Vector2D(870, 550), 2);
 		buttons[0][1] = quitbutton;
-
 	}
 	else if (MenuMode == "hamsterMenu") {
 		buttonsMagnitude = Vector2D(4, 1); //4 botones, 4x1
