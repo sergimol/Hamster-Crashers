@@ -166,7 +166,7 @@ bool FirstBossAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) 
 
 				SDL_Rect rectPlayer = tr_->getRectCollide();
 				rectPlayer.x += hamKnockback->getKnockback();
-				ents[i]->getComponent<CollisionDetec>()->tryToMove(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0), rectPlayer);
+				ents[i]->getComponent<CollisionDetec>()->tryToMove(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0), rectPlayer, false);
 			}
 		}
 	}

@@ -159,8 +159,11 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 				hamKnockback->knockback();
 
 				SDL_Rect rectPlayer = tr_->getRectCollide();
-				rectPlayer.x += hamKnockback->getKnockback();
-				ents[i]->getComponent<CollisionDetec>()->tryToMove(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0), rectPlayer);
+				rectPlayer.x += tr_->getVel().getX();
+				int dir = -1;
+				if (tr_->getVel().getX() > 0) dir = 1;
+				
+				ents[i]->getComponent<CollisionDetec>()->tryToMove(Vector2D(dir, 0), Vector2D(hamKnockback->getKnockback(), 0), rectPlayer, false);
 			}
 		}
 	}
