@@ -206,9 +206,6 @@ bool EntityAttribs::recieveDmg(int dmg) {
 }
 
 void EntityAttribs::die() {
-
-	entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", false);
-
 	//Creamos una entidad
 	Entity* e = entity_->getMngr()->addEntity();
 
@@ -231,9 +228,9 @@ void EntityAttribs::die() {
 		//Ponemos su UI a 'Muerto'
 		e->addComponent<UI>(id_, entity_->getComponent<UI>()->getPosUI())->dep();
 		hms_->getState() = HamStates::DEAD;
+		entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", false);
 	}
 	else {
-		
 		e->addComponent<Dying>();
 		enmState_->getState() = EnemyStates::ENM_DEAD;
 		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala

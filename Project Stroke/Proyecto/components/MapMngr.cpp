@@ -318,11 +318,11 @@ void MapMngr::loadEnemyRoom() {
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 				Vector2D(), 86 * scale, 86 * scale, 0.0f, 0.4, 0.5)->getFlip() = true;
 
-				enemy->addComponent<EnemyStateMachine>();
-				//1º: False porque no es un hamster //2º: True porque usa de referencia el rect de colision
-				enemy->addComponent<Shadow>(false, true);
+			enemy->addComponent<EnemyStateMachine>();
+			//1º: False porque no es un hamster //2º: True porque usa de referencia el rect de colision
+			enemy->addComponent<Shadow>(false, true);
 				
-				enemy->setGroup<Enemy>(true);
+			enemy->setGroup<Enemy>(true);
 
 			enemy->addComponent<EntityAttribs>(200, 0.0, "soldier1", Vector2D(3.6, 2), 0, 0, 5);
 

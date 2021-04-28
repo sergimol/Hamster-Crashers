@@ -41,6 +41,8 @@ private:
 
 	Vector2D speed_, goalVel_, dir_;
 	CollisionDetec* col_;
+	Movement* mov_;
+	Gravity* grav_;
 
 	std::map<KEYS, bool> keymap;
 

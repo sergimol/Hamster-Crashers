@@ -153,7 +153,7 @@ void Game::start() {
 		mngr_->refresh();
 
 
-		//sortEntities();
+		sortEntities();
 
 		//updateCamera();
 
@@ -215,7 +215,7 @@ void Game::sortEntities() {
 
 	auto& entities = mngr_->getEntities();
 	//Este 2 indica el numero de entidades a las que no afecta el mergeSort
-	mergeSort(entities, 2, entities.size() - 1);	
+	mergeSort(entities, 5, entities.size() - 1);	
 
 	/*
 		-------------DEBUG-----------
