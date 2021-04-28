@@ -106,6 +106,8 @@ void EnemyBehaviour::die() {
 		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAmbushList(hamId_, listIterator);
 		list = '0';
 	}
+	//se pone list a 0 porque es posible que ocurra una doble comprobacion del ataque y se llame dos veces a este metodo, y no puede ni debe eliminar dos veces un mismo iterador (error de lista)
+
 	//tiene que distinguir que tipo de behavior tiene,
 	//madre de dios no hay manera de comprobarlo directamente esto es muy doloroso
 	//if (bh_ == )

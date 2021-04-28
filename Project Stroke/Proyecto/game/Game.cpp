@@ -69,9 +69,9 @@ void Game::init() {
 	auto* soundSystem = mngr_->addEntity();
 	soundSystem->addComponent<SoundManager>();
 	mngr_->setHandler<SoundManager>(soundSystem);
-
-	//MENU	
-	auto* pauseMenu = mngr_->addEntity();
+    
+	//MENU		
+	auto* mainMenu = mngr_->addMenu();
 	/*mainMenu->addComponent<Animator>(
 		&sdlutils().images().at("menuSheet"),
 		1920,
@@ -82,9 +82,12 @@ void Game::init() {
 		Vector2D(0, 0),
 		3
 		);*/
+	mainMenu->addComponent<MenuButtonManager>("mainMenu", &sdlutils().images().at("mainMenuBlank"));	//mainMenu, pauseMenu o hamsterMenu
+	mngr_->setHandler<MainMenu>(mainMenu);
+	//mainMenu->addComponent<MenuButtonManager>("hamsterMenu", &sdlutils().images().at("hamsterSelectorBlank"));	//mainMenu, pauseMenu o hamsterMenu
+
+	auto* pauseMenu = mngr_->addMenu();
 	pauseMenu->addComponent<MenuButtonManager>("pauseMenu");	//mainMenu, pauseMenu o hamsterMenu
-	//mainMenu->addComponent<MenuButtonManager>("mainMenu", &sdlutils().images().at("mainMenuBlank"));	//mainMenu, pauseMenu o hamsterMenu
-	//hamstersMenu->addComponent<MenuButtonManager>("hamsterMenu", &sdlutils().images().at("hamsterSelectorBlank"));	//mainMenu, pauseMenu o hamsterMenu
 	mngr_->setHandler<PauseMenu>(pauseMenu);
 
 	// Mapa

@@ -29,7 +29,7 @@ void ImageSecuence::init() {
 
 void ImageSecuence::update() {
 
-	if (!trans_->isFading() && ih().keyDownEvent()) {
+	if (!trans_->isFading() && (ih().keyDownEvent()|| ih().isButtonDownEvent())) {
 		if (!keyTextures.empty()) {
 			trans_->startFadeIn();
 			next = true;
