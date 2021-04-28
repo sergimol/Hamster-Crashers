@@ -130,7 +130,12 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 							if (enmFlip == tr_->getFlip())
 								enmFlip = !enmFlip;
 
-							if (finCombo) {
+							//Final del combo
+							if (finCombo) 
+							{
+								//ANIMACION DE STUNN DEL ENEMIGO
+								ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::STUNNED, true);
+
 								enmKnockback->setKnockbackDistance(50);
 								enmKnockback->knockback();
 								enmKnockback->setKnockbackDistance(5);

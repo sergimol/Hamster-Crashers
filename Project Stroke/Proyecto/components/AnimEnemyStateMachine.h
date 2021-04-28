@@ -34,6 +34,7 @@ private:
 	bool lAttack;
 	bool sAttack;
 	bool hit;
+	bool stun;
 	bool lCombo;
 
 public: 

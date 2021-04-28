@@ -1,6 +1,7 @@
 #include "AnimHamsterStateMachine.h"
 #include "EntityAttribs.h"
 #include "Animator.h"
+#include "Knockback.h"
 
 void AnimHamsterStateMachine::init()
 {
@@ -50,6 +51,8 @@ void AnimHamsterStateMachine::HandleAnimState()
 	//hitted
 	if (hit)
 		currentState = HamStatesAnim::HITTED;
+	if (stun)
+		currentState = HamStatesAnim::STUNNED;
 	//
 	if (ability)
 		currentState = HamStatesAnim::ABILITY;
@@ -158,7 +161,7 @@ void AnimHamsterStateMachine::setAnimBool(HamStatesAnim h, bool b)
 		hit = b;
 		break;
 	case HamStatesAnim::STUNNED:
-		idle = b;
+		stun = b;
 		break;
 	case HamStatesAnim::DEAD:
 		idle = b;

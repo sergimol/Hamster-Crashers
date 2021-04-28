@@ -4,6 +4,7 @@
 #include "Animator.h"
 #include "EnemyBehaviour.h"
 #include "EnemyMother.h"
+#include "AnimEnemyStateMachine.h"
 
 EntityAttribs::EntityAttribs() :
 	health_(100),
@@ -140,6 +141,10 @@ void EntityAttribs::update() {
 				//Daño por veneno
 				recieveDmg(poisonDamage_);
 				timeLastUpdate_ = sdlutils().currRealTime();
+
+				//Animacion de hit 
+				if (entity_->getComponent<AnimEnemyStateMachine>() != nullptr)
+					entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
 			}
 			if (sdlutils().currRealTime() >= poisonTime_ + poisonCD_) {
 				poisoned_ = false;
@@ -265,6 +270,7 @@ void EntityAttribs::poison() {
 	//int SDL_SetTextureColorMod(hmsText_, 96, 227, 70);
 	poisonTime_ = sdlutils().currRealTime();
 	poisoned_ = true;
+
 }
 
 void EntityAttribs::onResume() {

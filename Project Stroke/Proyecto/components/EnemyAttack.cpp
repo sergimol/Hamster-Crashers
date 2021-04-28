@@ -128,6 +128,8 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 
 						//Animaci�n de stun
 						//anim_->play(sdlutils().anims().at("sardinilla_stun"));
+						ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
+
 
 						//Desactivamos control de movimiento 
 						ControlHandler* ctrl = ents[i]->getComponent<ControlHandler>();
@@ -161,6 +163,10 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 				SDL_Rect rectPlayer = tr_->getRectCollide();
 				rectPlayer.x += hamKnockback->getKnockback();
 				ents[i]->getComponent<CollisionDetec>()->tryToMove(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0), rectPlayer);
+
+				//ESTA LINEA DEBERIA IR EN FUNCION DEL ENEMIGO QUE ATACA SI ES EL FUERTE O NO
+				//ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STUNNED, true);
+
 			}
 		}
 	}
