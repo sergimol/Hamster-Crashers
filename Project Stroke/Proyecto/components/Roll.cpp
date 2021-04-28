@@ -141,10 +141,10 @@ bool Roll::checkCollisions()
 		{
 			//he puesto que le matas de una 
 			//creo que lo suyo seria stunnearlo y quitar la mitad de la vida o asi
-			int dmg = eAttribs->getMaxLife();
+			//abDmg_ = eAttribs->getMaxLife();
 			if (eAttribs->getLife() > 0)
 			{
-				eAttribs->recieveDmg(dmg);
+				eAttribs->recieveDmg(abDmg_);
 				hit = true;
 				entity_->getMngr()->refreshEnemies();
 			}

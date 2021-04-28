@@ -69,15 +69,6 @@ void EnemyAttack::update() {
 				DEBUG_isAttacking_ = true;
 				time_ = sdlutils().currRealTime();
 			}
-
-		//Si se colisiona..
-		if (CheckCollisions(attRect_, true))
-			//Suena el hit y le pega
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
-		//Si no colisiona..
-		else
-			//Suena el attackSound
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
 		}
 	}
 }

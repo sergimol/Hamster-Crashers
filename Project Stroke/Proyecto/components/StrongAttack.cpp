@@ -11,7 +11,7 @@
 
 
 StrongAttack::StrongAttack() :
-	hms_(nullptr), tr_(nullptr), cooldown_(500), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false){
+	hms_(nullptr), tr_(nullptr), cooldown_(400), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false){
 }
 
 void StrongAttack::init() {
