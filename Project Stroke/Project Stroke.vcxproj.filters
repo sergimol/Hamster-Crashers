@@ -399,9 +399,6 @@
     <ClCompile Include="Proyecto\components\Breakable.cpp">
       <Filter>Archivos de origen\components\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\Transition.cpp">
-      <Filter>Archivos de origen\components\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="Proyecto\components\AnimEnemyStateMachine.cpp">
       <Filter>Archivos de origen\components\Animation</Filter>
     </ClCompile>
@@ -423,9 +420,6 @@
     <ClCompile Include="Proyecto\components\TriggerScene.cpp">
       <Filter>Archivos de origen\components\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\ImageSecuence.cpp">
-      <Filter>Archivos de origen\components\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="Proyecto\components\MenuButtonManager.cpp">
       <Filter>Archivos de origen\components\Manager</Filter>
     </ClCompile>
@@ -434,6 +428,12 @@
     </ClCompile>
     <ClCompile Include="Proyecto\components\GravityEntity.cpp">
       <Filter>Archivos de origen\components\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Transition.cpp">
+      <Filter>Archivos de origen\components\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\ImageSecuence.cpp">
+      <Filter>Archivos de origen\components\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -701,9 +701,6 @@
     <ClInclude Include="Proyecto\components\Breakable.h">
       <Filter>Archivos de encabezado\Components\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\Transition.h">
-      <Filter>Archivos de encabezado\Components\Entity</Filter>
-    </ClInclude>
     <ClInclude Include="Proyecto\components\AnimEnemyStateMachine.h">
       <Filter>Archivos de encabezado\Components\Animation</Filter>
     </ClInclude>
@@ -725,9 +722,6 @@
     <ClInclude Include="Proyecto\components\TriggerScene.h">
       <Filter>Archivos de encabezado\Components\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\ImageSecuence.h">
-      <Filter>Archivos de encabezado\Components\Entity</Filter>
-    </ClInclude>
     <ClInclude Include="Proyecto\components\MenuButtonManager.h">
       <Filter>Archivos de encabezado\Components\Manager</Filter>
     </ClInclude>
@@ -736,6 +730,12 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\GravityEntity.h">
       <Filter>Archivos de encabezado\Components\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\ImageSecuence.h">
+      <Filter>Archivos de encabezado\Components\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Transition.h">
+      <Filter>Archivos de encabezado\Components\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
