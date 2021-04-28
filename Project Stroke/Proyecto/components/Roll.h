@@ -11,9 +11,9 @@ class Roll : public Ability {
 public:
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 
-	Roll() : speed_(), goalVel_(0, 0), dir_(0,0), timer(sdlutils().currRealTime()), rolling(false), col_(nullptr), abDmg_(30)
+	Roll() : speed_(), goalVel_(0, 0), dir_(0,0), timer(sdlutils().currRealTime()), rolling(false), col_(nullptr), abDmg_(10)
 	{
-		cooldown_ = 5000;
+		cooldown_ = 2500;
 	};
 
 	virtual ~Roll();

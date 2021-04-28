@@ -3,6 +3,10 @@
 #include "Animator.h"
 #include "Stroke.h"
 #include "CollisionDetec.h"
+#include "EnemyStun.h"
+#include "Knockback.h"
+#include "AnimEnemyStateMachine.h"
+#include "EnemyStateMachine.h"
 #include "AnimHamsterStateMachine.h"
 
 
@@ -130,20 +134,53 @@ bool Roll::checkCollisions()
 
 			//Cogemos el transform del enemigo
 		auto eTr = ents[i]->getComponent<Transform>();
+		auto eColRect = eTr->getRectCollide();
 
 		//Cogemos el transform del jugador
 		auto pTr = entity_->getComponent<Transform>();
+		auto pColRect = pTr->getRectCollide();
 
 		EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
 
 		//Comprobamos si hay colision
-		if (!eAttribs->checkInvulnerability() && Collisions::collides(pTr->getPos(), pTr->getW(), pTr->getH(), eTr->getPos(), eTr->getW(), eTr->getH()))
+		if (!eAttribs->checkInvulnerability() && Collisions::collides(Vector2D(pColRect.x, pColRect.y), pColRect.w, pColRect.h, Vector2D(eColRect.x, eColRect.y), eColRect.w, eColRect.h))
 		{
 			//he puesto que le matas de una 
 			//creo que lo suyo seria stunnearlo y quitar la mitad de la vida o asi
 			//abDmg_ = eAttribs->getMaxLife();
-			if (eAttribs->getLife() > 0)
+
+			auto& enmStateM = ents[i]->getComponent<EnemyStateMachine>()->getState();
+			if (enmStateM != EnemyStates::ENM_DEAD)
 			{
+
+				//Si tiene stun, se aplica
+				EnemyStun* enmStun = ents[i]->getComponent<EnemyStun>();
+				if (enmStun != nullptr && enmStun->isActive()) {
+
+					ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
+
+					//Si no estaba aturdido ya
+					if (enmStateM != EnemyStates::ENM_STUNNED) {
+						//Aturdimos al enemigo
+						enmStateM = EnemyStates::ENM_STUNNED;
+					}
+					//Reiniciamos tiempo de stun
+					enmStun->restartStunTime();
+				}
+
+				//Si tiene Knockback, se aplica
+				Knockback* enmKnockback = ents[i]->getComponent<Knockback>();
+				if (enmKnockback != nullptr) {
+					//Damos la vuelta si es atacado por detras
+					auto& enmFlip = eTr->getFlip();
+					if (enmFlip == tr_->getFlip())
+						enmFlip = !enmFlip;
+
+					enmKnockback->setKnockbackDistance(85);
+					enmKnockback->knockback();
+					enmKnockback->setKnockbackDistance(5);
+				}
+
 				eAttribs->recieveDmg(abDmg_);
 				hit = true;
 				entity_->getMngr()->refreshEnemies();

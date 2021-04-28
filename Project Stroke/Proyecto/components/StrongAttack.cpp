@@ -105,12 +105,6 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 								if (enmStateM != EnemyStates::ENM_STUNNED) {
 									//Aturdimos al enemigo
 									enmStateM = EnemyStates::ENM_STUNNED;
-									//Desactivamos componente de seguimiento de jugador
-									/*
-									FollowPlayer* flwPlayer = ents[i]->getComponent<FollowPlayer>();
-									if (flwPlayer != nullptr)
-										flwPlayer->setActive(false);
-									*/
 								}
 								//Reiniciamos tiempo de stun
 								enmStun->restartStunTime();
