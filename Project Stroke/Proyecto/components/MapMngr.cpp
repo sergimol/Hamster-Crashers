@@ -338,7 +338,7 @@ void MapMngr::loadEnemyRoom() {
 				);
 			enemy->addComponent<AnimEnemyStateMachine>();
 
-			enemy->addComponent<UI>("canelon", 4);
+			//enemy->addComponent<UI>("canelon", 4);
 
 			enemy->addComponent<EnemyAttack>();
 			enemy->addComponent<Knockback>();
@@ -447,7 +447,7 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 
 	Transform* tr = hamster1->getComponent<Transform>();
 
-	hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), 0, 15, 20);
+	hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), 0, 0, 20);
 	hamster1->addComponent<Animator>(
 		&sdlutils().images().at(name + "Sheet"),
 		86,
