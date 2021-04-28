@@ -19,7 +19,7 @@ void DisableOnExit::init() {
 }
 
 void DisableOnExit::update() {
-	if (state_->getState() != GameStates::PAUSE) {
+	if (state_->getState() == GameStates::RUNNING) {
 		auto& pos = tr_->getPos();
 		auto w = tr_->getW();
 		auto h = tr_->getH();

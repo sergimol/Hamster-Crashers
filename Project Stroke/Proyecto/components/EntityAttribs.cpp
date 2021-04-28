@@ -128,7 +128,7 @@ void EntityAttribs::init() {
 }
 
 void EntityAttribs::update() {
-	if (state_->getState() != GameStates::PAUSE) {
+	if (state_->getState() == GameStates::RUNNING) {
 		//Timer de invencibilidad
 		if (afterDamageInvul_ && sdlutils().currRealTime() > damageInvulTime_ + INVINCIBLECD) {
 			afterDamageInvul_ = false;
