@@ -175,6 +175,14 @@
       "file": "resources/images/menuSprites/localButtonEnter.png"
     },
     {
+      "id": "resumeButton",
+      "file": "resources/images/menuSprites/resumeButton.png"
+    },
+    {
+      "id": "resumeButtonEnter",
+      "file": "resources/images/menuSprites/resumeButtonEnter.png"
+    },
+    {
       "id": "onlineButton",
       "file": "resources/images/menuSprites/onlineButton.png"
     },

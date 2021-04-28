@@ -1,4 +1,5 @@
 #include "MenuButton.h"
+#include "MenuButtonManager.h"
 
 
 MenuButton::MenuButton(std::string n, Vector2D position, int stateNum) :
@@ -9,12 +10,10 @@ MenuButton::MenuButton(std::string n, Vector2D position, int stateNum) :
 	button_ = &sdlutils().images().at(buttonName_ + "Button");
 	buttonEnter_ = &sdlutils().images().at(buttonName_ + "ButtonEnter");
 
-	mainText = button_;
-
 	dest_.x = renderCoords_.getX();
 	dest_.y = renderCoords_.getY();
-	dest_.w = mainText->width();
-	dest_.h = mainText->height();
+	dest_.w = button_->width();
+	dest_.h = button_->height();
 }
 
 void MenuButton::init() {
@@ -38,7 +37,6 @@ void MenuButton::render() {
 }
 
 void MenuButton::selected() {
-	mainText = buttonEnter_;
 	buttonSelected_ = true;
 	/*if (buttonName_ == "local") {
 		std::cout << "local\n";
@@ -67,26 +65,27 @@ void MenuButton::selected() {
 }
 
 void MenuButton::exited() {
-	mainText = button_;
 	buttonSelected_ = false;
 }
 
 void MenuButton::pressed() {
-	mainText = buttonPressed_;
+	// Botones con la misma funcionalidad están separados porque en el futuro funcionarán diferente
 	if (buttonName_ == "local") {
-		std::cout << "local\n";
+		state_->setState(GameStates::RUNNING);
+		entity_->getMngr()->getHandler<MainMenu>()->getComponent<MenuButtonManager>()->updateKeymap(MenuButtonManager::SPACE, false);
 	}
 	else if (buttonName_ == "online") {
 		std::cout << "online\n";
 	}
 	else if (buttonName_ == "resume") {
 		state_->setState(GameStates::RUNNING);
+		entity_->getMngr()->getHandler<PauseMenu>()->getComponent<MenuButtonManager>()->updateKeymap(MenuButtonManager::SPACE, false);
 	}
 	else if (buttonName_ == "options") {
 		std::cout << "options\n";
 	}
 	else if (buttonName_ == "quit") {
-		ih().onQuit();
+		ih().startQuitEvent();
 	}
 	else if (buttonName_ == "sardinilla") {
 		std::cout << "sardinilla\n";

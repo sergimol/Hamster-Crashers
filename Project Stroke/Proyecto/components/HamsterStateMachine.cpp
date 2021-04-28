@@ -7,7 +7,7 @@ void HamsterStateMachine::init() {
 }
 
 void HamsterStateMachine::update() {
-	if (state_->getState() != GameStates::PAUSE) {
+	if (state_->getState() == GameStates::RUNNING) {
 		//CAMBIOS INTERNOS DE ALGUNAS ANIMACIONES QUE VAN DIRECTAMENTE
 		//LIGADOS A ESTADOS INTERNOS DEL HAMSTER
 		//Fin Animacion

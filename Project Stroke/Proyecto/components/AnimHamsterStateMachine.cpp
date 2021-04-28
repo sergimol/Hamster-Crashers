@@ -19,7 +19,7 @@ void AnimHamsterStateMachine::init()
 
 void AnimHamsterStateMachine::update()
 {
-	if (gState_->getState() != GameStates::PAUSE) {
+	if (gState_->getState() == GameStates::RUNNING) {
 		HandleAnimState();
 		CheckAnimState();
 	}

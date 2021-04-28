@@ -432,6 +432,9 @@
     <ClCompile Include="Proyecto\components\SoundManager.cpp">
       <Filter>Archivos de origen\components\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\GravityEntity.cpp">
+      <Filter>Archivos de origen\components\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -730,6 +733,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\SoundManager.h">
       <Filter>Archivos de encabezado\Components\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\GravityEntity.h">
+      <Filter>Archivos de encabezado\Components\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

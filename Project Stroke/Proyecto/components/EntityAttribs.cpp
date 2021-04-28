@@ -4,6 +4,7 @@
 #include "Animator.h"
 #include "EnemyBehaviour.h"
 #include "EnemyMother.h"
+#include "GravityEntity.h"
 #include "AnimEnemyStateMachine.h"
 
 EntityAttribs::EntityAttribs() :
@@ -129,7 +130,7 @@ void EntityAttribs::init() {
 }
 
 void EntityAttribs::update() {
-	if (state_->getState() != GameStates::PAUSE) {
+	if (state_->getState() == GameStates::RUNNING) {
 		//Timer de invencibilidad
 		if (afterDamageInvul_ && sdlutils().currRealTime() > damageInvulTime_ + INVINCIBLECD) {
 			afterDamageInvul_ = false;
@@ -162,7 +163,6 @@ bool EntityAttribs::recieveDmg(int dmg) {
 	//Actualizamos la healthBar
 	if (entity_->hasComponent<UI>())
 		entity_->getComponent<UI>()->bar(-dmg);
-	std::cout << "me cago en tus muertos" << health_ << std::endl;
 	//Si la vida ha bajado de 0...
 	if (health_ <= 0) {
 		if (hms_ != nullptr) {

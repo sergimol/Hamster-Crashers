@@ -22,7 +22,7 @@ void EnemyStrongAttack::init() {
 }
 
 void EnemyStrongAttack::update() {
-	if (state_->getState() != GameStates::PAUSE) {
+	if (state_->getState() == GameStates::RUNNING) {
 		//Deja de mostrar el collider
 		if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
 			DEBUG_isAttacking_ = false;
@@ -157,7 +157,7 @@ bool EnemyStrongAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo
 
 				SDL_Rect rectPlayer = tr_->getRectCollide();
 				rectPlayer.x += hamKnockback->getKnockback();
-				ents[i]->getComponent<CollisionDetec>()->tryToMove(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0), rectPlayer);
+				ents[i]->getComponent<CollisionDetec>()->tryToMove(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0), rectPlayer, false);
 			}
 		}
 	}
@@ -166,7 +166,7 @@ bool EnemyStrongAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo
 }
 
 void EnemyStrongAttack::render() {
-	if (DEBUG_isAttacking_) {
+	if (DEBUG_isAttacking_ && debug) {
 		SDL_SetRenderDrawColor(sdlutils().renderer(), 255, 170, 0, 255);
 
 		SDL_RenderDrawRect(sdlutils().renderer(), &attRect_);

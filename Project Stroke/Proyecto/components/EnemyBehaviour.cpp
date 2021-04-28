@@ -69,7 +69,7 @@ bool EnemyBehaviour::isWithinAttackRange() {
 
 void EnemyBehaviour::update() {
 	//ejecuta el metodo de behavior que le dice como comportarse (atacar, como moverse, cuando, el hace las condiciones el resto nos olvidamos)
-	if(state_->getState() != GameStates::PAUSE)
+	if(state_->getState() == GameStates::RUNNING)
 		bh_->behave();
 	//tambien seria oportuno que esta misma clase hiciese los cambios de bh_, aunque suene y parezca raro que sea este objeto el que indique cual es
 	//el siguiente comportamiento/Behavior no es algo tan descabezado.. <3
@@ -106,6 +106,8 @@ void EnemyBehaviour::die() {
 		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAmbushList(hamId_, listIterator);
 		list = '0';
 	}
+	//se pone list a 0 porque es posible que ocurra una doble comprobacion del ataque y se llame dos veces a este metodo, y no puede ni debe eliminar dos veces un mismo iterador (error de lista)
+
 	//tiene que distinguir que tipo de behavior tiene,
 	//madre de dios no hay manera de comprobarlo directamente esto es muy doloroso
 	//if (bh_ == )

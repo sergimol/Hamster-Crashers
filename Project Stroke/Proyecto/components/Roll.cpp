@@ -56,7 +56,7 @@ void Roll::action()
 		SDL_Rect rectPlayer = tr_->getRectCollide();
 		rectPlayer.x += tr_->getVel().getX();
 		rectPlayer.y += tr_->getVel().getY();
-		col_->tryToMove(dir_, goalVel_, rectPlayer);
+		col_->tryToMove(dir_, goalVel_, rectPlayer, false);
 		//Mete invulnerabilidad durante la habilidad
 		entity_->getComponent<EntityAttribs>()->setInvincibility(true);
 	}
@@ -67,7 +67,7 @@ void Roll::updateKeymap(KEYS x, bool is) {
 }
 
 void Roll::update() {
-	if (state_->getState() != GameStates::PAUSE) {
+	if (state_->getState() == GameStates::RUNNING) {
 		Ability::update();
 		auto& state = st_->getState();
 
@@ -107,7 +107,7 @@ void Roll::update() {
 			SDL_Rect rectPlayer = tr_->getRectCollide();
 			rectPlayer.x += vel.getX();
 			rectPlayer.y += vel.getY();
-			col_->tryToMove(dir_, goalVel_, rectPlayer);
+			col_->tryToMove(dir_, goalVel_, rectPlayer, false);
 			//Si se colisiona..
 			if (checkCollisions())
 				//Suena el hit y le pega

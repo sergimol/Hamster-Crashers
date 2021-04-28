@@ -36,5 +36,5 @@ void TriggerScene::update() {
 }
 
 void TriggerScene::render() {
-	SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 255, 0, 255);
+	if(debug) SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 255, 0, 255);
 }

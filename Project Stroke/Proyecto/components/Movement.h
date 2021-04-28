@@ -50,6 +50,9 @@ private:
 	Animator* anim_;
 	Gravity* grav_;
 	GameStates* state_;
+	AnimHamsterStateMachine* animState_;
+	/*Combos* comb_;
+	Stroke* stroke_;*/
 	Vector2D speed_, goalVel_, lastDir_;
 	
 	std::map<KEYS, bool> keymap;
