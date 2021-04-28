@@ -364,10 +364,11 @@ void ControlHandler::handleKeyboard() {
 		else if (gameState == GameStates::MAINMENU)
 			main_->updateKeymap(MenuButtonManager::LEFT, false);
 	}
+	auto& hamState = hms_->getState();
 	//el jump no necesita que se le pase el false
 	if (ih().isKeyDown(keymap.at(SPACE)))
 	{
-		if (gameState == GameStates::RUNNING) {
+		if (gameState == GameStates::RUNNING && hamState != HamStates::DEAD && hamState != HamStates::INFARCTED) {
 			mov_->updateKeymap(Movement::SPACE, true);
 			//if (roll_ != nullptr) roll_->updateKeymap(Roll::LEFT, true);
 		}
@@ -386,7 +387,6 @@ void ControlHandler::handleKeyboard() {
 	}
 	//el jump no necesita la parte para false
 
-	auto& hamState = hms_->getState();
 
 	//ATAQUE LIGERO
 	if (gameState == GameStates::RUNNING && hamState != HamStates::DEAD && hamState != HamStates::INFARCTED && ih().mouseButtonEvent()) {
