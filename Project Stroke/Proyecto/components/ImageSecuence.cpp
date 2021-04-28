@@ -24,6 +24,10 @@ ImageSecuence::ImageSecuence(string newScene) {
 		gameOver = true;
 		keyTextures.push(&sdlutils().images().at("hasMuerto"));
 	}
+	else if (newScene == hasGanado) {
+		gameOver = true;
+		keyTextures.push(&sdlutils().images().at("hasGanado"));
+	}
 }
 
 void ImageSecuence::init() {

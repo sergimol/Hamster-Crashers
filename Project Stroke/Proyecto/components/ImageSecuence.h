@@ -27,7 +27,8 @@ private:
 	const string level1 = "Mapa.tmx",
 		level2 = "Mapa2.tmx",
 		controls = "controls",
-		hasMuerto = "hasMuerto";
+		hasMuerto = "hasMuerto",
+		hasGanado = "hasGanado";
 
 	string newScene_;
 
