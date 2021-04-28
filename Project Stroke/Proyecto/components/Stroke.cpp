@@ -87,7 +87,6 @@ void Stroke::checkChance() {
 			//TODO by Samuel necesito que por alg�n lugar llameis al m�todo de Increase Latency de HeartUI para que se actualice la interfaz de la palpita�ao
 		}
 
-
 		timeLastUpdate_ = t;
 	}
 }

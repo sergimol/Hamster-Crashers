@@ -26,7 +26,7 @@ public:
 	void update() override;
 	void onResume() override;
 
-	void restartStunTime();
+	void restartStunTime(bool finCombo);
 	
 	inline void setStunCooldown(long unsigned cd) { cooldown_ = cd; }
 

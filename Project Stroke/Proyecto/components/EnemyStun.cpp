@@ -42,8 +42,10 @@ void EnemyStun::update() {
 	}
 }
 
-void EnemyStun::restartStunTime() {
+//TODO distinguir entre varios tipos de stun, que pongan ams o menos tiempo de stun y meuvan a los enemigos de lsitas
+void EnemyStun::restartStunTime(bool finCombo) {
 	time_ = sdlutils().currRealTime(); 
+	if (finCombo)
 	entity_->getComponent<EnemyBehaviour>()->changeToAmbush();
 }
 
