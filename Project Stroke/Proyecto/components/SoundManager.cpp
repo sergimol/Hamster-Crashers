@@ -39,7 +39,7 @@ void SoundManager::init() {
 	Mix_Volume(attacks, 20);
 	Mix_Volume(deps, 20);
 	Mix_Volume(heartattacks, 20);
-	Mix_Volume(musics, 10);
+	Mix_Volume(musics, 8);
 	mainTheme->play(1, musics);
 }
 
