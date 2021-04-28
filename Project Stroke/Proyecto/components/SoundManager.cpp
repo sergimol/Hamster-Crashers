@@ -40,7 +40,7 @@ void SoundManager::init() {
 	Mix_Volume(deps, 20);
 	Mix_Volume(heartattacks, 20);
 	Mix_Volume(musics, 8);
-	mainTheme->play(1, musics);
+	mainTheme->play(200, musics);
 }
 
 void SoundManager::play(std::string soundName) {
