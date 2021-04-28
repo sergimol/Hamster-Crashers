@@ -32,6 +32,15 @@ void SoundManager::init() {
 	heartattack1 = &sdlutils().soundEffects().at("heartattack1");
 	heartattack2 = &sdlutils().soundEffects().at("heartattack2");
 
+	mainTheme = &sdlutils().soundEffects().at("mainTheme");
+
+	Mix_Volume(lighthits, 20);
+	Mix_Volume(stronghits, 60);
+	Mix_Volume(attacks, 20);
+	Mix_Volume(deps, 20);
+	Mix_Volume(heartattacks, 20);
+	Mix_Volume(musics, 20);
+	mainTheme->play(1, musics);
 }
 
 void SoundManager::play(std::string soundName) {
@@ -54,41 +63,40 @@ void SoundManager::play(std::string soundName) {
 
 void SoundManager::lighthit() {
 	randomNum = pickRandom(11);
-
 	switch (randomNum)
 	{
 	case 0:
-		light0->play(0, hits);
+		light0->play(0, lighthits);
 		break;
 	case 1:
-		light1->play(0, hits);
+		light1->play(0, lighthits);
 		break;
 	case 2:
-		light2->play(0, hits);
+		light2->play(0, lighthits);
 		break;
 	case 3:
-		light3->play(0, hits);
+		light3->play(0, lighthits);
 		break;
 	case 4:
-		light4->play(0, hits);
+		light4->play(0, lighthits);
 		break;
 	case 5:
-		light5->play(0, hits);
+		light5->play(0, lighthits);
 		break;
 	case 6:
-		light6->play(0, hits);
+		light6->play(0, lighthits);
 		break;
 	case 7:
-		light7->play(0, hits);
+		light7->play(0, lighthits);
 		break;
 	case 8:
-		light8->play(0, hits);
+		light8->play(0, lighthits);
 		break;
 	case 9:
-		light9->play(0, hits);
+		light9->play(0, lighthits);
 		break;
 	case 10:
-		light10->play(0, hits);
+		light10->play(0, lighthits);
 		break;
 	default:
 		break;
@@ -101,13 +109,13 @@ void SoundManager::stronghit() {
 	switch (randomNum)
 	{
 	case 0:
-		strong0->play(0, hits);
+		strong0->play(0, stronghits);
 		break;
 	case 1:
-		strong1->play(0, hits);
+		strong1->play(0, stronghits);
 		break;
 	case 2:
-		strong2->play(0, hits);
+		strong2->play(0, stronghits);
 		break;
 	default:
 		break;
@@ -177,6 +185,7 @@ void SoundManager::heartattack() {
 		break;
 	}
 }
+
 
 
 

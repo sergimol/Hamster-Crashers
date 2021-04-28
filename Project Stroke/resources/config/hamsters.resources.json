@@ -422,6 +422,10 @@
     {
       "id": "heartattack2",
       "file": "resources/sound/heartattack/heartattack2.wav"
+    },
+    {
+      "id": "mainTheme",
+      "file": "resources/sound/music/mainTheme.mp3"
     }
 
   ],
