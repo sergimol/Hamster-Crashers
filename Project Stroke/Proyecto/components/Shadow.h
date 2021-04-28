@@ -2,6 +2,7 @@
 
 #include "ShadowFollow.h"
 #include "HamsterStateMachine.h"
+#include "GameStates.h"
 
 /*
 *	Crea y controla la sombra del jugador de manera independiente al Manager, para lograr
@@ -12,7 +13,7 @@
 
 class Shadow : public Component {
 public:
-	Shadow() :shadow_(nullptr), tr_(nullptr) {};
+	Shadow(bool isHamster, bool useCollision) :shadow_(nullptr), tr_(nullptr), isHamster_(isHamster), useCollision_(useCollision), gState_(nullptr){};
 	virtual ~Shadow() { delete shadow_; shadow_ = nullptr; };
 	virtual void init() override;
 	virtual void render() override;
@@ -20,5 +21,9 @@ public:
 private:
 	Entity* shadow_;
 	Transform* tr_;
-	HamStates state_;
+
+	bool isHamster_, useCollision_;
+
+	HamsterStateMachine* hamS_;
+	GameStates* gState_;
 };

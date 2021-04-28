@@ -1,14 +1,18 @@
 #include "HeartUI.h"
 #include "Animator.h"
 
+float lerp(float a, float b, float f)
+{
+	return (a + f * (b - a));
+}
+
 HeartUI::HeartUI(std::string n, int pos) :
 	heart_(&sdlutils().images().at("heart1")),
 	scale(2),
 	name(n),
 	position(pos),
-	latency(1000),
-	asciende(false),
-	desciende(false),
+	latency(MAXLATENCY),
+	latencyAux(MAXLATENCY),
 	alive(true)
 {
 	//Posiciones de los elementos de la UI
@@ -22,45 +26,19 @@ HeartUI::HeartUI(std::string n, int pos) :
 void HeartUI::update() {
 	//auto posAux = entity_->getComponent<Transform>()->getPos();
 	if (alive) {
-		if (sdlutils().currRealTime() > timeAux + latency) {
-			timeAux = sdlutils().currRealTime();
+		float currentState = sin((sdlutils().currRealTime() / latency));
 
-			asciende = true;
-			//Lo vamos haciendo más grande
+		if (abs(currentState) < 0.2 && latencyAux > 50) {
+			//latency = latencyAux;
+			latency = lerp(latency, latencyAux, 0.9);
 		}
 
-		//Coge sangre
-		if (asciende) {
-			destAux.h += 2;
-			destAux.w += 2;
 
-			//Y lo posicionamos en su sitio
-			destAux.x -= 0.5;
+		destAux.h = dest.h + abs(currentState) * 20;
+		destAux.w = dest.w + abs(currentState) * 20;
 
-			//Si ha llegado al tope
-			if (destAux.h > dest.h * 1.3) {
-				//Desciende
-				desciende = true;
-				asciende = false;
-			}
-		}
-
-		//Expulsa
-		if (desciende) {
-			destAux.h -= 2;
-			destAux.w -= 2;
-
-			//Y lo posicionamos en su sitio
-			destAux.x += 1;
-			
-			//Cuando vuelva a su tamaño original
-			if (destAux.h == dest.h) {
-				//Se ha terminado el proceso
-				destAux.h = dest.h;
-				destAux.w = dest.w;
-				desciende = false;
-			}
-		}
+		destAux.x = dest.x - (abs(currentState) * 20) / 2;
+		destAux.y = dest.y - (abs(currentState) * 20) / 2;
 	}
 }
 
@@ -75,7 +53,14 @@ void HeartUI::dep() {
 	alive = false;
 }
 
-//Incrementa o disminuye la latencia en un 'aux'%
+//Si el hamster muere cambiar textura a muerto
+void HeartUI::resurrection() {
+	heart_ = &sdlutils().images().at("heart1");
+	alive = true;
+	latency = MAXLATENCY;
+}
+
+//Incrementa o disminuye la latencia en un 'aux'
 void HeartUI::increaseLatency(float aux) {
-	latency *= aux;
+	latencyAux = MAXLATENCY * (1 - aux / 100);
 }

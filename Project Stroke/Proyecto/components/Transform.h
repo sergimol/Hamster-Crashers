@@ -80,6 +80,10 @@ public:
 		return velZ_;
 	}
 
+	void setVelZ(float velZ) {
+		velZ_ = velZ;
+	}
+
 	Vector2D& getPos() {
 		return pos_;
 	}
@@ -141,7 +145,7 @@ public:
 	}
 
 	void update() override {
-		if (state_->getState() != GameStates::PAUSE) {
+		if (state_->getState() == GameStates::RUNNING) {
 			if (grv_ != nullptr && grv_->isActive())
 				z_ += velZ_;
 			pos_ = pos_ + vel_;
@@ -157,10 +161,11 @@ public:
 		SDL_Rect loc = rectCollide;
 		loc.x = p.getX();
 		loc.y = p.getY();
+		if (debug) {
+			SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 0, 0, 255);
 
-		SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 0, 0, 255);
-
-		SDL_RenderDrawRect(sdlutils().renderer(), &loc);
+			SDL_RenderDrawRect(sdlutils().renderer(), &loc);
+		}
 	}
 
 private:

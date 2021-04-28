@@ -105,6 +105,10 @@ public:
 		return isQuitEvent_;
 	}
 
+	inline void startQuitEvent() {
+		isQuitEvent_ = true;
+	}
+
 	// keyboard
 	inline bool keyDownEvent() {
 		return isKeyDownEvent_;

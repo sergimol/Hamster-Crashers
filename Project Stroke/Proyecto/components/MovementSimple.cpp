@@ -47,7 +47,7 @@ void MovementSimple::updateKeymap(KEYS x, bool is) {
 	}
 }
 void MovementSimple::update() {
-	if (state_->getState() != GameStates::PAUSE) {
+	if (state_->getState() == GameStates::RUNNING) {
 		auto& vel = tr_->getVel();
 		//auto& state = enmState_->getState();
 		auto& z = tr_->getZ();
@@ -128,7 +128,7 @@ void MovementSimple::update() {
 			SDL_Rect rectPlayer = tr_->getRectCollide();
 			rectPlayer.x += vel.getX();
 			rectPlayer.y += vel.getY();
-			colDetec_->tryToMove(dir, goalVel_, rectPlayer);
+			colDetec_->tryToMove(dir, goalVel_, rectPlayer, true);
 		}
 
 		if (keymapSimple_.at(SPACE)) {		//Inicio del salto

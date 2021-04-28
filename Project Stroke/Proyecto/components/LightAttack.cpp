@@ -33,10 +33,7 @@ void LightAttack::update() {
 	{
 		if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
 		{
-
 			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK, false);
-
-
 		}
 
 	}
@@ -129,7 +126,12 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 							if (enmFlip == tr_->getFlip())
 								enmFlip = !enmFlip;
 
-							if (finCombo) {
+							//Final del combo
+							if (finCombo) 
+							{
+								//ANIMACION DE STUNN DEL ENEMIGO
+								ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::STUNNED, true);
+
 								enmKnockback->setKnockbackDistance(50);
 								enmKnockback->knockback();
 								enmKnockback->setKnockbackDistance(5);
@@ -157,7 +159,7 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 }
 
 void LightAttack::render() {
-	if (DEBUG_isAttacking_) {
+	if (DEBUG_isAttacking_ && debug) {
 		SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 212, 255, 255);
 
 		SDL_RenderDrawRect(sdlutils().renderer(), &attRect_);

@@ -68,6 +68,7 @@ class ShadowFollow;
 class Shadow;
 class EnemyMother;
 class SoundManager;
+class GravityEntity;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -137,7 +138,8 @@ class SoundManager;
 	ShadowFollow, \
 	TriggerScene, \
 	Shadow,\
-	SoundManager
+	SoundManager, \
+	GravityEntity
 
 // groups
 
@@ -162,6 +164,7 @@ struct StateMachine;
 struct Mother;
 struct PauseMenu;
 struct SoundManager;
+struct MainMenu;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
@@ -172,7 +175,8 @@ struct SoundManager;
 					LevelHandlr, \
 					Mother, \
 					PauseMenu,\
-					SoundManager
+					SoundManager, \
+					MainMenu
 
 
 //systems

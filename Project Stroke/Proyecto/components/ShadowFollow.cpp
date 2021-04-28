@@ -11,6 +11,21 @@ void ShadowFollow::init() {
 	baseWidth_ = tr_->getW();
 	baseHeight_ = tr_->getH();
 
+	
+	if (!useCollision_) {
+		otherWidth_ = otherTr_->getW();
+		otherHeight_ = otherTr_->getH();
+	}
+	else {
+		auto rect = otherTr_->getRectCollide();
+		otherWidth_ = rect.w;
+		otherHeight_ = rect.h;
+
+		baseWidth_ = rect.w;
+		baseHeight_ = rect.h / 3;
+	}
+	
+
 	anim_ = false;
 }
 
@@ -35,11 +50,20 @@ void ShadowFollow::update() {
 	height_ = baseHeight_ * new_scale;
 	width_ = baseWidth_ * new_scale;
 
-	float otherX = otherTr_->getPos().getX() + otherTr_->getW() / 2;
-	float otherY = otherTr_->getPos().getY() + 4*otherTr_->getH() / 5;
+	float otherX, otherY;
+	if (!useCollision_) {
+		otherX = otherTr_->getPos().getX() + otherWidth_ / 2;
+		otherY = otherTr_->getPos().getY() + 4 * otherHeight_ / 5;
+	}
+	else {
+		auto rect = otherTr_->getRectCollide();
+		otherX = rect.x + otherWidth_ / 2;
+		otherY = rect.y + otherHeight_;
+	}
 
-	float newX = otherX - width_ / 2;
-	float newY = otherY - height_ / 2;
+	float newX, newY;
+	newX = otherX - width_ / 2;
+	newY = otherY - height_ / 2;
 
 	//ACTUALIZAMOS POSICIÓN, TAMAÑO Y TOMAMOS EL SUELO DEL PLAYER
 	tr_->getPos().set(newX, newY);

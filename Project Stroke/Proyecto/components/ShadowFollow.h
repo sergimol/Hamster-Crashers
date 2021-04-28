@@ -10,7 +10,7 @@
 
 class ShadowFollow : public Component {
 public:
-	ShadowFollow(Transform* other) : otherTr_(other), tr_(nullptr) {};
+	ShadowFollow(Transform* other, bool useCollision) : otherTr_(other), tr_(nullptr), useCollision_(useCollision){};
 	virtual ~ShadowFollow() {};
 	
 	virtual void init() override;
@@ -20,9 +20,14 @@ private:
 	float lerp(float a, float b, float f);
 
 	float pixelMargin;
+
 	Transform* tr_, *otherTr_;
-	float baseWidth_, baseHeight_, width_, height_;
-	bool anim_;
+	
+	float baseWidth_, baseHeight_,
+		width_, height_,
+		otherWidth_, otherHeight_;
+
+	bool useCollision_, anim_;
 
 	const float animOff_ = 0.01f, animTime_ = 230.0f;
 	unsigned int timer_ = 0;

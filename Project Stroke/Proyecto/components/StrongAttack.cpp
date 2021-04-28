@@ -154,7 +154,7 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 }
 
 void StrongAttack::render() {
-	if (DEBUG_isAttacking_) {
+	if (DEBUG_isAttacking_ && debug) {
 		SDL_SetRenderDrawColor(sdlutils().renderer(), 255, 0, 0, 255);
 
 		SDL_RenderDrawRect(sdlutils().renderer(), &attRect_);

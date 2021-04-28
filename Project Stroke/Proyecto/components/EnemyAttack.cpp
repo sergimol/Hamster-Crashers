@@ -32,39 +32,44 @@ void EnemyAttack::update() {
 			if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
 			{
 				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
+				cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+				//auto sizeW = tr_->getW();
+				//auto sizeH = tr_->getH();
+				//auto& pos = tr_->getPos();
+				auto pos = tr_->getRectCollide();
+				auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
 
+
+				attRect_.w = pos.w + pos.w * range;
+				attRect_.h = pos.h + pos.h * range;
+
+				auto flip = tr_->getFlip();
+
+				//Si esta flipeado...
+				if (flip)
+					//Le damos la vuelta al rect
+					attRect_.x = pos.x - attRect_.w + pos.w / 2 - cam.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
+				else
+					attRect_.x = pos.x + pos.w - pos.w / 2 - cam.x;
+
+				attRect_.y = pos.y /*+ sizeH / 4*/ - cam.y;
+
+				//Comprobamos si colisiona con alguno de los enemigos que tiene delante
+
+				//Si se colisiona..
+				if (CheckCollisions(attRect_, true))
+					//Suena el hit y le pega
+					hitSound_.play();
+				//Si no colisiona..
+				else
+					//Suena el attackSound
+					attackSound_.play();
+
+
+
+				DEBUG_isAttacking_ = true;
+				time_ = sdlutils().currRealTime();
 			}
-
-		}
-	}
-	
-}
-
-bool EnemyAttack::LaunchAttack() {
-	if (sdlutils().currRealTime() > time_ + cooldown_) {
-		cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-		//auto sizeW = tr_->getW();
-		//auto sizeH = tr_->getH();
-		//auto& pos = tr_->getPos();
-		auto pos = tr_->getRectCollide();
-		auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
-
-
-		attRect_.w = pos.w + pos.w * range;
-		attRect_.h = pos.h + pos.h * range;
-
-		auto flip = tr_->getFlip();
-
-		//Si esta flipeado...
-		if (flip)
-			//Le damos la vuelta al rect
-			attRect_.x = pos.x - attRect_.w + pos.w / 2 - cam.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
-		else
-			attRect_.x = pos.x + pos.w - pos.w / 2 - cam.x;
-
-		attRect_.y = pos.y /*+ sizeH / 4*/ - cam.y;
-
-		//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
 		//Si se colisiona..
 		if (CheckCollisions(attRect_, true))
@@ -76,14 +81,14 @@ bool EnemyAttack::LaunchAttack() {
 			//Suena el attackSound
 			//attackSound_.play();
 			std::cout << "Hacer que se reproduzca sonido en enemyattack";
+		}
+	}
+}
+
+bool EnemyAttack::LaunchAttack() {
+	if (sdlutils().currRealTime() > time_ + cooldown_) {
 		//ANIMACION DE ATTAQUE
 		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, true);
-
-
-
-		DEBUG_isAttacking_ = true;
-		time_ = sdlutils().currRealTime();
-
 		return true;
 	}
 	else
@@ -132,6 +137,8 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 
 						//Animaci�n de stun
 						//anim_->play(sdlutils().anims().at("sardinilla_stun"));
+						ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
+
 
 						//Desactivamos control de movimiento 
 						ControlHandler* ctrl = ents[i]->getComponent<ControlHandler>();
@@ -163,8 +170,13 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 				hamKnockback->knockback();
 
 				SDL_Rect rectPlayer = tr_->getRectCollide();
-				rectPlayer.x += hamKnockback->getKnockback();
-				ents[i]->getComponent<CollisionDetec>()->tryToMove(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0), rectPlayer);
+				rectPlayer.x += tr_->getVel().getX();
+				int dir = -1;
+				if (tr_->getVel().getX() > 0) dir = 1;
+				
+				ents[i]->getComponent<CollisionDetec>()->tryToMove(Vector2D(dir, 0), Vector2D(hamKnockback->getKnockback(), 0), rectPlayer, false);
+				//ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STUNNED, true);
+				//ESTA LINEA DEBERIA IR EN FUNCION DEL ENEMIGO QUE ATACA SI ES EL FUERTE O NO
 			}
 		}
 	}
@@ -173,7 +185,7 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 }
 
 void EnemyAttack::render() {
-	if (DEBUG_isAttacking_) {
+	if (DEBUG_isAttacking_ && debug) {
 		SDL_SetRenderDrawColor(sdlutils().renderer(), 255, 170, 0, 255);
 
 		SDL_RenderDrawRect(sdlutils().renderer(), &attRect_);

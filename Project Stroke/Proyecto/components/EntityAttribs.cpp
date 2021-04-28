@@ -4,6 +4,8 @@
 #include "Animator.h"
 #include "EnemyBehaviour.h"
 #include "EnemyMother.h"
+#include "GravityEntity.h"
+#include "AnimEnemyStateMachine.h"
 
 EntityAttribs::EntityAttribs() :
 	health_(100),
@@ -128,7 +130,7 @@ void EntityAttribs::init() {
 }
 
 void EntityAttribs::update() {
-	if (state_->getState() != GameStates::PAUSE) {
+	if (state_->getState() == GameStates::RUNNING) {
 		//Timer de invencibilidad
 		if (afterDamageInvul_ && sdlutils().currRealTime() > damageInvulTime_ + INVINCIBLECD) {
 			afterDamageInvul_ = false;
@@ -140,6 +142,10 @@ void EntityAttribs::update() {
 				//Daño por veneno
 				recieveDmg(poisonDamage_);
 				timeLastUpdate_ = sdlutils().currRealTime();
+
+				//Animacion de hit 
+				if (entity_->getComponent<AnimEnemyStateMachine>() != nullptr)
+					entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
 			}
 			if (sdlutils().currRealTime() >= poisonTime_ + poisonCD_) {
 				poisoned_ = false;
@@ -157,7 +163,6 @@ bool EntityAttribs::recieveDmg(int dmg) {
 	//Actualizamos la healthBar
 	if (entity_->hasComponent<UI>())
 		entity_->getComponent<UI>()->bar(-dmg);
-	std::cout << "me cago en tus muertos" << health_ << std::endl;
 	//Si la vida ha bajado de 0...
 	if (health_ <= 0) {
 		if (hms_ != nullptr) {
@@ -265,6 +270,7 @@ void EntityAttribs::poison() {
 	//int SDL_SetTextureColorMod(hmsText_, 96, 227, 70);
 	poisonTime_ = sdlutils().currRealTime();
 	poisoned_ = true;
+
 }
 
 void EntityAttribs::onResume() {

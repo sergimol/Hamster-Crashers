@@ -8,6 +8,7 @@
 #include "../components/GhostCtrl.h"
 #include "../components/AnimHamsterStateMachine.h"
 #include "../components/ReanimationGame.h"
+#include "../components/CollisionDetec.h"
 #include "EnemyMother.h"
 
 void Stroke::init() {
@@ -30,7 +31,7 @@ void Stroke::init() {
 }
 
 void Stroke::update() {
-	if(state_->getState() != GameStates::PAUSE)
+	if(state_->getState() == GameStates::RUNNING)
 		checkChance();
 	//std::cout << chance_ << " " << chanceFromAb_ << std::endl;
 }
@@ -43,6 +44,7 @@ void Stroke::increaseChance(int n, bool fromAbility) {
 		else {
 			ss_->increaseChanceAB(n, chanceFromAb_);
 		}
+	    entity_->getComponent<HeartUI>()->increaseLatency(chanceFromAb_ + chance_);
 
 		timeLastIncrease_ = sdlutils().currRealTime();
 	}
@@ -53,6 +55,9 @@ void Stroke::increaseChance(int n, bool fromAbility) {
 void Stroke::decreaseChance() {
 	if (chance_ > 0) {
 		chance_ -= (chance_ * DECREASEPERCENTAGE) / 100;
+
+		//Llamamos a la UI para que el corazon palpite más rapido
+		entity_->getComponent<HeartUI>()->increaseLatency(chanceFromAb_ + chance_);
 	}
 }
 
@@ -78,7 +83,7 @@ void Stroke::checkChance() {
 		if (hms_->getState() != HamStates::INFARCTED && ss_->checkChance(chance_, chanceFromAb_) ) {
 			//TODO madremia que no lo podemos desactivar porque hay que quitarlo de la lsita de player y noseque algo habra que ahcer para que la camara no explote
 			//entity_->setActive(false);
-			infarctHamster();
+			//infarctHamster();
 			//TODO by Samuel necesito que por alg�n lugar llameis al m�todo de Increase Latency de HeartUI para que se actualice la interfaz de la palpita�ao
 		}
 
@@ -111,6 +116,9 @@ void Stroke::infarctHamster() {
 	//Evitamos el uso de la habilidad
 	ab_->deactiveAbility();
 	
+	//Y cambiamos la interfaz
+	entity_->getComponent<HeartUI>()->dep();
+
 	//hms_->getState() = HamStates::INFARCTED;
 
 	//Animacion del fantasma
@@ -120,7 +128,7 @@ void Stroke::infarctHamster() {
 	
 	//GENERAR PERSONAJE INFARTADO ()
 	auto* deadBody = entity_->getMngr()->addEntity();
-	deadBody->addComponent<Transform>(tr_->getPos(), Vector2D(0,0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip(),tr_->getScaleW(),tr_->getScaleH());
+	auto* tr = deadBody->addComponent<Transform>(tr_->getPos(), Vector2D(0,0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip(),tr_->getScaleW(),tr_->getScaleH());
 	deadBody->addComponent<Animator>(&sdlutils().images().at(name + "Sheet"),
 		86,
 		86,
@@ -129,7 +137,11 @@ void Stroke::infarctHamster() {
 		220,
 		Vector2D(0, 0),
 		3)->play(sdlutils().anims().at(name + "_stroke"));
-	deadBody->addComponent<Gravity>();
+	tr->setVelZ(tr_->getVelZ());
+	deadBody->addComponent<CollisionDetec>();
+	auto* gr = deadBody->addComponent<Gravity>();
+	tr->setGravity(gr);
+	deadBody->addComponent<Movement>();
 	deadBody->addComponent<InfarctedBody>(entity_);
 	deadBody->addComponent<ReanimationGame>();
 

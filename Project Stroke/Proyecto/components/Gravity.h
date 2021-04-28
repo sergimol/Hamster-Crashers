@@ -13,7 +13,6 @@ public:
 
 	void init() override;
 
-	void update() override {};
 	void checkHeight(SDL_Rect& playerPos);
 	void onDisable() override;
 	inline int getFloor() const { return floor_; };

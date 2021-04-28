@@ -175,6 +175,14 @@
       "file": "resources/images/menuSprites/localButtonEnter.png"
     },
     {
+      "id": "resumeButton",
+      "file": "resources/images/menuSprites/resumeButton.png"
+    },
+    {
+      "id": "resumeButtonEnter",
+      "file": "resources/images/menuSprites/resumeButtonEnter.png"
+    },
+    {
       "id": "onlineButton",
       "file": "resources/images/menuSprites/onlineButton.png"
     },
@@ -634,7 +642,7 @@
       "duration": 8,
       "cols": 6,
       "rows": 6,
-      "frameUpdate": 50,
+      "frameUpdate": 70,
       "loop": 0,
       "chain": ""
     },
@@ -650,7 +658,7 @@
       "chain": ""
     },
     {
-      "id": "soldier1_stunn",
+      "id": "soldier1_stun",
       "startFrameX": 3,
       "startFrameY": 3,
       "duration": 6,

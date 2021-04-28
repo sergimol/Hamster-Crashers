@@ -13,7 +13,7 @@ void Dying::init() {
 
 void Dying::update() {
 
-	if (state_->getState() != GameStates::PAUSE) {
+	if (state_->getState() == GameStates::RUNNING) {
 		//Timer
 		if (!blinkActive_ && sdlutils().currRealTime() >= timer_ + TIMEBEFOREBLINK) {
 			blinkActive_ = true;

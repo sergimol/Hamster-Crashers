@@ -7,18 +7,24 @@ void HamsterStateMachine::init() {
 }
 
 void HamsterStateMachine::update() {
-	if (state_->getState() != GameStates::PAUSE) {
+	if (state_->getState() == GameStates::RUNNING) {
 		//CAMBIOS INTERNOS DE ALGUNAS ANIMACIONES QUE VAN DIRECTAMENTE
 		//LIGADOS A ESTADOS INTERNOS DEL HAMSTER
 		//Fin Animacion
-		if (currentState == HamStates::STUNNED || entity_->getComponent<AnimHamsterStateMachine>()->getState() == HamStatesAnim::HITTED)
+		auto* a = entity_->getComponent<AnimHamsterStateMachine>();
+		if (a != nullptr)
 		{
-			if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+
+			auto& o = entity_->getComponent<AnimHamsterStateMachine>()->getState();
+			if (o == HamStatesAnim::HITTED || o== HamStatesAnim::STUNNED)
 			{
-				entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, false);
-			}
-			else {
-				entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
+
+				if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+				{
+					entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, false);
+					entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STUNNED, false);
+				}
+
 			}
 		}
 	}

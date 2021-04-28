@@ -9,12 +9,15 @@ void EnemyStateMachine::update() {
 	//Fin Animacion
 	if (entity_->getComponent<AnimEnemyStateMachine>() != nullptr)
 	{
-		if (currentState == EnemyStates::ENM_STUNNED || entity_->getComponent<AnimEnemyStateMachine>()->getState() == EnemyStatesAnim::HITTED)
+		if (currentState == EnemyStates::ENM_STUNNED || entity_->getComponent<AnimEnemyStateMachine>()->getState() == EnemyStatesAnim::HITTED 
+			|| entity_->getComponent<AnimEnemyStateMachine>()->getState() == EnemyStatesAnim::STUNNED)
 		{
 
 			if (entity_->getComponent<Animator>()->OnAnimationFrameEnd() )
 			{
 				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, false);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::STUNNED, false);
+
 			}
 
 		}

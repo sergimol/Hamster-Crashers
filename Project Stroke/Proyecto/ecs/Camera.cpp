@@ -23,14 +23,14 @@ void Camera::checkBounds() {
 	if (camera_.x < 0) {
 		camera_.x = 0;
 	}
-	else if (camera_.x + camera_.w > 5100 * map_->getScale()) {
-		camera_.x = (5100 * map_->getScale()) - camera_.w;
+	else if (camera_.x + camera_.w > 6400 * map_->getScale()) {
+		camera_.x = (6400 * map_->getScale()) - camera_.w;
 	}
 
 	if (camera_.y < -205)
 		camera_.y = -205;
-	else if (camera_.y + camera_.h > 384 * map_->getScale())
-		camera_.y = (384 * map_->getScale()) - camera_.h;
+	else if (camera_.y + camera_.h > 320 * map_->getScale())
+		camera_.y = (320 * map_->getScale()) - camera_.h;
 
 	camPos.setX(camera_.x + camera_.w / 2);
 	camPos.setY(camera_.y + camera_.h / 2);
@@ -48,6 +48,7 @@ void Camera::followPlayer() {
 		camPos = camPos + playerpos + Vector2D(e->getComponent<Transform>()->getW(), e->getComponent<Transform>()->getH()) / 2;
 		players++;
 	}
+	camPos.setY(camPos.getY() - 200);
 	//Actualizamos la posicion de la camara
 	camera_.x = (camPos.getX() / players) - camera_.w / 2;
 	camera_.y = (camPos.getY() / players) - camera_.h / 2;
@@ -56,6 +57,8 @@ void Camera::followPlayer() {
 void Camera::StaticCamera() {
 	Vector2D CamStaticPos = newObjetivo();
 
+	CamStaticPos.setY(camPos.getY() - 200);
+
 	camera_.x = CamStaticPos.getX() - camera_.w / 2;
 	camera_.y = CamStaticPos.getY() - camera_.h / 2;
 }
@@ -63,19 +66,20 @@ void Camera::StaticCamera() {
 void Camera::Goto() {
 	Vector2D CamStaticPos = newObjetivo();
 
+	CamStaticPos.setY(camPos.getY() - 200);
 	bool check1 = false;
 	bool check2 = false;
 	int speed = 6;
-	if (camera_.x < CamStaticPos.getX() - 12 - camera_.w / 2)
+	if (camera_.x < CamStaticPos.getX() - 24 - camera_.w / 2)
 		camera_.x = camera_.x + speed;
-	else if (camera_.x > CamStaticPos.getX() + 12 - camera_.w / 2)
+	else if (camera_.x > CamStaticPos.getX() + 24 - camera_.w / 2)
 		camera_.x = camera_.x - speed;
 	else
 		check1 = true;
 
-	if (camera_.y < CamStaticPos.getY() - 12 - camera_.h / 2)
+	if (camera_.y < CamStaticPos.getY() - 24 - camera_.h / 2)
 		camera_.y = camera_.y + speed;
-	else if (camera_.y > CamStaticPos.getY() + 12 - camera_.h / 2)
+	else if (camera_.y > CamStaticPos.getY() + 24 - camera_.h / 2)
 		camera_.y = camera_.y - speed;
 	else
 		check2 = true;

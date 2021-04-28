@@ -1,6 +1,7 @@
 #include "AnimEnemyStateMachine.h"
 #include "EntityAttribs.h"
 #include "Animator.h"
+#include "Knockback.h"
 
 void AnimEnemyStateMachine::init()
 {
@@ -15,7 +16,7 @@ void AnimEnemyStateMachine::init()
 
 void AnimEnemyStateMachine::update()
 {
-	if (gState_->getState() != GameStates::PAUSE) {
+	if (gState_->getState() == GameStates::RUNNING) {
 		HandleAnimState();
 		CheckAnimState();
 	}
@@ -40,6 +41,9 @@ void AnimEnemyStateMachine::HandleAnimState()
 	//hitted
 	if (hit)
 		currentState = EnemyStatesAnim::HITTED;
+	//stunned
+	if (stun)
+		currentState = EnemyStatesAnim::STUNNED;
 }
 
 //Cambia las animaciones dependiendo del estado del hamster
@@ -111,7 +115,7 @@ void AnimEnemyStateMachine::setAnimBool(EnemyStatesAnim h, bool b)
 		hit = b;
 		break;
 	case EnemyStatesAnim::STUNNED:
-		idle = b;
+		stun = b;
 		break;
 	case EnemyStatesAnim::DEAD:
 		idle = b;

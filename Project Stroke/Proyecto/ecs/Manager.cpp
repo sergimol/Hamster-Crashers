@@ -24,6 +24,9 @@ Manager::~Manager() {
 	for (auto fG : fgs_) {
 		delete fG; fG = nullptr;
 	}
+	for (auto mN : menus_) {
+		delete mN; mN = nullptr;
+	}
 }
 
 void Manager::refresh() {
@@ -56,6 +59,10 @@ void Manager::update() {
 	auto f = fgs_.size();
 	for (auto i = 0u; i < f; i++)
 		fgs_[i]->update();
+
+	auto m = menus_.size();
+	for (auto i = 0u; i < m; i++)
+		menus_[i]->update();
 }
 
 void Manager::render() {
@@ -78,6 +85,10 @@ void Manager::render() {
 	auto f = fgs_.size();
 	for (auto i = 0u; i < f; i++)
 		fgs_[i]->render();
+
+	auto m = menus_.size();
+	for (auto i = 0u; i < m; i++)
+		menus_[i]->render();
 }
 
 void Manager::resume() {

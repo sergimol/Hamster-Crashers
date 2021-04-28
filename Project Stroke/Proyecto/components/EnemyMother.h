@@ -39,8 +39,11 @@ public:
 	EnemyMother();
 	virtual ~EnemyMother() {
 		for (int i = 0; i < numPlayers; i++) {
-			delete objetivesList.at(i);
+			 objetivesList.at(i)->ambushing.clear();
+			 objetivesList.at(i)->atacking.clear();
+			 delete objetivesList.at(i);
 		}
+		objetivesList.clear();
 	};
 
 	void init() override;

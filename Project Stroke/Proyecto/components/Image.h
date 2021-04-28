@@ -29,11 +29,11 @@ public:
 
 		Vector2D renderPos = Vector2D(tr_->getPos().getX() - cam.x, tr_->getPos().getY() + tr_->getZ() - cam.y);
 		SDL_Rect dest = build_sdlrect(renderPos, tr_->getW(), tr_->getH());
+		if (debug) {
+			SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 255, 0, 255);
 
-		SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 255, 0, 255);
-
-		SDL_RenderDrawRect(sdlutils().renderer(), &dest);
-
+			SDL_RenderDrawRect(sdlutils().renderer(), &dest);
+		}
 
 		EntityAttribs* attribs = entity_->getComponent<EntityAttribs>();
 
