@@ -4,6 +4,7 @@
 #include "Animator.h"
 #include "EnemyBehaviour.h"
 #include "EnemyMother.h"
+#include "Transition.h"
 #include "GravityEntity.h"
 #include "AnimEnemyStateMachine.h"
 
@@ -205,6 +206,8 @@ bool EntityAttribs::recieveDmg(int dmg) {
 }
 
 void EntityAttribs::die() {
+
+	entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", false);
 
 	//Creamos una entidad
 	Entity* e = entity_->getMngr()->addEntity();

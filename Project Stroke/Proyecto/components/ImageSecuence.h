@@ -26,11 +26,16 @@ private:
 
 	const string level1 = "Mapa.tmx",
 		level2 = "Mapa2.tmx",
-		controls = "controls";
+		controls = "controls",
+		hasMuerto = "hasMuerto";
 
 	string newScene_;
 
 	bool next = false;
+
+	bool controles = false;
+
+	bool gameOver = false;
 
 	SDL_Rect imageRect;
 

@@ -17,7 +17,12 @@ ImageSecuence::ImageSecuence(string newScene) {
 		keyTextures.push(&sdlutils().images().at("canelon"));
 	}
 	else if (newScene == controls) {
+		controles = true;
 		keyTextures.push(&sdlutils().images().at("controles"));
+	}
+	else if (newScene == hasMuerto) {
+		gameOver = true;
+		keyTextures.push(&sdlutils().images().at("hasMuerto"));
 	}
 }
 
@@ -45,7 +50,14 @@ void ImageSecuence::update() {
 		}
 
 		if (keyTextures.empty() && !trans_->isFadingOut()) {
-			entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>()->setState(GameStates::RUNNING);
+			if (controles) {
+				entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>()->setState(GameStates::RUNNING);
+				controles = false;
+			}
+			if (gameOver) {
+				ih().startQuitEvent();
+				gameOver = true;
+			}
 			trans_->createMap();
 			entity_->setActive(false);
 		}

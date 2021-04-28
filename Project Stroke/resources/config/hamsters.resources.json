@@ -277,6 +277,10 @@
     {
       "id": "controles",
       "file": "resources/images/controles.png"
+    },
+    {
+      "id": "hasMuerto",
+      "file": "resources/images/hasmuerto.png"
     }
   ],
 
