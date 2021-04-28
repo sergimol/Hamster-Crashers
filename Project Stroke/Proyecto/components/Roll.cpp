@@ -176,7 +176,7 @@ bool Roll::checkCollisions()
 						enmStateM = EnemyStates::ENM_STUNNED;
 					}
 					//Reiniciamos tiempo de stun
-					enmStun->restartStunTime();
+					enmStun->restartStunTime(true);
 				}
 
 				//Si tiene Knockback, se aplica

@@ -105,7 +105,7 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 									enmStateM = EnemyStates::ENM_STUNNED;
 								}
 								//Reiniciamos tiempo de stun
-								enmStun->restartStunTime();
+								enmStun->restartStunTime(finCombo);
 							}
 						}
 

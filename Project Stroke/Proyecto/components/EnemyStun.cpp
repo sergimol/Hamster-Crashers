@@ -42,8 +42,9 @@ void EnemyStun::update() {
 	}
 }
 
-void EnemyStun::restartStunTime() {
+void EnemyStun::restartStunTime(bool finCombo) {
 	time_ = sdlutils().currRealTime(); 
+	if (finCombo)
 	entity_->getComponent<EnemyBehaviour>()->changeToAmbush();
 }
 
