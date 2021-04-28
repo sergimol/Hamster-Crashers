@@ -139,7 +139,8 @@ void Stroke::infarctHamster() {
 		3)->play(sdlutils().anims().at(name + "_stroke"));
 	tr->setVelZ(tr_->getVelZ());
 	deadBody->addComponent<CollisionDetec>();
-	deadBody->addComponent<Gravity>();
+	auto* gr = deadBody->addComponent<Gravity>();
+	tr->setGravity(gr);
 	deadBody->addComponent<Movement>();
 	deadBody->addComponent<InfarctedBody>(entity_);
 	deadBody->addComponent<ReanimationGame>();
