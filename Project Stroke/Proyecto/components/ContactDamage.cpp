@@ -45,12 +45,11 @@ void ContactDamage::updateRect() {
 	//Si se colisiona..
 	if (CheckCollisions(attRect_, true))
 		//Suena el hit y le pega
-		//hitSound_.play();
-		std::cout << "Hacer que se reproduzca sonido en contactDamage";
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
 	//Si no colisiona..
 	else
 		//NO  NO QUIERO Suena el attackSound
-		//attackSound_.play();
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
 
 	//this.anims.play(pegarse)
 

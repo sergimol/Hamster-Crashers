@@ -110,9 +110,7 @@ void Roll::update() {
 			col_->tryToMove(dir_, goalVel_, rectPlayer, false);
 			//Si se colisiona..
 			if (checkCollisions())
-				//Suena el hit y le pega
-				//hitSound_.play();
-				std::cout << "Hacer que se reproduzca sonido en roll";
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
 		}
 	}
 }

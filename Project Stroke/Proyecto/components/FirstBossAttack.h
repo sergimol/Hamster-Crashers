@@ -15,6 +15,7 @@
 #include "HamsterStateMachine.h"
 #include "EntityAttribs.h"
 #include "GameStates.h"
+#include "SoundManager.h"
 
 class FirstBossAttack : public Component {
 public:

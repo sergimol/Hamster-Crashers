@@ -198,13 +198,11 @@ void StrongAttack::attack() {
 			//Si se colisiona..
 			if (CheckCollisions(attRect_, finCombo))
 				//Suena el hit y le pega
-				//hitSound_.play();
-				std::cout << "Hacer que se reproduzca sonido en strong";
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stronghit");
 			//Si no colisiona..
 			else
 				//Suena el attackSound
-				//attackSound_.play();
-				std::cout << "Hacer que se reproduzca sonido en strong";
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
 
 			//this.anims.play(pegarse)
 			//entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STRONGATTACK, true);

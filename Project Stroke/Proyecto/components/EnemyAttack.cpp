@@ -59,12 +59,11 @@ void EnemyAttack::update() {
 				//Si se colisiona..
 				if (CheckCollisions(attRect_, true))
 					//Suena el hit y le pega
-					hitSound_.play();
+					entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
 				//Si no colisiona..
 				else
 					//Suena el attackSound
-					attackSound_.play();
-
+					entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
 
 
 				DEBUG_isAttacking_ = true;
@@ -74,13 +73,11 @@ void EnemyAttack::update() {
 		//Si se colisiona..
 		if (CheckCollisions(attRect_, true))
 			//Suena el hit y le pega
-			//hitSound_.play();
-			std::cout << "Hacer que se reproduzca sonido en enemyattack";
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
 		//Si no colisiona..
 		else
 			//Suena el attackSound
-			//attackSound_.play();
-			std::cout << "Hacer que se reproduzca sonido en enemyattack";
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
 		}
 	}
 }

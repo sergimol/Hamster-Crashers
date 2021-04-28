@@ -127,7 +127,7 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 								enmFlip = !enmFlip;
 
 							//Final del combo
-							if (finCombo) 
+							if (finCombo)
 							{
 								//ANIMACION DE STUNN DEL ENEMIGO
 								ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::STUNNED, true);
@@ -202,14 +202,11 @@ void LightAttack::attack() {
 			//Si se colisiona..
 			if (CheckCollisions(attRect_, finCombo))
 				//Suena el hit y le pega
-				//hitSound_.play();
-				std::cout << "Hacer que se reproduzca sonido en lightattack";
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
 			//Si no colisiona..
 			else
 				//Suena el attackSound
-				//attackSound_.play();
-				std::cout << "Hacer que se reproduzca sonido en lightattack";
-
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
 			//this.anims.play(pegarse)
 
 			//GESTION DE LA ANIMACION

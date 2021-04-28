@@ -15,6 +15,8 @@
 #include "HamsterStateMachine.h"
 #include "../game/Game.h"
 
+#include "SoundManager.h"
+
 class EnemyAttack : public Component {
 public:
 	EnemyAttack();

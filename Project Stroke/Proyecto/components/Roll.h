@@ -5,6 +5,7 @@
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 #include "CollisionDetec.h"
+#include "SoundManager.h"
 
 class Roll : public Ability {
 public:

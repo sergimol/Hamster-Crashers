@@ -15,6 +15,8 @@
 #include "EnemyStateMachine.h"
 #include "../game/Game.h"
 #include <cmath>
+#include "SoundManager.h"
+
 
 
 class LightAttack : public Component {

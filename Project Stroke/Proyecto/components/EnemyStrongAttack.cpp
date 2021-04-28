@@ -55,13 +55,11 @@ void EnemyStrongAttack::update() {
 				//Si se colisiona..
 				if (CheckCollisions(attRect_, true))
 					//Suena el hit y le pega
-					//hitSound_.play();
-				std::cout << "Hacer que se reproduzca sonido en enemyStrongattack";
+					entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stronghit");
 				//Si no colisiona..
 				else
 					//Suena el attackSound
-					//attackSound_.play();
-				std::cout << "Hacer que se reproduzca sonido en enemyStrongattack";
+					entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
 
 				//this.anims.play(pegarse)
 
