@@ -314,7 +314,7 @@
   </object>
   <object id="23" name="4" x="5505" y="56.25" width="13" height="255.5">
    <properties>
-    <property name="CameraCoordX" type="int" value="4800"/>
+    <property name="CameraCoordX" type="int" value="4100"/>
     <property name="CameraCoordY" type="int" value="150"/>
     <property name="Rounds" type="int" value="2"/>
    </properties>
