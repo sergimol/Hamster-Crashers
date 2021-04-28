@@ -29,6 +29,14 @@ void Roll::init() {
 	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
 	assert(state_ != nullptr);
 
+	mov_ = entity_->getComponent<Movement>();
+	assert(mov_ != nullptr);
+
+	grav_ = entity_->getComponent<Gravity>();
+	assert(grav_ != nullptr);
+
+	
+
 	keymap.insert({ UP, false });
 	keymap.insert({ DOWN, false });
 	keymap.insert({ RIGHT, false });
@@ -40,8 +48,8 @@ Roll::~Roll() {
 
 void Roll::action()
 {
-	if (entity_->getComponent<Movement>()->isActive()) {
-		entity_->getComponent<Movement>()->setActive(false);
+	if (mov_->isActive()) {
+		mov_->setActive(false);
 
 		rolling = true;
 
@@ -61,6 +69,7 @@ void Roll::action()
 		rectPlayer.x += tr_->getVel().getX();
 		rectPlayer.y += tr_->getVel().getY();
 		col_->tryToMove(dir_, goalVel_, rectPlayer, false);
+		
 		//Mete invulnerabilidad durante la habilidad
 		entity_->getComponent<EntityAttribs>()->setInvincibility(true);
 	}
@@ -112,6 +121,8 @@ void Roll::update() {
 			rectPlayer.x += vel.getX();
 			rectPlayer.y += vel.getY();
 			col_->tryToMove(dir_, goalVel_, rectPlayer, false);
+			grav_->checkHeight(rectPlayer);
+			if (grav_->getStuck())  vel.setX(-vel.getX());
 			//Si se colisiona..
 			if (checkCollisions())
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
