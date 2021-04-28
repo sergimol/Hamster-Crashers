@@ -14,6 +14,7 @@ public:
 	HeartUI(std::string n, int pos);
 	virtual ~HeartUI() {};
 
+	void init() override;
 	void update() override;
 	void render() override;
 	void dep();
@@ -38,4 +39,6 @@ private:
 	int position;
 	float latency;
 	float latencyAux;
+
+	GameStates* state_;
 };

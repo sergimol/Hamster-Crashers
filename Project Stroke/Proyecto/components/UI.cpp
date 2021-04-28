@@ -35,10 +35,17 @@ UI::UI(std::string n, int pos) :
 	dest3 = build_sdlrect(renderPosBar, barLenght, bar_->height() * scale);
 }
 
+void UI::init() {
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
+}
+
 void UI::render() {
 	//Renderizamos la barra, la cara del hamster y su corazon
-	bar_->render(dest3);
-	face_->render(dest);
+	if (state_->getState() != GameStates::MAINMENU && state_->getState() != GameStates::CONTROLS) {
+		bar_->render(dest3);
+		face_->render(dest);
+	}
 }
 
 //Si el hamster muere cambiar textura a muerto

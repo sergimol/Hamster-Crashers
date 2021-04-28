@@ -14,6 +14,7 @@ public:
 	UI(std::string n, int pos);
 	virtual ~UI() {};
 
+	void init() override;
 	void render() override;
 	void dep();
 	void bar(float objetivo);
@@ -43,4 +44,6 @@ private:
 	int barLenght;
 	int barLenghtInit;
 	int position;
+
+	GameStates* state_;
 };

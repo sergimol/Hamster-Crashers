@@ -23,6 +23,12 @@ HeartUI::HeartUI(std::string n, int pos) :
 	destAux = dest;
 }
 
+void HeartUI::init() {
+	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
+}
+
+
 void HeartUI::update() {
 	//auto posAux = entity_->getComponent<Transform>()->getPos();
 	if (alive) {
@@ -44,7 +50,8 @@ void HeartUI::update() {
 
 void HeartUI::render() {
 	//Renderizamos su corazon
-	heart_->render(destAux);
+	if (state_->getState() != GameStates::MAINMENU && state_->getState() != GameStates::CONTROLS)
+		heart_->render(destAux);
 }
 
 //Si el hamster muere cambiar textura a muerto
