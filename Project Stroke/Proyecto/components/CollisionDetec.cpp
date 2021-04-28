@@ -13,7 +13,7 @@ void CollisionDetec::init() {
 	assert(tr_ != nullptr);
 }
 
-void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPlayer) {
+void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPlayer, bool enemy) {
 	//Cojo el rect del player y le sumo la supuesta siguiente posicion
 	auto& vel = tr_->getVel();
 
@@ -65,10 +65,13 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 		vel.setY(0);
 
 	//Comprobacion para los límites de la cámara
-	if (rectPlayer.x < cam.x || rectPlayer.x + rectPlayer.w > pCam.getX() + cam.w / 2)
+	if (!enemy && (rectPlayer.x < cam.x || rectPlayer.x + rectPlayer.w > pCam.getX() + cam.w / 2))
 		vel.setX(0);
-	if (rectPlayer.y < cam.y || rectPlayer.y + rectPlayer.h > pCam.getY() + cam.h / 2)
+	if (!enemy && (rectPlayer.y < cam.y || rectPlayer.y + rectPlayer.h + 120 > pCam.getY() + cam.h / 2))
 		vel.setY(0);
+
+	if (vel.getX() < 0.001 && vel.getX() > -0.001) vel.setX(0);
+	if (vel.getY() < 0.001 && vel.getY() > -0.001) vel.setY(0);
 }
 
 float CollisionDetec::lerp(float a, float b, float f)
