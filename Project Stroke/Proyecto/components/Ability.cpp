@@ -17,7 +17,7 @@ void Ability::init() {
 }
 
 void Ability::update() {
-	if (state_->getState() != GameStates::PAUSE) {
+	if (state_->getState() == GameStates::RUNNING) {
 		/*
 		* Cada "cooldown" milisegundos, se comprueba que se pueda activar la habilidad
 		* Si la habilidad estaba activa, se desactiva

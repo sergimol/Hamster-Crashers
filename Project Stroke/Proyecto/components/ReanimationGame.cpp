@@ -17,7 +17,7 @@ void ReanimationGame::init() {
 }
 
 void ReanimationGame::update() {
-	if (state_->getState() != GameStates::PAUSE) {
+	if (state_->getState() == GameStates::RUNNING) {
 		if (ih().keyDownEvent()) {
 			if (ih().isKeyDown(key) && !down) {
 				down = true;

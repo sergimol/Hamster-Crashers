@@ -62,7 +62,7 @@ void Movement::updateKeymap(KEYS x, bool is) {
 
 void Movement::update() {
 
-	if (state_->getState() != GameStates::PAUSE) {
+	if (state_->getState() == GameStates::RUNNING) {
 		auto& vel = tr_->getVel();
 		auto& state = hms_->getState();
 		auto& z = tr_->getZ();

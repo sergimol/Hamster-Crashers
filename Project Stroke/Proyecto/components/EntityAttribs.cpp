@@ -4,6 +4,7 @@
 #include "Animator.h"
 #include "EnemyBehaviour.h"
 #include "EnemyMother.h"
+#include "GravityEntity.h"
 
 EntityAttribs::EntityAttribs() :
 	health_(100),
@@ -128,7 +129,7 @@ void EntityAttribs::init() {
 }
 
 void EntityAttribs::update() {
-	if (state_->getState() != GameStates::PAUSE) {
+	if (state_->getState() == GameStates::RUNNING) {
 		//Timer de invencibilidad
 		if (afterDamageInvul_ && sdlutils().currRealTime() > damageInvulTime_ + INVINCIBLECD) {
 			afterDamageInvul_ = false;
@@ -204,7 +205,7 @@ void EntityAttribs::die() {
 	Entity* e = entity_->getMngr()->addEntity();
 
 	//Le metemos un transform para su posicion
-	e->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip(), tr_->getScaleW(), tr_->getScaleH());
+	e->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0, tr_->getZ() + 500, tr_->getFlip(), tr_->getScaleW(), tr_->getScaleH());
 
 	//Y reproducimos la animacion de muerto
 	e->addComponent<Animator>(&sdlutils().images().at(id_ + "Sheet"),

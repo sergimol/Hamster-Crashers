@@ -35,6 +35,7 @@
 #include "../components/GameStates.h"
 #include "../components/EnemyMother.h"
 #include "../components/SoundManager.h"
+#include "../components/GravityEntity.h"
 
 //PARA LAS COLISIONES CON TILE
 #include "../utils/Collisions.h"

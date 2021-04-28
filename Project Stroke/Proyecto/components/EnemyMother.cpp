@@ -148,7 +148,7 @@ void EnemyMother::removeFromAmbushList(int hamid, std::list<Entity*>::iterator i
 
 void EnemyMother::update() {
 	if (numPlayers > 0) {
-		if (state_->getState() != GameStates::PAUSE) {
+		if (state_->getState() == GameStates::RUNNING) {
 		
 			asingEnemies();
 			orderAttack();

@@ -97,7 +97,7 @@ bool Combos::checkCombo(int action) {
 }
 
 void Combos::update() {
-	if (state_->getState() != GameStates::PAUSE) {
+	if (state_->getState() == GameStates::RUNNING) {
 		if (!cola_.empty() && sdlutils().currRealTime() - lastAttack_ > CADENCE) {
 			if (!grv_->isActive())
 				grv_->setActive(true);
