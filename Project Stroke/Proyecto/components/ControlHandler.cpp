@@ -156,7 +156,7 @@ void ControlHandler::handleController() {
 		auto& hamState = hms_->getState();
 		
 		if (ih().isButtonDownEvent()) {
-			if (hamState != HamStates::DEAD && hamState != HamStates::INFARCTED) {
+			if (hamState == HamStates::DEFAULT) {
 				//JUMP
 				if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_A))
 				{
@@ -165,11 +165,11 @@ void ControlHandler::handleController() {
 				}
 
 				//ATAQUE LIGERO
-				else if (hamState != HamStates::ABILITY && ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_X)) {
+				else if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_X)) {
 					lt_->attack();
 				}
 				//ATAQUE FUERTE
-				else if (hamState != HamStates::ABILITY && ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_Y)) {
+				else if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_Y)) {
 					st_->attack();
 				}
 				//HABILIDAD

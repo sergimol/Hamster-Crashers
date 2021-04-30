@@ -83,7 +83,7 @@ void Stroke::checkChance() {
 		if (hms_->getState() != HamStates::INFARCTED && ss_->checkChance(chance_, chanceFromAb_) ) {
 			//TODO madremia que no lo podemos desactivar porque hay que quitarlo de la lsita de player y noseque algo habra que ahcer para que la camara no explote
 			//entity_->setActive(false);
-			//infarctHamster();
+			infarctHamster();
 			//TODO by Samuel necesito que por alg�n lugar llameis al m�todo de Increase Latency de HeartUI para que se actualice la interfaz de la palpita�ao
 		}
 

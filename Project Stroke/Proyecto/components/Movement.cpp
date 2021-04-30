@@ -56,7 +56,7 @@ void Movement::init() {
 }
 
 void Movement::updateKeymap(KEYS x, bool is) {
-	if (x != SPACE || !keymap.at(SPACE))
+	if (x != SPACE || (!keymap.at(SPACE) && tr_->getZ() <= grav_->getFloor()))
 		keymap.at(x) = is;
 }
 
