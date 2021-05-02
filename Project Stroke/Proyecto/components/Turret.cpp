@@ -24,8 +24,8 @@ void Turret::init() {
 	anim_ = entity_->getComponent<Animator>();
 	assert(anim_ != nullptr);
 
-	actualSpeed_ = entity_->getComponent<EntityAttribs>()->getVel();
-	assert(actualSpeed_ != nullptr);
+	attribs_ = entity_->getComponent<EntityAttribs>();
+	assert(attribs_ != nullptr);
 
 	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
 	assert(state_ != nullptr);
@@ -68,7 +68,7 @@ void Turret::update() {
 void Turret::action() {
 
 	//Reduce vel a la mitad mientras dispara
-	entity_->getComponent<Movement>()->setSpeed(actualSpeed_ / 2);
+	attribs_->setVel(attribs_->getVel() / 2);
 
 	//Realizo las animaciones
 }
@@ -76,5 +76,5 @@ void Turret::action() {
 void Turret::endAbility() {
 
 	//Vuelve a vel original
-	entity_->getComponent<Movement>()->setSpeed(actualSpeed_);
+	attribs_->resetVel();
 }

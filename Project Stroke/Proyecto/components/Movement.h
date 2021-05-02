@@ -35,10 +35,6 @@ public:
 
 	Vector2D getLastDir() { return lastDir_; };
 
-	inline void setSpeed(Vector2D newSp) {
-		speed_ = newSp;
-	}
-
 protected:
 private:
 
@@ -51,6 +47,7 @@ private:
 	Gravity* grav_;
 	GameStates* state_;
 	AnimHamsterStateMachine* animState_;
+	EntityAttribs* attribs_;
 	/*Combos* comb_;
 	Stroke* stroke_;*/
 	Vector2D speed_, goalVel_, lastDir_;

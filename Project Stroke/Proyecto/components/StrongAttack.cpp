@@ -11,7 +11,7 @@
 
 
 StrongAttack::StrongAttack() :
-	hms_(nullptr), tr_(nullptr), cooldown_(400), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false){
+	hms_(nullptr), tr_(nullptr), cooldown_(500), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false){
 }
 
 void StrongAttack::init() {
@@ -120,12 +120,12 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 								enmFlip = !enmFlip;
 
 							if (finCombo) {
-								enmKnockback->setKnockbackDistance(50);
-								enmKnockback->knockback();
-								enmKnockback->setKnockbackDistance(5);
+								//enmKnockback->setKnockbackDistance(50);
+								enmKnockback->knockback(50);
+								//enmKnockback->setKnockbackDistance(5);
 							}
 							else
-								enmKnockback->knockback();
+								enmKnockback->knockback(7);
 						}
 
 						//Cogemos probabilidad de crítico
@@ -133,11 +133,11 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 
 						//Le restamos la vida al enemigo
 						if (sdlutils().rand().nextInt(1, 10000) < criticProb * 100) {	//Comprobacion golpe crítico
-							eAttribs->recieveDmg(dmg * playerAttribs->getCriticDmg() * 1.5);
+							eAttribs->recieveDmg(dmg * playerAttribs->getCriticDmg() * 1.75);
 							playerAttribs->resetCriticProb();
 						}
 						else
-							eAttribs->recieveDmg(dmg * 1.5);
+							eAttribs->recieveDmg(dmg * 1.75);
 					}
 				}
 			}

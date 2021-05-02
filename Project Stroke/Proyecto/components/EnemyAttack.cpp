@@ -11,7 +11,7 @@
 
 
 EnemyAttack::EnemyAttack() :
-	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false) {}
+	tr_(nullptr), cooldown_(800), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false) {}
 
 void EnemyAttack::init() {
 	tr_ = entity_->getComponent<Transform>();

@@ -11,7 +11,7 @@
 
 
 LightAttack::LightAttack() :
-	hms_(nullptr), tr_(nullptr), cooldown_(250), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false) {}
+	hms_(nullptr), tr_(nullptr), cooldown_(150), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false) {}
 
 void LightAttack::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -123,12 +123,12 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 								//ANIMACION DE STUNN DEL ENEMIGO
 								ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::STUNNED, true);
 
-								enmKnockback->setKnockbackDistance(50);
-								enmKnockback->knockback();
-								enmKnockback->setKnockbackDistance(5);
+								//enmKnockback->setKnockbackDistance(50);
+								enmKnockback->knockback(50);
+								//enmKnockback->setKnockbackDistance(5);
 							}
 							else
-								enmKnockback->knockback();
+								enmKnockback->knockback(3);
 						}
 					}
 					//Cogemos probabilidad de crítico

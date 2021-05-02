@@ -19,12 +19,12 @@ void Movement::init() {
 	anim_ = entity_->getComponent<Animator>();
 	assert(anim_ != nullptr);
 
-	auto* atribs = entity_->getComponent<EntityAttribs>();
+	attribs_ = entity_->getComponent<EntityAttribs>();
 	//assert(atribs != nullptr);
 
 	//Necesario para el cadaver
-	if (atribs != nullptr)
-		speed_ = atribs->getVel();
+	if (attribs_ != nullptr)
+		speed_ = attribs_->getVel();
 	else
 		speed_ = Vector2D(1, 1);
 
@@ -88,6 +88,9 @@ void Movement::update() {
 
 		if (dir.magnitude() != 0) {
 			dir = dir.normalize();
+
+			if (attribs_ != nullptr)
+				speed_ = attribs_->getVel();
 
 			goalVel_ = Vector2D(dir.getX() * speed_.getX(), dir.getY() * speed_.getY());
 		}

@@ -6,6 +6,8 @@ void Combos::init() {
 	assert(grv_ != nullptr);
 	anim_ = entity_->getComponent<AnimHamsterStateMachine>();
 	assert(anim_ != nullptr);
+	attribs_ = entity_->getComponent<EntityAttribs>();
+	assert(attribs_ != nullptr);
 	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
 	assert(state_ != nullptr);
 }
@@ -18,6 +20,7 @@ bool Combos::checkCombo(int action) {
 	case 0:							//Lista vacia
 		cola_.push(action);
 		firstActionAnim(action);
+		attribs_->setVel(attribs_->getVel() / 4);
 		break;
 	case 1:							//Si hay ataques almacenados se comprueban los combos
 		if (action == cola_.back() && action != 2) {
@@ -157,6 +160,7 @@ void Combos::jumpStrong() {
 void Combos::popUntilEmpty() {
 	while (!cola_.empty()) 
 		cola_.pop();
+	attribs_->resetVel();
 }
 
 // Comprueba y llama a la animación que corresponda al entrar la primera acción

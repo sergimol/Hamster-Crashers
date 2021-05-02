@@ -4,6 +4,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "Gravity.h"
 #include "AnimHamsterStateMachine.h"
+#include "EntityAttribs.h"
 #include <map>
 #include <cmath>
 #include <queue>
@@ -23,6 +24,7 @@ private:
 	Gravity* grv_;
 	AnimHamsterStateMachine* anim_;
 	GameStates* state_;
+	EntityAttribs* attribs_;
 
 	std::queue<int> cola_;
 	int lastAttack_;

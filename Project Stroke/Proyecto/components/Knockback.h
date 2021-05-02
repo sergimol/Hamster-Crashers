@@ -18,6 +18,7 @@ public:
 
 	void init() override;
 	void knockback();
+	void knockback(int kVel);
 	inline void setKnockbackDistance(int val) { knockbackVel_ = val; }
 	inline int getKnockback() { return knockbackVel_; }
 

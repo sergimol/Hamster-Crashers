@@ -19,3 +19,15 @@ void Knockback::knockback() {
 		vel.setX(-knockbackVel_);
 	}
 }
+
+void Knockback::knockback(int kVel) {
+	bool flip = tr_->getFlip();
+	auto& vel = tr_->getVel();
+	//anim de caerse de culo
+	if (flip) {
+		vel.setX(kVel);
+	}
+	else {
+		vel.setX(-kVel);
+	}
+}

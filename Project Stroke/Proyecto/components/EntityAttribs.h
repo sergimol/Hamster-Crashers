@@ -95,6 +95,12 @@ public:
 	inline void setInvincibility(bool i) {
 		invincibility_ = i;
 	}
+	inline void setVel(Vector2D newVel) {
+		velocity_ = newVel;
+	}
+	inline void resetVel() {
+		velocity_ = maxVelocity_;
+	}
 
 private:
 	HamsterStateMachine* hms_;
@@ -133,5 +139,6 @@ private:
 	std::string id_;
 
 	Vector2D velocity_;
+	Vector2D maxVelocity_;
 };
 

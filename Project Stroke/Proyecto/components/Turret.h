@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Ability.h"
+#include "EntityAttribs.h"
 
 class Turret : public Ability {
 public:
@@ -16,10 +17,10 @@ public:
 	void endAbility() override;
 
 private:
-	Vector2D actualSpeed_;
 	float cadenceTime_;
 	float x_;
 
+	EntityAttribs* attribs_;
 	//CONSTANTES
 	const int CADENCESHOT = 100;
 	const int BULLETSPEED = 10;
