@@ -140,7 +140,7 @@ bool ContactDamage::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 				else
 					hamFlip = true;
 
-				hamKnockback->knockback();
+				hamKnockback->knockback(30);
 			}
 		}
 

@@ -52,6 +52,7 @@
 #include "../components/EnemyMother.h"
 #include "../components/TriggerScene.h"
 #include "../components/AnimEnemyStateMachine.h"
+#include "../components/CatMovement.h"
 
 
 
@@ -193,6 +194,19 @@ void MapMngr::loadNewMap(string map) {
 							addHamster(object);
 						else if (object.getName() == "newScene") {
 							newSceneTrigger(object.getProperties()[0].getStringValue(), object);
+						}
+						else if (object.getName() == "secondBoss") { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
+							auto* enemy = entity_->getMngr()->addEntity();
+							enemy->addComponent<Transform>(
+								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+								Vector2D(),256.0f, 2*256.0f, 0.0f, 1,1);
+
+
+							enemy->addComponent<EntityAttribs>();
+							enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
+							enemy->addComponent<ContactDamage>(20);
+							enemy->addComponent<CatMovement>()->startChase();
+
 						}
 					}
 				}
