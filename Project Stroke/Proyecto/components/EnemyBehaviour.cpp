@@ -98,12 +98,13 @@ void EnemyBehaviour::setHamId(int hId, std::list<Entity*>::iterator it, char l) 
 	list = l;
 }
 void EnemyBehaviour::die() {
+	bool aux = entity_->hasComponent<StrongAttack>();
 	if (list == 'a') {
-		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAttackList(hamId_, listIterator);
+		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAttackList(hamId_, listIterator, aux);
 		list = '0';
 	}
 	else if (list == 'b') {
-		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAmbushList(hamId_, listIterator);
+		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAmbushList(hamId_, listIterator, aux);
 		list = '0';
 	}
 	//se pone list a 0 porque es posible que ocurra una doble comprobacion del ataque y se llame dos veces a este metodo, y no puede ni debe eliminar dos veces un mismo iterador (error de lista)

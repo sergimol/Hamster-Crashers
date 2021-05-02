@@ -29,6 +29,8 @@ struct Objetivo {
 	Entity* hamster;
 	list<Entity*> atacking;
 	list<Entity*> ambushing;
+	list<Entity*> strongAtacking;
+	list<Entity*> strongAmbushing;
 	Transform* hmTR_;
 	HamsterStateMachine* hmSt_;
 };
@@ -39,11 +41,15 @@ public:
 	EnemyMother();
 	virtual ~EnemyMother() {
 		for (int i = 0; i < numPlayers; i++) {
-			 objetivesList.at(i)->ambushing.clear();
-			 objetivesList.at(i)->atacking.clear();
+			objetivesList.at(i)->ambushing.clear();
+			objetivesList.at(i)->atacking.clear();
+			objetivesList.at(i)->strongAmbushing.clear();
+			objetivesList.at(i)->strongAtacking.clear();
 			 delete objetivesList.at(i);
 		}
 		objetivesList.clear();
+		waiting.clear();
+		strongWaiting.clear();
 	};
 
 	void init() override;
@@ -54,11 +60,11 @@ public:
 	void addObjetive(Entity* hamster);
 
 	void addEnemy(Entity* e) {
-		waiting.push_back(e);
+		if (e->hasComponent<StrongAttack>()) {
+			strongWaiting.push_back(e);
+		}
+		else waiting.push_back(e);
 		numEnemies++;
-	}
-	void addWaiting(Entity* e) {
-		waiting.push_back(e);
 	}
 	/*
 	Recoge a los enemigos de las listas ambush y los pone en waiting para luego volver a reorganizarlos a todos (nuevos y viejos),
@@ -73,8 +79,8 @@ public:
 	/*Change de entiity from attacking list to ambush list when stunned or out of combat*/
 	void changeFromAttackToAmbush(int hamid, std::list<Entity*>::iterator it);
 	//
-	void removeFromAttackList(int hamid, std::list<Entity*>::iterator it);
-	void removeFromAmbushList(int hamid, std::list<Entity*>::iterator it);
+	void removeFromAttackList(int hamid, std::list<Entity*>::iterator it, bool strong);
+	void removeFromAmbushList(int hamid, std::list<Entity*>::iterator it, bool strong);
 	
 	//No hay removefromwaiting, porque en un principio eso no deberia de ser posible ya que cuando estan en ese estado los players estan muertos
 
@@ -103,6 +109,7 @@ protected: //ahora mismo solo funcionan como private
 	std::vector<Entity*> enemys_; //realmente no lo necesitamos pero esta bien tenerlo por si acaso
 
 	list<Entity*> waiting; //es donde se vana  meter inicialmente a todos
+	list<Entity*> strongWaiting; //es donde se vana  meter inicialmente a todos
 	std::map<int, Objetivo*> objetivesList;
 	int numPlayers;
 	int numEnemies;
