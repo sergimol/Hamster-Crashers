@@ -285,6 +285,10 @@
     {
       "id": "hasGanado",
       "file": "resources/images/hasganado.png"
+    },
+    {
+      "id": "catSmoking",
+      "file": "resources/images/catSmoking.png"
     }
   ],
 

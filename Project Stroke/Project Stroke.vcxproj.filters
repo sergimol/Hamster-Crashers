@@ -435,6 +435,9 @@
     <ClCompile Include="Proyecto\components\ImageSecuence.cpp">
       <Filter>Archivos de origen\components\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\CatMovement.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\EnemyBehaviour\BossBehavior</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -736,6 +739,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\Transition.h">
       <Filter>Archivos de encabezado\Components\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\CatMovement.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\BossBehaviour</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

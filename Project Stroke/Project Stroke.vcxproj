@@ -171,6 +171,7 @@
     <ClCompile Include="Proyecto\components\FirstBossBehaviour.cpp" />
     <ClCompile Include="Proyecto\components\FleeFromPlayer.cpp" />
     <ClCompile Include="Proyecto\components\GravityEntity.cpp" />
+    <ClCompile Include="Proyecto\components\CatMovement.cpp" />
     <ClCompile Include="Proyecto\components\ShadowFollow.cpp" />
     <ClCompile Include="Proyecto\components\FollowPlayer.cpp" />
     <ClCompile Include="Proyecto\components\GameStates.cpp" />
@@ -258,6 +259,7 @@
     <ClInclude Include="Proyecto\components\FirstBossBehaviour.h" />
     <ClInclude Include="Proyecto\components\FleeFromPlayer.h" />
     <ClInclude Include="Proyecto\components\GravityEntity.h" />
+    <ClInclude Include="Proyecto\components\CatMovement.h" />
     <ClInclude Include="Proyecto\components\ShadowFollow.h" />
     <ClInclude Include="Proyecto\components\FollowPlayer.h" />
     <ClInclude Include="Proyecto\components\GameStates.h" />

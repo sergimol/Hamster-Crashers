@@ -47,9 +47,9 @@ void ContactDamage::updateRect() {
 		//Suena el hit y le pega
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
 	//Si no colisiona..
-	else
-		//NO  NO QUIERO Suena el attackSound
-		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
+	//else
+	//	//NO  NO QUIERO Suena el attackSound
+	//	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
 
 	//this.anims.play(pegarse)
 
@@ -145,6 +145,7 @@ bool ContactDamage::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 		}
 
 	}
+	entity_->getMngr()->refreshPlayers();
 	return canHit;
 }
 

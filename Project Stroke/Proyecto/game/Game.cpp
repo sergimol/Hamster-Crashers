@@ -36,6 +36,8 @@
 #include "../components/EnemyMother.h"
 #include "../components/SoundManager.h"
 #include "../components/GravityEntity.h"
+#include "../components/CatMovement.h"
+#include "../components/ContactDamage.h"
 
 //PARA LAS COLISIONES CON TILE
 #include "../utils/Collisions.h"
@@ -120,7 +122,14 @@ void Game::init() {
 	mngr_->setHandler<Mother>(mother);
 
 	//Carga del mapa
-	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Lvl1javi.tmx");	 
+	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Lvl1javi.tmx");
+
+	//auto cat = mngr_->addEntity();
+	//cat->addComponent<Transform>(Vector2D(100, 20), Vector2D(0, 0), 50, 1000, 0, 1, 1);
+	//cat->addComponent<EntityAttribs>();
+	//cat->addComponent<Image>(&sdlutils().images().at("catSmoking"));
+	//cat->addComponent<ContactDamage>(40);
+	//cat->addComponent<CatMovement>()->startChase();
 
 }
 

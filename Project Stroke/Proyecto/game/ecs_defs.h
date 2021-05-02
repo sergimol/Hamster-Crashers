@@ -69,6 +69,7 @@ class Shadow;
 class EnemyMother;
 class SoundManager;
 class GravityEntity;
+class CatMovement;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -139,7 +140,8 @@ class GravityEntity;
 	TriggerScene, \
 	Shadow,\
 	SoundManager, \
-	GravityEntity
+	GravityEntity, \
+	CatMovement
 
 // groups
 
