@@ -177,7 +177,7 @@ void EnemyMother::cleanListHamAttacking(int i) {
 /*Cambia a un eneigo en concreto de attack to ambush*/
 void EnemyMother::changeFromAttackToAmbush(int hamid, std::list<Entity*>::iterator it) {
 	
-	if (!(*it)->hasComponent<StrongAttack>()) {
+	if (!(*it)->hasComponent<EnemyStrongAttack>()) {
 
 	
 		//coloca el bicho en ambush al final

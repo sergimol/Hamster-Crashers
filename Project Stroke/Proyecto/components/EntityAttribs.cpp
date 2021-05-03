@@ -235,6 +235,7 @@ void EntityAttribs::die() {
 		//Desactivamos el componente del hasmter vivo
 		entity_->getComponent<Animator>()->setActive(false);
 		entity_->getComponent<Shadow>()->setActive(false);
+
 		//TODO arreglar camara, y demas objetos que den problemas con el como se esta desactivando el hamster,
 		//hacerlo a mano cada vez que os den problemas porque desactivar la entidad del hamster 
 		//NO ES UNA OPCION

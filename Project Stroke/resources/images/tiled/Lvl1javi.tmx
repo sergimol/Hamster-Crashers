@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="left-up" width="100" height="5" tilewidth="64" tileheight="64" infinite="0" nextlayerid="11" nextobjectid="62">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="left-up" width="100" height="5" tilewidth="64" tileheight="64" infinite="0" nextlayerid="11" nextobjectid="62">
  <tileset firstgid="1" source="demoTileset.tsx"/>
  <tileset firstgid="145" source="collisionTileset.tsx"/>
  <layer id="1" name="Capa de patrones 1" width="100" height="5">
@@ -49,49 +49,49 @@
  </layer>
  <objectgroup id="6" name="entities">
   <object id="1" name="sardinilla" x="264" y="161.167"/>
-  <object id="11" name="enemigo" x="602" y="229.637" width="27.2727" height="44.9091">
+  <object id="11" name="enemigoFuerte" x="602" y="229.637" width="27.2727" height="44.9091">
    <properties>
     <property name="sala" type="int" value="1"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
-  <object id="15" name="enemigo" x="1264.85" y="178" width="27.2727" height="44.9091">
+  <object id="15" name="enemigoFuerte" x="1264.85" y="178" width="27.2727" height="44.9091">
    <properties>
     <property name="sala" type="int" value="1"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
-  <object id="24" name="enemigo" x="1271.88" y="233.636" width="27.2727" height="44.9091">
+  <object id="24" name="enemigoFuerte" x="1271.88" y="233.636" width="27.2727" height="44.9091">
    <properties>
     <property name="sala" type="int" value="1"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
-  <object id="25" name="enemigo" x="624" y="153.637" width="27.2727" height="44.9091">
+  <object id="25" name="enemigoFuerte" x="624" y="153.637" width="27.2727" height="44.9091">
    <properties>
     <property name="sala" type="int" value="1"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
-  <object id="26" name="enemigo" x="796.728" y="156.667" width="27.2727" height="44.9091">
+  <object id="26" name="enemigoFuerte" x="796.728" y="156.667" width="27.2727" height="44.9091">
    <properties>
     <property name="sala" type="int" value="1"/>
     <property name="zRondas" type="int" value="1"/>
    </properties>
   </object>
-  <object id="27" name="enemigo" x="774.728" y="232.667" width="27.2727" height="44.9091">
+  <object id="27" name="enemigoFuerte" x="774.728" y="232.667" width="27.2727" height="44.9091">
    <properties>
     <property name="sala" type="int" value="1"/>
     <property name="zRondas" type="int" value="1"/>
    </properties>
   </object>
-  <object id="28" name="enemigo" x="1543.64" y="147.697" width="27.2727" height="44.9091">
+  <object id="28" name="enemigoFuerte" x="1543.64" y="147.697" width="27.2727" height="44.9091">
    <properties>
     <property name="sala" type="int" value="1"/>
     <property name="zRondas" type="int" value="1"/>
    </properties>
   </object>
-  <object id="29" name="enemigo" x="1547.64" y="239.697" width="27.2727" height="44.9091">
+  <object id="29" name="enemigoFuerte" x="1547.64" y="239.697" width="27.2727" height="44.9091">
    <properties>
     <property name="sala" type="int" value="1"/>
     <property name="zRondas" type="int" value="1"/>
@@ -229,31 +229,31 @@
     <property name="zRondas" type="int" value="1"/>
    </properties>
   </object>
-  <object id="55" name="enemigo" x="5805.22" y="227.576" width="27.2727" height="44.9091">
+  <object id="55" name="enemigoFuerte" x="5805.22" y="227.576" width="27.2727" height="44.9091">
    <properties>
     <property name="sala" type="int" value="4"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
-  <object id="56" name="enemigo" x="5810.31" y="193.152" width="27.2727" height="44.9091">
+  <object id="56" name="enemigoFuerte" x="5810.31" y="193.152" width="27.2727" height="44.9091">
    <properties>
     <property name="sala" type="int" value="4"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
-  <object id="57" name="enemigo" x="6022.43" y="202.243" width="27.2727" height="44.9091">
+  <object id="57" name="enemigoFuerte" x="6022.43" y="202.243" width="27.2727" height="44.9091">
    <properties>
     <property name="sala" type="int" value="4"/>
     <property name="zRondas" type="int" value="1"/>
    </properties>
   </object>
-  <object id="58" name="enemigo" x="6090.06" y="236.666" width="27.2727" height="44.9091">
+  <object id="58" name="enemigoFuerte" x="6090.06" y="236.666" width="27.2727" height="44.9091">
    <properties>
     <property name="sala" type="int" value="4"/>
     <property name="zRondas" type="int" value="1"/>
    </properties>
   </object>
-  <object id="59" name="enemigo" x="6083.03" y="171.939" width="27.2727" height="44.9091">
+  <object id="59" name="enemigoFuerte" x="6083.03" y="171.939" width="27.2727" height="44.9091">
    <properties>
     <property name="sala" type="int" value="4"/>
     <property name="zRondas" type="int" value="1"/>

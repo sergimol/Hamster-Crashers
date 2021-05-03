@@ -31,8 +31,6 @@ public:
 	void init() override;
 	void behave();
 
-	void lockHamster();
-	void lockHamster(int id);
 	bool isWithinAttackRange();
 
 	void strongAttack(bool f);
