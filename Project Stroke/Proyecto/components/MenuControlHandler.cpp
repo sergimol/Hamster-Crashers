@@ -24,7 +24,7 @@ void MenuControlHandler::init() {
 void MenuControlHandler::update() {
 	auto gameState = states_->getState();
 
-	if (gameState == GameStates::PAUSE || gameState == GameStates::MAINMENU || gameState == GameStates::SELECTION) {
+	if (gameState == stateNumber_) {
 		// Si hay algún mando conectado los tiene en cuenta
 		for (int i = 0; i < MAXPLAYERS; ++i) {
 			if (ih().playerHasController(i)) {
@@ -76,10 +76,10 @@ void MenuControlHandler::handleController(int controller) {
 	if (ih().isButtonDown(controller, SDL_CONTROLLER_BUTTON_A)) 
 		menu_->updateKeymap(MenuButtonManager::SPACE, true);
 	
-	auto gameState = states_->getState();
+	/*auto gameState = states_->getState();
 	if (ih().isButtonDown(controller, SDL_CONTROLLER_BUTTON_START) && gameState == GameStates::PAUSE) {
 		states_->setState(GameStates::RUNNING);
-	}
+	}*/
 }
 
 void MenuControlHandler::handleKeyboard() {
@@ -110,8 +110,8 @@ void MenuControlHandler::handleKeyboard() {
 	if (ih().isKeyDown(keymap.at(SPACE)))
 		menu_->updateKeymap(MenuButtonManager::SPACE, true);
 
-	auto gameState = states_->getState();
+	/*auto gameState = states_->getState();
 	if (ih().isKeyDown(SDL_SCANCODE_ESCAPE) && gameState == GameStates::PAUSE) {
 		states_->setState(GameStates::RUNNING);
-	}
+	}*/
 }

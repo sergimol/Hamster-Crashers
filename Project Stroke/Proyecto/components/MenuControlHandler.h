@@ -16,9 +16,10 @@ para cada una de las entidades y mandarles la orden
 de esta forma tmb se permitira mas adelante el mapeado de estas acciones*/
 class MenuControlHandler : public Component {
 public:
-	MenuControlHandler() :
+	MenuControlHandler(int state) :
 		states_(nullptr),
-		menu_(nullptr)
+		menu_(nullptr),
+		stateNumber_(state)
 	{
 	}
 
@@ -39,6 +40,8 @@ private:
 
 	void handleKeyboard();
 	void handleController(int controller);
+
+	int stateNumber_;
 };
 
 
