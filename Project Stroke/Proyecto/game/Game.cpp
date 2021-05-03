@@ -62,6 +62,7 @@ Game::~Game() {
 void Game::init() {
 
 	SDLUtils::init("Squeak Ship", 1920, 1010, "resources/config/hamsters.resources.json");
+	SDL_SetWindowSize(sdlutils().window(), 1920, 1010);
 
 	//Máquina de estados
 	auto* stateMachine = mngr_->addEntity();
@@ -92,13 +93,16 @@ void Game::init() {
 		Vector2D(0, 0),
 		3
 		);*/
-	mainMenu->addComponent<MenuButtonManager>("mainMenu", &sdlutils().images().at("mainMenuBlank"));	//mainMenu, pauseMenu o hamsterMenu
+
+	
+	mainMenu->addComponent<MenuButtonManager>("mainMenu");	//mainMenu, pauseMenu o hamsterMenu
 	mngr_->setHandler<MainMenu>(mainMenu);
 	//mainMenu->addComponent<MenuButtonManager>("hamsterMenu", &sdlutils().images().at("hamsterSelectorBlank"));	//mainMenu, pauseMenu o hamsterMenu
 
-	auto* pauseMenu = mngr_->addMenu();
-	pauseMenu->addComponent<MenuButtonManager>("pauseMenu");	//mainMenu, pauseMenu o hamsterMenu
-	mngr_->setHandler<PauseMenu>(pauseMenu);
+	//auto* pauseMenu = mngr_->addMenu();
+	//pauseMenu->addComponent<MenuButtonManager>("pauseMenu");	//mainMenu, pauseMenu o hamsterMenu
+	//mngr_->setHandler<PauseMenu>(pauseMenu);
+
 
 	// Mapa
 	auto* mapa = mngr_->addEntity();

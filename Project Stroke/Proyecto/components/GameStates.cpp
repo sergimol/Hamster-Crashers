@@ -2,7 +2,9 @@
 
 void GameStates::init() {
 	state_ = MAINMENU;	
-	//state_ = CONTROLS;	
+	//state_ = CONTROLS;
+	//state_ = SELECTION;	
+
 }
 
 void GameStates::setState(States state) {
