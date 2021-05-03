@@ -20,7 +20,8 @@ bool Combos::checkCombo(int action) {
 	case 0:							//Lista vacia
 		cola_.push(action);
 		firstActionAnim(action);
-		attribs_->setVel(attribs_->getVel() / 4);
+		if (action != 2)
+			attribs_->setVel(attribs_->getVel() / 4);
 		break;
 	case 1:							//Si hay ataques almacenados se comprueban los combos
 		if (action == cola_.back() && action != 2) {
@@ -48,6 +49,8 @@ bool Combos::checkCombo(int action) {
 			grv_->setActive(false);
 			anim_->setAnimBool(HamStatesAnim::LIGHTATTACK, true);
 			entity_->getComponent<Transform>()->getVelZ() = 0;
+
+			attribs_->setVel(attribs_->getVel() / 4); //Reducir velocidad
 			
 		}
 		else { //Combo imposible -> cambio de acción

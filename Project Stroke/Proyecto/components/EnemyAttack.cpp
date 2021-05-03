@@ -11,7 +11,7 @@
 
 
 EnemyAttack::EnemyAttack() :
-	tr_(nullptr), cooldown_(800), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false) {}
+	tr_(nullptr), minCD_(900), maxCD_(1300), cooldown_(sdlutils().rand().nextInt(minCD_, maxCD_)), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false) {}
 
 void EnemyAttack::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -68,6 +68,7 @@ void EnemyAttack::update() {
 
 				DEBUG_isAttacking_ = true;
 				time_ = sdlutils().currRealTime();
+				cooldown_ = sdlutils().rand().nextInt(minCD_, maxCD_);
 			}
 		}
 	}
