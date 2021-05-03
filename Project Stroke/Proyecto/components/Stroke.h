@@ -51,8 +51,8 @@ private:
 		//MAXCHANCE = 35, // Máximo de probabilidad de infarto que se puede recibir por salto y ataque
 		TIMETODECREASE = 10000, // Tiempo que debe pasar para empezar a reducir el infarto
 		TIMEBETWEENDECREASES = 2500, // Tiempo entre reducciones de la probabilidad
-		DECREASEPERCENTAGE = 35; // Porcentaje que se reduce por acierto en el minijuego
-
+		DECREASEPERCENTAGE = 35, // Porcentaje que se reduce por acierto en el minijuego
+		CHANGECOLORVALUE = 20;
 	// Probabilidad de que haya un infarto
 	int chance_ = 1,
 		chanceFromAb_ = 0,

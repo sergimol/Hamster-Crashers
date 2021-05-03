@@ -112,6 +112,8 @@ void MapMngr::loadNewMap(string map) {
 
 	if (map_.load(map)) {
 
+		mapHeight_ = map_.getProperties()[0].getIntValue();
+
 		mapDimensions_ = map_.getTileCount();
 		const auto& layers = map_.getLayers();
 
@@ -221,13 +223,12 @@ void MapMngr::loadNewMap(string map) {
 				for (int j = 0; j < mapDimensions_.y; j++) {
 					for (int i = 0; i < mapDimensions_.x; i++) {
 
-
 						//Guardamos el indice global del tile (nos servir� para saber en qu� tileset se encuentra)
 						auto tileList = tileLayer.getTiles();
 						auto globalIndexTile = tileList[i + j * mapDimensions_.x].ID;	//mapDimensions_.y+columna*elementos_enuna_fila
 
-					//Necesitamos saber a cual de los tilesets pertenece esa posicion
-						while (globalIndexTile > tilesets[index].getLastGID()) {
+						//Necesitamos saber a cual de los tilesets pertenece esa posicion
+ 						while (globalIndexTile > tilesets[index].getLastGID()) {
 							index++;	//Marca la posicion del tileset al que pertenece el tile
 						}
 

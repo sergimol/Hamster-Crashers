@@ -146,6 +146,10 @@ public:
 		return animCont == targetFrame;
 	}
 
+	void setTexture(Texture* t) {
+		tex_ = t;
+	}
+
 private:
 	//Variables de recursos
 	Transform* tr_;
