@@ -23,14 +23,14 @@ void Camera::checkBounds() {
 	if (camera_.x < 0) {
 		camera_.x = 0;
 	}
-	else if (camera_.x + camera_.w > 6400 * map_->getScale()) {
-		camera_.x = (6400 * map_->getScale()) - camera_.w;
+	else if (camera_.x + camera_.w > map_->getMaxW()) { 
+		camera_.x = map_->getMaxW() - camera_.w;
 	}
 
 	if (camera_.y < -205)
 		camera_.y = -205;
-	else if (camera_.y + camera_.h > 320 * map_->getScale())
-		camera_.y = (320 * map_->getScale()) - camera_.h;
+	else if (camera_.y + camera_.h > map_->getMaxH())
+		camera_.y = map_->getMaxH() - camera_.h;
 
 	camPos.setX(camera_.x + camera_.w / 2);
 	camPos.setY(camera_.y + camera_.h / 2);

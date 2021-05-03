@@ -61,8 +61,8 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 		}
 	}
 
-	if (rectPlayer.y + rectPlayer.h > map->getMaxH())
-		vel.setY(0);
+	/*if (rectPlayer.y + rectPlayer.h > map->getMaxH())
+		vel.setY(0);*/
 
 	//Comprobacion para los límites de la cámara
 	if (!enemy && (rectPlayer.x < cam.x || rectPlayer.x + rectPlayer.w > pCam.getX() + cam.w / 2))

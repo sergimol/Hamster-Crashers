@@ -56,6 +56,7 @@ public:
 	int getScale() { return scale; };
 	int getCellSize() { return TAM_CELDA; };
 	inline int getMaxH() { return mapDimensions_.y * TAM_CELDA * scale; };
+	inline int getMaxW() { return mapDimensions_.x * TAM_CELDA * scale; };
 
 	void loadEnemyRoom();
 	void reduceNumberEnemyRoom() { numberEnemyRoom--; };
