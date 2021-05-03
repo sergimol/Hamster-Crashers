@@ -100,12 +100,12 @@ void Game::init() {
 		Vector2D(0, 0),
 		3
 		);*/
-	mainMenu->addComponent<MenuButtonManager>("mainMenu", &sdlutils().images().at("mainMenuBlank"));	//mainMenu, pauseMenu o hamsterMenu
+	mainMenu->addComponent<MenuButtonManager>("mainMenu", 0);	//mainMenu, pauseMenu o hamsterMenu
 	mainMenu->addComponent<MenuControlHandler>();
 	mngr_->setHandler<MainMenu>(mainMenu);
 
 	auto* pauseMenu = mngr_->addMenu();
-	pauseMenu->addComponent<MenuButtonManager>("pauseMenu");	//mainMenu, pauseMenu o hamsterMenu
+	pauseMenu->addComponent<MenuButtonManager>("pauseMenu", 2);	//mainMenu, pauseMenu o hamsterMenu
 	pauseMenu->addComponent<MenuControlHandler>();
 	mngr_->setHandler<PauseMenu>(pauseMenu);
 

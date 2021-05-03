@@ -14,29 +14,28 @@ class MenuButtonManager: public Component{
 public:
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 
-	MenuButtonManager(string menu, Texture* bckgrnd);
-	MenuButtonManager(string menu);
+	MenuButtonManager(string menu, int state);
 
 	virtual ~MenuButtonManager() {};
 
 	void init() override;
 	void update() override;
-	void render() override;
 	void updateKeymap(KEYS x, bool is);
 
 private:
-	string MenuMode;
-	//Numero del boton en el menu
-	int buttonNumber;
+	string menuMode_;
+	//Numero del estado en el que se muestra el menú
+	int stateNumber_;
 
 	//Controla el boton activo dentro de la rejilla
-	Vector2D buttonsPosition;
-	Vector2D buttonsMagnitude;
-	vector<vector<Entity*>> buttons;
+	Vector2D buttonsPosition_;
+	Vector2D buttonsMagnitude_;
+	vector<vector<Entity*>> buttons_;
 
-	long unsigned int timer_, cooldown_; //Contador para ver CADA CUANTO puede usar una habilidad
+	GameStates* state_;
+	long unsigned int timer_, cooldown_; //Contador para movimiento entre botones
 
 	//Input
 	std::map<KEYS, bool> keymap;
-	Texture* background;
+	Entity* background_;
 };

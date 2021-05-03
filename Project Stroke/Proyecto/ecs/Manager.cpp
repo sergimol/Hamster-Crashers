@@ -69,7 +69,8 @@ void Manager::render() {
 	//RENDERIZA FONDOS
 	auto b = bgs_.size();
 	for (auto i = 0u; i < b; i++)
-		bgs_[i]->render();
+		if(bgs_[i]->isActive())
+			bgs_[i]->render();
 
 	//RENDERIZA TILES
 	auto w = tiles_.size();
