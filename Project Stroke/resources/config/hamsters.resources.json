@@ -293,6 +293,30 @@
     {
       "id": "catSmoking",
       "file": "resources/images/catSmoking.png"
+    },
+    {
+      "id": "1920x1080Button",
+      "file": "resources/images/menuSprites/quitButton.png"
+    },
+    {
+      "id": "1920x1080ButtonEnter",
+      "file": "resources/images/menuSprites/quitButtonEnter.png"
+    },
+    {
+      "id": "1280x720Button",
+      "file": "resources/images/menuSprites/quitButton.png"
+    },
+    {
+      "id": "1280x720ButtonEnter",
+      "file": "resources/images/menuSprites/quitButtonEnter.png"
+    },
+    {
+      "id": "640x480Button",
+      "file": "resources/images/menuSprites/quitButton.png"
+    },
+    {
+      "id": "640x480ButtonEnter",
+      "file": "resources/images/menuSprites/quitButtonEnter.png"
     }
   ],
 

@@ -74,6 +74,14 @@ public:
 		return height_;
 	}
 
+	inline void setWidth(int widthAux) {
+		width_ = widthAux;
+	}
+
+	inline void setHeight(int heightAux) {
+		height_ = heightAux;
+	}
+
 	// toggle to full-screen/window mode
 	inline void toggleFullScreen() {
 		auto flags = SDL_GetWindowFlags(window_);

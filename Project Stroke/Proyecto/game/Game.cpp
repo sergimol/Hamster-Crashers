@@ -62,7 +62,14 @@ Game::~Game() {
 
 void Game::init() {
 
-	SDLUtils::init("Squeak Ship", 1920, 1010, "resources/config/hamsters.resources.json");
+	SDLUtils::init("Squeak Ship", 1920, 1080, "resources/config/hamsters.resources.json");
+
+	SDL_SetWindowFullscreen(sdlutils().window(), SDL_WINDOW_FULLSCREEN);	//   SDL_WINDOW_FULLSCREEN  ||   SDL_WINDOW_FULLSCREEN_DESKTOP
+
+	//CAMBIAR TAMAÑO DE PANTALLA, ESCALA DEL RENDER Y ALTERNAR ENTRE PANTALLA COMPLETA
+	//SDL_SetWindowSize(sdlutils().window(), sdlutils().width(), sdlutils().height());
+	//SDL_RenderSetScale(sdlutils().renderer(), sdlutils().width() / 1920.0f, sdlutils().height() / 1080.0f);
+	//SDL_SetWindowFullscreen(sdlutils().window(), 0);	//   SDL_WINDOW_FULLSCREEN  ||   SDL_WINDOW_FULLSCREEN_DESKTOP
 
 	//Máquina de estados
 	auto* stateMachine = mngr_->addEntity();
@@ -80,7 +87,7 @@ void Game::init() {
 
 	//Metemos al mapa en el Handler de Map
 	mngr_->setHandler<LevelHandlr>(levelMngr);
-    
+
 	//MENU		
 	auto* mainMenu = mngr_->addMenu();
 	/*mainMenu->addComponent<Animator>(
@@ -102,6 +109,7 @@ void Game::init() {
 	pauseMenu->addComponent<MenuControlHandler>();
 	mngr_->setHandler<PauseMenu>(pauseMenu);
 
+
 	// Mapa
 	auto* mapa = mngr_->addEntity();
 	mngr_->setHandler<Map>(mapa);
@@ -109,7 +117,7 @@ void Game::init() {
 	//Cámara
 	auto* camera = mngr_->addEntity();
 	mngr_->setHandler<Camera__>(camera);
-	
+
 
 	//Componentes del mapa
 	mapa->addComponent<MapMngr>();
@@ -125,7 +133,7 @@ void Game::init() {
 
 	//Carga del mapa
 	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Lvl1javi.tmx");
-	
+
 }
 
 void Game::update() {
@@ -219,7 +227,7 @@ void Game::sortEntities() {
 
 	auto& entities = mngr_->getEntities();
 	//Este 2 indica el numero de entidades a las que no afecta el mergeSort
-	mergeSort(entities, 5, entities.size() - 1);	
+	mergeSort(entities, 5, entities.size() - 1);
 
 	/*
 		-------------DEBUG-----------

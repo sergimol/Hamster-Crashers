@@ -2,16 +2,14 @@
 #include "BackGround.h"
 #include "Transition.h"
 
-MenuButtonManager::MenuButtonManager(string menu, Texture* bckgrd) :MenuMode(menu), background(bckgrd) {}
-MenuButtonManager::MenuButtonManager(string menu) : MenuMode(menu) {}
+MenuButtonManager::MenuButtonManager(string menu) :MenuMode(menu) {}
 
 void MenuButtonManager::init() {
 
 	if (MenuMode == "mainMenu") {
-		/*
-		buttonsMagnitude = Vector2D(2, 2); //4 botones, 2x2*/
-		// Para la demo
-		buttonsMagnitude = Vector2D(2, 1); //2 botones, 2x1
+		
+		buttonsMagnitude = Vector2D(2, 2); //4 botones, 2x2
+
 		buttons = vector<vector<Entity*>>(buttonsMagnitude.getX());
 		for (int i = 0; i < buttons.size(); ++i) {
 			buttons[i] = vector<Entity*>(buttonsMagnitude.getY());
@@ -23,20 +21,19 @@ void MenuButtonManager::init() {
 		localbutton->addComponent<MenuButton>("local", Vector2D(100, 550), 0);
 		buttons[0][0] = localbutton;
 
-		/*auto* onlinebutton = mngr_->addEntity();
+		auto* onlinebutton = mngr_->addMenu();
 		onlinebutton->addComponent<MenuButton>("online", Vector2D(100, 750), 0);
 		buttons[0][1] = onlinebutton;
 
-		auto* optionsbutton = mngr_->addEntity();
-		optionsbutton->addComponent<MenuButton>("options", Vector2D(1550, 650), 0);
-		buttons[1][0] = optionsbutton;*/
+		auto* optionsbutton = mngr_->addMenu();
+		optionsbutton->addComponent<MenuButton>("options", Vector2D(1550, 550), 0);
+		buttons[1][0] = optionsbutton;
 
 		auto* quitbutton = mngr_->addMenu();
-		/*quitbutton->addComponent<MenuButton>("quit", Vector2D(1550, 820), 0);
-		buttons[1][1] = quitbutton;*/
-		// Para la demo
-		quitbutton->addComponent<MenuButton>("quit", Vector2D(1550, 550), 0);
-		buttons[1][0] = quitbutton;
+		quitbutton->addComponent<MenuButton>("quit", Vector2D(1550, 750), 0);
+		buttons[1][1] = quitbutton;
+		
+		background = &sdlutils().images().at("mainMenuBlank");
 	}
 	else if (MenuMode == "pauseMenu") {
 		//buttonsMagnitude = Vector2D(1, 3); //3 botones, 1x3
@@ -63,6 +60,8 @@ void MenuButtonManager::init() {
 		// Para la demo
 		quitbutton->addComponent<MenuButton>("quit", Vector2D(870, 550), 2);
 		buttons[0][1] = quitbutton;
+
+		background = nullptr;
 	}
 	else if (MenuMode == "hamsterMenu") {
 		buttonsMagnitude = Vector2D(4, 1); //4 botones, 4x1
@@ -87,8 +86,10 @@ void MenuButtonManager::init() {
 		auto* canelonbutton = mngr_->addMenu();
 		canelonbutton->addComponent<MenuButton>("canelon", Vector2D(1400, 50), 1);
 		buttons[3][0] = canelonbutton;
+
+		background = &sdlutils().images().at("hamsterSelectorBlank");
 	}
-	buttonsPosition = Vector2D(0, 0);
+	//buttonsPosition = Vector2D(0, 0);
 	buttons[buttonsPosition.getX()][buttonsPosition.getY()]->getComponent<MenuButton>()->selected();
 
 	keymap.insert({ UP, false });
@@ -141,14 +142,14 @@ void MenuButtonManager::update() {
 }
 
 void MenuButtonManager::render() {
-	if (MenuMode == "mainMenu" && MenuMode == "hamsterMenu")
+	if (MenuMode == "mainMenu" || MenuMode == "hamsterMenu")
 	{
 		auto backLeft = entity_->getMngr()->addBackGround();
 		backLeft->addComponent<Transform>(Vector2D(0, -250), Vector2D(0, 0), background->width(), background->height(), 0.0, 1, 1);
 		backLeft->addComponent<BackGround>(background, 0);
 	}
-
 }
+
 void MenuButtonManager::updateKeymap(KEYS x, bool is) {
 	//if (x != SPACE || !keymap.at(SPACE))
 		keymap.at(x) = is;
