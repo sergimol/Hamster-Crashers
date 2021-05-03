@@ -61,11 +61,15 @@ Game::~Game() {
 
 void Game::init() {
 
-	SDLUtils::init("Squeak Ship", 1920, 1080, "resources/config/hamsters.resources.json");
+	SDLUtils::init("Squeak Ship", 1920, 1010, "resources/config/hamsters.resources.json");
 
-	float pantallaX = 1920.0f; int pantallaY = 1010.0f;
-	SDL_SetWindowSize(sdlutils().window(), pantallaX, pantallaY);
-	SDL_RenderSetScale(sdlutils().renderer(), pantallaX / 1920.0f, pantallaY / 1080.0f);
+	SDL_SetWindowFullscreen(sdlutils().window(), SDL_WINDOW_FULLSCREEN);	//   SDL_WINDOW_FULLSCREEN  ||   SDL_WINDOW_FULLSCREEN_DESKTOP
+
+
+	//CAMBIAR TAMAÑO DE PANTALLA, ESCALA DEL RENDER Y ALTERNAR ENTRE PANTALLA COMPLETA
+	//SDL_SetWindowSize(sdlutils().window(), sdlutils().width(), sdlutils().height());
+	//SDL_RenderSetScale(sdlutils().renderer(), sdlutils().width() / 1920.0f, sdlutils().height() / 1080.0f);
+	//SDL_SetWindowFullscreen(sdlutils().window(), 0);	//   SDL_WINDOW_FULLSCREEN  ||   SDL_WINDOW_FULLSCREEN_DESKTOP
 
 
 	//Máquina de estados
@@ -99,13 +103,12 @@ void Game::init() {
 		);*/
 
 
-	//mainMenu->addComponent<MenuButtonManager>("mainMenu");	//mainMenu, pauseMenu o hamsterMenu
-	//mngr_->setHandler<MainMenu>(mainMenu);
-	//mainMenu->addComponent<MenuButtonManager>("hamsterMenu", &sdlutils().images().at("hamsterSelectorBlank"));	//mainMenu, pauseMenu o hamsterMenu
+	mainMenu->addComponent<MenuButtonManager>("mainMenu");	//mainMenu, pauseMenu o hamsterMenu
+	mngr_->setHandler<MainMenu>(mainMenu);
 
-	//auto* pauseMenu = mngr_->addMenu();
-	//pauseMenu->addComponent<MenuButtonManager>("pauseMenu");	//mainMenu, pauseMenu o hamsterMenu
-	//mngr_->setHandler<PauseMenu>(pauseMenu);
+	auto* pauseMenu = mngr_->addMenu();
+	pauseMenu->addComponent<MenuButtonManager>("pauseMenu");	//mainMenu, pauseMenu o hamsterMenu
+	mngr_->setHandler<PauseMenu>(pauseMenu);
 
 
 	// Mapa
