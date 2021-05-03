@@ -21,23 +21,10 @@ public:
 
 	void init() override;
 
-	void update() override;
-
-	void startChase();
-
 private:
 	Transform* tr_;
-	int iniPos = 0;
 
-	const int MOVE = -100, TIME = 3000, VEL = -2;
+	const int VEL = -2;
 
-	// Supuestamente con animaciones
-	// Timer temporal
-
-	int timer = 0;
-
-	bool walk = false;
-	bool walking = false;
-	bool start = false;
 };
 

@@ -78,11 +78,11 @@ void MovementInChase::update() {
 		}
 
 		if (keymap.at(RIGHT)) {
-			dir.setX(-0.75f);
-			tr_->getFlip() = false;
+			dir.setX(1.0f);
+			tr_->getFlip() = true;
 		}
 		else if (keymap.at(LEFT)) {
-			dir.setX(-1.5f);
+			dir.setX(-2.0f);
 			tr_->getFlip() = true;
 		}
 
@@ -92,15 +92,15 @@ void MovementInChase::update() {
 			if (attribs_ != nullptr)
 				speed_ = attribs_->getVel();
 
-			goalVel_ = Vector2D(dir.getX() * speed_.getX(), dir.getY() * speed_.getY());
+			goalVel_ = baseSpeed_ + Vector2D(dir.getX() * speed_.getX(), dir.getY() * speed_.getY());
 		}
 
 		lastDir_ = dir; //Recogemos siempre la �ltima direcci�n para quien la necesite
 
 		if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {		//Deceleracion
 			if (col_ != nullptr) {
-				vel.setX(col_->lerp(vel.getX(), 1, 0.25));
-				vel.setY(col_->lerp(vel.getY(), 1, 0.25));
+				vel.setX(col_->lerp(vel.getX(), baseSpeed_.getX(), 0.25));
+				vel.setY(col_->lerp(vel.getY(), 0, 0.25));
 			}
 			//ANIMACION DE IDLE
 

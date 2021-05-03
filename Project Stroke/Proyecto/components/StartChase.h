@@ -23,4 +23,5 @@ public:
 
 private:
 	Transform* tr_;
+	bool in = false;
 };

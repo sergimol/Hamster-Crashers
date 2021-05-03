@@ -51,6 +51,8 @@ private:
 	/*Combos* comb_;
 	Stroke* stroke_;*/
 	Vector2D speed_, goalVel_, lastDir_;
+
+	const Vector2D baseSpeed_ = Vector2D(-3, 0);
 	
 	std::map<KEYS, bool> keymap;
 };

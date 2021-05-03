@@ -10,6 +10,10 @@
 #include "Ability.h"
 #include "LightAttack.h"
 #include "StrongAttack.h"
+#include "Roll.h"
+#include "Pray.h"
+#include "Turret.h"
+#include "Poison.h"
 
 void StartChase::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -24,15 +28,10 @@ void StartChase::update() {
 		//Cogemos la camara para hacer bien las colisiones
 		SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 
-		if (!Collisions::collides(hamsterTr->getPos(), hamsterTr->getW(), hamsterTr->getH(),
+		if (Collisions::collides(hamsterTr->getPos(), hamsterTr->getW(), hamsterTr->getH(),
 			tr_->getPos(), tr_->getW(), tr_->getH())) {
+			start();
 		}
-	}
-
-	//Si todos los hamsters estan en el trigger
-	if (!entity_->getMngr()->getPlayers().empty()) { //TODO ELIMINAR ULTIMA CONDICION TRIGGER
-		//Empieza el Chase
-		start();
 	}
 }
 
@@ -43,9 +42,22 @@ void StartChase::render() {
 void StartChase::start() {
 	for (Entity* hamsters : entity_->getMngr()->getPlayers()) {
 		hamsters->getComponent<Movement>()->setActive(false);
-		hamsters->getComponent<Ability>()->setActive(false);
+
+		string id = hamsters->getComponent<EntityAttribs>()->getId();
+
+		if (id == "sardinilla") {
+			hamsters->getComponent<Roll>()->setActive(false);
+		}
+		else if (id == "canelon")
+			hamsters->getComponent<Pray>()->setActive(false);
+		else if (id == "keta")
+			hamsters->getComponent<Poison>()->setActive(false);
+		else
+			hamsters->getComponent<Turret>()->setActive(false);
+
 		hamsters->getComponent<LightAttack>()->setActive(false);
 		hamsters->getComponent<StrongAttack>()->setActive(false);
+
 		hamsters->getComponent<MovementInChase>()->setActive(true);
 	}
 }

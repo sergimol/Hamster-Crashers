@@ -167,8 +167,8 @@ void Movement::onEnable() {
 
 void Movement::onDisable()
 {
-	auto& vel = tr_->getVel();
-	vel = Vector2D();
+	//auto& vel = tr_->getVel();
+	//vel = Vector2D();
 }
 
 void Movement::onResume() {

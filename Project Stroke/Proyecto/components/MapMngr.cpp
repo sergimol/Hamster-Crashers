@@ -211,7 +211,7 @@ void MapMngr::loadNewMap(string map) {
 							enemy->addComponent<EntityAttribs>();
 							enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
 							enemy->addComponent<ContactDamage>(20);
-							enemy->addComponent<CatMovement>()->startChase();
+							enemy->addComponent<CatMovement>();
 
 						}
 					}
