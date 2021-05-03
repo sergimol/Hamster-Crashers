@@ -101,12 +101,12 @@ void Game::init() {
 		3
 		);*/
 	mainMenu->addComponent<MenuButtonManager>("mainMenu", 0);	//mainMenu, pauseMenu o hamsterMenu
-	mainMenu->addComponent<MenuControlHandler>();
+	mainMenu->addComponent<MenuControlHandler>(0);
 	mngr_->setHandler<MainMenu>(mainMenu);
 
 	auto* pauseMenu = mngr_->addMenu();
 	pauseMenu->addComponent<MenuButtonManager>("pauseMenu", 2);	//mainMenu, pauseMenu o hamsterMenu
-	pauseMenu->addComponent<MenuControlHandler>();
+	pauseMenu->addComponent<MenuControlHandler>(2);
 	mngr_->setHandler<PauseMenu>(pauseMenu);
 
 

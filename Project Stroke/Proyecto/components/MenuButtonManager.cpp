@@ -126,7 +126,7 @@ void MenuButtonManager::update() {
 		}
 
 		if (keymap.at(RIGHT)) {
-			if (buttonsPosition_.getX() < buttonsPosition_.getX() - 1) {
+			if (buttonsPosition_.getX() < buttonsMagnitude_.getX() - 1) {
 				buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
 				buttonsPosition_.setX(buttonsPosition_.getX() + 1);
 				buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
