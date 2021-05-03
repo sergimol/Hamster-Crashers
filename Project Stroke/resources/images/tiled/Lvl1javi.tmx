@@ -48,7 +48,7 @@
 </data>
  </layer>
  <objectgroup id="6" name="entities">
-  <object id="1" name="sardinilla" x="112" y="158.5"/>
+  <object id="1" name="sardinilla" x="264" y="161.167"/>
   <object id="11" name="enemigo" x="602" y="229.637" width="27.2727" height="44.9091">
    <properties>
     <property name="sala" type="int" value="1"/>
@@ -264,6 +264,7 @@
     <property name="newMap" value="hasGanado"/>
    </properties>
   </object>
+  <object id="64" name="secondBoss" x="14.6663" y="91.9997" width="106.667" height="105.333"/>
  </objectgroup>
  <objectgroup id="7" name="Salas">
   <object id="4" name="1" x="1010" y="64" width="13" height="255.5">

@@ -123,14 +123,6 @@ void Game::init() {
 
 	//Carga del mapa
 	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Lvl1javi.tmx");
-
-	//auto cat = mngr_->addEntity();
-	//cat->addComponent<Transform>(Vector2D(100, 20), Vector2D(0, 0), 50, 1000, 0, 1, 1);
-	//cat->addComponent<EntityAttribs>();
-	//cat->addComponent<Image>(&sdlutils().images().at("catSmoking"));
-	//cat->addComponent<ContactDamage>(40);
-	//cat->addComponent<CatMovement>()->startChase();
-
 }
 
 void Game::update() {
