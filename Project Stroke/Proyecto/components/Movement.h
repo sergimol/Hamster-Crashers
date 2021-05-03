@@ -38,7 +38,7 @@ public:
 protected:
 private:
 
-	const float jump_ = 45.0f, gravity_ = 4.8f, jumpTimer_ = 10.0f;
+	const float jump_ = 35.0f, gravity_ = 4.8f, jumpTimer_ = 10.0f;
 
 	Transform* tr_;
 	CollisionDetec* col_;

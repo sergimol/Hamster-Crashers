@@ -121,7 +121,10 @@ void Roll::update() {
 			rectPlayer.x += vel.getX();
 			rectPlayer.y += vel.getY();
 			col_->tryToMove(dir_, goalVel_, rectPlayer, false);
-			grav_->checkHeight(rectPlayer);
+			
+			if (grav_->isActive())
+				grav_->checkHeight(rectPlayer);
+
 			if (grav_->getStuck())  vel.setX(-vel.getX());
 			//Si se colisiona..
 			if (checkCollisions())

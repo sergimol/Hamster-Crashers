@@ -57,8 +57,8 @@ private:
 	StrongAttack* st_;
 	HamsterStateMachine* hms_;
 	GameStates* states_;
-	MenuButtonManager* pause_;
-	MenuButtonManager* main_;
+	//MenuButtonManager* pause_;
+	//MenuButtonManager* main_;
 	bool hasController_;
 
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };

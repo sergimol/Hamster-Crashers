@@ -104,9 +104,10 @@ bool Combos::checkCombo(int action) {
 
 void Combos::update() {
 	if (state_->getState() == GameStates::RUNNING) {
-		if (!cola_.empty() && sdlutils().currRealTime() - lastAttack_ > CADENCE) {
-			if (!grv_->isActive())
-				grv_->setActive(true);
+		if (!cola_.empty() && cola_.front() == 2 && sdlutils().currRealTime() - lastAttack_ > AIRCADENCE) {
+			popUntilEmpty();
+		}
+		else if (!cola_.empty() && sdlutils().currRealTime() - lastAttack_ > CADENCE) {
 			popUntilEmpty();
 		}
 
@@ -154,8 +155,8 @@ void Combos::fourConsecutives() {
 
 void Combos::jumpStrong() {
 	anim_->setAnimBool(HamStatesAnim::STRONGCOMBO, true);
-	if (!grv_->isActive())
-		grv_->setActive(true);
+	//if (!grv_->isActive())
+	//	grv_->setActive(true);
 
 	popUntilEmpty();
 }
@@ -164,6 +165,8 @@ void Combos::popUntilEmpty() {
 	while (!cola_.empty()) 
 		cola_.pop();
 	attribs_->resetVel();
+	if (!grv_->isActive())
+		grv_->setActive(true);
 }
 
 // Comprueba y llama a la animación que corresponda al entrar la primera acción

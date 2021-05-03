@@ -10,6 +10,7 @@
 #include <queue>
 
 const int CADENCE = 750;
+const int AIRCADENCE = 425;
 
 class Combos : public Component {
 public:
