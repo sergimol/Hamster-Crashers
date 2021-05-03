@@ -29,7 +29,7 @@ public:
 	void update() override;
 	void render() override;
 
-	bool CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo);
+	bool CheckCollisions(const SDL_Rect& rectPlayer);
 
 	void attack();
 
@@ -37,6 +37,8 @@ private:
 	Transform* tr_;
 	SDL_Rect attRect_;
 	HamsterStateMachine* hms_;
+	AnimHamsterStateMachine* anim_;
+
 	bool DEBUG_isAttacking_;
 	long unsigned int cooldown_, time_;
 	int player_;
