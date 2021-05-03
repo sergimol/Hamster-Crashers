@@ -170,8 +170,8 @@ void EnemyMother::cleanListHamAttacking(int i) {
 	//ME CAGO EN DIOS QUE SI PONGO ESTO PARA HACER LA MEIRDA EL APAÑO NO PUEDO USAR ESTE METODO PARA CONTROLAR EL INFARTO PORQUE CLARO LEUGO NO QUEDAN HAMSTER AJAJAJ
 	//TODO TODO TODO TODO PERO TODFO EL PUTO MUNDO TODO TODO TODO TODO TODO TODO TODO TOD O
 
-	objetivesList.erase(i);
-	numPlayers--;
+	//objetivesList.erase(i);
+	//numPlayers--;
 }
 
 /*Cambia a un eneigo en concreto de attack to ambush*/

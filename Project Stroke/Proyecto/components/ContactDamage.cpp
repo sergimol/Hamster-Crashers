@@ -70,8 +70,8 @@ bool ContactDamage::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 			//Cogemos el transform del player
 		auto eTR = ents[i]->getComponent<Transform>();
 
-		Vector2D newPos = new Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
-		Vector2D enemyPos = new Vector2D(enemyRect.x, enemyRect.y);
+		Vector2D newPos = Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
+		Vector2D enemyPos = Vector2D(enemyRect.x, enemyRect.y);
 
 		//Y comprobamos si colisiona
 		//es can attacks porque coninciden lso estados

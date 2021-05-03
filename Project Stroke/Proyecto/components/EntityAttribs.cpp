@@ -7,6 +7,7 @@
 #include "Transition.h"
 #include "GravityEntity.h"
 #include "AnimEnemyStateMachine.h"
+#include "Shadow.h"
 
 EntityAttribs::EntityAttribs() :
 	health_(100),
@@ -225,21 +226,30 @@ void EntityAttribs::die() {
 		Vector2D(0, 0),
 		3)->play(sdlutils().anims().at(id_+"_death"));
 
-	entity_->setActive(false);
+	//TODO WHY ¿?
 	//Si la persona que muere es un hamster...
 	if (!entity_->hasGroup<Enemy>()) {
 		//Ponemos su UI a 'Muerto'
 		e->addComponent<UI>(id_, entity_->getComponent<UI>()->getPosUI())->dep();
 		hms_->getState() = HamStates::DEAD;
-		entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", false);
+		//Desactivamos el componente del hasmter vivo
+		entity_->getComponent<Animator>()->setActive(false);
+		entity_->getComponent<Shadow>()->setActive(false);
+		//TODO arreglar camara, y demas objetos que den problemas con el como se esta desactivando el hamster,
+		//hacerlo a mano cada vez que os den problemas porque desactivar la entidad del hamster 
+		//NO ES UNA OPCION
+
+
+		//entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", false);
 	}
 	else {
+		//soalmente para los enemigos
+		entity_->setActive(false);
 		e->addComponent<Dying>();
 		enmState_->getState() = EnemyStates::ENM_DEAD;
 		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala
 	}
 
-	//Desactivamos el componente del hasmter vivo
 
 }
 

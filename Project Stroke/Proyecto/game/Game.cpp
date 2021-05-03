@@ -123,6 +123,7 @@ void Game::init() {
 
 	//Carga del mapa
 	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Lvl1javi.tmx");
+	
 }
 
 void Game::update() {
