@@ -60,7 +60,7 @@ public:
 	void addObjetive(Entity* hamster);
 
 	void addEnemy(Entity* e) {
-		if (e->hasComponent<StrongAttack>()) {
+		if (e->hasComponent<EnemyStrongAttack>()) {
 			strongWaiting.push_back(e);
 		}
 		else waiting.push_back(e);

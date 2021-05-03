@@ -98,7 +98,7 @@ void EnemyBehaviour::setHamId(int hId, std::list<Entity*>::iterator it, char l) 
 	list = l;
 }
 void EnemyBehaviour::die() {
-	bool aux = entity_->hasComponent<StrongAttack>();
+	bool aux = entity_->hasComponent<EnemyStrongAttack>();
 	if (list == 'a') {
 		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAttackList(hamId_, listIterator, aux);
 		list = '0';
