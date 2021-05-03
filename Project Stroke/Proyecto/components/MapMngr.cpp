@@ -199,7 +199,7 @@ void MapMngr::loadNewMap(string map) {
 							auto* enemy = entity_->getMngr()->addEntity();
 							enemy->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-								Vector2D(),256.0f, 2*256.0f, 0.0f, 1,1);
+								Vector2D(), 256.0f, 2 * 256.0f, 0.0f, 1, 1);
 
 
 							enemy->addComponent<EntityAttribs>();
@@ -335,7 +335,7 @@ void MapMngr::loadEnemyRoom() {
 			enemy->addComponent<EnemyStateMachine>();
 			//1º: False porque no es un hamster //2º: True porque usa de referencia el rect de colision
 			enemy->addComponent<Shadow>(false, true);
-				
+
 			enemy->setGroup<Enemy>(true);
 
 			enemy->addComponent<EntityAttribs>(200, 0.0, "soldier1", Vector2D(3.6, 2), 0, 0, 5);
@@ -370,43 +370,47 @@ void MapMngr::loadEnemyRoom() {
 			numberEnemyRoom++;
 		}
 		else if (name == "enemigoFuerte" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS	
-				//auto* enemy = mngr_->addEntity();
-				//enemy->addComponent<Transform>(
-				//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				//	Vector2D(), 240.0f, 370.0f, 0.0f, 1, 1)->getFlip() = true;
+			auto* enemy = mngr_->addEntity();
+			enemy->addComponent<Transform>(
+				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+				Vector2D(), 240.0f, 370.0f, 0.0f, 1, 1)->getFlip() = true;
 
-				//enemy->addComponent<EnemyStateMachine>();
-				//enemy->setGroup<Enemy>(true);
+			enemy->addComponent<EnemyStateMachine>();
+			enemy->setGroup<Enemy>(true);
 
-				/*enemy->addComponent<EntityAttribs>(200, 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 5);
+			enemy->setGroup<Enemy>(true);
 
-				enemy->addComponent<Animator>(
-					&sdlutils().images().at("soldier1Sheet"),
-					86,
-					86,
-					3,
-					3,
-					220,
-					Vector2D(0, 0),
-					3
-					);
-				enemy->addComponent<AnimEnemyStateMachine>();
-				enemy->addComponent<UI>("canelon", 4);*/
+			enemy->addComponent<EntityAttribs>(200, 0.0, "soldier1", Vector2D(3.6, 2), 0, 0, 5);
 
-				////enemy->addComponent<EnemyStrongAttack>();
-				//enemy->addComponent<EnemyAttack>();
-				//enemy->addComponent<Knockback>();
-				//enemy->addComponent<MovementSimple>();
+			enemy->addComponent<Animator>(
+				&sdlutils().images().at("soldier1Sheet"),
+				86,
+				86,
+				3,
+				3,
+				220,
+				Vector2D(0, 0),
+				3
+				);
+			enemy->addComponent<AnimEnemyStateMachine>();
 
-				//enemy->addComponent<EnemyBehaviour>(new IddleEnemy());
+			//enemy->addComponent<UI>("canelon", 4);
 
-				//enemies.push_back(enemy);
+			enemy->addComponent<EnemyStrongAttack>();
 
-				////anyadir a los cuidados de la madre
-				//mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addEnemy(enemy);
+			enemy->addComponent<EnemyAttack>();
+			enemy->addComponent<Knockback>();
+			enemy->addComponent<MovementSimple>();
 
-				//enemy->addComponent<EnemyStun>();
-				//numberEnemyRoom++;
+			enemy->addComponent<EnemyBehaviour>(new IddleEnemy());
+
+			enemies.push_back(enemy);
+
+			//anyadir a los cuidados de la madre
+			mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addEnemy(enemy);
+
+			enemy->addComponent<EnemyStun>();
+			numberEnemyRoom++;
 		}
 		else if (name == "firstBoss" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* enemy = mngr_->addEntity();
@@ -435,6 +439,10 @@ void MapMngr::loadEnemyRoom() {
 }
 
 void MapMngr::addHamster(const tmx::Object& obj) {
+
+
+
+
 	//do stuff with object properties
 	auto& name = obj.getName();
 	auto mngr_ = entity_->getMngr();
@@ -443,8 +451,10 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 
 	//Habilidad
 	if (name == "sardinilla")
+
 		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale),
 			Vector2D(), 86 * scale, 86 * scale, 0.0f, 0.5, 0.5);
+
 	else if (name == "canelon")
 		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale),
 			Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
@@ -518,7 +528,7 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 	mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addObjetive(hamster1);
 
 	//Para acceder facilmente le metemos en Hamster1 de Handelers
-	if (name == "sardinilla") mngr_->setHandler<Hamster1>(hamster1);
+	if (name == "sardinilla")mngr_->setHandler<Hamster1>(hamster1);
 	else if (name == "canelon") mngr_->setHandler<Hamster2>(hamster1);
 	else if (name == "keta") mngr_->setHandler<Hamster3>(hamster1);
 	else mngr_->setHandler<Hamster4>(hamster1);
