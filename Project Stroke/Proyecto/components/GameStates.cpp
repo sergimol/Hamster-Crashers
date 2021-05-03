@@ -1,7 +1,7 @@
 #include "GameStates.h"
 
 void GameStates::init() {
-	state_ = MAINMENU;	
+	state_ = RUNNING;
 	//state_ = CONTROLS;
 	//state_ = SELECTION;	
 
