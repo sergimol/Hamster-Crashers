@@ -7,6 +7,7 @@
 
 //las cosas que controla
 #include "Movement.h"
+#include "MovementInChase.h"
 #include "Roll.h"
 #include "Pray.h"
 #include "Turret.h"
@@ -52,6 +53,7 @@ private:
 	int player_;
 	Movement* mov_;
 	Roll* roll_;
+	MovementInChase* mic_;
 	Ability* ab_;
 	LightAttack* lt_;
 	StrongAttack* st_;

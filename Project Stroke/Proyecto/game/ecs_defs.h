@@ -9,6 +9,7 @@ class Image;
 class LightAttack;
 class StrongAttack;
 class Movement;
+class MovementInChase;
 class EntityAttribs;
 class UI;
 class Stroke;
@@ -71,6 +72,7 @@ class SoundManager;
 class GravityEntity;
 class CatMovement;
 class MenuControlHandler;
+class StartChase;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -79,6 +81,7 @@ class MenuControlHandler;
 	LightAttack, \
 	StrongAttack, \
 	Movement, \
+	MovementInChase, \
 	EntityAttribs, \
 	Stroke, \
 	UI, \
@@ -143,7 +146,8 @@ class MenuControlHandler;
 	SoundManager, \
 	GravityEntity, \
 	CatMovement, \
-	MenuControlHandler
+	MenuControlHandler,\
+	StartChase
 
 // groups
 

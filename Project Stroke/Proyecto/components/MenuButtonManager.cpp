@@ -7,7 +7,7 @@ MenuButtonManager::MenuButtonManager(string menu, int state) :menuMode_(menu), s
 void MenuButtonManager::init() {
 
 	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
-	assert(states_ != nullptr);
+	assert(state_ != nullptr);
 
 	if (menuMode_ == "mainMenu") {
 		

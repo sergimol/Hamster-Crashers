@@ -14,7 +14,7 @@ void CatMovement::update() {
 			walk = false;
 			walking = true;
 		}
-		if (tr_->getPos().getX() > iniPos + MOVE && walking) {
+		if (tr_->getPos().getX() < iniPos + MOVE && walking) {
 			tr_->setVel(Vector2D(0, 0));
 			timer = sdlutils().currRealTime();
 			walking = false;

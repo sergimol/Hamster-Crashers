@@ -173,6 +173,7 @@
     <ClCompile Include="Proyecto\components\GravityEntity.cpp" />
     <ClCompile Include="Proyecto\components\CatMovement.cpp" />
     <ClCompile Include="Proyecto\components\MenuControlHandler.cpp" />
+    <ClCompile Include="Proyecto\components\MovementInChase.cpp" />
     <ClCompile Include="Proyecto\components\ShadowFollow.cpp" />
     <ClCompile Include="Proyecto\components\FollowPlayer.cpp" />
     <ClCompile Include="Proyecto\components\GameStates.cpp" />
@@ -202,6 +203,7 @@
     <ClCompile Include="Proyecto\components\EnemyStun.cpp" />
     <ClCompile Include="Proyecto\components\Shadow.cpp" />
     <ClCompile Include="Proyecto\components\SoundManager.cpp" />
+    <ClCompile Include="Proyecto\components\StartChase.cpp" />
     <ClCompile Include="Proyecto\components\StrongFollowPlayer.cpp" />
     <ClCompile Include="Proyecto\components\Stun.cpp" />
     <ClCompile Include="Proyecto\components\Swallow.cpp" />
@@ -262,6 +264,7 @@
     <ClInclude Include="Proyecto\components\GravityEntity.h" />
     <ClInclude Include="Proyecto\components\CatMovement.h" />
     <ClInclude Include="Proyecto\components\MenuControlHandler.h" />
+    <ClInclude Include="Proyecto\components\MovementInChase.h" />
     <ClInclude Include="Proyecto\components\ShadowFollow.h" />
     <ClInclude Include="Proyecto\components\FollowPlayer.h" />
     <ClInclude Include="Proyecto\components\GameStates.h" />
@@ -292,6 +295,7 @@
     <ClInclude Include="Proyecto\components\EnemyStun.h" />
     <ClInclude Include="Proyecto\components\Shadow.h" />
     <ClInclude Include="Proyecto\components\SoundManager.h" />
+    <ClInclude Include="Proyecto\components\StartChase.h" />
     <ClInclude Include="Proyecto\components\StrokeStrategy.h" />
     <ClInclude Include="Proyecto\components\StrongFollowPlayer.h" />
     <ClInclude Include="Proyecto\components\Stun.h" />

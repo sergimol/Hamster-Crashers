@@ -61,5 +61,6 @@ public:
 	void loadEnemyRoom();
 	void reduceNumberEnemyRoom() { numberEnemyRoom--; };
 	void newSceneTrigger(string newName, const tmx::Object& obj);
+	void startChaseTrigger(const tmx::Object& obj);
 };
 

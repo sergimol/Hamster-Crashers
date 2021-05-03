@@ -10,6 +10,8 @@ void ControlHandler::init() {
 	mov_ = entity_->getComponent<Movement>();
 	assert(mov_ != nullptr);
 
+	mic_ = entity_->getComponent<MovementInChase>();
+
 	string id = entity_->getComponent<EntityAttribs>()->getId();
 
 	if (id == "sardinilla") {
@@ -77,6 +79,13 @@ void ControlHandler::onDisable() {
 	mov_->updateKeymap(Movement::LEFT, false);
 	mov_->updateKeymap(Movement::DOWN, false);
 	mov_->updateKeymap(Movement::UP, false);
+
+	if (mic_ != nullptr) {
+		mic_->updateKeymap(MovementInChase::RIGHT, false);
+		mic_->updateKeymap(MovementInChase::LEFT, false);
+		mic_->updateKeymap(MovementInChase::DOWN, false);
+		mic_->updateKeymap(MovementInChase::UP, false);
+	}
 }
 
 void ControlHandler::setController(bool hasController) {
@@ -101,6 +110,10 @@ void ControlHandler::handleController() {
 					roll_->updateKeymap(Roll::UP, true);
 					roll_->updateKeymap(Roll::DOWN, false);
 				}
+				if (mic_ != nullptr) {
+					mic_->updateKeymap(MovementInChase::DOWN, false);
+					mic_->updateKeymap(MovementInChase::UP, true);
+				}
 			}
 			//DOWN
 			else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) > 0)
@@ -111,7 +124,10 @@ void ControlHandler::handleController() {
 					roll_->updateKeymap(Roll::UP, false);
 					roll_->updateKeymap(Roll::DOWN, true);
 				}
-				
+				if (mic_ != nullptr) {
+					mic_->updateKeymap(MovementInChase::DOWN, true);
+					mic_->updateKeymap(MovementInChase::UP, false);
+				}
 			}
 			else
 			{				
@@ -120,6 +136,10 @@ void ControlHandler::handleController() {
 				if (roll_ != nullptr) {
 					roll_->updateKeymap(Roll::UP, false);
 					roll_->updateKeymap(Roll::DOWN, false);
+				}
+				if (mic_ != nullptr) {
+					mic_->updateKeymap(MovementInChase::DOWN, false);
+					mic_->updateKeymap(MovementInChase::UP, false);
 				}
 			}
 
@@ -132,6 +152,10 @@ void ControlHandler::handleController() {
 					roll_->updateKeymap(Roll::RIGHT, true);
 					roll_->updateKeymap(Roll::LEFT, false);
 				}
+				if (mic_ != nullptr) {
+					mic_->updateKeymap(MovementInChase::RIGHT, true);
+					mic_->updateKeymap(MovementInChase::LEFT, false);
+				}
 			}
 			//	LEFT
 			else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) < 0)
@@ -142,6 +166,10 @@ void ControlHandler::handleController() {
 					roll_->updateKeymap(Roll::RIGHT, false);
 					roll_->updateKeymap(Roll::LEFT, true);
 				}
+				if (mic_ != nullptr) {
+					mic_->updateKeymap(MovementInChase::RIGHT, false);
+					mic_->updateKeymap(MovementInChase::LEFT, true);
+				}
 			}
 			else {
 				mov_->updateKeymap(Movement::RIGHT, false);
@@ -149,6 +177,10 @@ void ControlHandler::handleController() {
 				if (roll_ != nullptr) {
 					roll_->updateKeymap(Roll::RIGHT, false);
 					roll_->updateKeymap(Roll::LEFT, false);
+				}
+				if (mic_ != nullptr) {
+					mic_->updateKeymap(MovementInChase::RIGHT, false);
+					mic_->updateKeymap(MovementInChase::LEFT, false);
 				}
 			}
 		}
@@ -274,6 +306,7 @@ void ControlHandler::handleKeyboard() {
 		if (gameState == GameStates::RUNNING) {
 			mov_->updateKeymap(Movement::UP, true);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::UP, true);
+			if (mic_ != nullptr) mic_->updateKeymap(MovementInChase::UP, true);
 		}
 		/*else if (gameState == GameStates::PAUSE )
 			pause_->updateKeymap(MenuButtonManager::UP, true);
@@ -285,6 +318,7 @@ void ControlHandler::handleKeyboard() {
 		if (gameState == GameStates::RUNNING) {
 			mov_->updateKeymap(Movement::UP, false);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::UP, false);
+			if (mic_ != nullptr) mic_->updateKeymap(MovementInChase::UP, false);
 		}
 		/*else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::UP, false);
@@ -297,6 +331,7 @@ void ControlHandler::handleKeyboard() {
 		if (gameState == GameStates::RUNNING) {
 			mov_->updateKeymap(Movement::DOWN, true);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::DOWN, true);
+			if (mic_ != nullptr) mic_->updateKeymap(MovementInChase::DOWN, true);
 		}
 		/*else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::DOWN, true);
@@ -309,6 +344,7 @@ void ControlHandler::handleKeyboard() {
 		if (gameState == GameStates::RUNNING) {
 			mov_->updateKeymap(Movement::DOWN, false);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::DOWN, false);
+			if (mic_ != nullptr) mic_->updateKeymap(MovementInChase::DOWN, false);
 		}
 		/*else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::DOWN, false);
@@ -322,6 +358,7 @@ void ControlHandler::handleKeyboard() {
 		if (gameState == GameStates::RUNNING) {
 			mov_->updateKeymap(Movement::RIGHT, true);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::RIGHT, true);
+			if (mic_ != nullptr) mic_->updateKeymap(MovementInChase::RIGHT, true);
 		}
 		/*else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::RIGHT, true);
@@ -334,6 +371,7 @@ void ControlHandler::handleKeyboard() {
 		if (gameState == GameStates::RUNNING) {
 			mov_->updateKeymap(Movement::RIGHT, false);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::RIGHT, false);
+			if (mic_ != nullptr) mic_->updateKeymap(MovementInChase::RIGHT, false);
 		}
 		/*else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::RIGHT, false);
@@ -346,6 +384,7 @@ void ControlHandler::handleKeyboard() {
 		if (gameState == GameStates::RUNNING) {
 			mov_->updateKeymap(Movement::LEFT, true);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::LEFT, true);
+			if (mic_ != nullptr) mic_->updateKeymap(MovementInChase::LEFT, true);
 		}
 		/*else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::LEFT, true);
@@ -358,6 +397,7 @@ void ControlHandler::handleKeyboard() {
 		if (gameState == GameStates::RUNNING) {
 			mov_->updateKeymap(Movement::LEFT, false);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::LEFT, false);
+			if (mic_ != nullptr) mic_->updateKeymap(MovementInChase::LEFT, false);
 		}
 		/*else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::LEFT, false);
@@ -370,7 +410,7 @@ void ControlHandler::handleKeyboard() {
 	{
 		if (gameState == GameStates::RUNNING && hamState != HamStates::DEAD && hamState != HamStates::INFARCTED) {
 			mov_->updateKeymap(Movement::SPACE, true);
-			//if (roll_ != nullptr) roll_->updateKeymap(Roll::LEFT, true);
+			if (mic_ != nullptr) mic_->updateKeymap(MovementInChase::SPACE, true);
 		}
 		/*else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::SPACE, true);

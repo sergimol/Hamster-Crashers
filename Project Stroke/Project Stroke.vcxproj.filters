@@ -441,6 +441,12 @@
     <ClCompile Include="Proyecto\components\MenuControlHandler.cpp">
       <Filter>Archivos de origen\components\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\MovementInChase.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Movement&amp;Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\StartChase.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\EnemyBehaviour\BossBehavior</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -748,6 +754,12 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\MenuControlHandler.h">
       <Filter>Archivos de encabezado\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\MovementInChase.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Movement&amp;Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\StartChase.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\BossBehaviour</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
