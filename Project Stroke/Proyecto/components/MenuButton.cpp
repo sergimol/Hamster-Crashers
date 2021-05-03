@@ -102,4 +102,34 @@ void MenuButton::pressed() {
 	else if (buttonName_ == "canelon") {
 		std::cout << "canelon\n";
 	}
+	else if (buttonName_ == "1920x1080") {
+		std::cout << "changeResolution\n";
+		//Cambiamos la resolucion
+		sdlutils().setWidth(1920);
+		sdlutils().setHeight(1080);
+
+		//Y cambiamos la ventana
+		SDL_SetWindowSize(sdlutils().window(), sdlutils().width(), sdlutils().height());
+		SDL_RenderSetScale(sdlutils().renderer(), sdlutils().width() / 1920.0f, sdlutils().height() / 1080.0f);
+	}
+	else if (buttonName_ == "1280x720") {
+		std::cout << "changeResolution\n";
+		//Cambiamos la resolucion
+		sdlutils().setWidth(1280);
+		sdlutils().setHeight(720);
+
+		//Y cambiamos la ventana
+		SDL_SetWindowSize(sdlutils().window(), sdlutils().width(), sdlutils().height());
+		SDL_RenderSetScale(sdlutils().renderer(), sdlutils().width() / 1920.0f, sdlutils().height() / 1080.0f);
+	}
+	else if (buttonName_ == "640x480") {
+		std::cout << "changeResolution\n";
+		//Cambiamos la resolucion
+		sdlutils().setWidth(640);
+		sdlutils().setHeight(480);
+
+		//Y cambiamos la ventana
+		SDL_SetWindowSize(sdlutils().window(), sdlutils().width(), sdlutils().height());
+		SDL_RenderSetScale(sdlutils().renderer(), sdlutils().width() / 1920.0f, sdlutils().height() / 1080.0f);
+	}
 }
