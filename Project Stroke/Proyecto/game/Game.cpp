@@ -272,7 +272,8 @@ void Game::merge(vector<Entity*>& vec, int l, int m, int r) {
 	int k = l;
 
 	while (i < n1 && j < n2) {
-		if (L[i]->getComponent<Transform>()->getPos().getY() <= R[j]->getComponent<Transform>()->getPos().getY()) {
+		SDL_Rect tr1 = L[i]->getComponent<Transform>()->getRectCollide(), tr2 = R[j]->getComponent<Transform>()->getRectCollide();
+		if (tr1.y + tr1.h <= tr2.y + tr2.h) {
 			vec[k] = L[i];
 			i++;
 		}
