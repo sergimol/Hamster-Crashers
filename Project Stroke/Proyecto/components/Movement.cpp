@@ -132,7 +132,8 @@ void Movement::update() {
 		rectPlayer.y += vel.getY();
 		if (col_ != nullptr)
 			col_->tryToMove(dir, goalVel_, rectPlayer, false);		//Intenta moverse
-		grav_->checkHeight(rectPlayer);					//Comprobamos que no tenga que subir un escalon
+		if(grav_->isActive())
+			grav_->checkHeight(rectPlayer);					//Comprobamos que no tenga que subir un escalon
 
 		if (grav_->getStuck()) vel.setX(0);				//Si lo tiene que subir y no salta no se mueve en x
 
