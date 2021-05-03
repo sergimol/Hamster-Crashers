@@ -16,7 +16,7 @@ public:
 	Animation();
 
 
-	Animation(Vector2D st, int dur, int c, int r, int fu, int lo, std::string ch);
+	Animation(Vector2D st, int dur, int c, int r, int fu, int lo, std::string ch, int at);
 
 
 	virtual ~Animation() {
@@ -51,6 +51,10 @@ public:
 		return chain_;
 	}
 
+	inline int attackFrame() const {
+		return attackFrame_;
+	}
+
 
 private:
 
@@ -61,4 +65,5 @@ private:
 	int frameUpdate_;
 	bool loop_;
 	std::string chain_;
+	int attackFrame_;
 };

@@ -448,7 +448,8 @@
       "rows": 11,
       "frameUpdate": 200,
       "loop": 1,
-      "chain": ""
+      "chain": "",
+      "attackFrame": -1
     },
     {
       "id": "sardinilla_move",
@@ -459,7 +460,9 @@
       "rows": 11,
       "frameUpdate": 100,
       "loop": 1,
-      "chain": ""
+      "chain": "",
+      "attackFrame": -1
+
     },
     {
       "id": "sardinilla_light_attack1",
@@ -470,7 +473,8 @@
       "rows": 11,
       "frameUpdate": 70,
       "loop": 1,
-      "chain": ""
+      "chain": "",
+      "attackFrame": 5
     },
     {
       "id": "sardinilla_light_attack2",
@@ -481,7 +485,8 @@
       "rows": 11,
       "frameUpdate": 70,
       "loop": 1,
-      "chain": ""
+      "chain": "",
+      "attackFrame": 5
     },
     {
       "id": "sardinilla_light_combo",
@@ -492,7 +497,8 @@
       "rows": 11,
       "frameUpdate": 50,
       "loop": 1,
-      "chain": ""
+      "chain": "",
+      "attackFrame": 5
     },
     {
       "id": "sardinilla_strong_attack",
@@ -503,7 +509,8 @@
       "rows": 11,
       "frameUpdate": 50,
       "loop": 1,
-      "chain": ""
+      "chain": "",
+      "attackFrame": 6
     },
     {
       "id": "sardinilla_strong_combo",
@@ -514,7 +521,8 @@
       "rows": 11,
       "frameUpdate": 60,
       "loop": 1,
-      "chain": ""
+      "chain": "",
+      "attackFrame": 8
     },
     {
       "id": "sardinilla_ability",
@@ -525,7 +533,8 @@
       "rows": 11,
       "frameUpdate": 100,
       "loop": 0,
-      "chain": "sardinilla_roll"
+      "chain": "sardinilla_roll",
+      "attackFrame": -1
     },
     {
       "id": "sardinilla_roll",
@@ -536,7 +545,8 @@
       "rows": 11,
       "frameUpdate": 100,
       "loop": 1,
-      "chain": ""
+      "chain": "",
+      "attackFrame": -1
     },
     {
       "id": "sardinilla_hit",
@@ -547,7 +557,8 @@
       "rows": 11,
       "frameUpdate": 100,
       "loop": 0,
-      "chain": ""
+      "chain": "",
+      "attackFrame": -1
     },
     {
       "id": "sardinilla_death",
@@ -558,7 +569,8 @@
       "rows": 11,
       "frameUpdate": 100,
       "loop": 0,
-      "chain": ""
+      "chain": "",
+      "attackFrame": -1
     },
     {
       "id": "sardinilla_stroke",
@@ -569,7 +581,8 @@
       "rows": 11,
       "frameUpdate": 100,
       "loop": 0,
-      "chain": ""
+      "chain": "",
+      "attackFrame": -1
     },
     {
       "id": "sardinilla_ghost_spawn",
@@ -580,7 +593,8 @@
       "rows": 11,
       "frameUpdate": 100,
       "loop": 0,
-      "chain": "sardinilla_idle_ghost"
+      "chain": "sardinilla_idle_ghost",
+      "attackFrame": -1
     },
     {
       "id": "sardinilla_idle_ghost",
@@ -591,7 +605,8 @@
       "rows": 11,
       "frameUpdate": 100,
       "loop": 1,
-      "chain": ""
+      "chain": "",
+      "attackFrame": -1
     },
     {
       "id": "sardinilla_stun",
@@ -602,7 +617,8 @@
       "rows": 11,
       "frameUpdate": 100,
       "loop": 0,
-      "chain": ""
+      "chain": "",
+      "attackFrame": -1
     },
     {
       "id": "breakObject",
@@ -613,7 +629,8 @@
       "rows": 1,
       "frameUpdate": 100,
       "loop": 0,
-      "chain": ""
+      "chain": "",
+      "attackFrame": -1
     },
     {
       "id": "menuInit",
@@ -624,7 +641,8 @@
       "rows": 1,
       "frameUpdate": 100,
       "loop": 0,
-      "chain": "menuStatic"
+      "chain": "menuStatic",
+      "attackFrame": -1
     },
     {
       "id": "menuStatic",
@@ -635,7 +653,8 @@
       "rows": 1,
       "frameUpdate": 100,
       "loop": 1,
-      "chain": ""
+      "chain": "",
+      "attackFrame": -1
     },
     {
       "id": "soldier1_idle",
@@ -646,7 +665,8 @@
       "rows": 6,
       "frameUpdate": 100,
       "loop": 1,
-      "chain": ""
+      "chain": "",
+      "attackFrame": -1
     },
     {
       "id": "soldier1_move",
@@ -657,7 +677,8 @@
       "rows": 6,
       "frameUpdate": 100,
       "loop": 1,
-      "chain": ""
+      "chain": "",
+      "attackFrame": -1
     },
     {
       "id": "soldier1_attack",
@@ -668,7 +689,8 @@
       "rows": 6,
       "frameUpdate": 70,
       "loop": 0,
-      "chain": ""
+      "chain": "",
+      "attackFrame": 8
     },
     {
       "id": "soldier1_hit",
@@ -679,7 +701,8 @@
       "rows": 6,
       "frameUpdate": 100,
       "loop": 0,
-      "chain": ""
+      "chain": "",
+      "attackFrame": -1
     },
     {
       "id": "soldier1_stun",
@@ -690,7 +713,8 @@
       "rows": 6,
       "frameUpdate": 100,
       "loop": 0,
-      "chain": ""
+      "chain": "",
+      "attackFrame": -1
     },
     {
       "id": "soldier1_death",
@@ -701,7 +725,8 @@
       "rows": 6,
       "frameUpdate": 60,
       "loop": 0,
-      "chain": ""
+      "chain": "",
+      "attackFrame": -1
     }
 
   ]

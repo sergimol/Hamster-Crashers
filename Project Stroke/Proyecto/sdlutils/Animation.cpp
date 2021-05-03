@@ -3,7 +3,7 @@
 #include "Animation.h"
 
 
-Animation::Animation(Vector2D st, int dur, int c, int r, int fu, int lo, std::string ch) {
+Animation::Animation(Vector2D st, int dur, int c, int r, int fu, int lo, std::string ch, int at) {
 	
 	startFrame_ = st;
 	duration_ = dur;
@@ -13,5 +13,6 @@ Animation::Animation(Vector2D st, int dur, int c, int r, int fu, int lo, std::st
 	if (lo == 1) loop_ = true;
 	else loop_ = false;
 	chain_ = ch;
+	attackFrame_ = at;
 }
 

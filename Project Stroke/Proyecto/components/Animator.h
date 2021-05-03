@@ -130,6 +130,7 @@ public:
 		animCont = 0;
 		looped = actualAnim.loop();
 		idChain = actualAnim.chain();
+		attackFrame = actualAnim.attackFrame();
 	}
 
 
@@ -144,6 +145,13 @@ public:
 	bool OnAnimationFrame(int targetFrame)
 	{
 		return animCont == targetFrame;
+	}
+
+	//Devuelve true o false en funcion de si la animacion ha llegado al frame en el que
+	//se activa el collider
+	bool OnFinalAttackFrame()
+	{
+		return animCont == attackFrame - 1;
 	}
 
 	void setTexture(Texture* t) {
@@ -183,6 +191,9 @@ private:
 
 	//Animacion encadenada
 	std::string idChain;
+
+	//Frame de ataque en caso de que lo tenga configurado
+	int attackFrame;
 
 };
 

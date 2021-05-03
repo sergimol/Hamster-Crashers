@@ -242,8 +242,9 @@ void SDLUtils::loadReasources(std::string filename) {
 					int fu = vObj["frameUpdate"]->AsNumber();
 					int lo = vObj["loop"]->AsNumber();
 					std::string ch = vObj["chain"]->AsString();
+					int at = vObj["attackFrame"]->AsNumber();
 
-					anims_.emplace(key, Animation(st, dur, c, r, fu, lo, ch));
+					anims_.emplace(key, Animation(st, dur, c, r, fu, lo, ch, at));
 				}
 				else {
 					throw "'anims' array in '" + filename
