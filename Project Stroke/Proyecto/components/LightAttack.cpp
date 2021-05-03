@@ -18,6 +18,8 @@ void LightAttack::init() {
 	assert(tr_ != nullptr);
 	hms_ = entity_->getComponent<HamsterStateMachine>();
 	assert(hms_ != nullptr);
+	anim_ = entity_->getComponent<AnimHamsterStateMachine>();
+	assert(anim_ != nullptr);
 
 	player_ = entity_->getComponent<EntityAttribs>()->getNumber();
 }
@@ -29,18 +31,19 @@ void LightAttack::update() {
 	}
 
 	//Fin animacion
-	if (entity_->getComponent<AnimHamsterStateMachine>()->getState() == HamStatesAnim::LIGHTATTACK)
+	if (anim_->getState() == HamStatesAnim::LIGHTATTACK)
 	{
 		if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
 		{
-			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK, false);
+			anim_->setAnimBool(HamStatesAnim::LIGHTATTACK, false);
 		}
 
 	}
 }
 
-bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
+bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 	bool canHit = false;
+	bool finCombo = false;
 
 	//Cogemos todas las entidades del juego
 	auto& ents = entity_->getMngr()->getEnemies();
@@ -61,6 +64,10 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 
 				//Comprobamos si está en la misma Z o relativamente cerca
 				if (eAttribs->ignoresMargin() || (abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < MARGINTOATTACK)) {
+					//A�adimos a los combos
+					if(!canHit)
+						finCombo = entity_->getComponent<Combos>()->checkCombo(0);
+
 					EntityAttribs* playerAttribs = entity_->getComponent<EntityAttribs>();
 					int dmg = playerAttribs->getDmg();
 					if (finCombo) {
@@ -146,6 +153,7 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 		}
 	}
 	entity_->getMngr()->refreshEnemies();
+
 	return canHit;
 }
 
@@ -158,7 +166,7 @@ void LightAttack::render() {
 }
 
 void LightAttack::attack() {
-	if (!entity_->getComponent<AnimHamsterStateMachine>()->isOnAttack()) {
+	if (!anim_->isOnAttack()) {
 
 		auto state = hms_->getState();
 		if (hms_->canAttack() && sdlutils().currRealTime() > time_ + cooldown_) {
@@ -187,37 +195,23 @@ void LightAttack::attack() {
 			attRect_.y = pos.y /*+ pos.h / 4*/ - cam.y;
 
 			//Comprobamos si colisiona con alguno de los enemigos que tiene delante
-			//A�adimos a los combos
-			bool finCombo = entity_->getComponent<Combos>()->checkCombo(0);
 
 			//Si se colisiona..
-			if (CheckCollisions(attRect_, finCombo))
+			if (CheckCollisions(attRect_))
 				//Suena el hit y le pega
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
 			//Si no colisiona..
-			else
+			else {
 				//Suena el attackSound
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
-			//this.anims.play(pegarse)
-
-			//GESTION DE LA ANIMACION
-			/*if (attackOrder_ == 0)
-			{
-				entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK1, true);
-				attackOrder_++;
+				//Animacion de ataque normalito
+				anim_->setAnimBool(HamStatesAnim::LIGHTATTACK, true);
 			}
-			else
-			{
-				entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::LIGHTATTACK2, true);
-				attackOrder_--;
-			}*/
+
 
 			DEBUG_isAttacking_ = true;
 			time_ = sdlutils().currRealTime();
 			entity_->getComponent<Stroke>()->increaseChance(5, false);
 		}
 	}
-	//else if (sdlutils().currRealTime() > time_ + cooldown_ / 2) {
-	//	state = HamStates::IDLE;
-	//}
 }

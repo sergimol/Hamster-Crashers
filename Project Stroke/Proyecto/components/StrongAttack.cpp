@@ -19,6 +19,8 @@ void StrongAttack::init() {
 	assert(tr_ != nullptr);
 	hms_ = entity_->getComponent<HamsterStateMachine>();
 	assert(hms_ != nullptr);
+	anim_ = entity_->getComponent<AnimHamsterStateMachine>();
+	assert(anim_ != nullptr);
 
 	player_ = entity_->getComponent<EntityAttribs>()->getNumber();
 }
@@ -32,17 +34,18 @@ void StrongAttack::update() {
 	}
 
 	//Fin Animacion
-	if (entity_->getComponent<AnimHamsterStateMachine>()->getState() == HamStatesAnim::STRONGATTACK)
+	if (anim_->getState() == HamStatesAnim::STRONGATTACK)
 	{
 		if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
 		{
-			entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STRONGATTACK, false);
+			anim_->setAnimBool(HamStatesAnim::STRONGATTACK, false);
 		}
 	}
 }
 
-bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
+bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 	bool canHit = false;
+	bool finCombo = false;
 
 	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 	//Cogemos todas las entidades del juego
@@ -64,6 +67,9 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 				
 				//Comprobamos si está en la misma Z o relativamente cerca
 				if (eAttribs->ignoresMargin() || (abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < MARGINTOATTACK)) {
+					//A�adimos a los combos
+					if (!canHit)
+						finCombo = entity_->getComponent<Combos>()->checkCombo(1);
 
 					EntityAttribs* playerAttribs = entity_->getComponent<EntityAttribs>();
 					int dmg = playerAttribs->getDmg();
@@ -125,7 +131,7 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer, bool finCombo) {
 								//enmKnockback->setKnockbackDistance(5);
 							}
 							else
-								enmKnockback->knockback(7);
+								enmKnockback->knockback(5);
 						}
 
 						//Cogemos probabilidad de crítico
@@ -156,7 +162,7 @@ void StrongAttack::render() {
 }
 
 void StrongAttack::attack() {
-	if (!entity_->getComponent<AnimHamsterStateMachine>()->isOnAttack()) {
+	if (!anim_->isOnAttack()) {
 		auto state = hms_->getState();
 		if (hms_->canAttack() && sdlutils().currRealTime() > time_ + cooldown_) {
 
@@ -186,21 +192,17 @@ void StrongAttack::attack() {
 
 			//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
-			//A�adimos a los combos
-			bool finCombo = entity_->getComponent<Combos>()->checkCombo(1);
-
 			//Si se colisiona..
-			if (CheckCollisions(attRect_, finCombo))
+			if (CheckCollisions(attRect_))
 				//Suena el hit y le pega
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stronghit");
 			//Si no colisiona..
-			else
+			else {
 				//Suena el attackSound
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
-
-			//this.anims.play(pegarse)
-			//entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STRONGATTACK, true);
-
+				//Animacion de ataque
+				anim_->setAnimBool(HamStatesAnim::STRONGATTACK, true);
+			}
 
 			DEBUG_isAttacking_ = true;
 			time_ = sdlutils().currRealTime();
