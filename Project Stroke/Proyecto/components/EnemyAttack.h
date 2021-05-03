@@ -35,7 +35,9 @@ private:
 	SDL_Rect attRect_;
 	Animator* anim_;
 	bool DEBUG_isAttacking_;
-	long unsigned int cooldown_, time_;
+	long unsigned int minCD_, maxCD_,
+					  cooldown_, time_;
+
 	SDL_Rect cam;
 }
 ;
