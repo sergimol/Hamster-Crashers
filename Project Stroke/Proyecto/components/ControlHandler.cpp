@@ -36,8 +36,8 @@ void ControlHandler::init() {
 	st_ = entity_->getComponent<StrongAttack>();
 	assert(st_ != nullptr);
 
-	pause_ = entity_->getMngr()->getHandler<PauseMenu>()->getComponent<MenuButtonManager>();
-	main_ = entity_->getMngr()->getHandler<MainMenu>()->getComponent<MenuButtonManager>();
+	/*pause_ = entity_->getMngr()->getHandler<PauseMenu>()->getComponent<MenuButtonManager>();
+	main_ = entity_->getMngr()->getHandler<MainMenu>()->getComponent<MenuButtonManager>();*/
 	
 
 
@@ -183,87 +183,87 @@ void ControlHandler::handleController() {
 		}
 	}
 
-	else {
-		if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) < 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_UP)) {
-			if (gameState == GameStates::PAUSE) {
-				pause_->updateKeymap(MenuButtonManager::UP, true);
-				pause_->updateKeymap(MenuButtonManager::DOWN, false);
-			}
-			else if (gameState == GameStates::MAINMENU) {
-				main_->updateKeymap(MenuButtonManager::UP, true);
-				main_->updateKeymap(MenuButtonManager::DOWN, false);
-			}
-		}
-		//DOWN
-		else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) > 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_DOWN))
-		{
-			if (gameState == GameStates::PAUSE) {
-				pause_->updateKeymap(MenuButtonManager::UP, false);
-				pause_->updateKeymap(MenuButtonManager::DOWN, true);
-			}
-			else if (gameState == GameStates::MAINMENU) {
-				main_->updateKeymap(MenuButtonManager::UP, false);
-				main_->updateKeymap(MenuButtonManager::DOWN, true);
-			}
-		}
-		else
-		{
-			if (gameState == GameStates::PAUSE) {
-				pause_->updateKeymap(MenuButtonManager::UP, false);
-				pause_->updateKeymap(MenuButtonManager::DOWN, false);
-			}
-			else if (gameState == GameStates::MAINMENU) {
-				main_->updateKeymap(MenuButtonManager::UP, false);
-				main_->updateKeymap(MenuButtonManager::DOWN, false);
-			}
-		}
+	//else {
+	//	if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) < 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_UP)) {
+	//		if (gameState == GameStates::PAUSE) {
+	//			pause_->updateKeymap(MenuButtonManager::UP, true);
+	//			pause_->updateKeymap(MenuButtonManager::DOWN, false);
+	//		}
+	//		else if (gameState == GameStates::MAINMENU) {
+	//			main_->updateKeymap(MenuButtonManager::UP, true);
+	//			main_->updateKeymap(MenuButtonManager::DOWN, false);
+	//		}
+	//	}
+	//	//DOWN
+	//	else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTY) > 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_DOWN))
+	//	{
+	//		if (gameState == GameStates::PAUSE) {
+	//			pause_->updateKeymap(MenuButtonManager::UP, false);
+	//			pause_->updateKeymap(MenuButtonManager::DOWN, true);
+	//		}
+	//		else if (gameState == GameStates::MAINMENU) {
+	//			main_->updateKeymap(MenuButtonManager::UP, false);
+	//			main_->updateKeymap(MenuButtonManager::DOWN, true);
+	//		}
+	//	}
+	//	else
+	//	{
+	//		if (gameState == GameStates::PAUSE) {
+	//			pause_->updateKeymap(MenuButtonManager::UP, false);
+	//			pause_->updateKeymap(MenuButtonManager::DOWN, false);
+	//		}
+	//		else if (gameState == GameStates::MAINMENU) {
+	//			main_->updateKeymap(MenuButtonManager::UP, false);
+	//			main_->updateKeymap(MenuButtonManager::DOWN, false);
+	//		}
+	//	}
 
-		//RIGHT
-		if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) > 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_RIGHT))
-		{
-			if (gameState == GameStates::PAUSE) {
-				pause_->updateKeymap(MenuButtonManager::RIGHT, true);
-				pause_->updateKeymap(MenuButtonManager::LEFT, false);
-			}
-			else if (gameState == GameStates::MAINMENU) {
-				main_->updateKeymap(MenuButtonManager::RIGHT, true);
-				main_->updateKeymap(MenuButtonManager::LEFT, false);
-			}
-		}
-		//	LEFT
-		else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) < 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_LEFT))
-		{
-			if (gameState == GameStates::PAUSE) {
-				pause_->updateKeymap(MenuButtonManager::RIGHT, false);
-				pause_->updateKeymap(MenuButtonManager::LEFT, true);
-			}
-			else if (gameState == GameStates::MAINMENU) {
-				main_->updateKeymap(MenuButtonManager::RIGHT, false);
-				main_->updateKeymap(MenuButtonManager::LEFT, true);
-			}
-		}
-		else {
-			if (gameState == GameStates::PAUSE) {
-				pause_->updateKeymap(MenuButtonManager::RIGHT, false);
-				pause_->updateKeymap(MenuButtonManager::LEFT, false);
-			}
-			else if (gameState == GameStates::MAINMENU) {
-				main_->updateKeymap(MenuButtonManager::RIGHT, false);
-				main_->updateKeymap(MenuButtonManager::LEFT, false);
-			}
-		}
+	//	//RIGHT
+	//	if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) > 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_RIGHT))
+	//	{
+	//		if (gameState == GameStates::PAUSE) {
+	//			pause_->updateKeymap(MenuButtonManager::RIGHT, true);
+	//			pause_->updateKeymap(MenuButtonManager::LEFT, false);
+	//		}
+	//		else if (gameState == GameStates::MAINMENU) {
+	//			main_->updateKeymap(MenuButtonManager::RIGHT, true);
+	//			main_->updateKeymap(MenuButtonManager::LEFT, false);
+	//		}
+	//	}
+	//	//	LEFT
+	//	else if (ih().getAxisValue(player_, SDL_CONTROLLER_AXIS_LEFTX) < 0 || ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_DPAD_LEFT))
+	//	{
+	//		if (gameState == GameStates::PAUSE) {
+	//			pause_->updateKeymap(MenuButtonManager::RIGHT, false);
+	//			pause_->updateKeymap(MenuButtonManager::LEFT, true);
+	//		}
+	//		else if (gameState == GameStates::MAINMENU) {
+	//			main_->updateKeymap(MenuButtonManager::RIGHT, false);
+	//			main_->updateKeymap(MenuButtonManager::LEFT, true);
+	//		}
+	//	}
+	//	else {
+	//		if (gameState == GameStates::PAUSE) {
+	//			pause_->updateKeymap(MenuButtonManager::RIGHT, false);
+	//			pause_->updateKeymap(MenuButtonManager::LEFT, false);
+	//		}
+	//		else if (gameState == GameStates::MAINMENU) {
+	//			main_->updateKeymap(MenuButtonManager::RIGHT, false);
+	//			main_->updateKeymap(MenuButtonManager::LEFT, false);
+	//		}
+	//	}
 
-		if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_A)) {
-			if(gameState == GameStates::PAUSE)
-				pause_->updateKeymap(MenuButtonManager::SPACE, true);
-			else if(gameState == GameStates::MAINMENU)
-				main_->updateKeymap(MenuButtonManager::SPACE, true);
-		}
-			
-		if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_START) && gameState == GameStates::PAUSE) {
-			states_->setState(GameStates::RUNNING);
-		}
-	}
+	//	if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_A)) {
+	//		if(gameState == GameStates::PAUSE)
+	//			pause_->updateKeymap(MenuButtonManager::SPACE, true);
+	//		else if(gameState == GameStates::MAINMENU)
+	//			main_->updateKeymap(MenuButtonManager::SPACE, true);
+	//	}
+	//		
+	//	if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_START) && gameState == GameStates::PAUSE) {
+	//		states_->setState(GameStates::RUNNING);
+	//	}
+	//}
 }
 
 void ControlHandler::handleKeyboard() {
@@ -275,10 +275,10 @@ void ControlHandler::handleKeyboard() {
 			mov_->updateKeymap(Movement::UP, true);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::UP, true);
 		}
-		else if (gameState == GameStates::PAUSE )
+		/*else if (gameState == GameStates::PAUSE )
 			pause_->updateKeymap(MenuButtonManager::UP, true);
 		else if (gameState == GameStates::MAINMENU )
-			main_->updateKeymap(MenuButtonManager::UP, true);
+			main_->updateKeymap(MenuButtonManager::UP, true);*/
 	}
 	else if (ih().isKeyUp(keymap.at(UP)))
 	{
@@ -286,10 +286,10 @@ void ControlHandler::handleKeyboard() {
 			mov_->updateKeymap(Movement::UP, false);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::UP, false);
 		}
-		else if (gameState == GameStates::PAUSE)
+		/*else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::UP, false);
 		else if (gameState == GameStates::MAINMENU)
-			main_->updateKeymap(MenuButtonManager::UP, false);
+			main_->updateKeymap(MenuButtonManager::UP, false);*/
 	}
 	//DOWN
 	if (ih().isKeyDown(keymap.at(DOWN)))
@@ -298,10 +298,10 @@ void ControlHandler::handleKeyboard() {
 			mov_->updateKeymap(Movement::DOWN, true);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::DOWN, true);
 		}
-		else if (gameState == GameStates::PAUSE)
+		/*else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::DOWN, true);
 		else if (gameState == GameStates::MAINMENU)
-			main_->updateKeymap(MenuButtonManager::DOWN, true);
+			main_->updateKeymap(MenuButtonManager::DOWN, true);*/
 
 	}
 	else if (ih().isKeyUp(keymap.at(DOWN)))
@@ -310,10 +310,10 @@ void ControlHandler::handleKeyboard() {
 			mov_->updateKeymap(Movement::DOWN, false);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::DOWN, false);
 		}
-		else if (gameState == GameStates::PAUSE)
+		/*else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::DOWN, false);
 		else if (gameState == GameStates::MAINMENU)
-			main_->updateKeymap(MenuButtonManager::DOWN, false);
+			main_->updateKeymap(MenuButtonManager::DOWN, false);*/
 
 	}
 	//RIGHT
@@ -323,10 +323,10 @@ void ControlHandler::handleKeyboard() {
 			mov_->updateKeymap(Movement::RIGHT, true);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::RIGHT, true);
 		}
-		else if (gameState == GameStates::PAUSE)
+		/*else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::RIGHT, true);
 		else if (gameState == GameStates::MAINMENU)
-			main_->updateKeymap(MenuButtonManager::RIGHT, true);
+			main_->updateKeymap(MenuButtonManager::RIGHT, true);*/
 
 	}
 	else if (ih().isKeyUp(keymap.at(RIGHT)))
@@ -335,10 +335,10 @@ void ControlHandler::handleKeyboard() {
 			mov_->updateKeymap(Movement::RIGHT, false);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::RIGHT, false);
 		}
-		else if (gameState == GameStates::PAUSE)
+		/*else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::RIGHT, false);
 		else if (gameState == GameStates::MAINMENU)
-			main_->updateKeymap(MenuButtonManager::RIGHT, false);
+			main_->updateKeymap(MenuButtonManager::RIGHT, false);*/
 	}
 	//	LEFT
 	if (ih().isKeyDown(keymap.at(LEFT)))
@@ -347,10 +347,10 @@ void ControlHandler::handleKeyboard() {
 			mov_->updateKeymap(Movement::LEFT, true);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::LEFT, true);
 		}
-		else if (gameState == GameStates::PAUSE)
+		/*else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::LEFT, true);
 		else if (gameState == GameStates::MAINMENU)
-			main_->updateKeymap(MenuButtonManager::LEFT, true);
+			main_->updateKeymap(MenuButtonManager::LEFT, true);*/
 
 	}
 	else if (ih().isKeyUp(keymap.at(LEFT)))
@@ -359,10 +359,10 @@ void ControlHandler::handleKeyboard() {
 			mov_->updateKeymap(Movement::LEFT, false);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::LEFT, false);
 		}
-		else if (gameState == GameStates::PAUSE)
+		/*else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::LEFT, false);
 		else if (gameState == GameStates::MAINMENU)
-			main_->updateKeymap(MenuButtonManager::LEFT, false);
+			main_->updateKeymap(MenuButtonManager::LEFT, false);*/
 	}
 	auto& hamState = hms_->getState();
 	//el jump no necesita que se le pase el false
@@ -372,10 +372,10 @@ void ControlHandler::handleKeyboard() {
 			mov_->updateKeymap(Movement::SPACE, true);
 			//if (roll_ != nullptr) roll_->updateKeymap(Roll::LEFT, true);
 		}
-		else if (gameState == GameStates::PAUSE)
+		/*else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::SPACE, true);
 		else if (gameState == GameStates::MAINMENU)
-			main_->updateKeymap(MenuButtonManager::SPACE, true);
+			main_->updateKeymap(MenuButtonManager::SPACE, true);*/
 
 	}
 	if (ih().isKeyDown(SDL_SCANCODE_ESCAPE)) {
