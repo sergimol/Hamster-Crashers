@@ -70,6 +70,7 @@ class EnemyMother;
 class SoundManager;
 class GravityEntity;
 class CatMovement;
+class MenuControlHandler;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -141,7 +142,8 @@ class CatMovement;
 	Shadow,\
 	SoundManager, \
 	GravityEntity, \
-	CatMovement
+	CatMovement, \
+	MenuControlHandler
 
 // groups
 

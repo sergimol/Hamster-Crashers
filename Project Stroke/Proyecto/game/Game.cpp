@@ -38,6 +38,7 @@
 #include "../components/GravityEntity.h"
 #include "../components/CatMovement.h"
 #include "../components/ContactDamage.h"
+#include "../components/MenuControlHandler.h"
 
 //PARA LAS COLISIONES CON TILE
 #include "../utils/Collisions.h"
@@ -93,11 +94,12 @@ void Game::init() {
 		3
 		);*/
 	mainMenu->addComponent<MenuButtonManager>("mainMenu", &sdlutils().images().at("mainMenuBlank"));	//mainMenu, pauseMenu o hamsterMenu
+	mainMenu->addComponent<MenuControlHandler>();
 	mngr_->setHandler<MainMenu>(mainMenu);
-	//mainMenu->addComponent<MenuButtonManager>("hamsterMenu", &sdlutils().images().at("hamsterSelectorBlank"));	//mainMenu, pauseMenu o hamsterMenu
 
 	auto* pauseMenu = mngr_->addMenu();
 	pauseMenu->addComponent<MenuButtonManager>("pauseMenu");	//mainMenu, pauseMenu o hamsterMenu
+	pauseMenu->addComponent<MenuControlHandler>();
 	mngr_->setHandler<PauseMenu>(pauseMenu);
 
 	// Mapa

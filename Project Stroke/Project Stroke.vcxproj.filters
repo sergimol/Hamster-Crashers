@@ -438,6 +438,9 @@
     <ClCompile Include="Proyecto\components\CatMovement.cpp">
       <Filter>Archivos de origen\components\Entity\Enemy\EnemyBehaviour\BossBehavior</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\MenuControlHandler.cpp">
+      <Filter>Archivos de origen\components\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -742,6 +745,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\CatMovement.h">
       <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\BossBehaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\MenuControlHandler.h">
+      <Filter>Archivos de encabezado\Components\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
