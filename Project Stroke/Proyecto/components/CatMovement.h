@@ -24,7 +24,7 @@ public:
 private:
 	Transform* tr_;
 
-	const int VEL = -2;
+	const int VEL = -5;
 
 };
 

@@ -17,7 +17,7 @@
 
 class ContactDamage : public Component {
 public:
-	ContactDamage(int danyo);
+	ContactDamage(int danyo,int directionKnockbackAux);
 
 	virtual ~ContactDamage() {}
 
@@ -36,5 +36,6 @@ private:
 	long unsigned int time_;
 	int dmg_;
 	SDL_Rect cam;
+	int directionKnockback;
 }
 ;

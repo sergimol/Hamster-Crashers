@@ -210,8 +210,9 @@ void MapMngr::loadNewMap(string map) {
 
 							enemy->addComponent<EntityAttribs>();
 							enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
-							enemy->addComponent<ContactDamage>(20);
+							enemy->addComponent<ContactDamage>(20,-30);
 							enemy->addComponent<CatMovement>();
+							enemy->getMngr()->setHandler<Pussy>(enemy);
 
 						}
 					}

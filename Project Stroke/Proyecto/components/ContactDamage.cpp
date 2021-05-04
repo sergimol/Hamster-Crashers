@@ -8,8 +8,8 @@
 #include "ContactDamage.h"
 #include "../utils/Collisions.h"
 
-ContactDamage::ContactDamage(int danyo) :
-	tr_(nullptr), attRect_(), DEBUG_isAttacking_(false), dmg_(danyo) {}
+ContactDamage::ContactDamage(int danyo,int directionKnockbackAux) :
+	tr_(nullptr), attRect_(), DEBUG_isAttacking_(false), dmg_(danyo), directionKnockback(directionKnockbackAux){}
 
 void ContactDamage::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -140,7 +140,7 @@ bool ContactDamage::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 				else
 					hamFlip = true;
 
-				hamKnockback->knockback(30);
+				hamKnockback->knockback(directionKnockback);
 			}
 		}
 

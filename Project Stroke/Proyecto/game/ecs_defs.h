@@ -173,6 +173,7 @@ struct Mother;
 struct PauseMenu;
 struct SoundManager;
 struct MainMenu;
+struct Pussy;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
@@ -184,6 +185,7 @@ struct MainMenu;
 					Mother, \
 					PauseMenu,\
 					SoundManager, \
+					Pussy, \
 					MainMenu
 
 

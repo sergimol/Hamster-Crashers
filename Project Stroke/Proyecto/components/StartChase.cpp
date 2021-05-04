@@ -21,22 +21,25 @@ void StartChase::init() {
 }
 
 void StartChase::update() {
-	for (Entity* hamsters : entity_->getMngr()->getPlayers()) {
-		//Cogemos la posicion de cada hamster...
-		auto hamsterTr = hamsters->getComponent<Transform>();
+	if (!collide) {
+		for (Entity* hamsters : entity_->getMngr()->getPlayers()) {
+			//Cogemos la posicion de cada hamster...
+			auto hamsterTr = hamsters->getComponent<Transform>();
 
-		//Cogemos la camara para hacer bien las colisiones
-		SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+			//Cogemos la camara para hacer bien las colisiones
+			SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 
-		if (Collisions::collides(hamsterTr->getPos(), hamsterTr->getW(), hamsterTr->getH(),
-			tr_->getPos(), tr_->getW(), tr_->getH())) {
-			start();
+			if (Collisions::collides(hamsterTr->getPos(), hamsterTr->getW(), hamsterTr->getH(),
+				tr_->getPos(), tr_->getW(), tr_->getH())) {
+				start();
+				collide = true;
+			}
 		}
 	}
 }
 
 void StartChase::render() {
-	if(debug) SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 255, 0, 255);
+	if (debug) SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 255, 0, 255);
 }
 
 void StartChase::start() {
@@ -59,5 +62,8 @@ void StartChase::start() {
 		hamsters->getComponent<StrongAttack>()->setActive(false);
 
 		hamsters->getComponent<MovementInChase>()->setActive(true);
+
+		//Y hacemos que la camara siga al gato
+		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::BossCat);
 	}
 }

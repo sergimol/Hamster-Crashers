@@ -62,9 +62,9 @@ Game::~Game() {
 
 void Game::init() {
 
-	SDLUtils::init("Squeak Ship", 1920, 1010, "resources/config/hamsters.resources.json");
+	SDLUtils::init("Squeak Ship", 1920, 1080, "resources/config/hamsters.resources.json");
 
-	//SDL_SetWindowFullscreen(sdlutils().window(), SDL_WINDOW_FULLSCREEN);	//   SDL_WINDOW_FULLSCREEN  ||   SDL_WINDOW_FULLSCREEN_DESKTOP
+	SDL_SetWindowFullscreen(sdlutils().window(), SDL_WINDOW_FULLSCREEN);	//   SDL_WINDOW_FULLSCREEN  ||   SDL_WINDOW_FULLSCREEN_DESKTOP
 
 	//CAMBIAR TAMAÑO DE PANTALLA, ESCALA DEL RENDER Y ALTERNAR ENTRE PANTALLA COMPLETA
 	//SDL_SetWindowSize(sdlutils().window(), sdlutils().width(), sdlutils().height());
@@ -132,7 +132,7 @@ void Game::init() {
 	mngr_->setHandler<Mother>(mother);
 
 	//Carga del mapa
-	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/BossGatoPrueba.tmx");
+	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Lvl1Javi.tmx");
 
 }
 

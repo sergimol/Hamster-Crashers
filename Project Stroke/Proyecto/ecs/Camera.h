@@ -1,4 +1,3 @@
-// This file is part of the course TPV2@UCM - Samir Genaim
 #pragma once
 
 #include <algorithm>
@@ -6,7 +5,6 @@
 #include <bitset>
 #include <vector>
 #include <iostream>
-
 
 #include "Component.h"
 #include "ecs.h"
@@ -17,7 +15,7 @@
 #include <SDL_rect.h>
 #include "../components/MapMngr.h"
 
-const enum State { Players, GoingTo, Static };
+const enum State { Players, GoingTo, Static, BossCat };
 class Camera : public Component {
 private:
 	SDL_Rect camera_;
@@ -25,6 +23,7 @@ private:
 	int players;
 
 	void followPlayer();
+	void followBossCat();
 	void Goto();
 	void StaticCamera();
 	bool followPlayers;		//Controla si quiero que la camara siga a los jugadores o a otro punto
@@ -41,11 +40,10 @@ public:
 	void init() override;
 	void update() override;
 	inline SDL_Rect getCam() const{ return camera_; };
-	void changeCamState(State estado) { cameraState = estado; };
 	void changeCamFollowPos(Vector2D objetive);
+	inline void changeCamState(State estado) { cameraState = estado; };
 	inline State getCamState() {return cameraState;};
 	inline Vector2D getCamPos() { return camPos; };
-	//void changeState(enum state) { cameraState = state ; };
 	Vector2D CameraFollowPos;	//Guarda el punto de la posición de la camara cuando lo lea
 
 	void setGoToTracker(bool objetivo) {GoToTracker = objetivo;};

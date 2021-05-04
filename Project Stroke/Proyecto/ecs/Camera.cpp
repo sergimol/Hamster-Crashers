@@ -1,4 +1,3 @@
-// This file is part of the course TPV2@UCM - Samir Genaim
 #include "Camera.h"
 #include "../components/Transform.h"
 
@@ -14,6 +13,8 @@ void Camera::update() {
 		Goto();
 	else if (cameraState == Static)
 		StaticCamera();
+	else if (cameraState == BossCat)
+		followBossCat();
 
 	checkBounds();
 }
@@ -23,7 +24,7 @@ void Camera::checkBounds() {
 	if (camera_.x < 0) {
 		camera_.x = 0;
 	}
-	else if (camera_.x + camera_.w > map_->getMaxW()) { 
+	else if (camera_.x + camera_.w > map_->getMaxW()) {
 		camera_.x = map_->getMaxW() - camera_.w;
 	}
 
@@ -48,6 +49,18 @@ void Camera::followPlayer() {
 		camPos = camPos + playerpos + Vector2D(e->getComponent<Transform>()->getW(), e->getComponent<Transform>()->getH()) / 2;
 		players++;
 	}
+	camPos.setY(camPos.getY() - 200);
+	//Actualizamos la posicion de la camara
+	camera_.x = (camPos.getX() / players) - camera_.w / 2;
+	camera_.y = (camPos.getY() / players) - camera_.h / 2;
+}
+
+void Camera::followBossCat() {
+	camPos = Vector2D();
+	auto cat = entity_->getMngr()->getHandler<Pussy>()->getComponent<Transform>();
+
+	//Camara sigue al gato dejándolo justo en la esquina derecha
+	camPos = camPos + cat->getPos() - Vector2D(sdlutils().width()/2 - cat->getW(),0);
 	camPos.setY(camPos.getY() - 200);
 	//Actualizamos la posicion de la camara
 	camera_.x = (camPos.getX() / players) - camera_.w / 2;
