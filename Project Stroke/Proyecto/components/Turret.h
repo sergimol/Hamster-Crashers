@@ -9,7 +9,6 @@ public:
 
 	virtual ~Turret();
 
-	void init() override;
 	void update() override;
 
 	//Ejecuta la habilidad en funcion del hamster que sea

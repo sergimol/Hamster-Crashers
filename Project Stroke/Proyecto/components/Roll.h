@@ -18,7 +18,7 @@ public:
 
 	virtual ~Roll();
 
-	virtual void init()override;
+	virtual void init();
 
 	//Ejecuta la habilidad en funcion del hamster que sea
 	virtual void action();

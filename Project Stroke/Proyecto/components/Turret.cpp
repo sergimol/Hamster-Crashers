@@ -14,22 +14,6 @@ Turret::Turret() : Ability(CD), x_(0), cadenceTime_(sdlutils().currRealTime()) {
 Turret::~Turret() {
 }
 
-void Turret::init() {
-	tr_ = entity_->getComponent<Transform>();
-	assert(tr_ != nullptr);
-
-	st_ = entity_->getComponent<HamsterStateMachine>();
-	assert(st_ != nullptr);
-
-	anim_ = entity_->getComponent<Animator>();
-	assert(anim_ != nullptr);
-
-	attribs_ = entity_->getComponent<EntityAttribs>();
-	assert(attribs_ != nullptr);
-
-	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
-	assert(state_ != nullptr);
-}
 
 void Turret::update() {
 	if (state_->getState() == GameStates::RUNNING) {

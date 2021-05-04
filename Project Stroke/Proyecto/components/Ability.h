@@ -22,7 +22,7 @@ public:
 
 	void update() override;
 
-	void render() override {};
+	void render() override;
 
 	void onResume() override;
 	//void onEnable() override {};
@@ -49,6 +49,11 @@ protected:
 	Animator* anim_;
 	GameStates* state_;
 	long unsigned int timer_, cooldown_; //Contador para ver CADA CUANTO puede usar una habilidad
+
+	Texture* txtOn, * txtOff;
+	SDL_Rect txtPos;
+
+	const float offsetTextX = 30, offsetTextY = 30;
 
 	bool active_ = true;
 	bool onUse_ = false;

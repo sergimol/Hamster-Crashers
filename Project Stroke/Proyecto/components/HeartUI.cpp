@@ -60,7 +60,7 @@ void HeartUI::dep() {
 	alive = false;
 }
 
-//Si el hamster muere cambiar textura a muerto
+//Si el hamster revive cambiar textura a vivo
 void HeartUI::resurrection() {
 	heart_ = &sdlutils().images().at("heart1");
 	alive = true;

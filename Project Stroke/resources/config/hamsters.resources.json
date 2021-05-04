@@ -317,7 +317,40 @@
     {
       "id": "640x480ButtonEnter",
       "file": "resources/images/menuSprites/quitButtonEnter.png"
+    },
+    {
+      "id": "sardinillaOn",
+      "file": "resources/images/UI/sardinillaAbilitiOn.png"
+    },
+    {
+      "id": "sardinillaOff",
+      "file": "resources/images/UI/sardinillaAbilitiOff.png"
+    },
+    {
+      "id": "monchiOn",
+      "file": "resources/images/UI/monchiAbilitiOn.png"
+    },
+    {
+      "id": "monchiOff",
+      "file": "resources/images/UI/monchiAbilitiOff.png"
+    },
+    {
+      "id": "ketaOn",
+      "file": "resources/images/UI/ketaAbilitiOn.png"
+    },
+    {
+      "id": "ketaOff",
+      "file": "resources/images/UI/ketaAbilitiOff.png"
+    },
+    {
+      "id": "canelonOn",
+      "file": "resources/images/UI/canelonAbilitiOn.png"
+    },
+    {
+      "id": "canelonOff",
+      "file": "resources/images/UI/canelonAbilitiOff.png"
     }
+
   ],
 
   "messages": [

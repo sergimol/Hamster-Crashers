@@ -132,7 +132,7 @@ void Game::init() {
 	mngr_->setHandler<Mother>(mother);
 
 	//Carga del mapa
-	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/BossGatoPrueba.tmx");
+	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Lvl1Javi.tmx");
 
 }
 

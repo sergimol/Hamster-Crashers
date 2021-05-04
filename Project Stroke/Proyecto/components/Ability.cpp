@@ -1,5 +1,6 @@
 #include "Ability.h"
 #include "AnimHamsterStateMachine.h"
+#include "UI.h"
 
 void Ability::init() {
 
@@ -14,6 +15,21 @@ void Ability::init() {
 
 	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
 	assert(state_ != nullptr);
+
+	auto* ui = entity_->getComponent<UI>();
+	auto name = entity_->getComponent<EntityAttribs>()->getId();
+
+	txtOn = &sdlutils().images().at(name + "On");
+	txtOff = &sdlutils().images().at(name + "Off");
+
+	txtPos = build_sdlrect(ui->getBarPos().getX() + offsetTextX, ui->getBarPos().getY() + offsetTextY, txtOn->width()/3, txtOn->height()/3);
+}
+
+void Ability::render() {
+	if (active_ && !onUse_)
+		txtOn->render(txtPos, 0);
+	else
+		txtOff->render(txtPos, 0);
 }
 
 void Ability::update() {

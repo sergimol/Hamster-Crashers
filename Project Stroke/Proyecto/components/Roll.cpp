@@ -11,23 +11,13 @@
 
 
 void Roll::init() {
-	tr_ = entity_->getComponent<Transform>();
-	assert(tr_ != nullptr);
-
-	st_ = entity_->getComponent<HamsterStateMachine>();
-	assert(st_ != nullptr);
-
-	anim_ = entity_->getComponent<Animator>();
-	assert(anim_ != nullptr);
-
+	Ability::init();
+	
 	speed_ = entity_->getComponent<EntityAttribs>()->getVel();
 	assert(speed_ != Vector2D());
 
 	col_ = entity_->getComponent<CollisionDetec>();
 	assert(col_ != nullptr);
-
-	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
-	assert(state_ != nullptr);
 
 	mov_ = entity_->getComponent<Movement>();
 	assert(mov_ != nullptr);

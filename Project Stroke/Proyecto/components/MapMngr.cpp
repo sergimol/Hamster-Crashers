@@ -501,6 +501,10 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 	hamster1->addComponent<StrongAttack>();
 	hamster1->addComponent<Combos>();
 
+	//Interfaz
+	hamster1->addComponent<UI>(name, 0);
+	hamster1->addComponent<HeartUI>(name, 0);
+
 	//Habilidad
 	if (name == "sardinilla") hamster1->addComponent<Roll>();
 	else if (name == "canelon") hamster1->addComponent<Pray>(100, 100);
@@ -508,9 +512,7 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 	else hamster1->addComponent<Turret>();
 
 
-	//Interfaz
-	hamster1->addComponent<UI>(name, 0);
-	hamster1->addComponent<HeartUI>(name, 0);
+	
 
 	//Gestion de infartos
 	hamster1->addComponent<PossesionGame>();
