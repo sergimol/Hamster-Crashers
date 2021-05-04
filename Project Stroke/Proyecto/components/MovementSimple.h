@@ -33,7 +33,10 @@ public:
 	virtual void onEnable() override;
 	virtual void onDisable() override;
 	void onResume() override;
-	Vector2D getLastDir() { return lastDir_; };
+	inline Vector2D getLastDir() { return lastDir_; };
+
+	inline Vector2D getSpeed() const { return speed_; };
+	inline void setSpeed(Vector2D s) { speed_ = s; };
 
 protected:
 private:

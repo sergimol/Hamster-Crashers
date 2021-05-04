@@ -5,6 +5,7 @@
 #include <map>
 #include "../sdlutils/SDLUtils.h"
 #include "Transform.h"
+#include "MovementSimple.h"
 
 class CollisionDetec : public Component {
 public:
@@ -12,7 +13,7 @@ public:
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 
 	CollisionDetec() :
-		tr_(nullptr){
+		tr_(nullptr), speed_(Vector2D(0,0)){
 	}
 
 	virtual ~CollisionDetec() {
@@ -24,10 +25,15 @@ public:
 
 	void tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPlayer, bool enemy);
 
+	void setMovement(MovementSimple* m);
+
 	float lerp(float a, float b, float f);
 
 private:
 
 	Transform* tr_;
+
+	MovementSimple* mv_;
+	Vector2D speed_;
 };
 

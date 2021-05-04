@@ -11,6 +11,12 @@
 void CollisionDetec::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+
+}
+
+void CollisionDetec::setMovement(MovementSimple* m) {
+	mv_ = m;
+	speed_ = mv_->getSpeed();
 }
 
 void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPlayer, bool enemy) {
@@ -61,14 +67,21 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 		}
 	}
 
-	/*if (rectPlayer.y + rectPlayer.h > map->getMaxH())
-		vel.setY(0);*/
-
 	//Comprobacion para los límites de la cámara
-	if (!enemy && (rectPlayer.x < cam.x || rectPlayer.x + rectPlayer.w > pCam.getX() + cam.w / 2))
-		vel.setX(0);
-	if (!enemy && (rectPlayer.y < cam.y || rectPlayer.y + rectPlayer.h + 120 > pCam.getY() + cam.h / 2))
-		vel.setY(0);
+	if (enemy) {
+		if (rectPlayer.x + rectPlayer.w < cam.x || rectPlayer.x  > pCam.getX() + cam.w / 2)
+			mv_->setSpeed(speed_ * 4);
+		else
+			mv_->setSpeed(speed_);
+		if (rectPlayer.y < cam.y || rectPlayer.y + rectPlayer.h + 120 > pCam.getY() + cam.h / 2)
+			vel.setY(-speed_.getY());
+	}
+	else {
+		if (rectPlayer.x < cam.x || rectPlayer.x + rectPlayer.w > pCam.getX() + cam.w / 2)
+			vel.setX(0);
+		if (rectPlayer.y < cam.y || rectPlayer.y + rectPlayer.h + 120 > pCam.getY() + cam.h / 2)
+			vel.setY(0);
+	}
 
 	if (vel.getX() < 0.001 && vel.getX() > -0.001) vel.setX(0);
 	if (vel.getY() < 0.001 && vel.getY() > -0.001) vel.setY(0);

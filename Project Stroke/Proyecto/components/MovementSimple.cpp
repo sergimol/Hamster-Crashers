@@ -16,7 +16,6 @@ void MovementSimple::init() {
 	assert(enmState_ != nullptr);
 
 	colDetec_ = entity_->getComponent<CollisionDetec>();
-
 	/*
 	anim_ = entity_->getComponent<Animator>();
 	assert(anim_ != nullptr);
@@ -24,6 +23,8 @@ void MovementSimple::init() {
 
 	speed_ = entity_->getComponent<EntityAttribs>()->getVel();
 	assert(speed_ != Vector2D());
+
+	colDetec_->setMovement(this);
 
 	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
 	assert(state_ != nullptr);
@@ -125,10 +126,10 @@ void MovementSimple::update() {
 		//Si me voy a chocar con una pared...
 		if (colDetec_ != nullptr) {
 			//Cojo el rect del player y le sumo la supuesta siguiente posicion
-			SDL_Rect rectPlayer = tr_->getRectCollide();
-			rectPlayer.x += vel.getX();
-			rectPlayer.y += vel.getY();
-			colDetec_->tryToMove(dir, goalVel_, rectPlayer, true);
+			SDL_Rect rectEnemy = tr_->getRectCollide();
+			rectEnemy.x += vel.getX();
+			rectEnemy.y += vel.getY();
+			colDetec_->tryToMove(dir, goalVel_, rectEnemy, true);
 		}
 
 		if (keymapSimple_.at(SPACE)) {		//Inicio del salto
