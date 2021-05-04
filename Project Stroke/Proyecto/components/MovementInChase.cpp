@@ -82,7 +82,7 @@ void MovementInChase::update() {
 			tr_->getFlip() = true;
 		}
 		else if (keymap.at(LEFT)) {
-			dir.setX(-2.0f);
+			dir.setX(-1.0f);
 			tr_->getFlip() = true;
 		}
 
@@ -100,7 +100,7 @@ void MovementInChase::update() {
 		if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {		//Deceleracion
 			if (col_ != nullptr) {
 				vel.setX(col_->lerp(vel.getX(), baseSpeed_.getX(), 0.25));
-				vel.setY(col_->lerp(vel.getY(), 0, 0.25));
+				vel.setY(col_->lerp(vel.getY(), baseSpeed_.getY(), 0.25));
 			}
 			//ANIMACION DE IDLE
 
@@ -109,6 +109,7 @@ void MovementInChase::update() {
 			if (col_ != nullptr) {
 				vel.setX(col_->lerp(goalVel_.getX(), vel.getX(), 0.9));
 				vel.setY(col_->lerp(goalVel_.getY(), vel.getY(), 0.9));
+				std::cout << vel.getY() << " \n";
 			}
 		}
 		else {
@@ -122,12 +123,14 @@ void MovementInChase::update() {
 		SDL_Rect rectPlayer = tr_->getRectCollide();
 		rectPlayer.x += vel.getX();
 		rectPlayer.y += vel.getY();
+		
 		if (col_ != nullptr)
 			col_->tryToMove(dir, goalVel_, rectPlayer, false);		//Intenta moverse
+		
 		if(grav_->isActive())
 			grav_->checkHeight(rectPlayer);					//Comprobamos que no tenga que subir un escalon
 
-		if (grav_->getStuck()) vel.setX(0);				//Si lo tiene que subir y no salta no se mueve en x
+		if (grav_->getStuck())			vel.setX(0);				//Si lo tiene que subir y no salta no se mueve en x
 
 	//SALTO
 		if (z <= grav_->getFloor()) {
