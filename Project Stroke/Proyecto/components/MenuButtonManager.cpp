@@ -18,21 +18,21 @@ void MenuButtonManager::init() {
 			buttons_[i] = vector<Entity*>(buttonsMagnitude_.getY());
 		}
 
-		auto mngr_ = entity_->getMngr();
+		auto mngr = entity_->getMngr();
 
-		auto* localbutton = mngr_->addMenu();
+		auto* localbutton = mngr->addMenu();
 		localbutton->addComponent<MenuButton>("local", Vector2D(100, 550), stateNumber_);
 		buttons_[0][0] = localbutton;
 
-		auto* onlinebutton = mngr_->addMenu();
+		auto* onlinebutton = mngr->addMenu();
 		onlinebutton->addComponent<MenuButton>("online", Vector2D(100, 750), stateNumber_);
 		buttons_[0][1] = onlinebutton;
 
-		auto* optionsbutton = mngr_->addMenu();
+		auto* optionsbutton = mngr->addMenu();
 		optionsbutton->addComponent<MenuButton>("options", Vector2D(1550, 550), stateNumber_);
 		buttons_[1][0] = optionsbutton;
 
-		auto* quitbutton = mngr_->addMenu();
+		auto* quitbutton = mngr->addMenu();
 		quitbutton->addComponent<MenuButton>("quit", Vector2D(1550, 750), stateNumber_);
 		buttons_[1][1] = quitbutton;
 		
@@ -50,9 +50,9 @@ void MenuButtonManager::init() {
 			buttons_[i] = vector<Entity*>(buttonsMagnitude_.getY());
 		}
 
-		auto mngr_ = entity_->getMngr();
+		auto mngr = entity_->getMngr();
 
-		auto* resumeButton = mngr_->addMenu();
+		auto* resumeButton = mngr->addMenu();
 		resumeButton->addComponent<MenuButton>("resume", Vector2D(800, 300), stateNumber_);
 		buttons_[0][0] = resumeButton;
 
@@ -60,7 +60,7 @@ void MenuButtonManager::init() {
 		optionsbutton->addComponent<MenuButton>("options", Vector2D(870, 470), 2);
 		buttons[0][1] = optionsbutton;*/
 
-		auto* quitbutton = mngr_->addMenu();
+		auto* quitbutton = mngr->addMenu();
 		/*quitbutton->addComponent<MenuButton>("quit", Vector2D(870, 650), 2);
 		buttons[0][2] = quitbutton;*/
 		// Para la demo
@@ -73,21 +73,21 @@ void MenuButtonManager::init() {
 		for (int i = 0; i < buttons_.size(); ++i) {
 			buttons_[i] = vector<Entity*>(buttonsMagnitude_.getY());
 		}
-		auto mngr_ = entity_->getMngr();
+		auto mngr = entity_->getMngr();
 
-		auto* sardinillabutton = mngr_->addMenu();
+		auto* sardinillabutton = mngr->addMenu();
 		sardinillabutton->addComponent<MenuButton>("sardinilla", Vector2D(50, 50), stateNumber_);
 		buttons_[0][0] = sardinillabutton;
 
-		auto* ketabutton = mngr_->addMenu();
+		auto* ketabutton = mngr->addMenu();
 		ketabutton->addComponent<MenuButton>("keta", Vector2D(500, 50), stateNumber_);
 		buttons_[1][0] = ketabutton;
 
-		auto* monchibutton = mngr_->addMenu();
+		auto* monchibutton = mngr->addMenu();
 		monchibutton->addComponent<MenuButton>("monchi", Vector2D(950, 50), stateNumber_);
 		buttons_[2][0] = monchibutton;
 
-		auto* canelonbutton = mngr_->addMenu();
+		auto* canelonbutton = mngr->addMenu();
 		canelonbutton->addComponent<MenuButton>("canelon", Vector2D(1400, 50), stateNumber_);
 		buttons_[3][0] = canelonbutton;
 
@@ -104,18 +104,18 @@ void MenuButtonManager::init() {
 			buttons_[i] = vector<Entity*>(buttonsMagnitude_.getY());
 		}
 
-		auto mngr_ = entity_->getMngr();
+		auto mngr = entity_->getMngr();
 
-		auto* twoPlayersButton = mngr_->addMenu();
-		twoPlayersButton->addComponent<MenuButton>("twoPlayers", Vector2D(sdlutils().width() / 2, sdlutils().height() / 3), stateNumber_);
+		auto* twoPlayersButton = mngr->addMenu();
+		twoPlayersButton->addComponent<MenuButton>("twoPlayers", Vector2D(750, 100), stateNumber_);
 		buttons_[0][0] = twoPlayersButton;
 
-		auto* threePlayersButton = mngr_->addMenu();
-		threePlayersButton->addComponent<MenuButton>("threePlayers", Vector2D(sdlutils().width() / 2, sdlutils().height() / 2), stateNumber_);
+		auto* threePlayersButton = mngr->addMenu();
+		threePlayersButton->addComponent<MenuButton>("threePlayers", Vector2D(750, 400), stateNumber_);
 		buttons_[0][1] = threePlayersButton;
 
-		auto* fourPlayersButton = mngr_->addMenu();
-		fourPlayersButton->addComponent<MenuButton>("fourPlayers", Vector2D(sdlutils().width() / 2, sdlutils().height() * 3 / 4), stateNumber_);
+		auto* fourPlayersButton = mngr->addMenu();
+		fourPlayersButton->addComponent<MenuButton>("fourPlayers", Vector2D(750, 700), stateNumber_);
 		buttons_[0][2] = fourPlayersButton;
 
 		auto backgrText = &sdlutils().images().at("mainMenuBlank");

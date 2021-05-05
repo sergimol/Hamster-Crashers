@@ -192,9 +192,13 @@ void MapMngr::loadNewMap(string map) {
 
 					objectLayer = &layer->getLayerAs<tmx::ObjectGroup>();
 
+					for (int i = 0; i < hamstersToLoad_.size(); ++i) {
+						addHamster(hamstersToLoad_[i], i);
+					}
+
 					for (const auto& object : objects) {
 						if (object.getName() == "sardinilla" || object.getName() == "canelon" || object.getName() == "keta" || object.getName() == "monchi")
-							addHamster(object);
+							{}//addHamster(object);
 						else if (object.getName() == "newScene") {
 							newSceneTrigger(object.getProperties()[0].getStringValue(), object);
 						}
@@ -344,7 +348,7 @@ void MapMngr::loadEnemyRoom() {
 
 			enemy->setGroup<Enemy>(true);
 
-			enemy->addComponent<EntityAttribs>(200, 0.0, "soldier1", Vector2D(3.6, 2), 0, 0, 5);
+			enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, "soldier1", Vector2D(3.6, 2), 0, 0, 5);
 
 			enemy->addComponent<Animator>(
 				&sdlutils().images().at("soldier1Sheet"),
@@ -386,7 +390,7 @@ void MapMngr::loadEnemyRoom() {
 
 			//enemy->setGroup<Enemy>(true);
 
-			//enemy->addComponent<EntityAttribs>(200, 0.0, "soldier1", Vector2D(3.6, 2), 0, 0, 5);
+			//enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, "soldier1", Vector2D(3.6, 2), 0, 0, 5);
 
 			//enemy->addComponent<Animator>(
 			//	&sdlutils().images().at("soldier1Sheet"),
@@ -427,7 +431,7 @@ void MapMngr::loadEnemyRoom() {
 			enemy->addComponent<EnemyStateMachine>();
 			enemy->setGroup<Enemy>(true);
 
-			enemy->addComponent<EntityAttribs>(700, 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true);
+			enemy->addComponent<EntityAttribs>(600 + (hamstersToLoad_.size() * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true);
 
 			enemy->addComponent<Image>(&sdlutils().images().at("firstBoss"));
 			enemy->addComponent<UI>("canelon", 4);
@@ -444,13 +448,13 @@ void MapMngr::loadEnemyRoom() {
 	}
 }
 
-void MapMngr::addHamster(const tmx::Object& obj) {
+void MapMngr::addHamster(string name, int i) {
 
 
 
 
 	//do stuff with object properties
-	auto& name = obj.getName();
+	//auto& name = obj.getName();
 	auto mngr_ = entity_->getMngr();
 	auto& players = mngr_->getPlayers();
 	auto* hamster1 = mngr_->addEntity();
@@ -458,17 +462,17 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 	//Habilidad
 	if (name == "sardinilla")
 
-		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale),
+		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
 			Vector2D(), 86 * scale, 86 * scale, 0.0f, 0.5, 0.5);
 
 	else if (name == "canelon")
-		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale),
+		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
 			Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
 	else if (name == "keta")
-		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale),
+		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
 			Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
 	else
-		hamster1->addComponent<Transform>(Vector2D(obj.getPosition().x * scale, obj.getPosition().y * scale),
+		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
 			Vector2D(), 86 * scale, 86 * scale, 0.0f, 1, 1);
 
 	hamster1->addComponent<HamsterStateMachine>();
@@ -477,7 +481,7 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 
 	Transform* tr = hamster1->getComponent<Transform>();
 
-	hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), 0, 0, 20);
+	hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20);
 	hamster1->addComponent<Animator>(
 		&sdlutils().images().at(name + "Sheet"),
 		86,
@@ -518,8 +522,14 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 	hamster1->addComponent<PossesionGame>();
 	hamster1->addComponent<GhostCtrl>();
 	//ES NECESARIO PASAR LA ESTRATEGIA QUE DEBE USAR EL STROKE O SE VA A LA PUTA (RandomStrokeStrategy o FairStrokeStrategy)
-	FairStrokeStrategy* rndStr = new FairStrokeStrategy();
-	hamster1->addComponent<Stroke>(rndStr);
+	if (hamstersToLoad_.size() > 1) {
+		RandomStrokeStrategy* rndStrat = new RandomStrokeStrategy();
+		hamster1->addComponent<Stroke>(rndStrat);
+	}
+	else {
+		FairStrokeStrategy* farirStrat = new FairStrokeStrategy();
+		hamster1->addComponent<Stroke>(farirStrat);
+	}
 
 	hamster1->addComponent<Knockback>();
 	hamster1->addComponent<GetItem>();
@@ -536,12 +546,21 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 	//añadirlo tmb a la lista de control de enemyMother
 	mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addObjetive(hamster1);
 
-	//Para acceder facilmente le metemos en Hamster1 de Handelers
-	if (name == "sardinilla")mngr_->setHandler<Hamster1>(hamster1);
-	else if (name == "canelon") mngr_->setHandler<Hamster2>(hamster1);
-	else if (name == "keta") mngr_->setHandler<Hamster3>(hamster1);
-	else mngr_->setHandler<Hamster4>(hamster1);
-
+	// Asignación de handler
+	switch (i) {
+		case 0:
+			mngr_->setHandler<Hamster1>(hamster1);
+			break;
+		case 1:
+			mngr_->setHandler<Hamster2>(hamster1);
+			break;
+		case 2:
+			mngr_->setHandler<Hamster3>(hamster1);
+			break;
+		case 3:
+			mngr_->setHandler<Hamster4>(hamster1);
+			break;
+	}
 }
 
 //void MapMngr::Refresh() {

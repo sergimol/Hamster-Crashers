@@ -73,6 +73,14 @@ public:
 	inline int height() {
 		return height_;
 	}
+	
+	inline int hamstersToChoose() {
+		return hamstersToChoose_;
+	}
+	
+	inline int hamstersChosen() {
+		return hamstersChosen_;
+	}
 
 	inline void setWidth(int widthAux) {
 		width_ = widthAux;
@@ -80,6 +88,14 @@ public:
 
 	inline void setHeight(int heightAux) {
 		height_ = heightAux;
+	}
+
+	inline void setHamstersToChoose(int hamsters) {
+		hamstersToChoose_ = hamsters;
+	}
+	
+	inline void setHamstersChosen(int hamsters) {
+		hamstersChosen_ = hamsters;
 	}
 
 	// toggle to full-screen/window mode
@@ -169,6 +185,8 @@ private:
 	std::string windowTitle_; // window title
 	int width_; // window width
 	int height_; // window height
+	int hamstersToChoose_; // número de hamsters a elegir en el menú de selección
+	int hamstersChosen_; // número de hamstes ya elegidos
 
 	SDL_Window *window_; // the window
 	SDL_Renderer *renderer_; // the renderer

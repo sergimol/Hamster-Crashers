@@ -42,8 +42,9 @@ private:
 	const int scale = 3;
 
 	std::queue<tmx::Object> TriggerftCamera;
+	vector<string> hamstersToLoad_;
 
-	void addHamster(const tmx::Object& obj);
+	void addHamster(string name, int i);
 public:
 	MapMngr() : Room(0) {};
 	~MapMngr();
@@ -62,5 +63,9 @@ public:
 	void reduceNumberEnemyRoom() { numberEnemyRoom--; };
 	void newSceneTrigger(string newName, const tmx::Object& obj);
 	void startChaseTrigger(const tmx::Object& obj);
+
+	void addHamster(string name) { hamstersToLoad_.push_back(name); };
+	void removeHamster(string name) { hamstersToLoad_.back().erase(); };
+	void clearHamstersVector() { hamstersToLoad_.clear(); };
 };
 

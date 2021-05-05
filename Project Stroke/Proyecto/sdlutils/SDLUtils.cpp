@@ -13,7 +13,9 @@ SDLUtils::SDLUtils() :
 SDLUtils::SDLUtils(std::string windowTitle, int width, int height) :
 	windowTitle_(windowTitle), //
 	width_(width), //
-	height_(height) {
+	height_(height),
+	hamstersChosen_(0),
+	hamstersToChoose_(0){
 
 	initWindow();
 	initSDLExtensions();

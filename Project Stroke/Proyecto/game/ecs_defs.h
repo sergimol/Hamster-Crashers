@@ -174,6 +174,8 @@ struct PauseMenu;
 struct SoundManager;
 struct MainMenu;
 struct Pussy;
+struct PlayerQuantityMenu;
+struct HamsterSelectionMenu;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
@@ -184,6 +186,8 @@ struct Pussy;
 					LevelHandlr, \
 					Mother, \
 					PauseMenu,\
+					PlayerQuantityMenu, \
+					HamsterSelectionMenu, \
 					SoundManager, \
 					Pussy, \
 					MainMenu
