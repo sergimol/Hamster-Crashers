@@ -30,7 +30,7 @@ public:
 	};
 
 	virtual ~InputHandler() {
-		for (int i = 0; i < MAXPLAYERS; ++i) {
+		/*for (int i = 0; i < MAXPLAYERS; ++i) {
 			if (controllers_[i] != nullptr) {
 				SDL_GameControllerClose((SDL_GameController*)i);
 				controllers_[i] = nullptr;
@@ -39,9 +39,9 @@ public:
 				leftJoysticks_[i] = nullptr;
 
 				delete rightJoysticks_[i];
-				rightJoysticks_[i] = nullptr;
+				rightJoysticks_[i] = nullptr;				
 			}
-		}
+		}*/
 	}
 
 	// clear the state
@@ -165,16 +165,16 @@ public:
 		switch (axis)
 		{
 		case SDL_CONTROLLER_AXIS_LEFTX:
-			return leftJoysticks_[controller]->getX();
+			return leftJoysticks_[controller].getX();
 			break;
 		case SDL_CONTROLLER_AXIS_LEFTY:
-			return leftJoysticks_[controller]->getY();
+			return leftJoysticks_[controller].getY();
 			break;
 		case SDL_CONTROLLER_AXIS_RIGHTX:
-			return rightJoysticks_[controller]->getX();
+			return rightJoysticks_[controller].getX();
 			break;
 		case SDL_CONTROLLER_AXIS_RIGHTY:
-			return rightJoysticks_[controller]->getY();
+			return rightJoysticks_[controller].getY();
 			break;
 		case SDL_CONTROLLER_AXIS_TRIGGERLEFT:
 			return leftTriggers_[controller];
@@ -259,16 +259,16 @@ private:
 
 			switch (axis) {
 			case 0:
-				leftJoysticks_[controllerID]->setX(value);
+				leftJoysticks_[controllerID].setX(value);
 				break;
 			case 1:
-				leftJoysticks_[controllerID]->setY(value);
+				leftJoysticks_[controllerID].setY(value);
 				break;
 			case 2:
-				rightJoysticks_[controllerID]->setX(value);
+				rightJoysticks_[controllerID].setX(value);
 				break;
 			case 3:
-				rightJoysticks_[controllerID]->setY(value);
+				rightJoysticks_[controllerID].setY(value);
 				break;
 			}
 		}
@@ -311,7 +311,7 @@ private:
 
 		Uint8 i = 0;
 		bool found = false;
-		int id = sysToGameId.find(event.jaxis.which)->second;
+		int id = sysToGameId.find(event.cdevice.which)->second;
 
 		// Encontramos el bot�n
 		while (!found && i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX) {
@@ -376,11 +376,8 @@ private:
 			SDL_GameControllerClose(controllers_[id]);
 			controllers_[id] = nullptr;
 
-			delete leftJoysticks_[id];
-			leftJoysticks_[id] = nullptr;
-
-			delete rightJoysticks_[id];
-			rightJoysticks_[id] = nullptr;
+			leftJoysticks_[id] = Vector2D(0, 0);
+			rightJoysticks_[id] = Vector2D(0, 0);
 
 			leftTriggers_[id] = 0.0f;
 			rightTriggers_[id] = 0.0f;
@@ -393,8 +390,8 @@ private:
 			cout << SDL_GameControllerName(c) << endl;
 
 			controllers_[gId] = c;
-			leftJoysticks_[gId] = new Vector2D(0, 0);
-			rightJoysticks_[gId] = new Vector2D(0, 0);
+			leftJoysticks_[gId] = Vector2D(0, 0);
+			rightJoysticks_[gId] = Vector2D(0, 0);
 			leftTriggers_[gId] = 0.0f;
 			rightTriggers_[gId] = 0.0f;
 			
@@ -431,8 +428,8 @@ private:
 	
 	array<SDL_GameController*, 4> controllers_;
 	queue<int> disconectedControllers_;
-	array<Vector2D*, 4> leftJoysticks_;
-	array<Vector2D*, 4> rightJoysticks_;
+	array<Vector2D, 4> leftJoysticks_;
+	array<Vector2D, 4> rightJoysticks_;
 	array<float, 4> leftTriggers_;
 	array<float, 4> rightTriggers_;
 };
