@@ -323,6 +323,30 @@
       "file": "resources/images/menuSprites/quitButtonEnter.png"
     },
     {
+      "id": "twoPlayersButton",
+      "file": "resources/images/menuSprites/twoPlayersButton.png"
+    },
+    {
+      "id": "twoPlayersButtonEnter",
+      "file": "resources/images/menuSprites/twoPlayersButtonEnter.png"
+    },
+    {
+      "id": "threePlayersButton",
+      "file": "resources/images/menuSprites/threePlayersButton.png"
+    },
+    {
+      "id": "threePlayersButtonEnter",
+      "file": "resources/images/menuSprites/threePlayersButtonEnter.png"
+    },
+    {
+      "id": "fourPlayersButton",
+      "file": "resources/images/menuSprites/fourPlayersButton.png"
+    },
+    {
+      "id": "fourPlayersButtonEnter",
+      "file": "resources/images/menuSprites/fourPlayersButtonEnter.png"
+    },
+    {
       "id": "sardinillaOn",
       "file": "resources/images/UI/sardinillaAbilitiOn.png"
     },

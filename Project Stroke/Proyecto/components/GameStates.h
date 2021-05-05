@@ -12,11 +12,12 @@ public:
 	enum States
 	{
 		MAINMENU,
-		SELECTION,
+		HAMSTERSELECTION,
 		PAUSE,
 		RUNNING,
 		CREDITS,
-		CONTROLS
+		CONTROLS,
+		PLAYERSELECTION
 	};
 
 	GameStates(): state_() {};

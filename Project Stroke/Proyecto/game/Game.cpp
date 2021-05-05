@@ -100,15 +100,24 @@ void Game::init() {
 		Vector2D(0, 0),
 		3
 		);*/
-	mainMenu->addComponent<MenuButtonManager>("mainMenu", 0);	//mainMenu, pauseMenu o hamsterMenu
-	mainMenu->addComponent<MenuControlHandler>(0);
+	mainMenu->addComponent<MenuButtonManager>("mainMenu", GameStates::MAINMENU);	//mainMenu, pauseMenu o hamsterMenu
+	mainMenu->addComponent<MenuControlHandler>(GameStates::MAINMENU);
 	mngr_->setHandler<MainMenu>(mainMenu);
 
 	auto* pauseMenu = mngr_->addMenu();
-	pauseMenu->addComponent<MenuButtonManager>("pauseMenu", 2);	//mainMenu, pauseMenu o hamsterMenu
-	pauseMenu->addComponent<MenuControlHandler>(2);
+	pauseMenu->addComponent<MenuButtonManager>("pauseMenu", GameStates::PAUSE);	//mainMenu, pauseMenu o hamsterMenu
+	pauseMenu->addComponent<MenuControlHandler>(GameStates::PAUSE);
 	mngr_->setHandler<PauseMenu>(pauseMenu);
 
+	auto* hamsterSelectionMenu = mngr_->addMenu();
+	hamsterSelectionMenu->addComponent<MenuButtonManager>("hamsterMenu", GameStates::HAMSTERSELECTION);	//mainMenu, pauseMenu o hamsterMenu
+	hamsterSelectionMenu->addComponent<MenuControlHandler>(GameStates::HAMSTERSELECTION);
+	mngr_->setHandler<HamsterSelectionMenu>(hamsterSelectionMenu);
+
+	auto* playerQuantityMenu = mngr_->addMenu();
+	playerQuantityMenu->addComponent<MenuButtonManager>("playerQuantityMenu", GameStates::PLAYERSELECTION);	//mainMenu, pauseMenu o hamsterMenu
+	playerQuantityMenu->addComponent<MenuControlHandler>(GameStates::PLAYERSELECTION);
+	mngr_->setHandler<PlayerQuantityMenu>(playerQuantityMenu);
 
 	// Mapa
 	auto* mapa = mngr_->addEntity();
@@ -132,7 +141,7 @@ void Game::init() {
 	mngr_->setHandler<Mother>(mother);
 
 	//Carga del mapa
-	mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Lvl1Javi.tmx");
+	//mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Lvl1Javi.tmx");
 
 }
 
