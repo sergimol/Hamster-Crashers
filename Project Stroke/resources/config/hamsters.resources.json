@@ -104,7 +104,11 @@
     },
     {
       "id": "sardinillaSheet2",
-      "file": "resources/images/sardinilla_spritesheet2.png"
+      "file": "resources/images/sardinilla_spritesheetHA.png"
+    },
+    {
+      "id": "sardinillaSheet3",
+      "file": "resources/images/sardinilla_spritesheetPos.png"
     },
     {
       "id": "firstBoss",

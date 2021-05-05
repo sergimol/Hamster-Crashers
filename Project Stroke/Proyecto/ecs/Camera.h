@@ -34,7 +34,7 @@ private:
 	MapMngr* map_;
 public:
 
-	Camera(SDL_Rect cam) : camera_(cam), CameraFollowPos(Vector2D()), cameraState(State::Players), map_(nullptr) {}
+	Camera(SDL_Rect cam) : camera_(cam), cameraFollowPos_(Vector2D()), cameraState(State::Players), map_(nullptr) {}
 
 	virtual ~Camera() {}
 	void init() override;
@@ -44,7 +44,7 @@ public:
 	inline void changeCamState(State estado) { cameraState = estado; };
 	inline State getCamState() {return cameraState;};
 	inline Vector2D getCamPos() { return camPos; };
-	Vector2D CameraFollowPos;	//Guarda el punto de la posición de la camara cuando lo lea
+	Vector2D cameraFollowPos_;	//Guarda el punto de la posición de la camara cuando lo lea
 
 	void setGoToTracker(bool objetivo) {GoToTracker = objetivo;};
 	

@@ -49,7 +49,7 @@ void StartChase::start() {
 		string id = hamsters->getComponent<EntityAttribs>()->getId();
 
 		if (id == "sardinilla") {
-			hamsters->getComponent<Roll>()->setActive(false);
+			hamsters->getComponent<Roll>()->deactiveAbility();
 		}
 		else if (id == "canelon")
 			hamsters->getComponent<Pray>()->setActive(false);

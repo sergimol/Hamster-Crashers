@@ -175,7 +175,7 @@ void MapMngr::loadNewMap(string map) {
 						auto* o = entity_->getMngr()->addMapHeight();
 						o->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 							Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 1, 1);
-						o->addComponent<HeightObject>()->setZ(stoi(object.getName()));
+						o->addComponent<HeightObject>()->setZ(stoi(object.getName()) * getCellSize() * scale);
 					}
 				}
 				else if (layer->getName() == "Salas") {
@@ -210,7 +210,7 @@ void MapMngr::loadNewMap(string map) {
 
 							enemy->addComponent<EntityAttribs>();
 							enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
-							enemy->addComponent<ContactDamage>(20,-30);
+							enemy->addComponent<ContactDamage>(20, -30);
 							enemy->addComponent<CatMovement>();
 							enemy->getMngr()->setHandler<Pussy>(enemy);
 
@@ -233,7 +233,7 @@ void MapMngr::loadNewMap(string map) {
 						auto globalIndexTile = tileList[i + j * mapDimensions_.x].ID;	//mapDimensions_.y+columna*elementos_enuna_fila
 
 						//Necesitamos saber a cual de los tilesets pertenece esa posicion
- 						while (globalIndexTile > tilesets[index].getLastGID()) {
+						while (globalIndexTile > tilesets[index].getLastGID()) {
 							index++;	//Marca la posicion del tileset al que pertenece el tile
 						}
 
@@ -512,7 +512,7 @@ void MapMngr::addHamster(const tmx::Object& obj) {
 	else hamster1->addComponent<Turret>();
 
 
-	
+
 
 	//Gestion de infartos
 	hamster1->addComponent<PossesionGame>();
