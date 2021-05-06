@@ -73,9 +73,6 @@ void MenuButton::exited() {
 void MenuButton::pressed() {
 	// Botones con la misma funcionalidad están separados porque en el futuro funcionarán diferente
 	if (buttonName_ == "local") {
-		//entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("controls", false);
-		//state_->setState(GameStates::CONTROLS);
-		//entity_->getMngr()->getHandler<MainMenu>()->getComponent<MenuButtonManager>()->updateKeymap(MenuButtonManager::SPACE, false);
 		sdlutils().setHamstersToChoose(1);
 		state_->setState(GameStates::HAMSTERSELECTION);
 		entity_->getMngr()->getHandler<MainMenu>()->getComponent<MenuButtonManager>()->updateKeymap(MenuButtonManager::SPACE, false);

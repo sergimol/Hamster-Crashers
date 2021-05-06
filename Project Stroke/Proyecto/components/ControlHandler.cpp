@@ -46,21 +46,11 @@ void ControlHandler::init() {
 	states_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
 	assert(states_ != nullptr);
 
-	if (player_ == 0) {
-		keymap.insert({ UP, SDL_SCANCODE_W });
-		keymap.insert({ DOWN, SDL_SCANCODE_S });
-		keymap.insert({ LEFT, SDL_SCANCODE_A });
-		keymap.insert({ RIGHT, SDL_SCANCODE_D });
-		keymap.insert({ SPACE, SDL_SCANCODE_SPACE });
-	}
-
-	else if (player_ == 1) {
-		keymap.insert({ UP, SDL_SCANCODE_UP });
-		keymap.insert({ DOWN, SDL_SCANCODE_DOWN });
-		keymap.insert({ LEFT, SDL_SCANCODE_LEFT });
-		keymap.insert({ RIGHT, SDL_SCANCODE_RIGHT });
-		keymap.insert({ SPACE, SDL_SCANCODE_K });
-	}
+	keymap.insert({ UP, SDL_SCANCODE_W });
+	keymap.insert({ DOWN, SDL_SCANCODE_S });
+	keymap.insert({ LEFT, SDL_SCANCODE_A });
+	keymap.insert({ RIGHT, SDL_SCANCODE_D });
+	keymap.insert({ SPACE, SDL_SCANCODE_SPACE });
 }
 
 
