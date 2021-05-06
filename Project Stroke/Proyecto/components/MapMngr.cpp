@@ -175,7 +175,7 @@ void MapMngr::loadNewMap(string map) {
 						auto* o = entity_->getMngr()->addMapHeight();
 						o->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 							Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 1, 1);
-						o->addComponent<HeightObject>()->setZ(stoi(object.getName()) * getCellSize() * scale);
+						o->addComponent<HeightObject>()->setZ(stoi(object.getName()) * getCellSize());
 					}
 				}
 				else if (layer->getName() == "Salas") {
