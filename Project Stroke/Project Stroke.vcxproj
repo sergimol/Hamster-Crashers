@@ -152,7 +152,7 @@
     <ClCompile Include="Proyecto\components\AnimHamsterStateMachine.cpp" />
     <ClCompile Include="Proyecto\components\BackGround.cpp" />
     <ClCompile Include="Proyecto\components\Behavior.cpp" />
-    <ClCompile Include="Proyecto\components\Breakable.cpp" />
+    <ClCompile Include="Proyecto\components\Obstacle.cpp" />
     <ClCompile Include="Proyecto\components\BulletHit.cpp" />
     <ClCompile Include="Proyecto\components\Cloud.cpp" />
     <ClCompile Include="Proyecto\components\CollisionDetec.cpp" />
@@ -242,7 +242,7 @@
     <ClInclude Include="Proyecto\components\AnimHamsterStateMachine.h" />
     <ClInclude Include="Proyecto\components\BackGround.h" />
     <ClInclude Include="Proyecto\components\Behavior.h" />
-    <ClInclude Include="Proyecto\components\Breakable.h" />
+    <ClInclude Include="Proyecto\components\Obstacle.h" />
     <ClInclude Include="Proyecto\components\BulletHit.h" />
     <ClInclude Include="Proyecto\components\Cloud.h" />
     <ClInclude Include="Proyecto\components\CollisionDetec.h" />

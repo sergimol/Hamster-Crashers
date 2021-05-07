@@ -1,3 +1,4 @@
+#include "Obstacle.h"
 #include "StrongAttack.h"
 #include "Stroke.h"
 #include "Combos.h"
@@ -150,6 +151,22 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 		}
 	}
 	entity_->getMngr()->refreshEnemies();
+
+	//COMPROBAMOS OBSTACULOS
+	auto& obstacles = entity_->getMngr()->getObstacles();
+	for (auto el : obstacles) {
+		auto obstRect = el->getComponent<Transform>()->getRectCollide();
+		Vector2D newPos = Vector2D(obstRect.x - cam.x, obstRect.y - cam.y);
+		//Si colisiona el ataque
+		if (Collisions::collides(Vector2D(rectPlayer.x, rectPlayer.y), rectPlayer.w, rectPlayer.h,
+			newPos, obstRect.w, obstRect.h)) {
+			//El objeto es golpeado y actua en consecuencia
+			auto* obstObject = el->getComponent<Obstacle>();
+			if (obstObject != nullptr)
+				obstObject->hit();
+		}
+	}
+
 	return canHit;
 }
 

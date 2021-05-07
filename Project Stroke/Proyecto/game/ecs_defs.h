@@ -73,6 +73,7 @@ class GravityEntity;
 class CatMovement;
 class MenuControlHandler;
 class StartChase;
+class Obstacle;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -147,7 +148,8 @@ class StartChase;
 	GravityEntity, \
 	CatMovement, \
 	MenuControlHandler,\
-	StartChase
+	StartChase, \
+	Obstacle
 
 // groups
 

@@ -377,7 +377,12 @@
     {
       "id": "canelonOff",
       "file": "resources/images/UI/canelonAbilitiOff.png"
+    },
+    {
+      "id": "obstacleBox",
+      "file": "resources/images/objects/obstacleBox.png"
     }
+
 
   ],
 
@@ -706,18 +711,6 @@
       "attackFrame": -1
     },
     {
-      "id": "breakObject",
-      "startFrameX": 0,
-      "startFrameY": 0,
-      "duration": 13,
-      "cols": 16,
-      "rows": 1,
-      "frameUpdate": 100,
-      "loop": 0,
-      "chain": "",
-      "attackFrame": -1
-    },
-    {
       "id": "menuInit",
       "startFrameX": 0,
       "startFrameY": 0,
@@ -808,6 +801,42 @@
       "duration": 8,
       "cols": 6,
       "rows": 6,
+      "frameUpdate": 60,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "obstacleBoxStatic",
+      "startFrameX": 1,
+      "startFrameY": 0,
+      "duration": 0,
+      "cols": 9,
+      "rows": 1,
+      "frameUpdate": 60,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "obstacleBoxHit",
+      "startFrameX": 1,
+      "startFrameY": 0,
+      "duration": 9,
+      "cols": 9,
+      "rows": 1,
+      "frameUpdate": 60,
+      "loop": 0,
+      "chain": "obstacleBoxStatic",
+      "attackFrame": -1
+    },
+    {
+      "id": "obstacleBoxBreak",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 9,
+      "cols": 9,
+      "rows": 1,
       "frameUpdate": 60,
       "loop": 0,
       "chain": "",

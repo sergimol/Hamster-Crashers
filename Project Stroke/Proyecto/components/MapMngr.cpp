@@ -54,7 +54,7 @@
 #include "../components/AnimEnemyStateMachine.h"
 #include "../components/CatMovement.h"
 #include "../components/StartChase.h"
-
+#include "../components/Obstacle.h"
 
 
 
@@ -293,7 +293,7 @@ void MapMngr::loadNewMap(string map) {
 }
 
 //Devuelve true si se está chocando con alguna colision
-bool MapMngr::intersectWall(SDL_Rect hamster) {
+bool MapMngr::intersectWall(const SDL_Rect& hamster) {
 
 	//Cogemos arriba izquierda y abajo derecha
 	Vector2D topLeftCoords = SDLPointToMapCoords(Vector2D((hamster.x) / scale, (hamster.y) / scale));
@@ -311,6 +311,19 @@ bool MapMngr::intersectWall(SDL_Rect hamster) {
 	}
 	//Si no se choca con nada devuelve false
 	return false;
+}
+
+bool MapMngr::intersectObstacles(const SDL_Rect& hamster) {
+	auto& obstacles = entity_->getMngr()->getObstacles();
+	bool collide = false;
+	int i = 0;
+	while (!collide && i < obstacles.size()) {
+		auto obstacleRect = obstacles[i]->getComponent<Transform>()->getRectCollide();
+		collide = Collisions::collides(Vector2D(hamster.x, hamster.y), hamster.w, hamster.h, 
+									   Vector2D(obstacleRect.x, obstacleRect.y), obstacleRect.w, obstacleRect.h);
+		++i;
+	}
+	return collide;
 }
 
 //Devuelve la posicion en pantalla
@@ -449,9 +462,10 @@ void MapMngr::loadEnemyRoom() {
 }
 
 void MapMngr::addHamster(string name, int i) {
-
-
-
+	/*tmx::Object obj = tmx::Object();
+	addObject(obj, 400, 130);
+	addObject(obj, 350, 140);
+	addObject(obj, 500, 100);*/
 
 	//do stuff with object properties
 	//auto& name = obj.getName();
@@ -461,7 +475,6 @@ void MapMngr::addHamster(string name, int i) {
 
 	//Habilidad
 	if (name == "sardinilla")
-
 		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
 			Vector2D(), 86 * scale, 86 * scale, 0.0f, 0.5, 0.5);
 
@@ -589,4 +602,31 @@ void MapMngr::startChaseTrigger(const tmx::Object& object) {
 	trigger->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 1, 1);
 	trigger->addComponent<StartChase>();
+}
+
+void MapMngr::addObject(const tmx::Object& object, int x, int y) {
+	auto* obstacle = entity_->getMngr()->addEntity();
+
+	string id = "Box";
+
+	obstacle->addComponent<Transform>(Vector2D(x * scale, y * scale), 
+		Vector2D(), 50 * scale, 50 * scale, 0.0f, 0.75, 0.75);
+
+	
+	obstacle->addComponent<Animator>(&sdlutils().images().at("obstacle" + id),
+		80,
+		86,
+		9,
+		1,
+		220,
+		Vector2D(0, 0),
+		3
+		);
+
+	//if(object.breakable)
+	obstacle->addComponent<Obstacle>(id, 3);
+	//else
+	//obstacle->addComponent<Obstacle>(id);
+
+	entity_->getMngr()->getObstacles().push_back(obstacle);
 }

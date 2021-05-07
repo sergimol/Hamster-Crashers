@@ -396,7 +396,7 @@
     <ClCompile Include="Proyecto\components\EnemyStrongAttack.cpp">
       <Filter>Archivos de origen\components\Entity\Enemy\Attack</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\Breakable.cpp">
+    <ClCompile Include="Proyecto\components\Obstacle.cpp">
       <Filter>Archivos de origen\components\Entity</Filter>
     </ClCompile>
     <ClCompile Include="Proyecto\components\AnimEnemyStateMachine.cpp">
@@ -710,7 +710,7 @@
     <ClInclude Include="Proyecto\components\StrongFollowPlayer.h">
       <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\Behavior</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\Breakable.h">
+    <ClInclude Include="Proyecto\components\Obstacle.h">
       <Filter>Archivos de encabezado\Components\Entity</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\AnimEnemyStateMachine.h">
