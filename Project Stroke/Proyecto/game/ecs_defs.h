@@ -74,6 +74,9 @@ class CatMovement;
 class MenuControlHandler;
 class StartChase;
 class Obstacle;
+class FinalBossManager;
+class FinalBossAttack;
+class FinalBossPunch;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -149,7 +152,10 @@ class Obstacle;
 	CatMovement, \
 	MenuControlHandler,\
 	StartChase, \
-	Obstacle
+	Obstacle, \
+	FinalBossManager, \
+	FinalBossAttack, \
+	FinalBossPunch
 
 // groups
 

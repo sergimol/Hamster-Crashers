@@ -21,12 +21,13 @@ void MovementSimple::init() {
 	assert(anim_ != nullptr);
 	*/
 	grav_ = entity_->getComponent<Gravity>();
-	assert(grav_ != nullptr);
+	//assert(grav_ != nullptr);
 
 	speed_ = entity_->getComponent<EntityAttribs>()->getVel();
 	assert(speed_ != Vector2D());
 
-	colDetec_->setMovement(this);
+	if (colDetec_ != nullptr)
+		colDetec_->setMovement(this);
 
 	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
 	assert(state_ != nullptr);
@@ -134,7 +135,7 @@ void MovementSimple::update() {
 
 			colDetec_->tryToMove(dir, goalVel_, rectEnemy, true);
 
-			if (grav_->isActive())
+			if (grav_ != nullptr && grav_->isActive())
 				grav_->checkHeight(rectEnemy);					//Comprobamos que no tenga que subir un escalon
 		}
 

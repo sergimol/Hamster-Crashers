@@ -152,6 +152,9 @@
     <ClCompile Include="Proyecto\components\AnimHamsterStateMachine.cpp" />
     <ClCompile Include="Proyecto\components\BackGround.cpp" />
     <ClCompile Include="Proyecto\components\Behavior.cpp" />
+    <ClCompile Include="Proyecto\components\FinalBossAttack.cpp" />
+    <ClCompile Include="Proyecto\components\FinalBossManager.cpp" />
+    <ClCompile Include="Proyecto\components\FinalBossPunch.cpp" />
     <ClCompile Include="Proyecto\components\Obstacle.cpp" />
     <ClCompile Include="Proyecto\components\BulletHit.cpp" />
     <ClCompile Include="Proyecto\components\Cloud.cpp" />
@@ -242,6 +245,9 @@
     <ClInclude Include="Proyecto\components\AnimHamsterStateMachine.h" />
     <ClInclude Include="Proyecto\components\BackGround.h" />
     <ClInclude Include="Proyecto\components\Behavior.h" />
+    <ClInclude Include="Proyecto\components\FinalBossAttack.h" />
+    <ClInclude Include="Proyecto\components\FinalBossManager.h" />
+    <ClInclude Include="Proyecto\components\FinalBossPunch.h" />
     <ClInclude Include="Proyecto\components\Obstacle.h" />
     <ClInclude Include="Proyecto\components\BulletHit.h" />
     <ClInclude Include="Proyecto\components\Cloud.h" />

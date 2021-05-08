@@ -447,6 +447,15 @@
     <ClCompile Include="Proyecto\components\StartChase.cpp">
       <Filter>Archivos de origen\components\Entity\Enemy\EnemyBehaviour\BossBehavior</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\FinalBossManager.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\EnemyBehaviour\BossBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\FinalBossAttack.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\Attack\BossAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\FinalBossPunch.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\Attack\BossAttack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -760,6 +769,15 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\StartChase.h">
       <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\BossBehaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\FinalBossManager.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\BossBehaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\FinalBossAttack.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\Attack\BossAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\FinalBossPunch.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\Attack\BossAttack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
