@@ -20,6 +20,8 @@ void MovementSimple::init() {
 	anim_ = entity_->getComponent<Animator>();
 	assert(anim_ != nullptr);
 	*/
+	grav_ = entity_->getComponent<Gravity>();
+	assert(grav_ != nullptr);
 
 	speed_ = entity_->getComponent<EntityAttribs>()->getVel();
 	assert(speed_ != Vector2D());
@@ -91,11 +93,11 @@ void MovementSimple::update() {
 			//ANIMACION DE IDLE
 
 		//ANIMACION DE IDLE
-		if (entity_->getComponent<AnimEnemyStateMachine>() != nullptr)
-		{
-			entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::MOVE, false);
-			entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::IDLE, true);
-		}
+			if (entity_->getComponent<AnimEnemyStateMachine>() != nullptr)
+			{
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::MOVE, false);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::IDLE, true);
+			}
 			/*if (state != EnemyStates::ENM_IDLE)
 				anim_->play(Vector2D(0, 0), Vector2D(2, 0), 220);*/
 
@@ -110,12 +112,12 @@ void MovementSimple::update() {
 			//ANIMACION DE MOVIMIENTO
 
 		//ANIMACION DE MOVIMIENTO
-		if (entity_->getComponent<AnimEnemyStateMachine>() != nullptr)
-		{
-			entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::MOVE, true);
-			entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::IDLE, false);
-		}
-		
+			if (entity_->getComponent<AnimEnemyStateMachine>() != nullptr)
+			{
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::MOVE, true);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::IDLE, false);
+			}
+
 			/*if (state != EnemyStates::ENM_MOVING)
 				anim_->play(Vector2D(0, 1), Vector2D(2, 2), 100);*/
 
@@ -129,27 +131,32 @@ void MovementSimple::update() {
 			SDL_Rect rectEnemy = tr_->getRectCollide();
 			rectEnemy.x += vel.getX();
 			rectEnemy.y += vel.getY();
+
 			colDetec_->tryToMove(dir, goalVel_, rectEnemy, true);
+
+			if (grav_->isActive())
+				grav_->checkHeight(rectEnemy);					//Comprobamos que no tenga que subir un escalon
 		}
 
-		if (keymapSimple_.at(SPACE)) {		//Inicio del salto
-			velZ = jump_;
-			//state = EnemyStates::JUMPING;
-			timer = sdlutils().currRealTime();
-		}
 
-		if (z > 0 && sdlutils().currRealTime() > timer + jumpTimer_) {			//Aceleracion del salto afectado por gravedad
-			velZ -= gravity_;
-			timer = sdlutils().currRealTime();
-		}
+		//if (keymapSimple_.at(SPACE)) {		//Inicio del salto
+		//	velZ = jump_;
+		//	//state = EnemyStates::JUMPING;
+		//	timer = sdlutils().currRealTime();
+		//}
 
-		else if (z < 0) {			//Final del salto	!!!!!!!!!(0 SE SUSTITUIRA POR LA Z DEL MAPA)!!!!!!!!
-			keymapSimple_.at(SPACE) = false;
-			velZ = 0;
-			z = 0;
-			//state = EnemyStates::ENM_IDLE;
-			timer = sdlutils().currRealTime();
-		}
+		//if (z > 0 && sdlutils().currRealTime() > timer + jumpTimer_) {			//Aceleracion del salto afectado por gravedad
+		//	velZ -= gravity_;
+		//	timer = sdlutils().currRealTime();
+		//}
+
+		//else if (z < 0) {			//Final del salto	!!!!!!!!!(0 SE SUSTITUIRA POR LA Z DEL MAPA)!!!!!!!!
+		//	keymapSimple_.at(SPACE) = false;
+		//	velZ = 0;
+		//	z = 0;
+		//	//state = EnemyStates::ENM_IDLE;
+		//	timer = sdlutils().currRealTime();
+		//}
 	}
 }
 

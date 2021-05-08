@@ -15,14 +15,25 @@ void Gravity::checkHeight(SDL_Rect& playerPos) {
 	auto& z = tr_->getZ();
 	auto& velZ = tr_->getVelZ();
 
-	if (z > floor_ && sdlutils().currRealTime() > timer + jumpTimer_) {			//Aceleracion del salto afectado por gravedad
-		velZ -= gravity_;
-		timer = sdlutils().currRealTime();
+	if (gravLocked() && sdlutils().currRealTime() > lockTimer_ + lockCooldown_)
+		lockGrav(false);
+
+	if (z > floor_ && sdlutils().currRealTime() > timer_ + jumpTimer_) {			//Aceleracion del salto afectado por gravedad
+		if (gravityLocked_ && velZ <= 0)
+		{
+			velZ = 0;
+		}
+		else
+		{
+			velZ -= gravity_;
+			timer_ = sdlutils().currRealTime();
+		}
 	}
 	else if (z < floor_) {			//Final del salto	
 		velZ = 0;
 		z = floor_;
 	}
+
 	//Comprobamos la colision con los triggers de altura
 	auto& heights = entity_->getMngr()->getMapH();
 	int maxHigh = 0;

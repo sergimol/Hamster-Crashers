@@ -10,7 +10,7 @@
 #include <queue>
 
 const int CADENCE = 750;
-const int AIRCADENCE = 425;
+const int AIRCADENCE = 450;
 
 class Combos : public Component {
 public:
@@ -21,6 +21,7 @@ public:
 	void onResume() override;
 	bool checkCombo(int accion);
 	void popUntilEmpty();
+	bool isJumping();
 private:
 	Gravity* grv_;
 	AnimHamsterStateMachine* anim_;

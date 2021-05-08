@@ -351,10 +351,10 @@ void MapMngr::loadEnemyRoom() {
 
 		if (name == "enemigo" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* enemy = mngr_->addEntity();
-			enemy->addComponent<Transform>(
+			auto* enTr = enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(), 86 * scale, 86 * scale, 0.0f, 0.4, 0.5)->getFlip() = true;
-
+				Vector2D(), 86 * scale, 86 * scale, 0.0f, 0.4, 0.5);
+			enTr->getFlip() = true;
 			enemy->addComponent<EnemyStateMachine>();
 			//1º: False porque no es un hamster //2º: True porque usa de referencia el rect de colision
 			enemy->addComponent<Shadow>(false, true);
@@ -379,7 +379,7 @@ void MapMngr::loadEnemyRoom() {
 
 			enemy->addComponent<EnemyAttack>();
 			enemy->addComponent<Knockback>();
-			enemy->addComponent<Gravity>();
+			enTr->setGravity(enemy->addComponent<Gravity>());
 			enemy->addComponent<CollisionDetec>();
 			enemy->addComponent<MovementSimple>();
 
