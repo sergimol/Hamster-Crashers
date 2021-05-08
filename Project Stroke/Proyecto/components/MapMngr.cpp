@@ -320,7 +320,7 @@ bool MapMngr::intersectObstacles(const SDL_Rect& hamster) {
 	while (!collide && i < obstacles.size()) {
 		auto obstacleRect = obstacles[i]->getComponent<Transform>()->getRectCollide();
 		collide = Collisions::collides(Vector2D(hamster.x, hamster.y), hamster.w, hamster.h, 
-									   Vector2D(obstacleRect.x, obstacleRect.y), obstacleRect.w, obstacleRect.h);
+									   Vector2D(obstacleRect.x, obstacleRect.y), obstacleRect.w/2, obstacleRect.h/2);
 		++i;
 	}
 	return collide;
@@ -462,10 +462,10 @@ void MapMngr::loadEnemyRoom() {
 }
 
 void MapMngr::addHamster(string name, int i) {
-	/*tmx::Object obj = tmx::Object();
+	tmx::Object obj = tmx::Object();
 	addObject(obj, 400, 130);
 	addObject(obj, 350, 140);
-	addObject(obj, 500, 100);*/
+	addObject(obj, 500, 100);
 
 	//do stuff with object properties
 	//auto& name = obj.getName();
@@ -617,7 +617,7 @@ void MapMngr::addObject(const tmx::Object& object, int x, int y) {
 		80,
 		86,
 		9,
-		1,
+		2,
 		220,
 		Vector2D(0, 0),
 		3
@@ -625,6 +625,9 @@ void MapMngr::addObject(const tmx::Object& object, int x, int y) {
 
 	//if(object.breakable)
 	obstacle->addComponent<Obstacle>(id, 3);
+
+	//1º: False, porque no es un hamster //2º: False, porque usa de referencia el rect del Animator
+	obstacle->addComponent<Shadow>(false, false);
 	//else
 	//obstacle->addComponent<Obstacle>(id);
 
