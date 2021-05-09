@@ -224,6 +224,9 @@ void MapMngr::loadNewMap(string map) {
 						else if (object.getName() == "trap") {
 							addTrap(object, object.getPosition().x, object.getPosition().y);
 						}
+						else if (object.getName() == "obstacle") {
+							addObject(object);
+						}
 					}
 				}
 			}
@@ -630,14 +633,15 @@ void MapMngr::startChaseTrigger(const tmx::Object& object) {
 	trigger->addComponent<StartChase>();
 }
 
-void MapMngr::addObject(const tmx::Object& object, int x, int y) {
+void MapMngr::addObject(const tmx::Object& object) {
 	auto* obstacle = entity_->getMngr()->addEntity();
 
-	string id = "Box";
+	obstacle->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 0.75, 0.75);
+	
+	auto& prop = object.getProperties();
 
-	obstacle->addComponent<Transform>(Vector2D(x * scale, y * scale), 
-		Vector2D(), 50 * scale, 50 * scale, 0.0f, 0.75, 0.75);
-
+	string id = prop[1].getStringValue();
 	
 	obstacle->addComponent<Animator>(&sdlutils().images().at("obstacle" + id),
 		80,
@@ -649,14 +653,14 @@ void MapMngr::addObject(const tmx::Object& object, int x, int y) {
 		3
 		);
 
-	//if(object.breakable)
-	obstacle->addComponent<Obstacle>(id, 3);
-
-	//1º: False, porque no es un hamster //2º: False, porque usa de referencia el rect del Animator
-	obstacle->addComponent<Shadow>(false, false);
-	//else
-	//obstacle->addComponent<Obstacle>(id);
-
+	if (prop[0].getBoolValue()) {
+		obstacle->addComponent<Obstacle>(id, prop[2].getIntValue());
+		//1º: False, porque no es un hamster //2º: False, porque usa de referencia el rect del Animator
+		obstacle->addComponent<Shadow>(false, false);
+	}
+	else {
+		obstacle->addComponent<Obstacle>(id);
+	}
 	entity_->getMngr()->getObstacles().push_back(obstacle);
 }
 

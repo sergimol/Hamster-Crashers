@@ -69,7 +69,7 @@ public:
 	void removeHamster(string name) { hamstersToLoad_.back().erase(); };
 	void clearHamstersVector() { hamstersToLoad_.clear(); };
 
-	void addObject(const tmx::Object& object, int x, int y);
+	void addObject(const tmx::Object& object);
 	void addTrap(const tmx::Object& object, int x, int y);
 };
 
