@@ -8,5 +8,5 @@ public:
 	virtual bool checkChance(int chanceNORMAL, int chanceAB) = 0;
 
 protected:
-	const int MAXCHANCE = 100;
+	const int MAXCHANCE = 1000;
 };

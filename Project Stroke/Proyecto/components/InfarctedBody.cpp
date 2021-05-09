@@ -92,8 +92,10 @@ void InfarctedBody::reanimate() {
 	hamster->getComponent<GhostCtrl>()->setActive(false);
 	// Deshacemos la posible posesión
 	hamster->getComponent<PossesionGame>()->endPossesion();
-	// Reseteamos la probabilidad de infarto a 0
-	hamster->getComponent<Stroke>()->restartChance();
+	// Reactivamos el infarto
+	hamster->getComponent<Stroke>()->setActive(true);
+	// Reactivamos la UI del corazón
+	hamster->getComponent<HeartUI>()->resurrection();
 
 	entity_->setActive(false);
 	entity_->getMngr()->refreshDeadBodies();

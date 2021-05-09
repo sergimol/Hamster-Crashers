@@ -144,7 +144,7 @@ void Movement::update() {
 				// Inicio del salto
 				if (keymap.at(SPACE)) {
 					combo->checkCombo(2);
-					entity_->getComponent<Stroke>()->increaseChance(2, false);
+					//entity_->getComponent<Stroke>()->increaseChance(1, false); Qué os parece si hago que el salto no de infarto eh guapos
 					velZ = jump_;
 					keymap.at(SPACE) = false;
 				}

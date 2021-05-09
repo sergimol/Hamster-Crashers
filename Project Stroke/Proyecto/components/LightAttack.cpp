@@ -246,7 +246,7 @@ void LightAttack::attack() {
 
 			DEBUG_isAttacking_ = true;
 			time_ = sdlutils().currRealTime();
-			entity_->getComponent<Stroke>()->increaseChance(5, false);
+			entity_->getComponent<Stroke>()->increaseChance(1, false);
 		}
 	}
 }

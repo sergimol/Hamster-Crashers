@@ -44,10 +44,10 @@ private:
 	Texture* lineH, * lineV;
 
 	//CONSTANTES DE TECLAS, TEXTURAS Y RELACIONADOS
-	const int numKeys = 5;
+	const int numKeys = 4;
 
-	const array<Texture*, 5> keyTextures{ &sdlutils().images().at("q") , &sdlutils().images().at("bullet"), &sdlutils().images().at("heart1"),  &sdlutils().images().at("heart2"),  &sdlutils().images().at("heart3") };
-	const array<SDL_Keycode, 5> keyCodes{ SDLK_a, SDLK_a, SDLK_a, SDLK_a, SDLK_a };
+	const array<Texture*, 4> keyTextures{ &sdlutils().images().at("q") , &sdlutils().images().at("bullet"), &sdlutils().images().at("heart1"),  &sdlutils().images().at("heart2")};
+	const array<SDL_Keycode, 4> keyCodes{ SDLK_a, SDLK_a, SDLK_a, SDLK_a };
 
 	SDL_Keycode actualKey;
 	

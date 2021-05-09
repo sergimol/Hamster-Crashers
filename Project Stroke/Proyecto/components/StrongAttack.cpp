@@ -223,7 +223,7 @@ void StrongAttack::attack() {
 
 			DEBUG_isAttacking_ = true;
 			time_ = sdlutils().currRealTime();
-			entity_->getComponent<Stroke>()->increaseChance(10, false);
+			entity_->getComponent<Stroke>()->increaseChance(2, false);
 		}
 	}
 	//else if (sdlutils().currRealTime() > time_ + cooldown_ / 2) {
