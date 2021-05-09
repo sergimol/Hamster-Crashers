@@ -70,5 +70,6 @@ public:
 	void clearHamstersVector() { hamstersToLoad_.clear(); };
 
 	void addObject(const tmx::Object& object, int x, int y);
+	void addTrap(const tmx::Object& object, int x, int y);
 };
 

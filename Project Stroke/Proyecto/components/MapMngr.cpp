@@ -56,6 +56,7 @@
 #include "../components/StartChase.h"
 #include "../components/Obstacle.h"
 #include "../components/FinalBossManager.h"
+#include "../components/TimeTrap.h"
 
 
 
@@ -219,6 +220,9 @@ void MapMngr::loadNewMap(string map) {
 							enemy->addComponent<CatMovement>();
 							enemy->getMngr()->setHandler<Pussy>(enemy);
 
+						}
+						else if (object.getName() == "trap") {
+							addTrap(object, object.getPosition().x, object.getPosition().y);
 						}
 					}
 				}
@@ -654,4 +658,39 @@ void MapMngr::addObject(const tmx::Object& object, int x, int y) {
 	//obstacle->addComponent<Obstacle>(id);
 
 	entity_->getMngr()->getObstacles().push_back(obstacle);
+}
+
+void MapMngr::addTrap(const tmx::Object& object, int x, int y) {
+	auto* trap = entity_->getMngr()->addEntity();
+
+	string id = "Box";
+
+	trap->addComponent<Transform>(Vector2D(x * scale, y * scale),
+		Vector2D(), 50 * scale, 50 * scale, 0.0f, 0.75, 0.75);
+	trap->addComponent<ContactDamage>(10, -30);
+	trap->addComponent<TimeTrap>(& sdlutils().images().at("catSmoking"));
+
+	//trap->addComponent<Image>(&sdlutils().images().at("catSmoking"));
+
+	/*
+	trap->addComponent<Animator>(&sdlutils().images().at("obstacle" + id),
+		80,
+		86,
+		9,
+		2,
+		220,
+		Vector2D(0, 0),
+		3
+		);
+	*/
+
+	//if(object.breakable)
+	//trap->addComponent<Obstacle>(id, 3);
+
+	//1º: False, porque no es un hamster //2º: False, porque usa de referencia el rect del Animator
+	//trap->addComponent<Shadow>(false, false);
+	//else
+	//obstacle->addComponent<Obstacle>(id);
+
+	entity_->getMngr()->getTraps().push_back(trap);
 }

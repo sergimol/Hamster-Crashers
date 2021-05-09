@@ -77,6 +77,7 @@ class Obstacle;
 class FinalBossManager;
 class FinalBossAttack;
 class FinalBossPunch;
+class TimeTrap;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -155,7 +156,8 @@ class FinalBossPunch;
 	Obstacle, \
 	FinalBossManager, \
 	FinalBossAttack, \
-	FinalBossPunch
+	FinalBossPunch,\
+	TimeTrap
 
 // groups
 
