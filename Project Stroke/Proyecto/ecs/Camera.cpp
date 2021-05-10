@@ -38,21 +38,13 @@ void Camera::checkBounds() {
 }
 
 void Camera::followPlayer() {
-	camPos = Vector2D();
+	cameraFollowPos_ = Vector2D(-1, -1);
+	camPos = newObjetivo();
 	players = 0;
-	auto& players_ = entity_->getMngr()->getPlayers();
-
-	//C�mara sigue a los personajes
-	for (Entity* e : players_) {
-		auto& playerpos = e->getComponent<Transform>()->getPos();
-		// Operaci�n para calcular el punto medio con m�s jugadores
-		camPos = camPos + playerpos + Vector2D(e->getComponent<Transform>()->getW(), e->getComponent<Transform>()->getH()) / 2;
-		players++;
-	}
-	camPos.setY(camPos.getY() - 200);
+	
 	//Actualizamos la posicion de la camara
-	camera_.x = (camPos.getX() / players) - camera_.w / 2;
-	camera_.y = (camPos.getY() / players) - camera_.h / 2;
+	camera_.x = camPos.getX() - camera_.w / 2;
+	camera_.y = camPos.getY() - camera_.h / 2;
 }
 
 void Camera::followBossCat() {
@@ -61,7 +53,7 @@ void Camera::followBossCat() {
 
 	//Camara sigue al gato dejándolo justo en la esquina derecha
 	camPos = camPos + cat->getPos() - Vector2D(sdlutils().width() / 2 - cat->getW(), 0);
-	//camPos.setY(camPos.getY() - 200);
+
 	//Actualizamos la posicion de la camara
 	camera_.x = (camPos.getX() / players) - camera_.w / 2;
 	camera_.y = (camPos.getY() / players) - camera_.h / 2;
@@ -70,8 +62,6 @@ void Camera::followBossCat() {
 void Camera::StaticCamera() {
 	Vector2D CamStaticPos = newObjetivo();
 
-	CamStaticPos.setY(camPos.getY() - 200);
-
 	camera_.x = CamStaticPos.getX() - camera_.w / 2;
 	camera_.y = CamStaticPos.getY() - camera_.h / 2;
 }
@@ -79,32 +69,24 @@ void Camera::StaticCamera() {
 void Camera::Goto() {
 	Vector2D CamStaticPos = newObjetivo();
 
-	CamStaticPos.setY(camPos.getY() - 200);
 	bool check1 = false;
-	bool check2 = false;
-	int speed = 12;
-	if (!check1) {
-		if (camera_.x < CamStaticPos.getX() - 24 - camera_.w / 2)
-			camera_.x = camera_.x + speed;
-		else if (camera_.x > CamStaticPos.getX() + 24 - camera_.w / 2)
-			camera_.x = camera_.x - speed;
-		else
-			check1 = true;
-	}
 
-	if (!check2) {
-		if (camera_.y < CamStaticPos.getY() - 24 - camera_.h / 2)
-			camera_.y = camera_.y + speed;
-		else if (camera_.y > CamStaticPos.getY() + 24 - camera_.h / 2)
-			camera_.y = camera_.y - speed;
-		else
-			check2 = true;
-	}
+	int speed = 9;
+
+	if (camera_.x < CamStaticPos.getX() - 24 - camera_.w / 2)
+		camera_.x = camera_.x + speed;
+	else if (camera_.x > CamStaticPos.getX() + 24 - camera_.w / 2)
+		camera_.x = camera_.x - speed;
+	else
+		check1 = true;
+	
+	camera_.y = CamStaticPos.getY() - camera_.h / 2;
 
 	//Cuando se ajusta la camara pasa al estado "Static"
-	if (check1 && check2 && GoToTracker)
+	if (check1 && GoToTracker) 
 		cameraState = Static;
-	else if (check1 && check2 && !GoToTracker)
+	
+	else if (check1 && !GoToTracker) 
 		cameraState = Players;
 }
 
@@ -120,30 +102,31 @@ Vector2D Camera::newObjetivo() {
 	for (Entity* e : players_) {
 		auto& playerpos = e->getComponent<Transform>()->getPos();
 		// Operaci�n para calcular el punto medio con m�s jugadores
-		camPos = camPos + playerpos + Vector2D(e->getComponent<Transform>()->getW(), e->getComponent<Transform>()->getH()) / 2;
+		camPos = camPos + playerpos + (Vector2D(e->getComponent<Transform>()->getW(), e->getComponent<Transform>()->getH()) / 2);
 		players++;
 	}
 	//Actualizamos la posicion central de los 4 jugadores
 	playerMidPos = Vector2D((camPos.getX() / players), (camPos.getY() / players));
 
-	Vector2D osci = (playerMidPos - cameraFollowPos_) / 4;
+	int osci = (playerMidPos.getX() - cameraFollowPos_.getX()) / 4;
 	//Dependiendo del valor de "CameraFollowPos" vamos a devolver el punto medio entre el punto que se pasa y la posici�n de los jugadores, o la posicion de los jugadores
 	//Calculamos un punto que se encuentra a 1/2 entre la posicion fija de la camara (objetive) y el punto medio de los 4 jugadores (playerMidPos)
-	if (cameraFollowPos_.getX() == -1 || cameraFollowPos_.getY() == -1)
-		CamStaticPos = playerMidPos;
-	else
+
+	CamStaticPos = playerMidPos;
+	if (cameraFollowPos_.getX() != -1 && cameraFollowPos_.getY() != -1)
 		//CamStaticPos = CameraFollowPos;
-		CamStaticPos = (cameraFollowPos_ + osci);
+		CamStaticPos.setX(cameraFollowPos_.getX() + osci);
+
+	CamStaticPos.setY(CamStaticPos.getY() - 205);
 
 	return CamStaticPos;
 }
 
 //Cambia el punto al que sigue la camara
-void Camera::changeCamFollowPos(Vector2D objetive) {
+void Camera::changeCamFollowPos(int objetive) {
 	//Si el vector que se le pasa no es valido, CameraFollowPos pasa a valer el punto medio entre los hamsters
-	if (!GoToTracker) {
-		cameraFollowPos_ = newObjetivo();
-	}
-	else
-		cameraFollowPos_ = objetive;
+	cameraFollowPos_ = newObjetivo();
+
+	if (GoToTracker)
+		cameraFollowPos_.setX(objetive);
 }

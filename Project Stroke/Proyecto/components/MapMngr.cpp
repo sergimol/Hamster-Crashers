@@ -81,11 +81,11 @@ void MapMngr::update() {
 	for (Entity* player : players) {
 		auto* pTr = player->getComponent<Transform>();
 		if (player->getComponent<HamsterStateMachine>()->getState() != HamStates::INFARCTED && Collisions::collides(pTr->getPos(), pTr->getW(), pTr->getH(), Vector2D(trigger.getPosition().x, trigger.getPosition().y) * scale, trigger.getAABB().width * scale, trigger.getAABB().height * scale)) {
-			RoundsPerRoom = getProp[2].getIntValue();
+			RoundsPerRoom = getProp[1].getIntValue();
 			loadEnemyRoom();
-			if (getProp[0].getIntValue() != -1 || getProp[1].getIntValue() != -1) {
+			if (getProp[0].getIntValue() != -1) {
 				camera->setGoToTracker(true);
-				camera->changeCamFollowPos(Vector2D(getProp[0].getIntValue(), getProp[1].getIntValue()) * scale);
+				camera->changeCamFollowPos(getProp[0].getIntValue() * scale);
 				camera->changeCamState(State::GoingTo);
 			}
 			//Borrar el punto de la camara del vector
@@ -99,7 +99,7 @@ void MapMngr::update() {
 		if (RoundsPerRoom == RoundsCount) {
 			Room++;	//Una vez cargamos a los enemigos de la habitacion incrementamos el contador para poder cargar los enemigos de la siguiente
 			RoundsCount = 0;
-			camera->changeCamFollowPos(Vector2D(-1, -1));	//Se pasa el punto medio de los jugadores
+			camera->changeCamFollowPos(-1);	//Se pasa el punto medio de los jugadores
 			camera->setGoToTracker(false);					//Se fija la transicion al punto medio de los jugadores al terminar GoTo
 			camera->changeCamState(State::GoingTo);			//Se cambia el estado de la camara a GoTo
 		}
@@ -670,9 +670,11 @@ void MapMngr::addTrap(const tmx::Object& object, int x, int y) {
 
 	trap->addComponent<Transform>(Vector2D(x * scale, y * scale),
 		Vector2D(), 50 * scale, 50 * scale, 0.0f, 0.75, 0.75);
-	trap->addComponent<ContactDamage>(10, -30);
+	trap->addComponent<ContactDamage>(10, 30);
 	trap->addComponent<TimeTrap>(& sdlutils().images().at("catSmoking"));
 
+	//int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty
+	trap->addComponent<EntityAttribs>(1 , 10.0f, "trap1", Vector2D(), 1, 0.0f, 1, true, false);
 	//trap->addComponent<Image>(&sdlutils().images().at("catSmoking"));
 
 	/*
