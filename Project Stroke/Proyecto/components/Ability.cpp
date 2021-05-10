@@ -54,6 +54,8 @@ void Ability::deactiveAbility() {
 	if (active_) {
 		active_ = false;
 		onUse_ = false;
+		auto& state = st_->getState();
+		state = HamStates::DEFAULT;
 		endAbility();
 	}
 }

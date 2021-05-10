@@ -71,7 +71,7 @@ void MenuButton::exited() {
 }
 
 void MenuButton::pressed() {
-	// Botones con la misma funcionalidad están separados porque en el futuro funcionarán diferente
+	// Botones con la misma funcionalidad estï¿½n separados porque en el futuro funcionarï¿½n diferente
 	if (buttonName_ == "local") {
 		sdlutils().setHamstersToChoose(1);
 		state_->setState(GameStates::HAMSTERSELECTION);

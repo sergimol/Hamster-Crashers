@@ -40,7 +40,7 @@ void ControlHandler::init() {
 
 	/*pause_ = entity_->getMngr()->getHandler<PauseMenu>()->getComponent<MenuButtonManager>();
 	main_ = entity_->getMngr()->getHandler<MainMenu>()->getComponent<MenuButtonManager>();*/
-	
+
 
 
 	states_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
@@ -120,7 +120,7 @@ void ControlHandler::handleController() {
 				}
 			}
 			else
-			{				
+			{
 				mov_->updateKeymap(Movement::UP, false);
 				mov_->updateKeymap(Movement::DOWN, false);
 				if (roll_ != nullptr) {
@@ -176,7 +176,7 @@ void ControlHandler::handleController() {
 		}
 
 		auto& hamState = hms_->getState();
-		
+
 		if (ih().isButtonDownEvent()) {
 			if (hamState == HamStates::DEFAULT) {
 				//JUMP
@@ -387,7 +387,7 @@ void ControlHandler::handleKeyboard() {
 		if (gameState == GameStates::RUNNING) {
 			mov_->updateKeymap(Movement::LEFT, false);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::LEFT, false);
-			if (mic_ != nullptr) 
+			if (mic_ != nullptr)
 				mic_->updateKeymap(MovementInChase::LEFT, false);
 		}
 		/*else if (gameState == GameStates::PAUSE)
@@ -422,15 +422,21 @@ void ControlHandler::handleKeyboard() {
 	//ATAQUE LIGERO
 	if (gameState == GameStates::RUNNING && hamState != HamStates::DEAD && hamState != HamStates::INFARCTED && ih().mouseButtonEvent()) {
 		if (hamState != HamStates::ABILITY && ih().getMouseButtonState(InputHandler::MOUSEBUTTON::LEFT) == 1) {
-			lt_->attack();
+			//Solo ataca si la habilidad está activada
+			if (lt_->isActive())
+				lt_->attack();
 		}
 		//ATAQUE FUERTE
 		else if (hamState != HamStates::ABILITY && ih().getMouseButtonState(InputHandler::MOUSEBUTTON::RIGHT) == 1) {
-			st_->attack();
+			//Solo ataca si la habilidad está activada
+			if (st_->isActive())
+				st_->attack();
 		}
 		//HABILIDAD
 		else if (ih().getMouseButtonState(InputHandler::MOUSEBUTTON::MIDDLE) == 1) {
-			ab_->use();
+			//Solo usa la habilidad si está activada
+			if (ab_->isActive())
+				ab_->use();
 		}
 	}
 }

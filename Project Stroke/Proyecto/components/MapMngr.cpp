@@ -200,7 +200,8 @@ void MapMngr::loadNewMap(string map) {
 
 					for (const auto& object : objects) {
 						if (object.getName() == "sardinilla" || object.getName() == "canelon" || object.getName() == "keta" || object.getName() == "monchi")
-							{}//addHamster(object);
+						{
+						}//addHamster(object);
 						else if (object.getName() == "newScene") {
 							newSceneTrigger(object.getProperties()[0].getStringValue(), object);
 						}
@@ -325,8 +326,8 @@ bool MapMngr::intersectObstacles(const SDL_Rect& hamster) {
 	int i = 0;
 	while (!collide && i < obstacles.size()) {
 		auto obstacleRect = obstacles[i]->getComponent<Transform>()->getRectCollide();
-		collide = Collisions::collides(Vector2D(hamster.x, hamster.y), hamster.w, hamster.h, 
-									   Vector2D(obstacleRect.x, obstacleRect.y), obstacleRect.w/2, obstacleRect.h/2);
+		collide = Collisions::collides(Vector2D(hamster.x, hamster.y), hamster.w, hamster.h,
+			Vector2D(obstacleRect.x, obstacleRect.y), obstacleRect.w / 2, obstacleRect.h / 2);
 		++i;
 	}
 	return collide;
@@ -546,8 +547,8 @@ void MapMngr::addHamster(string name, int i) {
 	hamster1->addComponent<Combos>();
 
 	//Interfaz
-	hamster1->addComponent<UI>(name, 0);
-	hamster1->addComponent<HeartUI>(name, 0);
+	hamster1->addComponent<UI>(name, i);
+	hamster1->addComponent<HeartUI>(name, i);
 
 	//Habilidad
 	if (name == "sardinilla") hamster1->addComponent<Roll>();
@@ -588,18 +589,18 @@ void MapMngr::addHamster(string name, int i) {
 
 	// Asignación de handler
 	switch (i) {
-		case 0:
-			mngr_->setHandler<Hamster1>(hamster1);
-			break;
-		case 1:
-			mngr_->setHandler<Hamster2>(hamster1);
-			break;
-		case 2:
-			mngr_->setHandler<Hamster3>(hamster1);
-			break;
-		case 3:
-			mngr_->setHandler<Hamster4>(hamster1);
-			break;
+	case 0:
+		mngr_->setHandler<Hamster1>(hamster1);
+		break;
+	case 1:
+		mngr_->setHandler<Hamster2>(hamster1);
+		break;
+	case 2:
+		mngr_->setHandler<Hamster3>(hamster1);
+		break;
+	case 3:
+		mngr_->setHandler<Hamster4>(hamster1);
+		break;
 	}
 }
 
@@ -636,11 +637,11 @@ void MapMngr::addObject(const tmx::Object& object) {
 
 	obstacle->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 0.75, 0.75);
-	
+
 	auto& prop = object.getProperties();
 
 	string id = prop[1].getStringValue();
-	
+
 	obstacle->addComponent<Animator>(&sdlutils().images().at("obstacle" + id),
 		80,
 		86,
@@ -670,10 +671,10 @@ void MapMngr::addTrap(const tmx::Object& object, int x, int y) {
 	trap->addComponent<Transform>(Vector2D(x * scale, y * scale),
 		Vector2D(), 50 * scale, 50 * scale, 0.0f, 0.75, 0.75);
 	trap->addComponent<ContactDamage>(10, 30);
-	trap->addComponent<TimeTrap>(& sdlutils().images().at("catSmoking"));
+	trap->addComponent<TimeTrap>(&sdlutils().images().at("catSmoking"));
 
 	//int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty
-	trap->addComponent<EntityAttribs>(1 , 10.0f, "trap1", Vector2D(), 1, 0.0f, 1, true, false);
+	trap->addComponent<EntityAttribs>(1, 10.0f, "trap1", Vector2D(), 1, 0.0f, 1, true, false);
 	//trap->addComponent<Image>(&sdlutils().images().at("catSmoking"));
 
 	/*
