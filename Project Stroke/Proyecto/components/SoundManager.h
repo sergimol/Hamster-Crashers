@@ -12,6 +12,26 @@ public:
 
 	void init() override;
 	void play(std::string soundName);
+	void setVolumeChannels();
+	void lowVolume(bool channel);
+	void upVolume(bool channel);
+
+	//channels
+	int lighthits = 0;
+	int stronghits = 1;
+	int attacks = 2;
+	int deps = 3;
+	int heartattacks = 4;
+	int musics = 5;
+
+	//volumes
+	//general
+	int fxVol_ = 1;
+	int musicVol_ = 1;
+	//local
+	int generalFXvol = 20;
+	int initStrongVol = 60;
+	int initMusicVol = 8;
 
 private:
 	int randomNum;
@@ -30,7 +50,6 @@ private:
 
 
 	//SOUND LIST AND CHANNELS
-	int lighthits = 0;
 	SoundEffect* light0;
 	SoundEffect* light1;
 	SoundEffect* light2;
@@ -43,12 +62,10 @@ private:
 	SoundEffect* light9;
 	SoundEffect* light10;
 
-	int stronghits = 1;
 	SoundEffect* strong0;
 	SoundEffect* strong1;
 	SoundEffect* strong2;
 
-	int attacks = 2;
 	SoundEffect* attack0;
 	SoundEffect* attack1;
 	SoundEffect* attack2;
@@ -56,17 +73,14 @@ private:
 	SoundEffect* attack4;
 
 
-	int deps = 3;
 	SoundEffect* dep0;
 	SoundEffect* dep1;
 	SoundEffect* dep2;
 
-	int heartattacks = 4;
 	SoundEffect* heartattack0;
 	SoundEffect* heartattack1;
 	SoundEffect* heartattack2;
 
-	int musics = 5;
 	SoundEffect* mainTheme;
 
 };

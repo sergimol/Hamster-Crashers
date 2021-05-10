@@ -13,22 +13,24 @@
 
 class MenuButton : public Component {
 public:
-	MenuButton(std::string n,  Vector2D position, int stateNum);
+	MenuButton(std::string n, Vector2D position, int stateNum);
 	virtual ~MenuButton() {};
 
 	void render() override;
 	void init() override;
 
-	void selected();
-	void pressed();
-	void exited();
+	virtual void selected();
+	virtual void exited();
+
+	virtual void pressed() {} = 0;
 
 	//Getters auxiliares
 	//inline int getPosUI() { return position; };
 
-private:
+protected:
 	//Nombre del personaje que contiene la UI, todo en minusculas
 	std::string buttonName_;
+
 	//Numero del boton en el menu
 	int stateNumber_;
 
@@ -36,7 +38,7 @@ private:
 	Texture* button_;
 	Texture* buttonEnter_;
 	Texture* buttonPressed_;
-	
+
 	GameStates* state_;
 
 	//DestRects
@@ -45,4 +47,65 @@ private:
 	Vector2D renderCoords_;
 
 	bool buttonSelected_;
+};
+
+class LocalButton : public MenuButton {
+	LocalButton(std::string n, Vector2D position, int stateNum) :MenuButton(n, position, stateNum) {};
+	void pressed() override;
+};
+
+class MultiplayerButton : public MenuButton {
+	MultiplayerButton(std::string n, Vector2D position, int stateNum) :MenuButton(n, position, stateNum) {};
+	void pressed() override;
+};
+
+class OptionsButton : public MenuButton {
+	OptionsButton(std::string n, Vector2D position, int stateNum) :MenuButton(n, position, stateNum) {};
+	void pressed() override;
+};
+
+class QuitButton : public MenuButton {
+	QuitButton(std::string n, Vector2D position, int stateNum) :MenuButton(n, position, stateNum) {};
+	void pressed() override;
+};
+
+class ResumeButton : public MenuButton {
+	ResumeButton(std::string n, Vector2D position, int stateNum) :MenuButton(n, position, stateNum) {};
+	void pressed() override ;
+};
+
+
+class HamsterButton : public MenuButton {
+	HamsterButton(std::string n, Vector2D position, int stateNum) :MenuButton(n, position, stateNum) {};
+	void pressed() override;
+};
+
+class PlayerNumberButton : public MenuButton {
+	PlayerNumberButton(std::string n, Vector2D position, int stateNum) :MenuButton(n, position, stateNum) {};
+	void pressed() override;
+};
+
+class HamsterSelectButton : public MenuButton {
+	HamsterSelectButton(std::string n, Vector2D position, int stateNum) :MenuButton(n, position, stateNum) {};
+	void pressed() override;
+};
+
+class MusicLowButton : public MenuButton {
+	MusicLowButton(std::string n, Vector2D position, int stateNum) :MenuButton(n, position, stateNum) {};
+	void pressed() override;
+};
+
+class MusicUpButton : public MenuButton {
+	MusicUpButton(std::string n, Vector2D position, int stateNum) :MenuButton(n, position, stateNum) {};
+	void pressed() override;
+};
+
+class FxLowButton : public MenuButton {
+	FxLowButton(std::string n, Vector2D position, int stateNum) :MenuButton(n, position, stateNum) {};
+	void pressed() override;
+};
+
+class FxUpButton : public MenuButton {
+	FxUpButton(std::string n, Vector2D position, int stateNum) :MenuButton(n, position, stateNum) {};
+	void pressed() override;
 };

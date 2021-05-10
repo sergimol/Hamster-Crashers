@@ -186,6 +186,6 @@ void MenuButtonManager::moveLeft() {
 }
 
 void MenuButtonManager::pressButton() {
-	if(sdlutils().currRealTime() > timer_ + cooldown_)
+	if (sdlutils().currRealTime() > timer_ + cooldown_)
 		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->pressed();
 }
