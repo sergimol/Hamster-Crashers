@@ -387,7 +387,8 @@ void ControlHandler::handleKeyboard() {
 		if (gameState == GameStates::RUNNING) {
 			mov_->updateKeymap(Movement::LEFT, false);
 			if (roll_ != nullptr) roll_->updateKeymap(Roll::LEFT, false);
-			if (mic_ != nullptr) mic_->updateKeymap(MovementInChase::LEFT, false);
+			if (mic_ != nullptr) 
+				mic_->updateKeymap(MovementInChase::LEFT, false);
 		}
 		/*else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::LEFT, false);

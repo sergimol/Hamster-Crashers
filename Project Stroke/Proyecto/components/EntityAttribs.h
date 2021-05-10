@@ -81,6 +81,9 @@ public:
 	inline bool ignoresMargin() {
 		return ignoreMargin_;
 	}
+	inline void setIgnoreMargin(bool i) {
+		ignoreMargin_ = i;
+	}
 
 	//Setters
 	inline void setPoisonProb(float prob) {

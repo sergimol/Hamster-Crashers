@@ -214,10 +214,9 @@ void MapMngr::loadNewMap(string map) {
 								Vector2D(), 256.0f, 2 * 256.0f, 0.0f, 1, 1);
 
 
-							enemy->addComponent<EntityAttribs>();
+							enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
 							enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
 							enemy->addComponent<ContactDamage>(20, -30);
-							enemy->addComponent<CatMovement>();
 							enemy->getMngr()->setHandler<Pussy>(enemy);
 
 						}
@@ -504,7 +503,7 @@ void MapMngr::addHamster(string name, int i) {
 
 	//Habilidad
 	if (name == "sardinilla")
-		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
+		hamster1->addComponent<Transform>(Vector2D((264.0 + 6000) * scale, 161.167 * scale),
 			Vector2D(), 86 * scale, 86 * scale, 0.0f, 0.5, 0.5);
 
 	else if (name == "canelon")

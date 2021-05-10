@@ -14,6 +14,7 @@
 #include "Pray.h"
 #include "Turret.h"
 #include "Poison.h"
+#include "CatMovement.h"
 
 void StartChase::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -43,23 +44,26 @@ void StartChase::render() {
 }
 
 void StartChase::start() {
-	for (Entity* hamsters : entity_->getMngr()->getPlayers()) {
-		hamsters->getComponent<Movement>()->setActive(false);
 
+	entity_->getMngr()->getHandler<Pussy>()->addComponent<CatMovement>();
+
+	for (Entity* hamsters : entity_->getMngr()->getPlayers()) {
 		string id = hamsters->getComponent<EntityAttribs>()->getId();
 
 		if (id == "sardinilla") {
 			hamsters->getComponent<Roll>()->deactiveAbility();
 		}
 		else if (id == "canelon")
-			hamsters->getComponent<Pray>()->setActive(false);
+			hamsters->getComponent<Pray>()->deactiveAbility();
 		else if (id == "keta")
-			hamsters->getComponent<Poison>()->setActive(false);
+			hamsters->getComponent<Poison>()->deactiveAbility();
 		else
-			hamsters->getComponent<Turret>()->setActive(false);
+			hamsters->getComponent<Turret>()->deactiveAbility();
 
 		hamsters->getComponent<LightAttack>()->setActive(false);
 		hamsters->getComponent<StrongAttack>()->setActive(false);
+
+		hamsters->getComponent<Movement>()->setActive(false);
 
 		hamsters->getComponent<MovementInChase>()->setActive(true);
 

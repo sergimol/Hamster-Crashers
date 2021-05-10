@@ -114,6 +114,8 @@ void Stroke::infarctHamster() {
 
 	//Evitamos el uso de la habilidad
 	ab_->deactiveAbility();
+	auto& state = hms_->getState();
+	state = HamStates::INFARCTED;
 
 	//Y cambiamos la interfaz
 	entity_->getComponent<HeartUI>()->dep();

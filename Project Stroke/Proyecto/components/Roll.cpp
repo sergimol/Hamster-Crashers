@@ -12,7 +12,7 @@
 
 void Roll::init() {
 	Ability::init();
-	
+
 	speed_ = entity_->getComponent<EntityAttribs>()->getVel();
 	assert(speed_ != Vector2D());
 
@@ -25,7 +25,7 @@ void Roll::init() {
 	grav_ = entity_->getComponent<Gravity>();
 	assert(grav_ != nullptr);
 
-	
+
 
 	keymap.insert({ UP, false });
 	keymap.insert({ DOWN, false });
@@ -59,7 +59,7 @@ void Roll::action()
 		rectPlayer.x += tr_->getVel().getX();
 		rectPlayer.y += tr_->getVel().getY();
 		col_->tryToMove(dir_, goalVel_, rectPlayer, false);
-		
+
 		//Mete invulnerabilidad durante la habilidad
 		entity_->getComponent<EntityAttribs>()->setInvincibility(true);
 	}
@@ -111,7 +111,7 @@ void Roll::update() {
 			rectPlayer.x += vel.getX();
 			rectPlayer.y += vel.getY();
 			col_->tryToMove(dir_, goalVel_, rectPlayer, false);
-			
+
 			if (grav_->isActive())
 				grav_->checkHeight(rectPlayer);
 
