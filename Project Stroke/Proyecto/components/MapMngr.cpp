@@ -671,9 +671,11 @@ void MapMngr::addTrap(const tmx::Object& object, int x, int y) {
 
 	trap->addComponent<Transform>(Vector2D(x * scale, y * scale),
 		Vector2D(), 50 * scale, 50 * scale, 0.0f, 0.75, 0.75);
-	trap->addComponent<ContactDamage>(10, -30);
+	trap->addComponent<ContactDamage>(10, 30);
 	trap->addComponent<TimeTrap>(& sdlutils().images().at("catSmoking"));
 
+	//int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty
+	trap->addComponent<EntityAttribs>(1 , 10.0f, "trap1", Vector2D(), 1, 0.0f, 1, true, false);
 	//trap->addComponent<Image>(&sdlutils().images().at("catSmoking"));
 
 	/*

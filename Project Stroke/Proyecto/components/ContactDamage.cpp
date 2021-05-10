@@ -69,15 +69,16 @@ bool ContactDamage::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 
 			//Cogemos el transform del player
 		auto eTR = ents[i]->getComponent<Transform>();
+		auto eColRect = eTR->getRectCollide();
 
-		Vector2D newPos = Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
+		//Vector2D newPos = Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
 		Vector2D enemyPos = Vector2D(enemyRect.x, enemyRect.y);
 		EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
 
 		//Y comprobamos si colisiona
 		//es can attacks porque coninciden lso estados
 		//TODO si se cambian lso estados DEAD STUNNED INFARTED hayq eu cambiar este booleano por otro ams combeniente
-		if (ents[i]->getComponent<HamsterStateMachine>()->canAttack() && Collisions::collides(newPos, eTR->getW(), eTR->getH(), enemyPos, enemyRect.w, enemyRect.h)) {
+		if (ents[i]->getComponent<HamsterStateMachine>()->canAttack() && Collisions::collides(Vector2D(eColRect.x - cam.x, eColRect.y - cam.y), eColRect.w, eColRect.h, enemyPos, enemyRect.w, enemyRect.h)) {
 			//TODO no voy a definir una entidad ahora
 			//int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
 
