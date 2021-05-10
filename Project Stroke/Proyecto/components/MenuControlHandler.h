@@ -39,7 +39,7 @@ private:
 	std::map<KEYS ,SDL_Scancode> keymap;
 
 	void handleKeyboard();
-	void handleController(int controller);
+	bool handleController(int controller);
 
 	int stateNumber_;
 };

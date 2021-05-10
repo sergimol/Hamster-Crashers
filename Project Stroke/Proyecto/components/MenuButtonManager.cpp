@@ -126,53 +126,10 @@ void MenuButtonManager::init() {
 	//buttonsPosition = Vector2D(0, 0);
 	buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
 
-	keymap.insert({ UP, false });
-	keymap.insert({ DOWN, false });
-	keymap.insert({ RIGHT, false });
-	keymap.insert({ LEFT, false });
-	keymap.insert({ SPACE, false });
-
 	cooldown_ = 100;	
 }
 
 void MenuButtonManager::update() {
-	if (sdlutils().currRealTime() > timer_ + cooldown_) {
-		if (keymap.at(UP)) {
-			if (buttonsPosition_.getY() > 0) {
-				buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
-				buttonsPosition_.setY(buttonsPosition_.getY() - 1);
-				buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
-			}
-		}
-		else if (keymap.at(DOWN)) {
-			if (buttonsPosition_.getY() < buttonsMagnitude_.getY() - 1) {
-				buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
-				buttonsPosition_.setY(buttonsPosition_.getY() + 1);
-				buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
-			}
-		}
-
-		if (keymap.at(RIGHT)) {
-			if (buttonsPosition_.getX() < buttonsMagnitude_.getX() - 1) {
-				buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
-				buttonsPosition_.setX(buttonsPosition_.getX() + 1);
-				buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
-			}
-		}
-		else if (keymap.at(LEFT)) {
-			if (buttonsPosition_.getX() > 0) {
-				buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
-				buttonsPosition_.setX(buttonsPosition_.getX() - 1);
-				buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
-			}
-		}
-
-		if (keymap.at(SPACE)) {
-			buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->pressed();
-		}
-		timer_ = sdlutils().currRealTime();
-	}
-
 	auto gameState = state_->getState();
 	if (background_ != nullptr)
 	{
@@ -183,7 +140,42 @@ void MenuButtonManager::update() {
 	}
 }
 
-void MenuButtonManager::updateKeymap(KEYS x, bool is) {
-	//if (x != SPACE || !keymap.at(SPACE))
-		keymap.at(x) = is;
+void MenuButtonManager::moveUp() {
+	if (buttonsPosition_.getY() > 0) {
+		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
+		buttonsPosition_.setY(buttonsPosition_.getY() - 1);
+		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
+	}
+	timer_ = sdlutils().currRealTime();
+}
+
+void MenuButtonManager::moveDown() {
+	if (buttonsPosition_.getY() < buttonsMagnitude_.getY() - 1) {
+		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
+		buttonsPosition_.setY(buttonsPosition_.getY() + 1);
+		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
+	}
+	timer_ = sdlutils().currRealTime();
+}
+
+void MenuButtonManager::moveRight() {
+	if (buttonsPosition_.getX() < buttonsMagnitude_.getX() - 1) {
+		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
+		buttonsPosition_.setX(buttonsPosition_.getX() + 1);
+		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
+	}
+	timer_ = sdlutils().currRealTime();
+}
+
+void MenuButtonManager::moveLeft() {
+	if (buttonsPosition_.getX() > 0) {
+		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
+		buttonsPosition_.setX(buttonsPosition_.getX() - 1);
+		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
+	}
+	timer_ = sdlutils().currRealTime();
+}
+
+void MenuButtonManager::pressButton() {
+	buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->pressed();
 }

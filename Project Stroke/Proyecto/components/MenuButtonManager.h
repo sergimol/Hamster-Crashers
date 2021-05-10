@@ -20,7 +20,12 @@ public:
 
 	void init() override;
 	void update() override;
-	void updateKeymap(KEYS x, bool is);
+
+	void moveUp();
+	void moveDown();
+	void moveRight();
+	void moveLeft();
+	void pressButton();
 
 private:
 	string menuMode_;
@@ -35,7 +40,5 @@ private:
 	GameStates* state_;
 	long unsigned int timer_, cooldown_; //Contador para movimiento entre botones
 
-	//Input
-	std::map<KEYS, bool> keymap;
 	Entity* background_;
 };

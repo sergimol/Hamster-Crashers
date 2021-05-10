@@ -25,57 +25,51 @@ void MenuControlHandler::update() {
 	auto gameState = states_->getState();
 
 	if (gameState == stateNumber_) {
+		bool handled = false;
+		int i = 0;
 		// Si hay algún mando conectado los tiene en cuenta
-		for (int i = 0; i < MAXPLAYERS; ++i) {
-			if (ih().playerHasController(i)) {
-				handleController(i);
-			}
-			else
-				break;
-		}
-		handleKeyboard();
+		while (!handled && ih().playerHasController(i)) {
+			handled = handleController(i);
+			i++;
+		}		
+		if (!handled)
+			handleKeyboard();
 	}
 }
 
 // M�tododos que manejan el input seg�n sea con mando o con teclado
-void MenuControlHandler::handleController(int controller) {
-
+bool MenuControlHandler::handleController(int controller) {
+	bool handled = false;
 	if (ih().getAxisValue(controller, SDL_CONTROLLER_AXIS_LEFTY) < 0 || ih().isButtonDown(controller, SDL_CONTROLLER_BUTTON_DPAD_UP)) {
-		menu_->updateKeymap(MenuButtonManager::UP, true);
-		menu_->updateKeymap(MenuButtonManager::DOWN, false);
+		menu_->moveUp();
+		handled = true;
 	}
 	//DOWN
 	else if (ih().getAxisValue(controller, SDL_CONTROLLER_AXIS_LEFTY) > 0 || ih().isButtonDown(controller, SDL_CONTROLLER_BUTTON_DPAD_DOWN))
 	{
-		menu_->updateKeymap(MenuButtonManager::UP, false);
-		menu_->updateKeymap(MenuButtonManager::DOWN, true);
-	}
-	else
-	{
-		menu_->updateKeymap(MenuButtonManager::UP, false);
-		menu_->updateKeymap(MenuButtonManager::DOWN, false);
+		menu_->moveDown();
+		handled = true;
 	}
 
 	//RIGHT
 	if (ih().getAxisValue(controller, SDL_CONTROLLER_AXIS_LEFTX) > 0 || ih().isButtonDown(controller, SDL_CONTROLLER_BUTTON_DPAD_RIGHT))
 	{
-		menu_->updateKeymap(MenuButtonManager::RIGHT, true);
-		menu_->updateKeymap(MenuButtonManager::LEFT, false);
+		menu_->moveRight();
+		handled = true;
 	}
 	//	LEFT
 	else if (ih().getAxisValue(controller, SDL_CONTROLLER_AXIS_LEFTX) < 0 || ih().isButtonDown(controller, SDL_CONTROLLER_BUTTON_DPAD_LEFT))
 	{
-		menu_->updateKeymap(MenuButtonManager::RIGHT, false);
-		menu_->updateKeymap(MenuButtonManager::LEFT, true);
-	}
-	else {
-		menu_->updateKeymap(MenuButtonManager::RIGHT, false);
-		menu_->updateKeymap(MenuButtonManager::LEFT, false);
+		menu_->moveLeft();
+		handled = true;
 	}
 
-	if (ih().isButtonDown(controller, SDL_CONTROLLER_BUTTON_A)) 
-		menu_->updateKeymap(MenuButtonManager::SPACE, true);
+	if (ih().isButtonDown(controller, SDL_CONTROLLER_BUTTON_A)) {
+		menu_->pressButton();
+		handled = true;
+	}
 	
+	return handled;
 	/*auto gameState = states_->getState();
 	if (ih().isButtonDown(controller, SDL_CONTROLLER_BUTTON_START) && gameState == GameStates::PAUSE) {
 		states_->setState(GameStates::RUNNING);
@@ -85,30 +79,22 @@ void MenuControlHandler::handleController(int controller) {
 void MenuControlHandler::handleKeyboard() {
 	//UP
 	if (ih().isKeyDown(keymap.at(UP))) //aqui es donde hacemos nuestro keymap
-		menu_->updateKeymap(MenuButtonManager::UP, true);
-	else if (ih().isKeyUp(keymap.at(UP)))
-		menu_->updateKeymap(MenuButtonManager::UP, false);
+		menu_->moveUp();
 		
 	//DOWN
 	if (ih().isKeyDown(keymap.at(DOWN)))
-		menu_->updateKeymap(MenuButtonManager::DOWN, true);
-	else if (ih().isKeyUp(keymap.at(DOWN)))
-		menu_->updateKeymap(MenuButtonManager::DOWN, false);
+		menu_->moveDown();
 
 	//RIGHT
 	if (ih().isKeyDown(keymap.at(RIGHT)))
-		menu_->updateKeymap(MenuButtonManager::RIGHT, true);
-	else if (ih().isKeyUp(keymap.at(RIGHT)))
-		menu_->updateKeymap(MenuButtonManager::RIGHT, false);
+		menu_->moveRight();
 
 	//	LEFT
 	if (ih().isKeyDown(keymap.at(LEFT)))
-		menu_->updateKeymap(MenuButtonManager::LEFT, true);
-	else if (ih().isKeyUp(keymap.at(LEFT)))
-		menu_->updateKeymap(MenuButtonManager::LEFT, false);
+		menu_->moveLeft();
 
 	if (ih().isKeyDown(keymap.at(SPACE)))
-		menu_->updateKeymap(MenuButtonManager::SPACE, true);
+		menu_->pressButton();
 
 	/*auto gameState = states_->getState();
 	if (ih().isKeyDown(SDL_SCANCODE_ESCAPE) && gameState == GameStates::PAUSE) {

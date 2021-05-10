@@ -20,7 +20,7 @@ public:
 	void knockback();
 	void knockback(int kVel);
 	inline void setKnockbackDistance(int val) { knockbackVel_ = val; }
-	inline int getKnockback() { return knockbackVel_; }
+	inline int getKnockback() const { return knockbackVel_; }
 
 private:
 	Transform* tr_;
