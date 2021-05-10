@@ -51,7 +51,7 @@ bool Combos::checkCombo(int action) {
 			entity_->getComponent<Transform>()->getVelZ() = 0;
 
 			attribs_->setVel(attribs_->getVel() / 4); //Reducir velocidad
-			
+
 		}
 		else { //Combo imposible -> cambio de acción
 			cola_.pop();
@@ -60,7 +60,7 @@ bool Combos::checkCombo(int action) {
 		}
 		break;
 	case 2:					//3ª acción de combo
-		if (action == cola_.back()) { 
+		if (action == cola_.back()) {
 			cola_.push(action);
 			if (action == 0) {
 				// Animación de tercero ligero
@@ -162,7 +162,7 @@ void Combos::jumpStrong() {
 }
 
 void Combos::popUntilEmpty() {
-	while (!cola_.empty()) 
+	while (!cola_.empty())
 		cola_.pop();
 	attribs_->resetVel();
 	if (!grv_->isActive())
@@ -189,4 +189,8 @@ void Combos::firstActionAnim(int action) {
 
 void Combos::onResume() {
 	lastAttack_ += sdlutils().currRealTime() - lastAttack_;
+}
+
+bool Combos::isJumping() {
+	return (!cola_.empty() && cola_.front() == 2);
 }

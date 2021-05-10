@@ -244,9 +244,10 @@ void EntityAttribs::die() {
 		//entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", false);
 	}
 	else {
-		//soalmente para los enemigos
+		//solamente para los enemigos
 		entity_->setActive(false);
 		e->addComponent<Dying>();
+		//e->getComponent<Transform>()->setGravity(e->addComponent<Gravity>());
 		enmState_->getState() = EnemyStates::ENM_DEAD;
 		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala
 	}

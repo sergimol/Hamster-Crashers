@@ -9,8 +9,8 @@ void ReanimationGame::init() {
 
 	buttonPos = build_sdlrect(pos, WIDTH, HEIGHT);
 
-	/*infarct_ = entity_->getComponent<InfarctedBody>();
-	assert(infarct_ != nullptr);*/
+	infarct_ = entity_->getComponent<InfarctedBody>();
+	assert(infarct_ != nullptr);
 
 	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
 	assert(state_ != nullptr);

@@ -53,24 +53,24 @@ void Stroke::increaseChance(int n, bool fromAbility) {
 	//std::cout << chance_ + " " + chanceFromAb_ << std::endl;
 }
 
-
+//Decrementa DECREASEPERCENTAGE en el minijuego de infarto
 void Stroke::decreaseChance() {
 	if (chance_ > 0) {
 		chance_ -= (chance_ * DECREASEPERCENTAGE) / 100;
 
 		//Llamamos a la UI para que el corazon palpite más rapido
-		entity_->getComponent<HeartUI>()->increaseLatency(chanceFromAb_ + chance_);
+		entity_->getComponent<HeartUI>()->increaseLatency((chanceFromAb_ + chance_)/10);
 	}
 }
 
 void Stroke::checkChance() {
 	int t = sdlutils().currRealTime();
 	// Comprobaci�n de la reducci�n de la probabilidad
-	if (t >= timeLastIncrease_ + TIMETODECREASE && t >= timeLastDecrease_ + TIMEBETWEENDECREASES) {
-		chance_--;
-		chanceFromAb_--;
-		if (chance_ < 1)
-			chance_ = 1;
+	if (t >= timeLastDecrease_ + TIMEBETWEENDECREASES) {
+		chance_-= NORMALDECREASE;
+		chanceFromAb_-= NORMALDECREASE;
+		if (chance_ < MINVALUE)
+			chance_ = MINVALUE;
 		if (chanceFromAb_ < 0)
 			chanceFromAb_ = 0;
 
@@ -85,7 +85,7 @@ void Stroke::checkChance() {
 	if (t >= timeLastUpdate_ + UPDATETIME) {
 		if (hms_->getState() != HamStates::INFARCTED && ss_->checkChance(chance_, chanceFromAb_)) {
 			//TODO madremia que no lo podemos desactivar porque hay que quitarlo de la lsita de player y noseque algo habra que ahcer para que la camara no explote
-			//infarctHamster();
+			infarctHamster();
 		}
 		timeLastUpdate_ = t;
 	}
@@ -119,6 +119,7 @@ void Stroke::infarctHamster() {
 	entity_->getComponent<HeartUI>()->dep();
 
 	//hms_->getState() = HamStates::INFARCTED;
+	this->setActive(false);
 
 	//Animacion del fantasma
 	entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STROKE, true);
@@ -147,8 +148,7 @@ void Stroke::infarctHamster() {
 	entity_->getMngr()->getDeadBodies().push_back(deadBody);
 
 	//Reseteamos chances
-	chance_ = 0;
-	chanceFromAb_ = 0;
+	restartChance();
 
 	std::cout << "INFARTADO" << std::endl;
 }
@@ -157,6 +157,10 @@ void Stroke::onResume() {
 	timeLastUpdate_ += sdlutils().currRealTime() - timeLastUpdate_;
 	timeLastIncrease_ += sdlutils().currRealTime() - timeLastIncrease_;
 	timeLastDecrease_ += sdlutils().currRealTime() - timeLastDecrease_;
+}
+
+void Stroke::onEnable() {
+	restartChance();
 }
 
 void Stroke::setStrategy(StrokeStrategy* ss) {

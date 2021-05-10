@@ -52,7 +52,8 @@ public:
 	void loadNewMap(string map);
 	void update()override;
 	SDL_Rect cam;
-	bool intersectWall(SDL_Rect hamster);
+	bool intersectWall(const SDL_Rect& hamster);
+	bool intersectObstacles(const SDL_Rect& hamster);
 
 	int getScale() { return scale; };
 	int getCellSize() { return TAM_CELDA; };
@@ -67,5 +68,8 @@ public:
 	void addHamster(string name) { hamstersToLoad_.push_back(name); };
 	void removeHamster(string name) { hamstersToLoad_.back().erase(); };
 	void clearHamstersVector() { hamstersToLoad_.clear(); };
+
+	void addObject(const tmx::Object& object);
+	void addTrap(const tmx::Object& object, int x, int y);
 };
 

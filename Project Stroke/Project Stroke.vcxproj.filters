@@ -396,9 +396,6 @@
     <ClCompile Include="Proyecto\components\EnemyStrongAttack.cpp">
       <Filter>Archivos de origen\components\Entity\Enemy\Attack</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\Breakable.cpp">
-      <Filter>Archivos de origen\components\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="Proyecto\components\AnimEnemyStateMachine.cpp">
       <Filter>Archivos de origen\components\Animation</Filter>
     </ClCompile>
@@ -446,6 +443,21 @@
     </ClCompile>
     <ClCompile Include="Proyecto\components\StartChase.cpp">
       <Filter>Archivos de origen\components\Entity\Enemy\EnemyBehaviour\BossBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\FinalBossManager.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\EnemyBehaviour\BossBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\FinalBossAttack.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\Attack\BossAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\FinalBossPunch.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\Attack\BossAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Obstacle.cpp">
+      <Filter>Archivos de origen\components\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\TimeTrap.cpp">
+      <Filter>Archivos de origen\components\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -710,7 +722,7 @@
     <ClInclude Include="Proyecto\components\StrongFollowPlayer.h">
       <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\Behavior</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\Breakable.h">
+    <ClInclude Include="Proyecto\components\Obstacle.h">
       <Filter>Archivos de encabezado\Components\Entity</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\AnimEnemyStateMachine.h">
@@ -760,6 +772,18 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\StartChase.h">
       <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\BossBehaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\FinalBossManager.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\BossBehaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\FinalBossAttack.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\Attack\BossAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\FinalBossPunch.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\Attack\BossAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\TimeTrap.h">
+      <Filter>Archivos de encabezado\Components\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

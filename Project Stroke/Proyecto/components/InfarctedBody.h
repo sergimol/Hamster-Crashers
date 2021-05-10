@@ -45,6 +45,7 @@ private:
 
 	const int KEY_WIDHT = 100;
 	const int KEY_HEIGHT = 100;
+	//Para poseer
 	const SDL_Keycode key = SDLK_r;
 };
 

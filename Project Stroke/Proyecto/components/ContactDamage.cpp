@@ -69,56 +69,64 @@ bool ContactDamage::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 
 			//Cogemos el transform del player
 		auto eTR = ents[i]->getComponent<Transform>();
+		auto eColRect = eTR->getRectCollide();
 
-		Vector2D newPos = Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
+		//Vector2D newPos = Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
 		Vector2D enemyPos = Vector2D(enemyRect.x, enemyRect.y);
+		EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
 
 		//Y comprobamos si colisiona
 		//es can attacks porque coninciden lso estados
 		//TODO si se cambian lso estados DEAD STUNNED INFARTED hayq eu cambiar este booleano por otro ams combeniente
-		if (ents[i]->getComponent<HamsterStateMachine>()->canAttack() && Collisions::collides(newPos, eTR->getW(), eTR->getH(), enemyPos, enemyRect.w, enemyRect.h)) {
+		if (ents[i]->getComponent<HamsterStateMachine>()->canAttack() && Collisions::collides(Vector2D(eColRect.x - cam.x, eColRect.y - cam.y), eColRect.w, eColRect.h, enemyPos, enemyRect.w, enemyRect.h)) {
 			//TODO no voy a definir una entidad ahora
 			//int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
-			//if (finCombo) {
-			//	if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.01); //Aumentar probabilidad critico
-			//	//Empujar y stun al aliado
-			//}
-			canHit = true;
-			//Le restamos la vida al aliado
-			ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg_);
 
-			auto& hamStateM = ents[i]->getComponent<HamsterStateMachine>()->getState();
+			//Comprobamos si está en la misma Z o relativamente cerca
+			if (eAttribs->ignoresMargin() || (abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < MARGINTOATTACK)) {
+			
 
-			if (hamStateM != HamStates::DEAD && hamStateM != HamStates::INFARCTED) {
-				//Si tiene stun, se aplica
-				Stun* stun = ents[i]->getComponent<Stun>();
-				if (stun != nullptr && stun->isActive()) {
+				//if (finCombo) {
+				//	if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.01); //Aumentar probabilidad critico
+				//	//Empujar y stun al aliado
+				//}
+				canHit = true;
+				//Le restamos la vida al aliado
+				ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg_);
 
-					//Si no estaba aturdido ya
-					if (hamStateM != HamStates::STUNNED) {
-						//Aturdimos al hamster
-						hamStateM = HamStates::STUNNED;
+				auto& hamStateM = ents[i]->getComponent<HamsterStateMachine>()->getState();
 
-						//Animaci�n de stun
-						//anim_->play(sdlutils().anims().at("sardinilla_stun"));
+				if (hamStateM != HamStates::DEAD && hamStateM != HamStates::INFARCTED) {
+					//Si tiene stun, se aplica
+					Stun* stun = ents[i]->getComponent<Stun>();
+					if (stun != nullptr && stun->isActive()) {
 
-						//Desactivamos control de movimiento 
-						ControlHandler* ctrl = ents[i]->getComponent<ControlHandler>();
-						if (ctrl != nullptr)
-							ctrl->setActive(false);
+						//Si no estaba aturdido ya
+						if (hamStateM != HamStates::STUNNED) {
+							//Aturdimos al hamster
+							hamStateM = HamStates::STUNNED;
 
-						//Desactivamos componentes de ataque
-						StrongAttack* strAtt = ents[i]->getComponent<StrongAttack>();
-						if (strAtt != nullptr)
-							strAtt->setActive(false);
+							//Animaci�n de stun
+							//anim_->play(sdlutils().anims().at("sardinilla_stun"));
 
-						LightAttack* lghtAtt = ents[i]->getComponent<LightAttack>();
-						if (lghtAtt != nullptr)
-							lghtAtt->setActive(false);
+							//Desactivamos control de movimiento 
+							ControlHandler* ctrl = ents[i]->getComponent<ControlHandler>();
+							if (ctrl != nullptr)
+								ctrl->setActive(false);
 
+							//Desactivamos componentes de ataque
+							StrongAttack* strAtt = ents[i]->getComponent<StrongAttack>();
+							if (strAtt != nullptr)
+								strAtt->setActive(false);
+
+							LightAttack* lghtAtt = ents[i]->getComponent<LightAttack>();
+							if (lghtAtt != nullptr)
+								lghtAtt->setActive(false);
+
+						}
+						//Reiniciamos tiempo de stun
+						stun->restartStunTime();
 					}
-					//Reiniciamos tiempo de stun
-					stun->restartStunTime();
 				}
 			}
 			//Si tiene Knockback, se aplica

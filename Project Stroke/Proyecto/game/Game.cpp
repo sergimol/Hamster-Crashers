@@ -39,6 +39,7 @@
 #include "../components/CatMovement.h"
 #include "../components/ContactDamage.h"
 #include "../components/MenuControlHandler.h"
+#include "../components/TimeTrap.h"
 
 //PARA LAS COLISIONES CON TILE
 #include "../utils/Collisions.h"

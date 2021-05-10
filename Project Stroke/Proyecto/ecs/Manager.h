@@ -160,6 +160,10 @@ public:
 	inline std::vector<Entity*>& getObstacles() {
 		return obstacles_;
 	}
+	
+	inline std::vector<Entity*>& getTraps() {
+		return traps_;
+	}
 
 	inline std::vector<Entity*>& getTiles() {
 		return tiles_;
@@ -245,6 +249,17 @@ public:
 			obstacles_.end());
 	}
 
+	void refreshTraps() {
+		traps_.erase( //
+			std::remove_if( //
+				traps_.begin(), //
+				traps_.end(), //
+				[](const Entity* e) { //
+					return !e->isActive();
+				}), //
+			traps_.end());
+	}
+
 private:
 	std::vector<Entity*> entities_;
 	std::vector<Entity*> tiles_;
@@ -260,6 +275,7 @@ private:
 	std::vector<Entity*> players_; // vector de jugadores
 	std::vector<Entity*> enemies_; // EJEMPLO
 	std::vector<Entity*> obstacles_; // EJEMPLO
+	std::vector<Entity*> traps_; // EJEMPLO
 	std::vector<Entity*> deadBodies_;
 	std::vector<Entity*> items_;
 };

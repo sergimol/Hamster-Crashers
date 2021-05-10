@@ -1,5 +1,7 @@
+#include "Obstacle.h"
 #include "LightAttack.h"
 #include "Stroke.h"
+//#include "Gravity.h"
 #include "Combos.h"
 #include "FollowPlayer.h"
 #include "Knockback.h"
@@ -7,7 +9,6 @@
 #include "AnimHamsterStateMachine.h"
 #include "Swallow.h"
 #include "AnimEnemyStateMachine.h"
-
 
 
 LightAttack::LightAttack() :
@@ -37,7 +38,6 @@ void LightAttack::update() {
 		{
 			anim_->setAnimBool(HamStatesAnim::LIGHTATTACK, false);
 		}
-
 	}
 }
 
@@ -45,7 +45,7 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 	bool canHit = false;
 	bool finCombo = false;
 
-	//Cogemos todas las entidades del juego
+	//Cogemos a los enemigos
 	auto& ents = entity_->getMngr()->getEnemies();
 
 	for (int i = 0; i < ents.size(); ++i) {
@@ -64,9 +64,14 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 
 				//Comprobamos si está en la misma Z o relativamente cerca
 				if (eAttribs->ignoresMargin() || (abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < MARGINTOATTACK)) {
+
+					Combos* combos = entity_->getComponent<Combos>();
 					//A�adimos a los combos
-					if(!canHit)
-						finCombo = entity_->getComponent<Combos>()->checkCombo(0);
+					if (!canHit)
+						finCombo = combos->checkCombo(0);
+
+					//Comprobamos si está saltando
+					bool isJumping = combos->isJumping();
 
 					EntityAttribs* playerAttribs = entity_->getComponent<EntityAttribs>();
 					int dmg = playerAttribs->getDmg();
@@ -78,9 +83,8 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 
 					Swallow* playerSwallow = entity_->getComponent<Swallow>();
 
-
 					//Si puede tragar, el enemigo tiene la mitad de la vida y es fin de combo - probabilidad de tragar
-					if (finCombo && playerSwallow != nullptr && eAttribs->getLife() <= eAttribs->getMaxLife() / 2 && playerSwallow->canSwallow()) {
+					if (!isJumping && finCombo && playerSwallow != nullptr && eAttribs->getLife() <= eAttribs->getMaxLife() / 2 && playerSwallow->canSwallow()) {
 						eAttribs->recieveDmg(eAttribs->getLife()); // Esta puesto asi y no con setlife para que se vea la barra bajar
 						playerAttribs->heal(playerSwallow->healQuantity());
 						//Movida de animación
@@ -97,6 +101,21 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 						}
 
 						auto& enmStateM = ents[i]->getComponent<EnemyStateMachine>()->getState();
+
+						auto grav = ents[i]->getComponent<Gravity>();
+
+						if (isJumping && grav != nullptr) {
+							//SALTO
+							//if (z <= grav_->getFloor()) {
+							//eTR->setVelZ(35.0/*tr_->getVelZ()*/);
+							auto& velZ = eTR->getVelZ();
+							if (!grav->gravLocked()) {
+								velZ = 30.0f;
+								grav->lockGrav(true);
+							}
+
+							grav->resetLockTimer();
+						}
 
 						if (enmStateM != EnemyStates::ENM_DEAD) {
 							//Si tiene stun, se aplica
@@ -152,7 +171,23 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 			}
 		}
 	}
+
 	entity_->getMngr()->refreshEnemies();
+
+	//COMPROBAMOS OBSTACULOS
+	auto& obstacles = entity_->getMngr()->getObstacles();
+	for (auto el : obstacles) {
+		auto obstRect = el->getComponent<Transform>()->getRectCollide();
+		Vector2D newPos = Vector2D(obstRect.x - cam.x, obstRect.y - cam.y);
+		//Si colisiona el ataque
+		if (Collisions::collides(Vector2D(rectPlayer.x, rectPlayer.y), rectPlayer.w, rectPlayer.h, 
+									newPos, obstRect.w, obstRect.h)) {
+			//El objeto es golpeado y actua en consecuencia
+			auto* obstObject = el->getComponent<Obstacle>();
+			if (obstObject != nullptr)
+				obstObject->hit();
+		}
+	}
 
 	return canHit;
 }
@@ -211,7 +246,7 @@ void LightAttack::attack() {
 
 			DEBUG_isAttacking_ = true;
 			time_ = sdlutils().currRealTime();
-			entity_->getComponent<Stroke>()->increaseChance(5, false);
+			entity_->getComponent<Stroke>()->increaseChance(1, false);
 		}
 	}
 }

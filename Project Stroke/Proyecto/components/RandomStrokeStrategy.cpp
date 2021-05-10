@@ -16,10 +16,11 @@ void RandomStrokeStrategy::increaseChanceNORMAL(int n, int& chanceNORMAL) {
 //
 // }
 bool RandomStrokeStrategy::checkChance(int chanceNORMAL, int chanceAB) {
-	int i = r_.nextInt(1, MAXCHANCE);
+	int i = 0;
+	i += r_.nextInt(1, MAXCHANCE);
 	i += r_.nextInt(1, MAXCHANCE);
 
 
 	//std::cout << i << " -- " << chanceAB + chanceNORMAL << std::endl;
-	return i/2 <= chanceAB + chanceNORMAL;
+	return i/2 < chanceAB + chanceNORMAL;
 }

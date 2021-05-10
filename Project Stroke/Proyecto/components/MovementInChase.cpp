@@ -139,7 +139,7 @@ void MovementInChase::update() {
 				// Inicio del salto
 				if (keymap.at(SPACE)) {
 					combo->checkCombo(2);
-					entity_->getComponent<Stroke>()->increaseChance(2, false);
+					//entity_->getComponent<Stroke>()->increaseChance(2, false); No necesario, no te infartas
 					velZ = jump_;
 					keymap.at(SPACE) = false;
 				}

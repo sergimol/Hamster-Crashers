@@ -25,8 +25,6 @@ void PossesionGame::update() {
 				succesfulHit();
 			else
 				failedHit();
-
-
 		}
 		//Si se muere o infarta el poseido, se acaba la posesion
 		if (possesedState->cantBeTargeted()) {

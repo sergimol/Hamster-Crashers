@@ -73,6 +73,11 @@ class GravityEntity;
 class CatMovement;
 class MenuControlHandler;
 class StartChase;
+class Obstacle;
+class FinalBossManager;
+class FinalBossAttack;
+class FinalBossPunch;
+class TimeTrap;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -147,7 +152,12 @@ class StartChase;
 	GravityEntity, \
 	CatMovement, \
 	MenuControlHandler,\
-	StartChase
+	StartChase, \
+	Obstacle, \
+	FinalBossManager, \
+	FinalBossAttack, \
+	FinalBossPunch,\
+	TimeTrap
 
 // groups
 

@@ -22,6 +22,8 @@ public:
 
 	void update() override;
 
+	void onEnable() override;
+
 	void onResume() override;
 
 	void increaseChance(int n, bool fromAbility);
@@ -35,10 +37,11 @@ public:
 	//DEBUG ------ INFARTA AL HAMSTER
 	void INFARCT() { chance_ = 100; };
 
-	void restartChance() { chance_ = 0; };
+	void restartChance() { chance_ = 0; chanceFromAb_ = 0; };
 
 private:
 	void checkChance();
+
 
 	StrokeStrategy* ss_;
 	HamsterStateMachine* hms_;
@@ -46,13 +49,15 @@ private:
 	Transform* tr_;
 	GameStates* state_;
 
-	const int UPDATETIME = 5000, // Tiempo entre comprobaciones de infarto
+	const int UPDATETIME = 3000, // Tiempo entre comprobaciones de infarto
 		//MAXAB = 65, // Máximo de probabilidad de infarto que se puede recibir por habilidades
 		//MAXCHANCE = 35, // Máximo de probabilidad de infarto que se puede recibir por salto y ataque
-		TIMETODECREASE = 10000, // Tiempo que debe pasar para empezar a reducir el infarto
+		TIMETODECREASE = 1500, // Tiempo que debe pasar para empezar a reducir el infarto
 		TIMEBETWEENDECREASES = 2500, // Tiempo entre reducciones de la probabilidad
+		NORMALDECREASE = 10, //Decremento de forma natural
+		MINVALUE = 5, //Mínimo porcentaje de infarto
 		DECREASEPERCENTAGE = 35, // Porcentaje que se reduce por acierto en el minijuego
-		CHANGECOLORVALUE = 20;
+		CHANGECOLORVALUE = 750; //Porcentaje para cambiar el color del hamster a aviso
 	// Probabilidad de que haya un infarto
 	int chance_ = 1,
 		chanceFromAb_ = 0,
