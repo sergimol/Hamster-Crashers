@@ -126,7 +126,8 @@ void MenuButtonManager::init() {
 	//buttonsPosition = Vector2D(0, 0);
 	buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
 
-	cooldown_ = 100;	
+	cooldown_ = 100;
+	timer_ = sdlutils().currRealTime() + cooldown_;
 }
 
 void MenuButtonManager::update() {
@@ -141,41 +142,50 @@ void MenuButtonManager::update() {
 }
 
 void MenuButtonManager::moveUp() {
-	if (buttonsPosition_.getY() > 0) {
-		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
-		buttonsPosition_.setY(buttonsPosition_.getY() - 1);
-		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
+	if (sdlutils().currRealTime() > timer_ + cooldown_) {
+		if (buttonsPosition_.getY() > 0) {
+			buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
+			buttonsPosition_.setY(buttonsPosition_.getY() - 1);
+			buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
+		}
+		timer_ = sdlutils().currRealTime();
 	}
-	timer_ = sdlutils().currRealTime();
 }
 
 void MenuButtonManager::moveDown() {
-	if (buttonsPosition_.getY() < buttonsMagnitude_.getY() - 1) {
-		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
-		buttonsPosition_.setY(buttonsPosition_.getY() + 1);
-		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
+	if (sdlutils().currRealTime() > timer_ + cooldown_) {
+		if (buttonsPosition_.getY() < buttonsMagnitude_.getY() - 1) {
+			buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
+			buttonsPosition_.setY(buttonsPosition_.getY() + 1);
+			buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
+		}
+		timer_ = sdlutils().currRealTime();
 	}
-	timer_ = sdlutils().currRealTime();
 }
 
 void MenuButtonManager::moveRight() {
-	if (buttonsPosition_.getX() < buttonsMagnitude_.getX() - 1) {
-		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
-		buttonsPosition_.setX(buttonsPosition_.getX() + 1);
-		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
+	if (sdlutils().currRealTime() > timer_ + cooldown_) {
+		if (buttonsPosition_.getX() < buttonsMagnitude_.getX() - 1) {
+			buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
+			buttonsPosition_.setX(buttonsPosition_.getX() + 1);
+			buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
+		}
+		timer_ = sdlutils().currRealTime();
 	}
-	timer_ = sdlutils().currRealTime();
 }
 
 void MenuButtonManager::moveLeft() {
-	if (buttonsPosition_.getX() > 0) {
-		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
-		buttonsPosition_.setX(buttonsPosition_.getX() - 1);
-		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
+	if (sdlutils().currRealTime() > timer_ + cooldown_) {
+		if (buttonsPosition_.getX() > 0) {
+			buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
+			buttonsPosition_.setX(buttonsPosition_.getX() - 1);
+			buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
+		}
+		timer_ = sdlutils().currRealTime();
 	}
-	timer_ = sdlutils().currRealTime();
 }
 
 void MenuButtonManager::pressButton() {
-	buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->pressed();
+	if(sdlutils().currRealTime() > timer_ + cooldown_)
+		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->pressed();
 }

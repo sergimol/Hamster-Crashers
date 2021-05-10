@@ -75,10 +75,12 @@ void MenuButton::pressed() {
 	if (buttonName_ == "local") {
 		sdlutils().setHamstersToChoose(1);
 		state_->setState(GameStates::HAMSTERSELECTION);
+		entity_->getMngr()->getHandler<HamsterSelectionMenu>()->getComponent<MenuButtonManager>()->onResume();
 		//entity_->getMngr()->getHandler<MainMenu>()->getComponent<MenuButtonManager>()->updateKeymap(MenuButtonManager::SPACE, false);
 	}
 	else if (buttonName_ == "online") {
 		state_->setState(GameStates::PLAYERSELECTION);
+		entity_->getMngr()->getHandler<PlayerQuantityMenu>()->getComponent<MenuButtonManager>()->onResume();
 		//entity_->getMngr()->getHandler<MainMenu>()->getComponent<MenuButtonManager>()->updateKeymap(MenuButtonManager::SPACE, false);
 	}
 	else if (buttonName_ == "resume") {

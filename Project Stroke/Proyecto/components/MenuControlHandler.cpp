@@ -25,15 +25,24 @@ void MenuControlHandler::update() {
 	auto gameState = states_->getState();
 
 	if (gameState == stateNumber_) {
-		bool handled = false;
-		int i = 0;
-		// Si hay algún mando conectado los tiene en cuenta
-		while (!handled && ih().playerHasController(i)) {
-			handled = handleController(i);
-			i++;
-		}		
-		if (!handled)
-			handleKeyboard();
+		if (gameState != GameStates::HAMSTERSELECTION) {
+			bool handled = false;
+			int i = 0;
+			// Si hay algún mando conectado los tiene en cuenta
+			while (!handled && ih().playerHasController(i)) {
+				handled = handleController(i);
+				i++;
+			}
+			if (!handled)
+				handleKeyboard();
+		}
+		else {
+			int i = sdlutils().hamstersChosen();
+			if (ih().playerHasController(i))
+				handleController(i);
+			else
+				handleKeyboard();
+		}
 	}
 }
 
