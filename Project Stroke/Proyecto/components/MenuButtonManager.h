@@ -27,9 +27,11 @@ public:
 	void moveLeft();
 	void pressButton();
 
+	void onResume() override { timer_ = sdlutils().currRealTime() + cooldown_; };
+
 private:
 	string menuMode_;
-	//Numero del estado en el que se muestra el menú
+	//Numero del estado en el que se muestra el menï¿½
 	int stateNumber_;
 
 	//Controla el boton activo dentro de la rejilla
