@@ -13,4 +13,6 @@ private:
 	const string keyWord_ = "obstacle", hitWord_ = "Hit", breakWord_ = "Break";
 	short int hits_ = -1;
 	bool canBeHit_ = true;
+
+	void createItem();
 };

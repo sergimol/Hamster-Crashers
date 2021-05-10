@@ -579,6 +579,9 @@ void MapMngr::addHamster(string name, int i) {
 	hamster1->addComponent<ControlHandler>(hamster1->getComponent<EntityAttribs>()->getNumber());
 	hamster1->addComponent<Stun>();
 
+	//Lepermite recoger objetos
+	hamster1->addComponent<GetItem>();
+
 	hamster1->setGroup<Ally>(true);
 
 	//Lo a�adimos al vector de entidades

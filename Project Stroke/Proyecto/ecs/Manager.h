@@ -241,12 +241,12 @@ public:
 	void refreshItems() {
 		items_.erase( //
 			std::remove_if( //
-				obstacles_.begin(), //
-				obstacles_.end(), //
+				items_.begin(), //
+				items_.end(), //
 				[](const Entity* e) { //
 					return !e->isActive();
 				}), //
-			obstacles_.end());
+			items_.end());
 	}
 
 	void refreshTraps() {
