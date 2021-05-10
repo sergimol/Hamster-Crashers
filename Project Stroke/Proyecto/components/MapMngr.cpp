@@ -503,7 +503,7 @@ void MapMngr::addHamster(string name, int i) {
 
 	//Habilidad
 	if (name == "sardinilla")
-		hamster1->addComponent<Transform>(Vector2D((264.0 + 6000) * scale, 161.167 * scale),
+		hamster1->addComponent<Transform>(Vector2D((264.0 + 5500) * scale, 161.167 * scale),
 			Vector2D(), 86 * scale, 86 * scale, 0.0f, 0.5, 0.5);
 
 	else if (name == "canelon")
