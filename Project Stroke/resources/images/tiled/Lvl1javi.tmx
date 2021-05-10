@@ -277,28 +277,24 @@
   <object id="4" name="1" x="1010" y="64" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="1100"/>
-    <property name="CameraCoordY" type="int" value="150"/>
     <property name="Rounds" type="int" value="2"/>
    </properties>
   </object>
   <object id="14" name="2" x="2527" y="62.3333" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="2600"/>
-    <property name="CameraCoordY" type="int" value="150"/>
     <property name="Rounds" type="int" value="2"/>
    </properties>
   </object>
   <object id="22" name="3" x="4093" y="56.25" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="4200"/>
-    <property name="CameraCoordY" type="int" value="150"/>
     <property name="Rounds" type="int" value="2"/>
    </properties>
   </object>
   <object id="23" name="4" x="5505" y="56.25" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="5600"/>
-    <property name="CameraCoordY" type="int" value="150"/>
     <property name="Rounds" type="int" value="2"/>
    </properties>
   </object>

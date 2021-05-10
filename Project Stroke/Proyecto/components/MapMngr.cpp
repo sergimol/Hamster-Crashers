@@ -79,11 +79,11 @@ void MapMngr::update() {
 	for (Entity* player : players) {
 		auto* pTr = player->getComponent<Transform>();
 		if (player->getComponent<HamsterStateMachine>()->getState() != HamStates::INFARCTED && Collisions::collides(pTr->getPos(), pTr->getW(), pTr->getH(), Vector2D(trigger.getPosition().x, trigger.getPosition().y) * scale, trigger.getAABB().width * scale, trigger.getAABB().height * scale)) {
-			RoundsPerRoom = getProp[2].getIntValue();
+			RoundsPerRoom = getProp[1].getIntValue();
 			loadEnemyRoom();
-			if (getProp[0].getIntValue() != -1 || getProp[1].getIntValue() != -1) {
+			if (getProp[0].getIntValue() != -1) {
 				camera->setGoToTracker(true);
-				camera->changeCamFollowPos(Vector2D(getProp[0].getIntValue(), getProp[1].getIntValue()) * scale);
+				camera->changeCamFollowPos(getProp[0].getIntValue() * scale);
 				camera->changeCamState(State::GoingTo);
 			}
 			//Borrar el punto de la camara del vector
@@ -97,7 +97,7 @@ void MapMngr::update() {
 		if (RoundsPerRoom == RoundsCount) {
 			Room++;	//Una vez cargamos a los enemigos de la habitacion incrementamos el contador para poder cargar los enemigos de la siguiente
 			RoundsCount = 0;
-			camera->changeCamFollowPos(Vector2D(-1, -1));	//Se pasa el punto medio de los jugadores
+			camera->changeCamFollowPos(-1);	//Se pasa el punto medio de los jugadores
 			camera->setGoToTracker(false);					//Se fija la transicion al punto medio de los jugadores al terminar GoTo
 			camera->changeCamState(State::GoingTo);			//Se cambia el estado de la camara a GoTo
 		}

@@ -16,7 +16,7 @@
 // say that it exists, that saves time when parsing files
 
 using namespace std;
-static bool debug = false;
+static bool debug = true;
 class Manager;
 
 class Game {

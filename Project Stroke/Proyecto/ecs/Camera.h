@@ -32,6 +32,7 @@ private:
 	bool GoToTracker;
 	void checkBounds();
 	MapMngr* map_;
+
 public:
 
 	Camera(SDL_Rect cam) : camera_(cam), cameraFollowPos_(Vector2D()), cameraState(State::Players), map_(nullptr) {}
@@ -40,7 +41,7 @@ public:
 	void init() override;
 	void update() override;
 	inline SDL_Rect getCam() const{ return camera_; };
-	void changeCamFollowPos(Vector2D objetive);
+	void changeCamFollowPos(int objetive);
 	inline void changeCamState(State estado) { cameraState = estado; };
 	inline State getCamState() {return cameraState;};
 	inline Vector2D getCamPos() { return camPos; };
