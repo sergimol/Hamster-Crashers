@@ -216,9 +216,8 @@ void MapMngr::loadNewMap(string map) {
 
 							enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
 							enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
-							enemy->addComponent<ContactDamage>(20, -30);
+							enemy->addComponent<ContactDamage>(20, 30);
 							enemy->getMngr()->setHandler<Pussy>(enemy);
-
 						}
 						else if (object.getName() == "trap") {
 							addTrap(object, object.getPosition().x, object.getPosition().y);

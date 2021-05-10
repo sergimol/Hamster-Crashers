@@ -132,7 +132,7 @@ void MovementInChase::update() {
 
 		if (grav_->getStuck())			vel.setX(0);				//Si lo tiene que subir y no salta no se mueve en x
 
-	//SALTO
+	//SALTO	
 		if (z <= grav_->getFloor()) {
 			auto* combo = entity_->getComponent<Combos>();
 			if (combo != nullptr) {

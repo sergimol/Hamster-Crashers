@@ -62,8 +62,10 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 		}
 		else {
 			//Dejo de moverme
-			vel.setX(0);
-			vel.setY(0);
+			if(dir.getX() != 0)
+				vel.setX(0);
+			if (dir.getY() != 0)
+				vel.setY(0);
 		}
 	}
 
