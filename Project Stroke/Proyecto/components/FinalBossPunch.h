@@ -28,7 +28,7 @@ public:
 	void render() override;
 	void onResume() override;
 
-	bool CheckCollisions(const SDL_Rect& enemyRect, bool finCombo);
+	bool CheckCollisions(const SDL_Rect& enemyRect);
 	bool LaunchAttack();
 	bool checkAttackFinished() { return attackFinished_; };
 	void resetAttackFinished() { attackFinished_ = false; };

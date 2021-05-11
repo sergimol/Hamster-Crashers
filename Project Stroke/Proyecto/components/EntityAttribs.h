@@ -36,7 +36,7 @@ public:
 
 	void die();
 
-	inline void setLife(int life) { health_ = life; };
+	void setLife(int life);
 
 	//Getters auxiliares
 	inline int getLife() const {

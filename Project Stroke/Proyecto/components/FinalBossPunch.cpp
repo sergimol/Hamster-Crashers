@@ -39,17 +39,17 @@ void FinalBossPunch::update() {
 				auto& pos = tr_->getPos();
 
 				attRect_.w = sizeW; //Esto que cuadre con la mano cuando sea
-				attRect_.h = sdlutils().height();
+				attRect_.h = tr_->getH()/6;
 
 				//Cogemos el rect completo del jefe
 
 				attRect_.x = pos.getX() - cam.x;
-				attRect_.y = pos.getY() - cam.y; //Pos inicial de esquina arriba
+				attRect_.y = pos.getY() - cam.y + (5.0f/6.0f)*tr_->getH(); //Pos inicial de esquina arriba
 
 				//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
 				//Si se colisiona..
-				if (CheckCollisions(attRect_, true))
+				if (CheckCollisions(attRect_))
 					//Suena el hit y le pega
 					entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
 				//Si no colisiona..
@@ -90,7 +90,7 @@ bool FinalBossPunch::LaunchAttack() {
 		return false;
 }
 
-bool FinalBossPunch::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
+bool FinalBossPunch::CheckCollisions(const SDL_Rect& enemyRect) {
 	bool canHit = false;
 
 	//Cogemos todas las entidades del juego
@@ -120,6 +120,7 @@ bool FinalBossPunch::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 			canHit = true;
 			//Le restamos la vida al aliado
 			eAttribs->recieveDmg(dmg);
+			ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
 
 			auto& hamStateM = ents[i]->getComponent<HamsterStateMachine>()->getState();
 
