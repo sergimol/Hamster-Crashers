@@ -7,11 +7,12 @@
 #include "StrongAttack.h"
 #include "LightAttack.h"
 #include "AnimHamsterStateMachine.h"
+#include "CollisionDetec.h"
 
 FinalBossAttack::FinalBossAttack() :
 	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
 	attackStarted_(false), hitTime_(0), beforeHitCD_(1000), afterHitCD_(4250), stunStarted_(false), eAttribs_(nullptr),
-	state_(nullptr), attackFinished_(false) {}
+	state_(nullptr), attackFinished_(false), attackCount_(0), maxSlaps_(0) {}
 
 void FinalBossAttack::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -22,6 +23,8 @@ void FinalBossAttack::init() {
 
 	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
 	assert(state_ != nullptr);
+
+	maxSlaps_ = sdlutils().rand().nextInt(2, 5);
 }
 
 void FinalBossAttack::update() {
@@ -31,50 +34,99 @@ void FinalBossAttack::update() {
 			DEBUG_isAttacking_ = false;
 		}
 		if (attackStarted_) {
-
-			//Telegrafiado hasta el ataque
-			if (!stunStarted_ && sdlutils().currRealTime() > hitTime_ + beforeHitCD_) {
-				cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-				auto sizeW = tr_->getW();
-				auto& pos = tr_->getPos();
-
-				attRect_.w = sizeW; //Esto que cuadre con la mano cuando sea
-				attRect_.h = sdlutils().height();
-
-				//Cogemos el rect completo del jefe
-
-				attRect_.x = pos.getX() - cam.x;
-				attRect_.y = pos.getY() - cam.y; //Pos inicial de esquina arriba
-
-				//Comprobamos si colisiona con alguno de los enemigos que tiene delante
-
-				//Si se colisiona..
-				if (CheckCollisions(attRect_, true))
-					//Suena el hit y le pega
-					entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
-				//Si no colisiona..
-				else
-					//Suena el attackSound
-					entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
-
-				//this.anims.play(pegarse)
-
-				DEBUG_isAttacking_ = true;
-				time_ = sdlutils().currRealTime();
-
-				stunStarted_ = true;
-			}
-			else if (eAttribs_->checkInvulnerability() && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
-				eAttribs_->setInvincibility(false);
-			}
-			else if (stunStarted_ && sdlutils().currRealTime() > hitTime_ + afterHitCD_) {
-				eAttribs_->setInvincibility(true);
-				attackStarted_ = false;
-				stunStarted_ = false;
-				attackFinished_ = true;
-			}
+			if (attackCount_ != maxSlaps_)  // Si esta a rango, se mueve e intentara atacar
+				slam();
+			else // ataque fuerte
+				swipe();
 		}
 	}
+}
+
+void FinalBossAttack::slam() {
+	if (!stunStarted_ && sdlutils().currRealTime() > hitTime_ + beforeHitCD_) {
+		cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+		auto sizeW = tr_->getW();
+		auto& pos = tr_->getPos();
+
+		attRect_.w = sizeW; //Esto que cuadre con la mano cuando sea
+		attRect_.h = sdlutils().height();
+
+		//Cogemos el rect completo del jefe
+
+		attRect_.x = pos.getX() - cam.x;
+		attRect_.y = pos.getY() - cam.y; //Pos inicial de esquina arriba
+
+		//Comprobamos si colisiona con alguno de los enemigos que tiene delante
+
+		//Si se colisiona..
+		if (CheckCollisions(attRect_, false))
+			//Suena el hit y le pega
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
+		//Si no colisiona..
+		else
+			//Suena el attackSound
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
+
+		//this.anims.play(pegarse)
+
+		DEBUG_isAttacking_ = true;
+		time_ = sdlutils().currRealTime();
+
+		stunStarted_ = true;
+	}
+	else if (eAttribs_->checkInvulnerability() && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
+		eAttribs_->setInvincibility(false);
+	}
+	else if (stunStarted_ && sdlutils().currRealTime() > hitTime_ + afterHitCD_) {
+		eAttribs_->setInvincibility(true);
+		attackStarted_ = false;
+		stunStarted_ = false;
+		attackFinished_ = true;
+		attackCount_++;
+	}
+}
+
+void FinalBossAttack::swipe() {
+	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+	auto sizeW = tr_->getW();
+	auto& pos = tr_->getPos();
+	auto& vel = tr_->getVel();
+
+	if (!swipeCharge_ && pos.getX() + vel.getX() < cam.x + cam.w - sizeW)
+		vel.setX(lerp(70, vel.getX(), 0.8));
+	else if (!swipeCharge_) {
+		swipeCharge_ = true;
+		hitTime_ = sdlutils().currRealTime();
+	}
+	else if (pos.getX() + vel.getX() > cam.x && sdlutils().currRealTime() > hitTime_ + beforeHitCD_) {
+		vel.setX(lerp(-55, vel.getX(), 0.8));
+
+		DEBUG_isAttacking_ = true;
+
+		attRect_.w = sizeW / 4.0f; //Esto que cuadre con la mano cuando sea
+		attRect_.h = sdlutils().height();
+
+		//Cogemos el rect completo del jefe
+		attRect_.x = pos.getX() - cam.x + sizeW / 4.0f;
+		attRect_.y = pos.getY() - cam.y; //Pos inicial de esquina arriba
+
+		//Si se colisiona..
+		if (CheckCollisions(attRect_, true))
+			//Suena el hit y le pega
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
+	}
+	else if (sdlutils().currRealTime() > hitTime_ + beforeHitCD_) {
+		attackStarted_ = false;
+		swipeCharge_ = false;
+		attackFinished_ = true;
+		maxSlaps_ = sdlutils().rand().nextInt(2, 5);
+		attackCount_ = 0;
+	}
+}
+
+float FinalBossAttack::lerp(float a, float b, float f)
+{
+	return (a + f * (b - a));
 }
 
 bool FinalBossAttack::LaunchAttack() {
@@ -82,6 +134,7 @@ bool FinalBossAttack::LaunchAttack() {
 		//Comienza el ciclo completo de ataque
 
 		attackStarted_ = true;
+		swipeCharge_ = false;
 		stunStarted_ = false;
 		hitTime_ = sdlutils().currRealTime();
 		return true;
@@ -90,7 +143,7 @@ bool FinalBossAttack::LaunchAttack() {
 		return false;
 }
 
-bool FinalBossAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
+bool FinalBossAttack::CheckCollisions(const SDL_Rect& enemyRect, bool swipe) {
 	bool canHit = false;
 
 	//Cogemos todas las entidades del juego
@@ -109,9 +162,10 @@ bool FinalBossAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) 
 		allyRect.y = eTR->getPos().getY() - cam.y;
 
 		EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
+		bool jumping = swipe ? ents[i]->getComponent<Combos>()->isJumping() : false;
 
 		//Y comprobamos si colisiona y si no es invulnerable
-		if (!eAttribs->checkInvulnerability() && SDL_HasIntersection(&enemyRect, &allyRect)) {
+		if (!jumping && !eAttribs->checkInvulnerability() && SDL_HasIntersection(&enemyRect, &allyRect)) {
 			int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
 			//if (finCombo) {
 			//	if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.01); //Aumentar probabilidad critico
@@ -120,6 +174,7 @@ bool FinalBossAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) 
 			canHit = true;
 			//Le restamos la vida al aliado
 			eAttribs->recieveDmg(dmg);
+			ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
 
 			auto& hamStateM = ents[i]->getComponent<HamsterStateMachine>()->getState();
 
@@ -163,7 +218,10 @@ bool FinalBossAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) 
 				if (hamFlip == tr_->getFlip())
 					hamFlip = !hamFlip;
 
-				hamKnockback->knockback();
+				if (swipe && !hamFlip)
+					hamKnockback->knockback(-30);
+				else
+					hamKnockback->knockback(30);
 
 				SDL_Rect rectPlayer = tr_->getRectCollide();
 				rectPlayer.x += hamKnockback->getKnockback();

@@ -255,6 +255,12 @@ void EntityAttribs::die() {
 
 }
 
+void EntityAttribs::setLife(int life) {
+	int dmg = health_ - life;
+	health_ = life;
+	if (entity_->hasComponent<UI>())
+		entity_->getComponent<UI>()->bar(-dmg);	
+}
 
 //Sana 'hp' unidades
 void EntityAttribs::heal(int hp) {

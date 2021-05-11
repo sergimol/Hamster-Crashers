@@ -28,7 +28,7 @@ public:
 	void render() override;
 	void onResume() override;
 
-	bool CheckCollisions(const SDL_Rect& enemyRect, bool finCombo);
+	bool CheckCollisions(const SDL_Rect& enemyRect, bool swipe);
 	bool LaunchAttack();
 	bool checkAttackFinished() { return attackFinished_; };
 	void resetAttackFinished() { attackFinished_ = false; };
@@ -37,7 +37,12 @@ public:
 		return attackStarted_;
 	}
 
+
 private:
+	void slam();
+	void swipe();
+	float lerp(float a, float b, float f);
+
 	Transform* tr_;
 	EntityAttribs* eAttribs_;
 
@@ -51,8 +56,12 @@ private:
 	float beforeHitCD_;
 	float afterHitCD_;
 
+	int attackCount_;
+	int maxSlaps_;
+
 	bool attackStarted_;
 	bool stunStarted_;
+	bool swipeCharge_;
 	GameStates* state_;
 
 	bool attackFinished_;
