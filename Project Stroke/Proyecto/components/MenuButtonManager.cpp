@@ -124,7 +124,7 @@ void MenuButtonManager::init() {
 		background_->addComponent<BackGround>(backgrText, 0);
 	}
 	//buttonsPosition = Vector2D(0, 0);
-	buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
+	//buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<LocalButton>()->selected();
 
 	cooldown_ = 100;
 	timer_ = sdlutils().currRealTime() + cooldown_;

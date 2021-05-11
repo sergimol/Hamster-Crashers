@@ -79,6 +79,8 @@ class FinalBossAttack;
 class FinalBossPunch;
 class TimeTrap;
 
+
+
 #define _CMPS_LIST_  \
 	Transform,\
 	HamsterStateMachine, \
@@ -158,7 +160,6 @@ class TimeTrap;
 	FinalBossAttack, \
 	FinalBossPunch,\
 	TimeTrap
-
 // groups
 
 struct Enemy;
