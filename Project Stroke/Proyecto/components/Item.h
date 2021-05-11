@@ -10,6 +10,11 @@ const enum class ItemType
 	Nut
 };
 
+struct ItemInfo {
+	Texture* tex;
+	ItemType ty;
+};
+
 class Item : public Component {
 public:
 	Item(ItemType t) : type_(t) {};
