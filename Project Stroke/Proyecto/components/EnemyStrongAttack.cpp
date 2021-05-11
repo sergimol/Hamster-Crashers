@@ -30,25 +30,25 @@ void EnemyStrongAttack::update() {
 			//Telegrafiado hasta el ataque
 			if (sdlutils().currRealTime() > durationTime_ + beforeHitCD_) {
 				cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-				auto sizeW = tr_->getW();
-				auto sizeH = tr_->getH();
-				auto& pos = tr_->getPos();
+				//auto sizeW = tr_->getW();
+				//auto sizeH = tr_->getH();
+				auto pos = tr_->getRectCollide();
 				auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
 
 
-				attRect_.w = sizeW / 2 + sizeW / 2 * range;
-				attRect_.h = sizeH / 2 + sizeH / 2 * range;
+				attRect_.w = pos.w + pos.w * range;
+				attRect_.h = pos.h + pos.h * range;
 
 				auto flip = tr_->getFlip();
 
 				//Si esta flipeado...
 				if (flip)
 					//Le damos la vuelta al rect
-					attRect_.x = pos.getX() - attRect_.w + sizeW / 4 - cam.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
+					attRect_.x = pos.x - attRect_.w + pos.w / 2 - cam.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
 				else
-					attRect_.x = pos.getX() + sizeW - sizeW / 4 - cam.x;
+					attRect_.x = pos.x + pos.w - pos.w / 2 - cam.x;
 
-				attRect_.y = pos.getY() + sizeH / 4 - cam.y;
+				attRect_.y = pos.y - cam.y;
 
 				//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
@@ -93,14 +93,15 @@ bool EnemyStrongAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo
 		//Si la entidad es un aliado...
 			//Cogemos el transform del aliado
 		auto eTR = ents[i]->getComponent<Transform>();
+		auto eColRect = eTR->getRectCollide();
 
-		Vector2D newPos = Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
+		Vector2D newPos = Vector2D(eColRect.x - cam.x, eColRect.y - cam.y);
 		Vector2D enemyPos = Vector2D(enemyRect.x, enemyRect.y);
 
 		EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
 
 		//Y comprobamos si colisiona y si no es invulnerable
-		if (!eAttribs->checkInvulnerability() && Collisions::collides(newPos, eTR->getW(), eTR->getH(), enemyPos, enemyRect.w, enemyRect.h)) {
+		if (!eAttribs->checkInvulnerability() && Collisions::collides(newPos, eColRect.w, eColRect.h, enemyPos, enemyRect.w, enemyRect.h)) {
 			int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
 			//if (finCombo) {
 			//	if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.01); //Aumentar probabilidad critico

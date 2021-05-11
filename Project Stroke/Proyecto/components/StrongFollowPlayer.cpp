@@ -2,7 +2,7 @@
 #include "Stroke.h"
 
 StrongFollowPlayer::StrongFollowPlayer() :
-	 rangeOffsetX_(250), rangeOffsetY_(100),
+	rangeOffsetX_(250), rangeOffsetY_(100),
 	enStrongAtk_(nullptr), enAtk_(nullptr), attackCount_(0), hasHitTime_(sdlutils().currRealTime()),
 	hitCD_(1500) {
 }
@@ -30,17 +30,18 @@ void StrongFollowPlayer::init() {
 
 //Esta a rango de ataque
 bool StrongFollowPlayer::isWithinAttackRange() {
-	auto width = tr_->getW();
-	auto hamWidth = hamsterTr_->getW();
+	auto hamPos = hamsterTr_->getRectCollide();
+	auto pos = tr_->getRectCollide();
 
-	auto& hamPos = hamsterTr_->getPos();
-	auto& pos = tr_->getPos();
-	int hamX = hamPos.getX(),
-		hamY = hamPos.getY() + hamsterTr_->getH(),
-		x = pos.getX(),
-		y = pos.getY() + tr_->getH();
+	auto width = pos.w;
+	auto hamWidth = hamPos.w;
 
-	return((hamX /*+ rangeOffsetX_*/ + hamWidth * 2 >= x + width && hamX + hamWidth - rangeOffsetX_ <= x + width /*+ width / 2*/) &&
+	int hamX = hamPos.x,
+		hamY = hamPos.y + hamPos.h,
+		x = pos.x,
+		y = pos.y + pos.h;
+
+	return((hamX <= x + width + width / 2 && hamX + hamWidth >= x - width / 2) &&
 		(hamY + rangeOffsetY_ >= y && hamY - rangeOffsetY_ / 10 <= y));
 }
 
@@ -53,15 +54,17 @@ void StrongFollowPlayer::behave() {
 			//teoricamente aqui nunca va a entrar, pero en el caso de ser un enemigo independiente del control de la madre debera de ahcerlo aca
 		}
 		else if (enmState_->getState() != EnemyStates::ENM_STUNNED) { // si no cambia de hamster marcado y no está atrudido
-			auto& hamPos = hamsterTr_->getPos();
-			auto& pos = tr_->getPos();
-			int hamX = hamPos.getX(),
-				hamY = hamPos.getY() + hamsterTr_->getH(),
-				x = pos.getX(),
-				y = pos.getY() + tr_->getH();
+			auto hamPos = hamsterTr_->getRectCollide();
+			auto pos = tr_->getRectCollide();
 
-			auto width = tr_->getW();
-			auto hamWidth = hamsterTr_->getW();
+			auto width = pos.w;
+			auto hamWidth = hamPos.w;
+
+			int hamX = hamPos.x,
+				hamY = hamPos.y + hamPos.h,
+				x = pos.x,
+				y = pos.y + pos.h;
+
 			auto& flip = tr_->getFlip();
 
 			if (x + width / 2 < hamX + hamWidth / 2)
@@ -81,11 +84,11 @@ void StrongFollowPlayer::behave() {
 					mov_->updateKeymap(MovementSimple::UP, false);
 
 
-				if (x > hamX + rangeOffsetX_)
+				if (hamX + hamWidth < x - width / 2)
 					mov_->updateKeymap(MovementSimple::LEFT, true);
 				else
 					mov_->updateKeymap(MovementSimple::LEFT, false);
-				if (x < hamX - rangeOffsetX_ / 2 - tr_->getW() / 2)
+				if (hamX > x + width + width / 2)
 					mov_->updateKeymap(MovementSimple::RIGHT, true);
 				else
 					mov_->updateKeymap(MovementSimple::RIGHT, false);
@@ -107,7 +110,7 @@ void StrongFollowPlayer::strongAttack(bool f) {
 			mov_->updateKeymap(MovementSimple::RIGHT, true);
 			mov_->updateKeymap(MovementSimple::LEFT, false);
 		}
-			
+
 		else {
 			mov_->updateKeymap(MovementSimple::RIGHT, false);
 			mov_->updateKeymap(MovementSimple::LEFT, true);
