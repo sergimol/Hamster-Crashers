@@ -38,9 +38,25 @@ void Obstacle::hit() {
 void Obstacle::createItem() {
 	auto* e = entity_->getMngr()->addEntity();
 
+	ItemInfo it;
+	
+	int r = sdlutils().rand().nextInt(0, 10);
+	
+	if (r < 5) {
+		it.tex = &sdlutils().images().at("heart3");
+		it.ty = ItemType::Nut;
+	}
+	else if (r < 8){
+		it.tex = &sdlutils().images().at("heart1");
+		it.ty = ItemType::Apple;
+	}
+	else {
+		it.tex = &sdlutils().images().at("heart2");
+		it.ty = ItemType::WaterMelon;
+	}
 	e->addComponent<Transform>(Vector2D(tr_->getPos().getX()+ (tr_->getW()/2) - 25, tr_->getPos().getY() + (tr_->getH() / 2) - 25), Vector2D(0, 0), 50, 50, 0, tr_->getScaleW(), tr_->getScaleH());
-	e->addComponent<Image>(&sdlutils().images().at("heart"));
-	e->addComponent<Item>(ItemType::Apple);
+	e->addComponent<Image>(it.tex);
+	e->addComponent<Item>(it.ty);
 
 	entity_->getMngr()->getItems().push_back(e);
 }
