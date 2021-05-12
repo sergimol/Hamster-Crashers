@@ -9,6 +9,7 @@
 #include "../sdlutils/InputHandler.h"
 
 #include "MenuButton.h"
+#include "MenuIndicator.h"
 
 class MenuButtonManager: public Component{
 public:
@@ -29,6 +30,8 @@ public:
 
 	void onResume() override { timer_ = sdlutils().currRealTime() + cooldown_; };
 
+	void updateIndicator(int i, bool isUp);
+	void resetIndicators();
 private:
 	string menuMode_;
 	//Numero del estado en el que se muestra el men�
@@ -38,6 +41,7 @@ private:
 	Vector2D buttonsPosition_;
 	Vector2D buttonsMagnitude_;
 	vector<vector<Entity*>> buttons_;
+	vector<Entity*> indicators_;
 
 	GameStates* state_;
 	long unsigned int timer_, cooldown_; //Contador para movimiento entre botones

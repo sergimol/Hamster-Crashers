@@ -11,38 +11,34 @@
 #include "GameStates.h"
 
 
-class MenuButton : public Component {
+class MenuIndicator : public Component {
 public:
-	MenuButton(std::string n, Vector2D position, int stateNum);
-	virtual ~MenuButton() {};
+	MenuIndicator(std::string n, Vector2D position, int stateNum);
+	virtual ~MenuIndicator() {};
 
 	void render() override;
 	void init() override;
 
-	void selected();
-	void pressed();
-	void exited();
-
-	//Getters auxiliares
-	//inline int getPosUI() { return position; };
-
+	void updateTexture(bool isUp);
+	void reset();
 private:
-	//Nombre del personaje que contiene la UI, todo en minusculas
-	std::string buttonName_;
+	//Nombre del indicador
+	std::string indicatorName_;
 	//Numero del boton en el menu
 	int stateNumber_;
 
-	//Texturas del boton
-	Texture* button_;
-	Texture* buttonEnter_;
-	Texture* buttonPressed_;
+	//Texturas del indicador
+	Texture* indicator_;
 
+	int indicatorIndex_;
+
+	vector<Texture*> possibleTextures_;
+	// Para no hacer .size
+	int texturesCount_ = 0;
 	GameStates* state_;
 
 	//DestRects
 	SDL_Rect dest_;
 	//Posiciones de los destRects
 	Vector2D renderCoords_;
-
-	bool buttonSelected_;
 };
