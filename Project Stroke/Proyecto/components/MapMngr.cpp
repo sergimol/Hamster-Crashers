@@ -57,6 +57,7 @@
 #include "../components/Obstacle.h"
 #include "../components/FinalBossManager.h"
 #include "../components/TimeTrap.h"
+#include "../components/MicroOndasManager.h"
 
 
 
@@ -219,6 +220,21 @@ void MapMngr::loadNewMap(string map) {
 							enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
 							enemy->addComponent<ContactDamage>(20, 30);
 							enemy->getMngr()->setHandler<Pussy>(enemy);
+						}
+						else if (object.getName() == "microondas") { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
+							auto* micro = entity_->getMngr()->addEntity();
+							
+							micro->addComponent<Transform>(
+								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+								Vector2D(), 256.0f, 2 * 256.0f, 0.0f, 1, 1);
+							
+							micro->addComponent<EntityAttribs>(hamstersToLoad_.size(), 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 20, true, false);
+
+							//enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
+							micro->addComponent<MicroOndasManager>(hamstersToLoad_.size());
+							//enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
+							//enemy->addComponent<ContactDamage>(20, 30);
+							//enemy->getMngr()->setHandler<Pussy>(enemy);
 						}
 						else if (object.getName() == "trap") {
 							addTrap(object, object.getPosition().x, object.getPosition().y);

@@ -459,6 +459,9 @@
     <ClCompile Include="Proyecto\components\TimeTrap.cpp">
       <Filter>Archivos de origen\components\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\MicroOndasManager.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\EnemyBehaviour\BossBehavior</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -784,6 +787,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\TimeTrap.h">
       <Filter>Archivos de encabezado\Components\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\MicroOndasManager.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\BossBehaviour</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

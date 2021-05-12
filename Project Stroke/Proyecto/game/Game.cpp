@@ -40,6 +40,7 @@
 #include "../components/ContactDamage.h"
 #include "../components/MenuControlHandler.h"
 #include "../components/TimeTrap.h"
+#include "../components/MicroOndasManager.h"
 
 //PARA LAS COLISIONES CON TILE
 #include "../utils/Collisions.h"
