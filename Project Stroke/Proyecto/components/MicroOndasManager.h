@@ -75,5 +75,10 @@ private:
 	SDL_Rect bateriaRect;
 
 	float auxX, auxY;
+
+	GameStates* gamestate;
+
+	int hits_;
+	float damageInPercent_;
 };
 

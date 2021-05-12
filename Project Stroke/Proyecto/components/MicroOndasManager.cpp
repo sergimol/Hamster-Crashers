@@ -1,20 +1,26 @@
 ﻿#include "MicroOndasManager.h"
 #include "Stroke.h"
 #include "iddleEnemy.h"
+#include "controlHandler.h"
+#include "Stun.h"
+#include "AnimHamsterStateMachine.h"
 
 MicroOndasManager::MicroOndasManager(int hamN, Texture* tx, Texture* tx2) :
 	tr_(nullptr),
 	hamsNum_(hamN), rightAttribs_(nullptr), leftAttribs_(nullptr),
-	timer_(0), timeToEnd_(120000), lastTime_(sdlutils().currRealTime()),
+	timer_(0), timeToEnd_(30000), lastTime_(sdlutils().currRealTime()),
 	phaseComplete_(false), hamsterDead_(false), tx_(tx), txBat_(tx2),
-	auxX(0), auxY(0)
+	auxX(0), auxY(0), hits_(1), damageInPercent_(0.25f), gamestate(nullptr)
 {
 }
 
 void MicroOndasManager::init() {
 	tx_->setBlendMode(SDL_BLENDMODE_BLEND);
+	tx_->setAlpha(0.0f);
+
 	txBat_->setBlendMode(SDL_BLENDMODE_BLEND);
 	txBat_->setAlpha(0.0f);
+
 	blackRect.x = 0;
 	blackRect.y = 0;
 	blackRect.w = sdlutils().width();
@@ -28,6 +34,10 @@ void MicroOndasManager::init() {
 
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+
+		
+	gamestate = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(gamestate != nullptr);
 
 
 	thisEnttityAttribs_ = entity_->getComponent<EntityAttribs>();
@@ -147,7 +157,7 @@ void MicroOndasManager::update() {
 	
 
 
-	if (bateria_ == nullptr && right_ == nullptr && left_ == nullptr){}
+	if (bateria_ == nullptr && right_ == nullptr && left_ == nullptr)
 		phaseComplete_ = true;
 
 	//Contrareloj del nivel microondas 
@@ -161,25 +171,78 @@ void MicroOndasManager::update() {
 		//TODO 
 		//seria esta parte la unica que no se actualiza el resto daria igual, el last time si que es necesario 
 		//que se actualice para que al volver al estado funcione de forma correcta
+		if (gamestate->getState() == GameStates::RUNNING)
 		timer_ += sdlutils().currRealTime() - lastTime_;
 
 		lastTime_ = sdlutils().currRealTime();
 
 
-		if (!hamsterDead_)
+		if (!hamsterDead_) {
+
 			if (timer_ >= timeToEnd_) {
 				//se acaba los hamster mueren
 				auto ents = entity_->getMngr()->getPlayers();
 				for (Entity* e : ents) {
+					e->getComponent<EntityAttribs>()->setLife(0);
 					e->getComponent<EntityAttribs>()->die();
 				}
 				hamsterDead_= true;
 			}
-			else
-			tx_->setAlpha(30.0f + (205.0f * timer_/ timeToEnd_));
+			auto ents = entity_->getMngr()->getPlayers();
+			for (Entity* e : ents) {
+				e->getComponent<EntityAttribs>()->setLife(e->getComponent<EntityAttribs>()->getMaxLife()  - e->getComponent<EntityAttribs>()->getMaxLife() * timer_ / timeToEnd_);
+				//e->getComponent<EntityAttribs>()->die();
+				//cada cuarto de tiempo le hace daño
+				if ((timer_ / timeToEnd_) >= ((float)hits_ * damageInPercent_)) {
+					//como le doy una tollina a un bicho?
+					e->getComponent<EntityAttribs>()->recieveDmg(0);
+					//sonido de la ostia
+
+					entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
+
+					auto& hamStateM = e->getComponent<HamsterStateMachine>()->getState();
+
+					if (hamStateM != HamStates::DEAD && hamStateM != HamStates::INFARCTED) {
+						//Si tiene stun, se aplica
+						Stun* stun = e->getComponent<Stun>();
+						if (stun != nullptr && stun->isActive()) {
+
+							//Si no estaba aturdido ya
+							if (hamStateM != HamStates::STUNNED) {
+								//Aturdimos al hamster
+								hamStateM = HamStates::STUNNED;
+
+								//Animaci�n de stun
+								e->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
+
+								//Desactivamos control de movimiento 
+								ControlHandler* ctrl = e->getComponent<ControlHandler>();
+								if (ctrl != nullptr)
+									ctrl->setActive(false);
+
+								//Desactivamos componentes de ataque
+								StrongAttack* strAtt = e->getComponent<StrongAttack>();
+								if (strAtt != nullptr)
+									strAtt->setActive(false);
+
+								LightAttack* lghtAtt = e->getComponent<LightAttack>();
+								if (lghtAtt != nullptr)
+									lghtAtt->setActive(false);
+
+							}
+							//Reiniciamos tiempo de stun
+							stun->restartStunTime();
+						}
+					}
+				}
+			}
+			if ((timer_ / timeToEnd_) >= ((float)hits_ * damageInPercent_))
+				hits_++;
+			tx_->setAlpha(10.0f + (205.0f * timer_/ timeToEnd_));
+		}
 	}
 	else
-		tx_->setAlpha(0);
+		tx_->setAlpha(0.0f);
 
 }
 
