@@ -323,6 +323,14 @@
       "file": "resources/images/anaranjado.png"
     },
     {
+      "id": "cables",
+      "file": "resources/images/cables.jpg"
+    },
+    {
+      "id": "bateria",
+      "file": "resources/images/bateria.jpg"
+    },
+    {
       "id": "puntoDeLuz",
       "file": "resources/images/lightpoint.png"
     },

@@ -73,5 +73,7 @@ private:
 
 	SDL_Rect blackRect; 
 	SDL_Rect bateriaRect;
+
+	float auxX, auxY;
 };
 

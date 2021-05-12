@@ -6,7 +6,8 @@ MicroOndasManager::MicroOndasManager(int hamN, Texture* tx, Texture* tx2) :
 	tr_(nullptr),
 	hamsNum_(hamN), rightAttribs_(nullptr), leftAttribs_(nullptr),
 	timer_(0), timeToEnd_(120000), lastTime_(sdlutils().currRealTime()),
-	phaseComplete_(false), hamsterDead_(false), tx_(tx), txBat_(tx2)
+	phaseComplete_(false), hamsterDead_(false), tx_(tx), txBat_(tx2),
+	auxX(0), auxY(0)
 {
 }
 
@@ -50,7 +51,7 @@ void MicroOndasManager::init() {
 	right_->addComponent<EnemyBehaviour>(new IddleEnemy());
 
 
-	right_->addComponent<Image>(&sdlutils().images().at("firstBoss"));
+	right_->addComponent<Image>(&sdlutils().images().at("cables"));
 
 	entity_->getMngr()->getEnemies().push_back(right_);
 
@@ -70,7 +71,7 @@ void MicroOndasManager::init() {
 	left_->addComponent<EnemyBehaviour>(new IddleEnemy());
 
 
-	left_->addComponent<Image>(&sdlutils().images().at("firstBoss"));
+	left_->addComponent<Image>(&sdlutils().images().at("cables"));
 
 
 	entity_->getMngr()->getEnemies().push_back(left_);
@@ -93,7 +94,7 @@ void MicroOndasManager::init() {
 
 
 
-	bateria_->addComponent<Image>(&sdlutils().images().at("firstBoss"))->setActive(false);
+	bateria_->addComponent<Image>(&sdlutils().images().at("bateria"))->setActive(false);
 
 
 	entity_->getMngr()->getEnemies().push_back(bateria_);
@@ -187,12 +188,17 @@ void MicroOndasManager::render() {
 	tx_->render(blackRect);
 
 	//para el renderizado del efecto de la bateria
+	SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 	if (bateria_ != nullptr && bateria_->isActive()) {
-		SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-		bateriaRect.x = bateriaTr_->getPos().getX() - cam.x - (cam.w / 2) + (bateriaTr_->getW() / 2);
-		bateriaRect.y = bateriaTr_->getPos().getY() - cam.y - (cam.h / 2) + (bateriaTr_->getH() / 2);
+		auxX = bateriaTr_->getPos().getX() + (bateriaTr_->getW() / 2);
+		auxY = bateriaTr_->getPos().getY() + (bateriaTr_->getH() / 2);
 		txBat_->setAlpha(255.0f - 255.0f * bateriaAttribs_->getLife() / bateriaAttribs_->getMaxLife());
 	}
+	else
+		txBat_->setAlpha(255.0f);
+
+	bateriaRect.x = auxX - cam.x - (cam.w / 2) ;
+	bateriaRect.y = auxY - cam.y - (cam.h / 2);
 
 	txBat_->render(bateriaRect);
 }
