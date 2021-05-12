@@ -21,13 +21,14 @@
 
 class MicroOndasManager : public Component {
 public:
-	MicroOndasManager(int hamN);
+	MicroOndasManager(int hamN, Texture* tx, Texture* tx2);
 
 	virtual ~MicroOndasManager() {};
 
 	void init() override;
 
 	void update() override;
+	void render() override;
 protected:
 private:
 	
@@ -55,7 +56,22 @@ private:
 	
 	int hamsNum_;
 
-	float timeToEnd_; //el tiempo que vana  estar ene l microondas
+	float timeToEnd_; //el tiempo que van a  estar en el microondas
+	float lastTime_;
+	float timer_;
 
+	bool phaseComplete_;
+	bool hamsterDead_;
+
+	//las texturas que mostraran el progreso de la fase
+	float alpha;
+	Texture* tx_; 
+	//si em sale bien i will doit
+	float alphaBat;
+	Texture* txBat_;
+
+
+	SDL_Rect blackRect; 
+	SDL_Rect bateriaRect;
 };
 

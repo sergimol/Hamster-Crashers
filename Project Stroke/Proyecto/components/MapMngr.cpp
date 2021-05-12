@@ -231,7 +231,7 @@ void MapMngr::loadNewMap(string map) {
 							micro->addComponent<EntityAttribs>( 300 + 150 * hamstersToLoad_.size(), 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 20, true, false);
 
 							//enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
-							micro->addComponent<MicroOndasManager>(hamstersToLoad_.size());
+							micro->addComponent<MicroOndasManager>(hamstersToLoad_.size(), &sdlutils().images().at("anaranjado"), &sdlutils().images().at("puntoDeLuz"));
 							//enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
 							//enemy->addComponent<ContactDamage>(20, 30);
 							//enemy->getMngr()->setHandler<Pussy>(enemy);

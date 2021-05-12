@@ -2,12 +2,28 @@
 #include "Stroke.h"
 #include "iddleEnemy.h"
 
-MicroOndasManager::MicroOndasManager(int hamN) :
+MicroOndasManager::MicroOndasManager(int hamN, Texture* tx, Texture* tx2) :
 	tr_(nullptr),
-	hamsNum_(hamN), rightAttribs_(nullptr), leftAttribs_(nullptr) {
+	hamsNum_(hamN), rightAttribs_(nullptr), leftAttribs_(nullptr),
+	timer_(0), timeToEnd_(120000), lastTime_(sdlutils().currRealTime()),
+	phaseComplete_(false), hamsterDead_(false), tx_(tx), txBat_(tx2)
+{
 }
 
 void MicroOndasManager::init() {
+	tx_->setBlendMode(SDL_BLENDMODE_BLEND);
+	txBat_->setBlendMode(SDL_BLENDMODE_BLEND);
+	txBat_->setAlpha(0.0f);
+	blackRect.x = 0;
+	blackRect.y = 0;
+	blackRect.w = sdlutils().width();
+	blackRect.h = sdlutils().height();
+
+	bateriaRect.x = 0;
+	bateriaRect.y = 0;
+	bateriaRect.w = sdlutils().width();
+	bateriaRect.h = sdlutils().height();
+
 
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
@@ -77,7 +93,7 @@ void MicroOndasManager::init() {
 
 
 
-	bateria_->addComponent<Image>(&sdlutils().images().at("firstBoss"));
+	bateria_->addComponent<Image>(&sdlutils().images().at("firstBoss"))->setActive(false);
 
 
 	entity_->getMngr()->getEnemies().push_back(bateria_);
@@ -120,8 +136,63 @@ void MicroOndasManager::update() {
 
 	thisEnttityAttribs_->setLife(vida);
 
-	if (right_ == nullptr && left_ == nullptr && bateriaAttribs_->checkInvulnerability()) {
+	//cuando los dos cables han petado
+	if (bateria_ != nullptr && right_ == nullptr && left_ == nullptr && bateriaAttribs_->checkInvulnerability()) {
 		bateriaAttribs_->setInvincibility(false);
+		bateria_->getComponent<Image>()->setActive(true);
+		//hacer la animacion en al que cae la bateria
 	}
 
+	
+
+
+	if (bateria_ == nullptr && right_ == nullptr && left_ == nullptr){}
+		phaseComplete_ = true;
+
+	//Contrareloj del nivel microondas 
+	//cuando llegue a 0 mataria a todos los jugadores
+	//dependiendo del tiempo que le quede se aplicaro un difunicado a la pantalla de color rojo/naranja
+
+	//la suma del tiempo
+	if (!phaseComplete_) {
+
+		//si el estado del jeugo no esta en pausa
+		//TODO 
+		//seria esta parte la unica que no se actualiza el resto daria igual, el last time si que es necesario 
+		//que se actualice para que al volver al estado funcione de forma correcta
+		timer_ += sdlutils().currRealTime() - lastTime_;
+
+		lastTime_ = sdlutils().currRealTime();
+
+
+		if (!hamsterDead_)
+			if (timer_ >= timeToEnd_) {
+				//se acaba los hamster mueren
+				auto ents = entity_->getMngr()->getPlayers();
+				for (Entity* e : ents) {
+					e->getComponent<EntityAttribs>()->die();
+				}
+				hamsterDead_= true;
+			}
+			else
+			tx_->setAlpha(30.0f + (205.0f * timer_/ timeToEnd_));
+	}
+	else
+		tx_->setAlpha(0);
+
+}
+
+void MicroOndasManager::render() {
+	//cargar las dos texturas que quiero
+	tx_->render(blackRect);
+
+	//para el renderizado del efecto de la bateria
+	if (bateria_ != nullptr && bateria_->isActive()) {
+		SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+		bateriaRect.x = bateriaTr_->getPos().getX() - cam.x - (cam.w / 2) + (bateriaTr_->getW() / 2);
+		bateriaRect.y = bateriaTr_->getPos().getY() - cam.y - (cam.h / 2) + (bateriaTr_->getH() / 2);
+		txBat_->setAlpha(255.0f - 255.0f * bateriaAttribs_->getLife() / bateriaAttribs_->getMaxLife());
+	}
+
+	txBat_->render(bateriaRect);
 }

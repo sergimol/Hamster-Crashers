@@ -319,6 +319,14 @@
       "file": "resources/images/menuSprites/quitButton.png"
     },
     {
+      "id": "anaranjado",
+      "file": "resources/images/anaranjado.png"
+    },
+    {
+      "id": "puntoDeLuz",
+      "file": "resources/images/lightpoint.png"
+    },
+    {
       "id": "640x480ButtonEnter",
       "file": "resources/images/menuSprites/quitButtonEnter.png"
     },
