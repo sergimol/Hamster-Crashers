@@ -33,7 +33,7 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 	if (map->intersectWall(rectPlayer) || map->intersectObstacles(rectPlayer)) {
 
 		//Comprobamos si hay doble input
-		if (dir.getX() != 0 && dir.getY() != 0) {
+		if (dir.getX() != 0 && dir.getY() != 0 || vel.getX() != 0 && vel.getY() != 0) {
 
 			//Probamos con ignorar el Y
 			rectPlayer.y = tr_->getRectCollide().y;
@@ -45,10 +45,10 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 			}
 			else {
 				//Probamos ignorando la X
-				rectPlayer.y = tr_->getRectCollide().y + goalVel.getY();
+				rectPlayer.y += goalVel.getY();
 				rectPlayer.x = tr_->getRectCollide().x;
 
-				if (!map->intersectWall(rectPlayer) && !map->intersectObstacles(rectPlayer)) {
+				if (map->intersectWall(rectPlayer) || map->intersectObstacles(rectPlayer)) {
 					goalVel.setX(0);
 					vel.setX(0);
 				}
@@ -62,10 +62,8 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 		}
 		else {
 			//Dejo de moverme
-			if(dir.getX() != 0)
-				vel.setX(0);
-			if (dir.getY() != 0)
-				vel.setY(0);
+			vel.setX(0);
+			vel.setY(0);
 		}
 	}
 
@@ -92,7 +90,7 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 				vel.setX(0);
 		}
 		if (rectPlayer.y < cam.y || rectPlayer.y + rectPlayer.h + 120 > pCam.getY() + cam.h / 2)
-			vel.setY(-speed_.getY()*4);
+			vel.setY(-speed_.getY() * 4);
 	}
 
 	if (vel.getX() < 0.001 && vel.getX() > -0.001) vel.setX(0);

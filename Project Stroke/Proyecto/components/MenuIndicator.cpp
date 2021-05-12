@@ -71,7 +71,7 @@ void MenuIndicator::reset()
 	}
 
 	// Resoluciones
-	else if (indicatorName_ == "resolution") {
+	else if (indicatorName_ == "resolutionIndicator") {
 		indicatorIndex_ = RESOLUTIONSCOUNT - 1;
 		indicator_ = possibleTextures_[indicatorIndex_];
 	}

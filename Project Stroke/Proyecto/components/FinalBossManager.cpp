@@ -1,4 +1,4 @@
-﻿#include "FinalBossManager.h"
+#include "FinalBossManager.h"
 #include "Stroke.h"
 
 FinalBossManager::FinalBossManager(int hamN) :
