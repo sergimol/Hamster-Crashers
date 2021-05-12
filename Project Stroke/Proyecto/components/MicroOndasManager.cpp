@@ -93,6 +93,35 @@ void MicroOndasManager::init() {
 
 
 void MicroOndasManager::update() {
-	thisEnttityAttribs_
+
+	int vida = 0;
+	
+	//como los enemigos se elimnan al final de todo esto me hace el apaño
+
+	if (right_ != nullptr && !right_->isActive())
+		right_ = nullptr;
+	else if (right_ != nullptr) {
+		vida += rightAttribs_->getLife();
+	}
+
+	if (left_ != nullptr && !left_->isActive())
+		left_ = nullptr;
+	else if (left_ != nullptr) {
+		vida += leftAttribs_->getLife();
+	}
+
+
+
+	if (bateria_ != nullptr && !bateria_->isActive())
+		bateria_ = nullptr;
+	else if (bateria_ != nullptr) {
+		vida += bateriaAttribs_->getLife();
+	}
+
+	thisEnttityAttribs_->setLife(vida);
+
+	if (right_ == nullptr && left_ == nullptr && bateriaAttribs_->checkInvulnerability()) {
+		bateriaAttribs_->setInvincibility(false);
+	}
 
 }

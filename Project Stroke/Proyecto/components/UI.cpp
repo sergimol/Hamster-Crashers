@@ -57,6 +57,7 @@ void UI::dep() {
 void UI::bar(float objetivo) {
 	int maxLife = entity_->getComponent<EntityAttribs>()->getMaxLife();	//Obtenemos la vida maxima de la entidad
 	int damageRecieved = (objetivo / maxLife) * barLenghtInit;					//Calculamos el daño relativo a lo que es nuestra 'bar'
+	//std::cout << objetivo << " " << maxLife << "\n";
 	barLenght += damageRecieved;
 	dest3 = build_sdlrect(renderPosBar, barLenght, bar_->height() * scale);
 }

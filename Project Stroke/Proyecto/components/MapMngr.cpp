@@ -228,7 +228,7 @@ void MapMngr::loadNewMap(string map) {
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 2 * 256.0f, 0.0f, 1, 1);
 							
-							micro->addComponent<EntityAttribs>(hamstersToLoad_.size(), 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 20, true, false);
+							micro->addComponent<EntityAttribs>( 300 + 150 * hamstersToLoad_.size(), 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 20, true, false);
 
 							//enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
 							micro->addComponent<MicroOndasManager>(hamstersToLoad_.size());
