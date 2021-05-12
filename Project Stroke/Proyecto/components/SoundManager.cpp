@@ -48,32 +48,22 @@ void SoundManager::setVolumeChannels() {
 }
 
 void SoundManager::lowVolume(bool musicChannel) {
-	if (musicChannel) {
-		if (musicVol_ > 0)
-		{
-			musicVol_ = musicVol_ - 0.2f;
-		}
-	}
-	else {
-		if (fxVol_ > 0) {
-			fxVol_ = fxVol_ - 0.2f;
-		}
-	}
+	if (musicChannel)
+		musicVol_ = musicVol_ - 0.2f;
+
+	else
+		fxVol_ = fxVol_ - 0.2f;
+
 	setVolumeChannels();
 }
 
 void SoundManager::upVolume(bool musicChannel) {
-	if (musicChannel) {
-		if (musicVol_ < 2)
-		{
-			musicVol_ = musicVol_ + 0.2f;
-		}
-	}
-	else {
-		if (fxVol_ < 2) {
-			fxVol_ = fxVol_ + 0.2f;
-		}
-	}
+	if (musicChannel) 
+		musicVol_ = musicVol_ + 0.2f;
+
+	else 
+		fxVol_ = fxVol_ + 0.2f;
+
 	setVolumeChannels();
 }
 

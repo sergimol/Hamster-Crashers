@@ -15,7 +15,7 @@ public:
 	void setVolumeChannels();
 	void lowVolume(bool channel);
 	void upVolume(bool channel);
-
+	void resetVolumes() { fxVol_ = 1; musicVol_ = 1; };
 	//channels
 	int lighthits = 0;
 	int stronghits = 1;
@@ -26,8 +26,8 @@ public:
 
 	//volumes
 	//general
-	int fxVol_ = 1;
-	int musicVol_ = 1;
+	float fxVol_ = 1;
+	float musicVol_ = 1;
 	//local
 	int generalFXvol = 20;
 	int initStrongVol = 60;

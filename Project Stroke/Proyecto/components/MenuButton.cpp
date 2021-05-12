@@ -2,6 +2,7 @@
 #include "MenuButtonManager.h"
 #include "Transition.h"
 #include "MenuControlHandler.h"
+#include "SoundManager.h"
 
 
 MenuButton::MenuButton(std::string n, Vector2D position, int stateNum) :
@@ -103,7 +104,8 @@ void MenuButton::pressed() {
 		//entity_->getMngr()->getHandler<PlayerQuantityMenu>()->getComponent<MenuButtonManager>()->updateKeymap(MenuButtonManager::SPACE, false);
 	}
 	else if (buttonName_ == "options") {
-		std::cout << "options\n";
+		state_->setState(GameStates::OPTIONS);
+		entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->onResume();
 	}
 	else if (buttonName_ == "quit") {
 		ih().startQuitEvent();
@@ -121,31 +123,60 @@ void MenuButton::pressed() {
 		}
 		//entity_->getMngr()->getHandler<HamsterSelectionMenu>()->getComponent<MenuButtonManager>()->updateKeymap(MenuButtonManager::SPACE, false);
 	}
-	else if (buttonName_ == "1920x1080") {
-		//Cambiamos la resolucion
-		sdlutils().setWidth(1920);
-		sdlutils().setHeight(1080);
-
-		//Y cambiamos la ventana
-		SDL_SetWindowSize(sdlutils().window(), sdlutils().width(), sdlutils().height());
-		SDL_RenderSetScale(sdlutils().renderer(), sdlutils().width() / 1920.0f, sdlutils().height() / 1080.0f);
+	else if (buttonName_ == "musicDown") {
+		auto soundMngr = entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>();
+		if (soundMngr->musicVol_ > 0.1f) {
+			soundMngr->lowVolume(true);
+			entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(0, false);
+		}
 	}
-	else if (buttonName_ == "1280x720") {
-		//Cambiamos la resolucion
-		sdlutils().setWidth(1280);
-		sdlutils().setHeight(720);
 
-		//Y cambiamos la ventana
-		SDL_SetWindowSize(sdlutils().window(), sdlutils().width(), sdlutils().height());
-		SDL_RenderSetScale(sdlutils().renderer(), sdlutils().width() / 1920.0f, sdlutils().height() / 1080.0f);
+	else if (buttonName_ == "musicUp") {
+		auto soundMngr = entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>();
+		if (soundMngr->musicVol_ < 2) {
+			soundMngr->upVolume(true);
+			entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(0, true);
+		}
 	}
-	else if (buttonName_ == "640x480") {
-		//Cambiamos la resolucion
-		sdlutils().setWidth(640);
-		sdlutils().setHeight(480);
 
-		//Y cambiamos la ventana
+	else if (buttonName_ == "fxDown") {
+		auto soundMngr = entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>();
+		if (soundMngr->fxVol_ > 0.1f) {
+			soundMngr->lowVolume(false);
+			entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(1, false);
+		}
+	}
+
+	else if(buttonName_ == "fxUp") {
+		auto soundMngr = entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>();
+		if (soundMngr->fxVol_ < 2) {
+			soundMngr->upVolume(false);
+			entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(1, true);
+		}
+	}
+
+	else if (buttonName_ == "resolutionDown") {
+		sdlutils().lowerResolution();
+		entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(2, false);
+	}
+
+	else if (buttonName_ == "resolutionUp") {
+		sdlutils().higherResolution();
+		entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(2, true);
+	}
+
+	else if (buttonName_ == "reset") {
+		sdlutils().setWidth(1920.0);
+		sdlutils().setHeight(1080.0);
+
 		SDL_SetWindowSize(sdlutils().window(), sdlutils().width(), sdlutils().height());
-		SDL_RenderSetScale(sdlutils().renderer(), sdlutils().width() / 1920.0f, sdlutils().height() / 1080.0f);
+		SDL_RenderSetScale(sdlutils().renderer(), 1.0f, 1.0f);
+
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetVolumes();
+		entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->resetIndicators();
+	}
+
+	else if (buttonName_ == "back") {
+		state_->goBack();
 	}
 }
