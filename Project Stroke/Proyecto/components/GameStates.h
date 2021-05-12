@@ -17,7 +17,8 @@ public:
 		RUNNING,
 		CREDITS,
 		CONTROLS,
-		PLAYERSELECTION
+		PLAYERSELECTION,
+		OPTIONS
 	};
 
 	GameStates(): state_() {};
@@ -25,8 +26,10 @@ public:
 
 	void init() override;
 	void setState(States state);
+	void goBack();
 	States getState();
 
 private:
 	States state_;
+	States lastState_;
 };

@@ -8,9 +8,14 @@ void GameStates::init() {
 }
 
 void GameStates::setState(States state) {
+	lastState_ = state_;
 	state_ = state;
 }
 
 GameStates::States GameStates::getState() {
 	return state_;
+}
+
+void GameStates::goBack() {
+	state_ = lastState_;
 }

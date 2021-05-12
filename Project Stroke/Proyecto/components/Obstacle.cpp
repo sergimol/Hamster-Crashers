@@ -12,7 +12,7 @@ void Obstacle::init() {
 }
 
 Obstacle::~Obstacle() {
-	entity_->getMngr()->refreshObstacles();
+	
 }
 
 void Obstacle::hit() {
@@ -22,13 +22,21 @@ void Obstacle::hit() {
 
 	assert(anim != nullptr);
 
+	//Destruimos el objeto si los golpes llegan 0
 	if (hits_ == 0 && canBeHit_) {
 		anim->play(sdlutils().anims().at(keyWord_ + id_ + breakWord_));
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("dep2");
 		entity_->addComponent<Dying>();
 		createItem();
 		canBeHit_ = false;
+		
+		//Falseo de eliminacion. 
+		//Desactivamos la entidad, la borramos de Obstacles y la volvemos a activar, de esa forma se borrará más tarde entities
+		entity_->setActive(false);
+		entity_->getMngr()->refreshObstacles();
+		entity_->setActive(true);
 	}
+	//En caso de que los golpes nunca lleguen a 0, siempre entrará en la animación de golpeo
 	else if(canBeHit_){
 		anim->play(sdlutils().anims().at(keyWord_ + id_ + hitWord_));
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("dep2");
