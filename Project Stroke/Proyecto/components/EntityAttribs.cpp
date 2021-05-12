@@ -188,7 +188,11 @@ bool EntityAttribs::recieveDmg(int dmg) {
 			//TODO
 			//aqui distingimos la meurte de un enemigo como tal
 			//posibilidades, ambushing o attacking
-			entity_->getComponent<EnemyBehaviour>()->die();
+			EnemyBehaviour* eB = entity_->getComponent<EnemyBehaviour>();
+			if (eB != nullptr)
+				eB->die();
+			else
+				entity_->setActive(false);
 		}
 		//Actualizamos UI
 		if (entity_->hasComponent<UI>())
