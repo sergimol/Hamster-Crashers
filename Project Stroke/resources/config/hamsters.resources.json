@@ -139,6 +139,10 @@
       "file": "resources/images/tiled/demoTileset.png"
     },
     {
+      "id": "TileLvl1",
+      "file": "resources/images/tiled/TileLvl1.png"
+    },
+    {
       "id": "q",
       "file": "resources/images/tecla_Q.png"
     },

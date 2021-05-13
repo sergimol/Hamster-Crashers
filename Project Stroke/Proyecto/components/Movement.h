@@ -37,8 +37,8 @@ public:
 
 protected:
 private:
-
-	const float jump_ = 35.0f, gravity_ = 4.8f, jumpTimer_ = 10.0f;
+	float jump_ = 35.0f;
+	const float gravity_ = 4.8f, jumpTimer_ = 10.0f;
 
 	Transform* tr_;
 	CollisionDetec* col_;
@@ -48,8 +48,6 @@ private:
 	GameStates* state_;
 	AnimHamsterStateMachine* animState_;
 	EntityAttribs* attribs_;
-	/*Combos* comb_;
-	Stroke* stroke_;*/
 	Vector2D speed_, goalVel_, lastDir_;
 	
 	std::map<KEYS, bool> keymap;

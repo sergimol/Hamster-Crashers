@@ -168,10 +168,10 @@ public:
 			pos_ = pos_ + vel_;
 
 			rectCollide.x = pos_.getX() + (width_ * ((1 - scaleCollideW) / 2));
-			rectCollide.y = pos_.getY() + (height_ * ((1 - scaleCollideH) / 2));
+			rectCollide.y = pos_.getY() - floor_ + (height_ * ((1 - scaleCollideH) / 2));
 
 			rectCollideFeet.x = pos_.getX() + (width_ * ((1 - scaleCollideW) / 2));
-			rectCollideFeet.y = pos_.getY() + (height_ * ((1 - scaleCollideH) / 2) + height_ * scaleCollideH);
+			rectCollideFeet.y = pos_.getY() - floor_ + (height_ * ((1 - scaleCollideH) / 2) + height_ * scaleCollideH);
 		}
 	}
 

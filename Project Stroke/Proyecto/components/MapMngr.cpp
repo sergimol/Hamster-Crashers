@@ -178,7 +178,7 @@ void MapMngr::loadNewMap(string map) {
 						auto* o = entity_->getMngr()->addMapHeight();
 						o->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 							Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 1, 1);
-						o->addComponent<HeightObject>()->setZ(stoi(object.getName()) * getCellSize());
+						o->addComponent<HeightObject>()->setZ(stoi(object.getName()) * getCellSize() * scale);
 					}
 				}
 				else if (layer->getName() == "Salas") {
@@ -188,7 +188,6 @@ void MapMngr::loadNewMap(string map) {
 						TriggerftCamera.push(object);
 					}
 				}
-
 				else if (layer->getName() == "entities") {
 					//Guardamos la capa de objetos
 					std::cout << layer->getName();

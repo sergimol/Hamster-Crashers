@@ -36,29 +36,35 @@ void Gravity::checkHeight(SDL_Rect& playerPos) {
 
 	//Comprobamos la colision con los triggers de altura
 	auto& heights = entity_->getMngr()->getMapH();
-	int maxHigh = 0;
+	int maxHigh = -1;
 	for (Entity* alt : heights) {
 		auto* aTr = alt->getComponent<Transform>();
-		if (Collisions::collides(aTr->getPos(), aTr->getW(), aTr->getH(), Vector2D(playerPos.x, playerPos.y), playerPos.w, playerPos.h) && alt->getComponent<HeightObject>()->getZ() > maxHigh) {
+		if (Collisions::collides(aTr->getPos(), aTr->getW(), aTr->getH(), Vector2D(playerPos.x, playerPos.y), playerPos.w, playerPos.h) && alt->getComponent<HeightObject>()->getZ() >= maxHigh) {
 			maxHigh = alt->getComponent<HeightObject>()->getZ();
 		}
 	}
 
 	//Si va a subir y no salta stuck=true, si ha subido más que el escalón actualizamos floor_
 	stuck_ = false;
-	if (maxHigh > floor_) {
-		if (z > maxHigh + 1) {
+	if (maxHigh == -1) {
+		inHeighChange_ = false;
+	}
+	else {
+		inHeighChange_ = true;
+		if (maxHigh > floor_) {
+			if (z > maxHigh + 1) {
+				floor_ = maxHigh;
+				//Se actualiza el suelo actual del transform
+				tr_->setFloor(floor_);
+			}
+			else {
+				stuck_ = true;
+			}
+		}
+		else if (maxHigh < floor_) {
 			floor_ = maxHigh;
-			//Se actualiza el suelo actual del transform
 			tr_->setFloor(floor_);
 		}
-		else {
-			stuck_ = true;
-		}
-	}
-	else if (maxHigh < floor_) {
-		floor_ = maxHigh;
-		tr_->setFloor(floor_);
 	}
 }
 
