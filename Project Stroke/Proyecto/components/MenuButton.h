@@ -25,6 +25,7 @@ public:
 
 	//Getters auxiliares
 	//inline int getPosUI() { return position; };
+	SDL_Rect getRect() const& { return dest_; };
 
 private:
 	//Nombre del personaje que contiene la UI, todo en minusculas

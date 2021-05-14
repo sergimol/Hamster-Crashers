@@ -243,6 +243,18 @@ void MenuButtonManager::moveLeft() {
 	}
 }
 
+void MenuButtonManager::setButtonPos(int x, int y) {
+	//if (buttonsPosition_ != Vector2D(x, y)) {
+	buttonsPosition_.set(x, y);
+	for (int i = 0; i < buttonsMagnitude_.getX(); ++i) {
+		for (int e = 0; e < buttonsMagnitude_.getY(); ++e) {
+			buttons_[i][e]->getComponent<MenuButton>()->exited();
+		}
+	}
+	buttons_[x][y]->getComponent<MenuButton>()->selected();
+	//}
+}
+
 void MenuButtonManager::pressButton() {
 	if (sdlutils().currRealTime() > timer_ + cooldown_)
 		buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->pressed();

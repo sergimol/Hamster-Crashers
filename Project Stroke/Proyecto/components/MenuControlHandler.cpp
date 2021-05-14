@@ -33,15 +33,19 @@ void MenuControlHandler::update() {
 				handled = handleController(i);
 				i++;
 			}
-			if (!handled)
+			if (!handled) {
 				handleKeyboard();
+				handleMouse();
+			}
 		}
 		else {
 			int i = sdlutils().hamstersChosen();
 			if (ih().playerHasController(i))
 				handleController(i);
-			else
+			else {
 				handleKeyboard();
+				handleMouse();
+			}
 		}
 	}
 }
@@ -110,3 +114,52 @@ void MenuControlHandler::handleKeyboard() {
 		states_->setState(GameStates::RUNNING);
 	}*/
 }
+
+void MenuControlHandler::handleMouse() {
+	auto buttons = menu_->getButtons();
+	auto magnitude = menu_->getMagnitude();
+	
+	int xMouse, yMouse;
+	SDL_GetMouseState(&xMouse, &yMouse);
+	
+	for (int i = 0; i < magnitude.getX(); ++i) {
+		for (int e = 0; e < magnitude.getY(); ++e) {
+			auto button = buttons[i][e];
+			if (button != nullptr) {
+				auto buttRect = button->getComponent<MenuButton>();
+				if (buttRect != nullptr && mouseInButton(xMouse, yMouse, buttRect->getRect())) {
+					menu_->setButtonPos(i, e);
+					if (ih().getMouseButtonState(InputHandler::MOUSEBUTTON::LEFT)) {
+						menu_->pressButton();
+					}
+				}
+			}
+		}
+	}
+}
+
+bool MenuControlHandler::mouseInButton(float x, float y, SDL_Rect const& button) {
+	auto relations = sdlutils().getResolutionRelation();
+	float relX = relations.getX(), relY = relations.getY();
+	x /= relX;
+	y /= relY;
+
+	//Mouse is left of the button
+	if (x < button.x){
+		return false;
+	}
+	//Mouse is right of the button
+	else if (x > (button.x + button.w)){
+		return false;
+	}
+	//Mouse above the button
+	else if (y < button.y){
+		return false;
+	}
+	//Mouse below the button
+	else if (y > (button.y + button.h)){
+		return false;
+	}
+	return true;
+}
+
