@@ -8,6 +8,11 @@ void GameStates::init() {
 }
 
 void GameStates::setState(States state) {
+	if (state == RUNNING)
+		sdlutils().hideCursor();
+	else
+		sdlutils().showCursor();
+
 	lastState_ = state_;
 	state_ = state;
 }
