@@ -87,10 +87,10 @@ void dialogos::changeDialogue() {
 //Controla toda la movida buena suerte lo programe hace 30 mins y no se que hice
 void dialogos::dialogoStateChange() {
 	//Cambiamos el dialogo cuando no se esta mostrando la movida
-	if (!showDialogue && !firstDialogue)
+	if (!firstDialogue)
 		changeDialogue();
 	//Cambiamos el estado de mostrarse a no mostrarse
-	showDialogue = !showDialogue;
+	showDialogue = true;
 
 	//Controla la primera vez, para que no te cambie de dialogo la primera vez que sale
 	if (firstDialogue)

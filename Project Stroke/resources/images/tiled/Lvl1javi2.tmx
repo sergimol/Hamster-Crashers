@@ -238,7 +238,7 @@
     <property name="Rounds" type="int" value="1"/>
    </properties>
   </object>
-  <object id="14" name="2" x="2527" y="62.3333" width="13" height="255.5">
+  <object id="14" name="2" x="1567" y="62.3333" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="2600"/>
     <property name="Rounds" type="int" value="2"/>
