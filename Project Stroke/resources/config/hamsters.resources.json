@@ -557,8 +557,31 @@
     {
       "id": "obstacleBox",
       "file": "resources/images/objects/obstacleBox.png"
+    },
+    {
+      "id": "dialogoAngel",
+      "file": "resources/images/dialogue/angelo.png"
+    },
+    {
+      "id": "dialogoBarra",
+      "file": "resources/images/dialogue/barradialogo.png"
+    },
+    {
+      "id": "dialogo0",
+      "file": "resources/images/dialogue/dialogo0.png"
+    },
+    {
+      "id": "explicacion0",
+      "file": "resources/images/dialogue/explicacion0.png"
+    },
+    {
+      "id": "dialogo1",
+      "file": "resources/images/dialogue/dialogo1.png"
+    },
+    {
+      "id": "explicacion1",
+      "file": "resources/images/dialogue/explicacion1.png"
     }
-
 
   ],
 
