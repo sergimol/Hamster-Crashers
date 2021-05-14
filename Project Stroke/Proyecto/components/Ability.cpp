@@ -20,10 +20,10 @@ void Ability::init() {
 	auto* ui = entity_->getComponent<UI>();
 	auto name = entity_->getComponent<EntityAttribs>()->getId();
 
-	txtOn = &sdlutils().images().at(name + "On");
-	txtOff = &sdlutils().images().at(name + "Off");
+	txtOn = &sdlutils().images().at("AbilityOn");
+	txtOff = &sdlutils().images().at("AbilityOff");
 
-	txtPos = build_sdlrect(ui->getBarPos().getX() + offsetTextX, ui->getBarPos().getY() + offsetTextY, txtOn->width()/3, txtOn->height()/3);
+	txtPos = build_sdlrect(ui->getBarPos().getX() + offsetTextX, ui->getBarPos().getY() + offsetTextY, txtOn->width(), txtOn->height());
 }
 
 void Ability::render() {

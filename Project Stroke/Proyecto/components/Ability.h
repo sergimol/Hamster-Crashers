@@ -53,7 +53,7 @@ protected:
 	Texture* txtOn, * txtOff;
 	SDL_Rect txtPos;
 
-	const float offsetTextX = 30, offsetTextY = 30;
+	const float offsetTextX = 60, offsetTextY = 40;
 
 	bool active_ = true;
 	bool onUse_ = false;
