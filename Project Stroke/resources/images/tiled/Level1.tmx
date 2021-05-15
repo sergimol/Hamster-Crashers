@@ -199,7 +199,7 @@
 </data>
  </layer>
  <objectgroup id="6" name="entities">
-  <object id="66" name="sardinilla" x="11.3197" y="497.667"/>
+  <object id="66" name="sardinilla" x="123.32" y="485.667"/>
   <object id="67" name="enemigoFuerte" x="349.32" y="566.137" width="27.2727" height="44.9091">
    <properties>
     <property name="sala" type="int" value="1"/>

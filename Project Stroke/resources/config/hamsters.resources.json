@@ -135,6 +135,14 @@
       "file": "resources/images/sardinilla_spritesheetPos.png"
     },
     {
+      "id": "canelonGodSheet",
+      "file": "resources/images/canelonGod_spritesheet.png"
+    },
+    {
+      "id": "canelonDemonSheet",
+      "file": "resources/images/canelonDemon_spritesheet.png"
+    },
+    {
       "id": "firstBoss",
       "file": "resources/images/boss1.png"
     },
