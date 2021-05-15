@@ -38,13 +38,14 @@ private:
 
 	std::map<KEYS ,SDL_Scancode> keymap;
 
-	void handleKeyboard();
+	bool handleKeyboard();
 	bool handleController(int controller);
-	void handleMouse();
+	bool handleMouse();
 
 	bool mouseInButton(float x, float y, SDL_Rect const& button);
 
-	int stateNumber_;
+	int stateNumber_, lastMouseX_ = 0, lastMouseY_ = 0;
+	//char lastHandled_ = ' ';
 };
 
 

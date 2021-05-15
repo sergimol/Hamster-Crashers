@@ -89,53 +89,69 @@ bool MenuControlHandler::handleController(int controller) {
 	}*/
 }
 
-void MenuControlHandler::handleKeyboard() {
+bool MenuControlHandler::handleKeyboard() {
 	//UP
 	if (ih().isKeyDown(keymap.at(UP))) //aqui es donde hacemos nuestro keymap
+	{
 		menu_->moveUp();
-		
+		return true;
+	}
 	//DOWN
-	if (ih().isKeyDown(keymap.at(DOWN)))
+	if (ih().isKeyDown(keymap.at(DOWN))) {
 		menu_->moveDown();
+		return true;
+	}
 
 	//RIGHT
-	if (ih().isKeyDown(keymap.at(RIGHT)))
+	if (ih().isKeyDown(keymap.at(RIGHT))) {
 		menu_->moveRight();
+		return true;
+	}
 
 	//	LEFT
-	if (ih().isKeyDown(keymap.at(LEFT)))
+	if (ih().isKeyDown(keymap.at(LEFT))) {
 		menu_->moveLeft();
+		return true;
+	}
 
-	if (ih().isKeyDown(keymap.at(SPACE)))
+	if (ih().isKeyDown(keymap.at(SPACE))) {
 		menu_->pressButton();
+		return true;
+	}
 
+	return false;
 	/*auto gameState = states_->getState();
 	if (ih().isKeyDown(SDL_SCANCODE_ESCAPE) && gameState == GameStates::PAUSE) {
 		states_->setState(GameStates::RUNNING);
 	}*/
 }
 
-void MenuControlHandler::handleMouse() {
+bool MenuControlHandler::handleMouse() {
 	auto buttons = menu_->getButtons();
 	auto magnitude = menu_->getMagnitude();
 	
 	int xMouse, yMouse;
 	SDL_GetMouseState(&xMouse, &yMouse);
-	
-	for (int i = 0; i < magnitude.getX(); ++i) {
-		for (int e = 0; e < magnitude.getY(); ++e) {
-			auto button = buttons[i][e];
-			if (button != nullptr) {
-				auto buttRect = button->getComponent<MenuButton>();
-				if (buttRect != nullptr && mouseInButton(xMouse, yMouse, buttRect->getRect())) {
-					menu_->setButtonPos(i, e);
-					if (ih().getMouseButtonState(InputHandler::MOUSEBUTTON::LEFT)) {
-						menu_->pressButton();
+	if (xMouse != lastMouseX_ || yMouse != lastMouseY_) {
+		lastMouseX_ = xMouse;
+		lastMouseY_ = yMouse;
+		for (int i = 0; i < magnitude.getX(); ++i) {
+			for (int e = 0; e < magnitude.getY(); ++e) {
+				auto button = buttons[i][e];
+				if (button != nullptr) {
+					auto buttRect = button->getComponent<MenuButton>();
+					if (buttRect != nullptr && mouseInButton(xMouse, yMouse, buttRect->getRect())) {
+						menu_->setButtonPos(i, e);
+						if (ih().getMouseButtonState(InputHandler::MOUSEBUTTON::LEFT)) {
+							menu_->pressButton();
+						}
 					}
 				}
 			}
 		}
+		return true;
 	}
+	return false;
 }
 
 bool MenuControlHandler::mouseInButton(float x, float y, SDL_Rect const& button) {
