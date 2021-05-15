@@ -60,9 +60,6 @@ void subtitulos::changeDialogue() {
 		dialogueNum++;
 		dialogoText_ = &sdlutils().images().at(actualSub_ + to_string(dialogueNum));
 	}
-	else {
-
-	}
 }
 
 //Controla toda la movida buena suerte lo programe hace 30 mins y no se que hice

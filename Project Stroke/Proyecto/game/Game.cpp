@@ -175,6 +175,7 @@ void Game::start() {
 
 		mngr_->update();
 		mngr_->refresh();
+		mngr_->refreshFrontGround();
 
 
 		sortEntities();
