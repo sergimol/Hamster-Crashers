@@ -6,7 +6,7 @@
 #include "../ecs/Camera.h"
 #include "../utils/Collisions.h"
 
-Pray::Pray(int dmg, int heal) : Ability(WAIT), dmg_(dmg), heal_(heal), evil_(true){
+Pray::Pray(int dmg, int heal) : Ability(2000), dmg_(dmg), heal_(heal), evil_(true){
 };
 
 Pray::~Pray() {
@@ -21,7 +21,7 @@ void Pray::endAbility() {
 }
 
 void Pray::prayAbility() {
-	auto& ents = entity_->getMngr()->getEntities();
+	auto& ents = entity_->getMngr()->getEnemies();
 
 	//Cogemos la camara
 	SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();

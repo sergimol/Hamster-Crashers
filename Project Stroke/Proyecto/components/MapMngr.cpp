@@ -13,6 +13,7 @@
 #include "../components/Roll.h"
 #include "../components/Poison.h"
 #include "../components/Pray.h"
+#include "../components/WarCry.h"
 #include "../components/Combos.h"
 #include "../components/Turret.h"
 #include "../components/MovementSimple.h"
@@ -92,7 +93,7 @@ void MapMngr::update() {
 			//TUTORIAL
 			if (stoi(trigger.getName()) < 3) {
 				entity_->getMngr()->getHandler<dialogosMngr>()->getComponent<dialogos>()->dialogoStateChange();
-			}	
+			}
 		}
 	}
 
@@ -224,19 +225,19 @@ void MapMngr::loadNewMap(string map) {
 							enemy->getMngr()->setHandler<Pussy>(enemy);
 						}
 						else if (object.getName() == "microondas") { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-							auto* micro = entity_->getMngr()->addEntity();
+							//auto* micro = entity_->getMngr()->addEntity();
 
-							micro->addComponent<Transform>(
-								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-								Vector2D(), 256.0f, 2 * 256.0f, 0.0f, 1, 1);
+							//micro->addComponent<Transform>(
+							//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+							//	Vector2D(), 256.0f, 2 * 256.0f, 0.0f, 1, 1);
 
-							micro->addComponent<EntityAttribs>(300 + 150 * hamstersToLoad_.size(), 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 20, true, false);
+							//micro->addComponent<EntityAttribs>(300 + 150 * hamstersToLoad_.size(), 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 20, true, false);
 
-							//enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
-							micro->addComponent<MicroOndasManager>(hamstersToLoad_.size(), &sdlutils().images().at("anaranjado"), &sdlutils().images().at("puntoDeLuz"));
-							//enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
-							//enemy->addComponent<ContactDamage>(20, 30);
-							//enemy->getMngr()->setHandler<Pussy>(enemy);
+							////enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
+							//micro->addComponent<MicroOndasManager>(hamstersToLoad_.size(), &sdlutils().images().at("anaranjado"), &sdlutils().images().at("puntoDeLuz"));
+							////enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
+							////enemy->addComponent<ContactDamage>(20, 30);
+							////enemy->getMngr()->setHandler<Pussy>(enemy);
 						}
 						else if (object.getName() == "trap") {
 							addTrap(object, object.getPosition().x, object.getPosition().y);
@@ -568,10 +569,14 @@ void MapMngr::addHamster(string name, int i) {
 	hamster1->addComponent<HeartUI>(name, i);
 
 	//Habilidad
-	if (name == "sardinilla") hamster1->addComponent<Roll>();
+	if (name == "sardinilla") hamster1->addComponent<WarCry>(0.25, 1.75);
 	else if (name == "canelon") hamster1->addComponent<Pray>(100, 100);
 	else if (name == "keta") hamster1->addComponent<Poison>(10000);
-	else hamster1->addComponent<Turret>();
+	else if (name == "monchi") {
+		hamster1->addComponent<Turret>();
+		hamster1->addComponent<Swallow>(5);
+	}
+	else hamster1->addComponent<WarCry>(0.5, 1.75);
 
 
 

@@ -12,6 +12,7 @@
 #include "Pray.h"
 #include "Turret.h"
 #include "Poison.h"
+#include "WarCry.h"
 #include "LightAttack.h"
 #include "StrongAttack.h"
 #include "HamsterStateMachine.h"
@@ -63,7 +64,7 @@ private:
 	//MenuButtonManager* main_;
 	bool hasController_;
 
-	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
+	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE, ABILITY, LATTACK, SATTACK };
 
 	std::map<KEYS ,SDL_Scancode> keymap;
 	//std::map<KEYS, bool> keymap; //lo voy a necesitar de verdad?

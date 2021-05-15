@@ -15,16 +15,18 @@ void ControlHandler::init() {
 	string id = entity_->getComponent<EntityAttribs>()->getId();
 
 	if (id == "sardinilla") {
-		ab_ = entity_->getComponent<Roll>();
-		//ab_ = entity_->getComponent<Turret>();
-		roll_ = entity_->getComponent<Roll>();
+		ab_ = entity_->getComponent<WarCry>();
+		//ab_ = entity_->getComponent<Roll>();
+		//roll_ = entity_->getComponent<Roll>();
 	}
 	else if (id == "canelon")
 		ab_ = entity_->getComponent<Pray>();
 	else if (id == "keta")
 		ab_ = entity_->getComponent<Poison>();
-	else
+	else if (id == "monchi")
 		ab_ = entity_->getComponent<Turret>();
+	else
+		ab_ = entity_->getComponent<WarCry>();
 
 	assert(ab_ != nullptr);
 	//assert(roll_ != nullptr); PUEDE SER NULLPTR
@@ -51,6 +53,9 @@ void ControlHandler::init() {
 	keymap.insert({ LEFT, SDL_SCANCODE_A });
 	keymap.insert({ RIGHT, SDL_SCANCODE_D });
 	keymap.insert({ SPACE, SDL_SCANCODE_SPACE });
+	keymap.insert({ ABILITY, SDL_SCANCODE_R });
+	keymap.insert({ LATTACK, SDL_SCANCODE_K });
+	keymap.insert({ SATTACK, SDL_SCANCODE_L });
 }
 
 
@@ -420,20 +425,20 @@ void ControlHandler::handleKeyboard() {
 
 
 	//ATAQUE LIGERO
-	if (gameState == GameStates::RUNNING && hamState != HamStates::DEAD && hamState != HamStates::INFARCTED && ih().mouseButtonEvent()) {
-		if (hamState != HamStates::ABILITY && ih().getMouseButtonState(InputHandler::MOUSEBUTTON::LEFT) == 1) {
+	if (gameState == GameStates::RUNNING && hamState != HamStates::DEAD && hamState != HamStates::INFARCTED) {
+		if (hamState != HamStates::ABILITY && (ih().getMouseButtonState(InputHandler::MOUSEBUTTON::LEFT) == 1 || ih().isKeyDown(keymap.at(LATTACK)))) {
 			//Solo ataca si la habilidad está activada
 			if (lt_->isActive())
 				lt_->attack();
 		}
 		//ATAQUE FUERTE
-		else if (hamState != HamStates::ABILITY && ih().getMouseButtonState(InputHandler::MOUSEBUTTON::RIGHT) == 1) {
+		else if (hamState != HamStates::ABILITY && (ih().getMouseButtonState(InputHandler::MOUSEBUTTON::RIGHT ) == 1 ||ih().isKeyDown(keymap.at(SATTACK)))) {
 			//Solo ataca si la habilidad está activada
 			if (st_->isActive())
 				st_->attack();
 		}
 		//HABILIDAD
-		else if (ih().getMouseButtonState(InputHandler::MOUSEBUTTON::MIDDLE) == 1) {
+		else if (ih().getMouseButtonState(InputHandler::MOUSEBUTTON::MIDDLE) == 1 || ih().isKeyDown(keymap.at(ABILITY))) {
 			//Solo usa la habilidad si está activada
 			if (ab_->isActive())
 				ab_->use();

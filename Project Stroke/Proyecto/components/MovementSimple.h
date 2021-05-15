@@ -17,7 +17,7 @@ public:
 
 	MovementSimple() :
 		tr_(nullptr), speed_(), enmState_(nullptr), goalVel_(0, 0), lastDir_(1,0), timer(sdlutils().currRealTime()), colDetec_(nullptr),
-		grav_(nullptr)
+		grav_(nullptr), attribs_(nullptr)
 	{
 	}
 
@@ -45,6 +45,8 @@ private:
 
 	const float jump_ = 45.0f, gravity_ = 4.8f, jumpTimer_ = 10.0f;
 	long unsigned int timer;
+
+	EntityAttribs* attribs_;
 
 	Gravity* grav_;
 	Transform* tr_;

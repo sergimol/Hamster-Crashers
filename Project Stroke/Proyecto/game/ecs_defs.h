@@ -18,6 +18,7 @@ class Pray;
 class Combos;
 class Roll;
 class Turret;
+class WarCry;
 class DisableOnExit;
 class BulletHit;
 class ControlHandler;
@@ -100,6 +101,7 @@ class subtitulos;
 	Combos, \
 	Roll, \
 	Turret, \
+	WarCry, \
 	DisableOnExit, \
 	BulletHit, \
 	Poison, \

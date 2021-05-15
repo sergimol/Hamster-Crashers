@@ -468,6 +468,9 @@
     <ClCompile Include="Proyecto\components\dialogos.cpp">
       <Filter>Archivos de origen\components\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\WarCry.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Ability</Filter>
+    </ClCompile>
     <ClCompile Include="Proyecto\components\subtitulos.cpp">
       <Filter>Archivos de origen\components\UI</Filter>
     </ClCompile>
@@ -805,6 +808,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\dialogos.h">
       <Filter>Archivos de encabezado\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\WarCry.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Ability</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\subtitulos.h">
       <Filter>Archivos de encabezado\Components\UI</Filter>

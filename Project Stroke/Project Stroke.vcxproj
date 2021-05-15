@@ -226,6 +226,7 @@
     <ClCompile Include="Proyecto\components\Stroke.cpp" />
     <ClCompile Include="Proyecto\components\StrongAttack.cpp" />
     <ClCompile Include="Proyecto\components\Transform.cpp" />
+    <ClCompile Include="Proyecto\components\WarCry.cpp" />
     <ClCompile Include="Proyecto\ecs\Camera.cpp" />
     <ClCompile Include="Proyecto\ecs\Entity.cpp" />
     <ClCompile Include="Proyecto\ecs\Manager.cpp" />
@@ -328,6 +329,7 @@
     <ClInclude Include="Proyecto\components\Stroke.h" />
     <ClInclude Include="Proyecto\components\StrongAttack.h" />
     <ClInclude Include="Proyecto\components\Transform.h" />
+    <ClInclude Include="Proyecto\components\WarCry.h" />
     <ClInclude Include="Proyecto\ecs\Camera.h" />
     <ClInclude Include="Proyecto\ecs\Component.h" />
     <ClInclude Include="Proyecto\ecs\ecs.h" />

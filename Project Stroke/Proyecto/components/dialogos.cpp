@@ -1,6 +1,7 @@
 #include "dialogos.h"
 #include "../sdlutils/InputHandler.h"
 #include "ControlHandler.h"
+#include "SoundManager.h"
 
 dialogos::dialogos()
 {
@@ -57,12 +58,15 @@ void dialogos::update() {
 	dialogoDest.y = dialogoDestI.y * position;
 	explicacionDest.y = explicacionDestI.y * position;
 
-	//Oculta el dialogo
-	if (ih().isKeyDown(keymap.at(SPACE)))
+	//Oculta el dialogo cuando termina el audio
+	if (showDialogue && entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->emptyChannel(4))
 	{
-		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->fadeOut(3000);
+		//entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->fadeOut(3000);
 		//entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->fadeIn(6000);
 		//Cambiamos el estado de mostrarse a no mostrarse
+		showDialogue = false;
+	}
+	if (ih().isKeyDown(keymap.at(SPACE))) {
 		showDialogue = false;
 	}
 }
@@ -90,6 +94,7 @@ void dialogos::changeDialogue() {
 
 //Controla toda la movida buena suerte lo programe hace 30 mins y no se que hice
 void dialogos::dialogoStateChange() {
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("heartattack");
 	//Cambiamos el dialogo cuando no se esta mostrando la movida
 	if (!firstDialogue)
 		changeDialogue();

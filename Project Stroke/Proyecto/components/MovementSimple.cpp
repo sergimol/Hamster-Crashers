@@ -23,7 +23,8 @@ void MovementSimple::init() {
 	grav_ = entity_->getComponent<Gravity>();
 	//assert(grav_ != nullptr);
 
-	speed_ = entity_->getComponent<EntityAttribs>()->getVel();
+	attribs_ = entity_->getComponent<EntityAttribs>();
+	speed_ = attribs_->getVel();
 	assert(speed_ != Vector2D());
 
 	if (colDetec_ != nullptr)
@@ -80,6 +81,9 @@ void MovementSimple::update() {
 
 		if (dir.magnitude() != 0) {
 			dir = dir.normalize();
+
+			if (attribs_ != nullptr)
+				speed_ = attribs_->getVel();
 
 			goalVel_ = Vector2D(dir.getX() * speed_.getX(), dir.getY() * speed_.getY());
 		}

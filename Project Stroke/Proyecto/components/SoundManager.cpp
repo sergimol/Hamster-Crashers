@@ -67,7 +67,7 @@ void SoundManager::init() {
 	mainTheme = &sdlutils().soundEffects().at("mainTheme");
 
 	setVolumeChannels();
-	mainTheme->play(200, musics);
+	//mainTheme->play(200, musics);
 }
 
 void SoundManager::setVolumeChannels() {
@@ -100,6 +100,15 @@ void SoundManager::upVolume(bool musicChannel) {
 
 	setVolumeChannels();
 }
+
+bool SoundManager::emptyChannel(int channel) {
+	if (Mix_Playing(channel) == 0) {
+		return true;
+	}
+	else
+		return false;
+}
+
 
 void SoundManager::play(std::string soundName) {
 	if (soundName == "lighthit") {

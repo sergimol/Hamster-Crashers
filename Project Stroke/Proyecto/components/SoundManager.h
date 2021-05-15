@@ -16,6 +16,7 @@ public:
 	void lowVolume(bool channel);
 	void upVolume(bool channel);
 	void resetVolumes() { fxVol_ = 1; musicVol_ = 1; };
+	bool emptyChannel(int channel);
 
 	void fadeOut(int time) { Mix_FadeOutChannel(musics, time); };
 	//FADEPRUEBA

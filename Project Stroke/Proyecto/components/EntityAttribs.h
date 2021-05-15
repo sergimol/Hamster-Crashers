@@ -60,13 +60,13 @@ public:
 	inline std::string getId() const {
 		return id_;
 	}
-	inline bool getCanPoison() {
+	inline bool getCanPoison() const {
 		return canPoison_;
 	}
-	inline float getPoisonProb() {
+	inline float getPoisonProb() const {
 		return poisonProbability_;
 	}
-	inline bool getPoisoned() {
+	inline bool getPoisoned() const {
 		return poisoned_;
 	}
 	inline int getCriticProb() const {
@@ -75,15 +75,13 @@ public:
 	inline int getCriticDmg() const {
 		return critDamage_;
 	}
-	inline bool checkInvulnerability() {
+	inline bool checkInvulnerability() const {
 		return (afterDamageInvul_ || invincibility_);
 	}
-	inline bool ignoresMargin() {
+	inline bool ignoresMargin() const{
 		return ignoreMargin_;
 	}
-	inline void setIgnoreMargin(bool i) {
-		ignoreMargin_ = i;
-	}
+
 
 	//Setters
 	inline void setPoisonProb(float prob) {
@@ -104,6 +102,12 @@ public:
 	inline void resetVel() {
 		velocity_ = maxVelocity_;
 	}
+	inline void setIgnoreMargin(bool i) {
+		ignoreMargin_ = i;
+	}
+	inline void setDmg(int newDmg) {
+		damage_ = newDmg;
+	}
 
 private:
 	HamsterStateMachine* hms_;
@@ -112,11 +116,13 @@ private:
 	Transform* tr_;
 	GameStates* state_;
 	
+	int playerNumber_;
 	int health_;
 	int maxHealth_;
 	int damage_;
 	int poisonDamage_;
-	int playerNumber_;
+	/*int lightAttCadence_;
+	int strongAttCadence_;*/
 
 	float critProbability_;
 	float poisonProbability_;
