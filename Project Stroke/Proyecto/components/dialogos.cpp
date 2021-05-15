@@ -68,7 +68,7 @@ void dialogos::update() {
 }
 //Muestra los dialogos
 void dialogos::show() {
-	if (position > 1.0f)
+	if (position > 1.1f)
 		position = position - 0.1f;
 	else
 		position = 1.0f;
