@@ -94,10 +94,11 @@ void MapMngr::update() {
 			TriggerftCamera.pop();
 
 			//TUTORIAL
-
 			if (stoi(trigger.getName()) < 3) {
 				entity_->getMngr()->getHandler<dialogosMngr>()->getComponent<dialogos>()->dialogoStateChange();
 			}
+
+			
 		}
 	}
 
