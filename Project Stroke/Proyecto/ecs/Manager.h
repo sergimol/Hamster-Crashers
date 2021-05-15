@@ -241,12 +241,12 @@ public:
 	void refreshItems() {
 		items_.erase( //
 			std::remove_if( //
-				obstacles_.begin(), //
-				obstacles_.end(), //
+				items_.begin(), //
+				items_.end(), //
 				[](const Entity* e) { //
 					return !e->isActive();
 				}), //
-			obstacles_.end());
+			items_.end());
 	}
 
 	void refreshTraps() {
@@ -267,6 +267,7 @@ private:
 	std::vector<Entity*> bgs_;
 	std::vector<Entity*> fgs_;
 	std::vector<Entity*> menus_;
+
 
 	std::array<Entity*, ecs::maxHdlr> hdlrs_;
 	std::array<std::unique_ptr<System>, ecs::maxSystem> sys_;

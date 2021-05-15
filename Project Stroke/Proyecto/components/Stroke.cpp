@@ -44,7 +44,9 @@ void Stroke::increaseChance(int n, bool fromAbility) {
 		else {
 			ss_->increaseChanceAB(n, chanceFromAb_);
 		}
+
 		entity_->getComponent<HeartUI>()->increaseLatency(chanceFromAb_ + chance_);
+
 		if (chance_ + chanceFromAb_ > CHANGECOLORVALUE)
 			entity_->getComponent<Animator>()->setTexture(&sdlutils().images().at("sardinillaSheet2"));
 
@@ -75,6 +77,7 @@ void Stroke::checkChance() {
 			chanceFromAb_ = 0;
 
 		entity_->getComponent<HeartUI>()->increaseLatency(chanceFromAb_ + chance_);
+
 		if (chance_ + chanceFromAb_ < CHANGECOLORVALUE)
 			entity_->getComponent<Animator>()->setTexture(&sdlutils().images().at("sardinillaSheet"));
 
@@ -119,6 +122,7 @@ void Stroke::infarctHamster() {
 
 	//Y cambiamos la interfaz
 	entity_->getComponent<HeartUI>()->dep();
+	entity_->getComponent<UI>()->dep("3");
 
 	//hms_->getState() = HamStates::INFARCTED;
 	this->setActive(false);

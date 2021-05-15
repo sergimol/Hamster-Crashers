@@ -40,6 +40,8 @@
 #include "../components/ContactDamage.h"
 #include "../components/MenuControlHandler.h"
 #include "../components/TimeTrap.h"
+#include "../components/MicroOndasManager.h"
+#include "../components/dialogos.h"
 
 //PARA LAS COLISIONES CON TILE
 #include "../utils/Collisions.h"
@@ -72,6 +74,11 @@ void Game::init() {
 	//SDL_RenderSetScale(sdlutils().renderer(), sdlutils().width() / 1920.0f, sdlutils().height() / 1080.0f);
 	//SDL_SetWindowFullscreen(sdlutils().window(), 0);	//   SDL_WINDOW_FULLSCREEN  ||   SDL_WINDOW_FULLSCREEN_DESKTOP
 
+	//Dialogos
+	auto* dialogosM = mngr_->addMenu();
+	dialogosM->addComponent<dialogos>();
+	mngr_->setHandler<dialogosMngr>(dialogosM);
+
 	//Máquina de estados
 	auto* stateMachine = mngr_->addEntity();
 	stateMachine->addComponent<GameStates>();
@@ -89,36 +96,31 @@ void Game::init() {
 	//Metemos al mapa en el Handler de Map
 	mngr_->setHandler<LevelHandlr>(levelMngr);
 
-	//MENU		
+	//MENUS		
 	auto* mainMenu = mngr_->addMenu();
-	/*mainMenu->addComponent<Animator>(
-		&sdlutils().images().at("menuSheet"),
-		1920,
-		1080,
-		1,
-		1,
-		220,
-		Vector2D(0, 0),
-		3
-		);*/
-	mainMenu->addComponent<MenuButtonManager>("mainMenu", GameStates::MAINMENU);	//mainMenu, pauseMenu o hamsterMenu
+	mainMenu->addComponent<MenuButtonManager>("mainMenu", GameStates::MAINMENU);
 	mainMenu->addComponent<MenuControlHandler>(GameStates::MAINMENU);
 	mngr_->setHandler<MainMenu>(mainMenu);
 
 	auto* pauseMenu = mngr_->addMenu();
-	pauseMenu->addComponent<MenuButtonManager>("pauseMenu", GameStates::PAUSE);	//mainMenu, pauseMenu o hamsterMenu
+	pauseMenu->addComponent<MenuButtonManager>("pauseMenu", GameStates::PAUSE);
 	pauseMenu->addComponent<MenuControlHandler>(GameStates::PAUSE);
 	mngr_->setHandler<PauseMenu>(pauseMenu);
 
 	auto* hamsterSelectionMenu = mngr_->addMenu();
-	hamsterSelectionMenu->addComponent<MenuButtonManager>("hamsterMenu", GameStates::HAMSTERSELECTION);	//mainMenu, pauseMenu o hamsterMenu
+	hamsterSelectionMenu->addComponent<MenuButtonManager>("hamsterMenu", GameStates::HAMSTERSELECTION);
 	hamsterSelectionMenu->addComponent<MenuControlHandler>(GameStates::HAMSTERSELECTION);
 	mngr_->setHandler<HamsterSelectionMenu>(hamsterSelectionMenu);
 
 	auto* playerQuantityMenu = mngr_->addMenu();
-	playerQuantityMenu->addComponent<MenuButtonManager>("playerQuantityMenu", GameStates::PLAYERSELECTION);	//mainMenu, pauseMenu o hamsterMenu
+	playerQuantityMenu->addComponent<MenuButtonManager>("playerQuantityMenu", GameStates::PLAYERSELECTION);
 	playerQuantityMenu->addComponent<MenuControlHandler>(GameStates::PLAYERSELECTION);
 	mngr_->setHandler<PlayerQuantityMenu>(playerQuantityMenu);
+
+	auto* optionsMenu = mngr_->addMenu();
+	optionsMenu->addComponent<MenuButtonManager>("optionsMenu", GameStates::OPTIONS);
+	optionsMenu->addComponent<MenuControlHandler>(GameStates::OPTIONS);
+	mngr_->setHandler<OptionsMenu>(optionsMenu);
 
 	// Mapa
 	auto* mapa = mngr_->addEntity();

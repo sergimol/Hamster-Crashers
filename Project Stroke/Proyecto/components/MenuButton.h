@@ -13,7 +13,7 @@
 
 class MenuButton : public Component {
 public:
-	MenuButton(std::string n,  Vector2D position, int stateNum);
+	MenuButton(std::string n, Vector2D position, int stateNum);
 	virtual ~MenuButton() {};
 
 	void render() override;
@@ -25,6 +25,7 @@ public:
 
 	//Getters auxiliares
 	//inline int getPosUI() { return position; };
+	SDL_Rect getRect() const& { return dest_; };
 
 private:
 	//Nombre del personaje que contiene la UI, todo en minusculas
@@ -36,7 +37,7 @@ private:
 	Texture* button_;
 	Texture* buttonEnter_;
 	Texture* buttonPressed_;
-	
+
 	GameStates* state_;
 
 	//DestRects

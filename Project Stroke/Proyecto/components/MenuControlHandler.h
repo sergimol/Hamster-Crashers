@@ -39,7 +39,10 @@ private:
 	std::map<KEYS ,SDL_Scancode> keymap;
 
 	void handleKeyboard();
-	void handleController(int controller);
+	bool handleController(int controller);
+	void handleMouse();
+
+	bool mouseInButton(float x, float y, SDL_Rect const& button);
 
 	int stateNumber_;
 };

@@ -188,11 +188,15 @@ bool EntityAttribs::recieveDmg(int dmg) {
 			//TODO
 			//aqui distingimos la meurte de un enemigo como tal
 			//posibilidades, ambushing o attacking
-			entity_->getComponent<EnemyBehaviour>()->die();
+			EnemyBehaviour* eB = entity_->getComponent<EnemyBehaviour>();
+			if (eB != nullptr)
+				eB->die();
+			else
+				entity_->setActive(false);
 		}
 		//Actualizamos UI
 		if (entity_->hasComponent<UI>())
-			entity_->getComponent<UI>()->dep();
+			entity_->getComponent<UI>()->dep("2");
 		//Actualizamos UI
 		if (entity_->hasComponent<HeartUI>())
 			entity_->getComponent<HeartUI>()->dep();
@@ -230,7 +234,7 @@ void EntityAttribs::die() {
 	//Si la persona que muere es un hamster...
 	if (!entity_->hasGroup<Enemy>()) {
 		//Ponemos su UI a 'Muerto'
-		e->addComponent<UI>(id_, entity_->getComponent<UI>()->getPosUI())->dep();
+		e->addComponent<UI>(id_, entity_->getComponent<UI>()->getPosUI())->dep("2");
 		hms_->getState() = HamStates::DEAD;
 		//Desactivamos el componente del hasmter vivo
 		entity_->getComponent<Animator>()->setActive(false);
@@ -255,6 +259,12 @@ void EntityAttribs::die() {
 
 }
 
+void EntityAttribs::setLife(int life) {
+	int dmg = health_ - life;
+	health_ = life;
+	if (entity_->hasComponent<UI>())
+		entity_->getComponent<UI>()->bar(-dmg);	
+}
 
 //Sana 'hp' unidades
 void EntityAttribs::heal(int hp) {

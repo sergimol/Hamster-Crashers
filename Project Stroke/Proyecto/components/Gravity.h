@@ -17,6 +17,7 @@ public:
 	void onDisable() override;
 	inline int getFloor() const { return floor_; };
 	inline bool getStuck() const { return stuck_; };
+	inline bool GetHeighCh() const { return inHeighChange_; };
 	void lockGrav(bool b) { gravityLocked_ = b; };
 	bool gravLocked() { return gravityLocked_; };
 	void resetLockTimer() { lockTimer_ = sdlutils().currRealTime(); };
@@ -29,6 +30,7 @@ private:
 		lockCooldown_;
 	const float jumpTimer_ = 0.15;
 	bool stuck_ = false,
+		 inHeighChange_=false,
 		 gravityLocked_;
 };
 

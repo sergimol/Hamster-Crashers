@@ -44,55 +44,79 @@
     },
     {
       "id": "bar",
-      "file": "resources/images/UI/bar.png"
+      "file": "resources/images/UI/hamsterUI/healthbar.png"
+    },
+    {
+      "id": "hamsBackGround",
+      "file": "resources/images/UI/hamsterUI/background.png"
     },
     {
       "id": "barEnemy",
-      "file": "resources/images/UI/barEnemy.png"
+      "file": "resources/images/UI/bossUI/bossHealthBar.png"
+    },
+    {
+      "id": "heart0",
+      "file": "resources/images/UI/hamsterUI/heart0.png"
     },
     {
       "id": "heart1",
-      "file": "resources/images/UI/heart1.png"
+      "file": "resources/images/UI/hamsterUI/heart1.png"
     },
     {
       "id": "heart2",
-      "file": "resources/images/UI/heart2.png"
+      "file": "resources/images/UI/hamsterUI/heart2.png"
     },
     {
       "id": "heart3",
-      "file": "resources/images/UI/heart3.png"
+      "file": "resources/images/UI/hamsterUI/heart3.png"
     },
     {
       "id": "sardinillaHead1",
-      "file": "resources/images/UI/sardinillaHead1.png"
+      "file": "resources/images/UI/hamsterUI/sardinillaHead.png"
     },
     {
       "id": "sardinillaHead2",
-      "file": "resources/images/UI/sardinillaHead2.png"
+      "file": "resources/images/UI/hamsterUI/sardinillaHeadDep.png"
+    },
+    {
+      "id": "sardinillaHead3",
+      "file": "resources/images/UI/hamsterUI/sardinillaHeadGhost.png"
     },
     {
       "id": "ketaHead1",
-      "file": "resources/images/UI/ketaHead1.png"
+      "file": "resources/images/UI//hamsterUI/ketaHead.png"
     },
     {
       "id": "ketaHead2",
-      "file": "resources/images/UI/ketaHead2.png"
+      "file": "resources/images/UI//hamsterUI/ketaHeadDep.png"
+    },
+    {
+      "id": "ketaHead3",
+      "file": "resources/images/UI//hamsterUI/ketaHeadGhost.png"
     },
     {
       "id": "monchiHead1",
-      "file": "resources/images/UI/monchiHead1.png"
+      "file": "resources/images/UI//hamsterUI/monchiHead.png"
     },
     {
       "id": "monchiHead2",
-      "file": "resources/images/UI/monchiHead2.png"
+      "file": "resources/images/UI//hamsterUI/monchiHeadDep.png"
+    },
+    {
+      "id": "monchiHead3",
+      "file": "resources/images/UI//hamsterUI/monchiHeadGhost.png"
     },
     {
       "id": "canelonHead1",
-      "file": "resources/images/UI/canelonHead1.png"
+      "file": "resources/images/UI//hamsterUI/canelonHead.png"
     },
     {
       "id": "canelonHead2",
-      "file": "resources/images/UI/canelonHead2.png"
+      "file": "resources/images/UI//hamsterUI/canelonHeadDep.png"
+    },
+    {
+      "id": "canelonHead3",
+      "file": "resources/images/UI//hamsterUI/canelonHeadGhost.png"
     },
     {
       "id": "enemigoFuerte",
@@ -139,6 +163,10 @@
       "file": "resources/images/tiled/demoTileset.png"
     },
     {
+      "id": "TileLvl1",
+      "file": "resources/images/tiled/TileLvl1.png"
+    },
+    {
       "id": "suelo",
       "file": "resources/images/tiled/tilesetSueloLevel1.png"
     },
@@ -156,23 +184,47 @@
     },
     {
       "id": "r",
-      "file": "resources/images/tecla_R.png"
+      "file": "resources/images/UI/keys/r.png"
     },
     {
       "id": "a",
-      "file": "resources/images/tecla_A.png"
+      "file": "resources/images/UI/keys/a.png"
+    },
+    {
+      "id": "b",
+      "file": "resources/images/UI/keys/b.png"
+    },
+    {
+      "id": "d",
+      "file": "resources/images/UI/keys/d.png"
+    },
+    {
+      "id": "s",
+      "file": "resources/images/UI/keys/s.png"
+    },
+    {
+      "id": "w",
+      "file": "resources/images/UI/keys/w.png"
+    },
+    {
+      "id": "x",
+      "file": "resources/images/UI/keys/x.png"
+    },
+    {
+      "id": "y",
+      "file": "resources/images/UI/keys/y.png"
     },
     {
       "id": "a2",
-      "file": "resources/images/tecla_A2.png"
+      "file": "resources/images/UI/keys/a2.png"
     },
     {
       "id": "linea",
-      "file": "resources/images/linea.png"
+      "file": "resources/images/UI/reanimationUI/horizontalBar.png"
     },
     {
       "id": "lineaV",
-      "file": "resources/images/lineaV.png"
+      "file": "resources/images/UI/reanimationUI/verticalBar.png"
     },
     {
       "id": "MAYONESITO",
@@ -267,6 +319,162 @@
       "file": "resources/images/menuSprites/canelonButtonEnter.png"
     },
     {
+      "id": "backButton",
+      "file": "resources/images/menuSprites/backButton.png"
+    },
+    {
+      "id": "backButtonEnter",
+      "file": "resources/images/menuSprites/backButtonEnter.png"
+    },
+    {
+      "id": "musicDownButton",
+      "file": "resources/images/menuSprites/lowButton.png"
+    },
+    {
+      "id": "musicDownButtonEnter",
+      "file": "resources/images/menuSprites/lowButtonEnter.png"
+    },
+    {
+      "id": "musicUpButton",
+      "file": "resources/images/menuSprites/upButton.png"
+    },
+    {
+      "id": "musicUpButtonEnter",
+      "file": "resources/images/menuSprites/upButtonEnter.png"
+    },
+    {
+      "id": "fxDownButton",
+      "file": "resources/images/menuSprites/lowButton.png"
+    },
+    {
+      "id": "fxDownButtonEnter",
+      "file": "resources/images/menuSprites/lowButtonEnter.png"
+    },
+    {
+      "id": "fxUpButton",
+      "file": "resources/images/menuSprites/upButton.png"
+    },
+    {
+      "id": "fxUpButtonEnter",
+      "file": "resources/images/menuSprites/upButtonEnter.png"
+    },
+    {
+      "id": "resolutionDownButton",
+      "file": "resources/images/menuSprites/lowButton.png"
+    },
+    {
+      "id": "resolutionDownButtonEnter",
+      "file": "resources/images/menuSprites/lowButtonEnter.png"
+    },
+    {
+      "id": "resolutionUpButton",
+      "file": "resources/images/menuSprites/upButton.png"
+    },
+    {
+      "id": "resolutionUpButtonEnter",
+      "file": "resources/images/menuSprites/upButtonEnter.png"
+    },
+    {
+      "id": "resetButton",
+      "file": "resources/images/menuSprites/resetButton.png"
+    },
+    {
+      "id": "resetButtonEnter",
+      "file": "resources/images/menuSprites/resetButtonEnter.png"
+    },
+    {
+      "id": "musicVolume",
+      "file": "resources/images/menuSprites/musicVolume.png"
+    },
+    {
+      "id": "resolution",
+      "file": "resources/images/menuSprites/resolution.png"
+    },
+    {
+      "id": "sfxVolume",
+      "file": "resources/images/menuSprites/sfxVolume.png"
+    },
+    {
+      "id": "sfxVolume",
+      "file": "resources/images/menuSprites/sfxVolume.png"
+    },
+    {
+      "id": "800x600",
+      "file": "resources/images/menuSprites/resolutions/800x600.png"
+    },
+    {
+      "id": "854x480",
+      "file": "resources/images/menuSprites/resolutions/854x480.png"
+    },
+    {
+      "id": "1024x768",
+      "file": "resources/images/menuSprites/resolutions/1024x768.png"
+    },
+    {
+      "id": "1280x720",
+      "file": "resources/images/menuSprites/resolutions/1280x720.png"
+    },
+    {
+      "id": "1280x960",
+      "file": "resources/images/menuSprites/resolutions/1280x960.png"
+    },
+    {
+      "id": "1280x1024",
+      "file": "resources/images/menuSprites/resolutions/1280x1024.png"
+    },
+    {
+      "id": "1920x1080",
+      "file": "resources/images/menuSprites/resolutions/1920x1080.png"
+    },
+    {
+      "id": "bar0",
+      "file": "resources/images/menuSprites/barLevels/bar0.png"
+    },
+    {
+      "id": "bar1",
+      "file": "resources/images/menuSprites/barLevels/bar1.png"
+    },
+    {
+      "id": "bar2",
+      "file": "resources/images/menuSprites/barLevels/bar2.png"
+    },
+    {
+      "id": "bar3",
+      "file": "resources/images/menuSprites/barLevels/bar3.png"
+    },
+    {
+      "id": "bar4",
+      "file": "resources/images/menuSprites/barLevels/bar4.png"
+    },
+    {
+      "id": "bar5",
+      "file": "resources/images/menuSprites/barLevels/bar5.png"
+    },
+    {
+      "id": "bar6",
+      "file": "resources/images/menuSprites/barLevels/bar6.png"
+    },
+    {
+      "id": "bar7",
+      "file": "resources/images/menuSprites/barLevels/bar7.png"
+    },
+    {
+      "id": "bar8",
+      "file": "resources/images/menuSprites/barLevels/bar8.png"
+    },
+    {
+      "id": "bar9",
+      "file": "resources/images/menuSprites/barLevels/bar9.png"
+    },
+    {
+      "id": "bar10",
+      "file": "resources/images/menuSprites/barLevels/bar10.png"
+    },
+    {
+      "id": "configBackground",
+      "file": "resources/images/menuSprites/configBackground.png"
+    },
+    {
       "id": "level1background1",
       "file": "resources/images/backgrounds/level1/level1parallax1.jpg"
     },
@@ -331,6 +539,22 @@
       "file": "resources/images/menuSprites/quitButton.png"
     },
     {
+      "id": "anaranjado",
+      "file": "resources/images/anaranjado.png"
+    },
+    {
+      "id": "cables",
+      "file": "resources/images/cables.jpg"
+    },
+    {
+      "id": "bateria",
+      "file": "resources/images/bateria.jpg"
+    },
+    {
+      "id": "puntoDeLuz",
+      "file": "resources/images/lightpoint.png"
+    },
+    {
       "id": "640x480ButtonEnter",
       "file": "resources/images/menuSprites/quitButtonEnter.png"
     },
@@ -359,42 +583,45 @@
       "file": "resources/images/menuSprites/fourPlayersButtonEnter.png"
     },
     {
-      "id": "sardinillaOn",
-      "file": "resources/images/UI/sardinillaAbilitiOn.png"
+      "id": "AbilityOn",
+      "file": "resources/images/UI/keys/r.png"
     },
     {
-      "id": "sardinillaOff",
-      "file": "resources/images/UI/sardinillaAbilitiOff.png"
+      "id": "AbilityOff",
+      "file": "resources/images/UI/keys/a.png"
     },
     {
-      "id": "monchiOn",
-      "file": "resources/images/UI/monchiAbilitiOn.png"
-    },
-    {
-      "id": "monchiOff",
-      "file": "resources/images/UI/monchiAbilitiOff.png"
-    },
-    {
-      "id": "ketaOn",
-      "file": "resources/images/UI/ketaAbilitiOn.png"
-    },
-    {
-      "id": "ketaOff",
-      "file": "resources/images/UI/ketaAbilitiOff.png"
-    },
-    {
-      "id": "canelonOn",
-      "file": "resources/images/UI/canelonAbilitiOn.png"
-    },
-    {
-      "id": "canelonOff",
-      "file": "resources/images/UI/canelonAbilitiOff.png"
+      "id": "Hexagon",
+      "file": "resources/images/UI/bossUI/bossIconHead.png"
     },
     {
       "id": "obstacleBox",
       "file": "resources/images/objects/obstacleBox.png"
+    },
+    {
+      "id": "dialogoAngel",
+      "file": "resources/images/dialogue/angelo.png"
+    },
+    {
+      "id": "dialogoBarra",
+      "file": "resources/images/dialogue/barradialogo.png"
+    },
+    {
+      "id": "dialogo0",
+      "file": "resources/images/dialogue/dialogo0.png"
+    },
+    {
+      "id": "explicacion0",
+      "file": "resources/images/dialogue/explicacion0.png"
+    },
+    {
+      "id": "dialogo1",
+      "file": "resources/images/dialogue/dialogo1.png"
+    },
+    {
+      "id": "explicacion1",
+      "file": "resources/images/dialogue/explicacion1.png"
     }
-
 
   ],
 

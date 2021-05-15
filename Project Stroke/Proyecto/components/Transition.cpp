@@ -120,7 +120,7 @@ void Transition::sceneTransition() {
 
 		entity_->getMngr()->refreshDeadBodies();
 		entity_->getMngr()->refreshEnemies();
-		//mngr_->refreshItems();
+		entity_->getMngr()->refreshItems();
 		entity_->getMngr()->refreshObstacles();
 		entity_->getMngr()->refreshPlayers();
 	}

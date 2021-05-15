@@ -24,12 +24,12 @@ void GetItem::update() {
 			auto eTR = e->getComponent<Transform>();
 
 			//Creamos nuestroRect
-			Vector2D newPos = Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
+			SDL_Rect rH = tr_->getRectCollide();
 
-			Vector2D otherPos = Vector2D(tr_->getPos().getX() - cam.x, tr_->getPos().getY() - cam.y);
+			SDL_Rect rI = eTR->getRectCollide();
 
 			//Y comprobamos si colisiona
-			if (Collisions::collides(otherPos, tr_->getW(), tr_->getH(), newPos, eTR->getW(), eTR->getH())) {
+			if (Collisions::collides(Vector2D(rH.x, rH.y), rH.w, rH.h, Vector2D(rI.x, rI.y), rI.w, rI.h)) {
 				//Comprobamos el tipo
 				switch (e->getComponent<Item>()->getItem()) {
 				case ItemType::Apple:

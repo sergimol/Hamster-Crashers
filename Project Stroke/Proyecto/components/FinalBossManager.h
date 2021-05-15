@@ -51,6 +51,9 @@ private:
 	Entity* hand_;		//Referencias a las manos
 	Entity* fist_;
 
+	EntityAttribs* handAttribs_;
+	EntityAttribs* fistAttribs_;
+
 	Transform* hamsterTr_;		//Referencias a los hamsters fijados
 	Transform* hamsterTrPunch_;
 	

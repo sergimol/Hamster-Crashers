@@ -12,5 +12,8 @@ private:
 	string id_;
 	const string keyWord_ = "obstacle", hitWord_ = "Hit", breakWord_ = "Break";
 	short int hits_ = -1;
+	//Marca si el objeto está muerto o no
 	bool canBeHit_ = true;
+
+	void createItem();
 };

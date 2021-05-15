@@ -15,7 +15,7 @@
 #include "VirtualTimer.h"
 #include "Animation.h"
 
-
+const int RESOLUTIONSCOUNT = 7;
 
 class SDLUtils: public Singleton<SDLUtils> {
 
@@ -80,6 +80,40 @@ public:
 	
 	inline int hamstersChosen() {
 		return hamstersChosen_;
+	}
+
+	inline void setResolution() {
+		width_ = widths_[resolutionIndex_];
+		height_ = heights_[resolutionIndex_];
+
+		SDL_SetWindowSize(window_, width_, height_);
+		SDL_RenderSetScale(renderer_, width_ / 1920.0f, height_ / 1080.f);
+	}
+
+	inline Vector2D getResolutionRelation() const& {
+		return Vector2D(width_ / 1920.0f, height_ / 1080.0f);
+	}
+
+	inline void lowerResolution() {
+		if (resolutionIndex_ > 0)
+			resolutionIndex_--;
+		else
+			resolutionIndex_ = RESOLUTIONSCOUNT - 1;
+
+		setResolution();
+	}
+
+	inline void higherResolution() {
+		if (resolutionIndex_ < RESOLUTIONSCOUNT - 1)
+			resolutionIndex_++;
+		else
+			resolutionIndex_ = 0;
+
+		setResolution();
+	}
+
+	inline std::string resolutionString(int i) {
+		return std::to_string((int)widths_[i]) + "x" + std::to_string((int)heights_[i]);
 	}
 
 	inline void setWidth(int widthAux) {
@@ -200,6 +234,12 @@ private:
 
 	RandomNumberGenerator random_; // (pseudo) random numbers generator
 	VirtualTimer timer_; // virtual timer
+
+	// Arrays con ancho y alto de todas las resoluciones
+	float widths_[RESOLUTIONSCOUNT] = { 800, 854, 1024, 1280, 1280, 1280, 1920 };
+	float heights_[RESOLUTIONSCOUNT] = { 600, 480, 768, 720, 960, 1024, 1080 };
+	// Indice de la resolución actual dentro de los arrays
+	int resolutionIndex_ = RESOLUTIONSCOUNT - 1; // se inicia en 1920x1080
 };
 
 

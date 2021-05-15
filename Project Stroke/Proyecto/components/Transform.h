@@ -34,6 +34,11 @@ public:
 		rectCollide.h = (height_ * scaleCollideH);
 		rectCollide.x = pos.getX() + (width * ((1 - scaleCollideW) / 2));
 		rectCollide.y = pos.getY() + (height * ((1 - scaleCollideH) / 2));
+
+		rectCollideFeet.w = (width_ * scaleCollideW);
+		rectCollideFeet.h = (height_ * scaleCollideH / 3);
+		rectCollideFeet.x = pos.getX() + (width * ((1 - scaleCollideW) / 2));
+		rectCollideFeet.y = pos.getY() + (height * ((1 - scaleCollideH) / 2) + height_ * scaleCollideH);
 	}
 
 	Transform(Vector2D pos, Vector2D vel, float width, float height,
@@ -54,6 +59,11 @@ public:
 		rectCollide.h = (height_ * scaleCollideH);
 		rectCollide.x = pos.getX() + (width * ((1 - scaleCollideW) / 2));
 		rectCollide.y = pos.getY() + (height * ((1 - scaleCollideH) / 2));
+
+		rectCollideFeet.w = (width_ * scaleCollideW);
+		rectCollideFeet.h = (height_ * scaleCollideH / 3);
+		rectCollideFeet.x = pos.getX() + (width * ((1 - scaleCollideW) / 2));
+		rectCollideFeet.y = pos.getY() + (height * ((1 - scaleCollideH) / 2) + height_ * scaleCollideH);
 	}
 
 	void init() override {
@@ -122,6 +132,10 @@ public:
 
 	SDL_Rect getRectCollide() const {
 		return rectCollide;
+	}	
+	
+	SDL_Rect getRectCollideFeet() const {
+		return rectCollideFeet;
 	}
 
 	void setRot(float rot) {
@@ -154,7 +168,10 @@ public:
 			pos_ = pos_ + vel_;
 
 			rectCollide.x = pos_.getX() + (width_ * ((1 - scaleCollideW) / 2));
-			rectCollide.y = pos_.getY() + (height_ * ((1 - scaleCollideH) / 2));
+			rectCollide.y = pos_.getY() - floor_ + (height_ * ((1 - scaleCollideH) / 2));
+
+			rectCollideFeet.x = pos_.getX() + (width_ * ((1 - scaleCollideW) / 2));
+			rectCollideFeet.y = pos_.getY() - floor_ + (height_ * ((1 - scaleCollideH) / 2) + height_ * scaleCollideH);
 		}
 	}
 
@@ -164,10 +181,18 @@ public:
 		SDL_Rect loc = rectCollide;
 		loc.x = p.getX();
 		loc.y = p.getY();
+
+		p = Vector2D(rectCollideFeet.x - entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam().x,
+			rectCollideFeet.y - entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam().y);
+		SDL_Rect loc2 = rectCollideFeet;
+		loc2.x = p.getX();
+		loc2.y = p.getY();
+
 		if (debug) {
 			SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 0, 0, 255);
 
 			SDL_RenderDrawRect(sdlutils().renderer(), &loc);
+			SDL_RenderDrawRect(sdlutils().renderer(), &loc2);
 		}
 	}
 
@@ -185,6 +210,7 @@ private:
 	float scaleCollideW;
 	float scaleCollideH;
 	SDL_Rect rectCollide;
+	SDL_Rect rectCollideFeet;
 	//Z del suelo en el que se encuentra
 	int floor_;
 };

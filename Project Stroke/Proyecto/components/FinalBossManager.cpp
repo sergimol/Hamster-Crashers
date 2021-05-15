@@ -1,10 +1,11 @@
-﻿#include "FinalBossManager.h"
+#include "FinalBossManager.h"
 #include "Stroke.h"
 
 FinalBossManager::FinalBossManager(int hamN) :
 	tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr),
 	lockedHamster_(nullptr), hamsterTr_(nullptr), attackAvailable_(false),
-	waitingTime_(sdlutils().currRealTime()), waitingCD_(4000), stunTime_(0), stunCD_(1500), hamsNum_(hamN) {
+	waitingTime_(sdlutils().currRealTime()), waitingCD_(4000), stunTime_(0), stunCD_(1500),
+	hamsNum_(hamN), handAttribs_(nullptr), fistAttribs_(nullptr) {
 }
 
 void FinalBossManager::init() {
@@ -27,7 +28,7 @@ void FinalBossManager::init() {
 	hand_->addComponent<EnemyStateMachine>();
 	hand_->setGroup<Enemy>(true);
 
-	hand_->addComponent<EntityAttribs>(800 + (hamsNum_ * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true);
+	handAttribs_ = hand_->addComponent<EntityAttribs>(800 + (hamsNum_ * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true);
 	hand_->addComponent<UI>("canelon", 4);
 
 	hand_->addComponent<Image>(&sdlutils().images().at("firstBoss"));
@@ -46,7 +47,7 @@ void FinalBossManager::init() {
 	fist_->addComponent<EnemyStateMachine>();
 	fist_->setGroup<Enemy>(true);
 
-	fist_->addComponent<EntityAttribs>(800 + (hamsNum_ * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true);
+	fistAttribs_ = fist_->addComponent<EntityAttribs>(800 + (hamsNum_ * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true);
 
 	fist_->addComponent<Image>(&sdlutils().images().at("firstBoss"));
 
@@ -121,9 +122,10 @@ void FinalBossManager::update() {
 	if (lockedHamster_ != nullptr && lockedHamStatePunch_ != nullptr) {
 
 		if (bossAtk_->checkAttackFinished() || bossPunch_->checkAttackFinished()) {
-			handTurn_ = sdlutils().rand().nextInt(0, 10) < 7;
+			handTurn_ = sdlutils().rand().nextInt(0, 100) < 65;
 			bossAtk_->resetAttackFinished();
 			bossPunch_->resetAttackFinished();
+			waitingTime_ = sdlutils().currRealTime();
 		}
 
 		handTurn_ ? movement(fistTr_, hamsterTrPunch_, movPunch_) : movement(handTr_, hamsterTr_, movHand_);
@@ -147,12 +149,20 @@ void FinalBossManager::update() {
 			}
 		}
 		else {
-			waitingTime_ = sdlutils().currRealTime();
-		}
+			float fistLife = fistAttribs_->getLife();
+			float handLife = handAttribs_->getLife();
+			if (fistLife > handLife)
+				fistAttribs_->setLife(handLife);
+			else if (handLife > fistLife)
+				handAttribs_->setLife(fistLife);
 
+			//waitingTime_ = sdlutils().currRealTime();
+		}
 	}
 	else
 		lockHamster();
+
+	cout << hand_->getComponent<EntityAttribs>()->getLife() << " " << fist_->getComponent<EntityAttribs>()->getLife() << endl;
 }
 
 void FinalBossManager::movement(Transform* tr, Transform* hamsterTr, MovementSimple* mov) {
@@ -182,7 +192,7 @@ void FinalBossManager::movement(Transform* tr, Transform* hamsterTr, MovementSim
 		mov->updateKeymap(MovementSimple::RIGHT, false);
 
 	if (tr == fistTr_) {
-		if (y > hamY - 3 * tr->getH() / 4 )
+		if (y > hamY - 3 * tr->getH() / 4)
 			mov->updateKeymap(MovementSimple::UP, true);
 		else
 			mov->updateKeymap(MovementSimple::UP, false);

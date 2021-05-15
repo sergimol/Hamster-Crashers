@@ -57,6 +57,8 @@
 #include "../components/Obstacle.h"
 #include "../components/FinalBossManager.h"
 #include "../components/TimeTrap.h"
+#include "../components/MicroOndasManager.h"
+#include "../components/dialogos.h"
 
 
 
@@ -90,6 +92,12 @@ void MapMngr::update() {
 			}
 			//Borrar el punto de la camara del vector
 			TriggerftCamera.pop();
+
+			//TUTORIAL
+
+			if (stoi(trigger.getName()) < 3) {
+				entity_->getMngr()->getHandler<dialogosMngr>()->getComponent<dialogos>()->dialogoStateChange();
+			}
 		}
 	}
 
@@ -177,7 +185,7 @@ void MapMngr::loadNewMap(string map) {
 						auto* o = entity_->getMngr()->addMapHeight();
 						o->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 							Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 1, 1);
-						o->addComponent<HeightObject>()->setZ(stoi(object.getName()) * getCellSize());
+						o->addComponent<HeightObject>()->setZ(stoi(object.getName()) * getCellSize() * scale);
 					}
 				}
 				else if (layer->getName() == "Salas") {
@@ -187,7 +195,6 @@ void MapMngr::loadNewMap(string map) {
 						TriggerftCamera.push(object);
 					}
 				}
-
 				else if (layer->getName() == "entities") {
 					//Guardamos la capa de objetos
 					std::cout << layer->getName();
@@ -200,7 +207,8 @@ void MapMngr::loadNewMap(string map) {
 
 					for (const auto& object : objects) {
 						if (object.getName() == "sardinilla" || object.getName() == "canelon" || object.getName() == "keta" || object.getName() == "monchi")
-							{}//addHamster(object);
+						{
+						}//addHamster(object);
 						else if (object.getName() == "newScene") {
 							newSceneTrigger(object.getProperties()[0].getStringValue(), object);
 						}
@@ -218,6 +226,21 @@ void MapMngr::loadNewMap(string map) {
 							enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
 							enemy->addComponent<ContactDamage>(20, 30);
 							enemy->getMngr()->setHandler<Pussy>(enemy);
+						}
+						else if (object.getName() == "microondas") { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
+							auto* micro = entity_->getMngr()->addEntity();
+
+							micro->addComponent<Transform>(
+								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+								Vector2D(), 256.0f, 2 * 256.0f, 0.0f, 1, 1);
+
+							micro->addComponent<EntityAttribs>(300 + 150 * hamstersToLoad_.size(), 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 20, true, false);
+
+							//enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
+							micro->addComponent<MicroOndasManager>(hamstersToLoad_.size(), &sdlutils().images().at("anaranjado"), &sdlutils().images().at("puntoDeLuz"));
+							//enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
+							//enemy->addComponent<ContactDamage>(20, 30);
+							//enemy->getMngr()->setHandler<Pussy>(enemy);
 						}
 						else if (object.getName() == "trap") {
 							addTrap(object, object.getPosition().x, object.getPosition().y);
@@ -325,8 +348,8 @@ bool MapMngr::intersectObstacles(const SDL_Rect& hamster) {
 	int i = 0;
 	while (!collide && i < obstacles.size()) {
 		auto obstacleRect = obstacles[i]->getComponent<Transform>()->getRectCollide();
-		collide = Collisions::collides(Vector2D(hamster.x, hamster.y), hamster.w, hamster.h, 
-									   Vector2D(obstacleRect.x, obstacleRect.y), obstacleRect.w/2, obstacleRect.h/2);
+		collide = Collisions::collides(Vector2D(hamster.x, hamster.y), hamster.w, hamster.h,
+			Vector2D(obstacleRect.x, obstacleRect.y), obstacleRect.w / 2, obstacleRect.h / 2);
 		++i;
 	}
 	return collide;
@@ -399,47 +422,50 @@ void MapMngr::loadEnemyRoom() {
 			numberEnemyRoom++;
 		}
 		else if (name == "enemigoFuerte" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS	
-			//auto* enemy = mngr_->addEntity();
-			//enemy->addComponent<Transform>(
-			//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-			//	Vector2D(), 240.0f, 370.0f, 0.0f, 1, 1)->getFlip() = true;
+			auto* enemy = mngr_->addEntity();
+			auto* enTr = enemy->addComponent<Transform>(
+				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+				Vector2D(), 106 * scale, 106 * scale, 0.0f, 0.3, 0.5);
+			enTr->getFlip() = true;
 
-			//enemy->addComponent<EnemyStateMachine>();
-			//enemy->setGroup<Enemy>(true);
+			enemy->addComponent<EnemyStateMachine>();
+			enemy->setGroup<Enemy>(true);
 
-			//enemy->setGroup<Enemy>(true);
+			enemy->setGroup<Enemy>(true);
 
-			//enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, "soldier1", Vector2D(3.6, 2), 0, 0, 5);
+			enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, "soldier1", Vector2D(3.6, 2), 0, 0, 5);
 
-			//enemy->addComponent<Animator>(
-			//	&sdlutils().images().at("soldier1Sheet"),
-			//	86,
-			//	86,
-			//	3,
-			//	3,
-			//	220,
-			//	Vector2D(0, 0),
-			//	3
-			//	);
-			//enemy->addComponent<AnimEnemyStateMachine>();
+			enemy->addComponent<Animator>(
+				&sdlutils().images().at("soldier1Sheet"),
+				86,
+				86,
+				3,
+				3,
+				220,
+				Vector2D(0, 0),
+				3
+				);
+			enemy->addComponent<AnimEnemyStateMachine>();
 
-			////enemy->addComponent<UI>("canelon", 4);
+			//enemy->addComponent<UI>("canelon", 4);
 
-			//enemy->addComponent<EnemyStrongAttack>();
+			enemy->addComponent<EnemyStrongAttack>();
 
-			//enemy->addComponent<EnemyAttack>();
-			//enemy->addComponent<Knockback>();
-			//enemy->addComponent<MovementSimple>();
+			enemy->addComponent<EnemyAttack>();
+			enemy->addComponent<Knockback>();
+			enTr->setGravity(enemy->addComponent<Gravity>());
+			enemy->addComponent<CollisionDetec>();
+			enemy->addComponent<MovementSimple>();
 
-			//enemy->addComponent<EnemyBehaviour>(new IddleEnemy());
+			enemy->addComponent<EnemyBehaviour>(new IddleEnemy());
 
-			//enemies.push_back(enemy);
+			enemies.push_back(enemy);
 
-			////anyadir a los cuidados de la madre
-			//mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addEnemy(enemy);
+			//anyadir a los cuidados de la madre
+			mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addEnemy(enemy);
 
-			//enemy->addComponent<EnemyStun>();
-			//numberEnemyRoom++;
+			enemy->addComponent<EnemyStun>();
+			numberEnemyRoom++;
 		}
 		else if (name == "firstBoss" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			//auto* enemy = mngr_->addEntity();
@@ -465,34 +491,30 @@ void MapMngr::loadEnemyRoom() {
 			//numberEnemyRoom++;
 		}
 		else if (name == "finalBoss" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-		//auto* enemy = mngr_->addEntity();
-		//enemy->addComponent<Transform>(
-		//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-		//	Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
+			auto* enemy = mngr_->addEntity();
+			enemy->addComponent<Transform>(
+				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+				Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
 
-		////enemy->addComponent<EnemyStateMachine>();
-		////enemy->setGroup<Enemy>(true);
+			//enemy->addComponent<EnemyStateMachine>();
+			//enemy->setGroup<Enemy>(true);
 
-		////enemy->addComponent<EntityAttribs>(600 + (hamstersToLoad_.size() * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true);
+			//enemy->addComponent<EntityAttribs>(600 + (hamstersToLoad_.size() * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true);
 
-		////enemy->addComponent<Image>(&sdlutils().images().at("firstBoss"));
-		////enemy->addComponent<UI>("canelon", 4);
+			//enemy->addComponent<Image>(&sdlutils().images().at("firstBoss"));
+			//enemy->addComponent<UI>("canelon", 4);
 
-		////enemy->addComponent<FirstBossAttack>();
-		////enemy->addComponent<MovementSimple>();
+			//enemy->addComponent<FirstBossAttack>();
+			//enemy->addComponent<MovementSimple>();
 
-		//enemy->addComponent<FinalBossManager>(hamstersToLoad_.size());
+			enemy->addComponent<FinalBossManager>(hamstersToLoad_.size());
 
-		//numberEnemyRoom++;
+			numberEnemyRoom++;
 		}
 	}
 }
 
 void MapMngr::addHamster(string name, int i) {
-	/*tmx::Object obj = tmx::Object();
-	addObject(obj, 400, 130);
-	addObject(obj, 350, 140);
-	addObject(obj, 500, 100);*/
 
 	//do stuff with object properties
 	//auto& name = obj.getName();
@@ -546,8 +568,8 @@ void MapMngr::addHamster(string name, int i) {
 	hamster1->addComponent<Combos>();
 
 	//Interfaz
-	hamster1->addComponent<UI>(name, 0);
-	hamster1->addComponent<HeartUI>(name, 0);
+	hamster1->addComponent<UI>(name, i);
+	hamster1->addComponent<HeartUI>(name, i);
 
 	//Habilidad
 	if (name == "sardinilla") hamster1->addComponent<Roll>();
@@ -578,6 +600,9 @@ void MapMngr::addHamster(string name, int i) {
 	hamster1->addComponent<ControlHandler>(hamster1->getComponent<EntityAttribs>()->getNumber());
 	hamster1->addComponent<Stun>();
 
+	//Lepermite recoger objetos
+	hamster1->addComponent<GetItem>();
+
 	hamster1->setGroup<Ally>(true);
 
 	//Lo a�adimos al vector de entidades
@@ -588,18 +613,18 @@ void MapMngr::addHamster(string name, int i) {
 
 	// Asignación de handler
 	switch (i) {
-		case 0:
-			mngr_->setHandler<Hamster1>(hamster1);
-			break;
-		case 1:
-			mngr_->setHandler<Hamster2>(hamster1);
-			break;
-		case 2:
-			mngr_->setHandler<Hamster3>(hamster1);
-			break;
-		case 3:
-			mngr_->setHandler<Hamster4>(hamster1);
-			break;
+	case 0:
+		mngr_->setHandler<Hamster1>(hamster1);
+		break;
+	case 1:
+		mngr_->setHandler<Hamster2>(hamster1);
+		break;
+	case 2:
+		mngr_->setHandler<Hamster3>(hamster1);
+		break;
+	case 3:
+		mngr_->setHandler<Hamster4>(hamster1);
+		break;
 	}
 }
 
@@ -636,11 +661,11 @@ void MapMngr::addObject(const tmx::Object& object) {
 
 	obstacle->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 0.75, 0.75);
-	
+
 	auto& prop = object.getProperties();
 
 	string id = prop[1].getStringValue();
-	
+
 	obstacle->addComponent<Animator>(&sdlutils().images().at("obstacle" + id),
 		80,
 		86,
@@ -670,10 +695,10 @@ void MapMngr::addTrap(const tmx::Object& object, int x, int y) {
 	trap->addComponent<Transform>(Vector2D(x * scale, y * scale),
 		Vector2D(), 50 * scale, 50 * scale, 0.0f, 0.75, 0.75);
 	trap->addComponent<ContactDamage>(10, 30);
-	trap->addComponent<TimeTrap>(& sdlutils().images().at("catSmoking"));
+	trap->addComponent<TimeTrap>(&sdlutils().images().at("catSmoking"));
 
 	//int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty
-	trap->addComponent<EntityAttribs>(1 , 10.0f, "trap1", Vector2D(), 1, 0.0f, 1, true, false);
+	trap->addComponent<EntityAttribs>(1, 10.0f, "trap1", Vector2D(), 1, 0.0f, 1, true, false);
 	//trap->addComponent<Image>(&sdlutils().images().at("catSmoking"));
 
 	/*

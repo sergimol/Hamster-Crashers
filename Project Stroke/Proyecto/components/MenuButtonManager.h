@@ -9,6 +9,7 @@
 #include "../sdlutils/InputHandler.h"
 
 #include "MenuButton.h"
+#include "MenuIndicator.h"
 
 class MenuButtonManager: public Component{
 public:
@@ -20,22 +21,36 @@ public:
 
 	void init() override;
 	void update() override;
-	void updateKeymap(KEYS x, bool is);
+
+	void moveUp();
+	void moveDown();
+	void moveRight();
+	void moveLeft();
+	void pressButton();
+
+	void onResume() override { timer_ = sdlutils().currRealTime() + cooldown_; };
+
+	void updateIndicator(int i, bool isUp);
+	void resetIndicators();
+
+	vector<vector<Entity*>> getButtons() const& { return buttons_; };
+	Vector2D getMagnitude() const& { return buttonsMagnitude_; };
+
+	void setButtonPos(int x, int y);
 
 private:
 	string menuMode_;
-	//Numero del estado en el que se muestra el menú
+	//Numero del estado en el que se muestra el menï¿½
 	int stateNumber_;
 
 	//Controla el boton activo dentro de la rejilla
 	Vector2D buttonsPosition_;
 	Vector2D buttonsMagnitude_;
 	vector<vector<Entity*>> buttons_;
+	vector<Entity*> indicators_;
 
 	GameStates* state_;
 	long unsigned int timer_, cooldown_; //Contador para movimiento entre botones
 
-	//Input
-	std::map<KEYS, bool> keymap;
 	Entity* background_;
 };

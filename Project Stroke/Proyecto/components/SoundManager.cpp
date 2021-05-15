@@ -34,13 +34,37 @@ void SoundManager::init() {
 
 	mainTheme = &sdlutils().soundEffects().at("mainTheme");
 
-	Mix_Volume(lighthits, 20);
-	Mix_Volume(stronghits, 60);
-	Mix_Volume(attacks, 20);
-	Mix_Volume(deps, 20);
-	Mix_Volume(heartattacks, 20);
-	Mix_Volume(musics, 8);
+	setVolumeChannels();
 	mainTheme->play(200, musics);
+}
+
+void SoundManager::setVolumeChannels() {
+	Mix_Volume(lighthits, generalFXvol * fxVol_);
+	Mix_Volume(stronghits, initStrongVol * fxVol_);
+	Mix_Volume(attacks, generalFXvol * fxVol_);
+	Mix_Volume(deps, generalFXvol * fxVol_);
+	Mix_Volume(heartattacks, generalFXvol * fxVol_);
+	Mix_Volume(musics, initMusicVol * musicVol_);
+}
+
+void SoundManager::lowVolume(bool musicChannel) {
+	if (musicChannel)
+		musicVol_ = musicVol_ - 0.2f;
+
+	else
+		fxVol_ = fxVol_ - 0.2f;
+
+	setVolumeChannels();
+}
+
+void SoundManager::upVolume(bool musicChannel) {
+	if (musicChannel) 
+		musicVol_ = musicVol_ + 0.2f;
+
+	else 
+		fxVol_ = fxVol_ + 0.2f;
+
+	setVolumeChannels();
 }
 
 void SoundManager::play(std::string soundName) {
@@ -124,7 +148,7 @@ void SoundManager::stronghit() {
 
 void SoundManager::attack() {
 	randomNum = pickRandom(5);
-	
+
 	switch (randomNum)
 	{
 	case 0:

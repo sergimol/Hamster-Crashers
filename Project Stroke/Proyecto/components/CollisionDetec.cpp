@@ -33,7 +33,7 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 	if (map->intersectWall(rectPlayer) || map->intersectObstacles(rectPlayer)) {
 
 		//Comprobamos si hay doble input
-		if (dir.getX() != 0 && dir.getY() != 0) {
+		if (dir.getX() != 0 && dir.getY() != 0 || vel.getX() != 0 && vel.getY() != 0) {
 
 			//Probamos con ignorar el Y
 			rectPlayer.y = tr_->getRectCollide().y;
@@ -45,10 +45,10 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 			}
 			else {
 				//Probamos ignorando la X
-				rectPlayer.y = tr_->getRectCollide().y + goalVel.getY();
+				rectPlayer.y += goalVel.getY();
 				rectPlayer.x = tr_->getRectCollide().x;
 
-				if (!map->intersectWall(rectPlayer) && !map->intersectObstacles(rectPlayer)) {
+				if (map->intersectWall(rectPlayer) || map->intersectObstacles(rectPlayer)) {
 					goalVel.setX(0);
 					vel.setX(0);
 				}
@@ -62,10 +62,8 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 		}
 		else {
 			//Dejo de moverme
-			if(dir.getX() != 0)
-				vel.setX(0);
-			if (dir.getY() != 0)
-				vel.setY(0);
+			vel.setX(0);
+			vel.setY(0);
 		}
 	}
 
@@ -75,24 +73,24 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 			mv_->setSpeed(speed_ * 4);
 		else
 			mv_->setSpeed(speed_);
-		if (rectPlayer.y < cam.y || rectPlayer.y + rectPlayer.h + 120 > pCam.getY() + cam.h / 2)
+		if (rectPlayer.y < cam.y || rectPlayer.y + tr_->getFloor() + rectPlayer.h + 120 > pCam.getY() + cam.h / 2)
 			vel.setY(-speed_.getY());
 	}
 	else {
 		if (rectPlayer.x < cam.x) {
 			if (entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamState() == State::GoingTo)
 				vel.setX(20);
-			else
-				vel.setX(0);
+			else 
+				vel.setX(0);			
 		}
 		else if (rectPlayer.x + rectPlayer.w > pCam.getX() + cam.w / 2) {
 			if (entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamState() == State::GoingTo)
 				vel.setX(-20);
-			else
+			else 
 				vel.setX(0);
 		}
-		if (rectPlayer.y < cam.y || rectPlayer.y + rectPlayer.h + 120 > pCam.getY() + cam.h / 2)
-			vel.setY(-speed_.getY()*4);
+		if (rectPlayer.y < cam.y || rectPlayer.y + rectPlayer.h + 120 > pCam.getY() + cam.h / 2) 
+			vel.setY(-speed_.getY() * 4);		
 	}
 
 	if (vel.getX() < 0.001 && vel.getX() > -0.001) vel.setX(0);

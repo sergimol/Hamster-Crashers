@@ -98,12 +98,13 @@ void EnemyBehaviour::setHamId(int hId, std::list<Entity*>::iterator it, char l) 
 	list = l;
 }
 void EnemyBehaviour::die() {
-	bool aux = entity_->hasComponent<EnemyStrongAttack>();
 	if (list == 'a') {
+		bool aux = entity_->hasComponent<EnemyStrongAttack>();
 		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAttackList(hamId_, listIterator, aux);
 		list = '0';
 	}
 	else if (list == 'b') {
+		bool aux = entity_->hasComponent<EnemyStrongAttack>();
 		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAmbushList(hamId_, listIterator, aux);
 		list = '0';
 	}
