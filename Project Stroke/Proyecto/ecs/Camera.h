@@ -18,9 +18,11 @@
 const enum State { Players, GoingTo, Static, BossCat };
 class Camera : public Component {
 private:
+	const float upOffset = -205;
 	SDL_Rect camera_;
 	Vector2D camPos;
 	int players;
+	int heightMap_= 0;
 
 	void followPlayer();
 	void followBossCat();
@@ -43,8 +45,9 @@ public:
 	inline SDL_Rect getCam() const{ return camera_; };
 	void changeCamFollowPos(int objetive);
 	inline void changeCamState(State estado) { cameraState = estado; };
-	inline State getCamState() {return cameraState;};
-	inline Vector2D getCamPos() { return camPos; };
+	inline State getCamState() const {return cameraState;};
+	inline Vector2D getCamPos() const { return camPos; };
+	inline float getUpOffset() const { return upOffset; };
 	Vector2D cameraFollowPos_;	//Guarda el punto de la posición de la camara cuando lo lea
 
 	void setGoToTracker(bool objetivo) {GoToTracker = objetivo;};

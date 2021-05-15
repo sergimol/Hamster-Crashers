@@ -28,8 +28,8 @@ void Camera::checkBounds() {
 		camera_.x = map_->getMaxW() - camera_.w;
 	}
 
-	if (camera_.y < -205)
-		camera_.y = -205;
+	if (camera_.y < upOffset - heightMap_)
+		camera_.y = upOffset - heightMap_;
 	else if (camera_.y + camera_.h > map_->getMaxH())
 		camera_.y = map_->getMaxH() - camera_.h;
 
@@ -41,7 +41,7 @@ void Camera::followPlayer() {
 	cameraFollowPos_ = Vector2D(-1, -1);
 	camPos = newObjetivo();
 	players = 0;
-	
+
 	//Actualizamos la posicion de la camara
 	camera_.x = camPos.getX() - camera_.w / 2;
 	camera_.y = camPos.getY() - camera_.h / 2;
@@ -78,14 +78,14 @@ void Camera::Goto() {
 		camera_.x = camera_.x - speed;
 	else
 		check1 = true;
-	
+
 	camera_.y = CamStaticPos.getY() - camera_.h / 2;
 
 	//Cuando se ajusta la camara pasa al estado "Static"
-	if (check1 && GoToTracker) 
+	if (check1 && GoToTracker)
 		cameraState = Static;
-	
-	else if (check1 && !GoToTracker) 
+
+	else if (check1 && !GoToTracker)
 		cameraState = Players;
 }
 
@@ -95,14 +95,19 @@ Vector2D Camera::newObjetivo() {
 	Vector2D CamStaticPos;
 	camPos = Vector2D();
 	players = 0;
+	float minH = -1;
+
 	//Calculamos punto medio de los hamsters
 	Vector2D playerMidPos;
 	auto& players_ = entity_->getMngr()->getPlayers();
 	for (Entity* e : players_) {
-		auto& playerpos = e->getComponent<Transform>()->getPos();
+		auto* tr = e->getComponent<Transform>();
+		auto& playerpos = tr->getPos();
 		// Operaci�n para calcular el punto medio con m�s jugadores
-		camPos = camPos + playerpos + (Vector2D(e->getComponent<Transform>()->getW(), e->getComponent<Transform>()->getH()) / 2);
+		camPos = camPos + playerpos + (Vector2D(tr->getW(), tr->getH()) / 2);
 		players++;
+		if (minH == -1 || tr->getFloor() < minH)
+			minH = tr->getFloor();
 	}
 	//Actualizamos la posicion central de los 4 jugadores
 	playerMidPos = Vector2D((camPos.getX() / players), (camPos.getY() / players));
@@ -116,8 +121,12 @@ Vector2D Camera::newObjetivo() {
 		//CamStaticPos = CameraFollowPos;
 		CamStaticPos.setX(cameraFollowPos_.getX() + osci);
 
-	CamStaticPos.setY(CamStaticPos.getY() - 205);
+	if (minH != -1 && minH != heightMap_) {
+		map_->setMaxH(map_->getMaxH() + (heightMap_ - minH));
+		heightMap_ = minH;
+	}
 
+	CamStaticPos.setY(CamStaticPos.getY() + upOffset - heightMap_);
 	return CamStaticPos;
 }
 

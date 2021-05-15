@@ -112,11 +112,11 @@ void MapMngr::update() {
 }
 
 void MapMngr::loadNewMap(string map) {
-	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
 
 	if (map_.load(map)) {
 
-		mapHeight_ = map_.getProperties()[0].getIntValue();
+		mapHeight_ = map_.getProperties()[0].getIntValue() * TAM_CELDA * scale;
 
 		mapDimensions_ = map_.getTileCount();
 		const auto& layers = map_.getLayers();
@@ -147,24 +147,25 @@ void MapMngr::loadNewMap(string map) {
 
 		//Fondos
 		auto* o = entity_->getMngr()->addBackGround();
+		auto upH = mapHeight_ - cam->getCam().h + cam->getUpOffset();
 		o->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
-		//Para meter un fondo meter esto									velocidad		tamaño       posicion
-		o->addComponent<Parallax>(&sdlutils().images().at("level1background1"), 30, Vector2D(1920, 1459), Vector2D(0, -205), false);
+		//Para meter un fondo meter esto									velocidad		tamaño			posicion
+		o->addComponent<Parallax>(&sdlutils().images().at("level1background1"), 30, Vector2D(1920, 1459), Vector2D(0, upH), false);
 
 		auto* p = entity_->getMngr()->addBackGround();
 		p->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
-		//Para meter un fondo meter esto                              velocidad  tamaño            posicion
-		p->addComponent<Parallax>(&sdlutils().images().at("level1background2"), 20, Vector2D(1920, 1459), Vector2D(0, -205), false);
+		//Para meter un fondo meter esto									velocidad		tamaño			posicion
+		p->addComponent<Parallax>(&sdlutils().images().at("level1background2"), 20, Vector2D(1920, 1459), Vector2D(0, upH), false);
 
 		auto* q = entity_->getMngr()->addBackGround();
 		q->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
-		//Para meter un fondo meter esto                              velocidad  tamaño            posicion
-		q->addComponent<Parallax>(&sdlutils().images().at("level1background3"), 10, Vector2D(1920, 1459), Vector2D(0, -205), false);
+		//Para meter un fondo meter esto									velocidad		tamaño			posicion
+		q->addComponent<Parallax>(&sdlutils().images().at("level1background3"), 10, Vector2D(1920, 1459), Vector2D(0, upH), false);
 
 		auto* r = entity_->getMngr()->addFrontGround();
 		r->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
-		//Para meter un fondo meter esto                              velocidad  tamaño            posicion
-		r->addComponent<Parallax>(&sdlutils().images().at("level1background4"), 10, Vector2D(1920, 1459), Vector2D(0, -355), true);
+		//Para meter un fondo meter esto									velocidad		tamaño			posicion
+		r->addComponent<Parallax>(&sdlutils().images().at("level1background4"), 10, Vector2D(1920, 1459), Vector2D(0, upH - 150), true);
 
 		for (const auto& layer : layers)
 		{

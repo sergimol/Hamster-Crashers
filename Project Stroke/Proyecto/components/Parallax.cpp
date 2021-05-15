@@ -48,6 +48,8 @@ void Parallax::init()
 	backRight->addComponent<BackGround>(tex_, pxVel_);
 	rightTr_ = backRight->getComponent<Transform>();
 	assert(rightTr_ != nullptr);
+
+	camOffset_ = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getUpOffset();
 }
 
 void Parallax::update()
@@ -58,17 +60,24 @@ void Parallax::update()
 
 void Parallax::checkRelativePos()
 {
-	camPos_ = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamPos();
-	if (camPos_.getX() >= rightTr_->getPos().getX())
+	camPos_ = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+
+	float y = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->getMaxH() - camPos_.h + camOffset_;
+
+	if (camPos_.x >= rightTr_->getPos().getX())
 	{		
-		leftTr_->setPos(Vector2D(leftTr_->getPos().getX() + leftTr_->getW(), leftTr_->getPos().getY()));
-		centerTr_->setPos(Vector2D(centerTr_->getPos().getX() + centerTr_->getW(), leftTr_->getPos().getY()));
-		rightTr_->setPos(Vector2D(rightTr_->getPos().getX() + rightTr_->getW(), leftTr_->getPos().getY()));
+		leftTr_->getPos().setX(leftTr_->getPos().getX() + leftTr_->getW());
+		centerTr_->getPos().setX(centerTr_->getPos().getX() + centerTr_->getW());
+		rightTr_->getPos().setX(rightTr_->getPos().getX() + rightTr_->getW());
 	}
-	else if(camPos_.getX() <= centerTr_->getPos().getX())
+	else if(camPos_.x <= centerTr_->getPos().getX())
 	{
-		leftTr_->setPos(Vector2D(leftTr_->getPos().getX() - leftTr_->getW(), leftTr_->getPos().getY()));
-		centerTr_->setPos(Vector2D(centerTr_->getPos().getX() - centerTr_->getW(), leftTr_->getPos().getY()));
-		rightTr_->setPos(Vector2D(rightTr_->getPos().getX() - rightTr_->getW(), leftTr_->getPos().getY()));
+		leftTr_->getPos().setX(leftTr_->getPos().getX() - leftTr_->getW());
+		centerTr_->getPos().setX(centerTr_->getPos().getX() - centerTr_->getW());
+		rightTr_->getPos().setX(rightTr_->getPos().getX() - rightTr_->getW());
 	}	
+
+	leftTr_->getPos().setY(y);
+	centerTr_->getPos().setY(y);
+	rightTr_->getPos().setY(y);
 }
