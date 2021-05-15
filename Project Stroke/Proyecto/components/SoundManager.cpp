@@ -32,6 +32,38 @@ void SoundManager::init() {
 	heartattack1 = &sdlutils().soundEffects().at("heartattack1");
 	heartattack2 = &sdlutils().soundEffects().at("heartattack2");
 
+	dialogue0 = &sdlutils().soundEffects().at("heartattack2");;
+	dialogue1 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue2 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue3 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue4 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue5 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue6 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue7 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue8 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue9 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue10 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue11 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue12 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue13 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue14 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue15 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue16 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue17 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue18 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue19 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue20 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue21 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue22 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue23 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue24 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue25 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue26 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue27 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue28 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue29 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue30 = &sdlutils().soundEffects().at("heartattack2");
+
 	mainTheme = &sdlutils().soundEffects().at("mainTheme");
 
 	setVolumeChannels();
@@ -45,6 +77,8 @@ void SoundManager::setVolumeChannels() {
 	Mix_Volume(deps, generalFXvol * fxVol_);
 	Mix_Volume(heartattacks, generalFXvol * fxVol_);
 	Mix_Volume(musics, initMusicVol * musicVol_);
+
+	Mix_Volume(subtitles, initSubtitleVol * musicVol_);
 }
 
 void SoundManager::lowVolume(bool musicChannel) {
@@ -58,10 +92,10 @@ void SoundManager::lowVolume(bool musicChannel) {
 }
 
 void SoundManager::upVolume(bool musicChannel) {
-	if (musicChannel) 
+	if (musicChannel)
 		musicVol_ = musicVol_ + 0.2f;
 
-	else 
+	else
 		fxVol_ = fxVol_ + 0.2f;
 
 	setVolumeChannels();
@@ -82,6 +116,9 @@ void SoundManager::play(std::string soundName) {
 	}
 	else if (soundName == "heartattack") {
 		heartattack();
+	}
+	else if (soundName == "subtitle") {
+		subtitle();
 	}
 }
 
@@ -217,4 +254,48 @@ int SoundManager::pickRandom(int max) {
 	int randomNum;
 	randomNum = sdlutils().rand().nextInt(0, max);
 	return randomNum;
+}
+
+void SoundManager::subtitle() {
+
+	switch (dialogueNum)
+	{
+	case 0:
+		dialogue0->play(0, subtitles);
+		break;
+	case 1:
+		dialogue1->play(0, subtitles);
+		break;
+	case 2:
+		dialogue2->play(0, subtitles);
+		break;
+	case 3:
+		dialogue3->play(0, subtitles);
+		break;
+	case 4:
+		dialogue4->play(0, subtitles);
+		break;
+	case 5:
+		dialogue5->play(0, subtitles);
+		break;
+	case 6:
+		dialogue6->play(0, subtitles);
+		break;
+	case 7:
+		dialogue7->play(0, subtitles);
+		break;
+	case 8:
+		dialogue8->play(0, subtitles);
+		break;
+	case 9:
+		dialogue9->play(0, subtitles);
+		break;
+	case 10:
+		dialogue10->play(0, subtitles);
+		break;
+	default:
+		break;
+	}
+
+	dialogueNum++;	//La proxima vez se reproducira el siguiente dialogo
 }

@@ -28,6 +28,7 @@ public:
 	int deps = 3;
 	int heartattacks = 4;
 	int musics = 5;
+	int subtitles = 6;
 
 	//volumes
 	//general
@@ -37,9 +38,11 @@ public:
 	int generalFXvol = 20;
 	int initStrongVol = 60;
 	int initMusicVol = 8;
+	int initSubtitleVol = 20;
 
 private:
 	int randomNum;
+	int dialogueNum = 0;
 
 	void lighthit();
 
@@ -50,6 +53,8 @@ private:
 	void dep();
 
 	void heartattack();
+
+	void subtitle();
 
 	int pickRandom(int max);
 
@@ -87,6 +92,38 @@ private:
 	SoundEffect* heartattack2;
 
 	SoundEffect* mainTheme;
+
+	SoundEffect* dialogue0;
+	SoundEffect* dialogue1;
+	SoundEffect* dialogue2;
+	SoundEffect* dialogue3;
+	SoundEffect* dialogue4;
+	SoundEffect* dialogue5;
+	SoundEffect* dialogue6;
+	SoundEffect* dialogue7;
+	SoundEffect* dialogue8;
+	SoundEffect* dialogue9;
+	SoundEffect* dialogue10;
+	SoundEffect* dialogue11;
+	SoundEffect* dialogue12;
+	SoundEffect* dialogue13;
+	SoundEffect* dialogue14;
+	SoundEffect* dialogue15;
+	SoundEffect* dialogue16;
+	SoundEffect* dialogue17;
+	SoundEffect* dialogue18;
+	SoundEffect* dialogue19;
+	SoundEffect* dialogue20;
+	SoundEffect* dialogue21;
+	SoundEffect* dialogue22;
+	SoundEffect* dialogue23;
+	SoundEffect* dialogue24;
+	SoundEffect* dialogue25;
+	SoundEffect* dialogue26;
+	SoundEffect* dialogue27;
+	SoundEffect* dialogue28;
+	SoundEffect* dialogue29;
+	SoundEffect* dialogue30;
 
 };
 
