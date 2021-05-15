@@ -1,5 +1,6 @@
 #include "Transition.h"
 #include "ImageSecuence.h"
+#include "SoundManager.h"
 #include "MapMngr.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../ecs/Entity.h"
@@ -47,7 +48,7 @@ void Transition::fadeOut() {
 		}
 	}
 
-// Comprueba si hay textura
+	// Comprueba si hay textura
 	if (tx_) {
 		// Setea el alpha de la textura
 		tx_->setAlpha(alpha);
@@ -74,9 +75,10 @@ void Transition::fadeIn() {
 	if (alpha == SDL_ALPHA_OPAQUE) {
 		if (subs_ != nullptr) {
 			subs_->dialogoStateChange();
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("subtitle");
 		}
 	}
-// Comprueba si hay textura
+	// Comprueba si hay textura
 	if (tx_) {
 		// Setea el alpha de la textura
 		tx_->setAlpha(alpha);
@@ -112,7 +114,7 @@ void Transition::sceneTransition() {
 			//Si la entidad que voy a coger no es la camara...
 			if (e->getMngr()->getHandler<Camera__>() != e && e->getMngr()->getHandler<LevelHandlr>() != e
 				&& e->getMngr()->getHandler<StateMachine>() != e && e->getMngr()->getHandler<Mother>() != e
-				&& e->getMngr()->getHandler<PauseMenu>() != e && e->getMngr()->getHandler<Map>() != e)
+				&& e->getMngr()->getHandler<PauseMenu>() != e && e->getMngr()->getHandler<Map>() != e && e->getMngr()->getHandler<SoundManager>() != e)
 				//La elimino
 				e->setActive(false);
 		}
@@ -139,7 +141,7 @@ void Transition::sceneTransition() {
 
 		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearColliders();
 	}
-	
+
 	//Y creamos uno nuevo
 	auto* images = entity_->getMngr()->addFrontGround();
 	images->addComponent<ImageSecuence>(nameScene_);
