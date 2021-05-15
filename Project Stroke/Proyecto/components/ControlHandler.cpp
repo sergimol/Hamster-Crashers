@@ -430,7 +430,7 @@ void ControlHandler::handleKeyboard() {
 				lt_->attack();
 		}
 		//ATAQUE FUERTE
-		else if (hamState != HamStates::ABILITY && /*(ih().getMouseButtonState(InputHandler::MOUSEBUTTON::RIGHT ) == 1 ||*/ ih().isKeyDown(keymap.at(SATTACK)))/*) */{
+		else if (hamState != HamStates::ABILITY && (ih().getMouseButtonState(InputHandler::MOUSEBUTTON::RIGHT ) == 1 ||ih().isKeyDown(keymap.at(SATTACK)))) {
 			//Solo ataca si la habilidad está activada
 			if (st_->isActive())
 				st_->attack();
