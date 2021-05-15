@@ -18,7 +18,5 @@ private:
 	int dmg_;
 	int heal_;
 
-	const float WAIT = 2000;
-
 	void prayAbility();
 };

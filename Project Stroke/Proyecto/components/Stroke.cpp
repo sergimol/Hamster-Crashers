@@ -3,6 +3,7 @@
 #include "../components/Poison.h"
 #include "../components/Pray.h"
 #include "../components/Turret.h"
+#include "../components/WarCry.h"
 #include "../components/Gravity.h"
 #include "../components/Image.h"
 #include "../components/GhostCtrl.h"
@@ -23,6 +24,7 @@ void Stroke::init() {
 	if (ab_ == nullptr) ab_ = entity_->getComponent<Pray>();
 	if (ab_ == nullptr) ab_ = entity_->getComponent<Poison>();
 	if (ab_ == nullptr) ab_ = entity_->getComponent<Turret>();
+	if (ab_ == nullptr) ab_ = entity_->getComponent<WarCry>();
 
 	assert(ab_ != nullptr);
 

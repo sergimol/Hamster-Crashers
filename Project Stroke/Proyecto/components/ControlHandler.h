@@ -12,6 +12,7 @@
 #include "Pray.h"
 #include "Turret.h"
 #include "Poison.h"
+#include "WarCry.h"
 #include "LightAttack.h"
 #include "StrongAttack.h"
 #include "HamsterStateMachine.h"

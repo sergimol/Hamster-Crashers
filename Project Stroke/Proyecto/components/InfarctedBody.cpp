@@ -9,6 +9,7 @@
 #include "../components/Poison.h"
 #include "../components/Pray.h"
 #include "../components/Turret.h"
+#include "../components/WarCry.h"
 #include "../components/PossesionGame.h"
 
 #include "../utils/Collisions.h"
@@ -24,6 +25,7 @@ void InfarctedBody::init() {
 	if (ab_ == nullptr) ab_ = hamster->getComponent<Pray>();
 	if (ab_ == nullptr) ab_ = hamster->getComponent<Poison>();
 	if (ab_ == nullptr) ab_ = hamster->getComponent<Turret>();
+	if (ab_ == nullptr) ab_ = hamster->getComponent<WarCry>();
 
 	assert(ab_ != nullptr);
 

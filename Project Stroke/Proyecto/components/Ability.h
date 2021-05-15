@@ -12,9 +12,11 @@
 
 class Ability : public Component {
 public:
-	Ability() : tr_(nullptr), st_(nullptr), timer_(-1000), cooldown_(1000) {};
+	Ability() : tr_(nullptr), st_(nullptr), timer_(-1000), cooldown_(1000), 
+				anim_(nullptr), state_(nullptr), txtOff(nullptr), txtOn(nullptr){};
 
-	Ability(int cd) : tr_(nullptr), st_(nullptr), timer_(-cd), cooldown_(cd) {};
+	Ability(int cd) : tr_(nullptr), st_(nullptr), timer_(-cd), cooldown_(cd),
+				anim_(nullptr), state_(nullptr), txtOff(nullptr), txtOn(nullptr) {};
 
 	virtual ~Ability() {};
 

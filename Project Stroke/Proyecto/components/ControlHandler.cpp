@@ -15,16 +15,18 @@ void ControlHandler::init() {
 	string id = entity_->getComponent<EntityAttribs>()->getId();
 
 	if (id == "sardinilla") {
-		ab_ = entity_->getComponent<Roll>();
-		//ab_ = entity_->getComponent<Turret>();
-		roll_ = entity_->getComponent<Roll>();
+		ab_ = entity_->getComponent<WarCry>();
+		//ab_ = entity_->getComponent<Roll>();
+		//roll_ = entity_->getComponent<Roll>();
 	}
 	else if (id == "canelon")
 		ab_ = entity_->getComponent<Pray>();
 	else if (id == "keta")
 		ab_ = entity_->getComponent<Poison>();
-	else
+	else if (id == "monchi")
 		ab_ = entity_->getComponent<Turret>();
+	else
+		ab_ = entity_->getComponent<WarCry>();
 
 	assert(ab_ != nullptr);
 	//assert(roll_ != nullptr); PUEDE SER NULLPTR

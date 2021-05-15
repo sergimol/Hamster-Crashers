@@ -33,6 +33,13 @@ public:
 
 	void attack();
 
+	inline int getCadence() {
+		return cooldown_;
+	}
+	inline void setCadence(int newCad) {
+		cooldown_ = newCad;
+	}
+
 private:
 	Transform* tr_;
 	SDL_Rect attRect_;
