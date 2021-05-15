@@ -268,6 +268,7 @@ private:
 	std::vector<Entity*> fgs_;
 	std::vector<Entity*> menus_;
 
+
 	std::array<Entity*, ecs::maxHdlr> hdlrs_;
 	std::array<std::unique_ptr<System>, ecs::maxSystem> sys_;
 

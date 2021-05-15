@@ -122,6 +122,7 @@ void Stroke::infarctHamster() {
 
 	//Y cambiamos la interfaz
 	entity_->getComponent<HeartUI>()->dep();
+	entity_->getComponent<UI>()->dep("3");
 
 	//hms_->getState() = HamStates::INFARCTED;
 	this->setActive(false);

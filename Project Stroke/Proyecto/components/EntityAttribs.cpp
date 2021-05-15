@@ -196,7 +196,7 @@ bool EntityAttribs::recieveDmg(int dmg) {
 		}
 		//Actualizamos UI
 		if (entity_->hasComponent<UI>())
-			entity_->getComponent<UI>()->dep();
+			entity_->getComponent<UI>()->dep("2");
 		//Actualizamos UI
 		if (entity_->hasComponent<HeartUI>())
 			entity_->getComponent<HeartUI>()->dep();
@@ -218,7 +218,7 @@ void EntityAttribs::die() {
 	Entity* e = entity_->getMngr()->addEntity();
 
 	//Le metemos un transform para su posicion
-	e->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip(), tr_->getScaleW(), tr_->getScaleH());
+	e->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0,  tr_->getZ(), tr_->getFlip(), tr_->getScaleW(), tr_->getScaleH());
 
 	//Y reproducimos la animacion de muerto
 	e->addComponent<Animator>(&sdlutils().images().at(id_ + "Sheet"),
@@ -234,7 +234,7 @@ void EntityAttribs::die() {
 	//Si la persona que muere es un hamster...
 	if (!entity_->hasGroup<Enemy>()) {
 		//Ponemos su UI a 'Muerto'
-		e->addComponent<UI>(id_, entity_->getComponent<UI>()->getPosUI())->dep();
+		e->addComponent<UI>(id_, entity_->getComponent<UI>()->getPosUI())->dep("2");
 		hms_->getState() = HamStates::DEAD;
 		//Desactivamos el componente del hasmter vivo
 		entity_->getComponent<Animator>()->setActive(false);

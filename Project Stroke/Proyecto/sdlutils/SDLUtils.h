@@ -90,6 +90,10 @@ public:
 		SDL_RenderSetScale(renderer_, width_ / 1920.0f, height_ / 1080.f);
 	}
 
+	inline Vector2D getResolutionRelation() const& {
+		return Vector2D(width_ / 1920.0f, height_ / 1080.0f);
+	}
+
 	inline void lowerResolution() {
 		if (resolutionIndex_ > 0)
 			resolutionIndex_--;

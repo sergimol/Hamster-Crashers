@@ -40,6 +40,9 @@ private:
 
 	void handleKeyboard();
 	bool handleController(int controller);
+	void handleMouse();
+
+	bool mouseInButton(float x, float y, SDL_Rect const& button);
 
 	int stateNumber_;
 };

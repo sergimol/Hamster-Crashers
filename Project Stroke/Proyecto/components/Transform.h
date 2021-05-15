@@ -38,10 +38,10 @@ public:
 		rectCollide.x = pos.getX() + (width * ((1 - scaleCollideW) / 2));
 		rectCollide.y = pos.getY() + (height * ((1 - scaleCollideH) / 2));
 
-		rectCollideFeet.w = (width_ * scaleCollideW);
-		rectCollideFeet.h = (height_ * scaleCollideH / 3);
-		rectCollideFeet.x = pos.getX() + (width * ((1 - scaleCollideW) / 2));
-		rectCollideFeet.y = pos.getY() + (height * ((1 - scaleCollideH) / 2) + height_ * scaleCollideH);
+		//rectCollideFeet.w = (width_ * scaleCollideW);
+		//rectCollideFeet.h = (height_ * scaleCollideH / 3);
+		//rectCollideFeet.x = pos.getX() + (width * ((1 - scaleCollideW) / 2));
+		//rectCollideFeet.y = pos.getY() + (height * ((1 - scaleCollideH) / 2) + height_ * scaleCollideH);
 	}
 
 	Transform(Vector2D pos, Vector2D vel, float width, float height,
@@ -135,8 +135,8 @@ public:
 
 	SDL_Rect getRectCollide() const {
 		return rectCollide;
-	}	
-	
+	}
+
 	SDL_Rect getRectCollideFeet() const {
 		return rectCollideFeet;
 	}

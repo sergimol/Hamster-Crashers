@@ -80,6 +80,8 @@ class FinalBossPunch;
 class TimeTrap;
 class MicroOndasManager;
 class MenuIndicator;
+class dialogos;
+
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -161,7 +163,8 @@ class MenuIndicator;
 	FinalBossPunch,\
 	TimeTrap,\
 	MicroOndasManager, \
-	MenuIndicator
+	MenuIndicator,\
+	dialogos
 
 // groups
 
@@ -191,6 +194,7 @@ struct Pussy;
 struct PlayerQuantityMenu;
 struct HamsterSelectionMenu;
 struct OptionsMenu;
+struct dialogosMngr;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
@@ -206,7 +210,8 @@ struct OptionsMenu;
 					SoundManager, \
 					Pussy, \
 					MainMenu, \
-					OptionsMenu
+					OptionsMenu, \
+					dialogosMngr
 
 
 //systems

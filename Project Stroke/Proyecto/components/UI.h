@@ -16,7 +16,7 @@ public:
 
 	void init() override;
 	void render() override;
-	void dep();
+	void dep(std::string s);
 	void bar(float objetivo);
 
 	Vector2D getBarPos() { return renderPosBar; };
@@ -27,15 +27,21 @@ public:
 private:
 	//Texturas de la UI
 	Texture* face_;
+	Texture* hexagon_;
 	Texture* bar_;
+	Texture* background_;
 
 	//DestRects
 	SDL_Rect dest;	//Face
 	SDL_Rect dest3;	//Bar
+	SDL_Rect dest2;	//Background
+	SDL_Rect dest4;	//Hexagono
 
 	//Posiciones de los destRects
 	Vector2D renderPosHead;
+	Vector2D renderPosBack;
 	Vector2D renderPosBar;
+	Vector2D renderPosHexagon;
 
 	//Nombre del personaje que contiene la UI, todo en minusculas
 	std::string name;	

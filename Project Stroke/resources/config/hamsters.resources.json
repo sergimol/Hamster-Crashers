@@ -44,55 +44,79 @@
     },
     {
       "id": "bar",
-      "file": "resources/images/UI/bar.png"
+      "file": "resources/images/UI/hamsterUI/healthbar.png"
+    },
+    {
+      "id": "hamsBackGround",
+      "file": "resources/images/UI/hamsterUI/background.png"
     },
     {
       "id": "barEnemy",
-      "file": "resources/images/UI/barEnemy.png"
+      "file": "resources/images/UI/bossUI/bossHealthBar.png"
+    },
+    {
+      "id": "heart0",
+      "file": "resources/images/UI/hamsterUI/heart0.png"
     },
     {
       "id": "heart1",
-      "file": "resources/images/UI/heart1.png"
+      "file": "resources/images/UI/hamsterUI/heart1.png"
     },
     {
       "id": "heart2",
-      "file": "resources/images/UI/heart2.png"
+      "file": "resources/images/UI/hamsterUI/heart2.png"
     },
     {
       "id": "heart3",
-      "file": "resources/images/UI/heart3.png"
+      "file": "resources/images/UI/hamsterUI/heart3.png"
     },
     {
       "id": "sardinillaHead1",
-      "file": "resources/images/UI/sardinillaHead1.png"
+      "file": "resources/images/UI/hamsterUI/sardinillaHead.png"
     },
     {
       "id": "sardinillaHead2",
-      "file": "resources/images/UI/sardinillaHead2.png"
+      "file": "resources/images/UI/hamsterUI/sardinillaHeadDep.png"
+    },
+    {
+      "id": "sardinillaHead3",
+      "file": "resources/images/UI/hamsterUI/sardinillaHeadGhost.png"
     },
     {
       "id": "ketaHead1",
-      "file": "resources/images/UI/ketaHead1.png"
+      "file": "resources/images/UI//hamsterUI/ketaHead.png"
     },
     {
       "id": "ketaHead2",
-      "file": "resources/images/UI/ketaHead2.png"
+      "file": "resources/images/UI//hamsterUI/ketaHeadDep.png"
+    },
+    {
+      "id": "ketaHead3",
+      "file": "resources/images/UI//hamsterUI/ketaHeadGhost.png"
     },
     {
       "id": "monchiHead1",
-      "file": "resources/images/UI/monchiHead1.png"
+      "file": "resources/images/UI//hamsterUI/monchiHead.png"
     },
     {
       "id": "monchiHead2",
-      "file": "resources/images/UI/monchiHead2.png"
+      "file": "resources/images/UI//hamsterUI/monchiHeadDep.png"
+    },
+    {
+      "id": "monchiHead3",
+      "file": "resources/images/UI//hamsterUI/monchiHeadGhost.png"
     },
     {
       "id": "canelonHead1",
-      "file": "resources/images/UI/canelonHead1.png"
+      "file": "resources/images/UI//hamsterUI/canelonHead.png"
     },
     {
       "id": "canelonHead2",
-      "file": "resources/images/UI/canelonHead2.png"
+      "file": "resources/images/UI//hamsterUI/canelonHeadDep.png"
+    },
+    {
+      "id": "canelonHead3",
+      "file": "resources/images/UI//hamsterUI/canelonHeadGhost.png"
     },
     {
       "id": "enemigoFuerte",
@@ -109,6 +133,14 @@
     {
       "id": "sardinillaSheet3",
       "file": "resources/images/sardinilla_spritesheetPos.png"
+    },
+    {
+      "id": "canelonGodSheet",
+      "file": "resources/images/canelonGod_spritesheet.png"
+    },
+    {
+      "id": "canelonDemonSheet",
+      "file": "resources/images/canelonDemon_spritesheet.png"
     },
     {
       "id": "firstBoss",
@@ -143,28 +175,64 @@
       "file": "resources/images/tiled/TileLvl1.png"
     },
     {
+      "id": "suelo",
+      "file": "resources/images/tiled/tilesetSueloLevel1.png"
+    },
+    {
+      "id": "objetos",
+      "file": "resources/images/tiled/tilesetObjetosLevel1.png"
+    },
+    {
+      "id": "sombrasObjetos",
+      "file": "resources/images/tiled/tilesetSombrasObjetosLevel1.png"
+    },
+    {
       "id": "q",
       "file": "resources/images/tecla_Q.png"
     },
     {
       "id": "r",
-      "file": "resources/images/tecla_R.png"
+      "file": "resources/images/UI/keys/r.png"
     },
     {
       "id": "a",
-      "file": "resources/images/tecla_A.png"
+      "file": "resources/images/UI/keys/a.png"
+    },
+    {
+      "id": "b",
+      "file": "resources/images/UI/keys/b.png"
+    },
+    {
+      "id": "d",
+      "file": "resources/images/UI/keys/d.png"
+    },
+    {
+      "id": "s",
+      "file": "resources/images/UI/keys/s.png"
+    },
+    {
+      "id": "w",
+      "file": "resources/images/UI/keys/w.png"
+    },
+    {
+      "id": "x",
+      "file": "resources/images/UI/keys/x.png"
+    },
+    {
+      "id": "y",
+      "file": "resources/images/UI/keys/y.png"
     },
     {
       "id": "a2",
-      "file": "resources/images/tecla_A2.png"
+      "file": "resources/images/UI/keys/a2.png"
     },
     {
       "id": "linea",
-      "file": "resources/images/linea.png"
+      "file": "resources/images/UI/reanimationUI/horizontalBar.png"
     },
     {
       "id": "lineaV",
-      "file": "resources/images/lineaV.png"
+      "file": "resources/images/UI/reanimationUI/verticalBar.png"
     },
     {
       "id": "MAYONESITO",
@@ -523,42 +591,45 @@
       "file": "resources/images/menuSprites/fourPlayersButtonEnter.png"
     },
     {
-      "id": "sardinillaOn",
-      "file": "resources/images/UI/sardinillaAbilitiOn.png"
+      "id": "AbilityOn",
+      "file": "resources/images/UI/keys/r.png"
     },
     {
-      "id": "sardinillaOff",
-      "file": "resources/images/UI/sardinillaAbilitiOff.png"
+      "id": "AbilityOff",
+      "file": "resources/images/UI/keys/a.png"
     },
     {
-      "id": "monchiOn",
-      "file": "resources/images/UI/monchiAbilitiOn.png"
-    },
-    {
-      "id": "monchiOff",
-      "file": "resources/images/UI/monchiAbilitiOff.png"
-    },
-    {
-      "id": "ketaOn",
-      "file": "resources/images/UI/ketaAbilitiOn.png"
-    },
-    {
-      "id": "ketaOff",
-      "file": "resources/images/UI/ketaAbilitiOff.png"
-    },
-    {
-      "id": "canelonOn",
-      "file": "resources/images/UI/canelonAbilitiOn.png"
-    },
-    {
-      "id": "canelonOff",
-      "file": "resources/images/UI/canelonAbilitiOff.png"
+      "id": "Hexagon",
+      "file": "resources/images/UI/bossUI/bossIconHead.png"
     },
     {
       "id": "obstacleBox",
       "file": "resources/images/objects/obstacleBox.png"
+    },
+    {
+      "id": "dialogoAngel",
+      "file": "resources/images/dialogue/angelo.png"
+    },
+    {
+      "id": "dialogoBarra",
+      "file": "resources/images/dialogue/barradialogo.png"
+    },
+    {
+      "id": "dialogo0",
+      "file": "resources/images/dialogue/dialogo0.png"
+    },
+    {
+      "id": "explicacion0",
+      "file": "resources/images/dialogue/explicacion0.png"
+    },
+    {
+      "id": "dialogo1",
+      "file": "resources/images/dialogue/dialogo1.png"
+    },
+    {
+      "id": "explicacion1",
+      "file": "resources/images/dialogue/explicacion1.png"
     }
-
 
   ],
 
