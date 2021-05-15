@@ -1,5 +1,4 @@
 #pragma once
-// This file is part of the course TPV2@UCM - Samir Genaim
 
 #include "../ecs/Component.h"
 #include "../ecs/Entity.h"
@@ -11,7 +10,7 @@
 
 class subtitulos : public Component {
 public:
-	subtitulos();
+	subtitulos(string actualSub, int transitionNum);
 	virtual ~subtitulos() {};
 
 	void render() override;
@@ -42,8 +41,9 @@ private:
 	bool showDialogue = false;
 	bool renderDialogues = false;
 	bool firstDialogue = true;
-	float position = 1;			//Desplaza verticalmente los destrects
+	float position = 3.0f;			//Desplaza verticalmente los destrects
 
-
+	string actualSub_;
+	int transitionNum_;
 
 };

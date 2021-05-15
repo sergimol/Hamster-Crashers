@@ -64,7 +64,7 @@ private:
 	//MenuButtonManager* main_;
 	bool hasController_;
 
-	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
+	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE, ABILITY, LATTACK, SATTACK };
 
 	std::map<KEYS ,SDL_Scancode> keymap;
 	//std::map<KEYS, bool> keymap; //lo voy a necesitar de verdad?

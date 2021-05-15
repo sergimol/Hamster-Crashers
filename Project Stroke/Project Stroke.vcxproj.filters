@@ -471,6 +471,9 @@
     <ClCompile Include="Proyecto\components\WarCry.cpp">
       <Filter>Archivos de origen\components\Entity\Hamster\Ability</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\subtitulos.cpp">
+      <Filter>Archivos de origen\components\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -808,6 +811,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\WarCry.h">
       <Filter>Archivos de encabezado\Components\Entity\Hamster\Ability</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\subtitulos.h">
+      <Filter>Archivos de encabezado\Components\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

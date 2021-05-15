@@ -1,5 +1,4 @@
 #pragma once
-// This file is part of the course TPV2@UCM - Samir Genaim
 
 #include "../ecs/Component.h"
 #include "../ecs/Entity.h"
@@ -12,7 +11,8 @@
 class dialogos : public Component {
 public:
 	dialogos();
-	virtual ~dialogos() {};
+	virtual ~dialogos() {
+	};
 
 	void render() override;
 	void update() override;
@@ -51,7 +51,7 @@ private:
 	bool showDialogue = false;
 	bool renderDialogues = false;
 	bool firstDialogue = true;
-	float position = 1;			//Desplaza verticalmente los destrects
+	float position = 3.0f;			//Desplaza verticalmente los destrects
 
 
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };

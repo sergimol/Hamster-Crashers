@@ -90,7 +90,7 @@ void Game::init() {
 	mngr_->setHandler<SoundManager>(soundSystem);
 
 	// LevelMngr: lleva a cabo la transicion entre niveles
-	auto* levelMngr = mngr_->addFrontGround();
+	auto* levelMngr = mngr_->addMenu();
 	levelMngr->addComponent<Transition>(&sdlutils().images().at("transition"));
 
 	//Metemos al mapa en el Handler de Map
@@ -175,6 +175,7 @@ void Game::start() {
 
 		mngr_->update();
 		mngr_->refresh();
+		mngr_->refreshFrontGround();
 
 
 		sortEntities();

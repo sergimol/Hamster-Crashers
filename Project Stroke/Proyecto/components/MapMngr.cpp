@@ -65,11 +65,7 @@
 
 
 MapMngr::~MapMngr() {
-	for (int i = 0; i < mapDimensions_.x; i++)
-	{
-		delete[] collider[i];
-	}
-	delete[] collider;
+	clearColliders();
 }
 
 void MapMngr::update() {
@@ -727,4 +723,12 @@ void MapMngr::addTrap(const tmx::Object& object, int x, int y) {
 	//obstacle->addComponent<Obstacle>(id);
 
 	entity_->getMngr()->getTraps().push_back(trap);
+}
+
+void MapMngr::clearColliders() {
+	for (int i = 0; i < mapDimensions_.x; i++)
+	{
+		delete[] collider[i];
+	}
+	delete[] collider;
 }

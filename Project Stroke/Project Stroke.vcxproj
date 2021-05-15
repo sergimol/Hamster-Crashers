@@ -212,6 +212,7 @@
     <ClCompile Include="Proyecto\components\StartChase.cpp" />
     <ClCompile Include="Proyecto\components\StrongFollowPlayer.cpp" />
     <ClCompile Include="Proyecto\components\Stun.cpp" />
+    <ClCompile Include="Proyecto\components\subtitulos.cpp" />
     <ClCompile Include="Proyecto\components\Swallow.cpp" />
     <ClCompile Include="Proyecto\components\TileRender.cpp" />
     <ClCompile Include="Proyecto\components\TimeTrap.cpp" />
@@ -313,6 +314,7 @@
     <ClInclude Include="Proyecto\components\StrokeStrategy.h" />
     <ClInclude Include="Proyecto\components\StrongFollowPlayer.h" />
     <ClInclude Include="Proyecto\components\Stun.h" />
+    <ClInclude Include="Proyecto\components\subtitulos.h" />
     <ClInclude Include="Proyecto\components\Swallow.h" />
     <ClInclude Include="Proyecto\components\TileRender.h" />
     <ClInclude Include="Proyecto\components\TimeTrap.h" />
