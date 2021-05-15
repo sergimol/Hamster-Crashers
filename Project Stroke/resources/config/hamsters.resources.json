@@ -139,6 +139,18 @@
       "file": "resources/images/tiled/demoTileset.png"
     },
     {
+      "id": "suelo",
+      "file": "resources/images/tiled/tilesetSueloLevel1.png"
+    },
+    {
+      "id": "objetos",
+      "file": "resources/images/tiled/tilesetObjetosLevel1.png"
+    },
+    {
+      "id": "sombrasObjetos",
+      "file": "resources/images/tiled/tilesetSombrasObjetosLevel1.png"
+    },
+    {
       "id": "q",
       "file": "resources/images/tecla_Q.png"
     },
