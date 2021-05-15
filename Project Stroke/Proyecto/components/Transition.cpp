@@ -129,6 +129,8 @@ void Transition::sceneTransition() {
 		for (Entity* e : entity_->getMngr()->getFgs())
 			e->setActive(false);
 
+		entity_->getMngr()->refreshFrontGround();
+
 		entity_->getMngr()->refreshDeadBodies();
 		entity_->getMngr()->refreshEnemies();
 		entity_->getMngr()->refreshItems();

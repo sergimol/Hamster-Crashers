@@ -260,6 +260,24 @@ public:
 			traps_.end());
 	}
 
+	void refreshFrontGround() {
+		// remove dead entities from the list of entities
+		fgs_.erase( //
+			std::remove_if( //
+				fgs_.begin(), //
+				fgs_.end(), //
+				[](const Entity* e) { //
+					if (e->isActive()) {
+						return false;
+					}
+					else {
+						delete e;
+						return true;
+					}
+				}), //
+			fgs_.end());
+	}
+
 private:
 	std::vector<Entity*> entities_;
 	std::vector<Entity*> tiles_;
