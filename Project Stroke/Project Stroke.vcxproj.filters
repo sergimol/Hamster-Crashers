@@ -468,6 +468,9 @@
     <ClCompile Include="Proyecto\components\dialogos.cpp">
       <Filter>Archivos de origen\components\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\subtitulos.cpp">
+      <Filter>Archivos de origen\components\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -801,6 +804,9 @@
       <Filter>Archivos de encabezado\Components\UI</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\dialogos.h">
+      <Filter>Archivos de encabezado\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\subtitulos.h">
       <Filter>Archivos de encabezado\Components\UI</Filter>
     </ClInclude>
   </ItemGroup>
