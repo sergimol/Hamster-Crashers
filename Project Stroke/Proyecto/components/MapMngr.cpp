@@ -96,9 +96,7 @@ void MapMngr::update() {
 			//TUTORIAL
 			if (stoi(trigger.getName()) < 3) {
 				entity_->getMngr()->getHandler<dialogosMngr>()->getComponent<dialogos>()->dialogoStateChange();
-			}
-
-			
+			}	
 		}
 	}
 

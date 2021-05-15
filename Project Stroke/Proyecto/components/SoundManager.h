@@ -17,10 +17,10 @@ public:
 	void upVolume(bool channel);
 	void resetVolumes() { fxVol_ = 1; musicVol_ = 1; };
 
-	void fadeOut(int time) { Mix_FadeOutChannel(musics, time);	fadeIn(8000);};
+	void fadeOut(int time) { Mix_FadeOutChannel(musics, time); };
 	//FADEPRUEBA
 	//entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->fadeOut(3000);
-	void fadeIn(int time) { Mix_FadeInChannel(musics,0,8000, time); };
+	void fadeIn(int time) { Mix_FadeInChannelTimed(musics, 0, 8000, time, 0); };
 	//channels
 	int lighthits = 0;
 	int stronghits = 1;
