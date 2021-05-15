@@ -3,6 +3,7 @@
 #include "../ecs/Component.h"
 #include "../sdlutils/Texture.h"
 #include "GameStates.h"
+#include "subtitulos.h"
 
 using namespace std;
 
@@ -23,7 +24,7 @@ public:
 
 	inline void startFadeOut() { fadingIn = true; fadingOut = false;};
 
-	void changeScene(string nameScene, bool changeMap);
+	void changeScene(string nameScene, bool changeMap, int numTransitions);
 
 	void sceneTransition();
 
@@ -39,6 +40,7 @@ private:
 	void fadeIn();
 
 	int alpha;
+	int numT;
 	Texture* tx_;
 	float alphaCalc;
 
@@ -54,8 +56,10 @@ private:
 	SDL_Rect blackRect;
 
 	string nameScene_;
+	string subs;
 	
 	GameStates* state_;
+	subtitulos* subs_;
 };
 
 

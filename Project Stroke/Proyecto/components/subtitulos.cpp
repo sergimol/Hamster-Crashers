@@ -1,10 +1,12 @@
 #include "subtitulos.h"
 
-subtitulos::subtitulos()
+subtitulos::subtitulos(string actualSub, int transitionNum)
 {
+	actualSub_ = actualSub;
+	transitionNum_ = transitionNum;
 	//Texturas
 	barText_ = &sdlutils().images().at("dialogoBarra");
-	dialogoText_ = &sdlutils().images().at("dialogo" + to_string(dialogueNum));
+	dialogoText_ = &sdlutils().images().at(actualSub_ + to_string(dialogueNum));
 
 	//Positions
 	barRenderPos = Vector2D(0, sdlutils().height() - barText_->height());
@@ -40,8 +42,9 @@ void subtitulos::update() {
 }
 //Muestra los dialogos
 void subtitulos::show() {
-	if (position > 1.0f)
+	if (position > 1.1f)
 		position = position - 0.1f;
+	else position = 1.0f;
 }
 
 void subtitulos::unshow() {
@@ -53,8 +56,13 @@ void subtitulos::unshow() {
 }
 
 void subtitulos::changeDialogue() {
-	dialogueNum++;
-	dialogoText_ = &sdlutils().images().at("dialogo" + to_string(dialogueNum));
+	if (dialogueNum < transitionNum_- 1) {
+		dialogueNum++;
+		dialogoText_ = &sdlutils().images().at(actualSub_ + to_string(dialogueNum));
+	}
+	else {
+
+	}
 }
 
 //Controla toda la movida buena suerte lo programe hace 30 mins y no se que hice

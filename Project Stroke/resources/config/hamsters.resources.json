@@ -629,8 +629,19 @@
     {
       "id": "explicacion1",
       "file": "resources/images/dialogue/explicacion1.png"
+    },
+    {
+      "id": "Lvl1Javi0",
+      "file": "resources/images/dialogue/explicacion0.png"
+    },
+    {
+      "id": "Lvl1Javi1",
+      "file": "resources/images/dialogue/dialogo1.png"
+    },
+    {
+      "id": "Lvl1Javi2",
+      "file": "resources/images/dialogue/explicacion1.png"
     }
-
   ],
 
   "messages": [

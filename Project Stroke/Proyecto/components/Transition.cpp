@@ -1,6 +1,6 @@
 #include "Transition.h"
 #include "ImageSecuence.h"
-#include "GameStates.h"
+#include "MapMngr.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
@@ -19,6 +19,7 @@ void Transition::init() {
 
 	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
 	assert(state_ != nullptr);
+
 }
 
 void Transition::update() {
@@ -40,6 +41,11 @@ void Transition::render() {
 
 void Transition::fadeOut() {
 	//FADE out
+	if (alpha == SDL_ALPHA_TRANSPARENT) {
+		if (subs_ != nullptr) {
+			subs_->changeShow();
+		}
+	}
 
 // Comprueba si hay textura
 	if (tx_) {
@@ -65,7 +71,11 @@ void Transition::fadeOut() {
 
 void Transition::fadeIn() {
 	//FADE IN
-
+	if (alpha == SDL_ALPHA_OPAQUE) {
+		if (subs_ != nullptr) {
+			subs_->dialogoStateChange();
+		}
+	}
 // Comprueba si hay textura
 	if (tx_) {
 		// Setea el alpha de la textura
@@ -86,10 +96,11 @@ void Transition::fadeIn() {
 	}
 }
 
-void Transition::changeScene(string nameScene, bool changeMap) {
+void Transition::changeScene(string nameScene, bool changeMap, int numTransitions) {
 	change = true;
 	changeMap_ = changeMap;
 	nameScene_ = nameScene;
+	numT = numTransitions;
 	startFadeIn();
 }
 
@@ -101,7 +112,7 @@ void Transition::sceneTransition() {
 			//Si la entidad que voy a coger no es la camara...
 			if (e->getMngr()->getHandler<Camera__>() != e && e->getMngr()->getHandler<LevelHandlr>() != e
 				&& e->getMngr()->getHandler<StateMachine>() != e && e->getMngr()->getHandler<Mother>() != e
-				&& e->getMngr()->getHandler<PauseMenu>() != e)
+				&& e->getMngr()->getHandler<PauseMenu>() != e && e->getMngr()->getHandler<Map>() != e)
 				//La elimino
 				e->setActive(false);
 		}
@@ -123,19 +134,21 @@ void Transition::sceneTransition() {
 		entity_->getMngr()->refreshItems();
 		entity_->getMngr()->refreshObstacles();
 		entity_->getMngr()->refreshPlayers();
+
+		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearColliders();
 	}
 	
 	//Y creamos uno nuevo
-	auto* images = entity_->getMngr()->addMenu();
+	auto* images = entity_->getMngr()->addFrontGround();
 	images->addComponent<ImageSecuence>(nameScene_);
+	subs_ = images->addComponent<subtitulos>(nameScene_, numT);
 }
 
 void Transition::createMap() {
 	//Y creamos uno nuevo
 	if (changeMap_) {
-		auto* mapa = entity_->getMngr()->addEntity();
-		mapa->addComponent<MapMngr>();
-		mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/" + nameScene_);
+		auto* mapa = entity_->getMngr()->getHandler<Map>();
+		mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/" + nameScene_ + ".tmx");
 
 		//Metemos al mapa en el Handler de Map
 		entity_->getMngr()->setHandler<Map>(mapa);

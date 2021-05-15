@@ -24,8 +24,8 @@ public:
 private:
 	stack<Texture*> keyTextures;
 
-	const string level1 = "Mapa.tmx",
-		level2 = "Mapa2aaaaaaaaaaa",
+	const string level1 = "Mapa",
+		level2 = "Lvl1Javi",
 		controls = "controls",
 		hasMuerto = "hasMuerto",
 		hasGanado = "hasGanado";
