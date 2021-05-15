@@ -81,6 +81,7 @@ class TimeTrap;
 class MicroOndasManager;
 class MenuIndicator;
 class dialogos;
+class subtitulos;
 
 
 #define _CMPS_LIST_  \
@@ -164,7 +165,8 @@ class dialogos;
 	TimeTrap,\
 	MicroOndasManager, \
 	MenuIndicator,\
-	dialogos
+	dialogos,\
+	subtitulos
 
 // groups
 

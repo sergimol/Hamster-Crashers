@@ -73,5 +73,7 @@ public:
 
 	void addObject(const tmx::Object& object);
 	void addTrap(const tmx::Object& object, int x, int y);
+
+	void clearColliders();
 };
 

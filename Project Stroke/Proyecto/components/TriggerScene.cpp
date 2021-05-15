@@ -30,7 +30,7 @@ void TriggerScene::update() {
 	//Si todos los hamsters estan en el trigger
 	if (canChange && !entity_->getMngr()->getPlayers().empty()) { //TODO ELIMINAR ULTIMA CONDICION TRIGGER
 		//Cambio de escena
-		entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene(nameScene, false); //TODO ELIMINAR CABLEO FALSE PARA DESPUES DEL HITO
+		entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene(nameScene, true, 3); //TODO ELIMINAR CABLEO FALSE PARA DESPUES DEL HITO
 		entity_->setActive(false);
 	}
 		
