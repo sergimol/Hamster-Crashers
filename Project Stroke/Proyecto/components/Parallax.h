@@ -12,7 +12,8 @@ private:
 	Texture* tex_;
 
 	//Posicion de la camara
-	Vector2D camPos_;
+	SDL_Rect camPos_;
+	float camOffset_;
 
 	//Comprueba que el parallax se ha movido hasta alguna
 	//actualiza las posiciones en ese caso

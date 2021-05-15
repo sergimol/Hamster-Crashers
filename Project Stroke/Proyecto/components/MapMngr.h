@@ -51,23 +51,25 @@ public:
 
 	void loadNewMap(string map);
 	void update()override;
-	SDL_Rect cam;
+	Camera* cam;
 	bool intersectWall(const SDL_Rect& hamster);
 	bool intersectObstacles(const SDL_Rect& hamster);
 
-	int getScale() { return scale; };
-	int getCellSize() { return TAM_CELDA; };
-	inline int getMaxH() { return mapHeight_ * TAM_CELDA * scale; };
-	inline int getMaxW() { return mapDimensions_.x * TAM_CELDA * scale; };
+	inline int getScale() const { return scale; };
+	inline int getCellSize() const { return TAM_CELDA; };
+	inline int getMaxH() const { return mapHeight_; };
+	inline int getMaxW() const { return mapDimensions_.x * TAM_CELDA * scale; };
+
+	inline void setMaxH(int i) { mapHeight_ = i; };
 
 	void loadEnemyRoom();
-	void reduceNumberEnemyRoom() { numberEnemyRoom--; };
+	inline void reduceNumberEnemyRoom() { numberEnemyRoom--; };
 	void newSceneTrigger(string newName, const tmx::Object& obj);
 	void startChaseTrigger(const tmx::Object& obj);
 
-	void addHamster(string name) { hamstersToLoad_.push_back(name); };
-	void removeHamster(string name) { hamstersToLoad_.back().erase(); };
-	void clearHamstersVector() { hamstersToLoad_.clear(); };
+	inline void addHamster(string name) { hamstersToLoad_.push_back(name); };
+	inline void removeHamster(string name) { hamstersToLoad_.back().erase(); };
+	inline void clearHamstersVector() { hamstersToLoad_.clear(); };
 
 	void addObject(const tmx::Object& object);
 	void addTrap(const tmx::Object& object, int x, int y);

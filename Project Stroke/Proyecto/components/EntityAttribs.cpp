@@ -218,7 +218,7 @@ void EntityAttribs::die() {
 	Entity* e = entity_->getMngr()->addEntity();
 
 	//Le metemos un transform para su posicion
-	e->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip(), tr_->getScaleW(), tr_->getScaleH());
+	e->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0,  tr_->getZ(), tr_->getFlip(), tr_->getScaleW(), tr_->getScaleH());
 
 	//Y reproducimos la animacion de muerto
 	e->addComponent<Animator>(&sdlutils().images().at(id_ + "Sheet"),
