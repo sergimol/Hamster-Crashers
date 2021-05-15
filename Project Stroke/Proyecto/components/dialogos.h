@@ -51,7 +51,7 @@ private:
 	bool showDialogue = false;
 	bool renderDialogues = false;
 	bool firstDialogue = true;
-	float position = 1;			//Desplaza verticalmente los destrects
+	float position = 3.0f;			//Desplaza verticalmente los destrects
 
 
 	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };

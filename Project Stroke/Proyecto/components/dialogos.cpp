@@ -60,14 +60,18 @@ void dialogos::update() {
 	//Oculta el dialogo
 	if (ih().isKeyDown(keymap.at(SPACE)))
 	{
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->fadeOut(3000);
+		//entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->fadeIn(6000);
 		//Cambiamos el estado de mostrarse a no mostrarse
 		showDialogue = false;
 	}
 }
 //Muestra los dialogos
 void dialogos::show() {
-	if (position > 1.0f)
+	if (position > 1.1f)
 		position = position - 0.1f;
+	else
+		position = 1.0f;
 }
 
 void dialogos::unshow() {
