@@ -32,6 +32,12 @@ public:
 
 	void updateIndicator(int i, bool isUp);
 	void resetIndicators();
+
+	vector<vector<Entity*>> getButtons() const& { return buttons_; };
+	Vector2D getMagnitude() const& { return buttonsMagnitude_; };
+
+	void setButtonPos(int x, int y);
+
 private:
 	string menuMode_;
 	//Numero del estado en el que se muestra el men�

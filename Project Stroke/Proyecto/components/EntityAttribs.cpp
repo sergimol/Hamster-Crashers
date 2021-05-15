@@ -196,7 +196,7 @@ bool EntityAttribs::recieveDmg(int dmg) {
 		}
 		//Actualizamos UI
 		if (entity_->hasComponent<UI>())
-			entity_->getComponent<UI>()->dep();
+			entity_->getComponent<UI>()->dep("2");
 		//Actualizamos UI
 		if (entity_->hasComponent<HeartUI>())
 			entity_->getComponent<HeartUI>()->dep();
@@ -234,7 +234,7 @@ void EntityAttribs::die() {
 	//Si la persona que muere es un hamster...
 	if (!entity_->hasGroup<Enemy>()) {
 		//Ponemos su UI a 'Muerto'
-		e->addComponent<UI>(id_, entity_->getComponent<UI>()->getPosUI())->dep();
+		e->addComponent<UI>(id_, entity_->getComponent<UI>()->getPosUI())->dep("2");
 		hms_->getState() = HamStates::DEAD;
 		//Desactivamos el componente del hasmter vivo
 		entity_->getComponent<Animator>()->setActive(false);

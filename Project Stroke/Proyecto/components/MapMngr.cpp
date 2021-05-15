@@ -516,10 +516,6 @@ void MapMngr::loadEnemyRoom() {
 }
 
 void MapMngr::addHamster(string name, int i) {
-	/*tmx::Object obj = tmx::Object();
-	addObject(obj, 400, 130);
-	addObject(obj, 350, 140);
-	addObject(obj, 500, 100);*/
 
 	//do stuff with object properties
 	//auto& name = obj.getName();
