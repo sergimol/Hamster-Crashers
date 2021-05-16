@@ -15,16 +15,8 @@
 
   "images": [
     {
-      "id": "fighter",
-      "file": "resources/images/fighter.png"
-    },
-    {
       "id": "heart",
       "file": "resources/images/heart.png"
-    },
-    {
-      "id": "asteroidsA",
-      "file": "resources/images/asteroid_gold.png"
     },
     {
       "id": "sardinilla",
@@ -237,10 +229,6 @@
     {
       "id": "MAYONESITO",
       "file": "resources/images/UI/mayonesaParallax.png"
-    },
-    {
-      "id": "breakablePlaceHolder",
-      "file": "resources/images/breakable.png"
     },
     {
       "id": "transition",

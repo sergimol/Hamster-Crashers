@@ -344,7 +344,7 @@ bool MapMngr::intersectObstacles(const SDL_Rect& hamster) {
 	bool collide = false;
 	int i = 0;
 	while (!collide && i < obstacles.size()) {
-		auto obstacleRect = obstacles[i]->getComponent<Transform>()->getRectCollide();
+		auto obstacleRect = obstacles[i]->getComponent<Transform>()->getRectCollideFeet();
 		collide = Collisions::collides(Vector2D(hamster.x, hamster.y), hamster.w, hamster.h,
 			Vector2D(obstacleRect.x, obstacleRect.y), obstacleRect.w / 2, obstacleRect.h / 2);
 		++i;
@@ -680,11 +680,13 @@ void MapMngr::addObject(const tmx::Object& object) {
 	if (prop[0].getBoolValue()) {
 		obstacle->addComponent<Obstacle>(id, prop[2].getIntValue());
 		//1º: False, porque no es un hamster //2º: False, porque usa de referencia el rect del Animator
-		obstacle->addComponent<Shadow>(false, false);
 	}
 	else {
 		obstacle->addComponent<Obstacle>(id);
 	}
+
+	obstacle->addComponent<Shadow>(false, false);
+
 	entity_->getMngr()->getObstacles().push_back(obstacle);
 }
 
