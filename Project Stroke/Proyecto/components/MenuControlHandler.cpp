@@ -132,7 +132,10 @@ bool MenuControlHandler::handleMouse() {
 	
 	int xMouse, yMouse;
 	SDL_GetMouseState(&xMouse, &yMouse);
-	if (xMouse != lastMouseX_ || yMouse != lastMouseY_) {
+
+	bool click = ih().getMouseButtonState(InputHandler::MOUSEBUTTON::LEFT);
+
+	if (xMouse != lastMouseX_ || yMouse != lastMouseY_ || click) {
 		lastMouseX_ = xMouse;
 		lastMouseY_ = yMouse;
 		for (int i = 0; i < magnitude.getX(); ++i) {
@@ -142,7 +145,7 @@ bool MenuControlHandler::handleMouse() {
 					auto buttRect = button->getComponent<MenuButton>();
 					if (buttRect != nullptr && mouseInButton(xMouse, yMouse, buttRect->getRect())) {
 						menu_->setButtonPos(i, e);
-						if (ih().getMouseButtonState(InputHandler::MOUSEBUTTON::LEFT)) {
+						if (click) {
 							menu_->pressButton();
 						}
 					}
