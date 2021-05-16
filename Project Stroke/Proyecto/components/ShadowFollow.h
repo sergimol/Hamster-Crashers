@@ -17,7 +17,6 @@ public:
 	virtual void update() override;
 
 private:
-	float lerp(float a, float b, float f);
 
 	float pixelMargin;
 

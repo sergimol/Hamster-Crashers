@@ -22,7 +22,7 @@ private:
 	SDL_Rect camera_;
 	Vector2D camPos;
 	int players;
-	int heightMap_= 0;
+	float heightMap_= 0;
 
 	void followPlayer();
 	void followBossCat();

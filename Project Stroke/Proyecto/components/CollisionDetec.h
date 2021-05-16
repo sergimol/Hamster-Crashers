@@ -27,8 +27,6 @@ public:
 
 	void setMovement(MovementSimple* m);
 
-	float lerp(float a, float b, float f);
-
 private:
 
 	Transform* tr_;

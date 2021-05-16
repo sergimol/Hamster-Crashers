@@ -92,8 +92,8 @@ void MovementSimple::update() {
 
 
 		if (!keymapSimple_.at(UP) && !keymapSimple_.at(DOWN) && !keymapSimple_.at(LEFT) && !keymapSimple_.at(RIGHT)) {		//Deceleracion
-			vel.setX(lerp(vel.getX(), 0, 0.25));
-			vel.setY(lerp(vel.getY(), 0, 0.25));
+			vel.setX(sdlutils().lerp(vel.getX(), 0, 0.25));
+			vel.setY(sdlutils().lerp(vel.getY(), 0, 0.25));
 
 			//ANIMACION DE IDLE
 
@@ -111,8 +111,8 @@ void MovementSimple::update() {
 
 		}
 		else {		//Aceleracion
-			vel.setX(lerp(goalVel_.getX(), vel.getX(), 0.9));
-			vel.setY(lerp(goalVel_.getY(), vel.getY(), 0.9));
+			vel.setX(sdlutils().lerp(goalVel_.getX(), vel.getX(), 0.9));
+			vel.setY(sdlutils().lerp(goalVel_.getY(), vel.getY(), 0.9));
 
 			//ANIMACION DE MOVIMIENTO
 
@@ -163,11 +163,6 @@ void MovementSimple::update() {
 		//	timer = sdlutils().currRealTime();
 		//}
 	}
-}
-
-float MovementSimple::lerp(float a, float b, float f)
-{
-	return (a + f * (b - a));
 }
 
 void MovementSimple::onEnable() {

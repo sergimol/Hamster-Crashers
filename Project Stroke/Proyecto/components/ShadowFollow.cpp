@@ -36,7 +36,7 @@ void ShadowFollow::update() {
 	if (new_scale < 0) new_scale = 0;
 	else if (new_scale > 1) new_scale = 1;
 
-	new_scale = lerp(0.5, 1, new_scale);
+	new_scale = sdlutils().lerp(0.5, 1, new_scale);
 
 	//SENSACIÓN DE MOVIMIENTO
 	if (anim_) new_scale += animOff_;
@@ -72,8 +72,4 @@ void ShadowFollow::update() {
 	tr_->setW(width_);
 
 	tr_->getZ() = -otherTr_->getFloor();	
-}
-
-float ShadowFollow::lerp(float a, float b, float f) {
-	return (a + f * (b - a));
 }

@@ -103,8 +103,8 @@ void Roll::update() {
 			}
 
 			if (st_->canMove()) {		//Aceleracion
-				vel.setX(col_->lerp(goalVel_.getX(), vel.getX(), 0.95));
-				vel.setY(col_->lerp(goalVel_.getY(), vel.getY(), 0.95));
+				vel.setX(sdlutils().lerp(goalVel_.getX(), vel.getX(), 0.95));
+				vel.setY(sdlutils().lerp(goalVel_.getY(), vel.getY(), 0.95));
 			}
 
 			SDL_Rect rectPlayer = tr_->getRectCollide();

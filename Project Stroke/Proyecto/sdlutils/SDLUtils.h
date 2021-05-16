@@ -204,6 +204,10 @@ public:
 		return SDL_GetTicks();
 	}
 
+	inline float lerp(float a, float b, float f) const{
+		return (a + f * (b - a));
+	}
+
 private:
 	SDLUtils();
 	SDLUtils(std::string windowTitle, int width, int height);

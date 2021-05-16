@@ -99,8 +99,8 @@ void Movement::update() {
 
 		if (!keymap.at(UP) && !keymap.at(DOWN) && !keymap.at(LEFT) && !keymap.at(RIGHT)) {		//Deceleracion
 			if (col_ != nullptr) {
-				vel.setX(col_->lerp(vel.getX(), 0, 0.25));
-				vel.setY(col_->lerp(vel.getY(), 0, 0.25));
+				vel.setX(sdlutils().lerp(vel.getX(), 0, 0.25));
+				vel.setY(sdlutils().lerp(vel.getY(), 0, 0.25));
 			}
 			//ANIMACION DE IDLE
 			if (animState_ != nullptr) {
@@ -110,8 +110,8 @@ void Movement::update() {
 		}
 		else if (hms_->canMove()) {		//Aceleracion
 			if (col_ != nullptr) {
-				vel.setX(col_->lerp(goalVel_.getX(), vel.getX(), 0.9));
-				vel.setY(col_->lerp(goalVel_.getY(), vel.getY(), 0.9));
+				vel.setX(sdlutils().lerp(goalVel_.getX(), vel.getX(), 0.9));
+				vel.setY(sdlutils().lerp(goalVel_.getY(), vel.getY(), 0.9));
 			}
 			//ANIMACION DE MOVIMIENTO
 			if (animState_ != nullptr) {
@@ -122,8 +122,8 @@ void Movement::update() {
 		else {
 			//porque esta kaput el bixo
 			if (col_ != nullptr) {
-				vel.setX(col_->lerp(vel.getX(), 0, 0.25));
-				vel.setY(col_->lerp(vel.getY(), 0, 0.25));
+				vel.setX(sdlutils().lerp(vel.getX(), 0, 0.25));
+				vel.setY(sdlutils().lerp(vel.getY(), 0, 0.25));
 			}
 		}
 		//1-0.85/2

@@ -96,8 +96,3 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 	if (vel.getX() < 0.001 && vel.getX() > -0.001) vel.setX(0);
 	if (vel.getY() < 0.001 && vel.getY() > -0.001) vel.setY(0);
 }
-
-float CollisionDetec::lerp(float a, float b, float f)
-{
-	return (a + f * (b - a));
-}

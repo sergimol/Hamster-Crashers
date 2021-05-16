@@ -41,7 +41,6 @@ public:
 private:
 	void slam();
 	void swipe();
-	float lerp(float a, float b, float f);
 
 	Transform* tr_;
 	EntityAttribs* eAttribs_;

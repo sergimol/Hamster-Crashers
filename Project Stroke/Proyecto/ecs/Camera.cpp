@@ -123,9 +123,12 @@ Vector2D Camera::newObjetivo() {
 
 	if (minH != -1 && minH != heightMap_) {
 		map_->setMaxH(map_->getMaxH() + (heightMap_ - minH));
-		heightMap_ = minH;
+		if (heightMap_ - minH < 0.1 && heightMap_ - minH > -0.1) 
+			heightMap_ = minH;
+		else 
+			heightMap_ = sdlutils().lerp(minH, heightMap_, 0.5);
 	}
-
+	
 	CamStaticPos.setY(CamStaticPos.getY() + upOffset - heightMap_);
 	return CamStaticPos;
 }

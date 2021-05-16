@@ -1,11 +1,6 @@
 #include "HeartUI.h"
 #include "Animator.h"
 
-float lerp(float a, float b, float f)
-{
-	return (a + f * (b - a));
-}
-
 HeartUI::HeartUI(std::string n, int pos) :
 	heart_(&sdlutils().images().at("heart1")),
 	scale(1),
@@ -36,7 +31,7 @@ void HeartUI::update() {
 
 		if (abs(currentState) < 0.2 && latencyAux > 50) {
 			//latency = latencyAux;
-			latency = lerp(latency, latencyAux, 0.9);
+			latency = sdlutils().lerp(latency, latencyAux, 0.9);
 		}
 
 

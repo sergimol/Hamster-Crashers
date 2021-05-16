@@ -9,6 +9,8 @@
 #include "AnimHamsterStateMachine.h"
 #include "CollisionDetec.h"
 
+#include "../sdlutils/SDLUtils.h"
+
 FinalBossAttack::FinalBossAttack() :
 	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
 	attackStarted_(false), hitTime_(0), beforeHitCD_(1000), afterHitCD_(4250), stunStarted_(false), eAttribs_(nullptr),
@@ -93,13 +95,13 @@ void FinalBossAttack::swipe() {
 	auto& vel = tr_->getVel();
 
 	if (!swipeCharge_ && pos.getX() + vel.getX() < cam.x + cam.w - sizeW)
-		vel.setX(lerp(70, vel.getX(), 0.8));
+		vel.setX(sdlutils().lerp(70, vel.getX(), 0.8));
 	else if (!swipeCharge_) {
 		swipeCharge_ = true;
 		hitTime_ = sdlutils().currRealTime();
 	}
 	else if (pos.getX() + vel.getX() > cam.x && sdlutils().currRealTime() > hitTime_ + beforeHitCD_) {
-		vel.setX(lerp(-55, vel.getX(), 0.8));
+		vel.setX(sdlutils().lerp(-55, vel.getX(), 0.8));
 
 		DEBUG_isAttacking_ = true;
 
@@ -122,11 +124,6 @@ void FinalBossAttack::swipe() {
 		maxSlaps_ = sdlutils().rand().nextInt(2, 5);
 		attackCount_ = 0;
 	}
-}
-
-float FinalBossAttack::lerp(float a, float b, float f)
-{
-	return (a + f * (b - a));
 }
 
 bool FinalBossAttack::LaunchAttack() {

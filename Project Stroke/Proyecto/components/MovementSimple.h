@@ -30,8 +30,6 @@ public:
 
 	void updateKeymap(KEYS x, bool is);
 
-	float lerp(float a, float b, float f);
-
 	virtual void onEnable() override;
 	virtual void onDisable() override;
 	void onResume() override;
