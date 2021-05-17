@@ -63,7 +63,7 @@ void Parallax::checkRelativePos()
 	camPos_ = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 
 	//Calcula la futura y
-	float y = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->getMaxH() - camPos_.h + camOffset_;
+	float y = camOffset_;
 
 	//Si se llega al principio o al final se rotan llas tres imágenes
 	if (camPos_.x >= rightTr_->getPos().getX())
@@ -80,7 +80,7 @@ void Parallax::checkRelativePos()
 	}	
 
 	//Actualizamos la y
-	leftTr_->getPos().setY(sdlutils().lerp(y, leftTr_->getPos().getY(), 0.95));
-	centerTr_->getPos().setY(sdlutils().lerp(y, leftTr_->getPos().getY(), 0.95));
-	rightTr_->getPos().setY(sdlutils().lerp(y, leftTr_->getPos().getY(), 0.95));
+	leftTr_->getPos().setY(y/*sdlutils().lerp(y, leftTr_->getPos().getY(), 0.95)*/);
+	centerTr_->getPos().setY(y/*sdlutils().lerp(y, leftTr_->getPos().getY(), 0.95)*/);
+	rightTr_->getPos().setY(y/*sdlutils().lerp(y, leftTr_->getPos().getY(), 0.95)*/);
 }

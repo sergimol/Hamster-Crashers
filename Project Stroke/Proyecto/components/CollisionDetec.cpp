@@ -12,6 +12,8 @@ void CollisionDetec::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 
+	cam_ = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
+	assert(cam_ != nullptr);
 }
 
 void CollisionDetec::setMovement(MovementSimple* m) {
@@ -80,17 +82,17 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 		if (rectPlayer.x < cam.x) {
 			if (entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamState() == State::GoingTo)
 				vel.setX(20);
-			else 
-				vel.setX(0);			
+			else
+				vel.setX(0);
 		}
 		else if (rectPlayer.x + rectPlayer.w > pCam.getX() + cam.w / 2) {
 			if (entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamState() == State::GoingTo)
 				vel.setX(-20);
-			else 
+			else
 				vel.setX(0);
 		}
-		if (rectPlayer.y < cam.y || rectPlayer.y + rectPlayer.h - tr_->getFloor() + 120 > pCam.getY() + cam.h / 2)
-			vel.setY(-speed_.getY() * 4);		
+		if (rectPlayer.y < cam.y || rectPlayer.y + rectPlayer.h - tr_->getFloor() + (tr_->getFloor() - cam_->getHeightMap()) + 60 > pCam.getY() + cam.h / 2)
+			vel.setY(-0.5);
 	}
 
 	if (vel.getX() < 0.001 && vel.getX() > -0.001) vel.setX(0);

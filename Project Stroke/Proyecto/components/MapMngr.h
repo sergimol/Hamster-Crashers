@@ -41,7 +41,7 @@ private:
 	int numberEnemyRoom;				//Guarda la cantidad de enemigos que hay por sala
 	int RoundsPerRoom;					//Guarda la cantidad de rondas que hay en una sala
 	int RoundsCount = 0;
-	int mapHeight_ = 0;
+	float mapHeight_ = 0;
 	const int scale = 3;
 
 	std::queue<tmx::Object> TriggerftCamera;
@@ -60,10 +60,10 @@ public:
 
 	inline int getScale() const { return scale; };
 	inline int getCellSize() const { return TAM_CELDA; };
-	inline int getMaxH() const { return mapHeight_; };
+	inline float getMaxH() const { return mapHeight_; };
 	inline int getMaxW() const { return mapDimensions_.x * TAM_CELDA * scale; };
 
-	inline void setMaxH(int i) { mapHeight_ = i; };
+	inline void setMaxH(float i) { mapHeight_ = i; };
 
 	void loadEnemyRoom();
 	inline void reduceNumberEnemyRoom() { numberEnemyRoom--; };

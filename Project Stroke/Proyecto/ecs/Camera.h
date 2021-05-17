@@ -23,6 +23,7 @@ private:
 	Vector2D camPos;
 	int players;
 	float heightMap_= 0;
+	float minH_ = 0;
 
 	void followPlayer();
 	void followBossCat();
@@ -48,6 +49,7 @@ public:
 	inline State getCamState() const {return cameraState;};
 	inline Vector2D getCamPos() const { return camPos; };
 	inline float getUpOffset() const { return upOffset; };
+	inline float getHeightMap() const { return heightMap_; };
 	Vector2D cameraFollowPos_;	//Guarda el punto de la posición de la camara cuando lo lea
 
 	void setGoToTracker(bool objetivo) {GoToTracker = objetivo;};

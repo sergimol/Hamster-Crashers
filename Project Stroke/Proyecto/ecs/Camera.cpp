@@ -16,7 +16,8 @@ void Camera::update() {
 	else if (cameraState == BossCat)
 		followBossCat();
 
-	checkBounds();
+	//if(minH_ == heightMap_)
+		checkBounds();
 }
 
 void Camera::checkBounds() {
@@ -43,8 +44,8 @@ void Camera::followPlayer() {
 	players = 0;
 
 	//Actualizamos la posicion de la camara
-	camera_.x = camPos.getX() - camera_.w / 2;
-	camera_.y = camPos.getY() - camera_.h / 2;
+	camera_.x = camPos.getX() - camera_.w / 2.0;
+	camera_.y = camPos.getY() - camera_.h / 2.0;
 }
 
 void Camera::followBossCat() {
@@ -95,19 +96,19 @@ Vector2D Camera::newObjetivo() {
 	Vector2D CamStaticPos;
 	camPos = Vector2D();
 	players = 0;
-	float minH = -1;
+	minH_ = -1;
 
 	//Calculamos punto medio de los hamsters
 	Vector2D playerMidPos;
 	auto& players_ = entity_->getMngr()->getPlayers();
 	for (Entity* e : players_) {
 		auto* tr = e->getComponent<Transform>();
-		auto& playerpos = tr->getPos();
+		auto playerpos = tr->getPos();
 		// Operaci�n para calcular el punto medio con m�s jugadores
 		camPos = camPos + playerpos + (Vector2D(tr->getW(), tr->getH()) / 2);
 		players++;
-		if (minH == -1 || tr->getFloor() < minH)
-			minH = tr->getFloor();
+		if (minH_ == -1 || tr->getFloor() < minH_)
+			minH_ = tr->getFloor();
 	}
 	//Actualizamos la posicion central de los 4 jugadores
 	playerMidPos = Vector2D((camPos.getX() / players), (camPos.getY() / players));
@@ -118,17 +119,21 @@ Vector2D Camera::newObjetivo() {
 
 	CamStaticPos = playerMidPos;
 	if (cameraFollowPos_.getX() != -1 && cameraFollowPos_.getY() != -1)
-		//CamStaticPos = CameraFollowPos;
 		CamStaticPos.setX(cameraFollowPos_.getX() + osci);
 
-	if (minH != -1 && minH != heightMap_) {
-		map_->setMaxH(map_->getMaxH() + (heightMap_ - minH));
-		if (heightMap_ - minH < 0.1 && heightMap_ - minH > -0.1) 
-			heightMap_ = minH;
+	float aux = heightMap_;
+	if (minH_ != -1 && minH_ != heightMap_) {
+		if (heightMap_ - minH_ < 0.1 && heightMap_ - minH_ > -0.1) {
+			heightMap_ = minH_;
+		}
 		else 
-			heightMap_ = sdlutils().lerp(minH, heightMap_, 0.5);
+			heightMap_ = sdlutils().lerp(minH_, heightMap_, 0.88f);
 	}
-	
+	if(aux != heightMap_)
+		map_->setMaxH(map_->getMaxH() + (aux - heightMap_));
+	else
+		map_->setMaxH(camera_.h - heightMap_);
+
 	CamStaticPos.setY(CamStaticPos.getY() + upOffset - heightMap_);
 	return CamStaticPos;
 }
