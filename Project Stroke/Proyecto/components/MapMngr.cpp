@@ -344,7 +344,7 @@ bool MapMngr::intersectObstacles(const SDL_Rect& hamster) {
 	bool collide = false;
 	int i = 0;
 	while (!collide && i < obstacles.size()) {
-		auto obstacleRect = obstacles[i]->getComponent<Transform>()->getRectCollide();
+		auto obstacleRect = obstacles[i]->getComponent<Transform>()->getRectCollideFeet();
 		collide = Collisions::collides(Vector2D(hamster.x, hamster.y), hamster.w, hamster.h,
 			Vector2D(obstacleRect.x, obstacleRect.y), obstacleRect.w, obstacleRect.h );
 		++i;
@@ -701,10 +701,16 @@ void MapMngr::startChaseTrigger(const tmx::Object& object) {
 void MapMngr::addObject(const tmx::Object& object) {
 	auto* obstacle = entity_->getMngr()->addEntity();
 
-	obstacle->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 0.75, 0.75);
-
 	auto& prop = object.getProperties();
+	// bool: rompible? true : false
+	// int : id del objeto "Box", "..."
+	// int : nº de golpes. Si no es rompible, se ignora
+	// int : pos en Z. Necesario meterlo a mano desde Tile
+
+	obstacle->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, prop[3].getIntValue(), false, 0.75, 0.75);
+
+	
 
 	string id = prop[1].getStringValue();
 
