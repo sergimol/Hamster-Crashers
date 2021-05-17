@@ -48,7 +48,7 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 				rectPlayer.y += goalVel.getY();
 				rectPlayer.x = tr_->getRectCollide().x;
 
-				if (map->intersectWall(rectPlayer) || map->intersectObstacles(rectPlayer)) {
+				if (!map->intersectWall(rectPlayer) && !map->intersectObstacles(rectPlayer)) {
 					goalVel.setX(0);
 					vel.setX(0);
 				}

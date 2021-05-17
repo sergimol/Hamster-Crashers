@@ -344,9 +344,9 @@ bool MapMngr::intersectObstacles(const SDL_Rect& hamster) {
 	bool collide = false;
 	int i = 0;
 	while (!collide && i < obstacles.size()) {
-		auto obstacleRect = obstacles[i]->getComponent<Transform>()->getRectCollideFeet();
+		auto obstacleRect = obstacles[i]->getComponent<Transform>()->getRectCollide();
 		collide = Collisions::collides(Vector2D(hamster.x, hamster.y), hamster.w, hamster.h,
-			Vector2D(obstacleRect.x, obstacleRect.y), obstacleRect.w / 2, obstacleRect.h / 2);
+			Vector2D(obstacleRect.x, obstacleRect.y), obstacleRect.w, obstacleRect.h );
 		++i;
 	}
 	return collide;

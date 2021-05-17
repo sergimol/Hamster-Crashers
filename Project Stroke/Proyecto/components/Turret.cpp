@@ -8,7 +8,7 @@
 #include "Movement.h"
 //#include "Animator.h"
 
-Turret::Turret() : Ability(CD), x_(0), cadenceTime_(sdlutils().currRealTime()) {
+Turret::Turret() : Ability(2000), x_(0), cadenceTime_(sdlutils().currRealTime()) {
 };
 
 Turret::~Turret() {

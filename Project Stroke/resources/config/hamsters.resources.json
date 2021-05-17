@@ -629,6 +629,10 @@
     {
       "id": "Lvl1Javi2",
       "file": "resources/images/dialogue/explicacion1.png"
+    },
+    {
+      "id": "cloud",
+      "file": "resources/images/ketaSprites/Nube-Sheet.png"
     }
   ],
 
@@ -1087,8 +1091,19 @@
       "loop": 0,
       "chain": "",
       "attackFrame": -1
+    },
+    {
+      "id": "nube",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 9,
+      "cols": 14,
+      "rows": 1,
+      "frameUpdate": 200,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
     }
-
   ]
 
 }
