@@ -177,8 +177,9 @@ struct Ally;
 struct Bullet_group;
 struct Item_group;
 struct Dead;
+struct Trap;
 
-#define _GRPS_LIST_  Enemy, Ally, Bullet_group, Item_group, Dead
+#define _GRPS_LIST_  Enemy, Ally, Bullet_group, Item_group, Dead, Trap
 
 // handlers
 //Creo que hay que hacer un handler por cada player

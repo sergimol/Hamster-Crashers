@@ -27,6 +27,9 @@ Manager::~Manager() {
 	for (auto mN : menus_) {
 		delete mN; mN = nullptr;
 	}
+	for (auto mT : traps_) {
+		delete mT; mT = nullptr;
+	}
 }
 
 void Manager::refresh() {
@@ -52,6 +55,11 @@ void Manager::update() {
 	for (auto i = 0u; i < n; i++)
 		entities_[i]->update();
 	
+
+	auto t = traps_.size();
+	for (auto i = 0u; i < t; i++)
+		traps_[i]->update();
+
 	auto b = bgs_.size();
 	for (auto i = 0u; i < b; i++)
 		bgs_[i]->update();
@@ -76,6 +84,12 @@ void Manager::render() {
 	auto w = tiles_.size();
 	for (auto i = 0u; i < w; i++)
 		tiles_[i]->render();
+
+	//RENDERIZA TRAMPAS (EN EL SUELO)
+	auto t = traps_.size();
+	for (auto i = 0u; i < t; i++)
+		traps_[i]->render();
+
 
 	//RENDERIZA ENTIDADES
 	auto n = entities_.size();

@@ -732,7 +732,7 @@ void MapMngr::addObject(const tmx::Object& object) {
 }
 
 void MapMngr::addTrap(const tmx::Object& object, int x, int y) {
-	auto* trap = entity_->getMngr()->addEntity();
+	auto* trap = entity_->getMngr()->addTrap();
 
 	string id = "Box";
 
@@ -765,7 +765,7 @@ void MapMngr::addTrap(const tmx::Object& object, int x, int y) {
 	//else
 	//obstacle->addComponent<Obstacle>(id);
 
-	entity_->getMngr()->getTraps().push_back(trap);
+	//entity_->getMngr()->getTraps().push_back(trap);
 }
 
 void MapMngr::clearColliders() {

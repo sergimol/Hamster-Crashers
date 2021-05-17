@@ -70,7 +70,7 @@ void TimeTrap::update() {
 
 			//entity_->getComponent<Image>().
 		}	
-		cout << time_ << "    y     " << lastTime_ << "   o    " << (time_ - lastTime_) << "           \n";
+		//cout << time_ << "    y     " << lastTime_ << "   o    " << (time_ - lastTime_) << "           \n";
 	}
 	else lastTime_ = sdlutils().currRealTime() - time_;
 	

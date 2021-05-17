@@ -71,6 +71,15 @@ public:
 		return e;
 	}
 
+	Entity* addTrap() {
+		Entity* e = new Entity(this);
+		if (e != nullptr) {
+			e->resetGroups();
+			traps_.emplace_back(e);
+		}
+		return e;
+	}
+
 	// handlers
 	template<typename T>
 	inline void setHandler(Entity *e) {
