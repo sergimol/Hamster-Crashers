@@ -179,6 +179,10 @@
       "file": "resources/images/tiled/tilesetSombrasObjetosLevel1.png"
     },
     {
+      "id": "sueloJardin",
+      "file": "resources/images/tiled/tileSetSueloLevel2.png"
+    },
+    {
       "id": "q",
       "file": "resources/images/tecla_Q.png"
     },
@@ -485,6 +489,22 @@
     {
       "id": "level1background4",
       "file": "resources/images/backgrounds/level1/level1parallax4.png"
+    },
+    {
+      "id": "level2background1",
+      "file": "resources/images/backgrounds/level2/level2parallax1.jpg"
+    },
+    {
+      "id": "level2background2",
+      "file": "resources/images/backgrounds/level2/level2parallax2.png"
+    },
+    {
+      "id": "level2background3",
+      "file": "resources/images/backgrounds/level2/level2parallax3.png"
+    },
+    {
+      "id": "level2background4",
+      "file": "resources/images/backgrounds/level2/level2parallax4.png"
     },
     {
       "id": "hamsterSelectorBlank",
