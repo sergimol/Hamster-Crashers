@@ -32,6 +32,7 @@ private:
 	Transform* tr_;
 
 	MovementSimple* mv_;
+	Camera* cam_;
 	Vector2D speed_;
 };
 

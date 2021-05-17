@@ -49,6 +49,7 @@ public:
 	inline State getCamState() const {return cameraState;};
 	inline Vector2D getCamPos() const { return camPos; };
 	inline float getUpOffset() const { return upOffset; };
+	inline float getHeightMap() const { return heightMap_; };
 	Vector2D cameraFollowPos_;	//Guarda el punto de la posición de la camara cuando lo lea
 
 	void setGoToTracker(bool objetivo) {GoToTracker = objetivo;};

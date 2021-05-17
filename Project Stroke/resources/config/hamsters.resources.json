@@ -499,6 +499,10 @@
       "file": "resources/images/soldier1_spritesheet.png"
     },
     {
+      "id": "soldier2Sheet",
+      "file": "resources/images/soldier2_spritesheet.png"
+    },
+    {
       "id": "controles",
       "file": "resources/images/controles.png"
     },
@@ -1046,6 +1050,78 @@
     },
     {
       "id": "soldier1_death",
+      "startFrameX": 3,
+      "startFrameY": 4,
+      "duration": 8,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 60,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "soldier2_idle",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 5,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "soldier2_move",
+      "startFrameX": 5,
+      "startFrameY": 0,
+      "duration": 4,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "soldier2_attack",
+      "startFrameX": 3,
+      "startFrameY": 1,
+      "duration": 8,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 70,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": 8
+    },
+    {
+      "id": "soldier2_hit",
+      "startFrameX": 5,
+      "startFrameY": 2,
+      "duration": 4,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "soldier2_stun",
+      "startFrameX": 3,
+      "startFrameY": 3,
+      "duration": 6,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "soldier2_death",
       "startFrameX": 3,
       "startFrameY": 4,
       "duration": 8,

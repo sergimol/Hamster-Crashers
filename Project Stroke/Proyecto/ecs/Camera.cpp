@@ -46,8 +46,6 @@ void Camera::followPlayer() {
 	//Actualizamos la posicion de la camara
 	camera_.x = camPos.getX() - camera_.w / 2.0;
 	camera_.y = camPos.getY() - camera_.h / 2.0;
-
-	//cout << camera_.x << " " << camera_.y << " \n";
 }
 
 void Camera::followBossCat() {
@@ -137,7 +135,6 @@ Vector2D Camera::newObjetivo() {
 		map_->setMaxH(camera_.h - heightMap_);
 
 	CamStaticPos.setY(CamStaticPos.getY() + upOffset - heightMap_);
-	cout << map_->getMaxH() << " " << CamStaticPos.getY() << endl;
 	return CamStaticPos;
 }
 
