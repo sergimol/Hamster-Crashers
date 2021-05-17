@@ -19,14 +19,20 @@ public:
 	void onDisable() override;
 
 	void onResume() override;
+
+	void setRevPlayer(Entity* e);
 private:
 	void endGame();
 
+	void handleKey();
+	void handleButton();
 
 	Texture* txUp_, * txDown_;
 	InfarctedBody* infarct_ = nullptr;
 
 	bool down = false;
+	// Referencia al numero del jugador que le está reviviendo
+	int revPlNumber_;
 
 	int progress = 0;
 	//Referente al minijuego
@@ -45,6 +51,7 @@ private:
 
 	SDL_Rect buttonPos;
 	const SDL_Keycode key = SDLK_a;
+	const SDL_GameControllerButton button = SDL_CONTROLLER_BUTTON_A;
 
 	GameStates* state_;
 

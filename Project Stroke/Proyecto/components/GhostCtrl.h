@@ -11,7 +11,7 @@
 class GhostCtrl: public Component
 {
 public:
-	GhostCtrl() : tr_(nullptr), mv_(nullptr), tx_(&sdlutils().images().at("q")), state_(nullptr) {
+	GhostCtrl() : tr_(nullptr), mv_(nullptr), keyTx_(&sdlutils().images().at("q")), buttonTx_(&sdlutils().images().at("b")), state_(nullptr) {
 		active_ = false;
 	};
 	~GhostCtrl() {};
@@ -28,15 +28,18 @@ private:
 	Transform* tr_;
 	HamStates st_;
 	Movement* mv_;
-	Texture* tx_;
+	Texture* keyTx_;
+	Texture* buttonTx_;
 	SDL_Rect cam;
 	GameStates* state_;
 
-	const int KEY_WIDHT = 100;
+	const int KEY_WIDTH = 100;
 	const int KEY_HEIGHT = 100;
-	const SDL_Keycode key = SDLK_q;
+	const SDL_Keycode key_ = SDLK_q;
+	const SDL_GameControllerButton button_ = SDL_CONTROLLER_BUTTON_B;
 
-	bool show;
+	bool show_;
+	bool isController_;
 
 	void startPossesion(Entity* e);
 };

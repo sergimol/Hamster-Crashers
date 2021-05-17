@@ -46,10 +46,16 @@ private:
 	//CONSTANTES DE TECLAS, TEXTURAS Y RELACIONADOS
 	const int numKeys = 4;
 
-	const array<Texture*, 4> keyTextures{ &sdlutils().images().at("q") , &sdlutils().images().at("bullet"), &sdlutils().images().at("heart1"),  &sdlutils().images().at("heart2")};
-	const array<SDL_Keycode, 4> keyCodes{ SDLK_a, SDLK_a, SDLK_a, SDLK_a };
+	const array<Texture*, 4> keyTextures{ &sdlutils().images().at("w") , &sdlutils().images().at("a2"), &sdlutils().images().at("s"),  &sdlutils().images().at("d")};
+	const array<SDL_Keycode, 4> keyCodes{ SDLK_w, SDLK_a, SDLK_s, SDLK_d };
+	const array<Texture*, 4> buttonTextures{ &sdlutils().images().at("a"), &sdlutils().images().at("b"), &sdlutils().images().at("x"), &sdlutils().images().at("y") };
+	const array<SDL_GameControllerButton, 4> buttonCodes{ SDL_CONTROLLER_BUTTON_A, SDL_CONTROLLER_BUTTON_B, SDL_CONTROLLER_BUTTON_X, SDL_CONTROLLER_BUTTON_Y };
 
 	SDL_Keycode actualKey;
+	SDL_GameControllerButton actualButton;
+
+	// Para obtener el estado de los botones del mando que corresponde
+	int playerNumber_;
 	
 	//CONTROL DEL MINIJUEGO
 

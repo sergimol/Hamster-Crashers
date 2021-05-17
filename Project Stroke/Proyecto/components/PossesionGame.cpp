@@ -20,12 +20,23 @@ void PossesionGame::render() {
 //Comprueba que la tecla sea pulsada y la keyGame esté chocando con el marcador
 void PossesionGame::update() {
 	if (state_->getState() == GameStates::RUNNING) {
-		if (ih().keyDownEvent()) {
-			if (ih().isKeyDown(actualKey) && keyGame->getComponent<KeyGame>()->hitSkillCheck())
-				succesfulHit();
-			else
-				failedHit();
+		bool success = false;
+		// Si el fantasma se está controlando con mando
+		if (ih().playerHasController(playerNumber_)) {
+			if (ih().isButtonDownEvent())
+				success = ih().isButtonDown(playerNumber_, actualButton) && keyGame->getComponent<KeyGame>()->hitSkillCheck();
 		}
+
+		// Si se está controlando con teclado
+		else if (ih().keyDownEvent()) {
+			success = ih().isKeyDown(actualKey) && keyGame->getComponent<KeyGame>()->hitSkillCheck();
+		}
+
+		if (success)
+			succesfulHit();
+		else
+			failedHit();
+
 		//Si se muere o infarta el poseido, se acaba la posesion
 		if (possesedState->cantBeTargeted()) {
 			endPossesion();
@@ -108,6 +119,13 @@ void PossesionGame::endPossesion() {
 //Coge una key y su respectiva imagen aleatorias
 void PossesionGame::randomiseKey() {
 	auto rand = sdlutils().rand().nextInt(0, numKeys);
-	actualKey = keyCodes[rand];
-	keyGame->getComponent<KeyGame>()->setTexture(keyTextures[rand]);
+	if (ih().playerHasController(playerNumber_)) {
+		actualButton = buttonCodes[rand];
+		keyGame->getComponent<KeyGame>()->setTexture(buttonTextures[rand]);
+	}
+	else
+	{
+		actualKey = keyCodes[rand];
+		keyGame->getComponent<KeyGame>()->setTexture(keyTextures[rand]);
+	}
 }

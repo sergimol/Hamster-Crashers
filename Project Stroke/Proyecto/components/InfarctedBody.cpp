@@ -41,9 +41,17 @@ void InfarctedBody::update() {
 				auto* oTr = e->getComponent<Transform>();
 				assert(oTr != nullptr);
 				show = Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), oTr->getPos(), oTr->getW(), oTr->getH());
-				if (show && ih().isKeyDown(key)) {
+				int eNum = e->getComponent<EntityAttribs>()->getNumber();
+				isCtrl = ih().playerHasController(eNum);
+				bool aux = false;
+				if (isCtrl)
+					aux = ih().isButtonDown(eNum, button);
+				else
+					aux = ih().isKeyDown(key);
+				if (show && aux) {
 					//Activamos el minijuego
 					entity_->getComponent<ReanimationGame>()->setActive(true);
+					entity_->getComponent<ReanimationGame>()->setRevPlayer(e);
 					//Pasamos a estar siendo revividos
 					reviving = true;
 					//Y deshabilitamos al que revive
@@ -69,7 +77,7 @@ void InfarctedBody::render() {
 	//Si estamos en contacto con un posible "host" que nos pueda revivir, muestra la imagen del botón
 	if (show && !reviving) {
 		Vector2D renderPos = Vector2D(tr_->getPos().getX() - cam.x, tr_->getPos().getY() + tr_->getZ() - cam.y);
-		SDL_Rect dest = build_sdlrect(renderPos, KEY_WIDHT, KEY_HEIGHT);
+		SDL_Rect dest = build_sdlrect(renderPos, KEY_WIDTH, KEY_HEIGHT);
 		tx_->render(dest);
 	}
 }

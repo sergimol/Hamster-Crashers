@@ -27,9 +27,12 @@ void GhostCtrl::update() {
 			if (e != entity_ && !e->getComponent<HamsterStateMachine>()->cantBeTargeted()) {
 				auto* oTr = e->getComponent<Transform>();
 				assert(oTr != nullptr);
-				show = Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), oTr->getPos(), oTr->getW(), oTr->getH());
-				if (show && ih().isKeyDown(key)) {
-					startPossesion(e);
+				show_ = Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), oTr->getPos(), oTr->getW(), oTr->getH());
+				if (show_) {
+					int n = entity_->getComponent<EntityAttribs>()->getNumber();
+					isController_ = ih().playerHasController(n);
+					if((isController_ && ih().isButtonDown(n, button_)) || (!isController_ && ih().isKeyDown(key_)))
+						startPossesion(e);
 				}
 			}
 		}
@@ -38,11 +41,14 @@ void GhostCtrl::update() {
 
 void GhostCtrl::render() {
 	//Si estamos en contacto con un posible "host" para poseer, muestra la imagen del botón
-	if (show) {
-	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+	if (show_) {
+		cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 		Vector2D renderPos = Vector2D(tr_->getPos().getX() - cam.x, tr_->getPos().getY() + tr_->getZ() - cam.y);
-		SDL_Rect dest = build_sdlrect(renderPos, KEY_WIDHT, KEY_HEIGHT);
-		tx_->render(dest);
+		SDL_Rect dest = build_sdlrect(renderPos, KEY_WIDTH, KEY_HEIGHT);
+		if (isController_)
+			buttonTx_->render(dest);
+		else
+			keyTx_->render(dest);
 	}
 }
 
@@ -54,7 +60,7 @@ void GhostCtrl::startPossesion(Entity* e) {
 	//animacion meterse dentro?------
 
 	//Paramos el componente para que deje de buscar jugadores
-	show = false;
+	show_ = false;
 	active_ = false;
 
 	//Activamos el minijuego

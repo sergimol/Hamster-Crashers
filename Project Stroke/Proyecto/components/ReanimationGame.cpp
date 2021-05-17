@@ -18,17 +18,10 @@ void ReanimationGame::init() {
 
 void ReanimationGame::update() {
 	if (state_->getState() == GameStates::RUNNING) {
-		if (ih().keyDownEvent()) {
-			if (ih().isKeyDown(key) && !down) {
-				down = true;
-				progress += BEAT;
-			}
-		}
-		else if (ih().keyUpEvent()) {
-			if (ih().isKeyUp(key) && down) {
-				down = false;
-			}
-		}
+		if (ih().playerHasController(revPlNumber_))
+			handleButton();
+		else
+			handleKey();
 
 		if (sdlutils().currRealTime() > timer + TIME_BETWEEN_DROPS) {
 			if (progress > 0)
@@ -44,6 +37,34 @@ void ReanimationGame::update() {
 		}
 	}
 
+}
+
+void ReanimationGame::handleKey() {
+	if (ih().keyDownEvent()) {
+		if (ih().isKeyDown(key) && !down) {
+			down = true;
+			progress += BEAT;
+		}
+	}
+	else if (ih().keyUpEvent()) {
+		if (ih().isKeyUp(key) && down) {
+			down = false;
+		}
+	}
+}
+
+void ReanimationGame::handleButton() {
+	if (ih().isButtonDownEvent()) {
+		if (ih().isButtonDown(revPlNumber_, button) && !down) {
+			down = true;
+			progress += BEAT;
+		}
+	}
+	else if (ih().isButtonUpEvent()) {
+		if (ih().isButtonUp(revPlNumber_, button) && down) {
+			down = false;
+		}
+	}
 }
 
 void ReanimationGame::render() {
@@ -68,4 +89,9 @@ void ReanimationGame::endGame() {
 
 void ReanimationGame::onResume() {
 	timer += sdlutils().currRealTime() - timer;
+}
+
+void ReanimationGame::setRevPlayer(Entity* e)
+{
+	revPlNumber_ = e->getComponent<EntityAttribs>()->getNumber();
 }
