@@ -4,11 +4,15 @@
 #include "../ecs/Manager.h"
 #include "Dying.h"
 
-TimeTrap::TimeTrap(Texture* tx) : latency(1000), tex_(tx)  {
+TimeTrap::TimeTrap(Texture* tx) : latency(1000), tex_(tx), time_(0.0f), lastTime_(0.0f), gamestate(nullptr)  {
 
 }
 
 void TimeTrap::init()  {
+
+	gamestate = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(gamestate != nullptr);
+
 
 	tex_->setBlendMode(SDL_BLENDMODE_BLEND);
 	tr_ = entity_->getComponent<Transform>();
@@ -47,22 +51,28 @@ TimeTrap::~TimeTrap() {
 }
 
 void TimeTrap::update() {
-	float currentState = sin((sdlutils().currRealTime() / latency));
 
-	if (currentState > 0) {
-		entity_->getComponent<ContactDamage>()->setActive(true);
-		std::cout << "On\n";
+	if (gamestate->getState() == GameStates::RUNNING) {
 
-		tex_->setAlpha(255);
+		time_ = sdlutils().currRealTime() - lastTime_;
+
+		float currentState = sin(time_ / latency);
+
+		if (currentState > 0) {
+			entity_->getComponent<ContactDamage>()->setActive(true);
+
+			tex_->setAlpha(255);
+		}
+		else {
+			entity_->getComponent<ContactDamage>()->setActive(false);
+
+			tex_->setAlpha(255.0f * (1.0f + currentState));
+
+			//entity_->getComponent<Image>().
+		}	
+		cout << time_ << "    y     " << lastTime_ << "   o    " << (time_ - lastTime_) << "           \n";
 	}
-	else {
-		entity_->getComponent<ContactDamage>()->setActive(false);
-		cout << "Off\n";
-
-		tex_->setAlpha(255.0f * (1.0f + currentState));
-
-		//entity_->getComponent<Image>().
-	}	
+	else lastTime_ = sdlutils().currRealTime() - time_;
 	
 }
 

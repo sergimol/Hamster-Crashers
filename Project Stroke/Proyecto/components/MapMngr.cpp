@@ -221,7 +221,7 @@ void MapMngr::loadNewMap(string map) {
 
 							enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
 							enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
-							enemy->addComponent<ContactDamage>(20, 30);
+							enemy->addComponent<ContactDamage>(20, 30, false, false);
 							enemy->getMngr()->setHandler<Pussy>(enemy);
 						}
 						else if (object.getName() == "microondas") { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
@@ -507,6 +507,47 @@ void MapMngr::loadEnemyRoom() {
 			enemy->addComponent<FinalBossManager>(hamstersToLoad_.size());
 
 			numberEnemyRoom++;
+		}else if (name == "finalBoss" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
+			auto* enemy = mngr_->addEntity();
+			enemy->addComponent<Transform>(
+				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+				Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
+
+			//enemy->addComponent<EnemyStateMachine>();
+			//enemy->setGroup<Enemy>(true);
+
+			//enemy->addComponent<EntityAttribs>(600 + (hamstersToLoad_.size() * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true);
+
+			//enemy->addComponent<Image>(&sdlutils().images().at("firstBoss"));
+			//enemy->addComponent<UI>("canelon", 4);
+
+			//enemy->addComponent<FirstBossAttack>();
+			//enemy->addComponent<MovementSimple>();
+
+			enemy->addComponent<FinalBossManager>(hamstersToLoad_.size());
+
+			numberEnemyRoom++;
+		}
+		else if (name == "finalBoss" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
+		auto* enemy = mngr_->addEntity();
+		enemy->addComponent<Transform>(
+			Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+			Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
+
+		//enemy->addComponent<EnemyStateMachine>();
+		//enemy->setGroup<Enemy>(true);
+
+		//enemy->addComponent<EntityAttribs>(600 + (hamstersToLoad_.size() * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true);
+
+		//enemy->addComponent<Image>(&sdlutils().images().at("firstBoss"));
+		//enemy->addComponent<UI>("canelon", 4);
+
+		//enemy->addComponent<FirstBossAttack>();
+		//enemy->addComponent<MovementSimple>();
+
+		enemy->addComponent<FinalBossManager>(hamstersToLoad_.size());
+
+		numberEnemyRoom++;
 		}
 	}
 }
@@ -697,7 +738,7 @@ void MapMngr::addTrap(const tmx::Object& object, int x, int y) {
 
 	trap->addComponent<Transform>(Vector2D(x * scale, y * scale),
 		Vector2D(), 50 * scale, 50 * scale, 0.0f, 0.75, 0.75);
-	trap->addComponent<ContactDamage>(10, 30);
+	trap->addComponent<ContactDamage>(10, 30, true, true);
 	trap->addComponent<TimeTrap>(&sdlutils().images().at("catSmoking"));
 
 	//int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty

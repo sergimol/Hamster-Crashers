@@ -24,4 +24,9 @@ private:
 	int alpha;
 	Texture* tex_;
 	float alphaCalc;
+
+
+	GameStates* gamestate;
+	float time_, lastTime_;
+
 };
