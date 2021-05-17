@@ -23,6 +23,7 @@ private:
 	Vector2D camPos;
 	int players;
 	float heightMap_= 0;
+	float minH_ = 0;
 
 	void followPlayer();
 	void followBossCat();
