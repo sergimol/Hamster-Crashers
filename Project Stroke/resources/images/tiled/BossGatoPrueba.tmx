@@ -57,13 +57,13 @@
  </layer>
  <objectgroup id="6" name="entities">
   <object id="1" name="sardinilla" x="6122" y="151.834"/>
-  <object id="64" name="secondBoss" x="6278.67" y="128" width="106.667" height="105.333"/>
+  <object id="64" name="secondBoss" x="448.003" y="146.667" width="106.667" height="105.333"/>
   <object id="62" name="newScene" x="2.66667" y="54.6667" width="64" height="278.667">
    <properties>
     <property name="newMap" value="Lvl1Javi"/>
    </properties>
   </object>
-  <object id="64" name="startChase" x="5945.33" y="61.3333" width="81.3333" height="272"/>
+  <object id="64" name="startChase" x="355.997" y="74.6666" width="81.3333" height="272"/>
  </objectgroup>
  <objectgroup id="7" name="Salas"/>
  <objectgroup id="10" name="Alturas"/>

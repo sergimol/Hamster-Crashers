@@ -200,7 +200,7 @@ struct Mother;
 struct PauseMenu;
 struct SoundManager;
 struct MainMenu;
-struct Pussy;
+struct Cat_;
 struct PlayerQuantityMenu;
 struct HamsterSelectionMenu;
 struct OptionsMenu;
@@ -218,7 +218,7 @@ struct dialogosMngr;
 					PlayerQuantityMenu, \
 					HamsterSelectionMenu, \
 					SoundManager, \
-					Pussy, \
+					Cat_, \
 					MainMenu, \
 					OptionsMenu, \
 					dialogosMngr

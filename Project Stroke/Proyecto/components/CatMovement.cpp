@@ -4,5 +4,17 @@
 void CatMovement::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
-	tr_->setVel(Vector2D(VEL, 0));
+
+	grav_ = entity_->getComponent<Gravity>();
+	assert(grav_ != nullptr);
+}
+
+void CatMovement::update()
+{
+	auto& z = tr_->getZ();
+	auto& velZ = tr_->getVelZ();
+	auto rect = tr_->getRectCollide();
+
+	if (grav_ != nullptr && grav_->isActive())
+		grav_->checkHeight(rect);
 }

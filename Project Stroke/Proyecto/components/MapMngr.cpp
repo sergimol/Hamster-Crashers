@@ -220,11 +220,15 @@ void MapMngr::loadNewMap(string map) {
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 2 * 256.0f, 0.0f, 1, 1);
 
+							//Le metemos gravedad
+							enemy->getComponent<Transform>()->setGravity(enemy->addComponent<Gravity>());
+							
+							enemy->addComponent<CatMovement>();
 
 							enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
 							enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
 							enemy->addComponent<ContactDamage>(20, 30, false, false);
-							enemy->getMngr()->setHandler<Pussy>(enemy);
+							enemy->getMngr()->setHandler<Cat_>(enemy);
 						}
 						else if (object.getName() == "microondas") { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 							//auto* micro = entity_->getMngr()->addEntity();
@@ -348,7 +352,7 @@ bool MapMngr::intersectObstacles(const SDL_Rect& hamster) {
 	while (!collide && i < obstacles.size()) {
 		auto obstacleRect = obstacles[i]->getComponent<Transform>()->getRectCollideFeet();
 		collide = Collisions::collides(Vector2D(hamster.x, hamster.y), hamster.w, hamster.h,
-			Vector2D(obstacleRect.x, obstacleRect.y), obstacleRect.w, obstacleRect.h );
+			Vector2D(obstacleRect.x, obstacleRect.y), obstacleRect.w, obstacleRect.h);
 		++i;
 	}
 	return collide;
@@ -601,7 +605,7 @@ void MapMngr::addHamster(string name, int i) {
 	hamster1->addComponent<HeartUI>(name, i);
 
 	//Habilidad
-	if (name == "sardinilla") hamster1->addComponent<WarCry>(0.25, 1.75);
+	if (name == "sardinilla") hamster1->addComponent<Roll>();
 	else if (name == "canelon") hamster1->addComponent<Pray>(100, 100);
 	else if (name == "keta") hamster1->addComponent<Poison>(10000);
 	else if (name == "monchi") {
@@ -701,7 +705,7 @@ void MapMngr::addObject(const tmx::Object& object) {
 	obstacle->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, prop[3].getIntValue(), false, 0.75, 0.75);
 
-	
+
 
 	string id = prop[1].getStringValue();
 

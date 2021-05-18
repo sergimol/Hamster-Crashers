@@ -423,6 +423,10 @@
       "file": "resources/images/menuSprites/resolutions/1920x1080.png"
     },
     {
+      "id": "fullscreen",
+      "file": "resources/images/menuSprites/resolutions/fullscreen.png"
+    },
+    {
       "id": "bar0",
       "file": "resources/images/menuSprites/barLevels/bar0.png"
     },
@@ -903,8 +907,23 @@
     {
       "id": "mainTheme",
       "file": "resources/sound/music/mainTheme.mp3"
+    },
+    {
+      "id": "catMeowInit",
+      "file": "resources/sound/cat/catMeowInit.wav"
+    },
+    {
+      "id": "catMeow",
+      "file": "resources/sound/cat/catMeow.wav"
+    },
+    {
+      "id": "catMeowAttack",
+      "file": "resources/sound/cat/catMeowAttack.wav"
+    },
+    {
+      "id": "catWalking",
+      "file": "resources/sound/cat/catMeowWalking.wav"
     }
-
   ],
 
   "anims": [

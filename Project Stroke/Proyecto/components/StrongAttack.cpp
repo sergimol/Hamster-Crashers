@@ -12,7 +12,7 @@
 
 
 StrongAttack::StrongAttack() :
-	hms_(nullptr), tr_(nullptr), cooldown_(475), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false){
+	hms_(nullptr), tr_(nullptr), cooldown_(475), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false) {
 }
 
 void StrongAttack::init() {
@@ -65,7 +65,7 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 
 			//Y comprobamos si colisiona y si no es invulnerable
 			if (!eAttribs->checkInvulnerability() && Collisions::collides(Vector2D(rectPlayer.x, rectPlayer.y), rectPlayer.w, rectPlayer.h, newPos, eColRect.w, eColRect.h)) {
-				
+
 				//Comprobamos si está en la misma Z o relativamente cerca
 				if (eAttribs->ignoresMargin() || (abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < MARGINTOATTACK)) {
 					//A�adimos a los combos
@@ -179,12 +179,12 @@ void StrongAttack::render() {
 }
 
 void StrongAttack::attack() {
-	if (!anim_->isOnAttack()) {
+	if (isActive() && !anim_->isOnAttack()) {
 		auto state = hms_->getState();
 		if (hms_->canAttack() && sdlutils().currRealTime() > time_ + cooldown_) {
 
 			cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-	
+
 			//auto sizeW = tr_->getW();
 			//auto sizeH = tr_->getH();
 			//auto& pos = tr_->getPos();
