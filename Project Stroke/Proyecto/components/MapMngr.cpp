@@ -218,11 +218,15 @@ void MapMngr::loadNewMap(string map) {
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 2 * 256.0f, 0.0f, 1, 1);
 
+							//Le metemos gravedad
+							enemy->getComponent<Transform>()->setGravity(enemy->addComponent<Gravity>());
+							
+							enemy->addComponent<CatMovement>();
 
 							enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
 							enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
 							enemy->addComponent<ContactDamage>(20, 30, false, false);
-							enemy->getMngr()->setHandler<Pussy>(enemy);
+							enemy->getMngr()->setHandler<Cat_>(enemy);
 						}
 						else if (object.getName() == "microondas") { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 							//auto* micro = entity_->getMngr()->addEntity();
@@ -486,48 +490,6 @@ void MapMngr::loadEnemyRoom() {
 			//enemies.push_back(enemy);
 
 			//numberEnemyRoom++;
-		}
-		else if (name == "finalBoss" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-			auto* enemy = mngr_->addEntity();
-			enemy->addComponent<Transform>(
-				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
-
-			//enemy->addComponent<EnemyStateMachine>();
-			//enemy->setGroup<Enemy>(true);
-
-			//enemy->addComponent<EntityAttribs>(600 + (hamstersToLoad_.size() * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true);
-
-			//enemy->addComponent<Image>(&sdlutils().images().at("firstBoss"));
-			//enemy->addComponent<UI>("canelon", 4);
-
-			//enemy->addComponent<FirstBossAttack>();
-			//enemy->addComponent<MovementSimple>();
-
-			enemy->addComponent<FinalBossManager>(hamstersToLoad_.size());
-
-			numberEnemyRoom++;
-		}
-		else if (name == "finalBoss" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-			auto* enemy = mngr_->addEntity();
-			enemy->addComponent<Transform>(
-				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
-
-			//enemy->addComponent<EnemyStateMachine>();
-			//enemy->setGroup<Enemy>(true);
-
-			//enemy->addComponent<EntityAttribs>(600 + (hamstersToLoad_.size() * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true);
-
-			//enemy->addComponent<Image>(&sdlutils().images().at("firstBoss"));
-			//enemy->addComponent<UI>("canelon", 4);
-
-			//enemy->addComponent<FirstBossAttack>();
-			//enemy->addComponent<MovementSimple>();
-
-			enemy->addComponent<FinalBossManager>(hamstersToLoad_.size());
-
-			numberEnemyRoom++;
 		}
 		else if (name == "finalBoss" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* enemy = mngr_->addEntity();

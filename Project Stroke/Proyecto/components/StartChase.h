@@ -28,5 +28,5 @@ private:
 
 	//Timer para el tiempo que dura el evento
 	float time_;
-	const float COOLDOWN_ = 2000;
+	const float COOLDOWN_ = 4000;
 };
