@@ -20,7 +20,6 @@ public:
 
 	void start();
 
-
 private:
 	Transform* tr_;
 	bool in = false;
