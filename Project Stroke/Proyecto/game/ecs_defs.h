@@ -84,6 +84,8 @@ class MenuIndicator;
 class dialogos;
 class subtitulos;
 class MenuAnim;
+class ObstacleMoveable;
+class LifeTime;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -169,7 +171,9 @@ class MenuAnim;
 	MenuIndicator,\
 	dialogos,\
 	subtitulos,\
-	MenuAnim
+	MenuAnim,\
+	ObstacleMoveable, \
+	LifeTime
 
 // groups
 
