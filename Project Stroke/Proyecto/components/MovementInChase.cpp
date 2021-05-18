@@ -109,7 +109,6 @@ void MovementInChase::update() {
 			if (col_ != nullptr) {
 				vel.setX(sdlutils().lerp(goalVel_.getX(), vel.getX(), 0.9));
 				vel.setY(sdlutils().lerp(goalVel_.getY(), vel.getY(), 0.9));
-				std::cout << vel.getY() << " \n";
 			}
 		}
 		else {

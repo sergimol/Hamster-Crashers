@@ -47,11 +47,10 @@ void Camera::followPlayer() {
 	camera_.x = camPos.getX() - camera_.w / 2.0;
 	camera_.y = camPos.getY() - camera_.h / 2.0;
 
-	//cout << camera_.x << " " << camera_.y << " \n";
 }
 
 void Camera::followBossCat() {
-	auto cat = entity_->getMngr()->getHandler<Pussy>()->getComponent<Transform>();
+	auto cat = entity_->getMngr()->getHandler<Cat_>()->getComponent<Transform>();
 
 	//Camara sigue al gato dejándolo justo en la esquina derecha
 	camPos = cat->getPos() - Vector2D(sdlutils().width() / 2 - cat->getW(), 0);
@@ -137,7 +136,6 @@ Vector2D Camera::newObjetivo() {
 		map_->setMaxH(camera_.h - heightMap_);
 
 	CamStaticPos.setY(CamStaticPos.getY() + upOffset - heightMap_);
-	cout << map_->getMaxH() << " " << CamStaticPos.getY() << endl;
 	return CamStaticPos;
 }
 

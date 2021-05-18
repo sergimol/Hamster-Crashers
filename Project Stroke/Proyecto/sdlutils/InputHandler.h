@@ -208,6 +208,11 @@ public:
 		return mbState_[b];
 	}
 
+	inline void rumbleEvent(int id) {
+		if(haptics_[id] != NULL)
+			SDL_HapticRunEffect(haptics_[id], 0, 1);
+	}
+
 private:
 	InputHandler() {
 		kbState_ = SDL_GetKeyboardState(0);
@@ -322,7 +327,8 @@ private:
 				i++;
 		}
 
-		buttonStates_[id][i] = true;
+		if(found)
+			buttonStates_[id][i] = true;
 	}
 
 	inline void onButtonUp(const SDL_Event& event) {
@@ -341,7 +347,8 @@ private:
 				i++;
 		}
 
-		buttonStates_[id][i] = false;
+		if (found)
+			buttonStates_[id][i] = false;
 	}
 
 	// Añade un mando al juego
@@ -373,6 +380,9 @@ private:
 			disconectedControllers_.push(id);
 			sysToGameId.erase(it);
 
+			if (haptics_[id] != NULL)
+				SDL_HapticClose(haptics_[id]);
+
 			SDL_GameControllerClose(controllers_[id]);
 			controllers_[id] = nullptr;
 
@@ -395,6 +405,21 @@ private:
 			leftTriggers_[gId] = 0.0f;
 			rightTriggers_[gId] = 0.0f;
 			
+			// para la vibracion
+			SDL_Joystick* j = SDL_GameControllerGetJoystick(c);
+			haptics_[gId] = SDL_HapticOpenFromJoystick(j);
+
+			if (haptics_[gId] != NULL) {
+				// Creacion del efecto
+				SDL_HapticEffect e;
+				SDL_memset(&e, 0, sizeof(SDL_HapticEffect));
+				e.type = SDL_HAPTIC_LEFTRIGHT;
+				e.leftright.large_magnitude = 2000;
+				e.leftright.small_magnitude = 2000;
+				e.leftright.length = 100;
+				SDL_HapticNewEffect(haptics_[gId], &e);
+			}
+
 			vector<int> aux;
 			for (int i = 0; i < SDL_CONTROLLER_BUTTON_MAX; ++i)
 				aux.push_back(0);
@@ -403,7 +428,6 @@ private:
 		}
 		SDL_JoystickEventState(SDL_ENABLE);
 	}
-
 
 	// Teclado
 	bool isKeyUpEvent_;
@@ -419,19 +443,21 @@ private:
 	bool isButtonDownEvent_;
 	bool isButtonUpEvent_;
 	bool isAxisMotionEvent_;
-	array<vector<int>, 4> buttonStates_;
-	array<int, 4> gameToSysId{ -1, -1, -1, -1 };
+	array<vector<int>, MAXPLAYERS> buttonStates_;
+	array<int, MAXPLAYERS> gameToSysId{ -1, -1, -1, -1 };
 	map<int, int> sysToGameId;
 
 	int actualControllers_; // Numero de mandos conectados en el momento
 	int totalControllers_; // Numero de mandos conectados en total
 	
-	array<SDL_GameController*, 4> controllers_;
+	array<SDL_GameController*, MAXPLAYERS> controllers_;
 	queue<int> disconectedControllers_;
-	array<Vector2D, 4> leftJoysticks_;
-	array<Vector2D, 4> rightJoysticks_;
-	array<float, 4> leftTriggers_;
-	array<float, 4> rightTriggers_;
+	array<Vector2D, MAXPLAYERS> leftJoysticks_;
+	array<Vector2D, MAXPLAYERS> rightJoysticks_;
+	array<float, MAXPLAYERS> leftTriggers_;
+	array<float, MAXPLAYERS> rightTriggers_;
+
+	array<SDL_Haptic*, MAXPLAYERS> haptics_;
 };
 
 // This macro defines a compact way for using the singleton InputHandler, instead of

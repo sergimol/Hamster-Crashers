@@ -1,6 +1,7 @@
 #include "MenuButtonManager.h"
 #include "BackGround.h"
 #include "Transition.h"
+#include "MenuAnim.h"
 
 MenuButtonManager::MenuButtonManager(string menu, int state) :menuMode_(menu), stateNumber_(state), background_(nullptr) {}
 
@@ -38,7 +39,7 @@ void MenuButtonManager::init() {
 		auto backgrText = &sdlutils().images().at("mainMenuBlank");
 		background_ = entity_->getMngr()->addBackGround();
 		background_->addComponent<Transform>(Vector2D(0, -250), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
-		background_->addComponent<BackGround>(backgrText, 0);
+		background_->addComponent<MenuAnim>();
 	}
 	else if (menuMode_ == "pauseMenu") {
 		buttonsMagnitude_ = Vector2D(1, 3); //3 botones, 1x3

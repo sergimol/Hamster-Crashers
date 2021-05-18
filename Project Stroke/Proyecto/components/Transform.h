@@ -161,6 +161,8 @@ public:
 		return floor_;
 	}
 
+	inline void setZ(int aux) { z_ = aux; }
+
 	void update() override {
 		if (state_->getState() == GameStates::RUNNING) {
 			//Movidas de gravedad

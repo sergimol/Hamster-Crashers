@@ -195,6 +195,10 @@
       "file": "resources/images/tiled/tilesetSombrasObjetosLevel1.png"
     },
     {
+      "id": "sueloJardin",
+      "file": "resources/images/tiled/tileSetSueloLevel2.png"
+    },
+    {
       "id": "q",
       "file": "resources/images/tecla_Q.png"
     },
@@ -439,6 +443,10 @@
       "file": "resources/images/menuSprites/resolutions/1920x1080.png"
     },
     {
+      "id": "fullscreen",
+      "file": "resources/images/menuSprites/resolutions/fullscreen.png"
+    },
+    {
       "id": "bar0",
       "file": "resources/images/menuSprites/barLevels/bar0.png"
     },
@@ -503,6 +511,22 @@
       "file": "resources/images/backgrounds/level1/level1parallax4.png"
     },
     {
+      "id": "level2background1",
+      "file": "resources/images/backgrounds/level2/level2parallax1.jpg"
+    },
+    {
+      "id": "level2background2",
+      "file": "resources/images/backgrounds/level2/level2parallax2.png"
+    },
+    {
+      "id": "level2background3",
+      "file": "resources/images/backgrounds/level2/level2parallax3.png"
+    },
+    {
+      "id": "level2background4",
+      "file": "resources/images/backgrounds/level2/level2parallax4.png"
+    },
+    {
       "id": "hamsterSelectorBlank",
       "file": "resources/images/menuSprites/hamsterSelectorBlank.png"
     },
@@ -513,6 +537,10 @@
     {
       "id": "soldier1Sheet",
       "file": "resources/images/soldier1_spritesheet.png"
+    },
+    {
+      "id": "soldier2Sheet",
+      "file": "resources/images/soldier2_spritesheet.png"
     },
     {
       "id": "controles",
@@ -649,6 +677,131 @@
     {
       "id": "cloud",
       "file": "resources/images/ketaSprites/Nube-Sheet.png"
+    },
+    {
+      "id": "ma0",
+      "file": "resources/images/menuAnim/0.png"
+    },
+    {
+      "id": "ma1",
+      "file": "resources/images/menuAnim/1.png"
+    },
+    {
+      "id": "ma2",
+      "file": "resources/images/menuAnim/2.png"
+    },
+    {
+      "id": "ma3",
+      "file": "resources/images/menuAnim/3.png"
+    },
+    {
+      "id": "ma4",
+      "file": "resources/images/menuAnim/4.png"
+    },
+    {
+      "id": "ma5",
+      "file": "resources/images/menuAnim/5.png"
+    },
+    {
+      "id": "ma6",
+      "file": "resources/images/menuAnim/6.png"
+
+    },
+    {
+      "id": "ma7",
+      "file": "resources/images/menuAnim/7.png"
+    },
+    {
+      "id": "ma8",
+      "file": "resources/images/menuAnim/8.png"
+    },
+    {
+      "id": "ma9",
+      "file": "resources/images/menuAnim/9.png"
+    },
+    {
+      "id": "ma10",
+      "file": "resources/images/menuAnim/10.png"
+    },
+    {
+      "id": "ma11",
+      "file": "resources/images/menuAnim/11.png"
+    },
+    {
+      "id": "ma12",
+      "file": "resources/images/menuAnim/12.png"
+    },
+    {
+      "id": "ma13",
+      "file": "resources/images/menuAnim/13.png"
+    },
+    {
+      "id": "ma14",
+      "file": "resources/images/menuAnim/14.png"
+    },
+    {
+      "id": "ma15",
+      "file": "resources/images/menuAnim/15.png"
+    },
+    {
+      "id": "ma16",
+      "file": "resources/images/menuAnim/16.png"
+    },
+    {
+      "id": "ma17",
+      "file": "resources/images/menuAnim/17.png"
+    },
+    {
+      "id": "ma18",
+      "file": "resources/images/menuAnim/18.png"
+    },
+    {
+      "id": "ma19",
+      "file": "resources/images/menuAnim/19.png"
+    },
+    {
+      "id": "ma20",
+      "file": "resources/images/menuAnim/20.png"
+    },
+    {
+      "id": "ma21",
+      "file": "resources/images/menuAnim/21.png"
+    },
+    {
+      "id": "ma22",
+      "file": "resources/images/menuAnim/22.png"
+    },
+    {
+      "id": "ma23",
+      "file": "resources/images/menuAnim/23.png"
+    },
+    {
+      "id": "ma24",
+      "file": "resources/images/menuAnim/24.png"
+    },
+    {
+      "id": "ma25",
+      "file": "resources/images/menuAnim/25.png"
+    },
+    {
+      "id": "ma26",
+      "file": "resources/images/menuAnim/26.png"
+    },
+    {
+      "id": "ma27",
+      "file": "resources/images/menuAnim/27.png"
+    },
+    {
+      "id": "ma28",
+      "file": "resources/images/menuAnim/28.png"
+    },
+    {
+      "id": "ma29",
+      "file": "resources/images/menuAnim/29.png"
+    },
+    {
+      "id": "ma30",
+      "file": "resources/images/menuAnim/30.png"
     }
   ],
 
@@ -790,8 +943,23 @@
     {
       "id": "mainTheme",
       "file": "resources/sound/music/mainTheme.mp3"
+    },
+    {
+      "id": "catMeowInit",
+      "file": "resources/sound/cat/catMeowInit.wav"
+    },
+    {
+      "id": "catMeow",
+      "file": "resources/sound/cat/catMeow.wav"
+    },
+    {
+      "id": "catMeowAttack",
+      "file": "resources/sound/cat/catMeowAttack.wav"
+    },
+    {
+      "id": "catWalking",
+      "file": "resources/sound/cat/catMeowWalking.wav"
     }
-
   ],
 
   "anims": [
@@ -1062,6 +1230,78 @@
     },
     {
       "id": "soldier1_death",
+      "startFrameX": 3,
+      "startFrameY": 4,
+      "duration": 8,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 60,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "soldier2_idle",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 5,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "soldier2_move",
+      "startFrameX": 5,
+      "startFrameY": 0,
+      "duration": 4,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "soldier2_attack",
+      "startFrameX": 3,
+      "startFrameY": 1,
+      "duration": 8,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 70,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": 8
+    },
+    {
+      "id": "soldier2_hit",
+      "startFrameX": 5,
+      "startFrameY": 2,
+      "duration": 4,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "soldier2_stun",
+      "startFrameX": 3,
+      "startFrameY": 3,
+      "duration": 6,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "soldier2_death",
       "startFrameX": 3,
       "startFrameY": 4,
       "duration": 8,
