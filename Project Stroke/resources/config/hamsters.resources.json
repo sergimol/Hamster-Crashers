@@ -919,8 +919,11 @@
     {
       "id": "catMeowAttack",
       "file": "resources/sound/cat/catMeowAttack.wav"
+    },
+    {
+      "id": "catWalking",
+      "file": "resources/sound/cat/catMeowWalking.wav"
     }
-
   ],
 
   "anims": [
