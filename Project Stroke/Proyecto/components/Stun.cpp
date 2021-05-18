@@ -22,8 +22,11 @@ void Stun::update() {
 	if (state == HamStates::STUNNED) {
 		//Deja de estar stunneado
 		if (sdlutils().currRealTime() > time_ + cooldown_) {
-			strAtt_->setActive(true);
-			lghtAtt_->setActive(true);
+			if (!entity_->getComponent<MovementInChase>()->isActive()) {
+				strAtt_->setActive(true);
+				lghtAtt_->setActive(true);
+			}
+			
 			hamCtrl_->setActive(true);
 			state = HamStates::DEFAULT;
 		}

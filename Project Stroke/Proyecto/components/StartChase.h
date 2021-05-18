@@ -25,4 +25,8 @@ private:
 	Transform* tr_;
 	bool in = false;
 	bool collide = false;
+
+	//Timer para el tiempo que dura el evento
+	float time_;
+	const float COOLDOWN_ = 2000;
 };

@@ -32,11 +32,25 @@ void StartChase::update() {
 
 			if (Collisions::collides(hamsterTr->getPos(), hamsterTr->getW(), hamsterTr->getH(),
 				tr_->getPos(), tr_->getW(), tr_->getH())) {
-				start();
+				time_ = sdlutils().currRealTime();
 				collide = true;
 			}
 		}
 	}
+	//Una vez haya chocado con el trigger...
+	else {
+
+		//Cuando pasen X segundos, empieza el evento
+		if (sdlutils().currRealTime() > time_ + COOLDOWN_) {
+
+			start();
+
+
+		}
+
+	}
+
+
 }
 
 void StartChase::render() {
