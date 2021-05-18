@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="left-up" width="100" height="6" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="79">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="left-up" width="100" height="6" tilewidth="64" tileheight="64" infinite="0" nextlayerid="13" nextobjectid="105">
  <properties>
   <property name="MaxH" type="int" value="6"/>
  </properties>
@@ -57,20 +57,81 @@
 </data>
  </layer>
  <objectgroup id="10" name="Alturas">
-  <object id="67" name="0" x="539.667" y="124.667" width="39" height="255.333"/>
-  <object id="68" name="1" x="578.667" y="124" width="12.667" height="256"/>
   <object id="69" name="0" x="895.667" y="125.667" width="38" height="254.667"/>
   <object id="71" name="1" x="882.667" y="124" width="12.667" height="256"/>
  </objectgroup>
  <objectgroup id="11" name="entities">
   <object id="66" name="sardinilla" x="36.7273" y="279.152" width="57.5758" height="48.4848"/>
-  <object id="77" name="trap" x="385.212" y="265.758" width="57.5758" height="48.4848"/>
-  <object id="78" name="obstacle" x="165.212" y="219.424" width="57.5758" height="48.4848">
+  <object id="93" name="enemigoFuerte" x="121.544" y="330.887" width="27.2727" height="44.9091">
    <properties>
-    <property name="a" type="bool" value="true"/>
-    <property name="id" value="Box"/>
-    <property name="numHits" type="int" value="2"/>
-    <property name="z" type="int" value="0"/>
+    <property name="sala" type="int" value="1"/>
+    <property name="zRondas" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="94" name="enemigoFuerte" x="784.394" y="279.25" width="27.2727" height="44.9091">
+   <properties>
+    <property name="sala" type="int" value="1"/>
+    <property name="zRondas" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="95" name="enemigoFuerte" x="791.424" y="334.886" width="27.2727" height="44.9091">
+   <properties>
+    <property name="sala" type="int" value="1"/>
+    <property name="zRondas" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="96" name="enemigoFuerte" x="163.544" y="258.887" width="27.2727" height="44.9091">
+   <properties>
+    <property name="sala" type="int" value="1"/>
+    <property name="zRondas" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="97" name="enemigo" x="316.272" y="257.917" width="27.2727" height="44.9091">
+   <properties>
+    <property name="sala" type="int" value="1"/>
+    <property name="zRondas" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="98" name="enemigoFuerte" x="294.272" y="333.917" width="27.2727" height="44.9091">
+   <properties>
+    <property name="sala" type="int" value="1"/>
+    <property name="zRondas" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="99" name="enemigoFuerte" x="1063.18" y="248.947" width="27.2727" height="44.9091">
+   <properties>
+    <property name="sala" type="int" value="1"/>
+    <property name="zRondas" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="100" name="enemigoFuerte" x="1067.18" y="340.947" width="27.2727" height="44.9091">
+   <properties>
+    <property name="sala" type="int" value="1"/>
+    <property name="zRondas" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="101" name="finalBoss" x="223.544" y="117.25" width="27.2727" height="44.9091">
+   <properties>
+    <property name="sala" type="int" value="1"/>
+    <property name="zRondas" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="102" name="firstBoss" x="255.544" y="117.25" width="27.2727" height="44.9091">
+   <properties>
+    <property name="sala" type="int" value="1"/>
+    <property name="zRondas" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="103" name="1" x="529.544" y="165.25" width="13" height="255.5">
+   <properties>
+    <property name="CameraCoordX" type="int" value="1100"/>
+    <property name="Rounds" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="104" name="escalectris" x="623.921" y="166.295" width="27.2727" height="44.9091">
+   <properties>
+    <property name="sala" type="int" value="1"/>
+    <property name="zRondas" type="int" value="1"/>
    </properties>
   </object>
  </objectgroup>

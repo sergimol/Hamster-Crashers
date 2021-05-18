@@ -83,7 +83,9 @@ class MicroOndasManager;
 class MenuIndicator;
 class dialogos;
 class subtitulos;
-
+class MenuAnim;
+class ObstacleMoveable;
+class LifeTime;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -168,7 +170,10 @@ class subtitulos;
 	MicroOndasManager, \
 	MenuIndicator,\
 	dialogos,\
-	subtitulos
+	subtitulos,\
+	MenuAnim,\
+	ObstacleMoveable, \
+	LifeTime
 
 // groups
 
@@ -195,7 +200,7 @@ struct Mother;
 struct PauseMenu;
 struct SoundManager;
 struct MainMenu;
-struct Pussy;
+struct Cat_;
 struct PlayerQuantityMenu;
 struct HamsterSelectionMenu;
 struct OptionsMenu;
@@ -213,7 +218,7 @@ struct dialogosMngr;
 					PlayerQuantityMenu, \
 					HamsterSelectionMenu, \
 					SoundManager, \
-					Pussy, \
+					Cat_, \
 					MainMenu, \
 					OptionsMenu, \
 					dialogosMngr

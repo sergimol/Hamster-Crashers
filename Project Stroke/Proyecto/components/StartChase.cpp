@@ -15,10 +15,12 @@
 #include "Turret.h"
 #include "Poison.h"
 #include "CatMovement.h"
+#include "AnimHamsterStateMachine.h"
 
 void StartChase::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+
 }
 
 void StartChase::update() {
@@ -32,9 +34,54 @@ void StartChase::update() {
 
 			if (Collisions::collides(hamsterTr->getPos(), hamsterTr->getW(), hamsterTr->getH(),
 				tr_->getPos(), tr_->getW(), tr_->getH())) {
-				start();
+				time_ = sdlutils().currRealTime();
 				collide = true;
+
+				for (Entity* hamsters : entity_->getMngr()->getPlayers()) {
+					string id = hamsters->getComponent<EntityAttribs>()->getId();
+
+					if (id == "sardinilla") {
+						hamsters->getComponent<Roll>()->deactiveAbility();
+					}
+					else if (id == "canelon")
+						hamsters->getComponent<Pray>()->deactiveAbility();
+					else if (id == "keta")
+						hamsters->getComponent<Poison>()->deactiveAbility();
+					else
+						hamsters->getComponent<Turret>()->deactiveAbility();
+
+					hamsters->getComponent<LightAttack>()->setActive(false);
+					hamsters->getComponent<StrongAttack>()->setActive(false);
+
+					hamsters->getComponent<Movement>()->setActive(false);
+
+					//Activamos la gravedad
+					entity_->getMngr()->getHandler<Cat_>()->getComponent<Transform>()->setVelZ(50);
+
+					//Desactivamos el Move y Ability
+					hamsters->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE,false);
+					hamsters->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::ABILITY,false);
+
+					//Y activamos el Idle
+					hamsters->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE,true);
+
+					//Y METEMOS UNA ANIMACIÓN TO WAPA AL GATO EN ESTOS SEGUNDOS DE ESPERA
+				
+				}
 			}
+		}
+	}
+	//Una vez haya chocado con el trigger...
+	else {
+
+		//Cuando pasen X segundos...
+		if (sdlutils().currRealTime() > time_ + COOLDOWN_) {
+
+			//Cambiamos el sistema de movimiento para comenzar el segundo boss
+			start();
+
+			//Y eliminamos el trigger de evento
+			entity_->setActive(false);
 		}
 	}
 }
@@ -45,29 +92,17 @@ void StartChase::render() {
 
 void StartChase::start() {
 
-	entity_->getMngr()->getHandler<Pussy>()->addComponent<CatMovement>();
+	//Damos velocidad al gato
+	entity_->getMngr()->getHandler<Cat_>()->getComponent<CatMovement>()->start();
+
 
 	for (Entity* hamsters : entity_->getMngr()->getPlayers()) {
-		string id = hamsters->getComponent<EntityAttribs>()->getId();
 
-		if (id == "sardinilla") {
-			hamsters->getComponent<Roll>()->deactiveAbility();
-		}
-		else if (id == "canelon")
-			hamsters->getComponent<Pray>()->deactiveAbility();
-		else if (id == "keta")
-			hamsters->getComponent<Poison>()->deactiveAbility();
-		else
-			hamsters->getComponent<Turret>()->deactiveAbility();
-
-		hamsters->getComponent<LightAttack>()->setActive(false);
-		hamsters->getComponent<StrongAttack>()->setActive(false);
-
-		hamsters->getComponent<Movement>()->setActive(false);
-
+		//Activamos el nuevo sistema de movimiento a cada hamster
 		hamsters->getComponent<MovementInChase>()->setActive(true);
-
-		//Y hacemos que la camara siga al gato
-		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::BossCat);
 	}
+
+	//Y hacemos que la camara siga al gato
+	//PONER AQUI EL TRANSITION PARA QUE NO CAMBIE LA CAMARA BRUSCAMENTE AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::BossCat);
 }

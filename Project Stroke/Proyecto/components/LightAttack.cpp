@@ -180,8 +180,8 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 		auto obstRect = el->getComponent<Transform>()->getRectCollide();
 		Vector2D newPos = Vector2D(obstRect.x - cam.x, obstRect.y - cam.y);
 		//Si colisiona el ataque
-		if (Collisions::collides(Vector2D(rectPlayer.x, rectPlayer.y), rectPlayer.w, rectPlayer.h, 
-									newPos, obstRect.w, obstRect.h)) {
+		if (Collisions::collides(Vector2D(rectPlayer.x, rectPlayer.y), rectPlayer.w, rectPlayer.h,
+			newPos, obstRect.w, obstRect.h)) {
 			//El objeto es golpeado y actua en consecuencia
 			auto* obstObject = el->getComponent<Obstacle>();
 			if (obstObject != nullptr)
@@ -201,7 +201,7 @@ void LightAttack::render() {
 }
 
 void LightAttack::attack() {
-	if (!anim_->isOnAttack()) {
+	if (isActive() && !anim_->isOnAttack()) {
 
 		auto state = hms_->getState();
 		if (hms_->canAttack() && sdlutils().currRealTime() > time_ + cooldown_) {

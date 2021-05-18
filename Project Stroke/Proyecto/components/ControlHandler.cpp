@@ -15,9 +15,9 @@ void ControlHandler::init() {
 	string id = entity_->getComponent<EntityAttribs>()->getId();
 
 	if (id == "sardinilla") {
-		ab_ = entity_->getComponent<WarCry>();
-		//ab_ = entity_->getComponent<Roll>();
-		//roll_ = entity_->getComponent<Roll>();
+		//ab_ = entity_->getComponent<WarCry>();
+		ab_ = entity_->getComponent<Roll>();
+		roll_ = entity_->getComponent<Roll>();
 	}
 	else if (id == "canelon")
 		ab_ = entity_->getComponent<Pray>();
@@ -188,6 +188,7 @@ void ControlHandler::handleController() {
 				if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_A))
 				{
 					mov_->updateKeymap(Movement::SPACE, true);
+					mic_->updateKeymap(MovementInChase::SPACE, true);
 					/*if (roll_ != nullptr) roll_->updateKeymap(Roll::SPACE, true);*/
 				}
 
