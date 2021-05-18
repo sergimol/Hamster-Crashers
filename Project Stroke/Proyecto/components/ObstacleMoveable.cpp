@@ -85,9 +85,9 @@ void ObstacleMoveable::render()
 		//se peude comenzar a caluclar el aplha
 		float aux = (time_ - ((spawnTime_ * spawns_) - warningTime_));
 
-		warningTx->setAlpha(255.0 * abs(sin(aux /warningTimeFlickering_)));
+		warningTx->setAlpha(205.0 * abs(sin(aux /warningTimeFlickering_)));
 
-		std::cout << sin(aux / warningTimeFlickering_) << "\n";
+		//std::cout << sin(aux / warningTimeFlickering_) << "\n";
 	}
 	else {
 
