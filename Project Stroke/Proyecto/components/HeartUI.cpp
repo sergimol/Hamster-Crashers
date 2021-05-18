@@ -1,5 +1,6 @@
 #include "HeartUI.h"
 #include "Animator.h"
+#include "../sdlutils/InputHandler.h"
 
 HeartUI::HeartUI(std::string n, int pos) :
 	heart_(&sdlutils().images().at("heart1")),
@@ -32,6 +33,7 @@ void HeartUI::update() {
 		if (abs(currentState) < 0.2 && latencyAux > 50) {
 			//latency = latencyAux;
 			latency = sdlutils().lerp(latency, latencyAux, 0.9);
+			ih().rumbleEvent(position); // position == id del jugador
 		}
 
 
