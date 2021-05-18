@@ -423,6 +423,10 @@
       "file": "resources/images/menuSprites/resolutions/1920x1080.png"
     },
     {
+      "id": "fullscreen",
+      "file": "resources/images/menuSprites/resolutions/fullscreen.png"
+    },
+    {
       "id": "bar0",
       "file": "resources/images/menuSprites/barLevels/bar0.png"
     },
