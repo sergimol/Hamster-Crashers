@@ -156,6 +156,7 @@
     <ClCompile Include="Proyecto\components\FinalBossAttack.cpp" />
     <ClCompile Include="Proyecto\components\FinalBossManager.cpp" />
     <ClCompile Include="Proyecto\components\FinalBossPunch.cpp" />
+    <ClCompile Include="Proyecto\components\MenuAnim.cpp" />
     <ClCompile Include="Proyecto\components\MicroOndasManager.cpp" />
     <ClCompile Include="Proyecto\components\MenuIndicator.cpp" />
     <ClCompile Include="Proyecto\components\Obstacle.cpp" />
@@ -255,6 +256,7 @@
     <ClInclude Include="Proyecto\components\FinalBossAttack.h" />
     <ClInclude Include="Proyecto\components\FinalBossManager.h" />
     <ClInclude Include="Proyecto\components\FinalBossPunch.h" />
+    <ClInclude Include="Proyecto\components\MenuAnim.h" />
     <ClInclude Include="Proyecto\components\MicroOndasManager.h" />
     <ClInclude Include="Proyecto\components\MenuIndicator.h" />
     <ClInclude Include="Proyecto\components\Obstacle.h" />

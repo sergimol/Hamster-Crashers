@@ -83,7 +83,7 @@ class MicroOndasManager;
 class MenuIndicator;
 class dialogos;
 class subtitulos;
-
+class MenuAnim;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -168,7 +168,8 @@ class subtitulos;
 	MicroOndasManager, \
 	MenuIndicator,\
 	dialogos,\
-	subtitulos
+	subtitulos,\
+	MenuAnim
 
 // groups
 
