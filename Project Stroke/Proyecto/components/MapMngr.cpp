@@ -60,6 +60,8 @@
 #include "../components/TimeTrap.h"
 #include "../components/MicroOndasManager.h"
 #include "../components/dialogos.h"
+#include "../components/ObstacleMoveable.h"
+#include "../components/LifeTime.h"
 
 
 
@@ -170,6 +172,24 @@ void MapMngr::loadNewMap(string map) {
 		//Para meter un fondo meter esto									velocidad		tamaño			posicion
 		r->addComponent<Parallax>(&sdlutils().images().at("level1background4"), 10, Vector2D(1920, 1459), Vector2D(0, upH - 100), true);
 
+		//Para meter un fondo meter esto									velocidad		tamaño			posicion
+		//o->addComponent<Parallax>(&sdlutils().images().at("level2background1"), 7, Vector2D(1920, 1459), Vector2D(0, upH), false);
+
+		//auto* p = entity_->getMngr()->addBackGround();
+		//p->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
+		////Para meter un fondo meter esto									velocidad		tamaño			posicion
+		//p->addComponent<Parallax>(&sdlutils().images().at("level2background2"), 10, Vector2D(1920, 1459), Vector2D(0, upH), false);
+
+		//auto* q = entity_->getMngr()->addBackGround();
+		//q->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
+		////Para meter un fondo meter esto									velocidad		tamaño			posicion
+		//q->addComponent<Parallax>(&sdlutils().images().at("level2background3"), 1, Vector2D(1920, 1459), Vector2D(0, upH), false);
+
+		//auto* r = entity_->getMngr()->addFrontGround();
+		//r->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
+		////Para meter un fondo meter esto									velocidad		tamaño			posicion
+		//r->addComponent<Parallax>(&sdlutils().images().at("level2background4"), 10, Vector2D(1920, 1459), Vector2D(0, upH - 150), true);
+
 		for (const auto& layer : layers)
 		{
 			if (layer->getType() == tmx::Layer::Type::Object)
@@ -222,11 +242,15 @@ void MapMngr::loadNewMap(string map) {
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 2 * 256.0f, 0.0f, 1, 1);
 
+							//Le metemos gravedad
+							enemy->getComponent<Transform>()->setGravity(enemy->addComponent<Gravity>());
+							
+							enemy->addComponent<CatMovement>();
 
 							enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
 							enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
 							enemy->addComponent<ContactDamage>(20, 30, false, false);
-							enemy->getMngr()->setHandler<Pussy>(enemy);
+							enemy->getMngr()->setHandler<Cat_>(enemy);
 						}
 						else if (object.getName() == "microondas") { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 							//auto* micro = entity_->getMngr()->addEntity();
@@ -544,6 +568,16 @@ void MapMngr::loadEnemyRoom() {
 
 			numberEnemyRoom++;
 		}
+		else if (name == "escalectris" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
+			auto* escalectris = mngr_->addEntity();
+			
+			escalectris->addComponent<Transform>(
+				Vector2D(object.getPosition().x* scale, object.getPosition().y* scale),
+				Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
+
+			escalectris->addComponent<ObstacleMoveable>(&sdlutils().images().at("catSmoking"),
+				object.getPosition().x* scale, object.getPosition().y* scale, 0, 0);
+		}
 	}
 }
 
@@ -605,7 +639,7 @@ void MapMngr::addHamster(string name, int i) {
 	hamster1->addComponent<HeartUI>(name, i);
 
 	//Habilidad
-	if (name == "sardinilla") hamster1->addComponent<WarCry>(0.25, 1.5);
+	if (name == "sardinilla") hamster1->addComponent<Roll>();
 	else if (name == "canelon") hamster1->addComponent<Pray>(100, 100);
 	else if (name == "keta") hamster1->addComponent<Poison>(10000);
 	else if (name == "monchi") {
