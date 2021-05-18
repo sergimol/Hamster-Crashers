@@ -197,6 +197,8 @@ struct PauseMenu;
 struct SoundManager;
 struct MainMenu;
 struct Pussy;
+struct Boss;
+struct FinalBoss;
 struct PlayerQuantityMenu;
 struct HamsterSelectionMenu;
 struct OptionsMenu;
@@ -215,6 +217,8 @@ struct dialogosMngr;
 					HamsterSelectionMenu, \
 					SoundManager, \
 					Pussy, \
+					Boss, \
+					FinalBoss, \
 					MainMenu, \
 					OptionsMenu, \
 					dialogosMngr
