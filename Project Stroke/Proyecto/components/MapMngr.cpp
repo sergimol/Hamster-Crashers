@@ -560,21 +560,28 @@ void MapMngr::addHamster(string name, int i) {
 	auto& players = mngr_->getPlayers();
 	auto* hamster1 = mngr_->addEntity();
 
+	int tam = 0;
 	//Habilidad
-	if (name == "sardinilla")
+	if (name == "sardinilla") {
+		tam = 86;
 		hamster1->addComponent<Transform>(Vector2D((264.0) * scale, 161.167 * scale),
-			Vector2D(), 86 * scale, 86 * scale, 0.0f, 0, 0, 0.5, 0.5);
-
-	else if (name == "canelon")
+			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.5);
+	}
+	else if (name == "canelon") {
+		tam = 128;
 		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
-			Vector2D(), 86 * scale, 86 * scale, 0.0f, 0, 0, 1, 1);
-	else if (name == "keta")
+			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.3, 0.3);
+	}
+	else if (name == "keta") {
+		tam = 100;
 		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
-			Vector2D(), 86 * scale, 86 * scale, 0.0f, 0, 0, 1, 1);
-	else
+			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 1, 1);
+	}
+	else {
+		tam = 86;
 		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
-			Vector2D(), 86 * scale, 86 * scale, 0.0f, 0, 0, 1, 1);
-
+			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 1, 1);
+	}
 	hamster1->addComponent<HamsterStateMachine>();
 	//1º: True, porque es un hamster //2º: False, porque usa de referencia el rect del Animator
 	hamster1->addComponent<Shadow>(true, false);
@@ -584,8 +591,8 @@ void MapMngr::addHamster(string name, int i) {
 	hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20);
 	hamster1->addComponent<Animator>(
 		&sdlutils().images().at(name + "Sheet"),
-		86,
-		86,
+		tam,
+		tam,
 		3,
 		3,
 		220,

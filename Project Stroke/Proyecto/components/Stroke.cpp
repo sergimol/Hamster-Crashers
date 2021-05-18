@@ -50,7 +50,7 @@ void Stroke::increaseChance(int n, bool fromAbility) {
 		entity_->getComponent<HeartUI>()->increaseLatency(chanceFromAb_ + chance_);
 
 		if (chance_ + chanceFromAb_ > CHANGECOLORVALUE)
-			entity_->getComponent<Animator>()->setTexture(&sdlutils().images().at("sardinillaSheet2"));
+			entity_->getComponent<Animator>()->setTexture(&sdlutils().images().at(entity_->getComponent<EntityAttribs>()->getId() + "Sheet2"));
 
 		timeLastIncrease_ = sdlutils().currRealTime();
 	}
@@ -81,7 +81,7 @@ void Stroke::checkChance() {
 		entity_->getComponent<HeartUI>()->increaseLatency(chanceFromAb_ + chance_);
 
 		if (chance_ + chanceFromAb_ < CHANGECOLORVALUE)
-			entity_->getComponent<Animator>()->setTexture(&sdlutils().images().at("sardinillaSheet"));
+			entity_->getComponent<Animator>()->setTexture(&sdlutils().images().at(entity_->getComponent<EntityAttribs>()->getId() + "Sheet"));
 
 		timeLastDecrease_ = t;
 	}
@@ -99,6 +99,7 @@ void Stroke::checkChance() {
 void Stroke::infarctHamster() {
 	//El personaje principal pasa a estar infartado
 	auto name = entity_->getComponent<EntityAttribs>()->getId();
+	auto name2 = name;
 	//Los enemigos que le seguian dejan de hacerlo
 	auto& ents = entity_->getMngr()->getPlayers();
 
@@ -137,14 +138,28 @@ void Stroke::infarctHamster() {
 	//GENERAR PERSONAJE INFARTADO ()
 	auto* deadBody = entity_->getMngr()->addEntity();
 	auto* tr = deadBody->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip(), tr_->getScaleW(), tr_->getScaleH());
+
+	int tam = 0;
+
+	if (name == "sardinilla" || name == "monchi") {
+		tam = 86;
+	}
+	else if (name == "canelon" || name == "canelonDemon") {
+		tam = 128;
+		name2 = "canelon";
+	}
+	else {
+		tam = 100;
+	}
+
 	deadBody->addComponent<Animator>(&sdlutils().images().at(name + "Sheet"),
-		86,
-		86,
+		tam,
+		tam,
 		3,
 		3,
 		220,
 		Vector2D(0, 0),
-		3)->play(sdlutils().anims().at(name + "_stroke"));
+		3)->play(sdlutils().anims().at(name2 + "_stroke"));
 	tr->setVelZ(tr_->getVelZ());
 	deadBody->addComponent<CollisionDetec>();
 	auto* gr = deadBody->addComponent<Gravity>();

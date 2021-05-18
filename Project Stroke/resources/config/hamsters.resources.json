@@ -127,12 +127,28 @@
       "file": "resources/images/sardinilla_spritesheetPos.png"
     },
     {
-      "id": "canelonGodSheet",
+      "id": "canelonSheet",
       "file": "resources/images/canelonGod_spritesheet.png"
+    },
+    {
+      "id": "canelonSheet2",
+      "file": "resources/images/canelonGod_spritesheetHA.png"
+    },
+    {
+      "id": "canelonSheet3",
+      "file": "resources/images/canelonGod_spritesheetPos.png"
     },
     {
       "id": "canelonDemonSheet",
       "file": "resources/images/canelonDemon_spritesheet.png"
+    },
+    {
+      "id": "canelonDemonSheet2",
+      "file": "resources/images/canelonDemon_spritesheetHA.png"
+    },
+    {
+      "id": "canelonDemonSheet3",
+      "file": "resources/images/canelonDemon_spritesheetPos.png"
     },
     {
       "id": "firstBoss",
@@ -1100,6 +1116,175 @@
       "cols": 14,
       "rows": 1,
       "frameUpdate": 200,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "canelon_idle",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 3,
+      "cols": 10,
+      "rows": 10,
+      "frameUpdate": 200,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "canelon_move",
+      "startFrameX": 3,
+      "startFrameY": 0,
+      "duration": 6,
+      "cols": 10,
+      "rows": 10,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+
+    },
+    {
+      "id": "canelon_light_attack1",
+      "startFrameX": 9,
+      "startFrameY": 0,
+      "duration": 5,
+      "cols": 10,
+      "rows": 10,
+      "frameUpdate": 70,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": 5
+    },
+    {
+      "id": "canelon_light_attack2",
+      "startFrameX": 9,
+      "startFrameY": 0,
+      "duration": 5,
+      "cols": 10,
+      "rows": 10,
+      "frameUpdate": 70,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": 5
+    },
+    {
+      "id": "canelon_light_combo",
+      "startFrameX": 4,
+      "startFrameY": 1,
+      "duration": 7,
+      "cols": 10,
+      "rows": 10,
+      "frameUpdate": 50,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": 5
+    },
+    {
+      "id": "canelon_strong_attack",
+      "startFrameX": 1,
+      "startFrameY": 2,
+      "duration": 5,
+      "cols": 10,
+      "rows": 10,
+      "frameUpdate": 50,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": 6
+    },
+    {
+      "id": "canelon_strong_combo",
+      "startFrameX": 6,
+      "startFrameY": 2,
+      "duration": 7,
+      "cols": 10,
+      "rows": 10,
+      "frameUpdate": 50,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": 6
+    },
+    {
+      "id": "canelon_ability",
+      "startFrameX": 3,
+      "startFrameY": 3,
+      "duration": 17,
+      "cols": 10,
+      "rows": 10,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "canelon_hit",
+      "startFrameX": 0,
+      "startFrameY": 5,
+      "duration": 4,
+      "cols": 10,
+      "rows": 10,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "canelon_death",
+      "startFrameX": 4,
+      "startFrameY": 5,
+      "duration": 17,
+      "cols": 10,
+      "rows": 10,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "canelon_stroke",
+      "startFrameX": 1,
+      "startFrameY": 7,
+      "duration": 11,
+      "cols": 10,
+      "rows": 10,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "canelon_ghost_spawn",
+      "startFrameX": 2,
+      "startFrameY": 8,
+      "duration": 4,
+      "cols": 10,
+      "rows": 10,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "canelon_idle_ghost",
+      "attackFrame": -1
+    },
+    {
+      "id": "canelon_idle_ghost",
+      "startFrameX": 6,
+      "startFrameY": 8,
+      "duration": 4,
+      "cols": 10,
+      "rows": 10,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "canelon_stun",
+      "startFrameX": 0,
+      "startFrameY": 9,
+      "duration": 9,
+      "cols": 10,
+      "rows": 10,
+      "frameUpdate": 100,
       "loop": 0,
       "chain": "",
       "attackFrame": -1
