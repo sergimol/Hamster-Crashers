@@ -637,6 +637,131 @@
     {
       "id": "cloud",
       "file": "resources/images/ketaSprites/Nube-Sheet.png"
+    },
+    {
+      "id": "ma0",
+      "file": "resources/images/menuAnim/0.png"
+    },
+    {
+      "id": "ma1",
+      "file": "resources/images/menuAnim/1.png"
+    },
+    {
+      "id": "ma2",
+      "file": "resources/images/menuAnim/2.png"
+    },
+    {
+      "id": "ma3",
+      "file": "resources/images/menuAnim/3.png"
+    },
+    {
+      "id": "ma4",
+      "file": "resources/images/menuAnim/4.png"
+    },
+    {
+      "id": "ma5",
+      "file": "resources/images/menuAnim/5.png"
+    },
+    {
+      "id": "ma6",
+      "file": "resources/images/menuAnim/6.png"
+
+    },
+    {
+      "id": "ma7",
+      "file": "resources/images/menuAnim/7.png"
+    },
+    {
+      "id": "ma8",
+      "file": "resources/images/menuAnim/8.png"
+    },
+    {
+      "id": "ma9",
+      "file": "resources/images/menuAnim/9.png"
+    },
+    {
+      "id": "ma10",
+      "file": "resources/images/menuAnim/10.png"
+    },
+    {
+      "id": "ma11",
+      "file": "resources/images/menuAnim/11.png"
+    },
+    {
+      "id": "ma12",
+      "file": "resources/images/menuAnim/12.png"
+    },
+    {
+      "id": "ma13",
+      "file": "resources/images/menuAnim/13.png"
+    },
+    {
+      "id": "ma14",
+      "file": "resources/images/menuAnim/14.png"
+    },
+    {
+      "id": "ma15",
+      "file": "resources/images/menuAnim/15.png"
+    },
+    {
+      "id": "ma16",
+      "file": "resources/images/menuAnim/16.png"
+    },
+    {
+      "id": "ma17",
+      "file": "resources/images/menuAnim/17.png"
+    },
+    {
+      "id": "ma18",
+      "file": "resources/images/menuAnim/18.png"
+    },
+    {
+      "id": "ma19",
+      "file": "resources/images/menuAnim/19.png"
+    },
+    {
+      "id": "ma20",
+      "file": "resources/images/menuAnim/20.png"
+    },
+    {
+      "id": "ma21",
+      "file": "resources/images/menuAnim/21.png"
+    },
+    {
+      "id": "ma22",
+      "file": "resources/images/menuAnim/22.png"
+    },
+    {
+      "id": "ma23",
+      "file": "resources/images/menuAnim/23.png"
+    },
+    {
+      "id": "ma24",
+      "file": "resources/images/menuAnim/24.png"
+    },
+    {
+      "id": "ma25",
+      "file": "resources/images/menuAnim/25.png"
+    },
+    {
+      "id": "ma26",
+      "file": "resources/images/menuAnim/26.png"
+    },
+    {
+      "id": "ma27",
+      "file": "resources/images/menuAnim/27.png"
+    },
+    {
+      "id": "ma28",
+      "file": "resources/images/menuAnim/28.png"
+    },
+    {
+      "id": "ma29",
+      "file": "resources/images/menuAnim/29.png"
+    },
+    {
+      "id": "ma30",
+      "file": "resources/images/menuAnim/30.png"
     }
   ],
 

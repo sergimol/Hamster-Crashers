@@ -474,6 +474,9 @@
     <ClCompile Include="Proyecto\components\subtitulos.cpp">
       <Filter>Archivos de origen\components\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\MenuAnim.cpp">
+      <Filter>Archivos de origen\components\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -814,6 +817,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\subtitulos.h">
       <Filter>Archivos de encabezado\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\MenuAnim.h">
+      <Filter>Archivos de encabezado\Components\Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

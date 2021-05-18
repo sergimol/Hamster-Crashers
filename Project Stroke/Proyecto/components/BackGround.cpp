@@ -21,4 +21,7 @@ void BackGround::update()
 	//Movemos el background en sentido contrario en funcion de la camara
 	tr_->setPos(Vector2D(tr_->getPos().getX() - (camPos_.getX() - antPos.getX())*pxVel_/100, tr_->getPos().getY()));
 	
+
+
+
 }
