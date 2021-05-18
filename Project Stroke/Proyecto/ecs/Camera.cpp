@@ -46,10 +46,11 @@ void Camera::followPlayer() {
 	//Actualizamos la posicion de la camara
 	camera_.x = camPos.getX() - camera_.w / 2.0;
 	camera_.y = camPos.getY() - camera_.h / 2.0;
+
 }
 
 void Camera::followBossCat() {
-	auto cat = entity_->getMngr()->getHandler<Pussy>()->getComponent<Transform>();
+	auto cat = entity_->getMngr()->getHandler<Cat_>()->getComponent<Transform>();
 
 	//Camara sigue al gato dejándolo justo en la esquina derecha
 	camPos = cat->getPos() - Vector2D(sdlutils().width() / 2 - cat->getW(), 0);

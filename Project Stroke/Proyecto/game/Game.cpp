@@ -42,6 +42,8 @@
 #include "../components/TimeTrap.h"
 #include "../components/MicroOndasManager.h"
 #include "../components/dialogos.h"
+#include "../components/ObstacleMoveable.h"
+#include "../components/LifeTime.h"
 
 //PARA LAS COLISIONES CON TILE
 #include "../utils/Collisions.h"

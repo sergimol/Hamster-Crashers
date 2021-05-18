@@ -84,6 +84,8 @@ class MenuIndicator;
 class dialogos;
 class subtitulos;
 class MenuAnim;
+class ObstacleMoveable;
+class LifeTime;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -169,7 +171,9 @@ class MenuAnim;
 	MenuIndicator,\
 	dialogos,\
 	subtitulos,\
-	MenuAnim
+	MenuAnim,\
+	ObstacleMoveable, \
+	LifeTime
 
 // groups
 
@@ -196,7 +200,9 @@ struct Mother;
 struct PauseMenu;
 struct SoundManager;
 struct MainMenu;
-struct Pussy;
+struct Boss;
+struct FinalBoss;
+struct Cat_;
 struct PlayerQuantityMenu;
 struct HamsterSelectionMenu;
 struct OptionsMenu;
@@ -214,7 +220,9 @@ struct dialogosMngr;
 					PlayerQuantityMenu, \
 					HamsterSelectionMenu, \
 					SoundManager, \
-					Pussy, \
+					Boss, \
+					FinalBoss, \
+					Cat_, \
 					MainMenu, \
 					OptionsMenu, \
 					dialogosMngr

@@ -477,6 +477,12 @@
     <ClCompile Include="Proyecto\components\MenuAnim.cpp">
       <Filter>Archivos de origen\components\Animation</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\ObstacleMoveable.cpp">
+      <Filter>Archivos de origen\components\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\LifeTime.cpp">
+      <Filter>Archivos de origen\components\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -820,6 +826,12 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\MenuAnim.h">
       <Filter>Archivos de encabezado\Components\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\ObstacleMoveable.h">
+      <Filter>Archivos de encabezado\Components\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\LifeTime.h">
+      <Filter>Archivos de encabezado\Components\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

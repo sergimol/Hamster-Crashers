@@ -32,7 +32,7 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 	SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 	Vector2D pCam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamPos();
 
-	if (map->intersectWall(rectPlayer) || map->intersectObstacles(rectPlayer)) {
+	if (map->intersectWall(rectPlayer) || map->intersectObstacles(rectPlayer) || map->intersectBoss(rectPlayer) || map->intersectFinalBoss(rectPlayer)) {
 
 		//Comprobamos si hay doble input
 		if (dir.getX() != 0 && dir.getY() != 0 || vel.getX() != 0 && vel.getY() != 0) {
