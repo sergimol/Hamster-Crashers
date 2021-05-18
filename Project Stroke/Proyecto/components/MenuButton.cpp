@@ -112,10 +112,19 @@ void MenuButton::pressed() {
 	}
 	else if (buttonName_ == "sardinilla" || buttonName_ == "keta" || buttonName_ == "monchi" || buttonName_ == "canelon") {
 		auto* mapa = entity_->getMngr()->getHandler<Map>();
-		mapa->getComponent<MapMngr>()->addHamster(buttonName_);
+		mapa->getComponent<MapMngr>()->addHamster(buttonName_);		
 
 		sdlutils().setHamstersToChoose(sdlutils().hamstersToChoose() - 1);
 		sdlutils().setHamstersChosen(sdlutils().hamstersChosen() + 1);
+
+		auto* mngr = entity_->getMngr();
+
+		vector<Entity*> indctrs = mngr->getHandler<HamsterSelectionMenu>()->getComponent<MenuButtonManager>()->getIndicators();
+		indctrs[0]->getComponent<MenuIndicator>()->updateTexture(true);
+
+		auto* selectedIndicator = mngr->addMenu();
+		selectedIndicator->addComponent<MenuIndicator>("p" + to_string(sdlutils().hamstersChosen()), Vector2D(dest_.x + 90, dest_.y), stateNumber_);
+		indctrs.push_back(selectedIndicator);
 
 		if (sdlutils().hamstersToChoose() <= 0) {
 			mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Lvl1Javi.tmx");

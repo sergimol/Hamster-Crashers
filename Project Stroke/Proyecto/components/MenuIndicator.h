@@ -21,6 +21,10 @@ public:
 
 	void updateTexture(bool isUp);
 	void reset();
+	
+	// Para el indicador del jugador que está eligiendo
+	void moveX(bool isRight);
+
 private:
 	//Nombre del indicador
 	std::string indicatorName_;
