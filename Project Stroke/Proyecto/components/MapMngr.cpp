@@ -557,7 +557,7 @@ void MapMngr::addHamster(string name, int i) {
 
 	//Habilidad
 	if (name == "sardinilla")
-		hamster1->addComponent<Transform>(Vector2D((264.0) * scale, 161.167 * scale),
+		hamster1->addComponent<Transform>(Vector2D((264.0) * scale, 191.167 * scale),
 			Vector2D(), 86 * scale, 86 * scale, 0.0f, 0, 0, 0.5, 0.5);
 
 	else if (name == "canelon")
@@ -698,7 +698,7 @@ void MapMngr::addObject(const tmx::Object& object) {
 
 	auto& prop = object.getProperties();
 	// bool: rompible? true : false
-	// int : id del objeto "Box", "..."
+	// string : id del objeto "Box", "..."
 	// int : nº de golpes. Si no es rompible, se ignora
 	// int : pos en Z. Necesario meterlo a mano desde Tile
 
