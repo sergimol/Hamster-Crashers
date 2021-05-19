@@ -73,6 +73,17 @@ void MenuButton::exited() {
 	buttonSelected_ = false;
 }
 
+void MenuButton::setSelectable(bool s)
+{
+	selectable_ = s;
+	
+	if(selectable_)
+		button_ = &sdlutils().images().at(buttonName_ + "Button");
+	else
+		button_ = &sdlutils().images().at(buttonName_ + "ButtonUnselectable");
+
+}
+
 void MenuButton::pressed() {
 	//Sonido
 	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("button");
@@ -201,12 +212,16 @@ void MenuButton::pressed() {
 		sdlutils().setHamstersToChoose(sdlutils().hamstersToChoose() - 1);
 		sdlutils().setHamstersChosen(sdlutils().hamstersChosen() + 1);
 
-		auto* mngr = entity_->getMngr();
+		setSelectable(false);
 
-		auto& indctrs = mngr->getHandler<HamsterSelectionMenu>()->getComponent<MenuButtonManager>()->getIndicators();
+		auto* mngr = entity_->getMngr();
+		auto menuMngr = mngr->getHandler<HamsterSelectionMenu>()->getComponent<MenuButtonManager>();
+		auto& indctrs = menuMngr->getIndicators();
 		indctrs[0]->getComponent<MenuIndicator>()->updateTexture(true);
 
-		auto* selectedIndicator = mngr->addMenu();
+		menuMngr->moveToFirstSelectable();
+
+		auto selectedIndicator = mngr->addMenu();
 		selectedIndicator->addComponent<MenuIndicator>("p" + to_string(sdlutils().hamstersChosen()), Vector2D(dest_.x + 90, dest_.y), stateNumber_);
 		indctrs.push_back(selectedIndicator);
 

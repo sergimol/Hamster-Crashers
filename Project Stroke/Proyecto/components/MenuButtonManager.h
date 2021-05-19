@@ -26,6 +26,7 @@ public:
 	void moveRight();
 	void moveLeft();
 	void pressButton();
+	void moveToFirstSelectable();
 
 	void onResume() override { timer_ = sdlutils().currRealTime() + cooldown_; };
 
