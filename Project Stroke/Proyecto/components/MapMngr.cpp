@@ -132,6 +132,9 @@ void MapMngr::loadNewMap(string map) {
 		{
 			collider[i] = new bool[mapDimensions_.y]{ false };
 		}
+		//Hay colisiones
+		collisionCreated = true;
+
 
 		//Dimensiones de los tiles
 		tilesDimensions_ = map_.getTileSize();
@@ -244,7 +247,7 @@ void MapMngr::loadNewMap(string map) {
 
 							//Le metemos gravedad
 							enemy->getComponent<Transform>()->setGravity(enemy->addComponent<Gravity>());
-							
+
 							enemy->addComponent<CatMovement>();
 
 							enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
@@ -570,13 +573,13 @@ void MapMngr::loadEnemyRoom() {
 		}
 		else if (name == "escalectris" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* escalectris = mngr_->addEntity();
-			
+
 			escalectris->addComponent<Transform>(
-				Vector2D(object.getPosition().x* scale, object.getPosition().y* scale),
+				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 				Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
 
 			escalectris->addComponent<ObstacleMoveable>(&sdlutils().images().at("catSmoking"),
-				object.getPosition().x* scale, object.getPosition().y* scale, 0, 0);
+				object.getPosition().x * scale, object.getPosition().y * scale, 0, 0);
 		}
 	}
 }
@@ -808,9 +811,14 @@ void MapMngr::addTrap(const tmx::Object& object, int x, int y) {
 }
 
 void MapMngr::clearColliders() {
-	for (int i = 0; i < mapDimensions_.x; i++)
-	{
-		delete[] collider[i];
+	if (collisionCreated) {
+		for (int i = 0; i < mapDimensions_.x; i++)
+		{
+			delete[] collider[i];
+		}
+		delete[] collider;
+		collisionCreated = false;
 	}
-	delete[] collider;
 }
+
+

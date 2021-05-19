@@ -31,7 +31,7 @@ void ObstacleMoveable::update()
 			//el coche funciona de manera independiente tiene un lifeTime que lo desactivara a si mismo
 			//pero tmb podemos destruirlo desde aca de ser necesario
 
-			auto coche = entity_->getMngr()->addEntity();
+			auto* coche = entity_->getMngr()->addEntity();
 			//el transform, aun no se que valores darle
 			coche->addComponent<Transform>(Vector2D(x_,y_), Vector2D(vel, 0), 255.0, 255.0,
 				0, 1, 1);

@@ -43,6 +43,7 @@ private:
 	int RoundsCount = 0;
 	float mapHeight_ = 0;
 	const int scale = 3;
+	bool collisionCreated = false;
 
 	std::queue<tmx::Object> TriggerftCamera;
 	vector<string> hamstersToLoad_;
