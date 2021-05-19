@@ -588,7 +588,7 @@ void MapMngr::addHamster(string name, int i) {
 	else if (name == "keta") {
 		tam = 100;
 		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
-			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 1, 1);
+			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.3);
 	}
 	else {
 		tam = 86;
