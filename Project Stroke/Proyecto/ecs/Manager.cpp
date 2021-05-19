@@ -51,6 +51,9 @@ void Manager::refresh() {
 				}
 			}), //
 		entities_.end());
+
+	//TODO lo ahgo aqui porque no las estoy poniendo en entidades
+	refreshWavesObjects();
 }
 
 void Manager::update() {
@@ -74,6 +77,11 @@ void Manager::update() {
 	auto m = menus_.size();
 	for (auto i = 0u; i < m; i++)
 		menus_[i]->update();
+
+
+	auto w = wavesObjects_.size();
+	for (auto i = 0u; i < w; i++)
+		wavesObjects_[i]->update();
 }
 
 void Manager::render() {
@@ -113,6 +121,10 @@ void Manager::render() {
 	auto m = menus_.size();
 	for (auto i = 0u; i < m; i++)
 		menus_[i]->render();
+
+	auto wo = wavesObjects_.size();
+	for (auto i = 0u; i < wo; i++)
+		wavesObjects_[i]->render();
 }
 
 void Manager::resume() {
@@ -127,4 +139,9 @@ void Manager::resume() {
 	auto f = fgs_.size();
 	for (auto i = 0u; i < f; i++)
 		fgs_[i]->resume();
+
+
+	auto wo = wavesObjects_.size();
+	for (auto i = 0u; i < wo; i++)
+		wavesObjects_[i]->resume();
 }

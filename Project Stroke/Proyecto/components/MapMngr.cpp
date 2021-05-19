@@ -108,6 +108,11 @@ void MapMngr::update() {
 			camera->changeCamFollowPos(-1);	//Se pasa el punto medio de los jugadores
 			camera->setGoToTracker(false);					//Se fija la transicion al punto medio de los jugadores al terminar GoTo
 			camera->changeCamState(State::GoingTo);			//Se cambia el estado de la camara a GoTo
+			//ha rerminado al sala de batalla
+			auto wo = entity_->getMngr()->getWavesObjects();
+			for (Entity* woe : wo) {
+				woe->setActive(false);
+			}
 		}
 		else {
 			RoundsCount++;
@@ -572,7 +577,7 @@ void MapMngr::loadEnemyRoom() {
 			//numberEnemyRoom++;
 		}
 		else if (name == "escalectris" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-			auto* escalectris = mngr_->addEntity();
+			auto* escalectris = mngr_->addWaveObject();
 
 			escalectris->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),

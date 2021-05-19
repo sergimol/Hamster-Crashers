@@ -89,6 +89,15 @@ public:
 		return e;
 	}
 
+	Entity* addWaveObject() {
+		Entity* e = new Entity(this);
+		if (e != nullptr) {
+			e->resetGroups();
+			wavesObjects_.emplace_back(e);
+		}
+		return e;
+	}
+
 	// handlers
 	template<typename T>
 	inline void setHandler(Entity *e) {
@@ -207,6 +216,11 @@ public:
 		return items_;
 	}
 
+	inline std::vector<Entity*>& getWavesObjects() {
+		return wavesObjects_;
+	}
+
+	
 	void update();
 	void render();
 	void refresh();
@@ -351,6 +365,24 @@ public:
 			fgs_.end());
 	}
 
+	void refreshWavesObjects() {
+		// remove dead entities from the list of entities
+		wavesObjects_.erase( //
+			std::remove_if( //
+				wavesObjects_.begin(), //
+				wavesObjects_.end(), //
+				[](const Entity* e) { //
+					if (e->isActive()) {
+						return false;
+					}
+					else {
+						delete e;
+						return true;
+					}
+				}), //
+			wavesObjects_.end());
+	}
+
 private:
 	std::vector<Entity*> entities_;
 	std::vector<Entity*> tiles_;
@@ -371,5 +403,6 @@ private:
 	std::vector<Entity*> traps_; // EJEMPLO
 	std::vector<Entity*> deadBodies_;
 	std::vector<Entity*> items_;
+	std::vector<Entity*> wavesObjects_; //objetos como el escalectris que solo estaran durante una batalla
 };
 
