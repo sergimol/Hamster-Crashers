@@ -595,29 +595,38 @@ void MapMngr::addHamster(string name, int i) {
 		tam = 86;
 		hamster1->addComponent<Transform>(Vector2D((264.0) * scale, 161.167 * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.5);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20);
 	}
 	else if (name == "canelon") {
 		tam = 128;
 		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
-			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.3, 0.3);
+			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.25, 0.3);
+		hamster1->addComponent<EntityAttribs>(100, 1.2, name, Vector2D(7, 3.5), i, 0, 20);
 	}
 	else if (name == "keta") {
 		tam = 100;
 		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
-			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.3);
+			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.25);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20);
+	}
+	else if (name == "monchi") {
+		tam = 86;
+		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
+			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 1, 1);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20);
 	}
 	else {
 		tam = 86;
 		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 1, 1);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20);
 	}
 	hamster1->addComponent<HamsterStateMachine>();
 	//1º: True, porque es un hamster //2º: False, porque usa de referencia el rect del Animator
-	hamster1->addComponent<Shadow>(true, false);
+	hamster1->addComponent<Shadow>(true, true);
 
 	Transform* tr = hamster1->getComponent<Transform>();
 
-	hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20);
 	hamster1->addComponent<Animator>(
 		&sdlutils().images().at(name + "Sheet"),
 		tam,

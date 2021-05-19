@@ -17,12 +17,15 @@ void ShadowFollow::init() {
 		otherHeight_ = otherTr_->getH();
 	}
 	else {
-		auto rect = otherTr_->getRectCollide();
+		auto rect = otherTr_->getRectCollideFeet();
+		rect.w *= 2;
+		rect.h *= 2;
+
 		otherWidth_ = rect.w;
 		otherHeight_ = rect.h;
 
 		baseWidth_ = rect.w;
-		baseHeight_ = rect.h / 3;
+		baseHeight_ = rect.h;
 	}
 	
 
@@ -56,9 +59,9 @@ void ShadowFollow::update() {
 		otherY = otherTr_->getPos().getY() + 4 * otherHeight_ / 5;
 	}
 	else {
-		auto rect = otherTr_->getRectCollide();
-		otherX = rect.x + otherWidth_ / 2;
-		otherY = rect.y + otherHeight_;
+		auto rect = otherTr_->getRectCollideFeet();
+		otherX = rect.x + otherWidth_ / 4;
+		otherY = rect.y + otherHeight_ / 4;
 	}
 
 	float newX, newY;
