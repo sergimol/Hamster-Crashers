@@ -83,12 +83,12 @@ void MenuIndicator::reset()
 	else if (indicatorName_ == "resolutionIndicator") {
 		indicatorIndex_ = RESOLUTIONSCOUNT - 1;
 		indicator_ = possibleTextures_[indicatorIndex_];
-	}
-
-	else if (indicatorName_ == "p") {
-		indicatorIndex_ = 0;
-		indicator_ = possibleTextures_[indicatorIndex_];
-	}
+	}
+
+	else if (indicatorName_ == "p") {
+		indicatorIndex_ = 0;
+		indicator_ = possibleTextures_[indicatorIndex_];
+	}
 }
 
 void MenuIndicator::moveX(bool isRight) {

@@ -41,8 +41,6 @@ public:
 	//Metodo que cambia de animacion sobre la spritesheet actual
 	void play(Animation actualAnim);
 
-
-
 	//Devuelve true o false en funcion si la animacion ha llegado al ultimo frame o no
 	bool OnAnimationFrameEnd();
 

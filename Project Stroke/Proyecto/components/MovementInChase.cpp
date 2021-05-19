@@ -120,12 +120,18 @@ void MovementInChase::update() {
 		}
 		//1-0.85/2
 		SDL_Rect rectPlayer = tr_->getRectCollide();
-		rectPlayer.x += vel.getX();
-		rectPlayer.y += vel.getY();
+		rectPlayer.x += goalVel_.getX();
+		rectPlayer.y += goalVel_.getY() + tr_->getFloor();
 		
-		if (col_ != nullptr)
+		SDL_Rect rectFoot = tr_->getRectCollide();
+		rectFoot.x += goalVel_.getX();
+		rectFoot.y += goalVel_.getY() + tr_->getFloor();
+
+		if (col_ != nullptr) {
 			col_->tryToMove(dir, goalVel_, rectPlayer, false);		//Intenta moverse
-		
+			col_->tryToMoveObs(dir, goalVel_, rectFoot, false);		//Intenta moverse
+		}
+
 		if(grav_->isActive())
 			grav_->checkHeight(rectPlayer);					//Comprobamos que no tenga que subir un escalon
 
