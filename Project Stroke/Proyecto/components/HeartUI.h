@@ -35,7 +35,7 @@ private:
 	std::string name;
 
 	bool alive;
-	int scale;
+	float scale;
 	int position;
 	float latency;
 	float latencyAux;
