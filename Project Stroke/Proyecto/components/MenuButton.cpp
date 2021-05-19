@@ -1,8 +1,10 @@
 #include "MenuButton.h"
+
 #include "MenuButtonManager.h"
 #include "Transition.h"
 #include "MenuControlHandler.h"
 #include "SoundManager.h"
+#include "MapMngr.h"
 
 
 MenuButton::MenuButton(std::string n, Vector2D position, int stateNum) :

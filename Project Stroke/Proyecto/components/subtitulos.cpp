@@ -1,12 +1,12 @@
 #include "subtitulos.h"
 
-subtitulos::subtitulos(string actualSub, int transitionNum)
+Subtitulos::Subtitulos(std::string actualSub, int transitionNum)
 {
 	actualSub_ = actualSub;
 	transitionNum_ = transitionNum;
 	//Texturas
 	barText_ = &sdlutils().images().at("dialogoBarra");
-	dialogoText_ = &sdlutils().images().at(actualSub_ + to_string(dialogueNum));
+	dialogoText_ = &sdlutils().images().at(actualSub_ + std::to_string(dialogueNum));
 
 	//Positions
 	barRenderPos = Vector2D(0, sdlutils().height() - barText_->height());
@@ -20,7 +20,7 @@ subtitulos::subtitulos(string actualSub, int transitionNum)
 	dialogoDest = dialogoDestI;
 }
 
-void subtitulos::render() {
+void Subtitulos::render() {
 	//Controlamos que solo se renderice cuando se tenga que mostrar
 	if (renderDialogues) {
 		barText_->render(barDest);
@@ -28,7 +28,7 @@ void subtitulos::render() {
 	}
 }
 
-void subtitulos::update() {
+void Subtitulos::update() {
 	if (showDialogue) {
 		renderDialogues = true;
 		show();
@@ -41,13 +41,13 @@ void subtitulos::update() {
 
 }
 //Muestra los dialogos
-void subtitulos::show() {
+void Subtitulos::show() {
 	if (position > 1.1f)
 		position = position - 0.1f;
 	else position = 1.0f;
 }
 
-void subtitulos::unshow() {
+void Subtitulos::unshow() {
 	if (position < 3.0f)
 		position = position + 0.1f;
 	else {
@@ -55,15 +55,15 @@ void subtitulos::unshow() {
 	}
 }
 
-void subtitulos::changeDialogue() {
+void Subtitulos::changeDialogue() {
 	if (dialogueNum < transitionNum_- 1) {
 		dialogueNum++;
-		dialogoText_ = &sdlutils().images().at(actualSub_ + to_string(dialogueNum));
+		dialogoText_ = &sdlutils().images().at(actualSub_ + std::to_string(dialogueNum));
 	}
 }
 
 //Controla toda la movida buena suerte lo programe hace 30 mins y no se que hice
-void subtitulos::dialogoStateChange() {
+void Subtitulos::dialogoStateChange() {
 	//Cambiamos el dialogo cuando no se esta mostrando la movida
 	if (!firstDialogue)
 		changeDialogue();

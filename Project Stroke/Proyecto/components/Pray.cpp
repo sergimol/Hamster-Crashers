@@ -6,6 +6,7 @@
 #include "Transform.h"
 #include "../ecs/Camera.h"
 #include "../utils/Collisions.h"
+#include "EntityAttribs.h"
 
 Pray::Pray(int dmg, int heal) : Ability(2000), dmg_(dmg), heal_(heal), evil_(true){
 };
