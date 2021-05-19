@@ -1,4 +1,6 @@
 #include "ReanimationGame.h"
+#include "EntityAttribs.h"
+
 
 void ReanimationGame::init() {
 	// No se habilita hasta que otro jugador lo inicia

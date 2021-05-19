@@ -1,4 +1,6 @@
 ﻿#include "Dying.h"
+#include "../ecs/Manager.h"
+#include "GameStates.h"
 
 void Dying::init() {
 

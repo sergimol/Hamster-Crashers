@@ -59,7 +59,7 @@ private:
 	string subs;
 	
 	GameStates* state_;
-	subtitulos* subs_;
+	Subtitulos* subs_;
 };
 
 

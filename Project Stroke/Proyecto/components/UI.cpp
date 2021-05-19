@@ -1,4 +1,5 @@
 #include "UI.h"
+#include "../ecs/Manager.h"
 
 UI::UI(std::string n, int pos) :
 	face_(&sdlutils().images().at(n + "Head1")), //
