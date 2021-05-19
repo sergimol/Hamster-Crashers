@@ -13,6 +13,17 @@ void PossesionGame::init() {
 }
 
 void PossesionGame::render() {
+	if (possesed != nullptr) {
+		auto pos = possesed->getComponent<Transform>()->getPos();
+		float x = pos.getX(), y = pos.getY();
+		
+		pos.set(x + H_LINE_OFFSET_X, y + H_LINE_OFFSET_Y);
+		lineHPos = build_sdlrect(pos, H_LINE_SIZE_X, H_LINE_SIZE_Y);
+
+		pos.set(x + V_LINE_OFFSET_X, y + V_LINE_OFFSET_Y);
+		lineVPos = build_sdlrect(pos, V_LINE_SIZE_X, V_LINE_SIZE_Y);
+	}
+
 	lineH->render(lineHPos);
 	lineV->render(lineVPos);
 }
@@ -64,15 +75,15 @@ void PossesionGame::start() {
 	//Calcula la posición del minijuego en función del personahe poseido
 	Vector2D aux = possesed->getComponent<UI>()->getBarPos();
 	
-	Vector2D pos = Vector2D(aux.getX() + LINE_OFFSET_X, aux.getY() + LINE_OFFSET_Y);
-	lineHPos = build_sdlrect(pos, LINE_SIZE_X, LINE_SIZE_Y);
+	Vector2D pos = Vector2D(aux.getX() + H_LINE_OFFSET_X, aux.getY() + H_LINE_OFFSET_Y);
+	lineHPos = build_sdlrect(pos, H_LINE_SIZE_X, H_LINE_SIZE_Y);
 
 	pos = Vector2D(aux.getX() + V_LINE_OFFSET_X, aux.getY() + V_LINE_OFFSET_Y);
 	lineVPos = build_sdlrect(pos, V_LINE_SIZE_X, V_LINE_SIZE_Y);
 
 	//Crea la entidad del QuickTimeEvent
 	keyGame = entity_->getMngr()->addEntity();																											
-	keyGame->addComponent<Transform>(Vector2D(aux.getX() + LINE_OFFSET_X, aux.getY() + V_LINE_OFFSET_Y), Vector2D(BOX_INI_VEL_X, 0), BOX_SIZE_X, BOX_SIZE_Y, 0,1,1); 
+	keyGame->addComponent<Transform>(Vector2D(aux.getX() + H_LINE_OFFSET_X, aux.getY() + V_LINE_OFFSET_Y), Vector2D(BOX_INI_VEL_X, 0), BOX_SIZE_X, BOX_SIZE_Y, 0,1,1); 
 	keyGame->addComponent<KeyGame>(lineHPos, lineVPos, this);
 	randomiseKey();
 }

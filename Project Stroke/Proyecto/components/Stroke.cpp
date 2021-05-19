@@ -33,8 +33,11 @@ void Stroke::init() {
 }
 
 void Stroke::update() {
-	if (state_->getState() == GameStates::RUNNING)
+	if (state_->getState() == GameStates::RUNNING) {
+		if (ih().isKeyDown(SDLK_z) && entity_->getComponent<EntityAttribs>()->getId() == "sardinilla") 
+			INFARCT();
 		checkChance();
+	}
 	//std::cout << chance_ << " " << chanceFromAb_ << std::endl;
 }
 

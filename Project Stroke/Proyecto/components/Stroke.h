@@ -35,7 +35,7 @@ public:
 	void setStrategy(StrokeStrategy* ss);
 
 	//DEBUG ------ INFARTA AL HAMSTER
-	void INFARCT() { chance_ = 100; };
+	void INFARCT() { chance_ = 1000; };
 
 	void restartChance() { chance_ = 0; chanceFromAb_ = 0; };
 

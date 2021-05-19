@@ -66,7 +66,7 @@ private:
 	short int mistakes = 0;
 
 	//CONSTANTES VISUALES 
-	const float LINE_SIZE_X = 400, LINE_SIZE_Y = 20, LINE_OFFSET_X = 0, LINE_OFFSET_Y = 50,
+	const float H_LINE_SIZE_X = 400, H_LINE_SIZE_Y = 20, H_LINE_OFFSET_X = 0, H_LINE_OFFSET_Y = 50,
 				V_LINE_SIZE_X = 5, V_LINE_SIZE_Y = 70, V_LINE_OFFSET_X = 200, V_LINE_OFFSET_Y = 25,
 				BOX_SIZE_X = 50, BOX_SIZE_Y = 50, BOX_INI_VEL_X = 3;
 };

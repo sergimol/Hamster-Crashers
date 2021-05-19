@@ -673,7 +673,7 @@ void MapMngr::addHamster(string name, int i) {
 	hamster1->addComponent<GhostCtrl>();
 	//ES NECESARIO PASAR LA ESTRATEGIA QUE DEBE USAR EL STROKE O SE VA A LA PUTA (RandomStrokeStrategy o FairStrokeStrategy)
 	if (hamstersToLoad_.size() > 1) {
-		RandomStrokeStrategy* rndStrat = new RandomStrokeStrategy();
+		FairStrokeStrategy* rndStrat = new FairStrokeStrategy();
 		hamster1->addComponent<Stroke>(rndStrat);
 	}
 	else {

@@ -96,4 +96,5 @@ void ReanimationGame::onResume() {
 void ReanimationGame::setRevPlayer(Entity* e)
 {
 	revPlNumber_ = e->getComponent<EntityAttribs>()->getNumber();
+	revTrans_ = e->getComponent<Transform>();
 }
