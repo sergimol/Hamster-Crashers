@@ -23,7 +23,7 @@ void Turret::update() {
 			if (sdlutils().currRealTime() > cadenceTime_ + CADENCESHOT) {
 
 				//Crea la entidad
-				auto bala = entity_->getMngr()->addEntity();
+				auto* bala = entity_->getMngr()->addEntity();
 
 				if (entity_->getComponent<Transform>()->getFlip())
 					x_ = -1;

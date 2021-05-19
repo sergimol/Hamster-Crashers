@@ -173,9 +173,9 @@ bool EntityAttribs::recieveDmg(int dmg) {
 		if (hms_ != nullptr) {
 			hms_->getState() = HamStates::DEAD;
 			auto& ents = entity_->getMngr()->getPlayers();
-			
+
 			int i = 0;
-			while ( i < ents.size() ) {
+			while (i < ents.size()) {
 				if (entity_ == ents[i]) {
 					entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->cleanListHam(i);
 					i = ents.size();
@@ -218,7 +218,7 @@ void EntityAttribs::die() {
 	Entity* e = entity_->getMngr()->addEntity();
 
 	//Le metemos un transform para su posicion
-	e->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0,  tr_->getZ(), tr_->getFlip(), tr_->getScaleW(), tr_->getScaleH());
+	e->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip(), tr_->getScaleW(), tr_->getScaleH());
 
 	int tam = 0;
 
@@ -239,7 +239,7 @@ void EntityAttribs::die() {
 		3,
 		220,
 		Vector2D(0, 0),
-		3)->play(sdlutils().anims().at(id_+"_death"));
+		3)->play(sdlutils().anims().at(id_ + "_death"));
 
 	//TODO WHY ¿?
 	//Si la persona que muere es un hamster...
@@ -265,6 +265,7 @@ void EntityAttribs::die() {
 		//e->getComponent<Transform>()->setGravity(e->addComponent<Gravity>());
 		enmState_->getState() = EnemyStates::ENM_DEAD;
 		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("soldierDep");
 	}
 
 
@@ -274,7 +275,7 @@ void EntityAttribs::setLife(int life) {
 	int dmg = health_ - life;
 	health_ = life;
 	if (entity_->hasComponent<UI>())
-		entity_->getComponent<UI>()->bar(-dmg);	
+		entity_->getComponent<UI>()->bar(-dmg);
 }
 
 //Sana 'hp' unidades

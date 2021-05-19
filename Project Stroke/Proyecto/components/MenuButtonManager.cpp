@@ -20,6 +20,8 @@ void MenuButtonManager::init() {
 			buttons_[i] = vector<Entity*>(buttonsMagnitude_.getY());
 		}
 
+		
+
 		auto* localbutton = mngr->addMenu();
 		localbutton->addComponent<MenuButton>("local", Vector2D(100, 550), stateNumber_);
 		buttons_[0][0] = localbutton;
@@ -37,9 +39,10 @@ void MenuButtonManager::init() {
 		buttons_[1][1] = quitbutton;
 		
 		auto backgrText = &sdlutils().images().at("mainMenuBlank");
-		background_ = entity_->getMngr()->addBackGround();
+		background_ = entity_->getMngr()->addMenuBackground();
 		background_->addComponent<Transform>(Vector2D(0, -250), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
 		background_->addComponent<MenuAnim>();
+
 	}
 	else if (menuMode_ == "pauseMenu") {
 		buttonsMagnitude_ = Vector2D(1, 3); //3 botones, 1x3
@@ -84,7 +87,7 @@ void MenuButtonManager::init() {
 		buttons_[3][0] = canelonbutton;
 
 		auto backgrText = &sdlutils().images().at("hamsterSelectorBlank");
-		background_ = entity_->getMngr()->addBackGround(); 
+		background_ = entity_->getMngr()->addMenuBackground(); 
 		background_->addComponent<Transform>(Vector2D(0, -250), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
 		background_->addComponent<BackGround>(backgrText, 0);
 
@@ -113,7 +116,7 @@ void MenuButtonManager::init() {
 		buttons_[0][2] = fourPlayersButton;
 
 		auto backgrText = &sdlutils().images().at("mainMenuBlank");
-		background_ = entity_->getMngr()->addBackGround();
+		background_ = entity_->getMngr()->addMenuBackground();
 		background_->addComponent<Transform>(Vector2D(0, -250), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
 		background_->addComponent<BackGround>(backgrText, 0);
 	}
@@ -182,7 +185,7 @@ void MenuButtonManager::init() {
 		indicators_.push_back(resolutionSign);
 
 		auto backgrText = &sdlutils().images().at("configBackground");
-		background_ = entity_->getMngr()->addBackGround();
+		background_ = entity_->getMngr()->addMenuBackground();
 		background_->addComponent<Transform>(Vector2D(0, -250), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
 		background_->addComponent<BackGround>(backgrText, 0);
 	}
@@ -229,30 +232,69 @@ void MenuButtonManager::moveDown() {
 void MenuButtonManager::moveRight() {
 	if (sdlutils().currRealTime() > timer_ + cooldown_) {
 		if (buttonsPosition_.getX() < buttonsMagnitude_.getX() - 1) {
+			bool moved = false;
 			buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
-			buttonsPosition_.setX(buttonsPosition_.getX() + 1);
+			int i = buttonsPosition_.getX();
+			while (!moved && i < buttonsMagnitude_.getX() - 1) {
+				if (buttons_[i + 1][buttonsPosition_.getY()]->getComponent<MenuButton>()->selectable()) {
+					buttonsPosition_.setX(i + 1);
+					moved = true;
+				}
+				else
+					i++;
+			}
 			buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
 
-			if (menuMode_ == "hamsterMenu") {
-				indicators_[0]->getComponent<MenuIndicator>()->moveX(true);
+			if (menuMode_ == "hamsterMenu" && moved) {
+				indicators_[0]->getComponent<MenuIndicator>()->moveToButton(buttonsPosition_.getX());
 			}
 		}
 		timer_ = sdlutils().currRealTime();
 	}
 }
 
+
+
 void MenuButtonManager::moveLeft() {
 	if (sdlutils().currRealTime() > timer_ + cooldown_) {
 		if (buttonsPosition_.getX() > 0) {
+			bool moved = false;
 			buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
-			buttonsPosition_.setX(buttonsPosition_.getX() - 1);
+			int i = buttonsPosition_.getX();
+			while (!moved && i > 0) {
+				if (buttons_[i - 1][buttonsPosition_.getY()]->getComponent<MenuButton>()->selectable()) {
+					buttonsPosition_.setX(i - 1);
+					moved = true;
+				}
+				else
+					i--;
+			}
 			buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
 
-			if (menuMode_ == "hamsterMenu") {
-				indicators_[0]->getComponent<MenuIndicator>()->moveX(false);
+			if (menuMode_ == "hamsterMenu" && moved) {
+				indicators_[0]->getComponent<MenuIndicator>()->moveToButton(buttonsPosition_.getX());
 			}
 		}
 		timer_ = sdlutils().currRealTime();
+	}
+}
+
+void MenuButtonManager::moveToFirstSelectable() {
+	bool found = false;
+	buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
+	int i = 0;
+	while (!found && i < buttonsMagnitude_.getX() - 1) {
+		if (buttons_[i][buttonsPosition_.getY()]->getComponent<MenuButton>()->selectable()) {
+			buttonsPosition_.setX(i);
+			found = true;
+		}
+		else
+			i++;
+	}
+	buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
+
+	if (menuMode_ == "hamsterMenu" && found) {
+		indicators_[0]->getComponent<MenuIndicator>()->moveToButton(buttonsPosition_.getX());
 	}
 }
 

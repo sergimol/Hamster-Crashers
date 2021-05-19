@@ -59,6 +59,7 @@ void Poison::action() {
 		Vector2D(0, 0),
 		14);
 
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("ketaSpecial");
 	cloud_->addComponent<Cloud>(dmg_);
 }
 

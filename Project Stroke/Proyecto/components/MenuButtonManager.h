@@ -1,5 +1,4 @@
 #pragma once
-// This file is part of the course TPV2@UCM - Samir Genaim
 
 #include "../ecs/Component.h"
 #include "../ecs/Entity.h"
@@ -27,6 +26,7 @@ public:
 	void moveRight();
 	void moveLeft();
 	void pressButton();
+	void moveToFirstSelectable();
 
 	void onResume() override { timer_ = sdlutils().currRealTime() + cooldown_; };
 

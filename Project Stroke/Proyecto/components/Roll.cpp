@@ -39,6 +39,9 @@ Roll::~Roll() {
 void Roll::action()
 {
 	if (mov_->isActive()) {
+
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("sardinillaSpecial");
+
 		mov_->setActive(false);
 
 		rolling = true;

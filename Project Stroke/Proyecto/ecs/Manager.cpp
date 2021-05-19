@@ -24,11 +24,14 @@ Manager::~Manager() {
 	for (auto fG : fgs_) {
 		delete fG; fG = nullptr;
 	}
-	for (auto mN : menus_) {
-		delete mN; mN = nullptr;
+	for (auto mB : menuBgs_) {
+		delete mB; mB = nullptr;
 	}
 	for (auto mT : traps_) {
 		delete mT; mT = nullptr;
+	}
+	for (auto mN : menus_) {
+		delete mN; mN = nullptr;
 	}
 }
 
@@ -48,13 +51,16 @@ void Manager::refresh() {
 				}
 			}), //
 		entities_.end());
+
+	//TODO lo ahgo aqui porque no las estoy poniendo en entidades
+	refreshWavesObjects();
 }
 
 void Manager::update() {
 	auto n = entities_.size();
 	for (auto i = 0u; i < n; i++)
 		entities_[i]->update();
-	
+
 
 	auto t = traps_.size();
 	for (auto i = 0u; i < t; i++)
@@ -71,14 +77,25 @@ void Manager::update() {
 	auto m = menus_.size();
 	for (auto i = 0u; i < m; i++)
 		menus_[i]->update();
+
+
+	auto w = wavesObjects_.size();
+	for (auto i = 0u; i < w; i++)
+		wavesObjects_[i]->update();
 }
 
 void Manager::render() {
 	//RENDERIZA FONDOS
 	auto b = bgs_.size();
 	for (auto i = 0u; i < b; i++)
-		if(bgs_[i]->isActive())
-			bgs_[i]->render();
+		bgs_[i]->render();
+
+	//RENDERIZA FONDOS
+	auto mb = menuBgs_.size();
+	for (auto i = 0u; i < mb; i++) {
+		if (menuBgs_[i]->isActive())
+			menuBgs_[i]->render();
+	}
 
 	//RENDERIZA TILES
 	auto w = tiles_.size();
@@ -104,6 +121,10 @@ void Manager::render() {
 	auto m = menus_.size();
 	for (auto i = 0u; i < m; i++)
 		menus_[i]->render();
+
+	auto wo = wavesObjects_.size();
+	for (auto i = 0u; i < wo; i++)
+		wavesObjects_[i]->render();
 }
 
 void Manager::resume() {
@@ -118,4 +139,9 @@ void Manager::resume() {
 	auto f = fgs_.size();
 	for (auto i = 0u; i < f; i++)
 		fgs_[i]->resume();
+
+
+	auto wo = wavesObjects_.size();
+	for (auto i = 0u; i < wo; i++)
+		wavesObjects_[i]->resume();
 }

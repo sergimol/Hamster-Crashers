@@ -62,6 +62,15 @@ public:
 		return e;
 	}
 
+	Entity* addMenuBackground() {
+		Entity* e = new Entity(this);
+		if (e != nullptr) {
+			e->resetGroups();
+			menuBgs_.emplace_back(e);
+		}
+		return e;
+	}
+
 	Entity* addMapHeight() {
 		Entity* e = new Entity(this);
 		if (e != nullptr) {
@@ -76,6 +85,15 @@ public:
 		if (e != nullptr) {
 			e->resetGroups();
 			traps_.emplace_back(e);
+		}
+		return e;
+	}
+
+	Entity* addWaveObject() {
+		Entity* e = new Entity(this);
+		if (e != nullptr) {
+			e->resetGroups();
+			wavesObjects_.emplace_back(e);
 		}
 		return e;
 	}
@@ -198,6 +216,11 @@ public:
 		return items_;
 	}
 
+	inline std::vector<Entity*>& getWavesObjects() {
+		return wavesObjects_;
+	}
+
+	
 	void update();
 	void render();
 	void refresh();
@@ -212,6 +235,50 @@ public:
 					return !e->isActive();
 				}), //
 			deadBodies_.end());
+	}
+
+	void refreshMenus() {
+		menus_.erase( //
+			std::remove_if( //
+				menus_.begin(), //
+				menus_.end(), //
+				[](const Entity* e) { //
+					return !e->isActive();
+				}), //
+			menus_.end());
+	}
+
+	void refreshForeground() {
+		fgs_.erase( //
+			std::remove_if( //
+				fgs_.begin(), //
+				fgs_.end(), //
+				[](const Entity* e) { //
+					return !e->isActive();
+				}), //
+			fgs_.end());
+	}
+
+	void refreshBackground() {
+		bgs_.erase( //
+			std::remove_if( //
+				bgs_.begin(), //
+				bgs_.end(), //
+				[](const Entity* e) { //
+					return !e->isActive();
+				}), //
+			bgs_.end());
+	}
+
+	void refreshTiles() {
+		tiles_.erase( //
+			std::remove_if( //
+				tiles_.begin(), //
+				tiles_.end(), //
+				[](const Entity* e) { //
+					return !e->isActive();
+				}), //
+			tiles_.end());
 	}
 
 	void refreshEnemies() {
@@ -269,6 +336,17 @@ public:
 			traps_.end());
 	}
 
+	void refreshMapHeight() {
+		mapHeights_.erase( //
+			std::remove_if( //
+				mapHeights_.begin(), //
+				mapHeights_.end(), //
+				[](const Entity* e) { //
+					return !e->isActive();
+				}), //
+			mapHeights_.end());
+	}
+
 	void refreshFrontGround() {
 		// remove dead entities from the list of entities
 		fgs_.erase( //
@@ -287,6 +365,24 @@ public:
 			fgs_.end());
 	}
 
+	void refreshWavesObjects() {
+		// remove dead entities from the list of entities
+		wavesObjects_.erase( //
+			std::remove_if( //
+				wavesObjects_.begin(), //
+				wavesObjects_.end(), //
+				[](const Entity* e) { //
+					if (e->isActive()) {
+						return false;
+					}
+					else {
+						delete e;
+						return true;
+					}
+				}), //
+			wavesObjects_.end());
+	}
+
 private:
 	std::vector<Entity*> entities_;
 	std::vector<Entity*> tiles_;
@@ -294,6 +390,7 @@ private:
 	std::vector<Entity*> bgs_;
 	std::vector<Entity*> fgs_;
 	std::vector<Entity*> menus_;
+	std::vector<Entity*> menuBgs_;
 
 
 	std::array<Entity*, ecs::maxHdlr> hdlrs_;
@@ -306,5 +403,6 @@ private:
 	std::vector<Entity*> traps_; // EJEMPLO
 	std::vector<Entity*> deadBodies_;
 	std::vector<Entity*> items_;
+	std::vector<Entity*> wavesObjects_; //objetos como el escalectris que solo estaran durante una batalla
 };
 
