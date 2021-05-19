@@ -29,8 +29,7 @@ public:
 
 	int depsChannel = 1;
 	int heartattacksChannel = 1;
-
-	int soldierDepChannel = 7;
+	int soldierDepChannel = 1;
 
 	int musicsChannel = 2;
 	int subtitlesChannel = 2;

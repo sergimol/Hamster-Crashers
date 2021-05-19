@@ -79,37 +79,37 @@ void SoundManager::init() {
 
 	trapKitchen = &sdlutils().soundEffects().at("trapKitchen");
 
-	dialogue0 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue1 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue2 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue3 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue4 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue5 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue6 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue7 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue8 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue9 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue10 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue11 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue12 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue13 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue14 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue15 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue16 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue17 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue18 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue19 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue20 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue21 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue22 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue23 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue24 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue25 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue26 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue27 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue28 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue29 = &sdlutils().soundEffects().at("heartattack2");
-	dialogue30 = &sdlutils().soundEffects().at("heartattack2");
+	dialogue0 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue1 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue2 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue3 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue4 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue5 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue6 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue7 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue8 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue9 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue10 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue11 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue12 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue13 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue14 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue15 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue16 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue17 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue18 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue19 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue20 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue21 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue22 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue23 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue24 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue25 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue26 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue27 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue28 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue29 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue30 = &sdlutils().soundEffects().at("catMeowInit");
 
 	setVolumeChannels();
 	//mainTheme->play(200, musics);
@@ -156,7 +156,7 @@ void SoundManager::setVolumeChannels() {
 	Mix_Volume(EatChannel, initEatVol * generalFXvol);
 
 	//Soldier dep
-	Mix_Volume(soldierDepChannel, initsoldierDepVol * generalFXvol);
+	Mix_Volume(soldierDepChannel, generalFXvol * generalFXvol);
 
 	//Train 
 	Mix_Volume(trainBackgroundChannel, inittrainBackgroundVol * generalFXvol);
@@ -216,13 +216,14 @@ void SoundManager::play(std::string soundName) {
 		playHeartattack();
 	}
 	else if (soundName == "ketaSpecial") {
-		playHeartattack();
+		playKetaSpecial();
+
 	}
 	else if (soundName == "monchiSpecial") {
-		playHeartattack();
+		playMonchiSpecial();
 	}
 	else if (soundName == "canelonSpecial") {
-		playHeartattack();
+		playCanelonSpecial();
 	}
 
 	else if (soundName == "catMeowInit") {
@@ -254,8 +255,6 @@ void SoundManager::play(std::string soundName) {
 	}
 
 	else if (soundName == "soldierDep") {
-		//playHeartattack();
-		trainPipi->play(0, trainBackgroundChannel);
 		playsoldierDep();
 	}
 

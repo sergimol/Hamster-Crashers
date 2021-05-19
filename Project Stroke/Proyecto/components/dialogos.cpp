@@ -94,7 +94,7 @@ void dialogos::changeDialogue() {
 
 //Controla toda la movida buena suerte lo programe hace 30 mins y no se que hice
 void dialogos::dialogoStateChange() {
-	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("heartattack");
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("subtitle");
 	//Cambiamos el dialogo cuando no se esta mostrando la movida
 	if (!firstDialogue)
 		changeDialogue();
