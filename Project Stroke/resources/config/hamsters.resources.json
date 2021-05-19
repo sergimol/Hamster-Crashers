@@ -1147,6 +1147,14 @@
     {
       "id": "trapKitchen",
       "file": "resources/sound/traps/traps0.wav"
+    },
+    {
+      "id": "tutorial0",
+      "file": "resources/sound/dialogos/dialogo0.wav"
+    },
+    {
+      "id": "tutorial1",
+      "file": "resources/sound/dialogos/dialogo1.wav"
     }
   ],
 

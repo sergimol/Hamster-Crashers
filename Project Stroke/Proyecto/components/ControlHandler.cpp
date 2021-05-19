@@ -2,6 +2,7 @@
 #include <cmath>
 #include "../sdlutils/InputHandler.h"
 #include "../ecs/Entity.h"
+#include "Stroke.h"
 
 using namespace std;
 
@@ -190,6 +191,7 @@ void ControlHandler::handleController() {
 					mov_->updateKeymap(Movement::SPACE, true);
 					mic_->updateKeymap(MovementInChase::SPACE, true);
 					/*if (roll_ != nullptr) roll_->updateKeymap(Roll::SPACE, true);*/
+
 				}
 
 				//ATAQUE LIGERO
@@ -203,10 +205,16 @@ void ControlHandler::handleController() {
 				//HABILIDAD
 				else if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)) {
 					ab_->use();
+
 				}
 			}
 			if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_START)) {
 				states_->setState(GameStates::PAUSE);
+			}
+			if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_B)) {
+
+				//para depurar le voy a provocar un infarto
+				entity_->getComponent<Stroke>()->infarctHamster();
 			}
 		}
 	}
@@ -408,6 +416,9 @@ void ControlHandler::handleKeyboard() {
 		if (gameState == GameStates::RUNNING && hamState != HamStates::DEAD && hamState != HamStates::INFARCTED) {
 			mov_->updateKeymap(Movement::SPACE, true);
 			if (mic_ != nullptr) mic_->updateKeymap(MovementInChase::SPACE, true);
+			
+
+
 		}
 		/*else if (gameState == GameStates::PAUSE)
 			pause_->updateKeymap(MenuButtonManager::SPACE, true);

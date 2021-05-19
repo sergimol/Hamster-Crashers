@@ -76,6 +76,8 @@ void Transition::fadeIn() {
 		if (subs_ != nullptr) {
 			subs_->dialogoStateChange();
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("subtitle");
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("transition");
+
 		}
 	}
 	// Comprueba si hay textura

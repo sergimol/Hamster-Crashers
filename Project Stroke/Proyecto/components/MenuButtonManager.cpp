@@ -184,10 +184,10 @@ void MenuButtonManager::init() {
 		resolutionSign->addComponent<MenuIndicator>("resolution", Vector2D(287, 550), stateNumber_);
 		indicators_.push_back(resolutionSign);
 
-		auto backgrText = &sdlutils().images().at("configBackground");
+		/*auto backgrText = &sdlutils().images().at("configBackground");
 		background_ = entity_->getMngr()->addMenuBackground();
 		background_->addComponent<Transform>(Vector2D(0, -250), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
-		background_->addComponent<BackGround>(backgrText, 0);
+		background_->addComponent<BackGround>(backgrText, 0);*/
 	}
 	//buttonsPosition = Vector2D(0, 0);
 	buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();

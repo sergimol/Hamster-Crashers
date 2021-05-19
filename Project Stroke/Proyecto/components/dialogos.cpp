@@ -59,7 +59,7 @@ void dialogos::update() {
 	explicacionDest.y = explicacionDestI.y * position;
 
 	//Oculta el dialogo cuando termina el audio
-	if (showDialogue && entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->emptyChannel(4))
+	if (showDialogue && entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->emptyChannel(entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->subtitlesChannel))
 	{
 		//entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->fadeOut(3000);
 		//entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->fadeIn(6000);
@@ -94,7 +94,7 @@ void dialogos::changeDialogue() {
 
 //Controla toda la movida buena suerte lo programe hace 30 mins y no se que hice
 void dialogos::dialogoStateChange() {
-	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("heartattack");
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("subtitle");
 	//Cambiamos el dialogo cuando no se esta mostrando la movida
 	if (!firstDialogue)
 		changeDialogue();

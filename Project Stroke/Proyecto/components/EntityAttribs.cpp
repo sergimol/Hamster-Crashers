@@ -214,6 +214,7 @@ bool EntityAttribs::recieveDmg(int dmg) {
 }
 
 void EntityAttribs::die() {
+
 	//Creamos una entidad
 	Entity* e = entity_->getMngr()->addEntity();
 
@@ -265,7 +266,8 @@ void EntityAttribs::die() {
 		//e->getComponent<Transform>()->setGravity(e->addComponent<Gravity>());
 		enmState_->getState() = EnemyStates::ENM_DEAD;
 		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala
-		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("soldierDep");
+		if (id_ == "soldier1" || id_ == "soldier2")
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("soldierDep");
 	}
 
 

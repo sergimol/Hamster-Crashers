@@ -15,7 +15,7 @@ void Animator::init() {
 }
 
 void Animator::render() {
-	if (state_->getState() != GameStates::MAINMENU && state_->getState() != GameStates::CONTROLS) {
+	if (state_->getState() != GameStates::MAINMENU && state_->getState() != GameStates::CONTROLS && state_->getState() != GameStates::OPTIONS) {
 		SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 
 		//recurso

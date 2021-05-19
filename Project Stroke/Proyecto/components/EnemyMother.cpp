@@ -225,6 +225,9 @@ void EnemyMother::removeFromAmbushList(int hamid, std::list<Entity*>::iterator i
 }
 
 void EnemyMother::update() {
+	//LE VOY A METER UN RESFRESH COMO UNA CASA A LAS LISTAS OWOWOWO
+	refreshLists();
+
 	if (numPlayers > 0) {
 		if (state_->getState() == GameStates::RUNNING) {
 		
