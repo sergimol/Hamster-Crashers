@@ -31,8 +31,11 @@ public:
 	bool CheckCollisions(const SDL_Rect& enemyRect, bool finCombo);
 	bool LaunchAttack();
 
-	inline bool getAttackStarted() {
+	inline bool getAttackStarted() const{
 		return attackStarted_;
+	}
+	inline bool getCollide() const {
+		return collides_;
 	}
 
 private:
@@ -47,10 +50,12 @@ private:
 
 	float hitTime_;
 	float beforeHitCD_;
+	float collideStartCD_;
 	float afterHitCD_;
 
 	bool attackStarted_;
 	bool stunStarted_;
+	bool collides_;
 	GameStates* state_;
 }
 ;

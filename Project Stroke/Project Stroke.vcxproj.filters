@@ -471,7 +471,7 @@
     <ClCompile Include="Proyecto\components\WarCry.cpp">
       <Filter>Archivos de origen\components\Entity\Hamster\Ability</Filter>
     </ClCompile>
-    <ClCompile Include="Proyecto\components\subtitulos.cpp">
+    <ClCompile Include="Proyecto\components\Subtitulos.cpp">
       <Filter>Archivos de origen\components\UI</Filter>
     </ClCompile>
     <ClCompile Include="Proyecto\components\MenuAnim.cpp">
@@ -482,6 +482,9 @@
     </ClCompile>
     <ClCompile Include="Proyecto\components\LifeTime.cpp">
       <Filter>Archivos de origen\components\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyecto\components\Animator.cpp">
+      <Filter>Archivos de origen\components\Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -821,7 +824,7 @@
     <ClInclude Include="Proyecto\components\WarCry.h">
       <Filter>Archivos de encabezado\Components\Entity\Hamster\Ability</Filter>
     </ClInclude>
-    <ClInclude Include="Proyecto\components\subtitulos.h">
+    <ClInclude Include="Proyecto\components\Subtitulos.h">
       <Filter>Archivos de encabezado\Components\UI</Filter>
     </ClInclude>
     <ClInclude Include="Proyecto\components\MenuAnim.h">

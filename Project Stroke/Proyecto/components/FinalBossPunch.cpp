@@ -100,13 +100,14 @@ bool FinalBossPunch::CheckCollisions(const SDL_Rect& enemyRect) {
 		//Si la entidad es un aliado...
 			//Cogemos el transform del aliado
 		auto eTR = ents[i]->getComponent<Transform>();
+		auto eRectCollide = eTR->getRectCollide();
 
 		//Creamos su Rect
 		SDL_Rect allyRect;
-		allyRect.h = eTR->getH();
-		allyRect.w = eTR->getW();
-		allyRect.x = eTR->getPos().getX() - cam.x;
-		allyRect.y = eTR->getPos().getY() - cam.y;
+		allyRect.h = eRectCollide.h;
+		allyRect.w = eRectCollide.w;
+		allyRect.x = eRectCollide.x - cam.x;
+		allyRect.y = eRectCollide.y - cam.y;
 
 		EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
 

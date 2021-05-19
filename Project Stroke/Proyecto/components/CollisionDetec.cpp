@@ -32,7 +32,7 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 	SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 	Vector2D pCam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamPos();
 
-	if (map->intersectWall(rectPlayer)) {
+	if (map->intersectWall(rectPlayer) || map->intersectBoss(rectPlayer) || map->intersectFinalBoss(rectPlayer)) {
 
 		//Comprobamos si hay doble input
 		if (dir.getX() != 0 && dir.getY() != 0 || vel.getX() != 0 && vel.getY() != 0) {
@@ -41,7 +41,7 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 			rectPlayer.y = tr_->getRectCollide().y + tr_->getFloor();
 
 			//Si con el Y bloqueado se mueve correctamente
-			if (!map->intersectWall(rectPlayer)) {
+			if (!map->intersectWall(rectPlayer) && !map->intersectBoss(rectPlayer) && !map->intersectFinalBoss(rectPlayer)) {
 				goalVel.setY(0);
 				vel.setY(0);
 			}
@@ -50,7 +50,7 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 				rectPlayer.y += goalVel.getY();
 				rectPlayer.x = tr_->getRectCollide().x;
 
-				if (!map->intersectWall(rectPlayer)) {
+				if (!map->intersectWall(rectPlayer) && !map->intersectBoss(rectPlayer) && !map->intersectFinalBoss(rectPlayer)) {
 					goalVel.setX(0);
 					vel.setX(0);
 				}
@@ -69,7 +69,7 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 		}
 	}
 
-	//Comprobacion para los límites de la cámara
+	//Comprobacion para los lï¿½mites de la cï¿½mara
 	if (enemy) {
 		if (rectPlayer.x + rectPlayer.w < cam.x || rectPlayer.x  > pCam.getX() + cam.w / 2)
 			mv_->setSpeed(speed_ * 4);
@@ -147,7 +147,7 @@ void CollisionDetec::tryToMoveObs(Vector2D dir, Vector2D goalVel, SDL_Rect& rect
 		}
 	}
 
-	//Comprobacion para los límites de la cámara
+	//Comprobacion para los lï¿½mites de la cï¿½mara
 	if (enemy) {
 		if (rectFoot.x + rectFoot.w < cam.x || rectFoot.x  > pCam.getX() + cam.w / 2)
 			mv_->setSpeed(speed_ * 4);

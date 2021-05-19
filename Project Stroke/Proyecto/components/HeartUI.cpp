@@ -1,6 +1,7 @@
 #include "HeartUI.h"
 #include "Animator.h"
 #include "../sdlutils/InputHandler.h"
+#include "../ecs/Manager.h"
 
 HeartUI::HeartUI(std::string n, int pos) :
 	heart_(&sdlutils().images().at("heart1")),

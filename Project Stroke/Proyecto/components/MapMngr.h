@@ -57,6 +57,8 @@ public:
 	Camera* cam;
 	bool intersectWall(const SDL_Rect& hamster);
 	bool intersectObstacles(const SDL_Rect& hamster);
+	bool intersectBoss(const SDL_Rect& hamster);
+	bool intersectFinalBoss(const SDL_Rect& hamster);
 
 	inline int getScale() const { return scale; };
 	inline int getCellSize() const { return TAM_CELDA; };

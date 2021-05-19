@@ -1,10 +1,12 @@
 #include "Pray.h"
 #include "Animator.h"
+#include "AnimHamsterStateMachine.h"
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 #include "Transform.h"
 #include "../ecs/Camera.h"
 #include "../utils/Collisions.h"
+#include "EntityAttribs.h"
 
 Pray::Pray(int dmg, int heal) : Ability(2000), dmg_(dmg), heal_(heal), evil_(true){
 };
@@ -67,6 +69,16 @@ void Pray::prayAbility() {
 			}
 		}
 	}
+	entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::ABILITY, false);
 	evil_ = !evil_;
+
+	if (evil_) {
+		entity_->getComponent<EntityAttribs>()->setId("canelon");
+		entity_->getComponent<Animator>()->setTexture(&sdlutils().images().at("canelonSheet"));
+	}
+	else {
+		entity_->getComponent<EntityAttribs>()->setId("canelonDemon");
+		entity_->getComponent<Animator>()->setTexture(&sdlutils().images().at("canelonDemonSheet"));
+	}
 }
 
