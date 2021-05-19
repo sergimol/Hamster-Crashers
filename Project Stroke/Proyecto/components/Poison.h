@@ -12,6 +12,8 @@ public:
 
 	virtual void render();
 
+	virtual void endAbility();
+
 	//Ejecuta la habilidad en funcion del hamster que sea
 	virtual void action();
 
@@ -22,6 +24,6 @@ private:
 
 	//Constantes
 	const float CLOUDCD = 2000;
-	const float COFFSETX = 200;
+	const float COFFSETX = 0;
 	const float CBULLETSPEED = 1;
 };

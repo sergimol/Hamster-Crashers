@@ -155,9 +155,16 @@ bool EnemyStrongAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo
 
 				hamKnockback->knockback();
 
-				SDL_Rect rectPlayer = tr_->getRectCollide();
+				SDL_Rect rectPlayer = eTR->getRectCollide();
 				rectPlayer.x += hamKnockback->getKnockback();
+				rectPlayer.y += eTR->getFloor();
+
+				SDL_Rect rectFoot = tr_->getRectCollide();
+				rectFoot.x += hamKnockback->getKnockback();
+				rectFoot.y += eTR->getFloor();
+
 				ents[i]->getComponent<CollisionDetec>()->tryToMove(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0), rectPlayer, false);
+				ents[i]->getComponent<CollisionDetec>()->tryToMoveObs(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0), rectFoot, false);
 			}
 		}
 	}
