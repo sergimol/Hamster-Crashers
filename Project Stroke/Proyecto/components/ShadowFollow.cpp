@@ -74,5 +74,5 @@ void ShadowFollow::update() {
 	tr_->setH(height_);
 	tr_->setW(width_);
 
-	tr_->getZ() = -otherTr_->getFloor();	
+	//tr_->getZ() = otherTr_->getFloor();	
 }
