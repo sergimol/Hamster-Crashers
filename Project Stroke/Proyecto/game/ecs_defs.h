@@ -200,6 +200,8 @@ struct Mother;
 struct PauseMenu;
 struct SoundManager;
 struct MainMenu;
+struct Boss;
+struct FinalBoss;
 struct Cat_;
 struct PlayerQuantityMenu;
 struct HamsterSelectionMenu;
@@ -218,6 +220,8 @@ struct dialogosMngr;
 					PlayerQuantityMenu, \
 					HamsterSelectionMenu, \
 					SoundManager, \
+					Boss, \
+					FinalBoss, \
 					Cat_, \
 					MainMenu, \
 					OptionsMenu, \

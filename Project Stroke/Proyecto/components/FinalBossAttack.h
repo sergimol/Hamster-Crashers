@@ -33,10 +33,12 @@ public:
 	bool checkAttackFinished() { return attackFinished_; };
 	void resetAttackFinished() { attackFinished_ = false; };
 
-	inline bool getAttackStarted() {
+	inline bool getAttackStarted() const {
 		return attackStarted_;
 	}
-
+	inline bool getCollide() const {
+		return collides_;
+	}
 
 private:
 	void slam();
@@ -54,6 +56,7 @@ private:
 	float hitTime_;
 	float beforeHitCD_;
 	float afterHitCD_;
+	float collideStartCD_;
 
 	int attackCount_;
 	int maxSlaps_;
@@ -61,6 +64,7 @@ private:
 	bool attackStarted_;
 	bool stunStarted_;
 	bool swipeCharge_;
+	bool collides_;
 	GameStates* state_;
 
 	bool attackFinished_;

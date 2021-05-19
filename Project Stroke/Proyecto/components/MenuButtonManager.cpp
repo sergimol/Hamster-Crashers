@@ -87,6 +87,10 @@ void MenuButtonManager::init() {
 		background_ = entity_->getMngr()->addBackGround(); 
 		background_->addComponent<Transform>(Vector2D(0, -250), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
 		background_->addComponent<BackGround>(backgrText, 0);
+
+		auto* playerSelectingIndicator = mngr->addMenu();
+		playerSelectingIndicator->addComponent<MenuIndicator>("p", Vector2D(140, 25), stateNumber_);
+		indicators_.push_back(playerSelectingIndicator);
 	}
 	else if (menuMode_ == "playerQuantityMenu") {
 		buttonsMagnitude_ = Vector2D(1, 3); //3 botones, 1x3
@@ -228,6 +232,10 @@ void MenuButtonManager::moveRight() {
 			buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
 			buttonsPosition_.setX(buttonsPosition_.getX() + 1);
 			buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
+
+			if (menuMode_ == "hamsterMenu") {
+				indicators_[0]->getComponent<MenuIndicator>()->moveX(true);
+			}
 		}
 		timer_ = sdlutils().currRealTime();
 	}
@@ -239,6 +247,10 @@ void MenuButtonManager::moveLeft() {
 			buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->exited();
 			buttonsPosition_.setX(buttonsPosition_.getX() - 1);
 			buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
+
+			if (menuMode_ == "hamsterMenu") {
+				indicators_[0]->getComponent<MenuIndicator>()->moveX(false);
+			}
 		}
 		timer_ = sdlutils().currRealTime();
 	}

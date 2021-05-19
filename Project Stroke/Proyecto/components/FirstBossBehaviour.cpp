@@ -53,6 +53,7 @@ void FirstBossBehaviour::lockHamster() {
 	else
 	{
 		//Si ninguno esta activo pone todo a null
+		lockedHamster_ = nullptr;
 		lockedHamState_ = nullptr;
 		hamsterTr_ = nullptr;
 		hamsterTr_ = nullptr;
