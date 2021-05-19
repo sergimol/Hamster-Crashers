@@ -27,6 +27,15 @@ MenuIndicator::MenuIndicator(std::string n, Vector2D position, int stateNum) :
 		indicatorIndex_ = RESOLUTIONSCOUNT - 1;
 		indicator_ = possibleTextures_[indicatorIndex_];
 	}
+	else if (indicatorName_ == "p") {
+		for (int i = 1; i <= 4; ++i) {
+			possibleTextures_.push_back(&sdlutils().images().at(indicatorName_ + to_string(i)));
+			texturesCount_++;
+		}
+
+		indicatorIndex_ = 0;
+		indicator_ = possibleTextures_[indicatorIndex_];
+	}
 	else {
 		indicator_ = &sdlutils().images().at(indicatorName_);
 	}
@@ -77,3 +86,9 @@ void MenuIndicator::reset()
 	}
 }
 
+void MenuIndicator::moveX(bool isRight) {
+	if (isRight)
+		dest_.x += 450;
+	else
+		dest_.x -= 450;
+}
