@@ -32,11 +32,13 @@ void ObstacleMoveable::update()
 			//pero tmb podemos destruirlo desde aca de ser necesario
 
 			auto* coche = entity_->getMngr()->addEntity();
-			//el transform, aun no se que valores darle
-			coche->addComponent<Transform>(Vector2D(x_,y_), Vector2D(vel, 0), 255.0, 255.0,
-				0, 1, 1);
+			
 
-			coche->addComponent<Animator>(
+			//el transform, aun no se que valores darle
+			coche->addComponent<Transform>(Vector2D(x_, y_), Vector2D(vel, 0),
+				115.0 * scale_, 46.0 * scale_,
+				0, 1, 1);
+			/*coche->addComponent<Animator>(
 				&sdlutils().images().at("soldier1Sheet"),
 				86,
 				86,
@@ -45,10 +47,16 @@ void ObstacleMoveable::update()
 				220,
 				Vector2D(0, 0),
 				3
-				);
+				);*/
 
-			//coche->addComponent<Image>(&sdlutils().images().at("catSmoking")); //por testing sin animacion
+			int aux = rand() % 1;
+			if (aux >0)
+				coche->addComponent<Image>(&sdlutils().images().at("coche1")); //por testing sin animacion
+			else
+				coche->addComponent<Image>(&sdlutils().images().at("coche2")); //por testing sin animacion
 			coche->addComponent<ContactDamage>(10, 10, true, true);
+
+
 			//la nueva componente, muerte en tiempo
 			coche->addComponent<LifeTime>(lifeTime_);
 			obstacle = coche;
@@ -64,14 +72,14 @@ void ObstacleMoveable::update()
 void ObstacleMoveable::render()
 {
 	SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-	auto tr_ = entity_->getComponent<Transform>();
+	//auto tr_ = entity_->getComponent<Transform>();
 
 	Vector2D renderPos;
 	if (vel > 0) 
-		renderPos = Vector2D(0, y_ - cam.y);
+		renderPos = Vector2D(10, y_ - cam.y);
 	else 
-		renderPos = Vector2D(cam.w - (warningTx->width()/2), y_ - cam.y);
-	SDL_Rect dest = build_sdlrect(renderPos, tr_->getW(), tr_->getH());
+		renderPos = Vector2D(cam.w - ((warningTx->width() * scale_) - 10), y_ - cam.y);
+	SDL_Rect dest = build_sdlrect(renderPos, (warningTx->width() * scale_), (warningTx->height() * scale_));
 	
 	if (debug) {
 		SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 255, 0, 255);
@@ -96,7 +104,7 @@ void ObstacleMoveable::render()
 
 	//std::cout << renderPos.getX() << " " << renderPos.getY() << "\n";
 
-	warningTx->render(dest, tr_->getRot());
+	warningTx->render(dest, 0);
 }
 
 ObstacleMoveable::~ObstacleMoveable() {

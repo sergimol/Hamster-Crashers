@@ -9,11 +9,11 @@
 using namespace std;
 class ObstacleMoveable: public Component {
 public:
-	ObstacleMoveable(Texture* wTx, float x, float y, float z, int floor) : lastTime_(0), spawnTime_(5000), lifeTime_(3000), time_(0),
+	ObstacleMoveable(Texture* wTx, float x, float y, float z, int floor, int scale) : lastTime_(0), spawnTime_(5000), lifeTime_(3000), time_(0),
 		warningTime_(2000), warningTimeFlickering_(100),
-		spawns_(0), warningTx(wTx),
-		obstacle(nullptr), vel(-10), x_(x), y_(y), z_(z), floor_(floor),
-		gamestate(nullptr)
+		spawns_(1), warningTx(wTx),
+		obstacle(nullptr), vel(-20), x_(x), y_(y), z_(z), floor_(floor),
+		gamestate(nullptr), scale_(scale)
 	{}
 	virtual ~ObstacleMoveable();
 	virtual void init() override;
@@ -40,7 +40,7 @@ private:
 		//warningTimeLife_; //el timepo maximo que va a estar haciendolo, creo que no me hace falta realmente
 
 	int spawns_; //auxiliar para calcular cuantos coches ha spawneado y asi cuadrar el spawTime y que saque mas coches/avisos;
-
+	int scale_;
 
 	GameStates* gamestate;
 };

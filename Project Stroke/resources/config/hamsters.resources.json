@@ -35,6 +35,18 @@
       "file": "resources/images/monchi.png"
     },
     {
+      "id": "coche1",
+      "file": "resources/images/chuchecito.png"
+    },
+    {
+      "id": "coche2",
+      "file": "resources/images/chuchecito2.png"
+    },
+    {
+      "id": "warningSign",
+      "file": "resources/images/warningSign.png"
+    },
+    {
       "id": "bar",
       "file": "resources/images/UI/hamsterUI/healthbar.png"
     },
