@@ -226,7 +226,7 @@ void MenuButton::pressed() {
 		indctrs.push_back(selectedIndicator);
 
 		if (sdlutils().hamstersToChoose() <= 0) {
-			mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/lvl1javi2.tmx");
+			mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Level1.tmx");
 			state_->setState(GameStates::RUNNING);
 		}
 		//entity_->getMngr()->getHandler<HamsterSelectionMenu>()->getComponent<MenuButtonManager>()->updateKeymap(MenuButtonManager::SPACE, false);

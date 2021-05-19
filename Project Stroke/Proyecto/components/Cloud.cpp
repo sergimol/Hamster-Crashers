@@ -46,43 +46,31 @@ void Cloud::update() {
 			//Y comprobamos si colisiona
 			if (Collisions::collides(otherPos, tr_->getW(), tr_->getH(), newPos, eRectCol.w, eRectCol.h)) {
 
-				ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
 
-				auto& enmStateM = ents[i]->getComponent<EnemyStateMachine>()->getState();
+				//auto& enmStateM = ents[i]->getComponent<EnemyStateMachine>()->getState();
 
-
-				//STUN si lo vemos mejor
-				//if (enmStateM != EnemyStates::ENM_DEAD) {
-				//	//Si tiene stun, se aplica
-				//	EnemyStun* enmStun = ents[i]->getComponent<EnemyStun>();
-				//	if (enmStun != nullptr && enmStun->isActive()) {
-
-				//		ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
-
-				//		//Si no estaba aturdido ya
-				//		if (enmStateM != EnemyStates::ENM_STUNNED) {
-				//			//Aturdimos al enemigo
-				//			enmStateM = EnemyStates::ENM_STUNNED;
-				//		}
-				//		//Reiniciamos tiempo de stun
-				//		enmStun->restartStunTime(false);
-				//	}
-				//}
 				auto eAttribs = ents[i]->getComponent<EntityAttribs>();
 
-				// Reducimos velocidad a los afectados
-				int j = 0;
+				//Si tiene stun se aplica el ralentí y animación
+				EnemyStun* enmStun = ents[i]->getComponent<EnemyStun>();
+				if (enmStun != nullptr && enmStun->isActive()) {
 
-				while (j < affectedEnemies_.size() && ents[i] != affectedEnemies_[j]) { ++j; }
+					ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
 
-				if (j == affectedEnemies_.size())
-					eAttribs->setVel(eAttribs->getVel() / 5);
+					// Reducimos velocidad a los no afectados
+					int j = 0;
+
+					while (j < affectedEnemies_.size() && ents[i] != affectedEnemies_[j]) { ++j; }
+
+					if (j == affectedEnemies_.size())
+						eAttribs->setVel(eAttribs->getVel() / 5);
+					//Añadimos a afectados
+					affectedEnemies_.push_back(ents[i]);
+				}
 
 				//Le restamos la vida al enemigo
 				eAttribs->recieveDmg(dmg_);
 
-				affectedEnemies_.push_back(ents[i]);
-				
 				entity_->getMngr()->refreshEnemies();
 				refreshAffectedEnemies();
 			}
