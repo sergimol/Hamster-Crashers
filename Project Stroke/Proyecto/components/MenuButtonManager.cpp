@@ -20,6 +20,8 @@ void MenuButtonManager::init() {
 			buttons_[i] = vector<Entity*>(buttonsMagnitude_.getY());
 		}
 
+		
+
 		auto* localbutton = mngr->addMenu();
 		localbutton->addComponent<MenuButton>("local", Vector2D(100, 550), stateNumber_);
 		buttons_[0][0] = localbutton;
@@ -37,9 +39,10 @@ void MenuButtonManager::init() {
 		buttons_[1][1] = quitbutton;
 		
 		auto backgrText = &sdlutils().images().at("mainMenuBlank");
-		background_ = entity_->getMngr()->addBackGround();
+		background_ = entity_->getMngr()->addMenuBackground();
 		background_->addComponent<Transform>(Vector2D(0, -250), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
 		background_->addComponent<MenuAnim>();
+
 	}
 	else if (menuMode_ == "pauseMenu") {
 		buttonsMagnitude_ = Vector2D(1, 3); //3 botones, 1x3
@@ -84,7 +87,7 @@ void MenuButtonManager::init() {
 		buttons_[3][0] = canelonbutton;
 
 		auto backgrText = &sdlutils().images().at("hamsterSelectorBlank");
-		background_ = entity_->getMngr()->addBackGround(); 
+		background_ = entity_->getMngr()->addMenuBackground(); 
 		background_->addComponent<Transform>(Vector2D(0, -250), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
 		background_->addComponent<BackGround>(backgrText, 0);
 
@@ -113,7 +116,7 @@ void MenuButtonManager::init() {
 		buttons_[0][2] = fourPlayersButton;
 
 		auto backgrText = &sdlutils().images().at("mainMenuBlank");
-		background_ = entity_->getMngr()->addBackGround();
+		background_ = entity_->getMngr()->addMenuBackground();
 		background_->addComponent<Transform>(Vector2D(0, -250), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
 		background_->addComponent<BackGround>(backgrText, 0);
 	}
@@ -182,7 +185,7 @@ void MenuButtonManager::init() {
 		indicators_.push_back(resolutionSign);
 
 		auto backgrText = &sdlutils().images().at("configBackground");
-		background_ = entity_->getMngr()->addBackGround();
+		background_ = entity_->getMngr()->addMenuBackground();
 		background_->addComponent<Transform>(Vector2D(0, -250), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
 		background_->addComponent<BackGround>(backgrText, 0);
 	}

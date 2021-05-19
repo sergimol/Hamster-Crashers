@@ -24,6 +24,8 @@ public:
 	void update() override {};
 
 	void tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPlayer, bool enemy);
+	
+	void tryToMoveObs(Vector2D dir, Vector2D goalVel, SDL_Rect& rectFoot, bool enemy);
 
 	void setMovement(MovementSimple* m);
 

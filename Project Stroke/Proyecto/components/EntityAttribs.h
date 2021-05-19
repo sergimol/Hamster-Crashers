@@ -60,6 +60,11 @@ public:
 	inline std::string getId() const {
 		return id_;
 	}
+
+	inline void setId(std::string id) {
+		id_ = id;
+	}
+
 	inline bool getCanPoison() const {
 		return canPoison_;
 	}

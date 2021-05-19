@@ -132,8 +132,8 @@ Vector2D Camera::newObjetivo() {
 	}
 	if(aux != heightMap_)
 		map_->setMaxH(map_->getMaxH() + (aux - heightMap_));
-	else
-		map_->setMaxH(camera_.h - heightMap_);
+	//else
+		//map_->setMaxH(camera_.h - heightMap_);
 
 	CamStaticPos.setY(CamStaticPos.getY() + upOffset - heightMap_);
 	return CamStaticPos;

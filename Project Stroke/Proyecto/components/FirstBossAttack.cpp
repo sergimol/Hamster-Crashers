@@ -132,6 +132,7 @@ bool FirstBossAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) 
 			auto& hamStateM = ents[i]->getComponent<HamsterStateMachine>()->getState();
 
 			if (hamStateM != HamStates::DEAD && hamStateM != HamStates::INFARCTED) {
+				ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
 				//Si tiene stun, se aplica
 				Stun* stun = ents[i]->getComponent<Stun>();
 				if (stun != nullptr && stun->isActive()) {
@@ -173,10 +174,14 @@ bool FirstBossAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) 
 
 				hamKnockback->knockback(75);
 
-				//TO DO: AAAAAAAAAAAAAAAAAAAAAAAAAAAAADFÑUIOGHFPIUEGHFPIUEAFGPIAUEF COJONES LAS COLISIONES DE MIERDA QUE LO JODEN TODO
-				//SDL_Rect rectPlayer = allyRect;
-				//rectPlayer.x += hamKnockback->getKnockback();
-				//ents[i]->getComponent<CollisionDetec>()->tryToMove(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0), rectPlayer, false);
+				SDL_Rect rectPlayer = tr_->getRectCollide();
+				rectPlayer.x += hamKnockback->getKnockback();
+
+				SDL_Rect rectFoot = tr_->getRectCollide();
+				rectFoot.x += hamKnockback->getKnockback();
+
+				ents[i]->getComponent<CollisionDetec>()->tryToMove(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0), rectPlayer, false);
+				ents[i]->getComponent<CollisionDetec>()->tryToMoveObs(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0), rectFoot, false);
 			}
 		}
 	}

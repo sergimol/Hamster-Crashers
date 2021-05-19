@@ -18,46 +18,95 @@ public:
 	void resetVolumes() { fxVol_ = 1; musicVol_ = 1; };
 	bool emptyChannel(int channel);
 
-	void fadeOut(int time) { Mix_FadeOutChannel(musics, time); };
+	void fadeOut(int time) { Mix_FadeOutChannel(musicsChannel, time); };
 	//FADEPRUEBA
 	//entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->fadeOut(3000);
 	//void fadeIn(int time);
 	//channels
-	int lighthits = 0;
-	int stronghits = 1;
-	int attacks = 2;
-	int deps = 3;
-	int heartattacks = 4;
-	int musics = 5;
-	int subtitles = 6;
-
+	int lighthitsChannel = 0;
+	int stronghitsChannel = 1;
+	int attacksChannel = 2;
+	int depsChannel = 3;
+	int heartattacksChannel = 4;
+	int musicsChannel = 5;
+	int subtitlesChannel = 6;
+	int catChannel = 7;
+	int ketaSpecialChannel = 8;
+	int monchiSpecialChannel = 9;
+	int canelonSpecialChannel = 10;
+	int carChannel = 11;
+	int buttonChannel = 12;
+	int birdsChannel = 13;
+	int EatChannel = 14;
+	int soldierDepChannel = 15;
+	int trainBackgroundChannel = 16;
+	int transitionChannel = 17;
+	int trapKitchenChannel = 18;
 	//volumes
 	//general
 	float fxVol_ = 1;
 	float musicVol_ = 1;
 	//local
 	int generalFXvol = 20;
+
 	int initStrongVol = 60;
-	int initMusicVol = 8;
 	int initSubtitleVol = 20;
 
+	int ketaSpecialVol = 20;
+	int monchiSpecialVol = 20;
+	int canelonSpecialVol = 20;
+
+	int initCatVol = 20;
+	int carVol = 20;
+
+	int buttonVol = 20;
+
+	int initMusicVol = 8;
+	int initBirdsVol = 20;
+
+	int initEatVol = 20;
+
+	int initsoldierDepVol = 20;
+	
+	int inittrainBackgroundVol = 20;
+
+	int inittransitionVol = 20;
+
+	int inittrapKitchenVol = 20;
 private:
 	int randomNum;
 	int dialogueNum = 0;
 
-	void lighthit();
+	void playLighthit();
 
-	void stronghit();
+	void playStronghit();
 
-	void attack();
+	void playAttack();
 
-	void dep();
+	void playDep();
 
-	void heartattack();
+	void playHeartattack();
 
-	void subtitle();
+	void playSubtitle();
+
+	void playKetaSpecial();
+
+	void playMonchiSpecial();
+
+	void playCanelonSpecial();
+
+	void playCar();
+
+	void playButton();
+
+	void  playEat();
+
+	void  playsoldierDep();
+
+	void  playtransition();
 
 	int pickRandom(int max);
+
 
 
 	//SOUND LIST AND CHANNELS
@@ -91,8 +140,60 @@ private:
 	SoundEffect* heartattack0;
 	SoundEffect* heartattack1;
 	SoundEffect* heartattack2;
+	SoundEffect* heartattack3;
+	SoundEffect* heartattack4;
+	SoundEffect* heartattack5;
+
+	SoundEffect* catMeowStatic;
+	SoundEffect* catMeowAttack;
+	SoundEffect* catMeowInit;
+	SoundEffect* catMeowWalking;
+
+	SoundEffect* ketaSpecial0;
+	SoundEffect* ketaSpecial1;
+	SoundEffect* ketaSpecial2;
+	SoundEffect* ketaSpecial3;
+	SoundEffect* ketaSpecial4;
+
+	SoundEffect* monchiSpecial0;
+	SoundEffect* monchiSpecial1;
+	SoundEffect* monchiSpecial2;
+	SoundEffect* monchiSpecial3;
+	SoundEffect* monchiSpecial4;
+
+	int canelonState = 0;
+	SoundEffect* canelonSpecial0;
+	SoundEffect* canelonSpecial1;
+
+	//Enemigos
+	SoundEffect* car0;
+	SoundEffect* car1;
+	SoundEffect* car2;
+
+	int buttonState = 0;
+	SoundEffect* button0;
+	SoundEffect* button1;
 
 	SoundEffect* mainTheme;
+	SoundEffect* birds;
+
+	SoundEffect* eat0;
+	SoundEffect* eat1;
+
+	SoundEffect* soldierDep0;
+	SoundEffect* soldierDep1;
+	SoundEffect* soldierDep2;
+	SoundEffect* soldierDep3;
+
+	SoundEffect* trainBackground;
+	SoundEffect* trainPipi;
+	SoundEffect* trainAlto;
+
+	SoundEffect* transition0;
+	SoundEffect* transition1;
+
+	SoundEffect* trapKitchen;
+
 
 	SoundEffect* dialogue0;
 	SoundEffect* dialogue1;

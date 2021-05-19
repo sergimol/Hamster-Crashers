@@ -82,7 +82,7 @@ class TimeTrap;
 class MicroOndasManager;
 class MenuIndicator;
 class dialogos;
-class subtitulos;
+class Subtitulos;
 class MenuAnim;
 class ObstacleMoveable;
 class LifeTime;
@@ -170,7 +170,7 @@ class LifeTime;
 	MicroOndasManager, \
 	MenuIndicator,\
 	dialogos,\
-	subtitulos,\
+	Subtitulos,\
 	MenuAnim,\
 	ObstacleMoveable, \
 	LifeTime

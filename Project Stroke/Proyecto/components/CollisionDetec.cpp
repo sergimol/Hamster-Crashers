@@ -32,16 +32,16 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 	SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 	Vector2D pCam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamPos();
 
-	if (map->intersectWall(rectPlayer) || map->intersectObstacles(rectPlayer) || map->intersectBoss(rectPlayer) || map->intersectFinalBoss(rectPlayer)) {
+	if (map->intersectWall(rectPlayer) || map->intersectBoss(rectPlayer) || map->intersectFinalBoss(rectPlayer)) {
 
 		//Comprobamos si hay doble input
 		if (dir.getX() != 0 && dir.getY() != 0 || vel.getX() != 0 && vel.getY() != 0) {
 
 			//Probamos con ignorar el Y
-			rectPlayer.y = tr_->getRectCollide().y;
+			rectPlayer.y = tr_->getRectCollide().y + tr_->getFloor();
 
 			//Si con el Y bloqueado se mueve correctamente
-			if (!map->intersectWall(rectPlayer) && !map->intersectObstacles(rectPlayer)) {
+			if (!map->intersectWall(rectPlayer) && !map->intersectBoss(rectPlayer) && !map->intersectFinalBoss(rectPlayer)) {
 				goalVel.setY(0);
 				vel.setY(0);
 			}
@@ -50,7 +50,7 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 				rectPlayer.y += goalVel.getY();
 				rectPlayer.x = tr_->getRectCollide().x;
 
-				if (!map->intersectWall(rectPlayer) && !map->intersectObstacles(rectPlayer)) {
+				if (!map->intersectWall(rectPlayer) && !map->intersectBoss(rectPlayer) && !map->intersectFinalBoss(rectPlayer)) {
 					goalVel.setX(0);
 					vel.setX(0);
 				}
@@ -69,7 +69,7 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 		}
 	}
 
-	//Comprobacion para los límites de la cámara
+	//Comprobacion para los lï¿½mites de la cï¿½mara
 	if (enemy) {
 		if (rectPlayer.x + rectPlayer.w < cam.x || rectPlayer.x  > pCam.getX() + cam.w / 2)
 			mv_->setSpeed(speed_ * 4);
@@ -92,6 +92,84 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 				vel.setX(0);
 		}
 		if (rectPlayer.y < cam.y || rectPlayer.y + rectPlayer.h - tr_->getFloor() + (tr_->getFloor() - cam_->getHeightMap()) + 60 > pCam.getY() + cam.h / 2)
+			vel.setY(-0.5);
+	}
+
+	if (vel.getX() < 0.001 && vel.getX() > -0.001) vel.setX(0);
+	if (vel.getY() < 0.001 && vel.getY() > -0.001) vel.setY(0);
+}
+
+void CollisionDetec::tryToMoveObs(Vector2D dir, Vector2D goalVel, SDL_Rect& rectFoot, bool enemy) {
+	//Cojo el rect del player y le sumo la supuesta siguiente posicion
+	auto& vel = tr_->getVel();
+
+	//Cogemos el mapa para comprobar luego las colisiones
+	auto map = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>();
+
+	//Si me voy a chocar con una pared...
+	SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+	Vector2D pCam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamPos();
+
+	if (map->intersectObstacles(rectFoot)) {
+
+		//Comprobamos si hay doble input
+		if (dir.getX() != 0 && dir.getY() != 0 || vel.getX() != 0 && vel.getY() != 0) {
+
+			//Probamos con ignorar el Y
+			rectFoot.y = tr_->getRectCollideFeet().y + tr_->getFloor();
+
+			//Si con el Y bloqueado se mueve correctamente
+			if (!map->intersectObstacles(rectFoot)) {
+				goalVel.setY(0);
+				vel.setY(0);
+			}
+			else {
+				//Probamos ignorando la X
+				rectFoot.y += goalVel.getY();
+				rectFoot.x = tr_->getRectCollideFeet().x;
+
+				if (!map->intersectObstacles(rectFoot)) {
+					goalVel.setX(0);
+					vel.setX(0);
+				}
+				//Para las esquinas. NO QUITAR
+				else {
+					//Dejo de moverme
+					vel.setX(0);
+					vel.setY(0);
+				}
+			}
+		}
+		else {
+			//Dejo de moverme
+			vel.setX(0);
+			vel.setY(0);
+		}
+	}
+
+	//Comprobacion para los lï¿½mites de la cï¿½mara
+	if (enemy) {
+		if (rectFoot.x + rectFoot.w < cam.x || rectFoot.x  > pCam.getX() + cam.w / 2)
+			mv_->setSpeed(speed_ * 4);
+		else
+			mv_->setSpeed(speed_);
+		if (rectFoot.y < cam.y || rectFoot.y + tr_->getFloor() + rectFoot.h + 120 > pCam.getY() + cam.h / 2)
+			vel.setY(-speed_.getY());
+	}
+	else {
+		if (rectFoot.x < cam.x) {
+			if (entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamState() == State::GoingTo)
+				vel.setX(20);
+			else
+				vel.setX(0);
+		}
+		else if (rectFoot.x + rectFoot.w > pCam.getX() + cam.w / 2) {
+			if (entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamState() == State::GoingTo)
+				vel.setX(-20);
+			else
+				vel.setX(0);
+		}
+		if (rectFoot.y < cam.y || rectFoot.y + rectFoot.h - tr_->getFloor() + (tr_->getFloor() - cam_->getHeightMap()) + 60 > pCam.getY() + cam.h / 2)
 			vel.setY(-0.5);
 	}
 

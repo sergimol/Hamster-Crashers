@@ -7,11 +7,12 @@
 #include "../sdlutils/SDLUtils.h"
 #include "EntityAttribs.h"
 
+#include <string>
 
-class subtitulos : public Component {
+class Subtitulos : public Component {
 public:
-	subtitulos(string actualSub, int transitionNum);
-	virtual ~subtitulos() {};
+	Subtitulos(std::string actualSub, int transitionNum);
+	virtual ~Subtitulos() {};
 
 	void render() override;
 	void update() override;
@@ -43,7 +44,7 @@ private:
 	bool firstDialogue = true;
 	float position = 3.0f;			//Desplaza verticalmente los destrects
 
-	string actualSub_;
+	std::string actualSub_;
 	int transitionNum_;
 
 };
