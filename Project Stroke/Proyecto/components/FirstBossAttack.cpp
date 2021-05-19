@@ -132,6 +132,7 @@ bool FirstBossAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) 
 			auto& hamStateM = ents[i]->getComponent<HamsterStateMachine>()->getState();
 
 			if (hamStateM != HamStates::DEAD && hamStateM != HamStates::INFARCTED) {
+				ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
 				//Si tiene stun, se aplica
 				Stun* stun = ents[i]->getComponent<Stun>();
 				if (stun != nullptr && stun->isActive()) {

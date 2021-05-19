@@ -14,7 +14,7 @@
 FinalBossAttack::FinalBossAttack() :
 	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
 	attackStarted_(false), hitTime_(0), beforeHitCD_(1000), afterHitCD_(4250), stunStarted_(false), eAttribs_(nullptr),
-	state_(nullptr), attackFinished_(false), attackCount_(0), maxSlaps_(0), collides_(nullptr), collideStartCD_(1250){}
+	state_(nullptr), attackFinished_(false), attackCount_(0), maxSlaps_(0), collides_(nullptr), collideStartCD_(1250) {}
 
 void FinalBossAttack::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -181,11 +181,12 @@ bool FinalBossAttack::CheckCollisions(const SDL_Rect& enemyRect, bool swipe) {
 			canHit = true;
 			//Le restamos la vida al aliado
 			eAttribs->recieveDmg(dmg);
-			ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
+			//ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
 
 			auto& hamStateM = ents[i]->getComponent<HamsterStateMachine>()->getState();
 
 			if (hamStateM != HamStates::DEAD && hamStateM != HamStates::INFARCTED) {
+				ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
 				//Si tiene stun, se aplica
 				Stun* stun = ents[i]->getComponent<Stun>();
 				if (stun != nullptr && stun->isActive()) {
