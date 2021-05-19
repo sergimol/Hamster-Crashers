@@ -1,5 +1,7 @@
 #include "Poison.h"
 #include "Animator.h"
+#include "Movement.h"
+#include "ControlHandler.h"
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 #include "Transform.h"
@@ -26,11 +28,12 @@ void Poison::render() {
 
 void Poison::endAbility() {
 	entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::ABILITY, false);
+	entity_->getComponent<ControlHandler>()->setActive(true);
 }
 
 void Poison::action() {
-
 	//Realizamos las animaciones
+	entity_->getComponent<ControlHandler>()->setActive(false);
 
 	if (tr_->getFlip())
 		x = -1;
