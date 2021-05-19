@@ -60,7 +60,7 @@ public:
 	int generalFXvol = 20;
 
 	int initStrongVol = 60;
-	int initSubtitleVol = 20;
+	int initSubtitleVol = 100;
 
 	int ketaSpecialVol = 20;
 	int monchiSpecialVol = 20;

@@ -59,7 +59,7 @@ void dialogos::update() {
 	explicacionDest.y = explicacionDestI.y * position;
 
 	//Oculta el dialogo cuando termina el audio
-	if (showDialogue && entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->emptyChannel(4))
+	if (showDialogue && entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->emptyChannel(entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->subtitlesChannel))
 	{
 		//entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->fadeOut(3000);
 		//entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->fadeIn(6000);

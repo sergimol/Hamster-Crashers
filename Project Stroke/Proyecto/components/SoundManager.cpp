@@ -79,8 +79,8 @@ void SoundManager::init() {
 
 	trapKitchen = &sdlutils().soundEffects().at("trapKitchen");
 
-	dialogue0 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue1 = &sdlutils().soundEffects().at("catMeowInit");
+	dialogue0 = &sdlutils().soundEffects().at("tutorial0");
+	dialogue1 = &sdlutils().soundEffects().at("tutorial1");
 	dialogue2 = &sdlutils().soundEffects().at("catMeowInit");
 	dialogue3 = &sdlutils().soundEffects().at("catMeowInit");
 	dialogue4 = &sdlutils().soundEffects().at("catMeowInit");
@@ -141,9 +141,6 @@ void SoundManager::setVolumeChannels() {
 	//Boss
 	Mix_Volume(catChannel, initCatVol * generalFXvol);
 
-	//Subtitles
-	Mix_Volume(subtitlesChannel, initSubtitleVol * musicVol_);
-
 	//Button
 	Mix_Volume(buttonChannel, buttonVol * generalFXvol);
 
@@ -167,6 +164,8 @@ void SoundManager::setVolumeChannels() {
 	//Traps
 	Mix_Volume(trapKitchenChannel, inittrapKitchenVol * generalFXvol);
 
+	//Subtitles
+	Mix_Volume(subtitlesChannel, initSubtitleVol * musicVol_);
 }
 
 void SoundManager::lowVolume(bool musicChannel) {
