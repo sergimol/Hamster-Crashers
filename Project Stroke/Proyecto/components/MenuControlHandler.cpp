@@ -143,8 +143,12 @@ bool MenuControlHandler::handleMouse() {
 				auto button = buttons[i][e];
 				if (button != nullptr) {
 					auto buttRect = button->getComponent<MenuButton>();
-					if (buttRect != nullptr && mouseInButton(xMouse, yMouse, buttRect->getRect())) {
+					if (buttRect != nullptr && buttRect->selectable() && mouseInButton(xMouse, yMouse, buttRect->getRect())) {
 						menu_->setButtonPos(i, e);
+						if (states_->getState() == GameStates::HAMSTERSELECTION) {
+							auto in = menu_->getIndicators();
+							in[0]->getComponent<MenuIndicator>()->moveToButton(i);
+						}
 						if (click) {
 							menu_->pressButton();
 						}
@@ -179,6 +183,7 @@ bool MenuControlHandler::mouseInButton(float x, float y, SDL_Rect const& button)
 	else if (y > (button.y + button.h)){
 		return false;
 	}
+
 	return true;
 }
 
