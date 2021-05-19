@@ -5,7 +5,7 @@
 
 HeartUI::HeartUI(std::string n, int pos) :
 	heart_(&sdlutils().images().at("heart1")),
-	scale(1),
+	scale(0.75),
 	name(n),
 	position(pos),
 	latency(MAXLATENCY),
@@ -13,7 +13,7 @@ HeartUI::HeartUI(std::string n, int pos) :
 	alive(true)
 {
 	//Posiciones de los elementos de la UI
-	renderPosHeart = Vector2D((sdlutils().width() / 4) * position + 20, 50) - Vector2D(10, -20);
+	renderPosHeart = Vector2D((sdlutils().width() / 4) * position + 40, 70) - Vector2D(10, -20);
 
 	//DestRects
 	dest = build_sdlrect(renderPosHeart, heart_->width() * scale, heart_->height() * scale);

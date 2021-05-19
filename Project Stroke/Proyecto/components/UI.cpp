@@ -16,7 +16,7 @@ UI::UI(std::string n, int pos) :
 		bar_ = &sdlutils().images().at("bar");
 
 		//Posiciones de los elementos de la UI
-		renderPosHead = Vector2D((sdlutils().width() / 4) * position + 85, 35);
+		renderPosHead = Vector2D((sdlutils().width() / 4) * position + 70, 35);
 		renderPosBar = Vector2D((sdlutils().width() / 4) * position + 125, 60);
 		renderPosBack = Vector2D((sdlutils().width() / 4) * position + 30, 10);
 		//DestRects
