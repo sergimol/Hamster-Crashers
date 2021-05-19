@@ -331,7 +331,7 @@
   <object id="104" name="firstBoss" x="297.32" y="122.5" width="27.2727" height="44.9091">
    <properties>
     <property name="sala" type="int" value="1"/>
-    <property name="zRondas" type="int" value="1"/>
+    <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
   <object id="105" name="trap" x="614.684" y="107.045" width="27.2727" height="44.9091">

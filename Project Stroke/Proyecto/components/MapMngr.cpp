@@ -668,7 +668,7 @@ void MapMngr::addHamster(string name, int i) {
 
 	//Habilidad
 	if (name == "sardinilla") hamster1->addComponent<Roll>();
-	else if (name == "canelon") hamster1->addComponent<Pray>(20, 50);
+	else if (name == "canelon") hamster1->addComponent<Pray>(20000, 50);
 	else if (name == "keta") hamster1->addComponent<Poison>(2);
 	else if (name == "monchi") {
 		hamster1->addComponent<Turret>();

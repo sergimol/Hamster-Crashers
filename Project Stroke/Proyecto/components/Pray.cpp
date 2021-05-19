@@ -42,7 +42,7 @@ void Pray::prayAbility() {
 		if (evil_) {
 
 			//Si la entidad es un enemigo...
-			if (e->hasGroup<Enemy>()) {
+			if (e->hasGroup<Enemy>() && e->isActive()) {
 
 				//Cogemos el transform del enemigo
 				auto eTR = e->getComponent<Transform>();
@@ -89,6 +89,7 @@ void Pray::prayAbility() {
 
 					//Le restamos la vida al enemigo
 					e->getComponent<EntityAttribs>()->recieveDmg(dmg_);
+					entity_->getMngr()->refreshEnemies();
 				}
 			}
 		}

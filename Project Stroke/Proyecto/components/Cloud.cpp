@@ -13,7 +13,8 @@ Cloud::~Cloud() {
 	refreshAffectedEnemies();
 	for (size_t i = 0; i < affectedEnemies_.size(); ++i)
 	{
-		affectedEnemies_[i]->getComponent<EntityAttribs>()->resetVel();
+		if (affectedEnemies_[i]->isActive())
+			affectedEnemies_[i]->getComponent<EntityAttribs>()->resetVel();
 	}
 };
 
@@ -31,48 +32,50 @@ void Cloud::update() {
 		auto& ents = entity_->getMngr()->getEnemies();
 
 		for (int i = 0; i < ents.size(); ++i) {
-			cam_ = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-			//Si la entidad es un enemigo...
+			if (ents[i]->isActive()) {
+				cam_ = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+				//Si la entidad es un enemigo...
 
-				//Cogemos el transform del enemigo
-			auto eTR = ents[i]->getComponent<Transform>();
-			auto eRectCol = eTR->getRectCollide();
+					//Cogemos el transform del enemigo
+				auto eTR = ents[i]->getComponent<Transform>();
+				auto eRectCol = eTR->getRectCollide();
 
-			//Creamos nuestroRect
-			Vector2D newPos = Vector2D(eRectCol.x - cam_.x, eRectCol.y - cam_.y);
+				//Creamos nuestroRect
+				Vector2D newPos = Vector2D(eRectCol.x - cam_.x, eRectCol.y - cam_.y);
 
-			Vector2D otherPos = Vector2D(tr_->getPos().getX() - cam_.x, tr_->getPos().getY() - cam_.y);
+				Vector2D otherPos = Vector2D(tr_->getPos().getX() - cam_.x, tr_->getPos().getY() - cam_.y);
 
-			//Y comprobamos si colisiona
-			if (Collisions::collides(otherPos, tr_->getW(), tr_->getH(), newPos, eRectCol.w, eRectCol.h)) {
+				//Y comprobamos si colisiona
+				if (Collisions::collides(otherPos, tr_->getW(), tr_->getH(), newPos, eRectCol.w, eRectCol.h)) {
 
 
-				//auto& enmStateM = ents[i]->getComponent<EnemyStateMachine>()->getState();
+					//auto& enmStateM = ents[i]->getComponent<EnemyStateMachine>()->getState();
 
-				auto eAttribs = ents[i]->getComponent<EntityAttribs>();
+					auto eAttribs = ents[i]->getComponent<EntityAttribs>();
 
-				//Si tiene stun se aplica el ralentí y animación
-				EnemyStun* enmStun = ents[i]->getComponent<EnemyStun>();
-				if (enmStun != nullptr && enmStun->isActive()) {
+					//Si tiene stun se aplica el ralentí y animación
+					EnemyStun* enmStun = ents[i]->getComponent<EnemyStun>();
+					if (enmStun != nullptr && enmStun->isActive()) {
 
-					ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
+						ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
 
-					// Reducimos velocidad a los no afectados
-					int j = 0;
+						// Reducimos velocidad a los no afectados
+						int j = 0;
 
-					while (j < affectedEnemies_.size() && ents[i] != affectedEnemies_[j]) { ++j; }
+						while (j < affectedEnemies_.size() && ents[i] != affectedEnemies_[j]) { ++j; }
 
-					if (j == affectedEnemies_.size())
-						eAttribs->setVel(eAttribs->getVel() / 5);
-					//Añadimos a afectados
-					affectedEnemies_.push_back(ents[i]);
+						if (j == affectedEnemies_.size())
+							eAttribs->setVel(eAttribs->getVel() / 5);
+						//Añadimos a afectados
+						affectedEnemies_.push_back(ents[i]);
+					}
+
+					//Le restamos la vida al enemigo
+					eAttribs->recieveDmg(dmg_);
+
+					entity_->getMngr()->refreshEnemies();
+					refreshAffectedEnemies();
 				}
-
-				//Le restamos la vida al enemigo
-				eAttribs->recieveDmg(dmg_);
-
-				entity_->getMngr()->refreshEnemies();
-				refreshAffectedEnemies();
 			}
 		}
 	}
