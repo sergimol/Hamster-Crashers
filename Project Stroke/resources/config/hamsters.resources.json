@@ -969,8 +969,16 @@
       "file": "resources/sound/heartattack/heartattack2.wav"
     },
     {
-      "id": "mainTheme",
-      "file": "resources/sound/music/mainTheme.mp3"
+      "id": "heartattack3",
+      "file": "resources/sound/heartattack/heartattack3.wav"
+    },
+    {
+      "id": "heartattack4",
+      "file": "resources/sound/heartattack/heartattack4.wav"
+    },
+    {
+      "id": "heartattack5",
+      "file": "resources/sound/heartattack/heartattack5.wav"
     },
     {
       "id": "catMeowInit",
@@ -987,6 +995,130 @@
     {
       "id": "catWalking",
       "file": "resources/sound/cat/catMeowWalking.wav"
+    },
+    {
+      "id": "canelonSpecialGod",
+      "file": "resources/sound/specialAttack/canelon/canelonSpecialGod.wav"
+    },
+    {
+      "id": "canelonSpecialDevil",
+      "file": "resources/sound/specialAttack/canelon/canelonSpecialDevil.wav"
+    },
+    {
+      "id": "ketaSpecial0",
+      "file": "resources/sound/specialAttack/keta/ketaSpecialShoot0.wav"
+    },
+    {
+      "id": "ketaSpecial1",
+      "file": "resources/sound/specialAttack/keta/ketaSpecialShoot1.wav"
+    },
+    {
+      "id": "ketaSpecial2",
+      "file": "resources/sound/specialAttack/keta/ketaSpecialShoot2.wav"
+    },
+    {
+      "id": "ketaSpecial3",
+      "file": "resources/sound/specialAttack/keta/ketaSpecialShoot3.wav"
+    },
+    {
+      "id": "ketaSpecial4",
+      "file": "resources/sound/specialAttack/keta/ketaSpecialShoot4.wav"
+    },
+    {
+      "id": "monchiSpecial0",
+      "file": "resources/sound/specialAttack/monchi/monchiSpecialShoot0.wav"
+    },
+    {
+      "id": "monchiSpecial1",
+      "file": "resources/sound/specialAttack/monchi/monchiSpecialShoot1.wav"
+    },
+    {
+      "id": "monchiSpecial2",
+      "file": "resources/sound/specialAttack/monchi/monchiSpecialShoot2.wav"
+    },
+    {
+      "id": "monchiSpecial3",
+      "file": "resources/sound/specialAttack/monchi/monchiSpecialShoot3.wav"
+    },
+    {
+      "id": "monchiSpecial4",
+      "file": "resources/sound/specialAttack/monchi/monchiSpecialShoot4.wav"
+    },
+    {
+      "id": "button0",
+      "file": "resources/sound/buttons/button0.wav"
+    },
+    {
+      "id": "button1",
+      "file": "resources/sound/buttons/button1.wav"
+    },
+    {
+      "id": "car0",
+      "file": "resources/sound/car/car0.wav"
+    },
+    {
+      "id": "car1",
+      "file": "resources/sound/car/car1.wav"
+    },
+    {
+      "id": "car2",
+      "file": "resources/sound/car/car2.wav"
+    },
+    {
+      "id": "mainTheme",
+      "file": "resources/sound/music/mainTheme.mp3"
+    },
+    {
+      "id": "birds",
+      "file": "resources/sound/lvl2/birds.mp3"
+    },
+    {
+      "id": "eat0",
+      "file": "resources/sound/pickItem/pick0.wav"
+    },
+    {
+      "id": "eat1",
+      "file": "resources/sound/pickItem/pick1.wav"
+    },
+    {
+      "id": "soldierDep0",
+      "file": "resources/sound/soldier/dep0.wav"
+    },
+    {
+      "id": "soldierDep1",
+      "file": "resources/sound/soldier/dep1.wav"
+    },
+    {
+      "id": "soldierDep2",
+      "file": "resources/sound/soldier/dep2.wav"
+    },
+    {
+      "id": "soldierDep3",
+      "file": "resources/sound/soldier/dep3.wav"
+    },
+    {
+      "id": "trainBackground",
+      "file": "resources/sound/train/background.wav"
+    },
+    {
+      "id": "trainPipi",
+      "file": "resources/sound/train/pipi.wav"
+    },
+    {
+      "id": "trainAlto",
+      "file": "resources/sound/train/pasoAlto.wav"
+    },
+    {
+      "id": "transition0",
+      "file": "resources/sound/transition/transition0.wav"
+    },
+    {
+      "id": "transition1",
+      "file": "resources/sound/transition/transition1.wav"
+    },
+    {
+      "id": "trapKitchen",
+      "file": "resources/sound/traps/traps0.wav"
     }
   ],
 
@@ -1394,7 +1526,7 @@
       "startFrameY": 0,
       "duration": 3,
       "cols": 10,
-      "rows": 10,
+      "rows": 11,
       "frameUpdate": 200,
       "loop": 1,
       "chain": "",
@@ -1406,7 +1538,7 @@
       "startFrameY": 0,
       "duration": 6,
       "cols": 10,
-      "rows": 10,
+      "rows": 11,
       "frameUpdate": 100,
       "loop": 1,
       "chain": "",
@@ -1417,9 +1549,9 @@
       "id": "canelon_light_attack1",
       "startFrameX": 9,
       "startFrameY": 0,
-      "duration": 5,
+      "duration": 6,
       "cols": 10,
-      "rows": 10,
+      "rows": 11,
       "frameUpdate": 70,
       "loop": 1,
       "chain": "",
@@ -1429,9 +1561,9 @@
       "id": "canelon_light_attack2",
       "startFrameX": 9,
       "startFrameY": 0,
-      "duration": 5,
+      "duration": 6,
       "cols": 10,
-      "rows": 10,
+      "rows": 11,
       "frameUpdate": 70,
       "loop": 1,
       "chain": "",
@@ -1439,11 +1571,11 @@
     },
     {
       "id": "canelon_light_combo",
-      "startFrameX": 4,
+      "startFrameX": 5,
       "startFrameY": 1,
-      "duration": 7,
+      "duration": 8,
       "cols": 10,
-      "rows": 10,
+      "rows": 11,
       "frameUpdate": 50,
       "loop": 1,
       "chain": "",
@@ -1451,11 +1583,11 @@
     },
     {
       "id": "canelon_strong_attack",
-      "startFrameX": 1,
+      "startFrameX": 3,
       "startFrameY": 2,
-      "duration": 5,
+      "duration": 6,
       "cols": 10,
-      "rows": 10,
+      "rows": 11,
       "frameUpdate": 50,
       "loop": 1,
       "chain": "",
@@ -1463,11 +1595,11 @@
     },
     {
       "id": "canelon_strong_combo",
-      "startFrameX": 6,
+      "startFrameX": 9,
       "startFrameY": 2,
-      "duration": 7,
+      "duration": 8,
       "cols": 10,
-      "rows": 10,
+      "rows": 11,
       "frameUpdate": 50,
       "loop": 1,
       "chain": "",
@@ -1475,11 +1607,11 @@
     },
     {
       "id": "canelon_ability",
-      "startFrameX": 3,
+      "startFrameX": 7,
       "startFrameY": 3,
       "duration": 17,
       "cols": 10,
-      "rows": 10,
+      "rows": 11,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "",
@@ -1487,11 +1619,11 @@
     },
     {
       "id": "canelon_hit",
-      "startFrameX": 0,
+      "startFrameX": 4,
       "startFrameY": 5,
-      "duration": 4,
+      "duration": 5,
       "cols": 10,
-      "rows": 10,
+      "rows": 11,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "",
@@ -1499,11 +1631,11 @@
     },
     {
       "id": "canelon_death",
-      "startFrameX": 4,
+      "startFrameX": 9,
       "startFrameY": 5,
       "duration": 17,
       "cols": 10,
-      "rows": 10,
+      "rows": 11,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "",
@@ -1511,11 +1643,11 @@
     },
     {
       "id": "canelon_stroke",
-      "startFrameX": 1,
+      "startFrameX": 6,
       "startFrameY": 7,
       "duration": 11,
       "cols": 10,
-      "rows": 10,
+      "rows": 11,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "",
@@ -1523,11 +1655,11 @@
     },
     {
       "id": "canelon_ghost_spawn",
-      "startFrameX": 2,
+      "startFrameX": 7,
       "startFrameY": 8,
       "duration": 4,
       "cols": 10,
-      "rows": 10,
+      "rows": 11,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "canelon_idle_ghost",
@@ -1535,11 +1667,11 @@
     },
     {
       "id": "canelon_idle_ghost",
-      "startFrameX": 6,
-      "startFrameY": 8,
+      "startFrameX": 1,
+      "startFrameY": 9,
       "duration": 4,
       "cols": 10,
-      "rows": 10,
+      "rows": 11,
       "frameUpdate": 100,
       "loop": 1,
       "chain": "",
@@ -1547,11 +1679,11 @@
     },
     {
       "id": "canelon_stun",
-      "startFrameX": 0,
+      "startFrameX": 5,
       "startFrameY": 9,
       "duration": 9,
       "cols": 10,
-      "rows": 10,
+      "rows": 11,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "",
@@ -1563,7 +1695,7 @@
       "startFrameY": 0,
       "duration": 4,
       "cols": 9,
-      "rows": 9,
+      "rows": 10,
       "frameUpdate": 200,
       "loop": 1,
       "chain": "",
@@ -1575,7 +1707,7 @@
       "startFrameY": 0,
       "duration": 4,
       "cols": 9,
-      "rows": 9,
+      "rows": 10,
       "frameUpdate": 100,
       "loop": 1,
       "chain": "",
@@ -1586,9 +1718,9 @@
       "id": "keta_light_attack1",
       "startFrameX": 8,
       "startFrameY": 0,
-      "duration": 3,
+      "duration": 4,
       "cols": 9,
-      "rows": 9,
+      "rows": 10,
       "frameUpdate": 70,
       "loop": 1,
       "chain": "",
@@ -1596,11 +1728,11 @@
     },
     {
       "id": "keta_light_attack2",
-      "startFrameX": 2,
+      "startFrameX": 3,
       "startFrameY": 1,
-      "duration": 3,
+      "duration": 4,
       "cols": 9,
-      "rows": 9,
+      "rows": 10,
       "frameUpdate": 70,
       "loop": 1,
       "chain": "",
@@ -1608,11 +1740,11 @@
     },
     {
       "id": "keta_light_combo",
-      "startFrameX": 5,
+      "startFrameX": 7,
       "startFrameY": 1,
-      "duration": 4,
+      "duration": 5,
       "cols": 9,
-      "rows": 9,
+      "rows": 10,
       "frameUpdate": 50,
       "loop": 1,
       "chain": "",
@@ -1620,11 +1752,11 @@
     },
     {
       "id": "keta_strong_attack",
-      "startFrameX": 0,
+      "startFrameX": 3,
       "startFrameY": 2,
-      "duration": 4,
+      "duration": 5,
       "cols": 9,
-      "rows": 9,
+      "rows": 10,
       "frameUpdate": 50,
       "loop": 1,
       "chain": "",
@@ -1632,11 +1764,11 @@
     },
     {
       "id": "keta_strong_combo",
-      "startFrameX": 4,
+      "startFrameX": 8,
       "startFrameY": 2,
-      "duration": 4,
+      "duration": 5,
       "cols": 9,
-      "rows": 9,
+      "rows": 10,
       "frameUpdate": 50,
       "loop": 1,
       "chain": "",
@@ -1644,11 +1776,11 @@
     },
     {
       "id": "keta_ability",
-      "startFrameX": 8,
-      "startFrameY": 2,
+      "startFrameX": 4,
+      "startFrameY": 3,
       "duration": 12,
       "cols": 9,
-      "rows": 9,
+      "rows": 10,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "",
@@ -1656,11 +1788,11 @@
     },
     {
       "id": "keta_hit",
-      "startFrameX": 2,
+      "startFrameX": 7,
       "startFrameY": 4,
-      "duration": 4,
+      "duration": 5,
       "cols": 9,
-      "rows": 9,
+      "rows": 10,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "",
@@ -1668,11 +1800,11 @@
     },
     {
       "id": "keta_death",
-      "startFrameX": 6,
-      "startFrameY": 4,
+      "startFrameX": 3,
+      "startFrameY": 5,
       "duration": 7,
       "cols": 9,
-      "rows": 9,
+      "rows": 10,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "",
@@ -1680,11 +1812,11 @@
     },
     {
       "id": "keta_stroke",
-      "startFrameX": 4,
-      "startFrameY": 5,
+      "startFrameX": 1,
+      "startFrameY": 6,
       "duration": 14,
       "cols": 9,
-      "rows": 9,
+      "rows": 10,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "",
@@ -1692,11 +1824,11 @@
     },
     {
       "id": "keta_ghost_spawn",
-      "startFrameX": 0,
+      "startFrameX": 6,
       "startFrameY": 7,
       "duration": 4,
       "cols": 9,
-      "rows": 9,
+      "rows": 10,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "keta_idle_ghost",
@@ -1704,11 +1836,11 @@
     },
     {
       "id": "keta_idle_ghost",
-      "startFrameX": 4,
-      "startFrameY": 7,
+      "startFrameX": 1,
+      "startFrameY": 8,
       "duration": 4,
       "cols": 9,
-      "rows": 9,
+      "rows": 10,
       "frameUpdate": 100,
       "loop": 1,
       "chain": "",
@@ -1716,11 +1848,11 @@
     },
     {
       "id": "keta_stun",
-      "startFrameX": 0,
+      "startFrameX": 5,
       "startFrameY": 8,
-      "duration": 6,
+      "duration": 7,
       "cols": 9,
-      "rows": 9,
+      "rows": 10,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "",

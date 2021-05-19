@@ -132,20 +132,75 @@ void MenuButton::pressed() {
 		entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuControlHandler>()->setMousePos(pos);
 
 		entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->onResume();
+
+		////Vuelve a renderizar el menu
+		//state_->setState(GameStates::MAINMENU);
+
+		////Y eliminamos TODO
+		//for (Entity* e : entity_->getMngr()->getEntities()) {
+
+		//	if (e->getMngr()->getHandler<Camera__>() != e
+		//		&& e->getMngr()->getHandler<StateMachine>() != e && e->getMngr()->getHandler<Mother>() != e &&
+		//		e->getMngr()->getHandler<Map>() != e && e->getMngr()->getHandler<SoundManager>() != e)
+		//		//La elimino
+		//		e->setActive(false);
+		//}
+
+		//for (Entity* e : entity_->getMngr()->getTiles())
+		//	e->setActive(false);
+
+		//for (Entity* e : entity_->getMngr()->getMapH())
+		//	e->setActive(false);
+
+		//for (Entity* e : entity_->getMngr()->getBgs())
+		//	e->setActive(false);
+
+		//for (Entity* e : entity_->getMngr()->getFgs())
+		//	e->setActive(false);
+
+		//entity_->getMngr()->refreshFrontGround();
+		//entity_->getMngr()->refreshTiles();
+		//entity_->getMngr()->refreshMapHeight();
+		//entity_->getMngr()->refreshBackground();
+		//entity_->getMngr()->refreshForeground();
+
+
+		//entity_->getMngr()->refreshDeadBodies();
+		//entity_->getMngr()->refreshEnemies();
+		//entity_->getMngr()->refreshItems();
+		//entity_->getMngr()->refreshObstacles();
+		//entity_->getMngr()->refreshPlayers();
+
+		//entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearColliders();
+
+		////Eliminamos a todos los hamsters
+		//entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearHamstersVector();
+
+		//sdlutils().setHamstersChosen(0);
+		//sdlutils().setHamstersToChoose(0);
+
+		//auto& i = entity_->getMngr()->getHandler<HamsterSelectionMenu>()->getComponent<MenuButtonManager>()->getIndicators();
+
+		//for (int h = 1; h < i.size(); h++) {
+		//	i[h]->setActive(false);
+		//}
+
+		//i[0]->getComponent<MenuIndicator>()->reset();
+
 	}
 	else if (buttonName_ == "quit") {
 		ih().startQuitEvent();
 	}
 	else if (buttonName_ == "sardinilla" || buttonName_ == "keta" || buttonName_ == "monchi" || buttonName_ == "canelon") {
 		auto* mapa = entity_->getMngr()->getHandler<Map>();
-		mapa->getComponent<MapMngr>()->addHamster(buttonName_);		
+		mapa->getComponent<MapMngr>()->addHamster(buttonName_);
 
 		sdlutils().setHamstersToChoose(sdlutils().hamstersToChoose() - 1);
 		sdlutils().setHamstersChosen(sdlutils().hamstersChosen() + 1);
 
 		auto* mngr = entity_->getMngr();
 
-		vector<Entity*> indctrs = mngr->getHandler<HamsterSelectionMenu>()->getComponent<MenuButtonManager>()->getIndicators();
+		auto& indctrs = mngr->getHandler<HamsterSelectionMenu>()->getComponent<MenuButtonManager>()->getIndicators();
 		indctrs[0]->getComponent<MenuIndicator>()->updateTexture(true);
 
 		auto* selectedIndicator = mngr->addMenu();
@@ -153,7 +208,7 @@ void MenuButton::pressed() {
 		indctrs.push_back(selectedIndicator);
 
 		if (sdlutils().hamstersToChoose() <= 0) {
-			mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Level1.tmx");
+			mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Lvl1javi2.tmx");
 			state_->setState(GameStates::RUNNING);
 		}
 		//entity_->getMngr()->getHandler<HamsterSelectionMenu>()->getComponent<MenuButtonManager>()->updateKeymap(MenuButtonManager::SPACE, false);
@@ -182,7 +237,7 @@ void MenuButton::pressed() {
 		}
 	}
 
-	else if(buttonName_ == "fxUp") {
+	else if (buttonName_ == "fxUp") {
 		auto soundMngr = entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>();
 		if (soundMngr->fxVol_ < 2) {
 			soundMngr->upVolume(false);

@@ -37,11 +37,12 @@ private:
 	Vector2D mapCoorsToSDLPoint(Vector2D coords);
 	Vector2D SDLPointToMapCoords(Vector2D p);
 	tmx::ObjectGroup* objectLayer;		//Guardamos la capa de entidades para poder leer los enemigos
-	int Room;							//Guarda la habitación en la que se encuentran los jugadores
+	int Room;							//Guarda la habitaciï¿½n en la que se encuentran los jugadores
 	int numberEnemyRoom;				//Guarda la cantidad de enemigos que hay por sala
 	int RoundsPerRoom;					//Guarda la cantidad de rondas que hay en una sala
 	int RoundsCount = 0;
 	float mapHeight_ = 0;
+	bool collisionCreated = false;
 	const float scale = 3;
 
 	std::queue<tmx::Object> TriggerftCamera;

@@ -62,6 +62,15 @@ public:
 		return e;
 	}
 
+	Entity* addMenuBackground() {
+		Entity* e = new Entity(this);
+		if (e != nullptr) {
+			e->resetGroups();
+			menuBgs_.emplace_back(e);
+		}
+		return e;
+	}
+
 	Entity* addMapHeight() {
 		Entity* e = new Entity(this);
 		if (e != nullptr) {
@@ -214,6 +223,50 @@ public:
 			deadBodies_.end());
 	}
 
+	void refreshMenus() {
+		menus_.erase( //
+			std::remove_if( //
+				menus_.begin(), //
+				menus_.end(), //
+				[](const Entity* e) { //
+					return !e->isActive();
+				}), //
+			menus_.end());
+	}
+
+	void refreshForeground() {
+		fgs_.erase( //
+			std::remove_if( //
+				fgs_.begin(), //
+				fgs_.end(), //
+				[](const Entity* e) { //
+					return !e->isActive();
+				}), //
+			fgs_.end());
+	}
+
+	void refreshBackground() {
+		bgs_.erase( //
+			std::remove_if( //
+				bgs_.begin(), //
+				bgs_.end(), //
+				[](const Entity* e) { //
+					return !e->isActive();
+				}), //
+			bgs_.end());
+	}
+
+	void refreshTiles() {
+		tiles_.erase( //
+			std::remove_if( //
+				tiles_.begin(), //
+				tiles_.end(), //
+				[](const Entity* e) { //
+					return !e->isActive();
+				}), //
+			tiles_.end());
+	}
+
 	void refreshEnemies() {
 		enemies_.erase( //
 			std::remove_if( //
@@ -269,6 +322,17 @@ public:
 			traps_.end());
 	}
 
+	void refreshMapHeight() {
+		mapHeights_.erase( //
+			std::remove_if( //
+				mapHeights_.begin(), //
+				mapHeights_.end(), //
+				[](const Entity* e) { //
+					return !e->isActive();
+				}), //
+			mapHeights_.end());
+	}
+
 	void refreshFrontGround() {
 		// remove dead entities from the list of entities
 		fgs_.erase( //
@@ -294,6 +358,7 @@ private:
 	std::vector<Entity*> bgs_;
 	std::vector<Entity*> fgs_;
 	std::vector<Entity*> menus_;
+	std::vector<Entity*> menuBgs_;
 
 
 	std::array<Entity*, ecs::maxHdlr> hdlrs_;
