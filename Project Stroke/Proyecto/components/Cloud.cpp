@@ -10,7 +10,7 @@
 
 Cloud::~Cloud() {
 	//Devuelve las velocidades originales
-	refreshAffectedEnemies();
+	/*refreshAffectedEnemies();*/
 	for (size_t i = 0; i < affectedEnemies_.size(); ++i)
 	{
 		if (affectedEnemies_[i]->isActive())
@@ -32,7 +32,9 @@ void Cloud::update() {
 		auto& ents = entity_->getMngr()->getEnemies();
 
 		for (int i = 0; i < ents.size(); ++i) {
-			if (ents[i]->isActive()) {
+			
+			//Comprobamos que no es la nube que se mete al array de enemigos por alguna razon
+			if (ents[i]->isActive() && ents[i]->getComponent<Cloud>() == nullptr) {
 				cam_ = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 				//Si la entidad es un enemigo...
 
