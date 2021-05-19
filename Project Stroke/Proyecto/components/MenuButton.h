@@ -27,6 +27,8 @@ public:
 	//inline int getPosUI() { return position; };
 	SDL_Rect getRect() const& { return dest_; };
 
+	void setSelectable(bool s);
+	bool selectable() { return selectable_; };
 private:
 	//Nombre del personaje que contiene la UI, todo en minusculas
 	std::string buttonName_;
@@ -46,4 +48,5 @@ private:
 	Vector2D renderCoords_;
 
 	bool buttonSelected_;
+	bool selectable_ = true;
 };

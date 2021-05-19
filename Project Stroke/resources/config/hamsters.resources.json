@@ -323,12 +323,20 @@
       "file": "resources/images/menuSprites/sardinillaButtonEnter.png"
     },
     {
+      "id": "sardinillaButtonUnselectable",
+      "file": "resources/images/menuSprites/sardinillaButtonUnselectable.png"
+    },
+    {
       "id": "ketaButton",
       "file": "resources/images/menuSprites/ketaButton.png"
     },
     {
       "id": "ketaButtonEnter",
       "file": "resources/images/menuSprites/ketaButtonEnter.png"
+    },
+    {
+      "id": "ketaButtonUnselectable",
+      "file": "resources/images/menuSprites/ketaButtonUnselectable.png"
     },
     {
       "id": "monchiButton",
@@ -339,12 +347,20 @@
       "file": "resources/images/menuSprites/monchiButtonEnter.png"
     },
     {
+      "id": "monchiButtonUnselectable",
+      "file": "resources/images/menuSprites/monchiButtonUnselectable.png"
+    },
+    {
       "id": "canelonButton",
       "file": "resources/images/menuSprites/canelonButton.png"
     },
     {
       "id": "canelonButtonEnter",
       "file": "resources/images/menuSprites/canelonButtonEnter.png"
+    },
+    {
+      "id": "canelonButtonUnselectable",
+      "file": "resources/images/menuSprites/canelonButtonUnselectable.png"
     },
     {
       "id": "backButton",

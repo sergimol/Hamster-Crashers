@@ -25,6 +25,8 @@ public:
 	// Para el indicador del jugador que está eligiendo
 	void moveX(bool isRight);
 
+	void moveToButton(int but);
+
 private:
 	//Nombre del indicador
 	std::string indicatorName_;
