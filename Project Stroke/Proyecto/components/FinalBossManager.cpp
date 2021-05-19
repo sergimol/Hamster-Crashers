@@ -36,10 +36,11 @@ void FinalBossManager::init() {
 	bossAtk_ = hand_->addComponent<FinalBossAttack>();
 	movHand_ = hand_->addComponent<MovementSimple>();
 
+	entity_->getMngr()->setHandler<FinalBoss>(hand_);
 	entity_->getMngr()->getEnemies().push_back(hand_);
 
 
-	fist_ = entity_->getMngr()->addEntity();		//Referencia al puño
+	fist_ = entity_->getMngr()->addEntity(); //Referencia al puño
 	fistTr_ = fist_->addComponent<Transform>(
 		tr_->getPos(), Vector2D(), 256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f);
 	fistTr_->getFlip() = true;
@@ -91,6 +92,7 @@ void FinalBossManager::lockHamster() {
 	else
 	{
 		//Si ninguno esta activo pone todo a null
+		lockedHamster_ = nullptr;
 		lockedHamState_ = nullptr;
 		hamsterTr_ = nullptr;
 		lockedHamsterPunch_ = nullptr;
@@ -161,8 +163,6 @@ void FinalBossManager::update() {
 	}
 	else
 		lockHamster();
-
-	cout << hand_->getComponent<EntityAttribs>()->getLife() << " " << fist_->getComponent<EntityAttribs>()->getLife() << endl;
 }
 
 void FinalBossManager::movement(Transform* tr, Transform* hamsterTr, MovementSimple* mov) {

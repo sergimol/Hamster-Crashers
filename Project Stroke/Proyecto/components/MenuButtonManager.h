@@ -38,6 +38,9 @@ public:
 
 	void setButtonPos(int x, int y);
 
+	inline vector<Entity*>& getIndicators() {
+		return indicators_;
+	}
 private:
 	string menuMode_;
 	//Numero del estado en el que se muestra el men�

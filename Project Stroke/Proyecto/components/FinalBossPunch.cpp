@@ -100,13 +100,14 @@ bool FinalBossPunch::CheckCollisions(const SDL_Rect& enemyRect) {
 		//Si la entidad es un aliado...
 			//Cogemos el transform del aliado
 		auto eTR = ents[i]->getComponent<Transform>();
+		auto eRectCollide = eTR->getRectCollide();
 
 		//Creamos su Rect
 		SDL_Rect allyRect;
-		allyRect.h = eTR->getH();
-		allyRect.w = eTR->getW();
-		allyRect.x = eTR->getPos().getX() - cam.x;
-		allyRect.y = eTR->getPos().getY() - cam.y;
+		allyRect.h = eRectCollide.h;
+		allyRect.w = eRectCollide.w;
+		allyRect.x = eRectCollide.x - cam.x;
+		allyRect.y = eRectCollide.y - cam.y;
 
 		EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
 
@@ -120,11 +121,11 @@ bool FinalBossPunch::CheckCollisions(const SDL_Rect& enemyRect) {
 			canHit = true;
 			//Le restamos la vida al aliado
 			eAttribs->recieveDmg(dmg);
-			ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
 
 			auto& hamStateM = ents[i]->getComponent<HamsterStateMachine>()->getState();
 
 			if (hamStateM != HamStates::DEAD && hamStateM != HamStates::INFARCTED) {
+			ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
 				//Si tiene stun, se aplica
 				Stun* stun = ents[i]->getComponent<Stun>();
 				if (stun != nullptr && stun->isActive()) {
@@ -168,7 +169,12 @@ bool FinalBossPunch::CheckCollisions(const SDL_Rect& enemyRect) {
 
 				SDL_Rect rectPlayer = tr_->getRectCollide();
 				rectPlayer.x += hamKnockback->getKnockback();
+
+				SDL_Rect rectFoot = tr_->getRectCollide();
+				rectFoot.x += hamKnockback->getKnockback();
+
 				ents[i]->getComponent<CollisionDetec>()->tryToMove(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0), rectPlayer, false);
+				ents[i]->getComponent<CollisionDetec>()->tryToMoveObs(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0), rectFoot, false);
 			}
 		}
 	}

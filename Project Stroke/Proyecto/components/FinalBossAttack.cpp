@@ -14,7 +14,7 @@
 FinalBossAttack::FinalBossAttack() :
 	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
 	attackStarted_(false), hitTime_(0), beforeHitCD_(1000), afterHitCD_(4250), stunStarted_(false), eAttribs_(nullptr),
-	state_(nullptr), attackFinished_(false), attackCount_(0), maxSlaps_(0) {}
+	state_(nullptr), attackFinished_(false), attackCount_(0), maxSlaps_(0), collides_(nullptr), collideStartCD_(1250) {}
 
 void FinalBossAttack::init() {
 	tr_ = entity_->getComponent<Transform>();
@@ -75,15 +75,24 @@ void FinalBossAttack::slam() {
 		time_ = sdlutils().currRealTime();
 
 		stunStarted_ = true;
+
 	}
-	else if (eAttribs_->checkInvulnerability() && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
+	else if (stunStarted_ && eAttribs_->checkInvulnerability() && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
 		eAttribs_->setInvincibility(false);
+	}
+	else if (stunStarted_ && !collides_ && sdlutils().currRealTime() > hitTime_ + collideStartCD_ && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
+		// Activar colisiones
+		collides_ = true;
 	}
 	else if (stunStarted_ && sdlutils().currRealTime() > hitTime_ + afterHitCD_) {
 		eAttribs_->setInvincibility(true);
 		attackStarted_ = false;
 		stunStarted_ = false;
 		attackFinished_ = true;
+
+		// Desactivar colisiones
+		collides_ = false;
+
 		attackCount_++;
 	}
 }
@@ -150,13 +159,14 @@ bool FinalBossAttack::CheckCollisions(const SDL_Rect& enemyRect, bool swipe) {
 		//Si la entidad es un aliado...
 			//Cogemos el transform del aliado
 		auto eTR = ents[i]->getComponent<Transform>();
+		auto eRectCollide = eTR->getRectCollide();
 
 		//Creamos su Rect
 		SDL_Rect allyRect;
-		allyRect.h = eTR->getH();
-		allyRect.w = eTR->getW();
-		allyRect.x = eTR->getPos().getX() - cam.x;
-		allyRect.y = eTR->getPos().getY() - cam.y;
+		allyRect.h = eRectCollide.h;
+		allyRect.w = eRectCollide.w;
+		allyRect.x = eRectCollide.x - cam.x;
+		allyRect.y = eRectCollide.y - cam.y;
 
 		EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
 		bool jumping = swipe ? ents[i]->getComponent<Combos>()->isJumping() : false;
@@ -171,11 +181,12 @@ bool FinalBossAttack::CheckCollisions(const SDL_Rect& enemyRect, bool swipe) {
 			canHit = true;
 			//Le restamos la vida al aliado
 			eAttribs->recieveDmg(dmg);
-			ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
+			//ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
 
 			auto& hamStateM = ents[i]->getComponent<HamsterStateMachine>()->getState();
 
 			if (hamStateM != HamStates::DEAD && hamStateM != HamStates::INFARCTED) {
+				ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
 				//Si tiene stun, se aplica
 				Stun* stun = ents[i]->getComponent<Stun>();
 				if (stun != nullptr && stun->isActive()) {
@@ -216,13 +227,20 @@ bool FinalBossAttack::CheckCollisions(const SDL_Rect& enemyRect, bool swipe) {
 					hamFlip = !hamFlip;
 
 				if (swipe && !hamFlip)
-					hamKnockback->knockback(-30);
+					hamKnockback->knockback(-75);
 				else
-					hamKnockback->knockback(30);
+					hamKnockback->knockback(75);
+
+				//TO DO: AAAAAAAAAAAAAAAAAAAAAAAAAAAAADFÑUIOGHFPIUEGHFPIUEAFGPIAUEF COJONES LAS COLISIONES DE MIERDA QUE LO JODEN TODO
 
 				SDL_Rect rectPlayer = tr_->getRectCollide();
 				rectPlayer.x += hamKnockback->getKnockback();
+
+				SDL_Rect rectFoot = tr_->getRectCollide();
+				rectFoot.x += hamKnockback->getKnockback();
+
 				ents[i]->getComponent<CollisionDetec>()->tryToMove(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0), rectPlayer, false);
+				ents[i]->getComponent<CollisionDetec>()->tryToMoveObs(Vector2D(0, 0), Vector2D(hamKnockback->getKnockback(), 0), rectFoot, false);
 			}
 		}
 	}

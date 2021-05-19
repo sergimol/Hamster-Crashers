@@ -57,8 +57,14 @@ void Roll::action()
 
 		SDL_Rect rectPlayer = tr_->getRectCollide();
 		rectPlayer.x += tr_->getVel().getX();
-		rectPlayer.y += tr_->getVel().getY();
+		rectPlayer.y += tr_->getVel().getY() + tr_->getFloor();
+
+		SDL_Rect rectFoot = tr_->getRectCollide();
+		rectFoot.x += goalVel_.getX();
+		rectFoot.y += goalVel_.getY() + tr_->getFloor();
+
 		col_->tryToMove(dir_, goalVel_, rectPlayer, false);
+		col_->tryToMoveObs(dir_, goalVel_, rectFoot, false);
 
 		//Mete invulnerabilidad durante la habilidad
 		entity_->getComponent<EntityAttribs>()->setInvincibility(true);
@@ -108,9 +114,15 @@ void Roll::update() {
 			}
 
 			SDL_Rect rectPlayer = tr_->getRectCollide();
-			rectPlayer.x += vel.getX();
-			rectPlayer.y += vel.getY();
+			rectPlayer.x += goalVel_.getX();
+			rectPlayer.y += goalVel_.getY() + tr_->getFloor();
+
+			SDL_Rect rectFoot = tr_->getRectCollide();
+			rectFoot.x += goalVel_.getX();
+			rectFoot.y += goalVel_.getY() + tr_->getFloor();
+
 			col_->tryToMove(dir_, goalVel_, rectPlayer, false);
+			col_->tryToMoveObs(dir_, goalVel_, rectFoot, false);
 
 			if (grav_->isActive())
 				grav_->checkHeight(rectPlayer);

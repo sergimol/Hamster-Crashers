@@ -158,12 +158,18 @@ bool EnemyAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 
 				hamKnockback->knockback();
 
-				SDL_Rect rectPlayer = tr_->getRectCollide();
-				rectPlayer.x += tr_->getVel().getX();
+				SDL_Rect rectPlayer = hamsTR->getRectCollide();
+				rectPlayer.x += hamsTR->getVel().getX();
+				rectPlayer.y += hamsTR->getFloor();
+				
+				SDL_Rect rectFoot = hamsTR->getRectCollideFeet();
+				rectFoot.x += hamsTR->getVel().getX();
+				rectFoot.y += hamsTR->getFloor();
 				int dir = -1;
 				if (tr_->getVel().getX() > 0) dir = 1;
 				
 				ents[i]->getComponent<CollisionDetec>()->tryToMove(Vector2D(dir, 0), Vector2D(hamKnockback->getKnockback(), 0), rectPlayer, false);
+				ents[i]->getComponent<CollisionDetec>()->tryToMoveObs(Vector2D(dir, 0), Vector2D(hamKnockback->getKnockback(), 0), rectFoot, false);
 				//ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STUNNED, true);
 				//ESTA LINEA DEBERIA IR EN FUNCION DEL ENEMIGO QUE ATACA SI ES EL FUERTE O NO
 			}

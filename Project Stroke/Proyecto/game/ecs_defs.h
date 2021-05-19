@@ -82,7 +82,7 @@ class TimeTrap;
 class MicroOndasManager;
 class MenuIndicator;
 class dialogos;
-class subtitulos;
+class Subtitulos;
 class MenuAnim;
 class ObstacleMoveable;
 class LifeTime;
@@ -170,7 +170,7 @@ class LifeTime;
 	MicroOndasManager, \
 	MenuIndicator,\
 	dialogos,\
-	subtitulos,\
+	Subtitulos,\
 	MenuAnim,\
 	ObstacleMoveable, \
 	LifeTime
@@ -200,6 +200,8 @@ struct Mother;
 struct PauseMenu;
 struct SoundManager;
 struct MainMenu;
+struct Boss;
+struct FinalBoss;
 struct Cat_;
 struct PlayerQuantityMenu;
 struct HamsterSelectionMenu;
@@ -218,6 +220,8 @@ struct dialogosMngr;
 					PlayerQuantityMenu, \
 					HamsterSelectionMenu, \
 					SoundManager, \
+					Boss, \
+					FinalBoss, \
 					Cat_, \
 					MainMenu, \
 					OptionsMenu, \

@@ -135,33 +135,18 @@ void MovementSimple::update() {
 			//Cojo el rect del player y le sumo la supuesta siguiente posicion
 			SDL_Rect rectEnemy = tr_->getRectCollide();
 			rectEnemy.x += vel.getX();
-			rectEnemy.y += vel.getY();
+			rectEnemy.y += vel.getY() + tr_->getFloor();
 
+			SDL_Rect rectFoot = tr_->getRectCollide();
+			rectFoot.x += goalVel_.getX();
+			rectFoot.y += goalVel_.getY() + tr_->getFloor();
+			
 			colDetec_->tryToMove(dir, goalVel_, rectEnemy, true);
+			colDetec_->tryToMoveObs(dir, goalVel_, rectFoot, true);
 
 			if (grav_ != nullptr && grav_->isActive())
 				grav_->checkHeight(rectEnemy);					//Comprobamos que no tenga que subir un escalon
 		}
-
-
-		//if (keymapSimple_.at(SPACE)) {		//Inicio del salto
-		//	velZ = jump_;
-		//	//state = EnemyStates::JUMPING;
-		//	timer = sdlutils().currRealTime();
-		//}
-
-		//if (z > 0 && sdlutils().currRealTime() > timer + jumpTimer_) {			//Aceleracion del salto afectado por gravedad
-		//	velZ -= gravity_;
-		//	timer = sdlutils().currRealTime();
-		//}
-
-		//else if (z < 0) {			//Final del salto	!!!!!!!!!(0 SE SUSTITUIRA POR LA Z DEL MAPA)!!!!!!!!
-		//	keymapSimple_.at(SPACE) = false;
-		//	velZ = 0;
-		//	z = 0;
-		//	//state = EnemyStates::ENM_IDLE;
-		//	timer = sdlutils().currRealTime();
-		//}
 	}
 }
 

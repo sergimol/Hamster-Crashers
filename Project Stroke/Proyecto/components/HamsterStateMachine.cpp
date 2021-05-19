@@ -1,5 +1,6 @@
 #include "HamsterStateMachine.h"
 #include "AnimHamsterStateMachine.h"
+#include "../ecs/Manager.h"
 
 void HamsterStateMachine::init() {
 	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();

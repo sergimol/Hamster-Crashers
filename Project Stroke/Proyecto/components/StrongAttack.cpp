@@ -194,7 +194,7 @@ void StrongAttack::attack() {
 
 
 			attRect_.w = pos.w + pos.w * range;
-			attRect_.h = pos.h + pos.h * range;
+			attRect_.h = pos.h + pos.h * range / 2;
 
 			auto flip = tr_->getFlip();
 

@@ -28,6 +28,9 @@ public:
 	void init() override;
 	void update() override;
 
+	void setMousePos(const Vector2D& mousePos) { lastMouseX_ = mousePos.getX(); lastMouseY_ = mousePos.getY(); };
+	Vector2D getMousePos() { return Vector2D(lastMouseX_, lastMouseY_); };
+
 private:
 	//const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
 	//const enum KEYS2 { UP, DOWN, LEFT, RIGHT, SPACE };
@@ -43,6 +46,7 @@ private:
 	bool handleMouse();
 
 	bool mouseInButton(float x, float y, SDL_Rect const& button);
+
 
 	int stateNumber_, lastMouseX_ = 0, lastMouseY_ = 0;
 	//char lastHandled_ = ' ';
