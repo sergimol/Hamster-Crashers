@@ -52,7 +52,7 @@ void SoundManager::init() {
 	canelonSpecial0 = &sdlutils().soundEffects().at("canelonSpecialGod");
 	canelonSpecial1 = &sdlutils().soundEffects().at("canelonSpecialDevil");
 
-	button0 = &sdlutils().soundEffects().at("button0");
+	button0 = &sdlutils().soundEffects().at("button0");	//No lo uso
 	button1 = &sdlutils().soundEffects().at("button1");
 
 	car0 = &sdlutils().soundEffects().at("car0");
@@ -62,22 +62,22 @@ void SoundManager::init() {
 	mainTheme = &sdlutils().soundEffects().at("mainTheme");
 	birds = &sdlutils().soundEffects().at("birds");
 
-	eat0 = &sdlutils().soundEffects().at("birds");
-	eat1 = &sdlutils().soundEffects().at("birds");
+	eat0 = &sdlutils().soundEffects().at("eat0");
+	eat1 = &sdlutils().soundEffects().at("eat1");
 
-	soldierDep0 = &sdlutils().soundEffects().at("birds");
-	soldierDep1 = &sdlutils().soundEffects().at("birds");
-	soldierDep2 = &sdlutils().soundEffects().at("birds");
-	soldierDep3 = &sdlutils().soundEffects().at("birds");
+	soldierDep0 = &sdlutils().soundEffects().at("soldierDep0");
+	soldierDep1 = &sdlutils().soundEffects().at("soldierDep1");
+	soldierDep2 = &sdlutils().soundEffects().at("soldierDep2");
+	soldierDep3 = &sdlutils().soundEffects().at("soldierDep3");
 
-	trainBackground = &sdlutils().soundEffects().at("heartattack2");;
-	trainPipi = &sdlutils().soundEffects().at("heartattack2");
-	trainAlto = &sdlutils().soundEffects().at("heartattack2");
+	trainBackground = &sdlutils().soundEffects().at("trainBackground");;
+	trainPipi = &sdlutils().soundEffects().at("trainPipi");
+	trainAlto = &sdlutils().soundEffects().at("trainAlto");
 
-	transition0 = &sdlutils().soundEffects().at("heartattack2");
-	transition1 = &sdlutils().soundEffects().at("heartattack2");
+	transition0 = &sdlutils().soundEffects().at("transition0");
+	transition1 = &sdlutils().soundEffects().at("transition1");
 
-	trapKitchen = &sdlutils().soundEffects().at("heartattack2");
+	trapKitchen = &sdlutils().soundEffects().at("trapKitchen");
 
 	dialogue0 = &sdlutils().soundEffects().at("heartattack2");
 	dialogue1 = &sdlutils().soundEffects().at("heartattack2");
@@ -113,6 +113,7 @@ void SoundManager::init() {
 
 	setVolumeChannels();
 	//mainTheme->play(200, musics);
+	Mix_AllocateChannels(6);
 }
 
 void SoundManager::setVolumeChannels() {
@@ -237,6 +238,10 @@ void SoundManager::play(std::string soundName) {
 		catMeowWalking->play(0, catChannel);
 	}
 
+	else if (soundName == "button") {
+		button1->play(0, buttonChannel);
+	}
+
 	else if (soundName == "subtitle") {
 		playSubtitle();
 	}
@@ -249,6 +254,8 @@ void SoundManager::play(std::string soundName) {
 	}
 
 	else if (soundName == "soldierDep") {
+		//playHeartattack();
+		trainPipi->play(0, trainBackgroundChannel);
 		playsoldierDep();
 	}
 
@@ -546,23 +553,6 @@ void SoundManager::playCar() {
 	}
 }
 
-void SoundManager::playButton() {
-
-	switch (buttonState)
-	{
-	case 0:
-		button0->play(0, canelonSpecialChannel);
-		break;
-	case 1:
-		button0->play(0, canelonSpecialChannel);
-		break;
-	default:
-		break;
-	}
-	buttonState++;
-	if (buttonState > 1)
-		buttonState = 0;
-}
 
 void SoundManager::playEat() {
 

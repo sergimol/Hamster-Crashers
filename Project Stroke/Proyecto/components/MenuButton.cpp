@@ -74,6 +74,9 @@ void MenuButton::exited() {
 }
 
 void MenuButton::pressed() {
+	//Sonido
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("button");
+
 	// Botones con la misma funcionalidad est�n separados porque en el futuro funcionar�n diferente
 	if (buttonName_ == "local") {
 		sdlutils().setHamstersToChoose(1);

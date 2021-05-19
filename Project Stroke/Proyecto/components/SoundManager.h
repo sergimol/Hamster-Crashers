@@ -24,24 +24,35 @@ public:
 	//void fadeIn(int time);
 	//channels
 	int lighthitsChannel = 0;
-	int stronghitsChannel = 1;
-	int attacksChannel = 2;
-	int depsChannel = 3;
-	int heartattacksChannel = 4;
-	int musicsChannel = 5;
-	int subtitlesChannel = 6;
-	int catChannel = 7;
-	int ketaSpecialChannel = 8;
-	int monchiSpecialChannel = 9;
-	int canelonSpecialChannel = 10;
-	int carChannel = 11;
-	int buttonChannel = 12;
-	int birdsChannel = 13;
-	int EatChannel = 14;
-	int soldierDepChannel = 15;
-	int trainBackgroundChannel = 16;
-	int transitionChannel = 17;
-	int trapKitchenChannel = 18;
+	int stronghitsChannel = 0;
+	int attacksChannel = 0;
+
+	int depsChannel = 1;
+	int heartattacksChannel = 1;
+
+	int soldierDepChannel = 7;
+
+	int musicsChannel = 2;
+	int subtitlesChannel = 2;
+	int birdsChannel = 2;
+
+	int catChannel = 3;
+	int carChannel = 3;
+
+	int ketaSpecialChannel = 4;
+	int monchiSpecialChannel = 4;
+	int canelonSpecialChannel = 4;
+
+	int buttonChannel = 5;
+	int EatChannel = 5;
+
+	int trainBackgroundChannel = 6;
+	int transitionChannel = 6;
+	int trapKitchenChannel = 6;
+
+
+
+
 	//volumes
 	//general
 	float fxVol_ = 1;
@@ -96,8 +107,6 @@ private:
 	void playCanelonSpecial();
 
 	void playCar();
-
-	void playButton();
 
 	void  playEat();
 
