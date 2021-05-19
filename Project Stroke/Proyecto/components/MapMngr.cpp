@@ -577,14 +577,14 @@ void MapMngr::loadEnemyRoom() {
 			//numberEnemyRoom++;
 		}
 		else if (name == "escalectris" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-			auto* escalectris = mngr_->addWaveObject();
+			//auto* escalectris = mngr_->addWaveObject();
 
-			escalectris->addComponent<Transform>(
-				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
+			//escalectris->addComponent<Transform>(
+			//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+			//	Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
 
-			escalectris->addComponent<ObstacleMoveable>(&sdlutils().images().at("warningSign"),
-				object.getPosition().x * scale, object.getPosition().y * scale, 0, 0, scale);
+			//escalectris->addComponent<ObstacleMoveable>(&sdlutils().images().at("catSmoking"),
+			//	object.getPosition().x * scale, object.getPosition().y * scale, 0, 0);
 		}
 	}
 }
@@ -618,7 +618,7 @@ void MapMngr::addHamster(string name, int i) {
 		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.25);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 0, 20);
 	}
 	else if (name == "monchi") {
 		tam = 86;
@@ -669,7 +669,7 @@ void MapMngr::addHamster(string name, int i) {
 	//Habilidad
 	if (name == "sardinilla") hamster1->addComponent<Roll>();
 	else if (name == "canelon") hamster1->addComponent<Pray>(100, 100);
-	else if (name == "keta") hamster1->addComponent<Poison>(10000);
+	else if (name == "keta") hamster1->addComponent<Poison>(2);
 	else if (name == "monchi") {
 		hamster1->addComponent<Turret>();
 		hamster1->addComponent<Swallow>(5);
