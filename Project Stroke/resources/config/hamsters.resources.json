@@ -905,8 +905,16 @@
       "file": "resources/sound/heartattack/heartattack2.wav"
     },
     {
-      "id": "mainTheme",
-      "file": "resources/sound/music/mainTheme.mp3"
+      "id": "heartattack3",
+      "file": "resources/sound/heartattack/heartattack3.wav"
+    },
+    {
+      "id": "heartattack4",
+      "file": "resources/sound/heartattack/heartattack4.wav"
+    },
+    {
+      "id": "heartattack5",
+      "file": "resources/sound/heartattack/heartattack5.wav"
     },
     {
       "id": "catMeowInit",
@@ -923,6 +931,130 @@
     {
       "id": "catWalking",
       "file": "resources/sound/cat/catMeowWalking.wav"
+    },
+    {
+      "id": "canelonSpecialGod",
+      "file": "resources/sound/specialAttack/canelon/canelonSpecialGod.wav"
+    },
+    {
+      "id": "canelonSpecialDevil",
+      "file": "resources/sound/specialAttack/canelon/canelonSpecialDevil.wav"
+    },
+    {
+      "id": "ketaSpecial0",
+      "file": "resources/sound/specialAttack/keta/ketaSpecialShoot0.wav"
+    },
+    {
+      "id": "ketaSpecial1",
+      "file": "resources/sound/specialAttack/keta/ketaSpecialShoot1.wav"
+    },
+    {
+      "id": "ketaSpecial2",
+      "file": "resources/sound/specialAttack/keta/ketaSpecialShoot2.wav"
+    },
+    {
+      "id": "ketaSpecial3",
+      "file": "resources/sound/specialAttack/keta/ketaSpecialShoot3.wav"
+    },
+    {
+      "id": "ketaSpecial4",
+      "file": "resources/sound/specialAttack/keta/ketaSpecialShoot4.wav"
+    },
+    {
+      "id": "monchiSpecial0",
+      "file": "resources/sound/specialAttack/monchi/monchiSpecialShoot0.wav"
+    },
+    {
+      "id": "monchiSpecial1",
+      "file": "resources/sound/specialAttack/monchi/monchiSpecialShoot1.wav"
+    },
+    {
+      "id": "monchiSpecial2",
+      "file": "resources/sound/specialAttack/monchi/monchiSpecialShoot2.wav"
+    },
+    {
+      "id": "monchiSpecial3",
+      "file": "resources/sound/specialAttack/monchi/monchiSpecialShoot3.wav"
+    },
+    {
+      "id": "monchiSpecial4",
+      "file": "resources/sound/specialAttack/monchi/monchiSpecialShoot4.wav"
+    },
+    {
+      "id": "button0",
+      "file": "resources/sound/buttons/button0.wav"
+    },
+    {
+      "id": "button1",
+      "file": "resources/sound/buttons/button1.wav"
+    },
+    {
+      "id": "car0",
+      "file": "resources/sound/car/car0.wav"
+    },
+    {
+      "id": "car1",
+      "file": "resources/sound/car/car1.wav"
+    },
+    {
+      "id": "car2",
+      "file": "resources/sound/car/car2.wav"
+    },
+    {
+      "id": "mainTheme",
+      "file": "resources/sound/music/mainTheme.mp3"
+    },
+    {
+      "id": "birds",
+      "file": "resources/sound/lvl2/birds.wav"
+    },
+    {
+      "id": "eat0",
+      "file": "resources/sound/pickItem/pick0.wav"
+    },
+    {
+      "id": "eat1",
+      "file": "resources/sound/pickItem/pick1.wav"
+    },
+    {
+      "id": "soldierDep0",
+      "file": "resources/sound/soldier/dep0.wav"
+    },
+    {
+      "id": "soldierDep1",
+      "file": "resources/sound/soldier/dep1.wav"
+    },
+    {
+      "id": "soldierDep2",
+      "file": "resources/sound/soldier/dep2.wav"
+    },
+    {
+      "id": "soldierDep3",
+      "file": "resources/sound/soldier/dep3.wav"
+    },
+    {
+      "id": "trainBackground",
+      "file": "resources/sound/train/background.wav"
+    },
+    {
+      "id": "trainPipi",
+      "file": "resources/sound/train/pipi.wav"
+    },
+    {
+      "id": "trainAlto",
+      "file": "resources/sound/train/pasoAlto.wav"
+    },
+    {
+      "id": "transition0",
+      "file": "resources/sound/transition/transition0.wav"
+    },
+    {
+      "id": "transition1",
+      "file": "resources/sound/transition/transition1.wav"
+    },
+    {
+      "id": "trapKitchen",
+      "file": "resources/sound/traps/traps0.wav"
     }
   ],
 
