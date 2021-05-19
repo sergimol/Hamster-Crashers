@@ -12,7 +12,7 @@ public:
 	ObstacleMoveable(Texture* wTx, float x, float y, float z, int floor, int scale) : lastTime_(0), spawnTime_(5000), lifeTime_(3000), time_(0),
 		warningTime_(2000), warningTimeFlickering_(100),
 		spawns_(1), warningTx(wTx),
-		obstacle(nullptr), vel(-20), x_(x), y_(y), z_(z), floor_(floor),
+		obstacle(nullptr), vel(-30), x_(x), y_(y), z_(z), floor_(floor),
 		gamestate(nullptr), scale_(scale)
 	{}
 	virtual ~ObstacleMoveable();

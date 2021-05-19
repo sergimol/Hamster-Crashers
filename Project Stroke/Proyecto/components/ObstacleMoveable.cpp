@@ -37,7 +37,7 @@ void ObstacleMoveable::update()
 			//el transform, aun no se que valores darle
 			coche->addComponent<Transform>(Vector2D(x_, y_), Vector2D(vel, 0),
 				115.0 * scale_, 46.0 * scale_,
-				0, 1, 1);
+				0, 0.5, 0.75);
 			/*coche->addComponent<Animator>(
 				&sdlutils().images().at("soldier1Sheet"),
 				86,
@@ -49,7 +49,7 @@ void ObstacleMoveable::update()
 				3
 				);*/
 
-			int aux = rand() % 1;
+			int aux = rand() % 2;
 			if (aux >0)
 				coche->addComponent<Image>(&sdlutils().images().at("coche1")); //por testing sin animacion
 			else
@@ -78,7 +78,7 @@ void ObstacleMoveable::render()
 	if (vel > 0) 
 		renderPos = Vector2D(10, y_ - cam.y);
 	else 
-		renderPos = Vector2D(cam.w - ((warningTx->width() * scale_) - 10), y_ - cam.y);
+		renderPos = Vector2D(cam.w - ((warningTx->width() * scale_) - 10), y_ - cam.y - (((warningTx->height() - 46)/2) * scale_));
 	SDL_Rect dest = build_sdlrect(renderPos, (warningTx->width() * scale_), (warningTx->height() * scale_));
 	
 	if (debug) {

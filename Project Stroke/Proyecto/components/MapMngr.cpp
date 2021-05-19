@@ -577,14 +577,14 @@ void MapMngr::loadEnemyRoom() {
 			//numberEnemyRoom++;
 		}
 		else if (name == "escalectris" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-			//auto* escalectris = mngr_->addWaveObject();
+			auto* escalectris = mngr_->addWaveObject();
 
-			//escalectris->addComponent<Transform>(
-			//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-			//	Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
+			escalectris->addComponent<Transform>(
+				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+				Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
 
-			//escalectris->addComponent<ObstacleMoveable>(&sdlutils().images().at("catSmoking"),
-			//	object.getPosition().x * scale, object.getPosition().y * scale, 0, 0);
+			escalectris->addComponent<ObstacleMoveable>(&sdlutils().images().at("warningSign"),
+				object.getPosition().x * scale, object.getPosition().y * scale, 0, 0, scale);
 		}
 	}
 }
