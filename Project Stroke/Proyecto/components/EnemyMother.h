@@ -89,13 +89,79 @@ public:
 	void cleanListHam(int hamId);
 	void cleanListHamAmbush(int hamId);
 	void cleanListHamAttacking(int hamId);
-	//getters es posible que algunos sean prescindibles// nada es una salvajada me arrepiento pero diego del futuro TODO
-	//----------------------------------------------------------
-	/*
-	std::vector<Entity*> getHamstervector() {
-		return hamsters_;
+
+
+	void refreshLists() {
+		for (int i = 0; i < numPlayers; i++) {
+
+			// remove dead entities from the list of entities
+			objetivesList.at(i)->ambushing.erase( //
+				std::remove_if( //
+					objetivesList.at(i)->ambushing.begin(), //
+					objetivesList.at(i)->ambushing.end(), //
+					[](const Entity* e) { //
+						if (e->isActive()) {
+							return false;
+						}
+						else {
+							delete e;
+							return true;
+						}
+					}), //
+				objetivesList.at(i)->ambushing.end());
+
+			// remove dead entities from the list of entities
+			objetivesList.at(i)->atacking.erase( //
+				std::remove_if( //
+					objetivesList.at(i)->atacking.begin(), //
+					objetivesList.at(i)->atacking.end(), //
+					[](const Entity* e) { //
+						if (e->isActive()) {
+							return false;
+						}
+						else {
+							delete e;
+							return true;
+						}
+					}), //
+				objetivesList.at(i)->atacking.end());
+
+			// remove dead entities from the list of entities
+			objetivesList.at(i)->strongAmbushing.erase( //
+				std::remove_if( //
+					objetivesList.at(i)->strongAmbushing.begin(), //
+					objetivesList.at(i)->strongAmbushing.end(), //
+					[](const Entity* e) { //
+						if (e->isActive()) {
+							return false;
+						}
+						else {
+							delete e;
+							return true;
+						}
+					}), //
+				objetivesList.at(i)->strongAmbushing.end());
+
+			// remove dead entities from the list of entities
+			objetivesList.at(i)->strongAtacking.erase( //
+				std::remove_if( //
+					objetivesList.at(i)->strongAtacking.begin(), //
+					objetivesList.at(i)->strongAtacking.end(), //
+					[](const Entity* e) { //
+						if (e->isActive()) {
+							return false;
+						}
+						else {
+							delete e;
+							return true;
+						}
+					}), //
+				objetivesList.at(i)->strongAtacking.end());
+
+			objetivesList.at(i)->strongAtacking.clear();
+		}
 	}
-	*/
+
 
 	//este me soluciona los problemas rapido y me ahorra usar lso demas xd pero se van a quedar igual porque ya los escribí
 	Entity* getEntity() {
