@@ -78,12 +78,6 @@ void MenuIndicator::reset()
 		indicatorIndex_ = 5;
 		indicator_ = possibleTextures_[indicatorIndex_];
 	}
-
-	// Resoluciones
-	else if (indicatorName_ == "resolutionIndicator") {
-		indicatorIndex_ = RESOLUTIONSCOUNT - 1;
-		indicator_ = possibleTextures_[indicatorIndex_];
-	}
 }
 
 void MenuIndicator::moveX(bool isRight) {
