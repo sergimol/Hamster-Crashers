@@ -29,9 +29,12 @@ void Poison::render() {
 void Poison::endAbility() {
 	entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::ABILITY, false);
 	entity_->getComponent<ControlHandler>()->setActive(true);
+	entity_->getComponent<EntityAttribs>()->setInvincibility(false);
 }
 
 void Poison::action() {
+
+	entity_->getComponent<EntityAttribs>()->setInvincibility(true);
 	//Realizamos las animaciones
 	entity_->getComponent<ControlHandler>()->setActive(false);
 
