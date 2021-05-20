@@ -23,11 +23,13 @@ void Pray::action() {
 	//Ahora empiezas la animacion
 	entity_->getComponent<ControlHandler>()->setActive(false);
 	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("canelonSpecial");
+	entity_->getComponent<EntityAttribs>()->setInvincibility(true);
 }
 
 void Pray::endAbility() {
 	prayAbility();
 	entity_->getComponent<ControlHandler>()->setActive(true);
+	entity_->getComponent<EntityAttribs>()->setInvincibility(false);
 }
 
 void Pray::prayAbility() {

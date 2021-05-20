@@ -53,6 +53,7 @@ void Turret::action() {
 
 	//Reduce vel a la mitad mientras dispara
 	attribs_->setVel(attribs_->getVel() / 2);
+	entity_->getComponent<EntityAttribs>()->setInvincibility(true);
 
 	//Realizo las animaciones
 }
@@ -61,4 +62,5 @@ void Turret::endAbility() {
 
 	//Vuelve a vel original
 	attribs_->resetVel();
+	entity_->getComponent<EntityAttribs>()->setInvincibility(false);
 }
