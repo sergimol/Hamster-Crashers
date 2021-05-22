@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="left-up" width="160" height="9" tilewidth="64" tileheight="64" infinite="0" nextlayerid="18" nextobjectid="209">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="left-up" width="160" height="9" tilewidth="64" tileheight="64" infinite="0" nextlayerid="18" nextobjectid="209">
  <properties>
   <property name="MaxH" type="int" value="9"/>
  </properties>
@@ -148,7 +148,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-145,0,0,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,0,0,
+145,0,0,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,0,0,0,0,0,0,0,0,0,0,0,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -157,7 +157,7 @@
  <objectgroup id="6" name="entities">
   <object id="71" name="enemigo" x="1119.05" y="505.667" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="1"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
@@ -181,19 +181,19 @@
   </object>
   <object id="77" name="enemigo" x="2441.2" y="392.197" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="1"/>
    </properties>
   </object>
   <object id="78" name="enemigo" x="1503.32" y="327.166" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="1"/>
    </properties>
   </object>
   <object id="79" name="enemigo" x="1426.9" y="325.166" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
@@ -205,19 +205,19 @@
   </object>
   <object id="81" name="enemigo" x="2389.14" y="376.561" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
   <object id="82" name="enemigo" x="1438.9" y="375.166" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
   <object id="83" name="enemigo" x="2368.17" y="341.772" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="1"/>
    </properties>
   </object>
@@ -348,73 +348,73 @@
   </object>
   <object id="142" name="enemigo" x="1072.36" y="479.545" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="1"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
   <object id="143" name="enemigo" x="1083.86" y="390.545" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="1"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
   <object id="144" name="enemigo" x="1132.36" y="432.545" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="1"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
   <object id="145" name="enemigo" x="1412.36" y="406.545" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
   <object id="146" name="enemigo" x="1424.36" y="456.545" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
   <object id="147" name="enemigo" x="2404.36" y="425.788" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
   <object id="148" name="enemigo" x="2454.36" y="339.303" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
   <object id="149" name="enemigo" x="1516.88" y="433.061" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="1"/>
    </properties>
   </object>
   <object id="150" name="enemigo" x="2365" y="408.03" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="1"/>
    </properties>
   </object>
   <object id="151" name="enemigo" x="2391.85" y="462.636" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="1"/>
    </properties>
   </object>
   <object id="152" name="enemigo" x="1560.88" y="448.758" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="1"/>
    </properties>
   </object>
   <object id="153" name="enemigo" x="1557.85" y="368.333" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="1"/>
    </properties>
   </object>

@@ -71,9 +71,9 @@ void Cloud::update() {
 				//Le restamos la vida al enemigo
 				eAttribs->recieveDmg(dmg_);
 
-				entity_->getMngr()->refreshEnemies();
-				refreshAffectedEnemies();
 			}
+			entity_->getMngr()->refreshEnemies();
+			refreshAffectedEnemies();
 		}
 	}
 }

@@ -75,7 +75,7 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 			mv_->setSpeed(speed_ * 4);
 		else
 			mv_->setSpeed(speed_);
-		if (rectPlayer.y < cam.y || rectPlayer.y + tr_->getFloor() + rectPlayer.h + 120 > pCam.getY() + cam.h / 2)
+		if (rectPlayer.y < cam.y || rectPlayer.y + rectPlayer.h - tr_->getFloor() + (tr_->getFloor() - cam_->getHeightMap()) + 60 > pCam.getY() + cam.h / 2)
 			vel.setY(-speed_.getY());
 	}
 	else {

@@ -446,6 +446,8 @@ void MapMngr::loadEnemyRoom() {
 			auto* enTr = enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 				Vector2D(), 86 * scale, 86 * scale, 0.0f, 0.4, 0.5);
+			enTr->setFloor(1 * TAM_CELDA * scale);
+			enTr->setZ(1 * TAM_CELDA * scale);
 			enTr->getFlip() = true;
 			enemy->addComponent<EnemyStateMachine>();
 			//1º: False porque no es un hamster //2º: True porque usa de referencia el rect de colision

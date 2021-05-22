@@ -61,7 +61,7 @@ public:
 	bool intersectBoss(const SDL_Rect& hamster);
 	bool intersectFinalBoss(const SDL_Rect& hamster);
 
-	inline int getScale() const { return scale; };
+	inline float getScale() const { return scale; };
 	inline int getCellSize() const { return TAM_CELDA; };
 	inline float getMaxH() const { return mapHeight_; };
 	inline int getMaxW() const { return mapDimensions_.x * TAM_CELDA * scale; };
