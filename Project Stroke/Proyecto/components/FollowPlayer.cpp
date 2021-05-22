@@ -4,7 +4,7 @@
 #include "IddleEnemy.h"
 
 FollowPlayer::FollowPlayer() :
-	 rangeOffsetX_(250), rangeOffsetY_(50) {
+	rangeOffsetX_(250), rangeOffsetY_(50) {
 }
 
 void FollowPlayer::init() {
@@ -45,7 +45,7 @@ bool FollowPlayer::isWithinAttackRange() {
 		x = pos.x,
 		y = pos.y + pos.h;
 
-	return((hamX <= x + width + width/2 && hamX + hamWidth >= x - width /2) &&
+	return((hamX <= x + width + width / 2 && hamX + hamWidth >= x - width / 2) &&
 		(hamY + rangeOffsetY_ >= y && hamY - rangeOffsetY_ / 10 <= y));
 }
 
@@ -66,8 +66,8 @@ bool FollowPlayer::isWithinAttackRange() {
 //}
 
 void FollowPlayer::behave() {
-
-	 if (lockedHamster_ != nullptr) {
+	cout << tr_->getVel() << endl;
+	if (lockedHamster_ != nullptr) {
 
 		// Cambia el foco si el actual muere o le da un infarto
 		auto& state = lockedHamState_->getState();
@@ -78,7 +78,7 @@ void FollowPlayer::behave() {
 			//al entrar en al lista por defecto deberia de estar en iddle)
 			owner_->SetBehavior(new IddleEnemy); //y chinpong
 		}
-		else if (enmState_->getState() != EnemyStates::ENM_STUNNED){ // si no cambia de hamster marcado y no está aturdido
+		else if (enmState_->getState() != EnemyStates::ENM_STUNNED) { // si no cambia de hamster marcado y no está aturdido
 			auto hamPos = hamsterTr_->getRectCollide();
 			auto pos = tr_->getRectCollide();
 

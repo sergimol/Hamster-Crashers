@@ -441,13 +441,13 @@ void MapMngr::loadEnemyRoom() {
 		auto mngr_ = entity_->getMngr();
 		auto& prop = object.getProperties();
 
-		if (name == "enemigo" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
+		if (name == "enemigo" && prop[1].getIntValue() == Room && prop[2].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* enemy = mngr_->addEntity();
 			auto* enTr = enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 				Vector2D(), 86 * scale, 86 * scale, 0.0f, 0.4, 0.5);
-			enTr->setFloor(1 * TAM_CELDA * scale);
-			enTr->setZ(1 * TAM_CELDA * scale);
+			enTr->setFloor(prop[0].getIntValue() * TAM_CELDA * scale);
+			enTr->setZ(prop[0].getIntValue() * TAM_CELDA * scale);
 			enTr->getFlip() = true;
 			enemy->addComponent<EnemyStateMachine>();
 			//1º: False porque no es un hamster //2º: True porque usa de referencia el rect de colision
