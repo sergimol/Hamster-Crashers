@@ -232,13 +232,13 @@ void EntityAttribs::die() {
 
 	int tam = 0;
 
-	if (id_ == "sardinilla" || id_ == "monchi") {
+	if (id_ == "sardinilla" || id_ == "monchi" || id_ == "soldier1" || id_ == "soldier2") {
 		tam = 86;
 	}
 	else if (id_ == "canelon" || id_ == "canelonDemon") {
 		tam = 128;
 	}
-	else {
+	else if (id_ == "keta"){
 		tam = 100;
 	}
 	//Y reproducimos la animacion de muerto
