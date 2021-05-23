@@ -30,6 +30,8 @@ private:
 	Texture* txUp_, * txDown_;
 	InfarctedBody* infarct_ = nullptr;
 
+	Transform* revTrans_ = nullptr;
+
 	bool down = false;
 	// Referencia al numero del jugador que le está reviviendo
 	int revPlNumber_;
@@ -41,7 +43,7 @@ private:
 			  DROP = 2,
 			  TIME_BETWEEN_DROPS = 30; //ms
 	//Visuales del botón
-	const int OFFSET_Y = -50,
+	const int OFFSET_Y = 50,
 			  OFFSET_X = 0,
 			  WIDTH = 100,
 			  HEIGHT = 100;

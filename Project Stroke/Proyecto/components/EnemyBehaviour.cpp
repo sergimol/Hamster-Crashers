@@ -36,7 +36,7 @@ void EnemyBehaviour::init() {
 }
 
 void EnemyBehaviour::SetBehavior(Behavior* bs) {
-	
+
 	if (bh_ != nullptr)
 		delete bh_;
 	bh_ = bs;
@@ -69,7 +69,7 @@ bool EnemyBehaviour::isWithinAttackRange() {
 
 void EnemyBehaviour::update() {
 	//ejecuta el metodo de behavior que le dice como comportarse (atacar, como moverse, cuando, el hace las condiciones el resto nos olvidamos)
-	if(state_->getState() == GameStates::RUNNING)
+	if (state_->getState() == GameStates::RUNNING)
 		bh_->behave();
 	//tambien seria oportuno que esta misma clase hiciese los cambios de bh_, aunque suene y parezca raro que sea este objeto el que indique cual es
 	//el siguiente comportamiento/Behavior no es algo tan descabezado.. <3
@@ -98,16 +98,17 @@ void EnemyBehaviour::setHamId(int hId, std::list<Entity*>::iterator it, char l) 
 	list = l;
 }
 void EnemyBehaviour::die() {
-	if (list == 'a') {
-		bool aux = entity_->hasComponent<EnemyStrongAttack>();
-		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAttackList(hamId_, listIterator, aux);
-		list = '0';
-	}
-	else if (list == 'b') {
-		bool aux = entity_->hasComponent<EnemyStrongAttack>();
-		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAmbushList(hamId_, listIterator, aux);
-		list = '0';
-	}
+	entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->refreshLists();
+	//if (list == 'a') {
+	//	bool aux = entity_->hasComponent<EnemyStrongAttack>();
+	//	entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAttackList(hamId_, listIterator, aux);
+	//	list = '0';
+	//}
+	//else if (list == 'b') {
+	//	bool aux = entity_->hasComponent<EnemyStrongAttack>();
+	//	entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAmbushList(hamId_, listIterator, aux);
+	//	list = '0';
+	//}
 	//se pone list a 0 porque es posible que ocurra una doble comprobacion del ataque y se llame dos veces a este metodo, y no puede ni debe eliminar dos veces un mismo iterador (error de lista)
 
 	//tiene que distinguir que tipo de behavior tiene,
@@ -115,6 +116,6 @@ void EnemyBehaviour::die() {
 	//if (bh_ == )
 }
 void EnemyBehaviour::changeToAmbush() {
-	if (list == 'a')
-	entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->changeFromAttackToAmbush(hamId_, listIterator);
+	if (entity_->isActive() && list == 'a' && listIterator._Getcont() != NULL)
+		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->changeFromAttackToAmbush(hamId_, listIterator);
 }

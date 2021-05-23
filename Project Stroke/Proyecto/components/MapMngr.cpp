@@ -71,6 +71,7 @@ MapMngr::~MapMngr() {
 }
 
 void MapMngr::update() {
+	cout << numberEnemyRoom << " " << entity_->getMngr()->getEnemies().size() <<endl;
 	auto* camera = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
 	//	Comprobamos la colision con los triggers salas
 	tmx::Object trigger;
@@ -159,44 +160,7 @@ void MapMngr::loadNewMap(string map) {
 		}
 
 		//Fondos
-		auto* o = entity_->getMngr()->addBackGround();
-		auto upH = mapHeight_ - cam->getCam().h + cam->getUpOffset();
-		o->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
-		//Para meter un fondo meter esto									velocidad		tamaño			posicion
-		o->addComponent<Parallax>(&sdlutils().images().at("level1background1"), 30, Vector2D(1920, 1459), Vector2D(0, upH), false);
-
-		auto* p = entity_->getMngr()->addBackGround();
-		p->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
-		//Para meter un fondo meter esto									velocidad		tamaño			posicion
-		p->addComponent<Parallax>(&sdlutils().images().at("level1background2"), 20, Vector2D(1920, 1459), Vector2D(0, upH), false);
-
-		auto* q = entity_->getMngr()->addBackGround();
-		q->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
-		//Para meter un fondo meter esto									velocidad		tamaño			posicion
-		q->addComponent<Parallax>(&sdlutils().images().at("level1background3"), 10, Vector2D(1920, 1459), Vector2D(0, upH), false);
-
-		auto* r = entity_->getMngr()->addFrontGround();
-		r->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
-		//Para meter un fondo meter esto									velocidad		tamaño			posicion
-		r->addComponent<Parallax>(&sdlutils().images().at("level1background4"), 10, Vector2D(1920, 1459), Vector2D(0, upH - 100), true);
-
-		//Para meter un fondo meter esto									velocidad		tamaño			posicion
-		//o->addComponent<Parallax>(&sdlutils().images().at("level2background1"), 7, Vector2D(1920, 1459), Vector2D(0, upH), false);
-
-		//auto* p = entity_->getMngr()->addBackGround();
-		//p->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
-		////Para meter un fondo meter esto									velocidad		tamaño			posicion
-		//p->addComponent<Parallax>(&sdlutils().images().at("level2background2"), 10, Vector2D(1920, 1459), Vector2D(0, upH), false);
-
-		//auto* q = entity_->getMngr()->addBackGround();
-		//q->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
-		////Para meter un fondo meter esto									velocidad		tamaño			posicion
-		//q->addComponent<Parallax>(&sdlutils().images().at("level2background3"), 1, Vector2D(1920, 1459), Vector2D(0, upH), false);
-
-		//auto* r = entity_->getMngr()->addFrontGround();
-		//r->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
-		////Para meter un fondo meter esto									velocidad		tamaño			posicion
-		//r->addComponent<Parallax>(&sdlutils().images().at("level2background4"), 10, Vector2D(1920, 1459), Vector2D(0, upH - 150), true);
+		addParaxall(1);
 
 		for (const auto& layer : layers)
 		{
@@ -230,12 +194,13 @@ void MapMngr::loadNewMap(string map) {
 					entity_->getMngr()->setHandler<Boss>(nullptr);
 					entity_->getMngr()->setHandler<FinalBoss>(nullptr);
 
-					for (int i = 0; i < hamstersToLoad_.size(); ++i) {
-						addHamster(hamstersToLoad_[i], i);
-					}
-
 					for (const auto& object : objects) {
-						if (object.getName() == "sardinilla" || object.getName() == "canelon" || object.getName() == "keta" || object.getName() == "monchi")
+						if (object.getName() == "spawnZone") {
+							for (int i = 0; i < hamstersToLoad_.size(); ++i) {
+								addHamster(hamstersToLoad_[i], i, object);
+							}
+						}
+						else if (object.getName() == "sardinilla" || object.getName() == "canelon" || object.getName() == "keta" || object.getName() == "monchi")
 						{
 						}//addHamster(object);
 						else if (object.getName() == "newScene") {
@@ -257,7 +222,7 @@ void MapMngr::loadNewMap(string map) {
 
 							enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
 							enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
-							enemy->addComponent<ContactDamage>(20, 30, false, false);
+							enemy->addComponent<ContactDamage>(20, 30, false, false, false);
 							enemy->getMngr()->setHandler<Cat_>(enemy);
 						}
 						else if (object.getName() == "microondas") { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
@@ -352,6 +317,32 @@ void MapMngr::loadNewMap(string map) {
 		//LoadEnemyRoom();
 		Room = 1;
 	}
+}
+
+void MapMngr::addParaxall(int lvl) {
+	auto upH = mapHeight_ - cam->getCam().h + cam->getUpOffset();
+
+	string l = "level" + to_string(lvl);
+
+	auto* o = entity_->getMngr()->addBackGround();
+	o->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
+	//Para meter un fondo meter esto									velocidad		tamaño			posicion
+	o->addComponent<Parallax>(&sdlutils().images().at(l + "background1"), 30, Vector2D(1920, 1459), Vector2D(0, upH), false);
+
+	auto* p = entity_->getMngr()->addBackGround();
+	p->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
+	//Para meter un fondo meter esto									velocidad		tamaño			posicion
+	p->addComponent<Parallax>(&sdlutils().images().at(l + "background2"), 20, Vector2D(1920, 1459), Vector2D(0, upH), false);
+
+	auto* q = entity_->getMngr()->addBackGround();
+	q->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
+	//Para meter un fondo meter esto									velocidad		tamaño			posicion
+	q->addComponent<Parallax>(&sdlutils().images().at(l + "background3"), 10, Vector2D(1920, 1459), Vector2D(0, upH), false);
+
+	auto* r = entity_->getMngr()->addFrontGround();
+	r->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
+	//Para meter un fondo meter esto									velocidad		tamaño			posicion
+	r->addComponent<Parallax>(&sdlutils().images().at(l + "background4"), 10, Vector2D(1920, 1459), Vector2D(0, upH), true);
 }
 
 //Devuelve true si se está chocando con alguna colision
@@ -455,7 +446,7 @@ void MapMngr::loadEnemyRoom() {
 
 			enemy->setGroup<Enemy>(true);
 
-			enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, "soldier2", Vector2D(3.6, 2), 0, 0, 5);
+			enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, "soldier2", Vector2D(3.6, 2), 0, 0, 5, 70);
 
 			enemy->addComponent<Animator>(
 				&sdlutils().images().at("soldier2Sheet"),
@@ -498,7 +489,7 @@ void MapMngr::loadEnemyRoom() {
 
 			//enemy->setGroup<Enemy>(true);
 
-			//enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, "soldier1", Vector2D(3.6, 2), 0, 0, 5);
+			//enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, "soldier1", Vector2D(3.6, 2), 0, 0, 5, 70);
 
 			//enemy->addComponent<Animator>(
 			//	&sdlutils().images().at("soldier1Sheet"),
@@ -590,7 +581,7 @@ void MapMngr::loadEnemyRoom() {
 
 			//numberEnemyRoom++;
 		}
-		else if (name == "escalectris" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
+		else if (name == "escalectris" && prop[1].getIntValue() == Room && prop[3].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* escalectris = mngr_->addWaveObject();
 
 			escalectris->addComponent<Transform>(
@@ -598,12 +589,14 @@ void MapMngr::loadEnemyRoom() {
 				Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
 
 			escalectris->addComponent<ObstacleMoveable>(&sdlutils().images().at("warningSign"),
-				object.getPosition().x * scale, object.getPosition().y * scale, 0, 0, scale);
+				object.getPosition().x * scale, object.getPosition().y * scale, 0, 0, scale,
+				prop[2].getFloatValue(), prop[0].getFloatValue()
+				);
 		}
 	}
 }
 
-void MapMngr::addHamster(string name, int i) {
+void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 
 	//do stuff with object properties
 	//auto& name = obj.getName();
@@ -615,38 +608,38 @@ void MapMngr::addHamster(string name, int i) {
 	//Habilidad
 	if (name == "sardinilla") {
 		tam = 86;
-		hamster1->addComponent<Transform>(Vector2D((264.0) * scale, 161.167 * scale),
+		hamster1->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y  * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.5);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20);
-	}
-	else if (name == "canelon") {
-		tam = 128;
-		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
-			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.25, 0.3);
-		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 1.2, name, Vector2D(7, 3.5), i, 0, 20);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20, 70);
 	}
 	else if (name == "keta") {
 		tam = 100;
-		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
+		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + object.getAABB().width) * scale, object.getPosition().y * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.25);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 7, 20);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 100, 20, 70);
 	}
 	else if (name == "monchi") {
 		tam = 86;
-		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
+		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + object.getAABB().width/3) * scale, (object.getPosition().y + object.getAABB().height/2) * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 1, 1);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20, 70);
+	}
+	else if (name == "canelon") {
+		tam = 128;
+		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + (object.getAABB().width*1.3)) * scale, (object.getPosition().y + object.getAABB().height/2) * scale),
+			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.25, 0.3);
+		hamster1->addComponent<HamsterStateMachine>();
+		hamster1->addComponent<EntityAttribs>(100, 1.2, name, Vector2D(7, 3.5), i, 0, 20, 70);
 	}
 	else {
 		tam = 86;
-		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
+		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + object.getAABB().width/2)* scale, (object.getPosition().y + object.getAABB().height/2)* scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 1, 1);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20, 70);
 	}
 	//1º: True, porque es un hamster //2º: False, porque usa de referencia el rect del Animator
 	hamster1->addComponent<Shadow>(true, true);
@@ -682,8 +675,8 @@ void MapMngr::addHamster(string name, int i) {
 
 	//Habilidad
 	if (name == "sardinilla") hamster1->addComponent<Roll>();
-	else if (name == "canelon") hamster1->addComponent<Pray>(20000, 50);
-	else if (name == "keta") hamster1->addComponent<Poison>(1);
+	else if (name == "canelon") hamster1->addComponent<Pray>(20000, 10);
+	else if (name == "keta") hamster1->addComponent<Poison>(50);
 	else if (name == "monchi") {
 		hamster1->addComponent<Turret>();
 		hamster1->addComponent<Swallow>(5);
@@ -695,7 +688,7 @@ void MapMngr::addHamster(string name, int i) {
 	hamster1->addComponent<GhostCtrl>();
 	//ES NECESARIO PASAR LA ESTRATEGIA QUE DEBE USAR EL STROKE O SE VA A LA PUTA (RandomStrokeStrategy o FairStrokeStrategy)
 	if (hamstersToLoad_.size() > 1) {
-		RandomStrokeStrategy* rndStrat = new RandomStrokeStrategy();
+		FairStrokeStrategy* rndStrat = new FairStrokeStrategy();
 		hamster1->addComponent<Stroke>(rndStrat);
 	}
 	else {
@@ -812,7 +805,7 @@ void MapMngr::addTrap(const tmx::Object& object, int x, int y) {
 
 	trap->addComponent<Transform>(Vector2D(x * scale, y * scale),
 		Vector2D(), 50 * scale, 50 * scale, 0.0f, 0.75, 0.75);
-	trap->addComponent<ContactDamage>(10, 30, true, true);
+	trap->addComponent<ContactDamage>(10, 30, true, true, true);
 	trap->addComponent<TimeTrap>(&sdlutils().images().at("catSmoking"));
 
 	//int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty

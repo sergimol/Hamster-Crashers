@@ -10,8 +10,6 @@ public:
 
 	virtual void update();
 
-	virtual void render();
-
 	virtual void endAbility();
 
 	//Ejecuta la habilidad en funcion del hamster que sea

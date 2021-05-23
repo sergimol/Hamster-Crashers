@@ -21,10 +21,10 @@ void Parallax::init()
 {
 	//izquierda
 	Entity* backLeft = nullptr;
-	if(front_) backLeft = entity_->getMngr()->addFrontGround();
+	if (front_) backLeft = entity_->getMngr()->addFrontGround();
 	else backLeft = entity_->getMngr()->addBackGround();
-	backLeft->addComponent<Transform>(texPos_, Vector2D(0, 0), texSize_.getX(), texSize_.getY(), 
-											   0.0, 1, 1);
+	backLeft->addComponent<Transform>(texPos_, Vector2D(0, 0), texSize_.getX(), texSize_.getY(),
+		0.0, 1, 1);
 	backLeft->addComponent<BackGround>(tex_, pxVel_);
 	leftTr_ = backLeft->getComponent<Transform>();
 	assert(leftTr_ != nullptr);
@@ -34,7 +34,7 @@ void Parallax::init()
 	if (front_) backCenter = entity_->getMngr()->addFrontGround();
 	else backCenter = entity_->getMngr()->addBackGround();
 	backCenter->addComponent<Transform>(Vector2D(texPos_.getX() + texSize_.getX(), texPos_.getY()), Vector2D(0, 0), texSize_.getX(), texSize_.getY()
-												 , 0.0, 1, 1);
+		, 0.0, 1, 1);
 	backCenter->addComponent<BackGround>(tex_, pxVel_);
 	centerTr_ = backCenter->getComponent<Transform>();
 	assert(centerTr_ != nullptr);
@@ -43,8 +43,8 @@ void Parallax::init()
 	Entity* backRight = nullptr;
 	if (front_) backRight = entity_->getMngr()->addFrontGround();
 	else backRight = entity_->getMngr()->addBackGround();
-	backRight->addComponent<Transform>(Vector2D(texPos_.getX() + texSize_.getX()*2, texPos_.getY()), Vector2D(0, 0), texSize_.getX(), texSize_.getY(),
-												0.0, 1, 1);
+	backRight->addComponent<Transform>(Vector2D(texPos_.getX() + texSize_.getX() * 2, texPos_.getY()), Vector2D(0, 0), texSize_.getX(), texSize_.getY(),
+		0.0, 1, 1);
 	backRight->addComponent<BackGround>(tex_, pxVel_);
 	rightTr_ = backRight->getComponent<Transform>();
 	assert(rightTr_ != nullptr);
@@ -63,24 +63,26 @@ void Parallax::checkRelativePos()
 	camPos_ = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 
 	//Calcula la futura y
-	//float y = camOffset_;
+	float y = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->getMaxH() - camPos_.h + camOffset_;
 
 	//Si se llega al principio o al final se rotan llas tres imágenes
 	if (camPos_.x >= rightTr_->getPos().getX())
-	{		
+	{
 		leftTr_->getPos().setX(leftTr_->getPos().getX() + leftTr_->getW());
 		centerTr_->getPos().setX(centerTr_->getPos().getX() + centerTr_->getW());
 		rightTr_->getPos().setX(rightTr_->getPos().getX() + rightTr_->getW());
 	}
-	else if(camPos_.x <= centerTr_->getPos().getX())
+	else if (camPos_.x <= centerTr_->getPos().getX())
 	{
 		leftTr_->getPos().setX(leftTr_->getPos().getX() - leftTr_->getW());
 		centerTr_->getPos().setX(centerTr_->getPos().getX() - centerTr_->getW());
 		rightTr_->getPos().setX(rightTr_->getPos().getX() - rightTr_->getW());
-	}	
+	}
 
 	//Actualizamos la y
-	//leftTr_->getPos().setY(y/*sdlutils().lerp(y, leftTr_->getPos().getY(), 0.95)*/);
-	//centerTr_->getPos().setY(y/*sdlutils().lerp(y, leftTr_->getPos().getY(), 0.95)*/);
-	//rightTr_->getPos().setY(y/*sdlutils().lerp(y, leftTr_->getPos().getY(), 0.95)*/);
+	if (!front_) {
+		leftTr_->getPos().setY(sdlutils().lerp(y, leftTr_->getPos().getY(), 0.98));
+		centerTr_->getPos().setY(sdlutils().lerp(y, leftTr_->getPos().getY(), 0.98));
+		rightTr_->getPos().setY(sdlutils().lerp(y, leftTr_->getPos().getY(), 0.98));
+	}
 }

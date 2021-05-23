@@ -16,8 +16,7 @@ void Camera::update() {
 	else if (cameraState == BossCat)
 		followBossCat();
 
-	//if(minH_ == heightMap_)
-		checkBounds();
+	checkBounds();
 }
 
 void Camera::checkBounds() {
@@ -127,10 +126,10 @@ Vector2D Camera::newObjetivo() {
 		if (heightMap_ - minH_ < 0.1 && heightMap_ - minH_ > -0.1) {
 			heightMap_ = minH_;
 		}
-		else 
+		else
 			heightMap_ = sdlutils().lerp(minH_, heightMap_, 0.88f);
 	}
-	if(aux != heightMap_)
+	if (aux != heightMap_)
 		map_->setMaxH(map_->getMaxH() + (aux - heightMap_));
 	//else
 		//map_->setMaxH(camera_.h - heightMap_);
