@@ -19,6 +19,7 @@ EntityAttribs::EntityAttribs() :
 	cadence_(0.0),
 	damage_(20),
 	ignoreMargin_(false),
+	marginToAttack(70),
 
 	critProbability_(0.05),
 	maxCrit_(0.2),
@@ -44,7 +45,7 @@ EntityAttribs::EntityAttribs() :
 	state_(nullptr)
 {}
 
-EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg) :
+EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, int marg) :
 	playerNumber_(number),
 	id_(id),
 	health_(life),
@@ -56,6 +57,7 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	cadence_(0.0),
 	damage_(dmg),
 	ignoreMargin_(false),
+	marginToAttack(marg),
 
 	critProbability_(0.05),
 	maxCrit_(0.2),
@@ -93,6 +95,7 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	cadence_(0.0),
 	damage_(dmg),
 	ignoreMargin_(igMargin),
+	marginToAttack(70),
 
 	critProbability_(0.05),
 	maxCrit_(0.2),
@@ -141,16 +144,17 @@ void EntityAttribs::update() {
 			afterDamageInvul_ = false;
 		}
 		//Timer de envenenamiento
-		if (poisoned_) {
+		if (poisoned_ && health_ > poisonDamage_) {
 			//cada x segundos
 			if (sdlutils().currRealTime() >= timeLastUpdate_ + updateCD_) {
+				//Animacion de hit 
+				if (entity_->getComponent<AnimEnemyStateMachine>() != nullptr)
+					entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
+
 				//Daño por veneno
 				recieveDmg(poisonDamage_);
 				timeLastUpdate_ = sdlutils().currRealTime();
 
-				//Animacion de hit 
-				if (entity_->getComponent<AnimEnemyStateMachine>() != nullptr)
-					entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
 			}
 			if (sdlutils().currRealTime() >= poisonTime_ + poisonCD_) {
 				poisoned_ = false;
@@ -261,13 +265,13 @@ void EntityAttribs::die() {
 	}
 	else {
 		//solamente para los enemigos
-		entity_->setActive(false);
+		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala
 		e->addComponent<Dying>();
 		//e->getComponent<Transform>()->setGravity(e->addComponent<Gravity>());
 		enmState_->getState() = EnemyStates::ENM_DEAD;
-		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala
 		if (id_ == "soldier1" || id_ == "soldier2")
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("soldierDep");
+		entity_->setActive(false);
 	}
 
 

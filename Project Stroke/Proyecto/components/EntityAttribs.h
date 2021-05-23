@@ -9,12 +9,11 @@
 #include "EnemyStateMachine.h"
 
 const int INVINCIBLECD = 200;
-const int MARGINTOATTACK = 70;
 
 class EntityAttribs: public Component {
 public:
 	EntityAttribs();
-	EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg);
+	EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, int marg);
 	EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty);
 
 	virtual ~EntityAttribs() {
@@ -60,11 +59,9 @@ public:
 	inline std::string getId() const {
 		return id_;
 	}
-
-	inline void setId(std::string id) {
-		id_ = id;
+	inline int getMarginToAttack() const {
+		return marginToAttack;
 	}
-
 	inline bool getCanPoison() const {
 		return canPoison_;
 	}
@@ -89,6 +86,9 @@ public:
 
 
 	//Setters
+	inline void setId(std::string id) {
+		id_ = id;
+	}
 	inline void setPoisonProb(float prob) {
 		poisonProbability_ = prob;
 	}
@@ -126,6 +126,7 @@ private:
 	int maxHealth_;
 	int damage_;
 	int poisonDamage_;
+	int marginToAttack;
 	/*int lightAttCadence_;
 	int strongAttCadence_;*/
 

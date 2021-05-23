@@ -71,6 +71,7 @@ MapMngr::~MapMngr() {
 }
 
 void MapMngr::update() {
+	cout << numberEnemyRoom << " " << entity_->getMngr()->getEnemies().size() <<endl;
 	auto* camera = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
 	//	Comprobamos la colision con los triggers salas
 	tmx::Object trigger;
@@ -178,7 +179,7 @@ void MapMngr::loadNewMap(string map) {
 		auto* r = entity_->getMngr()->addFrontGround();
 		r->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 		//Para meter un fondo meter esto									velocidad		tamaño			posicion
-		r->addComponent<Parallax>(&sdlutils().images().at("level1background4"), 10, Vector2D(1920, 1459), Vector2D(0, upH - 100), true);
+		r->addComponent<Parallax>(&sdlutils().images().at("level1background4"), 10, Vector2D(1920, 1459), Vector2D(0, upH), true);
 
 		//Para meter un fondo meter esto									velocidad		tamaño			posicion
 		//o->addComponent<Parallax>(&sdlutils().images().at("level2background1"), 7, Vector2D(1920, 1459), Vector2D(0, upH), false);
@@ -455,7 +456,7 @@ void MapMngr::loadEnemyRoom() {
 
 			enemy->setGroup<Enemy>(true);
 
-			enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, "soldier2", Vector2D(3.6, 2), 0, 0, 5);
+			enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, "soldier2", Vector2D(3.6, 2), 0, 0, 5, 70);
 
 			enemy->addComponent<Animator>(
 				&sdlutils().images().at("soldier2Sheet"),
@@ -498,7 +499,7 @@ void MapMngr::loadEnemyRoom() {
 
 			//enemy->setGroup<Enemy>(true);
 
-			//enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, "soldier1", Vector2D(3.6, 2), 0, 0, 5);
+			//enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, "soldier1", Vector2D(3.6, 2), 0, 0, 5, 70);
 
 			//enemy->addComponent<Animator>(
 			//	&sdlutils().images().at("soldier1Sheet"),
@@ -608,35 +609,35 @@ void MapMngr::addHamster(string name, int i) {
 		hamster1->addComponent<Transform>(Vector2D((264.0) * scale, 161.167 * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.5);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20, 70);
 	}
 	else if (name == "canelon") {
 		tam = 128;
 		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.25, 0.3);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 1.2, name, Vector2D(7, 3.5), i, 0, 20);
+		hamster1->addComponent<EntityAttribs>(100, 1.2, name, Vector2D(7, 3.5), i, 0, 20, 70);
 	}
 	else if (name == "keta") {
 		tam = 100;
 		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.25);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 7, 20);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 100, 20, 70);
 	}
 	else if (name == "monchi") {
 		tam = 86;
 		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 1, 1);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20, 70);
 	}
 	else {
 		tam = 86;
 		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 1, 1);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20, 70);
 	}
 	//1º: True, porque es un hamster //2º: False, porque usa de referencia el rect del Animator
 	hamster1->addComponent<Shadow>(true, true);
@@ -672,7 +673,7 @@ void MapMngr::addHamster(string name, int i) {
 
 	//Habilidad
 	if (name == "sardinilla") hamster1->addComponent<Roll>();
-	else if (name == "canelon") hamster1->addComponent<Pray>(20000, 50);
+	else if (name == "canelon") hamster1->addComponent<Pray>(20000, 10);
 	else if (name == "keta") hamster1->addComponent<Poison>(50);
 	else if (name == "monchi") {
 		hamster1->addComponent<Turret>();

@@ -832,7 +832,7 @@
   </object>
  </objectgroup>
  <objectgroup id="7" name="Salas">
-  <object id="136" name="1" x="578.909" y="317.58" width="13" height="255.5">
+  <object id="136" name="1" x="644.909" y="313.58" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="650"/>
     <property name="Rounds" type="int" value="1"/>
