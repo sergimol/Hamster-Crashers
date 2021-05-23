@@ -12,7 +12,8 @@ float RandomFloat(float a, float b) {
 }
 
 AmbushPlayer::AmbushPlayer() :
-	 rangeX_(250 * 2 *RandomFloat(1, 2)), rangeY_(MARGINTOATTACK * 2 * RandomFloat(1, 2)), rangeOffsetX_(100), rangeOffsetY_(100) {
+
+	 rangeX_(250 * 2 *RandomFloat(1, 2)), rangeY_(140 * RandomFloat(1, 2)), rangeOffsetX_(100), rangeOffsetY_(100) {
 }
 
 void AmbushPlayer::init() {
