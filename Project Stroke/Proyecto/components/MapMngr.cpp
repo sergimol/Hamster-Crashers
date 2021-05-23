@@ -620,7 +620,7 @@ void MapMngr::addHamster(string name, int i) {
 		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.25);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 0, 20);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 7, 20);
 	}
 	else if (name == "monchi") {
 		tam = 86;
@@ -671,7 +671,7 @@ void MapMngr::addHamster(string name, int i) {
 	//Habilidad
 	if (name == "sardinilla") hamster1->addComponent<Roll>();
 	else if (name == "canelon") hamster1->addComponent<Pray>(20000, 50);
-	else if (name == "keta") hamster1->addComponent<Poison>(2);
+	else if (name == "keta") hamster1->addComponent<Poison>(1);
 	else if (name == "monchi") {
 		hamster1->addComponent<Turret>();
 		hamster1->addComponent<Swallow>(5);
