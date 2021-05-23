@@ -27,5 +27,5 @@ private:
 
 	//Con esto movemos la bala a la Cara de Monchi
 	const int OFFSETX = 20;
-	const int OFFSETY = 20;
+	const int OFFSETY = 30;
 };
