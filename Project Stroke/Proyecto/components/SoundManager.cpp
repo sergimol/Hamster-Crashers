@@ -32,10 +32,24 @@ void SoundManager::init() {
 	heartattack1 = &sdlutils().soundEffects().at("heartattack1");
 	heartattack2 = &sdlutils().soundEffects().at("heartattack2");
 
+	//Cat Boss
 	catMeowStatic = &sdlutils().soundEffects().at("catMeow");
 	catMeowAttack = &sdlutils().soundEffects().at("catMeowAttack");
 	catMeowInit = &sdlutils().soundEffects().at("catMeowInit");
 	catMeowWalking = &sdlutils().soundEffects().at("catWalking");
+
+	//HandBoss
+	heavyPunch0 = &sdlutils().soundEffects().at("heavyPunch0");
+	heavyPunch1 = &sdlutils().soundEffects().at("heavyPunch1");
+
+	//Mono andando adonde ira
+	platillos = &sdlutils().soundEffects().at("platillos");
+
+	//KeyGame
+	rightNote = &sdlutils().soundEffects().at("rightNote");
+	wrongNote = &sdlutils().soundEffects().at("wrongNote");
+
+	sardinillaSpecial0 = &sdlutils().soundEffects().at("sardinillaSpecial0");
 
 	ketaSpecial0 = &sdlutils().soundEffects().at("ketaSpecial0");
 	ketaSpecial1 = &sdlutils().soundEffects().at("ketaSpecial1");
@@ -64,6 +78,8 @@ void SoundManager::init() {
 
 	eat0 = &sdlutils().soundEffects().at("eat0");
 	eat1 = &sdlutils().soundEffects().at("eat1");
+	eat2 = &sdlutils().soundEffects().at("eat2");
+	eat3 = &sdlutils().soundEffects().at("eat3");
 
 	soldierDep0 = &sdlutils().soundEffects().at("soldierDep0");
 	soldierDep1 = &sdlutils().soundEffects().at("soldierDep1");
@@ -198,25 +214,33 @@ bool SoundManager::emptyChannel(int channel) {
 
 
 void SoundManager::play(std::string soundName) {
+	//Golpe
 	if (soundName == "lighthit") {
 		playLighthit();
 	}
+	//Golpe Fuerte
 	else if (soundName == "stronghit") {
 		playStronghit();
 	}
+	//Ataque (whoosh)
 	else if (soundName == "attack") {
 		playAttack();
 	}
+	//Muerte
 	else if (soundName == "dep") {
 		playDep();
 	}
-
+	//Ataque corazon
 	else if (soundName == "heartattack") {
 		playHeartattack();
 	}
+
+	//Especiales Hamsters
+	else if (soundName == "sardinillaSpecial") {
+		sardinillaSpecial0->play(0, attacksChannel);
+	}
 	else if (soundName == "ketaSpecial") {
 		playKetaSpecial();
-
 	}
 	else if (soundName == "monchiSpecial") {
 		playMonchiSpecial();
@@ -224,7 +248,7 @@ void SoundManager::play(std::string soundName) {
 	else if (soundName == "canelonSpecial") {
 		playCanelonSpecial();
 	}
-
+	//Boss Gato
 	else if (soundName == "catMeowInit") {
 		catMeowInit->play(0, catChannel);
 	}
@@ -238,25 +262,17 @@ void SoundManager::play(std::string soundName) {
 		catMeowWalking->play(0, catChannel);
 	}
 
-	else if (soundName == "button") {
-		button1->play(0, buttonChannel);
+	//Boss Mano
+	else if (soundName == "handPunch") {
+		playHandPunch();
 	}
 
-	else if (soundName == "subtitle") {
-		playSubtitle();
-	}
-	else if (soundName == "birds") {
-		birds->play(200, birdsChannel);
-	}
-	
-	else if (soundName == "eatItem") {
-		playEat();
+	//Boss Mono
+	else if (soundName == "platillos") {
+		platillos->play(0, lighthitsChannel);
 	}
 
-	else if (soundName == "soldierDep") {
-		playsoldierDep();
-	}
-
+	//Sonidos tren
 	else if (soundName == "trainBackground") {
 
 		trainBackground->play(200, trainBackgroundChannel);
@@ -270,12 +286,59 @@ void SoundManager::play(std::string soundName) {
 		trainAlto->play(0, trainBackgroundChannel);
 	}
 
+	//Enemigo coche
+	else if (soundName == "coche") {
+		playCar();
+	}
+
+	//Muerte soldados
+	else if (soundName == "soldierDep") {
+		playsoldierDep();
+	}
+
+	//Juego reanimar, tecla correcta o fallida
+	else if (soundName == "rightNote") {
+		rightNote->play(0, buttonChannel);
+	}
+	else if (soundName == "wrongNote") {
+		wrongNote->play(0, buttonChannel);
+	}
+	//Posesion hamster
+	else if (soundName == "possesion") {
+		possesion->play(0, lighthitsChannel);
+	}
+
+	//Botones UI
+	else if (soundName == "button") {
+		button1->play(0, buttonChannel);
+	}
+
+	else if (soundName == "subtitle") {
+		playSubtitle();
+	}
+	else if (soundName == "birds") {
+		birds->play(200, birdsChannel);
+	}
+
+	//Recoger items
+	else if (soundName == "eatItem") {
+		playEat();
+	}
+
+	//Transiciones
 	else if (soundName == "transition") {
 		playtransition();
 	}
+
+	//Trampa cocina
 	else if (soundName == "trapKitchen") {
 		trapKitchen->play(0, trapKitchenChannel);
 	}
+	
+	
+
+	
+
 	
 }
 
@@ -554,7 +617,7 @@ void SoundManager::playCar() {
 
 void SoundManager::playEat() {
 
-	randomNum = pickRandom(2);
+	randomNum = pickRandom(4);
 
 	switch (randomNum)
 	{
@@ -562,7 +625,13 @@ void SoundManager::playEat() {
 		eat0->play(0, EatChannel);
 		break;
 	case 1:
-		eat0->play(0, EatChannel);
+		eat1->play(0, EatChannel);
+		break;
+	case 2:
+		eat2->play(0, EatChannel);
+		break;
+	case 3:
+		eat3->play(0, EatChannel);
 		break;
 	default:
 		break;
@@ -603,6 +672,21 @@ void SoundManager::playtransition() {
 		break;
 	case 1:
 		transition1->play(0, transitionChannel);
+		break;
+	default:
+		break;
+	}
+}
+
+void SoundManager::playHandPunch() {
+	randomNum = pickRandom(2);
+	switch (randomNum)
+	{
+	case 0:
+		heavyPunch0->play(0, attacksChannel);
+		break;
+	case 1:
+		heavyPunch1->play(0, attacksChannel);
 		break;
 	default:
 		break;

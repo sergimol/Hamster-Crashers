@@ -71,7 +71,7 @@ MapMngr::~MapMngr() {
 }
 
 void MapMngr::update() {
-	cout << numberEnemyRoom << " " << entity_->getMngr()->getEnemies().size() <<endl;
+	//cout << numberEnemyRoom << " " << entity_->getMngr()->getEnemies().size() <<endl;
 	auto* camera = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
 	//	Comprobamos la colision con los triggers salas
 	tmx::Object trigger;
