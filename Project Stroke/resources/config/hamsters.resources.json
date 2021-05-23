@@ -878,6 +878,10 @@
     {
       "id": "p4",
       "file": "resources/images/menuSprites/4.png"
+    },
+    {
+      "id": "monosinpatico",
+      "file": "resources/images/monosinpatico_spritesheet.png"
     }
   ],
 
@@ -2199,6 +2203,78 @@
       "cols": 8,
       "rows": 2,
       "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "monosinpatico_idle",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 4,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "monosinpatico_move",
+      "startFrameX": 4,
+      "startFrameY": 0,
+      "duration": 4,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "monosinpatico_attack",
+      "startFrameX": 2,
+      "startFrameY": 1,
+      "duration": 7,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 70,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": 8
+    },
+    {
+      "id": "monosinpatico_hit",
+      "startFrameX": 3,
+      "startFrameY": 2,
+      "duration": 6,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "monosinpatico_stun",
+      "startFrameX": 3,
+      "startFrameY": 3,
+      "duration": 7,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "monosinpatico_death",
+      "startFrameX": 4,
+      "startFrameY": 4,
+      "duration": 7,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 60,
       "loop": 0,
       "chain": "",
       "attackFrame": -1
