@@ -17,7 +17,7 @@
 
 class ContactDamage : public Component {
 public:
-	ContactDamage(int danyo,int directionKnockbackAux, bool useFeet, bool damageInJump);
+	ContactDamage(int danyo,int directionKnockbackAux, bool useFeet, bool damageInJump, bool damageEnemies);
 
 	virtual ~ContactDamage() {}
 
@@ -26,6 +26,7 @@ public:
 	void render() override;
 
 	bool CheckCollisions(const SDL_Rect& enemyRect, bool finCombo);
+	bool CheckCollisionsEnemies(const SDL_Rect& enemyRect, bool finCombo);
 	void updateRect();
 
 private:

@@ -48,7 +48,7 @@ private:
 	std::queue<tmx::Object> TriggerftCamera;
 	vector<string> hamstersToLoad_;
 
-	void addHamster(string name, int i);
+	void addHamster(string name, int i,const tmx::Object& object);
 public:
 	MapMngr() : Room(0) {};
 	~MapMngr();
