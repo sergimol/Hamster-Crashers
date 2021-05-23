@@ -1025,6 +1025,10 @@
       "file": "resources/sound/cat/catMeowWalking.wav"
     },
     {
+      "id": "sardinillaSpecial0",
+      "file": "resources/sound/specialAttack/sardinilla/sardinillaSpecial.wav"
+    },
+    {
       "id": "canelonSpecialGod",
       "file": "resources/sound/specialAttack/canelon/canelonSpecialGod.wav"
     },
@@ -1109,6 +1113,14 @@
       "file": "resources/sound/pickItem/pick1.wav"
     },
     {
+      "id": "eat2",
+      "file": "resources/sound/pickItem/pick2.wav"
+    },
+    {
+      "id": "eat3",
+      "file": "resources/sound/pickItem/pick3.wav"
+    },
+    {
       "id": "soldierDep0",
       "file": "resources/sound/soldier/dep0.wav"
     },
@@ -1155,6 +1167,30 @@
     {
       "id": "tutorial1",
       "file": "resources/sound/dialogos/dialogo1.wav"
+    },
+    {
+      "id": "possesion",
+      "file": "resources/sound/possesion/possesion.wav"
+    },
+    {
+      "id": "heavyPunch0",
+      "file": "resources/sound/hand/heavyPunch.wav"
+    },
+    {
+      "id": "heavyPunch1",
+      "file": "resources/sound/hand/smashDown.wav"
+    },
+    {
+      "id": "platillos",
+      "file": "resources/sound/platillos/platillos.wav"
+    },
+    {
+      "id": "rightNote",
+      "file": "resources/sound/reanimationKeySound/rightNote.wav"
+    },
+    {
+      "id": "wrongNote",
+      "file": "resources/sound/reanimationKeySound/wrongNote.wav"
     }
   ],
 
