@@ -89,7 +89,7 @@ bool ContactDamage::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 			//Comprobamos si está en la misma Z o relativamente cerca
 			if (eAttribs->ignoresMargin()) {
 				
-				if (abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < MARGINTOATTACK) {
+				if (abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < eAttribs->getMarginToAttack()) {
 
 
 
@@ -245,7 +245,7 @@ bool ContactDamage::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 				//Comprobamos si está en la misma Z o relativamente cerca
 				if (eAttribs->ignoresMargin()) {
 
-					if (abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < MARGINTOATTACK) {
+					if (abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < eAttribs->getMarginToAttack()) {
 
 
 
