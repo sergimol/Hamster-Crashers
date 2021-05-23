@@ -54,7 +54,7 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 
 	for (int i = 0; i < ents.size(); ++i) {
 		//Si la entidad es un enemigo...
-		if (ents[i]->hasGroup<Enemy>()) {
+		if (ents[i]->isActive() && ents[i]->hasGroup<Enemy>()) {
 			//Cogemos el transform del enemigo
 			auto eTR = ents[i]->getComponent<Transform>();
 			auto eColRect = eTR->getRectCollide();
@@ -67,7 +67,7 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 			if (!eAttribs->checkInvulnerability() && Collisions::collides(Vector2D(rectPlayer.x, rectPlayer.y), rectPlayer.w, rectPlayer.h, newPos, eColRect.w, eColRect.h)) {
 
 				//Comprobamos si está en la misma Z o relativamente cerca
-				if (eAttribs->ignoresMargin() || (abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < MARGINTOATTACK)) {
+				if (eAttribs->ignoresMargin() || (abs((tr_->getRectCollide().y) - (eColRect.y)) < eAttribs->getMarginToAttack())) {
 					//A�adimos a los combos
 					if (!canHit)
 						finCombo = entity_->getComponent<Combos>()->checkCombo(1);

@@ -369,8 +369,10 @@
   </object>
   <object id="135" name="escalectris" x="493.697" y="109.545" width="27.2727" height="44.9091">
    <properties>
-    <property name="sala" type="int" value="8"/>
-    <property name="zRondas" type="int" value="1"/>
+    <property name="SpawnTime" type="float" value="5000"/>
+    <property name="sala" type="int" value="2"/>
+    <property name="velocidad" type="float" value="-30"/>
+    <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
   <object id="142" name="enemigo" x="1072.36" y="479.545" width="27.2727" height="44.9091">
@@ -831,7 +833,7 @@
   <object id="210" name="spawnZone" x="2.33313" y="386" width="60.667" height="37.9997"/>
  </objectgroup>
  <objectgroup id="7" name="Salas">
-  <object id="136" name="1" x="578.909" y="317.58" width="13" height="255.5">
+  <object id="136" name="1" x="644.909" y="313.58" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="650"/>
     <property name="Rounds" type="int" value="1"/>
