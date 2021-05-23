@@ -6,6 +6,7 @@
 #include "Image.h"
 #include "BulletHit.h"
 #include "Movement.h"
+#include "AnimHamsterStateMachine.h"
 //#include "Animator.h"
 
 Turret::Turret() : Ability(2000), x_(0), cadenceTime_(sdlutils().currRealTime()) {
@@ -52,7 +53,7 @@ void Turret::update() {
 void Turret::action() {
 
 	//Reduce vel a la mitad mientras dispara
-	attribs_->setVel(attribs_->getVel() / 2);
+	entity_->getComponent<EntityAttribs>()->setVel(entity_->getComponent<EntityAttribs>()->getVel() / 2);
 	entity_->getComponent<EntityAttribs>()->setInvincibility(true);
 
 	//Realizo las animaciones
@@ -61,6 +62,6 @@ void Turret::action() {
 void Turret::endAbility() {
 
 	//Vuelve a vel original
-	attribs_->resetVel();
-	entity_->getComponent<EntityAttribs>()->setInvincibility(false);
+	entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::ABILITY, false);
+	entity_->getComponent<EntityAttribs>()->resetVel();
 }

@@ -21,7 +21,7 @@ private:
 
 	EntityAttribs* attribs_;
 	//CONSTANTES
-	const int CADENCESHOT = 100;
+	const int CADENCESHOT = 200;
 	const int BULLETSPEED = 10;
 	const int CD = 2000;
 
