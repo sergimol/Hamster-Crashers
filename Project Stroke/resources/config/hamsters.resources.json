@@ -132,67 +132,67 @@
     },
     {
       "id": "sardinillaSheet",
-      "file": "resources/images/sardinilla_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/sardinilla_spritesheet.png"
     },
     {
       "id": "sardinillaSheet2",
-      "file": "resources/images/sardinilla_spritesheetHA.png"
+      "file": "resources/images/spritesheets/hamsters/sardinilla_spritesheetHA.png"
     },
     {
       "id": "sardinillaSheet3",
-      "file": "resources/images/sardinilla_spritesheetPos.png"
+      "file": "resources/images/spritesheets/hamsters/sardinilla_spritesheetPos.png"
     },
     {
       "id": "canelonSheet",
-      "file": "resources/images/canelonGod_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/canelonGod_spritesheet.png"
     },
     {
       "id": "canelonSheet2",
-      "file": "resources/images/canelonGod_spritesheetHA.png"
+      "file": "resources/images/spritesheets/hamsters/canelonGod_spritesheetHA.png"
     },
     {
       "id": "canelonSheet3",
-      "file": "resources/images/canelonGod_spritesheetPos.png"
+      "file": "resources/images/spritesheets/hamsters/canelonGod_spritesheetPos.png"
     },
     {
       "id": "canelonDemonSheet",
-      "file": "resources/images/canelonDemon_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/canelonDemon_spritesheet.png"
     },
     {
       "id": "canelonDemonSheet2",
-      "file": "resources/images/canelonDemon_spritesheetHA.png"
+      "file": "resources/images/spritesheets/hamsters/canelonDemon_spritesheetHA.png"
     },
     {
       "id": "canelonDemonSheet3",
-      "file": "resources/images/canelonDemon_spritesheetPos.png"
+      "file": "resources/images/spritesheets/hamsters/canelonDemon_spritesheetPos.png"
     },
     {
       "id": "ketaSheet",
-      "file": "resources/images/keta_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/keta_spritesheet.png"
     },
     {
       "id": "ketaSheet2",
-      "file": "resources/images/keta_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/keta_spritesheet.png"
     },
     {
       "id": "ketaSheet3",
-      "file": "resources/images/keta_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/keta_spritesheet.png"
     },
     {
       "id": "monchiSheet",
-      "file": "resources/images/monchi_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/monchi_spritesheet.png"
     },
     {
       "id": "monchiSheet2",
-      "file": "resources/images/monchi_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/monchi_spritesheet.png"
     },
     {
       "id": "monchiSheet3",
-      "file": "resources/images/monchi_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/monchi_spritesheet.png"
     },
     {
       "id": "calcetinSheet",
-      "file": "resources/images/calcetin_spritesheet.png"
+      "file": "resources/images/spritesheets/enemies/level1/calcetin_spritesheet.png"
     },
     {
       "id": "firstBoss",
@@ -337,10 +337,6 @@
     {
       "id": "quitButtonEnter",
       "file": "resources/images/menuSprites/quitButtonEnter.png"
-    },
-    {
-      "id": "soldier1",
-      "file": "resources/images/enemies/level1/soldier1sheet.png"
     },
     {
       "id": "shadow",
@@ -596,11 +592,11 @@
     },
     {
       "id": "soldier1Sheet",
-      "file": "resources/images/soldier1_spritesheet.png"
+      "file": "resources/images/spritesheets/enemies/level1/soldier1_spritesheet.png"
     },
     {
       "id": "soldier2Sheet",
-      "file": "resources/images/soldier2_spritesheet.png"
+      "file": "resources/images/spritesheets/enemies/level1/soldier2_spritesheet.png"
     },
     {
       "id": "controles",
