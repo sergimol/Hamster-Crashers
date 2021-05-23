@@ -75,7 +75,7 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 			mv_->setSpeed(speed_ * 4);
 		else
 			mv_->setSpeed(speed_);
-		if (rectPlayer.y < cam.y || rectPlayer.y + tr_->getFloor() + rectPlayer.h + 120 > pCam.getY() + cam.h / 2)
+		if (rectPlayer.y < cam.y || rectPlayer.y + rectPlayer.h - tr_->getFloor() + (tr_->getFloor() - cam_->getHeightMap()) + 60 > pCam.getY() + cam.h / 2)
 			vel.setY(-speed_.getY());
 	}
 	else {
@@ -145,33 +145,7 @@ void CollisionDetec::tryToMoveObs(Vector2D dir, Vector2D goalVel, SDL_Rect& rect
 			vel.setX(0);
 			vel.setY(0);
 		}
-	}
-
-	//Comprobacion para los l�mites de la c�mara
-	if (enemy) {
-		if (rectFoot.x + rectFoot.w < cam.x || rectFoot.x  > pCam.getX() + cam.w / 2)
-			mv_->setSpeed(speed_ * 4);
-		else
-			mv_->setSpeed(speed_);
-		if (rectFoot.y < cam.y || rectFoot.y + tr_->getFloor() + rectFoot.h + 120 > pCam.getY() + cam.h / 2)
-			vel.setY(-speed_.getY());
-	}
-	else {
-		if (rectFoot.x < cam.x) {
-			if (entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamState() == State::GoingTo)
-				vel.setX(20);
-			else
-				vel.setX(0);
-		}
-		else if (rectFoot.x + rectFoot.w > pCam.getX() + cam.w / 2) {
-			if (entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamState() == State::GoingTo)
-				vel.setX(-20);
-			else
-				vel.setX(0);
-		}
-		if (rectFoot.y < cam.y || rectFoot.y + rectFoot.h - tr_->getFloor() + (tr_->getFloor() - cam_->getHeightMap()) + 60 > pCam.getY() + cam.h / 2)
-			vel.setY(-0.5);
-	}
+	}	
 
 	if (vel.getX() < 0.001 && vel.getX() > -0.001) vel.setX(0);
 	if (vel.getY() < 0.001 && vel.getY() > -0.001) vel.setY(0);

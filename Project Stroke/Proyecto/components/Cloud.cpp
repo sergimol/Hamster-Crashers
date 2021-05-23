@@ -55,7 +55,7 @@ void Cloud::update() {
 
 					auto eAttribs = ents[i]->getComponent<EntityAttribs>();
 
-					//Si tiene stun se aplica el ralentí y animación
+					//Si tiene stun se aplica el ralentï¿½ y animaciï¿½n
 					EnemyStun* enmStun = ents[i]->getComponent<EnemyStun>();
 					if (enmStun != nullptr && enmStun->isActive()) {
 
@@ -68,7 +68,7 @@ void Cloud::update() {
 
 						if (j == affectedEnemies_.size())
 							eAttribs->setVel(eAttribs->getVel() / 5);
-						//Añadimos a afectados
+						//Aï¿½adimos a afectados
 						affectedEnemies_.push_back(ents[i]);
 					}
 
@@ -79,6 +79,8 @@ void Cloud::update() {
 					refreshAffectedEnemies();
 				}
 			}
+			entity_->getMngr()->refreshEnemies();
+			refreshAffectedEnemies();
 		}
 	}
 }
