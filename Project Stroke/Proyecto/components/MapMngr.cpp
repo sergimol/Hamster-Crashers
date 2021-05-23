@@ -230,12 +230,13 @@ void MapMngr::loadNewMap(string map) {
 					entity_->getMngr()->setHandler<Boss>(nullptr);
 					entity_->getMngr()->setHandler<FinalBoss>(nullptr);
 
-					for (int i = 0; i < hamstersToLoad_.size(); ++i) {
-						addHamster(hamstersToLoad_[i], i);
-					}
-
 					for (const auto& object : objects) {
-						if (object.getName() == "sardinilla" || object.getName() == "canelon" || object.getName() == "keta" || object.getName() == "monchi")
+						if (object.getName() == "spawnZone") {
+							for (int i = 0; i < hamstersToLoad_.size(); ++i) {
+								addHamster(hamstersToLoad_[i], i, object);
+							}
+						}
+						else if (object.getName() == "sardinilla" || object.getName() == "canelon" || object.getName() == "keta" || object.getName() == "monchi")
 						{
 						}//addHamster(object);
 						else if (object.getName() == "newScene") {
@@ -591,7 +592,7 @@ void MapMngr::loadEnemyRoom() {
 	}
 }
 
-void MapMngr::addHamster(string name, int i) {
+void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 
 	//do stuff with object properties
 	//auto& name = obj.getName();
@@ -603,35 +604,35 @@ void MapMngr::addHamster(string name, int i) {
 	//Habilidad
 	if (name == "sardinilla") {
 		tam = 86;
-		hamster1->addComponent<Transform>(Vector2D((264.0) * scale, 161.167 * scale),
+		hamster1->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y  * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.5);
 		hamster1->addComponent<HamsterStateMachine>();
 		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20);
 	}
-	else if (name == "canelon") {
-		tam = 128;
-		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
-			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.25, 0.3);
-		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 1.2, name, Vector2D(7, 3.5), i, 0, 20);
-	}
 	else if (name == "keta") {
 		tam = 100;
-		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
+		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + object.getAABB().width) * scale, object.getPosition().y * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.25);
 		hamster1->addComponent<HamsterStateMachine>();
 		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 7, 20);
 	}
 	else if (name == "monchi") {
 		tam = 86;
-		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
+		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + object.getAABB().width/3) * scale, (object.getPosition().y + object.getAABB().height/2) * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 1, 1);
 		hamster1->addComponent<HamsterStateMachine>();
 		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20);
 	}
+	else if (name == "canelon") {
+		tam = 128;
+		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + (object.getAABB().width*1.3)) * scale, (object.getPosition().y + object.getAABB().height/2) * scale),
+			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.25, 0.3);
+		hamster1->addComponent<HamsterStateMachine>();
+		hamster1->addComponent<EntityAttribs>(100, 1.2, name, Vector2D(7, 3.5), i, 0, 20);
+	}
 	else {
 		tam = 86;
-		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
+		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + object.getAABB().width/2)* scale, (object.getPosition().y + object.getAABB().height/2)* scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 1, 1);
 		hamster1->addComponent<HamsterStateMachine>();
 		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20);
