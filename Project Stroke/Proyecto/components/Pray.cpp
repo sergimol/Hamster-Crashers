@@ -13,7 +13,7 @@
 #include "../utils/Collisions.h"
 #include "EntityAttribs.h"
 
-Pray::Pray(int dmg, int heal) : Ability(2000), dmg_(dmg), heal_(heal), evil_(true) {
+Pray::Pray(int dmg, int heal) : Ability(2000), dmg_(dmg), heal_(heal), evil_(false) {
 };
 
 Pray::~Pray() {
@@ -33,26 +33,27 @@ void Pray::endAbility() {
 }
 
 void Pray::prayAbility() {
-	auto& ents = entity_->getMngr()->getEnemies();
+
 
 	//Cogemos la camara
 	SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 
 	bool hasHit = false;
-	for (Entity* e : ents) {
+	if (evil_) {
 
-		if (evil_) {
-
+		auto& ents = entity_->getMngr()->getEnemies();
+		for (Entity* e : ents) {
 			//Si la entidad es un enemigo...
-			if (e->hasGroup<Enemy>() && e->isActive()) {
+			if (e->isActive()) {
 
 				//Cogemos el transform del enemigo
 				auto eTR = e->getComponent<Transform>();
+				auto eRectCollide = eTR->getRectCollide();
 
-				Vector2D newPos = Vector2D(eTR->getPos().getX(), eTR->getPos().getY());
+				Vector2D newPos = Vector2D(eRectCollide.x - cam.x, eRectCollide.y - cam.y);
 
 				//Y comprobamos si colisiona
-				if (Collisions::collides(newPos, eTR->getW(), eTR->getH(), Vector2D(cam.x, cam.y), cam.w, cam.h)) {
+				if (Collisions::collides(newPos, eRectCollide.w, eRectCollide.h, Vector2D(cam.x, cam.y), cam.w, cam.h)) {
 					// Sonido de golpe una sola vez
 					if (!hasHit)
 						entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
@@ -93,33 +94,36 @@ void Pray::prayAbility() {
 					e->getComponent<EntityAttribs>()->recieveDmg(dmg_);
 					entity_->getMngr()->refreshEnemies();
 				}
-			}
-		}
-		else {
 
-			//Si la entidad es un enemigo...
-			if (e->hasGroup<Ally>()) {
-
-				//Cogemos el transform del enemigo
-				auto eTR = e->getComponent<Transform>();
-
-				Vector2D newPos = Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
-
-				//Y comprobamos si colisiona
-				if (Collisions::collides(newPos, eTR->getW(), eTR->getH(), Vector2D(cam.x, cam.y), cam.w, cam.h)) {
-
-					//Le restamos la vida al enemigo
-					auto& state = st_->getState();
-					if (state != HamStates::DEAD && e->getComponent<EntityAttribs>()->getLife() > 0) //deberia que valer con el DEAD que cuando muera desactive cosas
-						e->getComponent<EntityAttribs>()->heal(heal_);
-				}
 			}
 		}
 	}
+
+	else {
+
+		auto& ents = entity_->getMngr()->getPlayers();
+		for (Entity* e : ents) {
+			//Cogemos el transform del aliado
+			auto eTR = e->getComponent<Transform>();
+			auto eRectCollide = eTR->getRectCollide();
+
+			Vector2D newPos = Vector2D(eRectCollide.x - cam.x, eRectCollide.y - cam.y);
+
+			//Y comprobamos si colisiona
+			if (Collisions::collides(newPos, eRectCollide.w, eRectCollide.h, Vector2D(cam.x, cam.y), cam.w, cam.h)) {
+
+				//Curamos
+				auto& state = st_->getState();
+				if (state != HamStates::DEAD && e->getComponent<EntityAttribs>()->getLife() > 0) //deberia que valer con el DEAD que cuando muera desactive cosas
+					e->getComponent<EntityAttribs>()->heal(heal_);
+			}
+		}
+	}
+
 	entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::ABILITY, false);
 	evil_ = !evil_;
 
-	if (evil_) {
+	if (!evil_) {
 		entity_->getComponent<EntityAttribs>()->setId("canelon");
 		entity_->getComponent<Animator>()->setTexture(&sdlutils().images().at("canelonSheet"));
 	}

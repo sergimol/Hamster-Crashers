@@ -33,14 +33,14 @@ void Turret::update() {
 
 				//Meto los componentes
 				bala->addComponent<Transform>(
-					tr_->getPos() + Vector2D(tr_->getW() / 2 + x_ * OFFSETX, tr_->getH() / 2 - OFFSETY),
+					tr_->getPos() + Vector2D(tr_->getW() / 2 + x_ * OFFSETX, tr_->getH() / 2 - OFFSETY - tr_->getFloor()),
 					Vector2D(x_, 0.0f) * BULLETSPEED, 12.0f*3, 8.0f*3, 0.0f, 1, 1)->getFlip() = entity_->getComponent<Transform>()->getFlip();
 
 				bala->addComponent<Image>(&sdlutils().images().at("bullet"));
 
 				bala->addComponent<DisableOnExit>();
 
-				bala->addComponent<BulletHit>(tr_->getPos().getY() + tr_->getH());
+				bala->addComponent<BulletHit>();
 
 				bala->setGroup<Bullet_group>(true);
 
@@ -53,7 +53,7 @@ void Turret::update() {
 void Turret::action() {
 
 	//Reduce vel a la mitad mientras dispara
-	entity_->getComponent<EntityAttribs>()->setVel(entity_->getComponent<EntityAttribs>()->getVel() / 2);
+	entity_->getComponent<EntityAttribs>()->setVel(entity_->getComponent<EntityAttribs>()->getVel() / 4);
 	entity_->getComponent<EntityAttribs>()->setInvincibility(true);
 
 	//Realizo las animaciones
@@ -63,5 +63,6 @@ void Turret::endAbility() {
 
 	//Vuelve a vel original
 	entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::ABILITY, false);
+	entity_->getComponent<EntityAttribs>()->setInvincibility(false);
 	entity_->getComponent<EntityAttribs>()->resetVel();
 }

@@ -22,7 +22,7 @@ private:
 	EntityAttribs* attribs_;
 	//CONSTANTES
 	const int CADENCESHOT = 200;
-	const int BULLETSPEED = 10;
+	const int BULLETSPEED = 25;
 	const int CD = 2000;
 
 	//Con esto movemos la bala a la Cara de Monchi

@@ -113,11 +113,13 @@ private:
 
 	void  playtransition();
 
+	void  playHandPunch();
+
 	int pickRandom(int max);
 
 
 
-	//SOUND LIST AND CHANNELS
+	//Golpe
 	SoundEffect* light0;
 	SoundEffect* light1;
 	SoundEffect* light2;
@@ -130,21 +132,24 @@ private:
 	SoundEffect* light9;
 	SoundEffect* light10;
 
+	//Golpe Fuerte
 	SoundEffect* strong0;
 	SoundEffect* strong1;
 	SoundEffect* strong2;
 
+	//Ataque (whoosh)
 	SoundEffect* attack0;
 	SoundEffect* attack1;
 	SoundEffect* attack2;
 	SoundEffect* attack3;
 	SoundEffect* attack4;
 
-
+	//Muerte
 	SoundEffect* dep0;
 	SoundEffect* dep1;
 	SoundEffect* dep2;
 
+	//Ataque corazon
 	SoundEffect* heartattack0;
 	SoundEffect* heartattack1;
 	SoundEffect* heartattack2;
@@ -152,57 +157,87 @@ private:
 	SoundEffect* heartattack4;
 	SoundEffect* heartattack5;
 
+	//Boss Gato
 	SoundEffect* catMeowStatic;
 	SoundEffect* catMeowAttack;
 	SoundEffect* catMeowInit;
 	SoundEffect* catMeowWalking;
 
+	//Boss Mano
+	SoundEffect* heavyPunch0;
+	SoundEffect* heavyPunch1;
+
+	//Boss Mono
+	SoundEffect* platillos;
+
+	//Sonidos tren
+	SoundEffect* trainBackground;
+	SoundEffect* trainPipi;
+	SoundEffect* trainAlto;
+
+	//Coche
+	SoundEffect* car0;
+	SoundEffect* car1;
+	SoundEffect* car2;
+
+	//Muerte soldados
+	SoundEffect* soldierDep0;
+	SoundEffect* soldierDep1;
+	SoundEffect* soldierDep2;
+	SoundEffect* soldierDep3;
+
+	//Juego reanimar, tecla correcta o fallida
+	SoundEffect* rightNote;
+	SoundEffect* wrongNote;
+
+	//Posesion hamster
+	SoundEffect* possesion;
+
+	//Especial Sardinilla
+	SoundEffect* sardinillaSpecial0;
+
+	//Especial Keta
 	SoundEffect* ketaSpecial0;
 	SoundEffect* ketaSpecial1;
 	SoundEffect* ketaSpecial2;
 	SoundEffect* ketaSpecial3;
 	SoundEffect* ketaSpecial4;
 
+	//Especial monchi
 	SoundEffect* monchiSpecial0;
 	SoundEffect* monchiSpecial1;
 	SoundEffect* monchiSpecial2;
 	SoundEffect* monchiSpecial3;
 	SoundEffect* monchiSpecial4;
 
+	//Especial canelon
 	int canelonState = 0;
 	SoundEffect* canelonSpecial0;
 	SoundEffect* canelonSpecial1;
 
-	//Enemigos
-	SoundEffect* car0;
-	SoundEffect* car1;
-	SoundEffect* car2;
-
+	//Botones UI
 	int buttonState = 0;
 	SoundEffect* button0;
 	SoundEffect* button1;
 
+	//Musica y sonidos ambiente
 	SoundEffect* mainTheme;
 	SoundEffect* birds;
 
+	//Recoger items
 	SoundEffect* eat0;
 	SoundEffect* eat1;
+	SoundEffect* eat2;
+	SoundEffect* eat3;
 
-	SoundEffect* soldierDep0;
-	SoundEffect* soldierDep1;
-	SoundEffect* soldierDep2;
-	SoundEffect* soldierDep3;
-
-	SoundEffect* trainBackground;
-	SoundEffect* trainPipi;
-	SoundEffect* trainAlto;
-
+	//Transiciones
 	SoundEffect* transition0;
 	SoundEffect* transition1;
 
+	//Trampa cocina
 	SoundEffect* trapKitchen;
 
-
+	//Dialogos Angel (tutorial y transiciones, falta diferenciarlos)
 	SoundEffect* dialogue0;
 	SoundEffect* dialogue1;
 	SoundEffect* dialogue2;
