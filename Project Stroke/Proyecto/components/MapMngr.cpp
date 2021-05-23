@@ -257,7 +257,7 @@ void MapMngr::loadNewMap(string map) {
 
 							enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
 							enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
-							enemy->addComponent<ContactDamage>(20, 30, false, false);
+							enemy->addComponent<ContactDamage>(20, 30, false, false, false);
 							enemy->getMngr()->setHandler<Cat_>(enemy);
 						}
 						else if (object.getName() == "microondas") { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
@@ -578,7 +578,7 @@ void MapMngr::loadEnemyRoom() {
 
 			//numberEnemyRoom++;
 		}
-		else if (name == "escalectris" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
+		else if (name == "escalectris" && prop[1].getIntValue() == Room && prop[3].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* escalectris = mngr_->addWaveObject();
 
 			escalectris->addComponent<Transform>(
@@ -586,7 +586,9 @@ void MapMngr::loadEnemyRoom() {
 				Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
 
 			escalectris->addComponent<ObstacleMoveable>(&sdlutils().images().at("warningSign"),
-				object.getPosition().x * scale, object.getPosition().y * scale, 0, 0, scale);
+				object.getPosition().x * scale, object.getPosition().y * scale, 0, 0, scale,
+				prop[2].getFloatValue(), prop[0].getFloatValue()
+				);
 		}
 	}
 }
@@ -800,7 +802,7 @@ void MapMngr::addTrap(const tmx::Object& object, int x, int y) {
 
 	trap->addComponent<Transform>(Vector2D(x * scale, y * scale),
 		Vector2D(), 50 * scale, 50 * scale, 0.0f, 0.75, 0.75);
-	trap->addComponent<ContactDamage>(10, 30, true, true);
+	trap->addComponent<ContactDamage>(10, 30, true, true, true);
 	trap->addComponent<TimeTrap>(&sdlutils().images().at("catSmoking"));
 
 	//int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty
