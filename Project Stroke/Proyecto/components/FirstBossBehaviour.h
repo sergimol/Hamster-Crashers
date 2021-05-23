@@ -18,6 +18,8 @@
 #include "MovementSimple.h"
 #include "FirstBossAttack.h"
 #include "Behavior.h"
+#include "AnimEnemyStateMachine.h"
+
 
 class FirstBossBehaviour : public Behavior {
 public:
@@ -66,5 +68,7 @@ private:
 
 	float stunTime_; //Tiempo parado antes de recuperar el comportamiento
 	float stunCD_;
+
+	AnimEnemyStateMachine* anim_; //
 };
 

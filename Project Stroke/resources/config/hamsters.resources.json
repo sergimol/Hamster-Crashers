@@ -175,6 +175,10 @@
       "file": "resources/images/keta_spritesheet.png"
     },
     {
+      "id": "calcetinSheet",
+      "file": "resources/images/calcetin_spritesheet.png"
+    },
+    {
       "id": "firstBoss",
       "file": "resources/images/boss1.png"
     },
@@ -1889,6 +1893,66 @@
       "duration": 7,
       "cols": 9,
       "rows": 10,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "calcetin_idle",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 4,
+      "cols": 7,
+      "rows": 2,
+      "frameUpdate": 150,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "calcetin_move",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 4,
+      "cols": 8,
+      "rows": 2,
+      "frameUpdate": 150,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "calcetin_attack",
+      "startFrameX": 4,
+      "startFrameY": 0,
+      "duration": 8,
+      "cols": 8,
+      "rows": 2,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "calcetin_hit",
+      "startFrameX": 4,
+      "startFrameY": 1,
+      "duration": 4,
+      "cols": 8,
+      "rows": 2,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "calcetin_floor",
+      "startFrameX": 7,
+      "startFrameY": 1,
+      "duration": 1,
+      "cols": 8,
+      "rows": 2,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "",
