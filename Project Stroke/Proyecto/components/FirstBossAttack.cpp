@@ -7,6 +7,7 @@
 #include "StrongAttack.h"
 #include "LightAttack.h"
 #include "AnimHamsterStateMachine.h"
+#include "AnimEnemyStateMachine.h"
 
 FirstBossAttack::FirstBossAttack() :
 	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
@@ -26,6 +27,15 @@ void FirstBossAttack::init() {
 
 void FirstBossAttack::update() {
 	if (state_->getState() == GameStates::RUNNING) {
+		//Quitar la animacion de ataque
+		if (entity_->getComponent<AnimEnemyStateMachine>()->getState() == EnemyStatesAnim::ATTACK)
+		{
+			if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+			{
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, true);
+			}
+		}
 		//Deja de mostrar el collider
 		if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
 			DEBUG_isAttacking_ = false;
@@ -34,6 +44,10 @@ void FirstBossAttack::update() {
 
 			//Telegrafiado hasta el ataque
 			if (!stunStarted_ && sdlutils().currRealTime() > hitTime_ + beforeHitCD_) {
+
+				//ANIMACION DE ATACAR 
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, true);
+
 				cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 				auto sizeW = tr_->getW();
 				auto& pos = tr_->getPos();
@@ -65,17 +79,25 @@ void FirstBossAttack::update() {
 				stunStarted_ = true;
 
 			}
+			//Esta en el suelo
 			else if (stunStarted_ && eAttribs_->checkInvulnerability() && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
 				eAttribs_->setInvincibility(false);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, true);
 			}
 			else if (stunStarted_ && !collides_ && sdlutils().currRealTime() > hitTime_ + collideStartCD_ && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
 				// Activar colisiones
 				collides_ = true;
 			}
+			//Deja de estar en el suelo
 			else if (stunStarted_ && sdlutils().currRealTime() > hitTime_ + afterHitCD_) {
 				eAttribs_->setInvincibility(true);
 				attackStarted_ = false;
 				stunStarted_ = false;
+
+				//LE QUITAMOS LA ANIMACION DE ESTAR EN EL SUELO
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, false);
+				//FORZAMOS A VOLVER A IDLE
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::IDLE, false);
 
 				//desactivar colisiones
 				collides_ = false;

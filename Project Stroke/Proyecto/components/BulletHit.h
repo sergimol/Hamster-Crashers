@@ -10,7 +10,7 @@ class BulletHit : public Component {
 
 public:
 
-	BulletHit(float pos);
+	BulletHit();
 
 	virtual ~BulletHit();
 
@@ -22,9 +22,5 @@ private:
 	Transform* tr_;
 	GameStates* state_;
 	SDL_Rect cam_;
-	float y_;
-
-	//Daño por bala
-	const int DMG = 2;
 };
 

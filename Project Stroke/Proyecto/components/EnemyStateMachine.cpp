@@ -1,5 +1,6 @@
 #include "EnemyStateMachine.h"
 #include "AnimEnemyStateMachine.h"
+#include "EntityAttribs.h"
 
 
 void EnemyStateMachine::update() {
@@ -15,8 +16,17 @@ void EnemyStateMachine::update() {
 
 			if (entity_->getComponent<Animator>()->OnAnimationFrameEnd() )
 			{
-				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, false);
-				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::STUNNED, false);
+				//COMPROBAMOS QUE NO SEA UN BOSS
+				if (entity_->getComponent<EntityAttribs>()->getId() != "calcetin")
+				{
+					entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, false);
+					entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::STUNNED, false);
+				}
+				else
+				{
+					entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, false);
+					entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, true);
+				}
 
 			}
 

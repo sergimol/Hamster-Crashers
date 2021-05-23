@@ -32,18 +32,23 @@ void AnimEnemyStateMachine::HandleAnimState()
 	//move
 	if (move && !lAttack && !idle)
 		currentState = EnemyStatesAnim::MOVE;
+	//quedarse en el suelo para los bosses (va delante del hit para cortarlo)
+	if (onfloor)
+		currentState = EnemyStatesAnim::ONFLOOR;
 	//light attack
 	if (lAttack /*&& !sAttack*/)
 		currentState = EnemyStatesAnim::ATTACK;
 	//strong attack
 	if (sAttack && !lAttack)
 		currentState = EnemyStatesAnim::STRONGATTACK;
+	
 	//hitted
 	if (hit)
 		currentState = EnemyStatesAnim::HITTED;
 	//stunned
 	if (stun)
 		currentState = EnemyStatesAnim::STUNNED;
+	
 }
 
 //Cambia las animaciones dependiendo del estado del hamster
@@ -79,6 +84,9 @@ void AnimEnemyStateMachine::CheckAnimState()
 			break;
 		case EnemyStatesAnim::DEAD:
 			anim->play(sdlutils().anims().at(id + "_death"));
+			break;
+		case EnemyStatesAnim::ONFLOOR:
+			anim->play(sdlutils().anims().at(id + "_floor"));
 			break;
 		}
 	}
@@ -119,6 +127,9 @@ void AnimEnemyStateMachine::setAnimBool(EnemyStatesAnim h, bool b)
 		break;
 	case EnemyStatesAnim::DEAD:
 		idle = b;
+		break;
+	case EnemyStatesAnim::ONFLOOR:
+		onfloor = b;
 		break;
 	}
 }

@@ -3,7 +3,7 @@
 
 FirstBossBehaviour::FirstBossBehaviour() :
 	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr),
-	lockedHamster_(nullptr), hamsterTr_(nullptr), hamsId_(-1), attackAvailable_(false), 
+	lockedHamster_(nullptr), hamsterTr_(nullptr), anim_(nullptr),  hamsId_(-1), attackAvailable_(false), 
 	waitingTime_(sdlutils().currRealTime()), waitingCD_(4000), stunTime_(0), stunCD_(1500) {
 }
 
@@ -18,12 +18,18 @@ void FirstBossBehaviour::init() {
 	bossAtk_ = owEntity->getComponent<FirstBossAttack>();
 	assert(bossAtk_ != nullptr);
 
+	anim_ = owEntity->getComponent<AnimEnemyStateMachine>();
+	assert(anim_ != nullptr);
+
 	hamsters_ = owEntity->getMngr()->getPlayers();
 
 	lockHamster(); // De momento un hamster concreto para manejar mejor
 	assert(lockedHamster_ != nullptr);
 	assert(lockedHamState_ != nullptr);
 	assert(hamsterTr_ != nullptr);
+	assert(anim_ != nullptr);
+
+
 }
 
 
