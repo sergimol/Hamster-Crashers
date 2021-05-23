@@ -25,9 +25,6 @@ void Poison::update() {
 	}
 }
 
-void Poison::render() {
-}
-
 void Poison::endAbility() {
 	entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::ABILITY, false);
 	entity_->getComponent<ControlHandler>()->setActive(true);
