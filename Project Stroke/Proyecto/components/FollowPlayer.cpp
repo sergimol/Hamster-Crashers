@@ -66,7 +66,6 @@ bool FollowPlayer::isWithinAttackRange() {
 //}
 
 void FollowPlayer::behave() {
-	cout << tr_->getVel() << endl;
 	if (lockedHamster_ != nullptr) {
 
 		// Cambia el foco si el actual muere o le da un infarto
