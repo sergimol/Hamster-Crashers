@@ -121,7 +121,7 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 {}
 
 EntityAttribs::~EntityAttribs() {
-	if (entity_->hasGroup<Enemy>() && entity_->getMngr()->getHandler<Map>() != nullptr)
+	if (state_->getState() == GameStates::RUNNING && entity_->hasGroup<Enemy>() && entity_->getMngr()->getHandler<Map>() != nullptr)
 		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();
 }
 
