@@ -16,8 +16,7 @@ public:
 	EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, int marg);
 	EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty);
 
-	virtual ~EntityAttribs() {
-	}
+	virtual ~EntityAttribs();
 
 	void init() override;
 

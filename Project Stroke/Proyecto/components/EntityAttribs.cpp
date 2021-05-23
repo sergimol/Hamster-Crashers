@@ -120,6 +120,11 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	tr_(nullptr)
 {}
 
+EntityAttribs::~EntityAttribs() {
+	if (entity_->hasGroup<Enemy>())
+		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();
+}
+
 void EntityAttribs::init() {
 	// Estados si es jugador o enemigo
 	if (!entity_->hasGroup<Enemy>()) {
@@ -265,7 +270,7 @@ void EntityAttribs::die() {
 	}
 	else {
 		//solamente para los enemigos
-		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala
+		//entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala
 		e->addComponent<Dying>();
 		//e->getComponent<Transform>()->setGravity(e->addComponent<Gravity>());
 		enmState_->getState() = EnemyStates::ENM_DEAD;

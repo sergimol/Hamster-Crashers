@@ -233,21 +233,21 @@ bool ContactDamage::CheckCollisionsEnemies(const SDL_Rect& enemyRect, bool finCo
 
 	for (int i = 0; i < ents.size(); ++i) {
 		//Si la entidad es un player...
-
+		if (ents[i]->isActive()) {
 			//Cogemos el transform del player
-		auto eTR = ents[i]->getComponent<Transform>();
-		SDL_Rect eColRect;
-		if (!useFeet_)
-			eColRect = eTR->getRectCollide();
-		else
-			eColRect = eTR->getRectCollideFeet();
+			auto eTR = ents[i]->getComponent<Transform>();
+			SDL_Rect eColRect;
+			if (!useFeet_)
+				eColRect = eTR->getRectCollide();
+			else
+				eColRect = eTR->getRectCollideFeet();
 
-		//Vector2D newPos = Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
-		Vector2D enemyPos = Vector2D(enemyRect.x, enemyRect.y);
-		EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
+			//Vector2D newPos = Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
+			Vector2D enemyPos = Vector2D(enemyRect.x, enemyRect.y);
+			EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
 
-		//Y comprobamos si colisiona
-		//es can attacks porque coninciden lso estados
+			//Y comprobamos si colisiona
+			//es can attacks porque coninciden lso estados
 
 			if (Collisions::collides(Vector2D(eColRect.x - cam.x, eColRect.y - cam.y), eColRect.w, eColRect.h, enemyPos, enemyRect.w, enemyRect.h)) {
 				//TODO no voy a definir una entidad ahora
@@ -255,7 +255,7 @@ bool ContactDamage::CheckCollisionsEnemies(const SDL_Rect& enemyRect, bool finCo
 
 				//Comprobamos si está en la misma Z o relativamente cerca
 				if (eAttribs->ignoresMargin()) {
-						auto& hamStateM = ents[i]->getComponent<EnemyStateMachine>()->getState();
+					auto& hamStateM = ents[i]->getComponent<EnemyStateMachine>()->getState();
 
 					if ((hamStateM != EnemyStates::ENM_STUNNED && hamStateM != EnemyStates::ENM_DEAD) && abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < eAttribs->getMarginToAttack()) {
 
@@ -291,7 +291,7 @@ bool ContactDamage::CheckCollisionsEnemies(const SDL_Rect& enemyRect, bool finCo
 					}
 				}
 				else {
-						auto& hamStateM = ents[i]->getComponent<EnemyStateMachine>()->getState();
+					auto& hamStateM = ents[i]->getComponent<EnemyStateMachine>()->getState();
 
 					if ((hamStateM != EnemyStates::ENM_STUNNED && hamStateM != EnemyStates::ENM_DEAD)) {
 
@@ -355,7 +355,7 @@ bool ContactDamage::CheckCollisionsEnemies(const SDL_Rect& enemyRect, bool finCo
 
 				}
 			}
-
+		}
 	}
 	entity_->getMngr()->refreshEnemies();
 
