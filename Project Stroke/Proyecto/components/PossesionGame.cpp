@@ -17,6 +17,10 @@ void PossesionGame::render() {
 		auto pos = possesed->getComponent<Transform>()->getPos();
 		float x = pos.getX(), y = pos.getY();
 		
+		auto* cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
+		x -= cam->getCamPos().getX();
+		y -= cam->getCamPos().getY();
+
 		pos.set(x + H_LINE_OFFSET_X, y + H_LINE_OFFSET_Y);
 		lineHPos = build_sdlrect(pos, H_LINE_SIZE_X, H_LINE_SIZE_Y);
 
