@@ -9,6 +9,8 @@
 void Gravity::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
+
+	floor_ = tr_->getFloor();
 }
 
 void Gravity::checkHeight(SDL_Rect& playerPos) {

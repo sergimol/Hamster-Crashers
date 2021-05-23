@@ -13,6 +13,8 @@ Poison::Poison(int dmg) : Ability(2000), dmg_(dmg) {
 };
 
 Poison::~Poison() {
+	if (cloud_ != nullptr)
+		cloud_->setActive(false);
 }
 
 void Poison::update() {

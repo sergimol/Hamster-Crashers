@@ -441,11 +441,13 @@ void MapMngr::loadEnemyRoom() {
 		auto mngr_ = entity_->getMngr();
 		auto& prop = object.getProperties();
 
-		if (name == "enemigo" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
+		if (name == "enemigo" && prop[1].getIntValue() == Room && prop[2].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* enemy = mngr_->addEntity();
 			auto* enTr = enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 				Vector2D(), 86 * scale, 86 * scale, 0.0f, 0.4, 0.5);
+			enTr->setFloor(prop[0].getIntValue() * TAM_CELDA * scale);
+			enTr->setZ(prop[0].getIntValue() * TAM_CELDA * scale);
 			enTr->getFlip() = true;
 			enemy->addComponent<EnemyStateMachine>();
 			//1º: False porque no es un hamster //2º: True porque usa de referencia el rect de colision
@@ -618,7 +620,7 @@ void MapMngr::addHamster(string name, int i) {
 		hamster1->addComponent<Transform>(Vector2D(264.0 * scale, 161.167 * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.25);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 0, 20);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 7, 20);
 	}
 	else if (name == "monchi") {
 		tam = 86;
@@ -669,7 +671,7 @@ void MapMngr::addHamster(string name, int i) {
 	//Habilidad
 	if (name == "sardinilla") hamster1->addComponent<Roll>();
 	else if (name == "canelon") hamster1->addComponent<Pray>(20000, 50);
-	else if (name == "keta") hamster1->addComponent<Poison>(2);
+	else if (name == "keta") hamster1->addComponent<Poison>(1);
 	else if (name == "monchi") {
 		hamster1->addComponent<Turret>();
 		hamster1->addComponent<Swallow>(5);

@@ -149,7 +149,7 @@ void MovementInChase::update() {
 					keymap.at(SPACE) = false;
 				}
 				// Fin del salto
-				if (velZ < grav_->getFloor()) {
+				if (velZ < 0) {
 					combo->popUntilEmpty();
 					/*keymap.at(SPACE) = false;*/
 				}

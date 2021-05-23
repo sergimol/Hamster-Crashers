@@ -1,6 +1,7 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 
 #include "Manager.h"
+#include "../components/EnemyMother.h"
 
 #include <algorithm>
 #include "../utils/checkML.h"
@@ -36,6 +37,9 @@ Manager::~Manager() {
 }
 
 void Manager::refresh() {
+	if(getHandler<Mother>()->getComponent<EnemyMother>() != nullptr)
+		getHandler<Mother>()->getComponent<EnemyMother>()->refreshLists();
+
 	// remove dead entities from the list of entities
 	entities_.erase( //
 		std::remove_if( //

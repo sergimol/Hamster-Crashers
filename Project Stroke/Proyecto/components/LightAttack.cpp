@@ -63,7 +63,7 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 			if (!eAttribs->checkInvulnerability() && Collisions::collides(Vector2D(rectPlayer.x, rectPlayer.y), rectPlayer.w, rectPlayer.h, newPos, eColRect.w, eColRect.h)) {
 
 				//Comprobamos si está en la misma Z o relativamente cerca
-				if (eAttribs->ignoresMargin() || (abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < MARGINTOATTACK)) {
+				if (eAttribs->ignoresMargin() || (abs((tr_->getPos().getY()) - (eTR->getPos().getY())) < MARGINTOATTACK)) {
 
 					Combos* combos = entity_->getComponent<Combos>();
 					//A�adimos a los combos

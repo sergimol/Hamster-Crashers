@@ -40,16 +40,16 @@ protected:
 public:
 	EnemyMother();
 	virtual ~EnemyMother() {
-		for (int i = 0; i < numPlayers; i++) {
-			objetivesList.at(i)->ambushing.clear();
-			objetivesList.at(i)->atacking.clear();
-			objetivesList.at(i)->strongAmbushing.clear();
-			objetivesList.at(i)->strongAtacking.clear();
-			 delete objetivesList.at(i);
+		for (int i = 0; i < numPlayers_; i++) {
+			objetivesList_.at(i)->ambushing.clear();
+			objetivesList_.at(i)->atacking.clear();
+			objetivesList_.at(i)->strongAmbushing.clear();
+			objetivesList_.at(i)->strongAtacking.clear();
+			 delete objetivesList_.at(i);
 		}
-		objetivesList.clear();
-		waiting.clear();
-		strongWaiting.clear();
+		objetivesList_.clear();
+		waiting_.clear();
+		strongWaiting_.clear();
 	};
 
 	void init() override;
@@ -61,10 +61,10 @@ public:
 
 	void addEnemy(Entity* e) {
 		if (e->hasComponent<EnemyStrongAttack>()) {
-			strongWaiting.push_back(e);
+			strongWaiting_.push_back(e);
 		}
-		else waiting.push_back(e);
-		numEnemies++;
+		else waiting_.push_back(e);
+		numEnemies_++;
 	}
 	/*
 	Recoge a los enemigos de las listas ambush y los pone en waiting para luego volver a reorganizarlos a todos (nuevos y viejos),
@@ -92,74 +92,82 @@ public:
 
 
 	void refreshLists() {
-		for (int i = 0; i < numPlayers; i++) {
+		for (int i = 0; i < numPlayers_; i++) {
 
 			// remove dead entities from the list of entities
-			objetivesList.at(i)->ambushing.erase( //
+			objetivesList_.at(i)->ambushing.erase( //
 				std::remove_if( //
-					objetivesList.at(i)->ambushing.begin(), //
-					objetivesList.at(i)->ambushing.end(), //
+					objetivesList_.at(i)->ambushing.begin(), //
+					objetivesList_.at(i)->ambushing.end(), //
+					[](const Entity* e) { //
+						return !e->isActive();
+					}), //
+				objetivesList_.at(i)->ambushing.end());
+
+			// remove dead entities from the list of entities
+			objetivesList_.at(i)->atacking.erase( //
+				std::remove_if( //
+					objetivesList_.at(i)->atacking.begin(), //
+					objetivesList_.at(i)->atacking.end(), //
 					[](const Entity* e) { //
 						if (e->isActive()) {
 							return false;
 						}
 						else {
-							delete e;
 							return true;
 						}
 					}), //
-				objetivesList.at(i)->ambushing.end());
+				objetivesList_.at(i)->atacking.end());
 
 			// remove dead entities from the list of entities
-			objetivesList.at(i)->atacking.erase( //
+			objetivesList_.at(i)->strongAmbushing.erase( //
 				std::remove_if( //
-					objetivesList.at(i)->atacking.begin(), //
-					objetivesList.at(i)->atacking.end(), //
+					objetivesList_.at(i)->strongAmbushing.begin(), //
+					objetivesList_.at(i)->strongAmbushing.end(), //
 					[](const Entity* e) { //
-						if (e->isActive()) {
-							return false;
-						}
-						else {
-							delete e;
-							return true;
-						}
+						return !e->isActive();
 					}), //
-				objetivesList.at(i)->atacking.end());
+				objetivesList_.at(i)->strongAmbushing.end());
 
 			// remove dead entities from the list of entities
-			objetivesList.at(i)->strongAmbushing.erase( //
+			objetivesList_.at(i)->strongAtacking.erase( //
 				std::remove_if( //
-					objetivesList.at(i)->strongAmbushing.begin(), //
-					objetivesList.at(i)->strongAmbushing.end(), //
+					objetivesList_.at(i)->strongAtacking.begin(), //
+					objetivesList_.at(i)->strongAtacking.end(), //
 					[](const Entity* e) { //
-						if (e->isActive()) {
-							return false;
-						}
-						else {
-							delete e;
-							return true;
-						}
+						return !e->isActive();
 					}), //
-				objetivesList.at(i)->strongAmbushing.end());
+				objetivesList_.at(i)->strongAtacking.end());
 
-			// remove dead entities from the list of entities
-			objetivesList.at(i)->strongAtacking.erase( //
-				std::remove_if( //
-					objetivesList.at(i)->strongAtacking.begin(), //
-					objetivesList.at(i)->strongAtacking.end(), //
-					[](const Entity* e) { //
-						if (e->isActive()) {
-							return false;
-						}
-						else {
-							delete e;
-							return true;
-						}
-					}), //
-				objetivesList.at(i)->strongAtacking.end());
-
-			objetivesList.at(i)->strongAtacking.clear();
+			//objetivesList_.at(i)->strongAtacking.clear();
+			
 		}
+			// remove dead entities from the list of entities
+			waiting_.erase( //
+				std::remove_if( //
+					waiting_.begin(), //
+					waiting_.end(), //
+					[](const Entity* e) { //
+						if (e->isActive()) {
+							return false;
+						}
+						else {
+
+						return true;
+						}
+					}), //
+				waiting_.end());
+
+			// remove dead entities from the list of entities
+			strongWaiting_.erase( //
+				std::remove_if( //
+					strongWaiting_.begin(), //
+					strongWaiting_.end(), //
+					[](const Entity* e) { //
+						return !e->isActive();
+					}), //
+				strongWaiting_.end());
+
 	}
 
 
@@ -174,11 +182,11 @@ protected: //ahora mismo solo funcionan como private
 	std::vector<Entity*> hamsters_; //same as below
 	std::vector<Entity*> enemys_; //realmente no lo necesitamos pero esta bien tenerlo por si acaso
 
-	list<Entity*> waiting; //es donde se vana  meter inicialmente a todos
-	list<Entity*> strongWaiting; //es donde se vana  meter inicialmente a todos
-	std::map<int, Objetivo*> objetivesList;
-	int numPlayers;
-	int numEnemies;
+	list<Entity*> waiting_; //es donde se vana  meter inicialmente a todos
+	list<Entity*> strongWaiting_; //es donde se vana  meter inicialmente a todos
+	std::map<int, Objetivo*> objetivesList_;
+	int numPlayers_;
+	int numEnemies_;
 
 	GameStates* state_;
 };
