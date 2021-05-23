@@ -75,6 +75,10 @@
       "file": "resources/images/UI/hamsterUI/heart3.png"
     },
     {
+      "id": "calcetinHead",
+      "file": "resources/images/UI/calcetinHead.png"
+    },
+    {
       "id": "sardinillaHead1",
       "file": "resources/images/UI/hamsterUI/sardinillaHead.png"
     },
@@ -680,11 +684,11 @@
     },
     {
       "id": "AbilityOn",
-      "file": "resources/images/UI/keys/r.png"
+      "file": "resources/images/UI/hamsterUI/especialR.png"
     },
     {
       "id": "AbilityOff",
-      "file": "resources/images/UI/keys/rPressed.png"
+      "file": "resources/images/UI/hamsterUI/especialRpressed.png"
     },
     {
       "id": "Hexagon",
