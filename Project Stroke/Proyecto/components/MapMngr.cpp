@@ -487,14 +487,12 @@ void MapMngr::loadEnemyRoom() {
 			enemy->addComponent<EnemyStateMachine>();
 			enemy->setGroup<Enemy>(true);
 
-			enemy->setGroup<Enemy>(true);
-
 			enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, "monosinpatico", Vector2D(3.6, 2), 0, 0, 5, 70);
 
 			enemy->addComponent<Animator>(
-				&sdlutils().images().at("monosinpatico"),
-				86,
-				86,
+				&sdlutils().images().at("monosinpaticoSheet"),
+				128,
+				128,
 				3,
 				3,
 				220,
@@ -502,8 +500,6 @@ void MapMngr::loadEnemyRoom() {
 				3
 				);
 			enemy->addComponent<AnimEnemyStateMachine>();
-			//enemy->getComponent<Animator>()->play(sdlutils().anims().at("calcetin_idle"));
-			enemy->addComponent<UI>("calcetin", 4);
 
 			enemy->addComponent<EnemyAttack>();
 			enemy->addComponent<Knockback>();
@@ -545,7 +541,7 @@ void MapMngr::loadEnemyRoom() {
 				);
 			enemy->addComponent<AnimEnemyStateMachine>();
 			//enemy->getComponent<Animator>()->play(sdlutils().anims().at("calcetin_idle"));
-			enemy->addComponent<UI>("canelon", 4);
+			enemy->addComponent<UI>("calcetin", 4);
 
 			enemy->addComponent<FirstBossAttack>();
 			enemy->addComponent<MovementSimple>();
@@ -620,8 +616,8 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 	}
 	else if (name == "monchi") {
 		tam = 86;
-		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + object.getAABB().width / 3) * scale, (object.getPosition().y + object.getAABB().height / 2) * scale),
-			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.4, 0.3);
+		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + object.getAABB().width/3) * scale, (object.getPosition().y + object.getAABB().height/2) * scale),
+			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.4, 0.4);
 		hamster1->addComponent<HamsterStateMachine>();
 		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20, 70);
 	}

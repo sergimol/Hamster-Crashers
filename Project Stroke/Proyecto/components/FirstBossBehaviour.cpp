@@ -4,7 +4,7 @@
 FirstBossBehaviour::FirstBossBehaviour() :
 	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr),
 	lockedHamster_(nullptr), hamsterTr_(nullptr), anim_(nullptr),  hamsId_(-1), attackAvailable_(false), 
-	waitingTime_(sdlutils().currRealTime()), waitingCD_(4000), stunTime_(0), stunCD_(1500) {
+	waitingTime_(sdlutils().currRealTime()), waitingCD_(4000), stunTime_(0), stunCD_(1500), startBehavior_(false) {
 }
 
 void FirstBossBehaviour::init() {
@@ -130,7 +130,15 @@ bool FirstBossBehaviour::isWithinAttackRange() {
 }
 
 void FirstBossBehaviour::behave() {
-	if (lockedHamster_ != nullptr) {
+	//Fin animacion
+	//if (!startBehavior_ && anim_->getState() == HamStatesAnim::LIGHTATTACK)
+	//{
+	//	if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+	//	{
+	//		startBehavior_ = true;
+	//	}
+	//}
+	/*else*/ if (lockedHamster_ != nullptr) {
 		// Cambia el foco si el actual muere o le da un infarto
 		if (lockedHamState_->cantBeTargeted()) {
 			lockHamster();
