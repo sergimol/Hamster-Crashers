@@ -9,6 +9,8 @@
 
 #include <string>
 
+//ESTA CLASE ES LA DE LAS TRANSICIONES QUE SALE ANGEL HABLANDO
+
 class Subtitulos : public Component {
 public:
 	Subtitulos(std::string actualSub, int transitionNum);

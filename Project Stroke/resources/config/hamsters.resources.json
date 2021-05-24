@@ -1117,8 +1117,12 @@
       "file": "resources/sound/car/car2.wav"
     },
     {
+      "id": "Nivel1GameVersion",
+      "file": "resources/sound/music/Nivel1GameVersion.mp3"
+    },
+    {
       "id": "mainTheme",
-      "file": "resources/sound/music/mainTheme.mp3"
+      "file": "resources/sound/music/Nivel1GameVersion.mp3"
     },
     {
       "id": "birds",
