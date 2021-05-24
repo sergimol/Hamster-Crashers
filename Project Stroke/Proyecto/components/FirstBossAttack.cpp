@@ -49,16 +49,18 @@ void FirstBossAttack::update() {
 				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, true);
 
 				cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-				auto sizeW = tr_->getW();
-				auto& pos = tr_->getPos();
+				auto rectCollide = tr_->getRectCollide();
 
-				attRect_.w = sizeW; //Esto que cuadre con la mano cuando sea
-				attRect_.h = sdlutils().height();
+				//auto sizeW = rectCollide.w;
+				//auto& pos = tr_->getPos();
+
+				attRect_.w = rectCollide.w; //Esto que cuadre con la mano cuando sea
+				attRect_.h = rectCollide.h;
 
 				//Cogemos el rect completo del jefe
 
-				attRect_.x = pos.getX() - cam.x;
-				attRect_.y = pos.getY() - cam.y; //Pos inicial de esquina arriba
+				attRect_.x = rectCollide.x - cam.x;
+				attRect_.y = rectCollide.y - cam.y; //Pos inicial de esquina arriba
 
 				//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
