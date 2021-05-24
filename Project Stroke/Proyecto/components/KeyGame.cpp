@@ -8,8 +8,6 @@ void KeyGame::init() {
 
 	assert(poss_ != nullptr);
 
-	iniPos = tr_->getPos();
-
 	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
 	assert(state_ != nullptr);
 }
@@ -23,20 +21,25 @@ void KeyGame::render() {
 }
 
 void KeyGame::update() {
-	if (state_->getState() == GameStates::RUNNING && tr_->getPos().getX() > trail.x + trail.w) {
-		goBack();
-	}
+	if (state_->getState() == GameStates::RUNNING){
+		progress += speed;
 
-	if (pressed && sdlutils().currRealTime() > timer + pressedTime) {
-		down = false;
+		if (tr_->getPos().getX() > trail.x + trail.w) {
+			goBack();
+		}
+
+		if (pressed && sdlutils().currRealTime() > timer + pressedTime) {
+			down = false;
+		} 
 	}
 }
 
 // Devuelve a la posición inicial y notifica a Possesion
 void KeyGame::goBack() {
-	tr_->getPos() = iniPos;
+	tr_->getPos() = Vector2D(trail.x, trail.y);
 	poss_->reachedEnd();
 	pressed = false;
+	progress = 0;
 }
 
 //Comprueba si es un acierto y se anima
@@ -48,8 +51,8 @@ bool KeyGame::hitSkillCheck() {
 	}
 	float x = tr_->getPos().getX(), y = tr_->getPos().getY();
 	auto* cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
-	x -= cam->getCamPos().getX() / 2.0f;
-	y -= cam->getCamPos().getY() / 2.0f;
+	/*x -= cam->getCamPos().getX() / 2.0f;
+	y -= cam->getCamPos().getY() / 2.0f;*/
 
 	return Collisions::collides(Vector2D(x, y), tr_->getW(), tr_->getH(), 
 						Vector2D(hitmarker.x, hitmarker.y), hitmarker.w, hitmarker.h);
@@ -67,3 +70,12 @@ bool KeyGame::hitSkillCheck() {
 //	setKey();
 //	tr_->setPos(iniPos);
 //}
+
+void KeyGame::updateGamePos(const SDL_Rect& hit, const SDL_Rect& trai) {
+	hitmarker = hit;
+	trail = trai;
+	auto newPos = tr_->getPos();
+	newPos.setX(trail.x + tr_->getW() / 2 + progress);
+	newPos.setY(trail.y - tr_->getH() / 2);
+	tr_->setPos(newPos);
+}

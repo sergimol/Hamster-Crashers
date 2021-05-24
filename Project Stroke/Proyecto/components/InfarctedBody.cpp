@@ -76,7 +76,7 @@ void InfarctedBody::update() {
 void InfarctedBody::render() {
 	//Si estamos en contacto con un posible "host" que nos pueda revivir, muestra la imagen del botón
 	if (show && !reviving) {
-		Vector2D renderPos = Vector2D(tr_->getPos().getX() - cam.x, tr_->getPos().getY() + tr_->getZ() - cam.y);
+		Vector2D renderPos = Vector2D(tr_->getPos().getX() + tr_->getW() - cam.x, tr_->getPos().getY() + tr_->getZ() - cam.y);
 		SDL_Rect dest = build_sdlrect(renderPos, KEY_WIDTH, KEY_HEIGHT);
 		tx_->render(dest);
 	}

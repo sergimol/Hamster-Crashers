@@ -3,6 +3,8 @@
 #include "Stroke.h"
 #include "../sdlutils/InputHandler.h"
 #include "KeyGame.h"
+#include "SoundManager.h"
+
 #include "../ecs/Manager.h"
 
 void PossesionGame::init() {
@@ -24,30 +26,31 @@ void PossesionGame::render() {
 //Comprueba que la tecla sea pulsada y la keyGame esté chocando con el marcador
 void PossesionGame::update() {
 	if (state_->getState() == GameStates::RUNNING) {
-
-		/*std::cin >> H_LINE_OFFSET_X >> H_LINE_OFFSET_Y;
-		std::cin >> V_LINE_OFFSET_X >> V_LINE_OFFSET_Y;*/
-
 		if (keyGame != nullptr)
 			keyGame->update();
 
 		bool success = false;
+
 		// Si el fantasma se está controlando con mando
 		if (ih().playerHasController(playerNumber_)) {
-			if (ih().isButtonDownEvent())
+			if (ih().isButtonDownEvent()) {
 				success = ih().isButtonDown(playerNumber_, actualButton) && keyGame->getComponent<KeyGame>()->hitSkillCheck();
-		}
 
+				if (success)
+					succesfulHit();
+				else
+					failedHit();
+			}
+		}
 		// Si se está controlando con teclado
 		else if (ih().keyDownEvent()) {
 			success = ih().isKeyDown(actualKey) && keyGame->getComponent<KeyGame>()->hitSkillCheck();
+
+			if (success)
+				succesfulHit();
+			else
+				failedHit();
 		}
-
-		if (success)
-			succesfulHit();
-		else
-			failedHit();
-
 		//Si se muere o infarta el poseido, se acaba la posesion
 		if (possesedState->cantBeTargeted()) {
 			endPossesion();
@@ -79,7 +82,7 @@ void PossesionGame::start() {
 	//Crea la entidad del QuickTimeEvent
 	keyGame = new Entity(entity_->getMngr());
 	
-	keyGame->addComponent<Transform>(Vector2D(lineHPos.x, lineHPos.y), Vector2D(BOX_INI_VEL_X, 0), BOX_SIZE_X, BOX_SIZE_Y, 0, 1, 1);
+	keyGame->addComponent<Transform>(Vector2D(lineHPos.x - BOX_SIZE_X/2, lineHPos.y - BOX_SIZE_Y/2), Vector2D(0, 0), BOX_SIZE_X, BOX_SIZE_Y, 0, 1, 1);
 	keyGame->addComponent<KeyGame>(lineHPos, lineVPos, this);
 	randomiseKey();
 }
@@ -99,6 +102,9 @@ void PossesionGame::updateGamePos() {
 
 		pos.set(x + V_LINE_OFFSET_X, y + V_LINE_OFFSET_Y);
 		lineVPos = build_sdlrect(pos, V_LINE_SIZE_X, V_LINE_SIZE_Y);
+
+		if(keyGame != nullptr)
+			keyGame->getComponent<KeyGame>()->updateGamePos(lineVPos, lineHPos);
 	}
 }
 
@@ -118,6 +124,8 @@ void PossesionGame::reachedEnd() {
 }
 
 void PossesionGame::succesfulHit() {
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("rightNote");
+
 	//Si no hemos fallado la prueba antes, se da por pasada
 	if(!failed) roundPassed = true;
 	
@@ -129,6 +137,7 @@ void PossesionGame::succesfulHit() {
 }
 
 void PossesionGame::failedHit() {
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("wrongNote");
 	failed = true;
 }
 

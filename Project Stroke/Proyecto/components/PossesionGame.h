@@ -11,7 +11,7 @@ using namespace std;
 class PossesionGame :public Component {
 public:
 	PossesionGame() : possesed(nullptr), lineH(&sdlutils().images().at("linea")), lineV(&sdlutils().images().at("lineaV")) {};
-	~PossesionGame() {};
+	~PossesionGame() { if (keyGame != nullptr) delete keyGame; };
 
 	virtual void init() override;
 
@@ -89,12 +89,12 @@ private:
 
 	bool roundPassed = false, failed = false;
 	
-	const short int maxMistakes = 3;
+	const short int maxMistakes = 59;
 
 	short int mistakes = 0;
 
 	//CONSTANTES VISUALES 
 	float H_LINE_SIZE_X = 400, H_LINE_SIZE_Y = 20, H_LINE_OFFSET_X = 300, H_LINE_OFFSET_Y = -150,
-				V_LINE_SIZE_X = 5, V_LINE_SIZE_Y = 70, V_LINE_OFFSET_X = 650, V_LINE_OFFSET_Y = -175,
-				BOX_SIZE_X = 50, BOX_SIZE_Y = 50, BOX_INI_VEL_X = 3;
+		V_LINE_SIZE_X = 5, V_LINE_SIZE_Y = 70, V_LINE_OFFSET_X = 650, V_LINE_OFFSET_Y = -175,
+		BOX_SIZE_X = 50, BOX_SIZE_Y = 50; //BOX_INI_VEL_X = 3;
 };

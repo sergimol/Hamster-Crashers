@@ -27,6 +27,8 @@ public:
 	inline void setTexture(Texture* txt) { tx_ = txt; };
 
 	inline void setTextureDown(Texture* txt) { txDown_ = txt; };
+
+	void updateGamePos(const SDL_Rect& hit, const SDL_Rect& trai);
 private:
 	void goBack();
 
@@ -38,11 +40,9 @@ private:
 	SDL_Rect trail;
 	SDL_Rect hitmarker;
 	
-	Vector2D iniPos;
-
 	bool pressed = false, down = false;
 
-	int timer;
+	int timer, progress = 0;
 
-	const int pressedTime = 150;
+	const int pressedTime = 150, speed = 5;
 };

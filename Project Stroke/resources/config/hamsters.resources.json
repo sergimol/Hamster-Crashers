@@ -247,11 +247,11 @@
       "file": "resources/images/tecla_Q.png"
     },
     {
-      "id": "r",
+      "id": "p",
       "file": "resources/images/UI/keys/r.png"
     },
     {
-      "id": "rPressed",
+      "id": "pPressed",
       "file": "resources/images/UI/keys/rPressed.png"
     },
     {

@@ -214,7 +214,7 @@ void ControlHandler::handleController() {
 			if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_B)) {
 
 				//para depurar le voy a provocar un infarto
-				entity_->getComponent<Stroke>()->infarctHamster();
+				entity_->getComponent<Stroke>()->INFARCT();
 			}
 		}
 	}
