@@ -26,6 +26,7 @@ EntityAttribs::EntityAttribs() :
 	critDamage_(1.0),
 
 	poisonDamage_(2),
+	canBePoisoned_(true),
 	poisonProbability_(0.0),
 	canPoison_(poisonProbability_ > 0),
 	poisoned_(false),
@@ -64,6 +65,7 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	critDamage_(1.5),
 
 	poisonDamage_(2),
+	canBePoisoned_(true),
 	poisonProbability_(poisonProb),
 	canPoison_(poisonProbability_ > 0),
 	poisoned_(false),
@@ -102,6 +104,7 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	critDamage_(1.5),
 
 	poisonDamage_(2),
+	canBePoisoned_(false),
 	poisonProbability_(poisonProb),
 	canPoison_(poisonProbability_ > 0),
 	poisoned_(false),
@@ -315,10 +318,11 @@ void EntityAttribs::addCritProbability(float probability) {
 
 //Comienza el envenenamiento
 void EntityAttribs::poison() {
-	//int SDL_SetTextureColorMod(hmsText_, 96, 227, 70);
-	poisonTime_ = sdlutils().currRealTime();
-	poisoned_ = true;
-
+	if (canBePoisoned_) {
+		//int SDL_SetTextureColorMod(hmsText_, 96, 227, 70);
+		poisonTime_ = sdlutils().currRealTime();
+		poisoned_ = true;
+	}
 }
 
 void EntityAttribs::onResume() {
