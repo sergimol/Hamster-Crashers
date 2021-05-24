@@ -93,9 +93,10 @@ void EnemyBehaviour::onDisable() {
 void EnemyBehaviour::setHamId(int hId, std::list<Entity*>::iterator it, char l) {
 	hamId_ = hId;
 	listIterator = it; //es para luego hacer el quitado de la lista que no es una pila, si no un vector del que s epueden quitar o meter entidades desde cualquier direccion
-	
-	lockHamster(hId);
-	bh_->setObjetive();
+	if (hId >= 0) {
+		lockHamster(hId);
+		bh_->setObjetive();
+	}
 	list = l;
 }
 void EnemyBehaviour::die() {
