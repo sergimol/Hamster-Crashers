@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="left-up" width="160" height="5" tilewidth="64" tileheight="64" infinite="0" nextlayerid="22" nextobjectid="135">
+<map version="1.4" tiledversion="2020.10.30" orientation="orthogonal" renderorder="left-up" width="160" height="5" tilewidth="64" tileheight="64" infinite="0" nextlayerid="22" nextobjectid="135">
  <properties>
   <property name="MaxH" type="int" value="5"/>
  </properties>
@@ -342,24 +342,28 @@
    <properties>
     <property name="CameraCoordX" type="int" value="1100"/>
     <property name="Rounds" type="int" value="2"/>
+    <property name="zBoss" type="bool" value="false"/>
    </properties>
   </object>
   <object id="108" name="2" x="2074.56" y="868.53" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="2600"/>
     <property name="Rounds" type="int" value="2"/>
+    <property name="zBoss" type="bool" value="false"/>
    </properties>
   </object>
   <object id="109" name="3" x="3640.56" y="862.447" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="4200"/>
     <property name="Rounds" type="int" value="2"/>
+    <property name="zBoss" type="bool" value="false"/>
    </properties>
   </object>
   <object id="110" name="4" x="5052.56" y="862.447" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="5600"/>
     <property name="Rounds" type="int" value="2"/>
+    <property name="zBoss" type="bool" value="false"/>
    </properties>
   </object>
  </objectgroup>

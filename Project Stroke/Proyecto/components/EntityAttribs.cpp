@@ -85,7 +85,7 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	state_(nullptr)
 {}
 
-EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty) :
+EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty, bool canBPois) :
 	playerNumber_(number),
 	id_(id),
 	health_(life),
@@ -104,7 +104,7 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	critDamage_(1.5),
 
 	poisonDamage_(2),
-	canBePoisoned_(false),
+	canBePoisoned_(canBPois),
 	poisonProbability_(poisonProb),
 	canPoison_(poisonProbability_ > 0),
 	poisoned_(false),
@@ -120,7 +120,8 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	hms_(nullptr),
 	hmsText_(nullptr),
 	enmState_(nullptr),
-	tr_(nullptr)
+	tr_(nullptr),
+	state_(nullptr)
 {}
 
 EntityAttribs::~EntityAttribs() {
