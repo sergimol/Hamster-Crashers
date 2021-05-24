@@ -16,12 +16,19 @@ void KeyGame::init() {
 
 void KeyGame::render() {
 	SDL_Rect box = build_sdlrect(tr_->getPos(), tr_->getW(), tr_->getH());
-	tx_->render(box);
+	if (!down)
+		tx_->render(box);
+	else
+		txDown_->render(box);
 }
 
 void KeyGame::update() {
 	if (state_->getState() == GameStates::RUNNING && tr_->getPos().getX() > trail.x + trail.w) {
 		goBack();
+	}
+
+	if (pressed && sdlutils().currRealTime() > timer + pressedTime) {
+		down = false;
 	}
 }
 
@@ -29,11 +36,22 @@ void KeyGame::update() {
 void KeyGame::goBack() {
 	tr_->getPos() = iniPos;
 	poss_->reachedEnd();
+	pressed = false;
 }
 
-//Comprueba si es un acierto
+//Comprueba si es un acierto y se anima
 bool KeyGame::hitSkillCheck() {
-	return Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), 
+	if (!pressed) {
+		pressed = true;
+		down = true;
+		timer = sdlutils().currRealTime();
+	}
+	float x = tr_->getPos().getX(), y = tr_->getPos().getY();
+	auto* cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
+	x -= cam->getCamPos().getX() / 2.0f;
+	y -= cam->getCamPos().getY() / 2.0f;
+
+	return Collisions::collides(Vector2D(x, y), tr_->getW(), tr_->getH(), 
 						Vector2D(hitmarker.x, hitmarker.y), hitmarker.w, hitmarker.h);
 }
 

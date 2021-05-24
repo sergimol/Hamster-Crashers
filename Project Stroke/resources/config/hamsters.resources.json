@@ -235,36 +235,72 @@
       "file": "resources/images/UI/keys/r.png"
     },
     {
+      "id": "rPressed",
+      "file": "resources/images/UI/keys/rPressed.png"
+    },
+    {
       "id": "a",
       "file": "resources/images/UI/keys/a.png"
+    },
+    {
+      "id": "aPressed",
+      "file": "resources/images/UI/keys/aPressed.png"
     },
     {
       "id": "b",
       "file": "resources/images/UI/keys/b.png"
     },
     {
+      "id": "bPressed",
+      "file": "resources/images/UI/keys/bPressed.png"
+    },
+    {
       "id": "d",
       "file": "resources/images/UI/keys/d.png"
+    },
+    {
+      "id": "dPressed",
+      "file": "resources/images/UI/keys/dPressed.png"
     },
     {
       "id": "s",
       "file": "resources/images/UI/keys/s.png"
     },
     {
+      "id": "sPressed",
+      "file": "resources/images/UI/keys/sPressed.png"
+    },
+    {
       "id": "w",
       "file": "resources/images/UI/keys/w.png"
+    },
+    {
+      "id": "wPressed",
+      "file": "resources/images/UI/keys/wPressed.png"
     },
     {
       "id": "x",
       "file": "resources/images/UI/keys/x.png"
     },
     {
+      "id": "xPressed",
+      "file": "resources/images/UI/keys/xPressed.png"
+    },
+    {
       "id": "y",
       "file": "resources/images/UI/keys/y.png"
     },
     {
+      "id": "yPressed",
+      "file": "resources/images/UI/keys/yPressed.png"
+    },
+    {
       "id": "a2",
       "file": "resources/images/UI/keys/a2.png"
+    },
+    {
+      "id": "a2Pressed",
+      "file": "resources/images/UI/keys/a2Pressed.png"
     },
     {
       "id": "linea",

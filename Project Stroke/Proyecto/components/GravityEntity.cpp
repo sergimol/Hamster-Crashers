@@ -12,7 +12,7 @@ void GravityEntity::update() {
 	auto& z = tr_->getZ();
 	auto& velZ = tr_->getVelZ();
 
-	std::cout << velZ << "\n";
+	//std::cout << velZ << "\n";
 
 	if (z > floor&& sdlutils().currRealTime() > timer + jumpTimer_) {			//Aceleracion del salto afectado por gravedad
 		velZ -= gravity_;

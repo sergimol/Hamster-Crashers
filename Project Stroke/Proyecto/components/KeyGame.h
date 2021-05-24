@@ -25,10 +25,14 @@ public:
 	bool hitSkillCheck();
 
 	inline void setTexture(Texture* txt) { tx_ = txt; };
+
+	inline void setTextureDown(Texture* txt) { txDown_ = txt; };
 private:
+	void goBack();
+
 	Transform* tr_;
 	PossesionGame* poss_;
-	Texture* tx_;
+	Texture* tx_, * txDown_;
 	GameStates* state_;
 
 	SDL_Rect trail;
@@ -36,5 +40,9 @@ private:
 	
 	Vector2D iniPos;
 
-	void goBack();
+	bool pressed = false, down = false;
+
+	int timer;
+
+	const int pressedTime = 150;
 };
