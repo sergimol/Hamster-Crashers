@@ -51,9 +51,9 @@ public:
 	int notesReanimVol = 20;
 	int possesionVol = 20;
 
-	int sardinillaSpecialVol = 20;
+	int sardinillaSpecialVol = 30;
 	int ketaSpecialVol = 20;
-	int monchiSpecialVol = 20;
+	int monchiSpecialVol = 10;
 	int canelonSpecialVol = 20;
 
 	int buttonVol = 20;
