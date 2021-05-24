@@ -1117,11 +1117,31 @@
       "file": "resources/sound/car/car2.wav"
     },
     {
-      "id": "Nivel1GameVersion",
-      "file": "resources/sound/music/Nivel1GameVersion.mp3"
+      "id": "HamstersMainThemev2",
+      "file": "resources/sound/music/HamstersMainThemev2.mp3"
     },
     {
-      "id": "mainTheme",
+      "id": "HamstersNivel2_Boss160bpm",
+      "file": "resources/sound/music/HamstersNivel2_Boss160bpm.mp3"
+    },
+    {
+      "id": "HamstersNivel2GameVersion",
+      "file": "resources/sound/music/HamstersNivel2GameVersion.mp3"
+    },
+    {
+      "id": "HamstersNivel4_Boss2",
+      "file": "resources/sound/music/HamstersNivel4_Boss2.mp3"
+    },
+    {
+      "id": "HamstersNivel4GameVersion",
+      "file": "resources/sound/music/HamstersNivel4GameVersion.mp3"
+    },
+    {
+      "id": "Nivel1Boss1_0",
+      "file": "resources/sound/music/Nivel1Boss1_0.mp3"
+    },
+    {
+      "id": "Nivel1GameVersion",
       "file": "resources/sound/music/Nivel1GameVersion.mp3"
     },
     {

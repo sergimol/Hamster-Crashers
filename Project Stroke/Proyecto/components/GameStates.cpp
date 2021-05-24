@@ -1,5 +1,5 @@
 #include "GameStates.h"
-
+#include "SoundManager.h"
 void GameStates::init() {
 	state_ = MAINMENU;
 	//state_ = CONTROLS;
@@ -15,6 +15,7 @@ void GameStates::setState(States state) {
 
 	lastState_ = state_;
 	state_ = state;
+
 }
 
 GameStates::States GameStates::getState() {

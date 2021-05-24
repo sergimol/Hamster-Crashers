@@ -22,32 +22,33 @@ public:
 	//FADEPRUEBA
 	//entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->fadeOut(3000);
 	//void fadeIn(int time);
+
 	//channels
 	int lighthitsChannel = 0;
-	int stronghitsChannel = 0;
-	int attacksChannel = 0;
+	int stronghitsChannel = 1;
+	int attacksChannel = 2;
 
-	int depsChannel = 1;
-	int heartattacksChannel = 1;
-	int soldierDepChannel = 1;
+	int depsChannel = 3;
+	int heartattacksChannel = 4;
+	int soldierDepChannel = 5;
 
-	int musicsChannel = 2;
+	int musicsChannel = 26;
 	int subtitlesChannel = 7;
-	int birdsChannel = 2;
+	int birdsChannel = 8;
 
-	int catChannel = 3;
-	int carChannel = 3;
+	int catChannel = 9;
+	int carChannel = 10;
 
-	int ketaSpecialChannel = 4;
-	int monchiSpecialChannel = 4;
-	int canelonSpecialChannel = 4;
+	int ketaSpecialChannel = 11;
+	int monchiSpecialChannel = 12;
+	int canelonSpecialChannel = 13;
 
-	int buttonChannel = 5;
-	int EatChannel = 5;
+	int buttonChannel = 14;
+	int EatChannel = 15;
 
-	int trainBackgroundChannel = 6;
-	int transitionChannel = 6;
-	int trapKitchenChannel = 6;
+	int trainBackgroundChannel = 16;
+	int transitionChannel = 17;
+	int trapKitchenChannel = 18;
 
 
 

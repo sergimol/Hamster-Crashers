@@ -73,13 +73,13 @@ void SoundManager::init() {
 	car1 = &sdlutils().soundEffects().at("car1");
 	car2 = &sdlutils().soundEffects().at("car2");
 
-	HamstersMainThemev2 = &sdlutils().soundEffects().at("Nivel1GameVersion");
+	HamstersMainThemev2 = &sdlutils().soundEffects().at("HamstersMainThemev2");
 	Nivel1GameVersion = &sdlutils().soundEffects().at("Nivel1GameVersion");
-	Nivel1Boss1_0 = &sdlutils().soundEffects().at("Nivel1GameVersion");
-	HamstersNivel2GameVersion = &sdlutils().soundEffects().at("Nivel1GameVersion");
-	HamstersNivel2_Boss160bpm = &sdlutils().soundEffects().at("Nivel1GameVersion");
-	HamstersNivel4_Boss2 = &sdlutils().soundEffects().at("Nivel1GameVersion");
-	HamstersNivel4GameVersion = &sdlutils().soundEffects().at("Nivel1GameVersion");
+	Nivel1Boss1_0 = &sdlutils().soundEffects().at("Nivel1Boss1_0");
+	HamstersNivel2GameVersion = &sdlutils().soundEffects().at("HamstersNivel2GameVersion");
+	HamstersNivel2_Boss160bpm = &sdlutils().soundEffects().at("HamstersNivel2_Boss160bpm");
+	HamstersNivel4_Boss2 = &sdlutils().soundEffects().at("HamstersNivel4_Boss2");
+	HamstersNivel4GameVersion = &sdlutils().soundEffects().at("HamstersNivel4GameVersion");
 
 	birds = &sdlutils().soundEffects().at("birds");
 
@@ -349,30 +349,33 @@ void SoundManager::play(std::string soundName) {
 
 	//CANCIONES
 	else if (soundName == "HamstersMainThemev2") {
-		HamstersMainThemev2->play(0, musicsChannel);
+		Mix_HaltChannel(musicsChannel);
+		HamstersMainThemev2->play(200, musicsChannel);
 	}
 	else if (soundName == "Nivel1GameVersion") {
-		Nivel1GameVersion->play(0, musicsChannel);
+		Mix_HaltChannel(musicsChannel);
+		Nivel1GameVersion->play(200, musicsChannel);
 	}
 	else if (soundName == "Nivel1Boss1_0") {
-		Nivel1Boss1_0->play(0, musicsChannel);
+		Mix_HaltChannel(musicsChannel);
+		Nivel1Boss1_0->play(200, musicsChannel);
 	}
 	else if (soundName == "HamstersNivel2GameVersion") {
-		HamstersNivel2GameVersion->play(0, musicsChannel);
+		Mix_HaltChannel(musicsChannel);
+		HamstersNivel2GameVersion->play(200, musicsChannel);
 	}
 	else if (soundName == "HamstersNivel2_Boss160bpm") {
-		HamstersNivel2_Boss160bpm->play(0, musicsChannel);
+		Mix_HaltChannel(musicsChannel);
+		HamstersNivel2_Boss160bpm->play(200, musicsChannel);
 	}
 	else if (soundName == "HamstersNivel4_Boss2") {
-		HamstersNivel4_Boss2->play(0, musicsChannel);
+		Mix_HaltChannel(musicsChannel);
+		HamstersNivel4_Boss2->play(200, musicsChannel);
 	}
 	else if (soundName == "HamstersNivel4GameVersion") {
-		HamstersNivel4GameVersion->play(0, musicsChannel);
+		Mix_HaltChannel(musicsChannel);
+		HamstersNivel4GameVersion->play(200, musicsChannel);
 	}
-
-
-
-
 }
 
 int SoundManager::pickRandom(int max) {
