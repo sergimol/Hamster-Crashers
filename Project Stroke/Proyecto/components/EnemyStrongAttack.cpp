@@ -124,7 +124,7 @@ bool EnemyStrongAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo
 			//}
 			canHit = true;
 			//Le restamos la vida al aliado
-			eAttribs->recieveDmg(dmg / 6);
+			eAttribs->recieveDmg(dmg / 2);
 
 			auto& hamStateM = ents[i]->getComponent<HamsterStateMachine>()->getState();
 

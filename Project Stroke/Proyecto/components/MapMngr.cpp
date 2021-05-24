@@ -450,9 +450,17 @@ void MapMngr::loadEnemyRoom() {
 
 		if (name == "enemigo" && prop[1].getIntValue() == Room && prop[2].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* enemy = mngr_->addEntity();
+
 			auto* enTr = enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(), 86 * scale, 86 * scale, 0.0f, 0.4, 0.5);
+				Vector2D(), 86 * scale, 86 * scale, 0.0f, 0, 0, 0.4, 0.5);
+			/*
+			hamster1->addComponent<Transform>(
+				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+				Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.5);*/
+
+
+
 			enTr->setFloor(prop[0].getIntValue() * TAM_CELDA * scale);
 			enTr->setZ(prop[0].getIntValue() * TAM_CELDA * scale);
 			enTr->getFlip() = true;
@@ -497,7 +505,8 @@ void MapMngr::loadEnemyRoom() {
 			auto* enemy = mngr_->addEntity();
 			auto* enTr = enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(), 128 * scale, 128 * scale, 0.0f, 0.3, 0.5);
+				Vector2D(), 128 * scale, 128 * scale, 0.0f, 0, 0, 0.3, 0.5);
+
 			enTr->setFloor(prop[0].getIntValue() * TAM_CELDA * scale);
 			enTr->setZ(prop[0].getIntValue() * TAM_CELDA * scale);
 			enTr->getFlip() = true;
@@ -505,7 +514,7 @@ void MapMngr::loadEnemyRoom() {
 			enemy->addComponent<EnemyStateMachine>();
 			enemy->setGroup<Enemy>(true);
 
-			enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, prop[3].getStringValue(), Vector2D(3.6, 2), 0, 0, 5, 70);
+			enemy->addComponent<EntityAttribs>(300 + ((hamstersToLoad_.size() - 1) * 100), 0.0, prop[3].getStringValue(), Vector2D(3.6, 2), 0, 0, 5, true, false, true);
 
 			enemy->addComponent<Animator>(
 				&sdlutils().images().at(prop[3].getStringValue() + "Sheet"),
@@ -545,7 +554,7 @@ void MapMngr::loadEnemyRoom() {
 			enemy->addComponent<EnemyStateMachine>();
 			enemy->setGroup<Enemy>(true);
 
-			enemy->addComponent<EntityAttribs>(600 + (hamstersToLoad_.size() * 100), 0.0, "calcetin", Vector2D(4.5, 2), 0, 0, 20, true, true);
+			enemy->addComponent<EntityAttribs>(600 + (hamstersToLoad_.size() * 100), 0.0, "calcetin", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
 
 			//enemy->addComponent<Image>(&sdlutils().images().at("firstBoss"));
 			enemy->addComponent<Animator>(
@@ -581,7 +590,7 @@ void MapMngr::loadEnemyRoom() {
 			//enemy->addComponent<EnemyStateMachine>();
 			//enemy->setGroup<Enemy>(true);
 
-			//enemy->addComponent<EntityAttribs>(600 + (hamstersToLoad_.size() * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true);
+			//enemy->addComponent<EntityAttribs>(600 + (hamstersToLoad_.size() * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
 
 			//enemy->addComponent<Image>(&sdlutils().images().at("firstBoss"));
 			//enemy->addComponent<UI>("canelon", 4);
@@ -821,7 +830,7 @@ void MapMngr::addTrap(const tmx::Object& object, int x, int y) {
 	trap->addComponent<TimeTrap>(&sdlutils().images().at("catSmoking"));
 
 	//int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty
-	trap->addComponent<EntityAttribs>(1, 10.0f, "trap1", Vector2D(), 1, 0.0f, 1, true, false);
+	trap->addComponent<EntityAttribs>(1, 10.0f, "trap1", Vector2D(), 1, 0.0f, 1, true, false, false);
 	//trap->addComponent<Image>(&sdlutils().images().at("catSmoking"));
 
 	/*
