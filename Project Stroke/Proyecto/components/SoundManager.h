@@ -16,74 +16,60 @@ public:
 	void lowVolume(bool channel);
 	void upVolume(bool channel);
 	void resetVolumes() { fxVol_ = 1; musicVol_ = 1; };
-	bool emptyChannel(int channel);
+	bool emptyChannel();
+	void StopTutorial();
 
-	void fadeOut(int time) { Mix_FadeOutChannel(musicsChannel, time); };
 	//FADEPRUEBA
 	//entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->fadeOut(3000);
 	//void fadeIn(int time);
-
-	//channels
-	int lighthitsChannel = 0;
-	int stronghitsChannel = 1;
-	int attacksChannel = 2;
-
-	int depsChannel = 3;
-	int heartattacksChannel = 4;
-	int soldierDepChannel = 5;
-
-	int musicsChannel = 26;
-	int subtitlesChannel = 7;
-	int birdsChannel = 8;
-
-	int catChannel = 9;
-	int carChannel = 10;
-
-	int ketaSpecialChannel = 11;
-	int monchiSpecialChannel = 12;
-	int canelonSpecialChannel = 13;
-
-	int buttonChannel = 14;
-	int EatChannel = 15;
-
-	int trainBackgroundChannel = 16;
-	int transitionChannel = 17;
-	int trapKitchenChannel = 18;
-
-
-
 
 	//volumes
 	//general
 	float fxVol_ = 1;
 	float musicVol_ = 1;
 	//local
-	int generalFXvol = 20;
 
+	int initLightVol = 60;
 	int initStrongVol = 60;
-	int initSubtitleVol = 100;
+	int initAttackVol = 20;
 
+	int initDepVol = 20;
+	int initHeartAttackVol = 20;
+
+	int initCatVol = 20;
+
+	int initHandVol = 20;
+
+	int initMonkeVol = 20;
+
+	int inittrainBackgroundVol = 20;
+
+	int carVol = 20;
+
+	int initsoldierDepVol = 5;
+
+	int notesReanimVol = 20;
+	int possesionVol = 20;
+
+	int sardinillaSpecialVol = 20;
 	int ketaSpecialVol = 20;
 	int monchiSpecialVol = 20;
 	int canelonSpecialVol = 20;
 
-	int initCatVol = 20;
-	int carVol = 20;
-
 	int buttonVol = 20;
-
-	int initMusicVol = 8;
-	int initBirdsVol = 20;
 
 	int initEatVol = 20;
 
-	int initsoldierDepVol = 20;
-	
-	int inittrainBackgroundVol = 20;
-
-	int inittransitionVol = 20;
+	int pageSkipVol = 20;
+	int initTutorialVol = 20;
+	int initTransitionVol = 20;
 
 	int inittrapKitchenVol = 20;
+
+	int initBirdsVol = 20;
+
+	int initMusicVol = 5;
+
 private:
 	int randomNum;
 
@@ -99,7 +85,6 @@ private:
 
 	void playTutorial();
 	void playTransition();
-	void StopTutorial();
 
 	void playKetaSpecial();
 
@@ -133,6 +118,7 @@ private:
 	SoundEffect* light8;
 	SoundEffect* light9;
 	SoundEffect* light10;
+
 
 	//Golpe Fuerte
 	SoundEffect* strong0;
@@ -222,16 +208,6 @@ private:
 	SoundEffect* button0;
 	SoundEffect* button1;
 
-	//Musica y sonidos ambiente
-	SoundEffect* HamstersMainThemev2;
-	SoundEffect* Nivel1GameVersion;
-	SoundEffect* Nivel1Boss1_0;
-	SoundEffect* HamstersNivel2GameVersion;
-	SoundEffect* HamstersNivel2_Boss160bpm;
-	SoundEffect* HamstersNivel4_Boss2;
-	SoundEffect* HamstersNivel4GameVersion;
-
-	SoundEffect* birds;
 
 	//Recoger items
 	SoundEffect* eat0;
@@ -274,6 +250,16 @@ private:
 	SoundEffect* transition9;
 	SoundEffect* transition10;
 
+	//Musica y sonidos ambiente
+	Music* HamstersMainThemev2;
+	Music* Nivel1GameVersion;
+	Music* Nivel1Boss1_0;
+	Music* HamstersNivel2GameVersion;
+	Music* HamstersNivel2_Boss160bpm;
+	Music* HamstersNivel4_Boss2;
+	Music* HamstersNivel4GameVersion;
+
+	SoundEffect* birds;
 
 };
 

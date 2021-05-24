@@ -21,6 +21,8 @@ public:
 		assert(chunk_ != nullptr);
 	}
 
+	void setChannel(int c) { channels_ = c; };
+
 	SoundEffect(SoundEffect &&other) noexcept {
 		chunk_ = other.chunk_;
 		other.chunk_ = nullptr;
