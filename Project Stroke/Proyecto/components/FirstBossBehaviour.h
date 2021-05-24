@@ -69,6 +69,8 @@ private:
 	float stunTime_; //Tiempo parado antes de recuperar el comportamiento
 	float stunCD_;
 
+	bool startBehavior_;
+
 	AnimEnemyStateMachine* anim_; //
 };
 
