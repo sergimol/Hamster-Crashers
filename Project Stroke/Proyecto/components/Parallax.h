@@ -33,6 +33,7 @@ private:
 	//Para que se rendericen por delante
 	bool front_ = false;
 
+
 public:
 	Parallax(Texture* im, float vel, Vector2D size, Vector2D pos, bool front);
 	virtual ~Parallax() {};
