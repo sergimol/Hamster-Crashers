@@ -79,11 +79,7 @@ void FirstBossAttack::update() {
 				stunStarted_ = true;
 
 			}
-			//Esta en el suelo, puede recibir daño 
-			/*else if (stunStarted_ && eAttribs_->checkInvulnerability() && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
-				eAttribs_->setInvincibility(false);
-				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, true);
-			}*/
+			//HA LLEGADO AL SUELO
 			if (entity_->getComponent<AnimEnemyStateMachine>()->getState() == EnemyStatesAnim::ATTACK)
 			{
 				if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
@@ -91,6 +87,8 @@ void FirstBossAttack::update() {
 					if (stunStarted_ && eAttribs_->checkInvulnerability()) {
 
 						eAttribs_->setInvincibility(false);
+
+						//LE PASAMOS AL ESTADO DEL SUELO Y QUITAMOS EL ATAQUE
 						entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, true);
 						entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
 
@@ -102,18 +100,19 @@ void FirstBossAttack::update() {
 				// Activar colisiones
 				collides_ = true;
 			}
-			//Deja de estar en el suelo
+			//SE LEVANTA
 			else if (stunStarted_ && sdlutils().currRealTime() > hitTime_ + afterHitCD_) {
 				eAttribs_->setInvincibility(true);
 				attackStarted_ = false;
 				stunStarted_ = false;
 
-				//LE QUITAMOS LA ANIMACION DE ESTAR EN EL SUELO
+				//QUITAMOS TODOS LOS ESTADOS QUE PUEDEN INTERFERIR
 				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, false);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, false);
+
 				//FORZAMOS A LA ANIMACION DE SUBIDA
 				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::UP, true);
-				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
-
 
 				//desactivar colisiones
 				collides_ = false;

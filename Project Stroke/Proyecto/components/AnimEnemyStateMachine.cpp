@@ -50,6 +50,8 @@ void AnimEnemyStateMachine::HandleAnimState()
 		currentState = EnemyStatesAnim::STUNNED;
 	if (up)
 		currentState = EnemyStatesAnim::UP;
+	if (sequence)
+		currentState = EnemyStatesAnim::SEQUENCE;
 	
 }
 
@@ -92,6 +94,9 @@ void AnimEnemyStateMachine::CheckAnimState()
 			break;
 		case EnemyStatesAnim::UP:
 			anim->play(sdlutils().anims().at(id + "_up"));
+			break;
+		case EnemyStatesAnim::SEQUENCE:
+			anim->play(sdlutils().anims().at(id + "_sequence"));
 			break;
 		}
 	}
@@ -138,6 +143,9 @@ void AnimEnemyStateMachine::setAnimBool(EnemyStatesAnim h, bool b)
 		break;
 	case EnemyStatesAnim::UP:
 		up = b;
+		break;
+	case EnemyStatesAnim::SEQUENCE:
+		sequence = b;
 		break;
 	}
 }
