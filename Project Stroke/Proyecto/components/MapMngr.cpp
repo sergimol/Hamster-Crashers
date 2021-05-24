@@ -197,7 +197,9 @@ void MapMngr::loadNewMap(string map) {
 					for (const auto& object : objects) {
 						if (object.getName() == "spawnZone") {
 							for (int i = 0; i < hamstersToLoad_.size(); ++i) {
-								addHamster(hamstersToLoad_[i], i, object);
+								// Por si se generan mas de los que deberian
+								if(i < MAXPLAYERS)
+									addHamster(hamstersToLoad_[i], i, object);
 							}
 						}
 						else if (object.getName() == "sardinilla" || object.getName() == "canelon" || object.getName() == "keta" || object.getName() == "monchi")
