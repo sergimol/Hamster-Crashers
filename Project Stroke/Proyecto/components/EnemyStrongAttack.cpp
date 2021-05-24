@@ -7,6 +7,7 @@
 #include "StrongAttack.h"
 #include "LightAttack.h"
 #include "AnimHamsterStateMachine.h"
+#include "AnimEnemyStateMachine.h"
 
 EnemyStrongAttack::EnemyStrongAttack() :
 	tr_(nullptr), cooldown_(3000), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
@@ -26,48 +27,53 @@ void EnemyStrongAttack::update() {
 		if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
 			DEBUG_isAttacking_ = false;
 		}
-		if (attackStarted_) {
-			//Telegrafiado hasta el ataque
-			if (sdlutils().currRealTime() > durationTime_ + beforeHitCD_) {
-				cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-				//auto sizeW = tr_->getW();
-				//auto sizeH = tr_->getH();
-				auto pos = tr_->getRectCollide();
-				auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
+
+		//Fin animacion
+		if (entity_->getComponent<AnimEnemyStateMachine>() != nullptr)
+		{
+			if (attackStarted_) {
+				//Telegrafiado hasta el ataque
+				if (sdlutils().currRealTime() > durationTime_ + beforeHitCD_) {
+					cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+					//auto sizeW = tr_->getW();
+					//auto sizeH = tr_->getH();
+					auto pos = tr_->getRectCollide();
+					auto range = entity_->getComponent<EntityAttribs>()->getAttackRange(); // Cogemos el rango del ataque
 
 
-				attRect_.w = pos.w + pos.w * range;
-				attRect_.h = pos.h + pos.h * range;
+					attRect_.w = pos.w + pos.w * range;
+					attRect_.h = pos.h + pos.h * range;
 
-				auto flip = tr_->getFlip();
+					auto flip = tr_->getFlip();
 
-				//Si esta flipeado...
-				if (flip)
-					//Le damos la vuelta al rect
-					attRect_.x = pos.x - attRect_.w + pos.w / 2 - cam.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
-				else
-					attRect_.x = pos.x + pos.w - pos.w / 2 - cam.x;
+					//Si esta flipeado...
+					if (flip)
+						//Le damos la vuelta al rect
+						attRect_.x = pos.x - attRect_.w + pos.w / 2 - cam.x; //esto no funciona bien para el resto de entidades solo con sardinilla supongo, mas tarde investigamos
+					else
+						attRect_.x = pos.x + pos.w - pos.w / 2 - cam.x;
 
-				attRect_.y = pos.y - cam.y;
+					attRect_.y = pos.y - cam.y;
 
-				//Comprobamos si colisiona con alguno de los enemigos que tiene delante
+					//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
-				//Si se colisiona..
-				if (CheckCollisions(attRect_, true))
-					//Suena el hit y le pega
-					entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stronghit");
-				//Si no colisiona..
-				else
-					//Suena el attackSound
-					entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
+					//Si se colisiona..
+					if (CheckCollisions(attRect_, true))
+						//Suena el hit y le pega
+						entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stronghit");
+					//Si no colisiona..
+					else
+						//Suena el attackSound
+						entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
 
-				//this.anims.play(pegarse)
+					//this.anims.play(pegarse)
 
-				DEBUG_isAttacking_ = true;
-			}
-			if (sdlutils().currRealTime() > durationTime_ + attackDurationCD_) {
-				attackStarted_ = false;
-				time_ = sdlutils().currRealTime();
+					DEBUG_isAttacking_ = true;
+				}
+				if (sdlutils().currRealTime() > durationTime_ + attackDurationCD_) {
+					attackStarted_ = false;
+					time_ = sdlutils().currRealTime();
+				}
 			}
 		}
 	}
@@ -77,6 +83,8 @@ bool EnemyStrongAttack::LaunchAttack() {
 	if (sdlutils().currRealTime() > time_ + cooldown_) {
 		attackStarted_ = true;
 		durationTime_ = sdlutils().currRealTime();
+		//ANIMACION DE ATTAQUE
+		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, true);
 		return true;
 	}
 	else
