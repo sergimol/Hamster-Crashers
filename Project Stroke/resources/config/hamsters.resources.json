@@ -719,6 +719,22 @@
       "file": "resources/images/dialogue/explicacion1.png"
     },
     {
+      "id": "dialogo2",
+      "file": "resources/images/dialogue/dialogo2.png"
+    },
+    {
+      "id": "explicacion2",
+      "file": "resources/images/dialogue/explicacion2.png"
+    },
+    {
+      "id": "dialogo3",
+      "file": "resources/images/dialogue/dialogo3.png"
+    },
+    {
+      "id": "explicacion3",
+      "file": "resources/images/dialogue/explicacion3.png"
+    },
+    {
       "id": "Lvl1Javi0",
       "file": "resources/images/dialogue/explicacion0.png"
     },
