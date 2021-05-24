@@ -547,7 +547,7 @@ void MapMngr::loadEnemyRoom() {
 				);
 			enemy->addComponent<AnimEnemyStateMachine>();
 			//enemy->getComponent<Animator>()->play(sdlutils().anims().at("calcetin_idle"));
-			enemy->addComponent<UI>("canelon", 4);
+			enemy->addComponent<UI>("calcetin", 4);
 
 			enemy->addComponent<FirstBossAttack>();
 			enemy->addComponent<MovementSimple>();
