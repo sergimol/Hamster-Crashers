@@ -41,6 +41,7 @@ private:
 
 	int alpha;
 	int numT;
+	int numTReference;
 	Texture* tx_;
 	float alphaCalc;
 

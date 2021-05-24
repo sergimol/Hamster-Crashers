@@ -73,11 +73,11 @@ void Transition::fadeOut() {
 void Transition::fadeIn() {
 	//FADE IN
 	if (alpha == SDL_ALPHA_OPAQUE) {
-		if (subs_ != nullptr) {
+		if (subs_ != nullptr && numTReference > 0) {
 			subs_->dialogoStateChange();
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("nextPage");
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("transition");
-
+			numTReference--;
 		}
 	}
 	// Comprueba si hay textura
@@ -104,7 +104,7 @@ void Transition::changeScene(string nameScene, bool changeMap, int numTransition
 	change = true;
 	changeMap_ = changeMap;
 	nameScene_ = nameScene;
-	numT = numTransitions;
+	numTReference = numT = numTransitions;
 	startFadeIn();
 }
 

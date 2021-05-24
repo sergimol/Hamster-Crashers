@@ -930,7 +930,28 @@
     {
       "id": "monosinpaticoSheet",
       "file": "resources/images/monosinpatico_spritesheet.png"
+    },
+    {
+      "id": "Level1Boss0",
+      "file": "resources/images/transitions/Level1Boss0.png"
+    },
+    {
+      "id": "Level1Boss1",
+      "file": "resources/images/transitions/Level1Boss1.png"
+    },
+    {
+      "id": "Level1Boss2",
+      "file": "resources/images/transitions/Level1Boss2.png"
+    },
+    {
+      "id": "Level1Boss3",
+      "file": "resources/images/transitions/Level1Boss3.png"
+    },
+    {
+      "id": "Level1Boss4",
+      "file": "resources/images/transitions/Level1Boss4.png"
     }
+
   ],
 
   "messages": [

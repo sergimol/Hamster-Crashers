@@ -62,7 +62,7 @@ public:
 
 	int pageSkipVol = 20;
 	int initTutorialVol = 20;
-	int initTransitionVol = 20;
+	int initTransitionVol = 100;
 
 	int inittrapKitchenVol = 20;
 
