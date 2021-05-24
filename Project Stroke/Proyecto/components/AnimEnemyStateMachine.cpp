@@ -80,6 +80,9 @@ void AnimEnemyStateMachine::CheckAnimState()
 		case EnemyStatesAnim::ATTACK:
 			anim->play(sdlutils().anims().at(id + "_attack"));
 			break;
+		case EnemyStatesAnim::STRONGATTACK:
+			anim->play(sdlutils().anims().at(id + "_strongattack"));
+			break;
 		case EnemyStatesAnim::HITTED:
 			anim->play(sdlutils().anims().at(id + "_hit"));
 			break;

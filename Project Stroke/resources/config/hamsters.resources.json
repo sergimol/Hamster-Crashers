@@ -2321,6 +2321,18 @@
       "attackFrame": 8
     },
     {
+      "id": "monosinpatico_strongattack",
+      "startFrameX": 2,
+      "startFrameY": 1,
+      "duration": 7,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 30,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": 8
+    },
+    {
       "id": "monosinpatico_hit",
       "startFrameX": 3,
       "startFrameY": 2,

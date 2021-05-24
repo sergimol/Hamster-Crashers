@@ -28,11 +28,12 @@ void EnemyStrongAttack::update() {
 			DEBUG_isAttacking_ = false;
 		}
 
-		//Fin animacion
+	
 		if (entity_->getComponent<AnimEnemyStateMachine>() != nullptr)
 		{
-			if (attackStarted_) {
-				//Telegrafiado hasta el ataque
+			if (attackStarted_) 
+			{
+				//SE MANTIENE PEGANDO
 				if (sdlutils().currRealTime() > durationTime_ + beforeHitCD_) {
 					cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 					//auto sizeW = tr_->getW();
@@ -66,13 +67,17 @@ void EnemyStrongAttack::update() {
 						//Suena el attackSound
 						entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
 
-					//this.anims.play(pegarse)
+					
 
 					DEBUG_isAttacking_ = true;
 				}
+				//DEJA DE PEGAR
 				if (sdlutils().currRealTime() > durationTime_ + attackDurationCD_) {
 					attackStarted_ = false;
 					time_ = sdlutils().currRealTime();
+
+					//SE ACABA EL ATAQUE 
+					entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::STRONGATTACK, false);
 				}
 			}
 		}
@@ -83,8 +88,10 @@ bool EnemyStrongAttack::LaunchAttack() {
 	if (sdlutils().currRealTime() > time_ + cooldown_) {
 		attackStarted_ = true;
 		durationTime_ = sdlutils().currRealTime();
+
+
 		//ANIMACION DE ATTAQUE
-		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, true);
+		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::STRONGATTACK, true);
 		return true;
 	}
 	else
@@ -152,6 +159,9 @@ bool EnemyStrongAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo
 					//Reiniciamos tiempo de stun
 					stun->restartStunTime();
 				}
+
+				//ANIMACION DE HIT DEL HAMSTER
+				ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
 			}
 			//Si tiene Knockback, se aplica
 			Knockback* hamKnockback = ents[i]->getComponent<Knockback>();
@@ -161,7 +171,7 @@ bool EnemyStrongAttack::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo
 				if (hamFlip == tr_->getFlip())
 					hamFlip = !hamFlip;
 
-				hamKnockback->knockback();
+				hamKnockback->knockback(15);
 
 				SDL_Rect rectPlayer = eTR->getRectCollide();
 				rectPlayer.x += hamKnockback->getKnockback();
