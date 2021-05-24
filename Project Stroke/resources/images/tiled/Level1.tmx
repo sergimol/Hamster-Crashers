@@ -858,7 +858,7 @@
    <properties>
     <property name="CameraCoordX" type="int" value="650"/>
     <property name="Rounds" type="int" value="1"/>
-    <property name="zBoss" type="bool" value="true"/>
+    <property name="zBoss" type="bool" value="false"/>
    </properties>
   </object>
   <object id="137" name="2" x="1795.91" y="251.913" width="13" height="255.5">
