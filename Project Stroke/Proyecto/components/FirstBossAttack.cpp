@@ -27,13 +27,13 @@ void FirstBossAttack::init() {
 
 void FirstBossAttack::update() {
 	if (state_->getState() == GameStates::RUNNING) {
-		//Quitar la animacion de ataque
-		if (entity_->getComponent<AnimEnemyStateMachine>()->getState() == EnemyStatesAnim::ATTACK)
+		//Quitar la animacion de subida
+		if (entity_->getComponent<AnimEnemyStateMachine>()->getState() == EnemyStatesAnim::UP)
 		{
 			if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
 			{
-				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
-				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, true);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::UP, false);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::IDLE, true);
 			}
 		}
 		//Deja de mostrar el collider
@@ -45,20 +45,22 @@ void FirstBossAttack::update() {
 			//Telegrafiado hasta el ataque
 			if (!stunStarted_ && sdlutils().currRealTime() > hitTime_ + beforeHitCD_) {
 
-				//ANIMACION DE ATACAR 
+				//EMPIEZA EL ATAQUE
 				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, true);
 
 				cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-				auto sizeW = tr_->getW();
-				auto& pos = tr_->getPos();
+				auto rectCollide = tr_->getRectCollide();
 
-				attRect_.w = sizeW; //Esto que cuadre con la mano cuando sea
-				attRect_.h = sdlutils().height();
+				//auto sizeW = rectCollide.w;
+				//auto& pos = tr_->getPos();
+
+				attRect_.w = rectCollide.w; //Esto que cuadre con la mano cuando sea
+				attRect_.h = rectCollide.h;
 
 				//Cogemos el rect completo del jefe
 
-				attRect_.x = pos.getX() - cam.x;
-				attRect_.y = pos.getY() - cam.y; //Pos inicial de esquina arriba
+				attRect_.x = rectCollide.x - cam.x;
+				attRect_.y = rectCollide.y - cam.y; //Pos inicial de esquina arriba
 
 				//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
@@ -79,25 +81,40 @@ void FirstBossAttack::update() {
 				stunStarted_ = true;
 
 			}
-			//Esta en el suelo
-			else if (stunStarted_ && eAttribs_->checkInvulnerability() && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
-				eAttribs_->setInvincibility(false);
-				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, true);
+			//HA LLEGADO AL SUELO
+			if (entity_->getComponent<AnimEnemyStateMachine>()->getState() == EnemyStatesAnim::ATTACK)
+			{
+				if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+				{
+					if (stunStarted_ && eAttribs_->checkInvulnerability()) {
+
+						eAttribs_->setInvincibility(false);
+
+						//LE PASAMOS AL ESTADO DEL SUELO Y QUITAMOS EL ATAQUE
+						entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, true);
+						entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
+
+
+					}
+				}
 			}
 			else if (stunStarted_ && !collides_ && sdlutils().currRealTime() > hitTime_ + collideStartCD_ && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
 				// Activar colisiones
 				collides_ = true;
 			}
-			//Deja de estar en el suelo
+			//SE LEVANTA
 			else if (stunStarted_ && sdlutils().currRealTime() > hitTime_ + afterHitCD_) {
 				eAttribs_->setInvincibility(true);
 				attackStarted_ = false;
 				stunStarted_ = false;
 
-				//LE QUITAMOS LA ANIMACION DE ESTAR EN EL SUELO
+				//QUITAMOS TODOS LOS ESTADOS QUE PUEDEN INTERFERIR
 				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, false);
-				//FORZAMOS A VOLVER A IDLE
-				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::IDLE, false);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, false);
+
+				//FORZAMOS A LA ANIMACION DE SUBIDA
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::UP, true);
 
 				//desactivar colisiones
 				collides_ = false;

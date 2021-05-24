@@ -327,22 +327,22 @@ void MapMngr::addParaxall(int lvl) {
 	auto* o = entity_->getMngr()->addBackGround();
 	o->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 	//Para meter un fondo meter esto									velocidad		tamaño			posicion
-	o->addComponent<Parallax>(&sdlutils().images().at(l + "background1"), 30, Vector2D(1920, 1459), Vector2D(0, upH), false);
+	o->addComponent<Parallax>(&sdlutils().images().at(l + "background1"), 7, Vector2D(1920, 1459), Vector2D(0, upH), false);
 
 	auto* p = entity_->getMngr()->addBackGround();
 	p->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 	//Para meter un fondo meter esto									velocidad		tamaño			posicion
-	p->addComponent<Parallax>(&sdlutils().images().at(l + "background2"), 20, Vector2D(1920, 1459), Vector2D(0, upH), false);
+	p->addComponent<Parallax>(&sdlutils().images().at(l + "background2"), 10, Vector2D(1920, 1459), Vector2D(0, upH), false);
 
 	auto* q = entity_->getMngr()->addBackGround();
 	q->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 	//Para meter un fondo meter esto									velocidad		tamaño			posicion
-	q->addComponent<Parallax>(&sdlutils().images().at(l + "background3"), 10, Vector2D(1920, 1459), Vector2D(0, upH), false);
+	q->addComponent<Parallax>(&sdlutils().images().at(l + "background3"), 15, Vector2D(1920, 1459), Vector2D(0, upH), false);
 
-	auto* r = entity_->getMngr()->addFrontGround();
-	r->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
-	//Para meter un fondo meter esto									velocidad		tamaño			posicion
-	r->addComponent<Parallax>(&sdlutils().images().at(l + "background4"), 10, Vector2D(1920, 1459), Vector2D(0, upH), true);
+	//auto* r = entity_->getMngr()->addFrontGround();
+	//r->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
+	////Para meter un fondo meter esto									velocidad		tamaño			posicion
+	//r->addComponent<Parallax>(&sdlutils().images().at(l + "background4"), 10, Vector2D(1920, 1459), Vector2D(0, upH), true);
 }
 
 //Devuelve true si se está chocando con alguna colision
@@ -386,7 +386,7 @@ bool MapMngr::intersectBoss(const SDL_Rect& hamster) {
 	//Igual esto explota que flipas cuando no de invalid map, probablemente porque
 	//boss no vuelve a ser igual a nullptr una vez se muere yo que se problema
 	//del pibito que lea esto
-	if (boss != nullptr && boss->getComponent<FirstBossAttack>()->getCollide()) {
+	if (boss != nullptr && boss->isActive() && boss->getComponent<FirstBossAttack>()->getCollide()) {
 		auto bossRect = boss->getComponent<Transform>()->getRectCollide();
 		collide = Collisions::collides(Vector2D(hamster.x, hamster.y), hamster.w, hamster.h,
 			Vector2D(bossRect.x, bossRect.y), bossRect.w, bossRect.h);
@@ -481,20 +481,18 @@ void MapMngr::loadEnemyRoom() {
 			auto* enemy = mngr_->addEntity();
 			auto* enTr = enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(), 106 * scale, 106 * scale, 0.0f, 0.3, 0.5);
+				Vector2D(), 128 * scale, 128 * scale, 0.0f, 0.3, 0.5);
 			enTr->getFlip() = true;
 
 			enemy->addComponent<EnemyStateMachine>();
 			enemy->setGroup<Enemy>(true);
 
-			enemy->setGroup<Enemy>(true);
-
 			enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, "monosinpatico", Vector2D(3.6, 2), 0, 0, 5, 70);
 
 			enemy->addComponent<Animator>(
-				&sdlutils().images().at("monosinpatico"),
-				86,
-				86,
+				&sdlutils().images().at("monosinpaticoSheet"),
+				128,
+				128,
 				3,
 				3,
 				220,
@@ -502,8 +500,6 @@ void MapMngr::loadEnemyRoom() {
 				3
 				);
 			enemy->addComponent<AnimEnemyStateMachine>();
-			//enemy->getComponent<Animator>()->play(sdlutils().anims().at("calcetin_idle"));
-			enemy->addComponent<UI>("calcetin", 4);
 
 			enemy->addComponent<EnemyAttack>();
 			enemy->addComponent<Knockback>();
@@ -525,7 +521,7 @@ void MapMngr::loadEnemyRoom() {
 			auto* enemy = mngr_->addEntity();
 			enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, (object.getPosition().y -300) * scale),
-				Vector2D(), scale * 164.0f, scale * 600.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
+				Vector2D(), scale * 164.0f, scale * 600.0f, 0.0f, 0.5f, 1.0f)->getFlip() = true;
 
 			enemy->addComponent<EnemyStateMachine>();
 			enemy->setGroup<Enemy>(true);
@@ -544,7 +540,6 @@ void MapMngr::loadEnemyRoom() {
 				3
 				);
 			enemy->addComponent<AnimEnemyStateMachine>();
-			//enemy->getComponent<Animator>()->play(sdlutils().anims().at("calcetin_idle"));
 			enemy->addComponent<UI>("canelon", 4);
 
 			enemy->addComponent<FirstBossAttack>();
@@ -620,8 +615,8 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 	}
 	else if (name == "monchi") {
 		tam = 86;
-		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + object.getAABB().width / 3) * scale, (object.getPosition().y + object.getAABB().height / 2) * scale),
-			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.4, 0.3);
+		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + object.getAABB().width/3) * scale, (object.getPosition().y + object.getAABB().height/2) * scale),
+			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.4, 0.4);
 		hamster1->addComponent<HamsterStateMachine>();
 		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20, 70);
 	}

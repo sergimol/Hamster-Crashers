@@ -106,8 +106,6 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 							EnemyStun* enmStun = ents[i]->getComponent<EnemyStun>();
 							if (enmStun != nullptr && enmStun->isActive()) {
 
-								ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
-
 								//Si no estaba aturdido ya
 								if (enmStateM != EnemyStates::ENM_STUNNED) {
 									//Aturdimos al enemigo
@@ -116,7 +114,11 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 								//Reiniciamos tiempo de stun
 								enmStun->restartStunTime(finCombo);
 							}
+							
 						}
+
+						//ANIMACION DE HIT DEL ENEMIGO
+						ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
 
 						//Si tiene Knockback, se aplica
 						Knockback* enmKnockback = ents[i]->getComponent<Knockback>();
