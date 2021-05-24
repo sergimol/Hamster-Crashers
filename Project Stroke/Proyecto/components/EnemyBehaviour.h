@@ -44,7 +44,7 @@ public:
 	bool isWithinAttackRange();
 
 	//para attackMetods & ambushMetods
-	void setHamId(int hId, std::list<Entity*>::iterator it, char l);
+	void setHamId(int hId, char l);
 
 	void die();
 
@@ -125,7 +125,6 @@ protected: //ahora mismo solo funcionan como private
 	Behavior* bh_; //el behavior
 
 	int hamId_;
-	std::list<Entity*>::iterator listIterator;
 	char list;
 };
 

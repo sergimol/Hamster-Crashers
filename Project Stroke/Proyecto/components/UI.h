@@ -18,6 +18,7 @@ public:
 	void render() override;
 	void dep(std::string s);
 	void bar(float objetivo);
+	void resurrection();
 
 	Vector2D getBarPos() { return renderPosBar; };
 

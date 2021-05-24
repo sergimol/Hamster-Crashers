@@ -116,17 +116,17 @@ void SoundManager::init() {
 	tutorial10 = &sdlutils().soundEffects().at("catMeowInit");
 
 
-	transition0 = &sdlutils().soundEffects().at("catMeowInit");
-	transition1 = &sdlutils().soundEffects().at("catMeowInit");
-	transition2 = &sdlutils().soundEffects().at("catMeowInit");
-	transition3 = &sdlutils().soundEffects().at("catMeowInit");
-	transition4 = &sdlutils().soundEffects().at("catMeowInit");
-	transition5 = &sdlutils().soundEffects().at("catMeowInit");
-	transition6 = &sdlutils().soundEffects().at("catMeowInit");
-	transition7 = &sdlutils().soundEffects().at("catMeowInit");
-	transition8 = &sdlutils().soundEffects().at("catMeowInit");
-	transition9 = &sdlutils().soundEffects().at("catMeowInit");
-	transition10 = &sdlutils().soundEffects().at("catMeowInit");
+	transition0 = &sdlutils().soundEffects().at("tutorial0");
+	transition1 = &sdlutils().soundEffects().at("tutorial0");
+	transition2 = &sdlutils().soundEffects().at("tutorial0");
+	transition3 = &sdlutils().soundEffects().at("tutorial0");
+	transition4 = &sdlutils().soundEffects().at("tutorial0");
+	transition5 = &sdlutils().soundEffects().at("tutorial0");
+	transition6 = &sdlutils().soundEffects().at("tutorial0");
+	transition7 = &sdlutils().soundEffects().at("tutorial0");
+	transition8 = &sdlutils().soundEffects().at("tutorial0");
+	transition9 = &sdlutils().soundEffects().at("tutorial0");
+	transition10 = &sdlutils().soundEffects().at("tutorial0");
 
 
 	setVolumeChannels();
@@ -628,34 +628,34 @@ void SoundManager::playTutorial() {
 		tutorial0->play(0,7);
 		break;
 	case 2:
-		tutorial1->play();
+		tutorial1->play(0, 7);
 		break;
 	case 3:
-		tutorial2->play();
+		tutorial2->play(0, 7);
 		break;
 	case 4:
-		tutorial3->play();
+		tutorial3->play(0, 7);
 		break;
 	case 5:
-		tutorial4->play();
+		tutorial4->play(0, 7);
 		break;
 	case 6:
-		tutorial5->play();
+		tutorial5->play(0, 7);
 		break;
 	case 7:
-		tutorial6->play();
+		tutorial6->play(0, 7);
 		break;
 	case 8:
-		tutorial7->play();
+		tutorial7->play(0, 7);
 		break;
 	case 9:
-		tutorial8->play();
+		tutorial8->play(0, 7);
 		break;
 	case 10:
-		tutorial9->play();
+		tutorial9->play(0, 7);
 		break;
 	case 11:
-		tutorial10->play();
+		tutorial10->play(0, 7);
 		break;
 	default:
 		break;
@@ -667,7 +667,7 @@ void SoundManager::playTutorial() {
 
 void SoundManager::playPageSkip() {
 
-	randomNum = pickRandom(4);
+	randomNum = pickRandom(2);
 
 	switch (randomNum)
 	{
@@ -687,37 +687,37 @@ void SoundManager::playTransition() {
 	switch (transitionNum)
 	{
 	case 0:
-		transition0->play();
+		transition0->play(0, 7);
 		break;
 	case 1:
-		transition1->play();
+		transition1->play(0, 7);
 		break;
 	case 2:
-		transition2->play();
+		transition2->play(0, 7);
 		break;
 	case 3:
-		transition3->play();
+		transition3->play(0, 7);
 		break;
 	case 4:
-		transition4->play();
+		transition4->play(0, 7);
 		break;
 	case 5:
-		transition5->play();
+		transition5->play(0, 7);
 		break;
 	case 6:
-		transition6->play();
+		transition6->play(0, 7);
 		break;
 	case 7:
-		transition7->play();
+		transition7->play(0, 7);
 		break;
 	case 8:
-		transition8->play();
+		transition8->play(0, 7);
 		break;
 	case 9:
-		transition9->play();
+		transition9->play(0, 7);
 		break;
 	case 10:
-		transition10->play();
+		transition10->play(0, 7);
 		break;
 	default:
 		break;

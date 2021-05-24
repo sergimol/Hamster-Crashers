@@ -9,7 +9,7 @@
  <tileset firstgid="806" source="objetos.tsx"/>
  <tileset firstgid="946" source="sombrasObjetos.tsx"/>
  <tileset firstgid="1086" name="sueloJardin" tilewidth="64" tileheight="64" tilecount="825" columns="25">
-  <image source="C:/Users/gormi/OneDrive/Escritorio/COSASASEPRITE/FONDOSNIVEL2/tilesetSueloLevel2.png" width="1600" height="2112"/>
+  <image source="tilesetSueloLevel2.png" width="1600" height="2112"/>
  </tileset>
  <layer id="19" name="HIERBACAJA" width="160" height="5">
   <data encoding="csv">

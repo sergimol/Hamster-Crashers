@@ -34,7 +34,7 @@ void Stroke::init() {
 
 void Stroke::update() {
 	if (state_->getState() == GameStates::RUNNING) {
-		if (ih().isKeyDown(SDLK_z) && entity_->getComponent<EntityAttribs>()->getId() == "sardinilla") 
+		if (ih().isKeyDown(SDLK_z) && entity_->getComponent<EntityAttribs>()->getId() == "keta") 
 			INFARCT();
 		checkChance();
 	}
@@ -93,7 +93,7 @@ void Stroke::checkChance() {
 	if (t >= timeLastUpdate_ + UPDATETIME) {
 		if (hms_->getState() != HamStates::INFARCTED && ss_->checkChance(chance_, chanceFromAb_)) {
 			//TODO madremia que no lo podemos desactivar porque hay que quitarlo de la lsita de player y noseque algo habra que ahcer para que la camara no explote
-			//infarctHamster();
+			infarctHamster();
 		}
 		timeLastUpdate_ = t;
 	}
