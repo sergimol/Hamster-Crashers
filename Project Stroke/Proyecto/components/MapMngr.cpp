@@ -504,6 +504,7 @@ void MapMngr::loadEnemyRoom() {
 			enemy->addComponent<AnimEnemyStateMachine>();
 
 			enemy->addComponent<EnemyAttack>();
+			enemy->addComponent<EnemyStrongAttack>();
 			enemy->addComponent<Knockback>();
 			enTr->setGravity(enemy->addComponent<Gravity>());
 			enemy->addComponent<CollisionDetec>();
