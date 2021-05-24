@@ -147,7 +147,8 @@ void Transition::sceneTransition() {
 	//Y creamos uno nuevo
 	auto* images = entity_->getMngr()->addFrontGround();
 	images->addComponent<ImageSecuence>(nameScene_);
-	subs_ = images->addComponent<Subtitulos>(nameScene_, numT);
+	if (numT != 0)
+		subs_ = images->addComponent<Subtitulos>(nameScene_, numT);
 }
 
 void Transition::createMap() {

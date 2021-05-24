@@ -743,7 +743,7 @@ void MapMngr::newSceneTrigger(string newScene, const tmx::Object& object) {
 	auto trigger = entity_->getMngr()->addEntity();
 	trigger->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 1, 1);
-	trigger->addComponent<TriggerScene>(newScene);
+	trigger->addComponent<TriggerScene>(newScene,object.getProperties()[1].getIntValue());
 }
 
 void MapMngr::startChaseTrigger(const tmx::Object& object) {
