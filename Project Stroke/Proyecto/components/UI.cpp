@@ -70,3 +70,8 @@ void UI::bar(float objetivo) {
 	barLenght += damageRecieved;
 	dest3 = build_sdlrect(renderPosBar, barLenght, bar_->height() * scale);
 }
+
+void UI::resurrection() {
+	face_ = &sdlutils().images().at(name + "Head1");
+	dest3 = build_sdlrect(renderPosBar, barLenght, bar_->height() * scale);
+}

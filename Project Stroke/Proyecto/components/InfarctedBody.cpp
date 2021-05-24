@@ -61,7 +61,7 @@ void InfarctedBody::update() {
 		}
 		//En caso de que el estado del hamster que nos revive cambie, se cancela el minijuego
 		if (reviving) {
-			if (otherState != HamStates::DEFAULT) {
+			if (otherHamster->getComponent<HamsterStateMachine>()->getState() != HamStates::DEFAULT) {
 				//Permitimos al otro moverse
 				enableOtherHamster();
 				//Se acaba el minijuego
@@ -107,6 +107,9 @@ void InfarctedBody::reanimate() {
 	// Reactivamos la UI del corazón
 	hamster->getComponent<HeartUI>()->resurrection();
 
+
+	hamster->getComponent<UI>()->resurrection();
+
 	entity_->setActive(false);
 	entity_->getMngr()->refreshDeadBodies();
 }
@@ -119,11 +122,19 @@ void InfarctedBody::disableOtherHamster(Entity* e) {
 	}
 	
 	//Y le inhabilitamos el movimiento y el ataque
-	if(otherHamster != nullptr)
+	if (otherHamster != nullptr) {
+		otherHamster->getComponent<Transform>()->setVel(Vector2D(0, 0));
 		otherHamster->getComponent<Movement>()->setActive(false);
+		otherHamster->getComponent<LightAttack>()->setActive(false);
+		otherHamster->getComponent<StrongAttack>()->setActive(false);
+	}
 }
 
 void InfarctedBody::enableOtherHamster() {
-	if(otherHamster != nullptr)
+	if (otherHamster != nullptr) {
 		otherHamster->getComponent<Movement>()->setActive(true);
+		otherHamster->getComponent<LightAttack>()->setActive(true);
+		otherHamster->getComponent<StrongAttack>()->setActive(true);
+
+	}
 }
