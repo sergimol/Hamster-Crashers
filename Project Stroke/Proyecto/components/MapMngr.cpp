@@ -487,14 +487,12 @@ void MapMngr::loadEnemyRoom() {
 			enemy->addComponent<EnemyStateMachine>();
 			enemy->setGroup<Enemy>(true);
 
-			enemy->setGroup<Enemy>(true);
-
 			enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, "monosinpatico", Vector2D(3.6, 2), 0, 0, 5, 70);
 
 			enemy->addComponent<Animator>(
-				&sdlutils().images().at("monosinpatico"),
-				86,
-				86,
+				&sdlutils().images().at("monosinpaticoSheet"),
+				128,
+				128,
 				3,
 				3,
 				220,
@@ -502,8 +500,6 @@ void MapMngr::loadEnemyRoom() {
 				3
 				);
 			enemy->addComponent<AnimEnemyStateMachine>();
-			//enemy->getComponent<Animator>()->play(sdlutils().anims().at("calcetin_idle"));
-			enemy->addComponent<UI>("calcetin", 4);
 
 			enemy->addComponent<EnemyAttack>();
 			enemy->addComponent<Knockback>();
@@ -545,7 +541,7 @@ void MapMngr::loadEnemyRoom() {
 				);
 			enemy->addComponent<AnimEnemyStateMachine>();
 			//enemy->getComponent<Animator>()->play(sdlutils().anims().at("calcetin_idle"));
-			enemy->addComponent<UI>("canelon", 4);
+			enemy->addComponent<UI>("calcetin", 4);
 
 			enemy->addComponent<FirstBossAttack>();
 			enemy->addComponent<MovementSimple>();
