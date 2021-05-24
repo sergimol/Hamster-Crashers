@@ -195,7 +195,7 @@ void EnemyMother::changeFromAttackToAmbush(int hamid, Entity*e) {
 		//aunque eso implicaria que le ntidad se activando y desactivando entre instrucciones, lo cual tampoco me parece que sea correcto bajo ningunca circustancia.
 		//como sea esta comprobacion impedira que todo esto explote en mil pedazos de ser asi el caso como s eha descrito anteriormente
 
-	if (e->hasComponent<EnemyStrongAttack>()) {
+	if (!e->hasComponent<EnemyStrongAttack>()) {
 
 		
 		//coloca el bicho en ambush al final
