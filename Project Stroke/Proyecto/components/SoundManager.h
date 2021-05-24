@@ -32,7 +32,7 @@ public:
 	int soldierDepChannel = 1;
 
 	int musicsChannel = 2;
-	int subtitlesChannel = 2;
+	int subtitlesChannel = 7;
 	int birdsChannel = 2;
 
 	int catChannel = 3;
@@ -85,7 +85,6 @@ public:
 	int inittrapKitchenVol = 20;
 private:
 	int randomNum;
-	int dialogueNum = 0;
 
 	void playLighthit();
 
@@ -97,7 +96,9 @@ private:
 
 	void playHeartattack();
 
-	void playSubtitle();
+	void playTutorial();
+	void playTransition();
+	void StopTutorial();
 
 	void playKetaSpecial();
 
@@ -111,7 +112,7 @@ private:
 
 	void  playsoldierDep();
 
-	void  playtransition();
+	void  playPageSkip();
 
 	void  playHandPunch();
 
@@ -221,7 +222,14 @@ private:
 	SoundEffect* button1;
 
 	//Musica y sonidos ambiente
-	SoundEffect* mainTheme;
+	SoundEffect* HamstersMainThemev2;
+	SoundEffect* Nivel1GameVersion;
+	SoundEffect* Nivel1Boss1_0;
+	SoundEffect* HamstersNivel2GameVersion;
+	SoundEffect* HamstersNivel2_Boss160bpm;
+	SoundEffect* HamstersNivel4_Boss2;
+	SoundEffect* HamstersNivel4GameVersion;
+
 	SoundEffect* birds;
 
 	//Recoger items
@@ -230,45 +238,41 @@ private:
 	SoundEffect* eat2;
 	SoundEffect* eat3;
 
-	//Transiciones
-	SoundEffect* transition0;
-	SoundEffect* transition1;
+	//PageNext
+	SoundEffect* pageSkip0;
+	SoundEffect* pageSkip1;
+
 
 	//Trampa cocina
 	SoundEffect* trapKitchen;
 
 	//Dialogos Angel (tutorial y transiciones, falta diferenciarlos)
-	SoundEffect* dialogue0;
-	SoundEffect* dialogue1;
-	SoundEffect* dialogue2;
-	SoundEffect* dialogue3;
-	SoundEffect* dialogue4;
-	SoundEffect* dialogue5;
-	SoundEffect* dialogue6;
-	SoundEffect* dialogue7;
-	SoundEffect* dialogue8;
-	SoundEffect* dialogue9;
-	SoundEffect* dialogue10;
-	SoundEffect* dialogue11;
-	SoundEffect* dialogue12;
-	SoundEffect* dialogue13;
-	SoundEffect* dialogue14;
-	SoundEffect* dialogue15;
-	SoundEffect* dialogue16;
-	SoundEffect* dialogue17;
-	SoundEffect* dialogue18;
-	SoundEffect* dialogue19;
-	SoundEffect* dialogue20;
-	SoundEffect* dialogue21;
-	SoundEffect* dialogue22;
-	SoundEffect* dialogue23;
-	SoundEffect* dialogue24;
-	SoundEffect* dialogue25;
-	SoundEffect* dialogue26;
-	SoundEffect* dialogue27;
-	SoundEffect* dialogue28;
-	SoundEffect* dialogue29;
-	SoundEffect* dialogue30;
+	int tutorialNum = 0;
+	SoundEffect* tutorial0;
+	SoundEffect* tutorial1;
+	SoundEffect* tutorial2;
+	SoundEffect* tutorial3;
+	SoundEffect* tutorial4;
+	SoundEffect* tutorial5;
+	SoundEffect* tutorial6;
+	SoundEffect* tutorial7;
+	SoundEffect* tutorial8;
+	SoundEffect* tutorial9;
+	SoundEffect* tutorial10;
+
+	int transitionNum = 0;
+	SoundEffect* transition0;
+	SoundEffect* transition1;
+	SoundEffect* transition2;
+	SoundEffect* transition3;
+	SoundEffect* transition4;
+	SoundEffect* transition5;
+	SoundEffect* transition6;
+	SoundEffect* transition7;
+	SoundEffect* transition8;
+	SoundEffect* transition9;
+	SoundEffect* transition10;
+
 
 };
 

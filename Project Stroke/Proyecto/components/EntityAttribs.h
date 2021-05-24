@@ -144,6 +144,7 @@ private:
 	float damageInvulTime_;
 
 	bool canPoison_;
+	bool canBePoisoned_;
 	bool poisoned_;
 	float poisonTime_;
 	float timeLastUpdate_;

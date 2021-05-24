@@ -3,6 +3,9 @@
 #include "ControlHandler.h"
 #include "SoundManager.h"
 
+//ESTA CLASE ES LA DEL TUTORIAL QUE SALE ANGEL HABLANDO
+
+
 dialogos::dialogos()
 {
 	//Texturas
@@ -79,8 +82,11 @@ void dialogos::show() {
 }
 
 void dialogos::unshow() {
-	if (position < 3.0f)
+	if (position < 3.0f) {
 		position = position + 0.1f;
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stopTutorial");
+
+	}
 	else {
 		renderDialogues = false;
 	}
@@ -94,7 +100,7 @@ void dialogos::changeDialogue() {
 
 //Controla toda la movida buena suerte lo programe hace 30 mins y no se que hice
 void dialogos::dialogoStateChange() {
-	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("subtitle");
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("tutorial");
 	//Cambiamos el dialogo cuando no se esta mostrando la movida
 	if (!firstDialogue)
 		changeDialogue();

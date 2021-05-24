@@ -73,7 +73,14 @@ void SoundManager::init() {
 	car1 = &sdlutils().soundEffects().at("car1");
 	car2 = &sdlutils().soundEffects().at("car2");
 
-	mainTheme = &sdlutils().soundEffects().at("mainTheme");
+	HamstersMainThemev2 = &sdlutils().soundEffects().at("Nivel1GameVersion");
+	Nivel1GameVersion = &sdlutils().soundEffects().at("Nivel1GameVersion");
+	Nivel1Boss1_0 = &sdlutils().soundEffects().at("Nivel1GameVersion");
+	HamstersNivel2GameVersion = &sdlutils().soundEffects().at("Nivel1GameVersion");
+	HamstersNivel2_Boss160bpm = &sdlutils().soundEffects().at("Nivel1GameVersion");
+	HamstersNivel4_Boss2 = &sdlutils().soundEffects().at("Nivel1GameVersion");
+	HamstersNivel4GameVersion = &sdlutils().soundEffects().at("Nivel1GameVersion");
+
 	birds = &sdlutils().soundEffects().at("birds");
 
 	eat0 = &sdlutils().soundEffects().at("eat0");
@@ -90,46 +97,43 @@ void SoundManager::init() {
 	trainPipi = &sdlutils().soundEffects().at("trainPipi");
 	trainAlto = &sdlutils().soundEffects().at("trainAlto");
 
-	transition0 = &sdlutils().soundEffects().at("transition0");
-	transition1 = &sdlutils().soundEffects().at("transition1");
+	pageSkip0 = &sdlutils().soundEffects().at("transition0");
+	pageSkip1 = &sdlutils().soundEffects().at("transition1");
 
 	trapKitchen = &sdlutils().soundEffects().at("trapKitchen");
 
-	dialogue0 = &sdlutils().soundEffects().at("tutorial0");
-	dialogue1 = &sdlutils().soundEffects().at("tutorial1");
-	dialogue2 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue3 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue4 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue5 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue6 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue7 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue8 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue9 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue10 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue11 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue12 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue13 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue14 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue15 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue16 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue17 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue18 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue19 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue20 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue21 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue22 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue23 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue24 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue25 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue26 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue27 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue28 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue29 = &sdlutils().soundEffects().at("catMeowInit");
-	dialogue30 = &sdlutils().soundEffects().at("catMeowInit");
+	tutorial0 = &sdlutils().soundEffects().at("tutorial0");
+	tutorial1 = &sdlutils().soundEffects().at("tutorial1");
+	tutorial2 = &sdlutils().soundEffects().at("catMeowInit");
+	tutorial3 = &sdlutils().soundEffects().at("catMeowInit");
+	tutorial4 = &sdlutils().soundEffects().at("catMeowInit");
+	tutorial5 = &sdlutils().soundEffects().at("catMeowInit");
+	tutorial6 = &sdlutils().soundEffects().at("catMeowInit");
+	tutorial7 = &sdlutils().soundEffects().at("catMeowInit");
+	tutorial8 = &sdlutils().soundEffects().at("catMeowInit");
+	tutorial9 = &sdlutils().soundEffects().at("catMeowInit");
+	tutorial10 = &sdlutils().soundEffects().at("catMeowInit");
+
+	transition0 = &sdlutils().soundEffects().at("catMeowInit");
+	transition1 = &sdlutils().soundEffects().at("catMeowInit");
+	transition2 = &sdlutils().soundEffects().at("catMeowInit");
+	transition3 = &sdlutils().soundEffects().at("catMeowInit");
+	transition4 = &sdlutils().soundEffects().at("catMeowInit");
+	transition5 = &sdlutils().soundEffects().at("catMeowInit");
+	transition6 = &sdlutils().soundEffects().at("catMeowInit");
+	transition7 = &sdlutils().soundEffects().at("catMeowInit");
+	transition8 = &sdlutils().soundEffects().at("catMeowInit");
+	transition9 = &sdlutils().soundEffects().at("catMeowInit");
+	transition10 = &sdlutils().soundEffects().at("catMeowInit");
+
 
 	setVolumeChannels();
 	//mainTheme->play(200, musics);
-	Mix_AllocateChannels(6);
+	Mix_AllocateChannels(16);
+}
+
+void SoundManager::StopTutorial() {
+	Mix_HaltChannel(subtitlesChannel);
 }
 
 void SoundManager::setVolumeChannels() {
@@ -173,7 +177,7 @@ void SoundManager::setVolumeChannels() {
 
 	//Train 
 	Mix_Volume(trainBackgroundChannel, inittrainBackgroundVol * generalFXvol);
-	
+
 	//Transition
 	Mix_Volume(transitionChannel, inittransitionVol * generalFXvol);
 
@@ -313,9 +317,7 @@ void SoundManager::play(std::string soundName) {
 		button1->play(0, buttonChannel);
 	}
 
-	else if (soundName == "subtitle") {
-		playSubtitle();
-	}
+
 	else if (soundName == "birds") {
 		birds->play(200, birdsChannel);
 	}
@@ -327,19 +329,50 @@ void SoundManager::play(std::string soundName) {
 
 	//Transiciones
 	else if (soundName == "transition") {
-		playtransition();
+		playTransition();
+	}
+	else if (soundName == "nextPage") {
+		playPageSkip();
+	}
+	else if (soundName == "tutorial") {
+		playTutorial();
+	}
+	else if (soundName == "stopTutorial") {
+		StopTutorial();
 	}
 
 	//Trampa cocina
 	else if (soundName == "trapKitchen") {
 		trapKitchen->play(0, trapKitchenChannel);
 	}
-	
-	
 
-	
 
-	
+	//CANCIONES
+	else if (soundName == "HamstersMainThemev2") {
+		HamstersMainThemev2->play(0, musicsChannel);
+	}
+	else if (soundName == "Nivel1GameVersion") {
+		Nivel1GameVersion->play(0, musicsChannel);
+	}
+	else if (soundName == "Nivel1Boss1_0") {
+		Nivel1Boss1_0->play(0, musicsChannel);
+	}
+	else if (soundName == "HamstersNivel2GameVersion") {
+		HamstersNivel2GameVersion->play(0, musicsChannel);
+	}
+	else if (soundName == "HamstersNivel2_Boss160bpm") {
+		HamstersNivel2_Boss160bpm->play(0, musicsChannel);
+	}
+	else if (soundName == "HamstersNivel4_Boss2") {
+		HamstersNivel4_Boss2->play(0, musicsChannel);
+	}
+	else if (soundName == "HamstersNivel4GameVersion") {
+		HamstersNivel4GameVersion->play(0, musicsChannel);
+	}
+
+
+
+
 }
 
 int SoundManager::pickRandom(int max) {
@@ -483,48 +516,113 @@ void SoundManager::playHeartattack() {
 }
 
 
-void SoundManager::playSubtitle() {
+void SoundManager::playTutorial() {
 
-	switch (dialogueNum)
+	switch (tutorialNum)
 	{
 	case 0:
-		dialogue0->play(0, subtitlesChannel);
+		tutorial0->play(0, subtitlesChannel);
 		break;
 	case 1:
-		dialogue1->play(0, subtitlesChannel);
+		tutorial0->play(0, subtitlesChannel);
 		break;
 	case 2:
-		dialogue2->play(0, subtitlesChannel);
+		tutorial1->play(0, subtitlesChannel);
 		break;
 	case 3:
-		dialogue3->play(0, subtitlesChannel);
+		tutorial2->play(0, subtitlesChannel);
 		break;
 	case 4:
-		dialogue4->play(0, subtitlesChannel);
+		tutorial3->play(0, subtitlesChannel);
 		break;
 	case 5:
-		dialogue5->play(0, subtitlesChannel);
+		tutorial4->play(0, subtitlesChannel);
 		break;
 	case 6:
-		dialogue6->play(0, subtitlesChannel);
+		tutorial5->play(0, subtitlesChannel);
 		break;
 	case 7:
-		dialogue7->play(0, subtitlesChannel);
+		tutorial6->play(0, subtitlesChannel);
 		break;
 	case 8:
-		dialogue8->play(0, subtitlesChannel);
+		tutorial7->play(0, subtitlesChannel);
 		break;
 	case 9:
-		dialogue9->play(0, subtitlesChannel);
+		tutorial8->play(0, subtitlesChannel);
 		break;
 	case 10:
-		dialogue10->play(0, subtitlesChannel);
+		tutorial9->play(0, subtitlesChannel);
+		break;
+	case 11:
+		tutorial10->play(0, subtitlesChannel);
 		break;
 	default:
 		break;
 	}
 
-	dialogueNum++;	//La proxima vez se reproducira el siguiente dialogo
+	tutorialNum++;	//La proxima vez se reproducira el siguiente dialogo
+}
+
+
+void SoundManager::playPageSkip() {
+
+	randomNum = pickRandom(4);
+
+	switch (randomNum)
+	{
+	case 0:
+		pageSkip0->play(0, transitionChannel);
+		break;
+	case 1:
+		pageSkip0->play(0, transitionChannel);
+		break;
+	default:
+		break;
+	}
+}
+
+void SoundManager::playTransition() {
+
+	switch (transitionNum)
+	{
+	case 0:
+		transition0->play(0, subtitlesChannel);
+		break;
+	case 1:
+		transition1->play(0, subtitlesChannel);
+		break;
+	case 2:
+		transition2->play(0, subtitlesChannel);
+		break;
+	case 3:
+		transition3->play(0, subtitlesChannel);
+		break;
+	case 4:
+		transition4->play(0, subtitlesChannel);
+		break;
+	case 5:
+		transition5->play(0, subtitlesChannel);
+		break;
+	case 6:
+		transition6->play(0, subtitlesChannel);
+		break;
+	case 7:
+		transition7->play(0, subtitlesChannel);
+		break;
+	case 8:
+		transition8->play(0, subtitlesChannel);
+		break;
+	case 9:
+		transition9->play(0, subtitlesChannel);
+		break;
+	case 10:
+		transition10->play(0, subtitlesChannel);
+		break;
+	default:
+		break;
+	}
+
+	transitionNum++;	//La proxima vez se reproducira el siguiente dialogo
 }
 
 void SoundManager::playKetaSpecial() {
@@ -661,22 +759,6 @@ void SoundManager::playsoldierDep() {
 	}
 }
 
-void SoundManager::playtransition() {
-
-	randomNum = pickRandom(4);
-
-	switch (randomNum)
-	{
-	case 0:
-		transition0->play(0, transitionChannel);
-		break;
-	case 1:
-		transition1->play(0, transitionChannel);
-		break;
-	default:
-		break;
-	}
-}
 
 void SoundManager::playHandPunch() {
 	randomNum = pickRandom(2);

@@ -1,6 +1,7 @@
 #include "GetItem.h"
 #include "Item.h"
 #include "EntityAttribs.h"
+#include "SoundManager.h"
 #include "GameStates.h"
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
@@ -33,7 +34,7 @@ void GetItem::update() {
 				//Comprobamos el tipo
 				switch (e->getComponent<Item>()->getItem()) {
 				case ItemType::Apple:
-					this->entity_->getComponent<EntityAttribs>()->heal(APPLEHP);
+					entity_->getComponent<EntityAttribs>()->heal(APPLEHP);
 					break;
 				case ItemType::WaterMelon:
 					this->entity_->getComponent<EntityAttribs>()->heal(WATERHP);
@@ -44,6 +45,8 @@ void GetItem::update() {
 				default:
 					break;
 				}
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("eatItem");
+
 				e->setActive(false);
 				entity_->getMngr()->refreshItems();
 			}
