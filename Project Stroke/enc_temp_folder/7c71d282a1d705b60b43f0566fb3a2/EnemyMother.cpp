@@ -141,7 +141,6 @@ void EnemyMother::cleanListHamAmbush(int i) {
 		//Tponer las entitades en behavior iddle
 		if (waiting_.back()->isActive())
 		waiting_.back()->getComponent<EnemyBehaviour>()->SetBehavior(new IddleEnemy());
-		waiting_.back()->getComponent<EnemyBehaviour>()->setHamId(-1, --waiting_.end(), 0);
 	}
 	//enemigos fuertes //TODO
 	n = objetivesList_.at(i)->strongAmbushing.size();
@@ -151,7 +150,6 @@ void EnemyMother::cleanListHamAmbush(int i) {
 		//Tponer las entitades en behavior iddle
 		if (waiting_.back()->isActive())
 		waiting_.back()->getComponent<EnemyBehaviour>()->SetBehavior(new IddleEnemy());
-		waiting_.back()->getComponent<EnemyBehaviour>()->setHamId(-1, --waiting_.end(), 0);
 	}
 }
 void EnemyMother::cleanListHamAttacking(int i) {
@@ -162,8 +160,6 @@ void EnemyMother::cleanListHamAttacking(int i) {
 		//poner las entitades en behavior iddle
 		if (waiting_.back()->isActive())
 		waiting_.back()->getComponent<EnemyBehaviour>()->SetBehavior(new IddleEnemy());
-
-		waiting_.back()->getComponent<EnemyBehaviour>()->setHamId(-1, --waiting_.end(), 0);
 	}
 	n = objetivesList_.at(i)->strongAtacking.size();
 	for (auto y = 0u; y < n; y++) {
@@ -172,7 +168,6 @@ void EnemyMother::cleanListHamAttacking(int i) {
 		//poner las entitades en behavior iddle
 		if (waiting_.back()->isActive())
 		waiting_.back()->getComponent<EnemyBehaviour>()->SetBehavior(new IddleEnemy());
-		waiting_.back()->getComponent<EnemyBehaviour>()->setHamId(-1, --waiting_.end(), 0);
 	}
 
 
