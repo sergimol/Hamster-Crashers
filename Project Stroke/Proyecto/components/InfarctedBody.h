@@ -15,7 +15,7 @@ using namespace std;
 class InfarctedBody: public Component
 {
 public:
-	InfarctedBody(Entity* h): hamster(h), tx_(&sdlutils().images().at("r")), ctrlTx_(&sdlutils().images().at("b")) {};
+	InfarctedBody(Entity* h): hamster(h), tx_(&sdlutils().images().at("p")), ctrlTx_(&sdlutils().images().at("b")) {};
 	~InfarctedBody() {};
 
 	virtual void init() override;
@@ -32,8 +32,7 @@ private:
 	Entity* hamster, *otherHamster;
 	Ability* ab_;
 	Transform* tr_;
-	Texture* tx_;
-	Texture* ctrlTx_;
+	Texture* tx_, *ctrlTx_;
 	GameStates* state_;
 
 	//Mantiene el estado del hamster QUE TE ESTÁ REVIVIENDO
@@ -45,8 +44,8 @@ private:
 	bool show;
 	bool isCtrl;
 
-	const int KEY_WIDTH = 100;
-	const int KEY_HEIGHT = 100;
+	const int KEY_WIDTH = 75;
+	const int KEY_HEIGHT = 75;
 	//Para poseer
 	const SDL_Keycode key = SDLK_p;
 	const SDL_GameControllerButton button = SDL_CONTROLLER_BUTTON_B;

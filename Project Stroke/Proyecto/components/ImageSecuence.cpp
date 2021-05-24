@@ -28,6 +28,9 @@ ImageSecuence::ImageSecuence(string newScene) {
 		gameOver = true;
 		keyTextures.push(&sdlutils().images().at("hasGanado"));
 	}
+	else if (newScene == level1Boss) {
+		keyTextures.push(&sdlutils().images().at("hasGanado"));
+	}
 }
 
 void ImageSecuence::init() {

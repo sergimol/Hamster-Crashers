@@ -7,6 +7,13 @@ void ReanimationGame::init() {
 	active_ = false;
 	
 	auto pos = entity_->getComponent<Transform>()->getPos();
+
+	float x = pos.getX(), y = pos.getY();
+
+	auto* cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
+	x -= cam->getCamPos().getX() / 2.0f;
+	y -= cam->getCamPos().getY() / 2.0f;
+
 	pos.set(pos.getX() + OFFSET_X, pos.getY() + OFFSET_Y);
 
 	buttonPos = build_sdlrect(pos, WIDTH, HEIGHT);
@@ -70,8 +77,10 @@ void ReanimationGame::handleButton() {
 }
 
 void ReanimationGame::render() {
-	if (down) txDown_->render(buttonPos);
-	else txUp_->render(buttonPos);
+	if (txUp_ != nullptr && txDown_ != nullptr) {
+		if (down) txDown_->render(buttonPos);
+		else txUp_->render(buttonPos);
+	}
 }
 
 void ReanimationGame::onDisable() {
@@ -97,4 +106,9 @@ void ReanimationGame::setRevPlayer(Entity* e)
 {
 	revPlNumber_ = e->getComponent<EntityAttribs>()->getNumber();
 	revTrans_ = e->getComponent<Transform>();
+
+	bool useController = ih().playerHasController(revPlNumber_);
+
+	txUp_ = &sdlutils().images().at(useController ? "a" : "a2");
+	txDown_ = &sdlutils().images().at(useController ? "aPressed" : "a2Pressed");
 }

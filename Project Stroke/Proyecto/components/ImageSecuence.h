@@ -28,7 +28,8 @@ private:
 		level2 = "Lvl1Javi",
 		controls = "controls",
 		hasMuerto = "hasMuerto",
-		hasGanado = "hasGanado";
+		hasGanado = "hasGanado",
+		level1Boss = "Level1Boss";
 
 	string newScene_;
 

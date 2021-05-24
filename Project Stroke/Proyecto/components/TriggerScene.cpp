@@ -31,10 +31,9 @@ void TriggerScene::update() {
 	if (canChange && !entity_->getMngr()->getPlayers().empty()) { //TODO ELIMINAR ULTIMA CONDICION TRIGGER
 		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::Players);
 		//Cambio de escena
-		entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene(nameScene, true, 3); //TODO ELIMINAR CABLEO FALSE PARA DESPUES DEL HITO
+		entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene(nameScene, true,numT);
 		entity_->setActive(false);
-	}
-		
+	}		
 	else
 		canChange = true;
 }

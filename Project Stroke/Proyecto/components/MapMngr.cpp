@@ -197,7 +197,9 @@ void MapMngr::loadNewMap(string map) {
 					for (const auto& object : objects) {
 						if (object.getName() == "spawnZone") {
 							for (int i = 0; i < hamstersToLoad_.size(); ++i) {
-								addHamster(hamstersToLoad_[i], i, object);
+								// Por si se generan mas de los que deberian
+								if(i < MAXPLAYERS)
+									addHamster(hamstersToLoad_[i], i, object);
 							}
 						}
 						else if (object.getName() == "sardinilla" || object.getName() == "canelon" || object.getName() == "keta" || object.getName() == "monchi")
@@ -743,7 +745,7 @@ void MapMngr::newSceneTrigger(string newScene, const tmx::Object& object) {
 	auto trigger = entity_->getMngr()->addEntity();
 	trigger->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 1, 1);
-	trigger->addComponent<TriggerScene>(newScene);
+	trigger->addComponent<TriggerScene>(newScene,object.getProperties()[1].getIntValue());
 }
 
 void MapMngr::startChaseTrigger(const tmx::Object& object) {

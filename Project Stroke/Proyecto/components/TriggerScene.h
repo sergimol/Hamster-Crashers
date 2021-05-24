@@ -8,7 +8,7 @@ using namespace std;
 
 class TriggerScene : public Component {
 public:
-	TriggerScene(string newScene) :nameScene(newScene),  canChange(true) {
+	TriggerScene(string newScene,int numTransition) :nameScene(newScene),  canChange(true), numT(numTransition) {
 	};
 	
 	virtual ~TriggerScene() {};
@@ -23,4 +23,5 @@ private:
 	string nameScene;
 	Transform* tr_;
 	bool canChange;
+	int numT;
 };

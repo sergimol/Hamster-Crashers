@@ -7,7 +7,7 @@
 class ReanimationGame : public Component
 {
 public:
-	ReanimationGame(): txUp_(&sdlutils().images().at("a")), txDown_(&sdlutils().images().at("a2")), state_(nullptr) {};
+	ReanimationGame(): txUp_(nullptr), txDown_(nullptr), state_(nullptr) {};
 	~ReanimationGame() {};
 
 	void init() override;
@@ -35,6 +35,7 @@ private:
 	bool down = false;
 	// Referencia al numero del jugador que le está reviviendo
 	int revPlNumber_;
+	bool useController_;
 
 	int progress = 0;
 	//Referente al minijuego

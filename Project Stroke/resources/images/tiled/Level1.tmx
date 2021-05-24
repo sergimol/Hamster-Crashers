@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="left-up" width="160" height="9" tilewidth="64" tileheight="64" infinite="0" nextlayerid="19" nextobjectid="215">
+<map version="1.4" tiledversion="2020.10.30" orientation="orthogonal" renderorder="left-up" width="160" height="9" tilewidth="64" tileheight="64" infinite="0" nextlayerid="19" nextobjectid="215">
  <properties>
   <property name="MaxH" type="int" value="9"/>
  </properties>
@@ -299,9 +299,10 @@
     <property name="zzId" value="monsinpatico"/>
    </properties>
   </object>
-  <object id="102" name="newScene" x="10123.6" y="194.167" width="65.3333" height="346.667">
+  <object id="102" name="newScene" x="825.4" y="151.743" width="65.3333" height="346.667">
    <properties>
-    <property name="newMap" value="hasGanado"/>
+    <property name="newMap" value="Level1Boss"/>
+    <property name="numT" type="int" value="1"/>
    </properties>
   </object>
   <object id="103" name="finalBoss" x="265.32" y="122.5" width="27.2727" height="44.9091">
@@ -853,7 +854,7 @@
   </object>
  </objectgroup>
  <objectgroup id="7" name="Salas">
-  <object id="136" name="1" x="640.909" y="315.58" width="13" height="255.5">
+  <object id="136" name="1" x="1344.91" y="315.58" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="650"/>
     <property name="Rounds" type="int" value="1"/>
