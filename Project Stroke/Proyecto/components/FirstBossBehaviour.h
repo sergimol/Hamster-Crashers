@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "../ecs/Component.h"
+#include "../ecs/Entity.h"
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../ecs/Manager.h"

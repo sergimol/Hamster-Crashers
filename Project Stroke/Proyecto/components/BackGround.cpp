@@ -1,6 +1,6 @@
 #include "BackGround.h"
 
-BackGround::BackGround(Texture* im, float vel) : Image(im)
+BackGround::BackGround(Texture* im, float vel) : Image(im), trainVel_(85), trainMode_(false)
 {
 	//Asignamos la textura
 	tex_ = im;
@@ -10,18 +10,18 @@ BackGround::BackGround(Texture* im, float vel) : Image(im)
 
 }
 
-void BackGround::update() 
+void BackGround::update()
 {
 	//Cogemos la posicion anterior de la camara
 	Vector2D antPos = camPos_;
 
-	//Cogemos la posicion actual de la camara
-	camPos_ = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamPos();
-
+	if (!trainMode_) {
+		//Cogemos la posicion actual de la camara
+		camPos_ = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamPos();
+	}
+	else {
+		camPos_ = camPos_ + Vector2D(trainVel_,0);
+	}
 	//Movemos el background en sentido contrario en funcion de la camara
-	tr_->setPos(Vector2D(tr_->getPos().getX() - (camPos_.getX() - antPos.getX())*pxVel_/100, tr_->getPos().getY()));
-	
-
-
-
+	tr_->setPos(Vector2D(tr_->getPos().getX() - (camPos_.getX() - antPos.getX()) * pxVel_ / 100, tr_->getPos().getY()));
 }

@@ -7,6 +7,7 @@
 #include "BulletHit.h"
 #include "Movement.h"
 #include "AnimHamsterStateMachine.h"
+#include "SoundManager.h"
 //#include "Animator.h"
 
 Turret::Turret() : Ability(2000), x_(0), cadenceTime_(sdlutils().currRealTime()) {
@@ -22,7 +23,8 @@ void Turret::update() {
 
 		if (onUse_) {
 			if (sdlutils().currRealTime() > cadenceTime_ + CADENCESHOT) {
-
+				//Sonido
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("monchiSpecial");
 				//Crea la entidad
 				auto* bala = entity_->getMngr()->addEntity();
 

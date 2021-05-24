@@ -228,6 +228,7 @@ void MenuButton::pressed() {
 		if (sdlutils().hamstersToChoose() <= 0) {
 			mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Level1.tmx");
 			state_->setState(GameStates::RUNNING);
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1GameVersion");
 		}
 		//entity_->getMngr()->getHandler<HamsterSelectionMenu>()->getComponent<MenuButtonManager>()->updateKeymap(MenuButtonManager::SPACE, false);
 	}

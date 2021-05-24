@@ -238,7 +238,7 @@ void EntityAttribs::die() {
 	if (id_ == "sardinilla" || id_ == "monchi" || id_ == "soldier1" || id_ == "soldier2") {
 		tam = 86;
 	}
-	else if (id_ == "canelon" || id_ == "canelonDemon") {
+	else if (id_ == "canelon" || id_ == "canelonDemon" || id_ == "monosinpatico") {
 		tam = 128;
 	}
 	else if (id_ == "keta"){
@@ -252,7 +252,9 @@ void EntityAttribs::die() {
 		3,
 		220,
 		Vector2D(0, 0),
-		3)->play(sdlutils().anims().at(id_ + "_death"));
+		3);
+
+	e->getComponent<Animator>()->play(sdlutils().anims().at(id_ + "_death"));
 
 	//TODO WHY ¿?
 	//Si la persona que muere es un hamster...

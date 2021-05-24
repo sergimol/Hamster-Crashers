@@ -755,6 +755,22 @@
       "file": "resources/images/dialogue/explicacion1.png"
     },
     {
+      "id": "dialogo2",
+      "file": "resources/images/dialogue/dialogo2.png"
+    },
+    {
+      "id": "explicacion2",
+      "file": "resources/images/dialogue/explicacion2.png"
+    },
+    {
+      "id": "dialogo3",
+      "file": "resources/images/dialogue/dialogo3.png"
+    },
+    {
+      "id": "explicacion3",
+      "file": "resources/images/dialogue/explicacion3.png"
+    },
+    {
       "id": "Lvl1Javi0",
       "file": "resources/images/dialogue/explicacion0.png"
     },
@@ -912,7 +928,7 @@
       "file": "resources/images/menuSprites/4.png"
     },
     {
-      "id": "monosinpatico",
+      "id": "monosinpaticoSheet",
       "file": "resources/images/monosinpatico_spritesheet.png"
     }
   ],
@@ -950,6 +966,8 @@
       "color": "0x0000ffff"
     }
   ],
+
+
 
   "sounds": [
     {
@@ -1153,14 +1171,6 @@
       "file": "resources/sound/car/car2.wav"
     },
     {
-      "id": "Nivel1GameVersion",
-      "file": "resources/sound/music/Nivel1GameVersion.mp3"
-    },
-    {
-      "id": "mainTheme",
-      "file": "resources/sound/music/Nivel1GameVersion.mp3"
-    },
-    {
       "id": "birds",
       "file": "resources/sound/lvl2/birds.mp3"
     },
@@ -1251,6 +1261,37 @@
     {
       "id": "wrongNote",
       "file": "resources/sound/reanimationKeySound/wrongNote.wav"
+    }
+  ],
+
+  "musics": [
+    {
+      "id": "HamstersMainThemev2",
+      "file": "resources/sound/music/HamstersMainThemev2.mp3"
+    },
+    {
+      "id": "HamstersNivel2_Boss160bpm",
+      "file": "resources/sound/music/HamstersNivel2_Boss160bpm.mp3"
+    },
+    {
+      "id": "HamstersNivel2GameVersion",
+      "file": "resources/sound/music/HamstersNivel2GameVersion.mp3"
+    },
+    {
+      "id": "HamstersNivel4_Boss2",
+      "file": "resources/sound/music/HamstersNivel4_Boss2.mp3"
+    },
+    {
+      "id": "HamstersNivel4GameVersion",
+      "file": "resources/sound/music/HamstersNivel4GameVersion.mp3"
+    },
+    {
+      "id": "Nivel1Boss1_0",
+      "file": "resources/sound/music/Nivel1Boss1_0.mp3"
+    },
+    {
+      "id": "Nivel1GameVersion",
+      "file": "resources/sound/music/Nivel1GameVersion.mp3"
     }
   ],
 
@@ -2189,7 +2230,7 @@
       "startFrameY": 0,
       "duration": 4,
       "cols": 8,
-      "rows": 2,
+      "rows": 8,
       "frameUpdate": 150,
       "loop": 1,
       "chain": "",
@@ -2201,7 +2242,7 @@
       "startFrameY": 0,
       "duration": 4,
       "cols": 8,
-      "rows": 2,
+      "rows": 8,
       "frameUpdate": 150,
       "loop": 1,
       "chain": "",
@@ -2213,7 +2254,7 @@
       "startFrameY": 0,
       "duration": 8,
       "cols": 8,
-      "rows": 2,
+      "rows": 8,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "",
@@ -2225,7 +2266,7 @@
       "startFrameY": 1,
       "duration": 4,
       "cols": 8,
-      "rows": 2,
+      "rows": 8,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "",
@@ -2237,7 +2278,7 @@
       "startFrameY": 1,
       "duration": 1,
       "cols": 8,
-      "rows": 2,
+      "rows": 8,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "",
@@ -2249,7 +2290,7 @@
       "startFrameY": 2,
       "duration": 3,
       "cols": 8,
-      "rows": 2,
+      "rows": 8,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "",
@@ -2261,7 +2302,7 @@
       "startFrameY": 2,
       "duration": 16,
       "cols": 8,
-      "rows": 2,
+      "rows": 8,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "",
@@ -2271,9 +2312,9 @@
       "id": "calcetin_sequence",
       "startFrameX": 3,
       "startFrameY": 4,
-      "duration": 28,
+      "duration": 27,
       "cols": 8,
-      "rows": 2,
+      "rows": 8,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "",
@@ -2310,8 +2351,20 @@
       "duration": 7,
       "cols": 6,
       "rows": 6,
-      "frameUpdate": 70,
+      "frameUpdate": 50,
       "loop": 0,
+      "chain": "",
+      "attackFrame": 8
+    },
+    {
+      "id": "monosinpatico_strongattack",
+      "startFrameX": 2,
+      "startFrameY": 1,
+      "duration": 7,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 30,
+      "loop": 1,
       "chain": "",
       "attackFrame": 8
     },
@@ -2322,7 +2375,7 @@
       "duration": 6,
       "cols": 6,
       "rows": 6,
-      "frameUpdate": 100,
+      "frameUpdate": 70,
       "loop": 0,
       "chain": "",
       "attackFrame": -1

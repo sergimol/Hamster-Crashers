@@ -35,18 +35,18 @@ void EnemyMother::asingEnemies() {
 		while (objetive < numPlayers_ && objetivesList_.at(objetive)->hmSt_->cantBeTargeted()) {
 			objetive++;
 		}
-		if (objetive < numPlayers_) {
+		if (objetive < numPlayers_ && waiting_.front()->isActive()) {
 
 			//no hay players alive no hace falta reasignar
 			//
 			//
 			objetivesList_.at(objetive)->ambushing.push_back(waiting_.front());
-			waiting_.pop_front();
 			// poner las entitades en behavior ambush
 			objetivesList_.at(objetive)->ambushing.back()->getComponent<EnemyBehaviour>()->SetBehavior(new AmbushPlayer());
 			//darle el iterador y el hamster id a behavior porque lo va a necesitar
 			objetivesList_.at(objetive)->ambushing.back()->getComponent<EnemyBehaviour>()->setHamId
-				(objetive, --objetivesList_.at(objetive)->ambushing.end(), 'b');
+				(objetive, 'b');
+			waiting_.pop_front();
 		}
 	}
 	//repartir los enemigos strong
@@ -57,18 +57,18 @@ void EnemyMother::asingEnemies() {
 		while (objetive < numPlayers_ && objetivesList_.at(objetive)->hmSt_->cantBeTargeted()) {
 			objetive++;
 		}
-		if (objetive < numPlayers_) {
+		if (objetive < numPlayers_ && strongWaiting_.front()->isActive()) {
 
 			//no hay players alive no hace falta reasignar
 			//
 			//
 			objetivesList_.at(objetive)->strongAmbushing.push_back(strongWaiting_.front());
-			strongWaiting_.pop_front();
 			// poner las entitades en behavior ambush
 			objetivesList_.at(objetive)->strongAmbushing.back()->getComponent<EnemyBehaviour>()->SetBehavior(new AmbushPlayer());
 			//darle el iterador y el hamster id a behavior porque lo va a necesitar
 			objetivesList_.at(objetive)->strongAmbushing.back()->getComponent<EnemyBehaviour>()->setHamId
-			(objetive, --objetivesList_.at(objetive)->strongAmbushing.end(), 'b');
+			(objetive, 'b');
+			strongWaiting_.pop_front();
 		}
 	}
 }
@@ -90,27 +90,29 @@ void EnemyMother::orderAttack() {
 		auto z = objetivesList_.at(i)->atacking.size();
 		for (int y = z; y < 2; y++) {
 			//se puede a�adir
-			if (!objetivesList_.at(i)->ambushing.empty()) { // hay enemigos disponibles
+			if (!objetivesList_.at(i)->ambushing.empty() && objetivesList_.at(i)->ambushing.front()->isActive()
+				&& objetivesList_.at(i)->ambushing.front()->hasComponent<EnemyBehaviour>()) { // hay enemigos disponibles
 				objetivesList_.at(i)->atacking.push_back(objetivesList_.at(i)->ambushing.front());
-				objetivesList_.at(i)->ambushing.pop_front();
 				//TODO poner las entitades en behavior attack correspondiente
 				objetivesList_.at(i)->atacking.back()->getComponent<EnemyBehaviour>()->SetBehavior(new FollowPlayer());
 				//darle el iterador y el hamster id a behavior porque lo va a necesitar
 				objetivesList_.at(i)->atacking.back()->getComponent<EnemyBehaviour>()->setHamId
-					(i, --objetivesList_.at(i)->atacking.end(), 'a');
+					(i, 'a');
+				objetivesList_.at(i)->ambushing.pop_front();
 			}
 		}
 		//enemigos strong
 		if (objetivesList_.at(i)->strongAtacking.empty()) {
 			//se puede a�adir
-			if (!objetivesList_.at(i)->strongAmbushing.empty()) { // hay enemigos disponibles
+			if (!objetivesList_.at(i)->strongAmbushing.empty() && objetivesList_.at(i)->strongAmbushing.front()->isActive()
+				&& objetivesList_.at(i)->strongAmbushing.front()->hasComponent<EnemyBehaviour>()) { // hay enemigos disponibles
 				objetivesList_.at(i)->strongAtacking.push_back(objetivesList_.at(i)->strongAmbushing.front());
-				objetivesList_.at(i)->strongAmbushing.pop_front();
 				//TODO poner las entitades en behavior attack correspondiente
 				objetivesList_.at(i)->strongAtacking.back()->getComponent<EnemyBehaviour>()->SetBehavior(new StrongFollowPlayer());
 				//darle el iterador y el hamster id a behavior porque lo va a necesitar
 				objetivesList_.at(i)->strongAtacking.back()->getComponent<EnemyBehaviour>()->setHamId
-				(i, --objetivesList_.at(i)->strongAtacking.end(), 'a');
+				(i, 'a');
+				objetivesList_.at(i)->strongAmbushing.pop_front();
 			}
 		}
 		
@@ -137,7 +139,9 @@ void EnemyMother::cleanListHamAmbush(int i) {
 		waiting_.push_back(objetivesList_.at(i)->ambushing.back());
 		objetivesList_.at(i)->ambushing.pop_back();
 		//Tponer las entitades en behavior iddle
+		if (waiting_.back()->isActive())
 		waiting_.back()->getComponent<EnemyBehaviour>()->SetBehavior(new IddleEnemy());
+		waiting_.back()->getComponent<EnemyBehaviour>()->setHamId(-1, 0);
 	}
 	//enemigos fuertes //TODO
 	n = objetivesList_.at(i)->strongAmbushing.size();
@@ -145,7 +149,9 @@ void EnemyMother::cleanListHamAmbush(int i) {
 		waiting_.push_back(objetivesList_.at(i)->strongAmbushing.back());
 		objetivesList_.at(i)->strongAmbushing.pop_back();
 		//Tponer las entitades en behavior iddle
+		if (waiting_.back()->isActive())
 		waiting_.back()->getComponent<EnemyBehaviour>()->SetBehavior(new IddleEnemy());
+		waiting_.back()->getComponent<EnemyBehaviour>()->setHamId(-1, 0);
 	}
 }
 void EnemyMother::cleanListHamAttacking(int i) {
@@ -154,14 +160,19 @@ void EnemyMother::cleanListHamAttacking(int i) {
 		waiting_.push_back(objetivesList_.at(i)->atacking.back());
 		objetivesList_.at(i)->atacking.pop_back();
 		//poner las entitades en behavior iddle
+		if (waiting_.back()->isActive())
 		waiting_.back()->getComponent<EnemyBehaviour>()->SetBehavior(new IddleEnemy());
+
+		waiting_.back()->getComponent<EnemyBehaviour>()->setHamId(-1, 0);
 	}
 	n = objetivesList_.at(i)->strongAtacking.size();
 	for (auto y = 0u; y < n; y++) {
 		waiting_.push_back(objetivesList_.at(i)->strongAtacking.back());
 		objetivesList_.at(i)->strongAtacking.pop_back();
 		//poner las entitades en behavior iddle
+		if (waiting_.back()->isActive())
 		waiting_.back()->getComponent<EnemyBehaviour>()->SetBehavior(new IddleEnemy());
+		waiting_.back()->getComponent<EnemyBehaviour>()->setHamId(-1, 0);
 	}
 
 
@@ -175,52 +186,94 @@ void EnemyMother::cleanListHamAttacking(int i) {
 }
 
 /*Cambia a un eneigo en concreto de attack to ambush*/
-void EnemyMother::changeFromAttackToAmbush(int hamid, std::list<Entity*>::iterator it) {
-	if (!(*it)->hasComponent<EnemyStrongAttack>()) {
+void EnemyMother::changeFromAttackToAmbush(int hamid, Entity*e) {
+	/*if (it != objetivesList_.at(hamid)->atacking.end())
+		if (it != objetivesList_.at(hamid)->ambushing.end())
+			if ( it != objetivesList_.at(hamid)->strongAtacking.end()) 
+				if (it != objetivesList_.at(hamid)->strongAmbushing.end())*/ //son todos los iteradores no validos y los que bajo ninguna circustancia quiero acceder a ellos
+		//haog esot porque en algun momento que no estoy controlando el iterador pasa de estan en el ultimo-- a en end el no valido, presupongo que es por el refresh ya que es ahora el unico encargado de realizar tales operaciones
+		//aunque eso implicaria que le ntidad se activando y desactivando entre instrucciones, lo cual tampoco me parece que sea correcto bajo ningunca circustancia.
+		//como sea esta comprobacion impedira que todo esto explote en mil pedazos de ser asi el caso como s eha descrito anteriormente
 
-	
+	if (!e->hasComponent<EnemyStrongAttack>()) {
+
+		
 		//coloca el bicho en ambush al final
-		objetivesList_.at(hamid)->ambushing.push_back(*it);
+		objetivesList_.at(hamid)->ambushing.push_back(e);
 		//lo saca de la lista attacking
-		removeFromAttackList(hamid, it, false);
+		removeFromAttackList(hamid, e, false);
 
 		//poner las entitades en behavior attack correspondiente
 		objetivesList_.at(hamid)->ambushing.back()->getComponent<EnemyBehaviour>()->SetBehavior(new AmbushPlayer());
 		//darle el iterador y el hamster id a behavior porque lo va a necesitar
 		objetivesList_.at(hamid)->ambushing.back()->getComponent<EnemyBehaviour>()->setHamId
-		(hamid, --objetivesList_.at(hamid)->ambushing.end(), 'b');
+		(hamid, 'b');
 		//yasta
 	}
 	else {
 
 		//coloca el bicho en ambush al final
-		objetivesList_.at(hamid)->strongAmbushing.push_back(*it);
+		objetivesList_.at(hamid)->strongAmbushing.push_back(e);
 		//lo saca de la lista attacking
-		removeFromAttackList(hamid, it, true);
+		removeFromAttackList(hamid, e, true);
 
 		//poner las entitades en behavior attack correspondiente
 		objetivesList_.at(hamid)->strongAmbushing.back()->getComponent<EnemyBehaviour>()->SetBehavior(new AmbushPlayer());
-		//darle el iterador y el hamster id a behavior porque lo va a necesitar
+		//darle el iterador y el hamster id a behavior porque lo va a necesitar, dato ya no hay iterador, ya que se nos volvia loco el ninio y recomentar todo al final xd
 		objetivesList_.at(hamid)->strongAmbushing.back()->getComponent<EnemyBehaviour>()->setHamId
-		(hamid, --objetivesList_.at(hamid)->strongAmbushing.end(), 'b');
+		(hamid, 'b');
 		//yasta
 	}
 
 }
 
 
-void EnemyMother::removeFromAttackList(int hamid, std::list<Entity*>::iterator it, bool strong) {
-	if (!strong) 
-		objetivesList_.at(hamid)->atacking.erase(it); //si se ha morido se quita, no se cambia ni nada, la lista se actualiza sola
-	else 
-		objetivesList_.at(hamid)->strongAtacking.erase(it);
+void EnemyMother::removeFromAttackList(int hamid, Entity* et, bool strong) {
+	if (!strong) {
+
+		// Create a list Iterator
+		std::list<Entity*>::iterator it;
+		// Fetch the iterator of element with value 'the'
+		it = std::find(objetivesList_.at(hamid)->atacking.begin(), objetivesList_.at(hamid)->atacking.end(), et);
+		// Check if iterator points to end or not
+		if (it != objetivesList_.at(hamid)->atacking.end())
+			objetivesList_.at(hamid)->atacking.erase(it); //si se ha morido se quita, no se cambia ni nada, la lista se actualiza sola
+	}
+	else {
+		// Create a list Iterator
+		std::list<Entity*>::iterator it;
+		// Fetch the iterator of element with value 'the'
+		it = std::find(objetivesList_.at(hamid)->strongAtacking.begin(), objetivesList_.at(hamid)->strongAtacking.end(), et);
+		// Check if iterator points to end or not
+		if (it != objetivesList_.at(hamid)->strongAtacking.end())
+			objetivesList_.at(hamid)->strongAtacking.erase(it);
+	}
 }
 
-void EnemyMother::removeFromAmbushList(int hamid, std::list<Entity*>::iterator it, bool strong) {
-	if (!strong) 
-		objetivesList_.at(hamid)->ambushing.erase(it); //si se ha morido se quita, no se cambia ni nada, la lista se actualiza sola
-	else 
-		objetivesList_.at(hamid)->strongAmbushing.erase(it);
+void EnemyMother::removeFromAmbushList(int hamid, Entity* et, bool strong) {
+
+	
+
+
+	if (!strong) {
+		// Create a list Iterator
+		std::list<Entity*>::iterator it;
+		// Fetch the iterator of element with value 'the'
+		it = std::find(objetivesList_.at(hamid)->ambushing.begin(), objetivesList_.at(hamid)->ambushing.end(), et);
+		// Check if iterator points to end or not
+		if (it != objetivesList_.at(hamid)->ambushing.end())
+			it = objetivesList_.at(hamid)->ambushing.erase(it); //si se ha morido se quita, no se cambia ni nada, la lista se actualiza sola
+	}
+	else {
+
+		// Create a list Iterator
+		std::list<Entity*>::iterator it;
+		// Fetch the iterator of element with value 'the'
+		it = std::find(objetivesList_.at(hamid)->strongAmbushing.begin(), objetivesList_.at(hamid)->strongAmbushing.end(), et);
+		// Check if iterator points to end or not
+		if (it != objetivesList_.at(hamid)->strongAmbushing.end())
+			it = objetivesList_.at(hamid)->strongAmbushing.erase(it);
+	}
 }
 
 void EnemyMother::update() {

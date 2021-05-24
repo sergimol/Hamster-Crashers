@@ -103,6 +103,8 @@ void Game::init() {
 	mainMenu->addComponent<MenuButtonManager>("mainMenu", GameStates::MAINMENU);
 	mainMenu->addComponent<MenuControlHandler>(GameStates::MAINMENU);
 	mngr_->setHandler<MainMenu>(mainMenu);
+	mngr_->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersMainThemev2");
+
 
 	auto* pauseMenu = mngr_->addMenu();
 	pauseMenu->addComponent<MenuButtonManager>("pauseMenu", GameStates::PAUSE);

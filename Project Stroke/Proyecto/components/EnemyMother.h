@@ -77,10 +77,10 @@ public:
 	void asingEnemies();
 	void orderAttack();
 	/*Change de entiity from attacking list to ambush list when stunned or out of combat*/
-	void changeFromAttackToAmbush(int hamid, std::list<Entity*>::iterator it);
+	void changeFromAttackToAmbush(int hamid, Entity* e);
 	//
-	void removeFromAttackList(int hamid, std::list<Entity*>::iterator it, bool strong);
-	void removeFromAmbushList(int hamid, std::list<Entity*>::iterator it, bool strong);
+	void removeFromAttackList(int hamid, Entity* e, bool strong);
+	void removeFromAmbushList(int hamid, Entity* e, bool strong);
 	
 	//No hay removefromwaiting, porque en un principio eso no deberia de ser posible ya que cuando estan en ese estado los players estan muertos
 
@@ -110,12 +110,7 @@ public:
 					objetivesList_.at(i)->atacking.begin(), //
 					objetivesList_.at(i)->atacking.end(), //
 					[](const Entity* e) { //
-						if (e->isActive()) {
-							return false;
-						}
-						else {
-							return true;
-						}
+						return !e->isActive();
 					}), //
 				objetivesList_.at(i)->atacking.end());
 
@@ -148,13 +143,7 @@ public:
 					waiting_.begin(), //
 					waiting_.end(), //
 					[](const Entity* e) { //
-						if (e->isActive()) {
-							return false;
-						}
-						else {
-
-						return true;
-						}
+						return !e->isActive();
 					}), //
 				waiting_.end());
 

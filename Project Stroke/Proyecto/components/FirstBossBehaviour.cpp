@@ -7,7 +7,8 @@ FirstBossBehaviour::FirstBossBehaviour() :
 	waitingTime_(sdlutils().currRealTime()), waitingCD_(4000), stunTime_(0), stunCD_(1500), startBehavior_(false) {
 }
 
-void FirstBossBehaviour::init() {
+void FirstBossBehaviour::init() 
+{
 	Entity* owEntity = owner_->getEntity();
 	mov_ = owEntity->getComponent<MovementSimple>();
 	assert(mov_ != nullptr);
@@ -29,6 +30,8 @@ void FirstBossBehaviour::init() {
 	assert(hamsterTr_ != nullptr);
 	assert(anim_ != nullptr);
 
+	//EMPEZAMOS CON LA CINEMATICA
+	anim_->setAnimBool(EnemyStatesAnim::SEQUENCE, true);
 
 }
 
@@ -117,7 +120,8 @@ void FirstBossBehaviour::lockHamster(int id) {
 }
 
 //Esta a rango de ataque
-bool FirstBossBehaviour::isWithinAttackRange() {
+bool FirstBossBehaviour::isWithinAttackRange()
+{
 	auto width = tr_->getW();
 	auto hamWidth = hamsterTr_->getW();
 
@@ -131,14 +135,16 @@ bool FirstBossBehaviour::isWithinAttackRange() {
 
 void FirstBossBehaviour::behave() {
 	//Fin animacion
-	//if (!startBehavior_ && anim_->getState() == HamStatesAnim::LIGHTATTACK)
-	//{
-	//	if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
-	//	{
-	//		startBehavior_ = true;
-	//	}
-	//}
-	/*else*/ if (lockedHamster_ != nullptr) {
+	if (!startBehavior_ )
+	{
+		Entity* owEntity = owner_->getEntity();
+		if (anim_->getState() == EnemyStatesAnim::SEQUENCE && owEntity->getComponent<Animator>()->OnAnimationFrameEnd())
+		{
+			startBehavior_ = true;
+			anim_->setAnimBool(EnemyStatesAnim::SEQUENCE, false);
+		}
+	}
+	else if (lockedHamster_ != nullptr) {
 		// Cambia el foco si el actual muere o le da un infarto
 		if (lockedHamState_->cantBeTargeted()) {
 			lockHamster();
