@@ -68,6 +68,7 @@ void UI::bar(float objetivo) {
 	int damageRecieved = (objetivo / maxLife) * barLenghtInit;					//Calculamos el daño relativo a lo que es nuestra 'bar'
 	//std::cout << objetivo << " " << maxLife << "\n";
 	barLenght += damageRecieved;
+	if(face_ == &sdlutils().images().at(name + "Head1"))
 	dest3 = build_sdlrect(renderPosBar, barLenght, bar_->height() * scale);
 }
 
