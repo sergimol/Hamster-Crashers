@@ -13,6 +13,8 @@ private:
 	//Textura del fondo
 	Texture* tex_;
 
+	bool trainMode_;
+	int trainVel_;
 
 public:
 	BackGround(Texture* im, float vel);
