@@ -1,5 +1,6 @@
 ﻿#include "FirstBossBehaviour.h"
 #include "Stroke.h"
+#include "SoundManager.h"
 
 FirstBossBehaviour::FirstBossBehaviour() :
 	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr),
@@ -133,17 +134,24 @@ bool FirstBossBehaviour::isWithinAttackRange()
 	return(hamX /*+ rangeOffsetX_*/ + hamWidth /**2*/ >= x + 3*width/4 && hamX /*+ hamWidth*/ /*- rangeOffsetX_ */<= x + 1*width/4);
 }
 
-void FirstBossBehaviour::behave() {
-	//Fin animacion
+void FirstBossBehaviour::behave() 
+{
+	//COMPROBACION DE CINEMATICA
 	if (!startBehavior_ )
 	{
+		//FIN DE CINEMATICA
 		Entity* owEntity = owner_->getEntity();
 		if (anim_->getState() == EnemyStatesAnim::SEQUENCE && owEntity->getComponent<Animator>()->OnAnimationFrameEnd())
 		{
 			startBehavior_ = true;
 			anim_->setAnimBool(EnemyStatesAnim::SEQUENCE, false);
+			//Empieza la musica del boss
+			Entity* owEntity = owner_->getEntity();
+			owEntity->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1Boss1_0");
+
 		}
 	}
+	//SE ACABA LA CINEMATICA, EMPIEZA EL COMPORTAMIENTO DEL BOSS
 	else if (lockedHamster_ != nullptr) {
 		// Cambia el foco si el actual muere o le da un infarto
 		if (lockedHamState_->cantBeTargeted()) {

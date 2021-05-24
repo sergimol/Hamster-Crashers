@@ -54,7 +54,7 @@ void ObstacleMoveable::update()
 				coche->addComponent<Image>(&sdlutils().images().at("coche1")); //por testing sin animacion
 			else
 				coche->addComponent<Image>(&sdlutils().images().at("coche2")); //por testing sin animacion
-			coche->addComponent<ContactDamage>(10, 10, true, true, true);
+			coche->addComponent<ContactDamage>(10, 50, true, true, true);
 
 
 			if (vel >= 0)
