@@ -481,7 +481,7 @@ void MapMngr::loadEnemyRoom() {
 			auto* enemy = mngr_->addEntity();
 			auto* enTr = enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(), 106 * scale, 106 * scale, 0.0f, 0.3, 0.5);
+				Vector2D(), 128 * scale, 128 * scale, 0.0f, 0.3, 0.5);
 			enTr->getFlip() = true;
 
 			enemy->addComponent<EnemyStateMachine>();

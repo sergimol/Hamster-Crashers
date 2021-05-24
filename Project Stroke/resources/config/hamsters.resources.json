@@ -2274,7 +2274,7 @@
       "duration": 7,
       "cols": 6,
       "rows": 6,
-      "frameUpdate": 70,
+      "frameUpdate": 50,
       "loop": 0,
       "chain": "",
       "attackFrame": 8
@@ -2286,7 +2286,7 @@
       "duration": 6,
       "cols": 6,
       "rows": 6,
-      "frameUpdate": 100,
+      "frameUpdate": 70,
       "loop": 0,
       "chain": "",
       "attackFrame": -1
