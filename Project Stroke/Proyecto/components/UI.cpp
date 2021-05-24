@@ -30,9 +30,9 @@ UI::UI(std::string n, int pos) :
 		bar_ = &sdlutils().images().at("barEnemy");
 
 		//Posiciones de los elementos de la UId
-		renderPosHead = Vector2D((sdlutils().width() / 4)  + 25, sdlutils().height() - 100);
+		renderPosHead = Vector2D((sdlutils().width() / 4) -20, sdlutils().height()-130);
 		renderPosHexagon = Vector2D((sdlutils().width() / 4) - 75, sdlutils().height() - 150);
-		renderPosBar = renderPosHead + Vector2D(25, 10);
+		renderPosBar = renderPosHead + Vector2D(150, 50);
 
 		//DestRects
 		dest = build_sdlrect(renderPosHead, face_->width()  * scale, face_->height()  * scale);
@@ -51,8 +51,8 @@ void UI::render() {
 	//Renderizamos la barra, la cara del hamster y su corazon
 	if (state_->getState() != GameStates::MAINMENU && state_->getState() != GameStates::CONTROLS) {
 		background_->render(dest2);
-		hexagon_->render(dest4);
 		bar_->render(dest3);
+		hexagon_->render(dest4);
 		face_->render(dest);
 	}
 }

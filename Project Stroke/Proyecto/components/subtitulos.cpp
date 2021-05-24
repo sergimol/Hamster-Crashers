@@ -1,4 +1,6 @@
 #include "subtitulos.h"
+#include "ControlHandler.h"
+#include "SoundManager.h"
 
 Subtitulos::Subtitulos(std::string actualSub, int transitionNum)
 {
@@ -48,8 +50,10 @@ void Subtitulos::show() {
 }
 
 void Subtitulos::unshow() {
-	if (position < 3.0f)
+	if (position < 3.0f) {
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stopTutorial");
 		position = position + 0.1f;
+	}
 	else {
 		renderDialogues = false;
 	}

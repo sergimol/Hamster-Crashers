@@ -75,7 +75,7 @@ void Transition::fadeIn() {
 	if (alpha == SDL_ALPHA_OPAQUE) {
 		if (subs_ != nullptr) {
 			subs_->dialogoStateChange();
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("subtitle");
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("nextPage");
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("transition");
 
 		}

@@ -32,7 +32,7 @@ public:
 	int soldierDepChannel = 1;
 
 	int musicsChannel = 2;
-	int subtitlesChannel = 2;
+	int subtitlesChannel = 7;
 	int birdsChannel = 2;
 
 	int catChannel = 3;
@@ -85,7 +85,6 @@ public:
 	int inittrapKitchenVol = 20;
 private:
 	int randomNum;
-	int dialogueNum = 0;
 
 	void playLighthit();
 
@@ -97,7 +96,9 @@ private:
 
 	void playHeartattack();
 
-	void playSubtitle();
+	void playTutorial();
+	void playTransition();
+	void StopTutorial();
 
 	void playKetaSpecial();
 
@@ -111,13 +112,15 @@ private:
 
 	void  playsoldierDep();
 
-	void  playtransition();
+	void  playPageSkip();
+
+	void  playHandPunch();
 
 	int pickRandom(int max);
 
 
 
-	//SOUND LIST AND CHANNELS
+	//Golpe
 	SoundEffect* light0;
 	SoundEffect* light1;
 	SoundEffect* light2;
@@ -130,21 +133,24 @@ private:
 	SoundEffect* light9;
 	SoundEffect* light10;
 
+	//Golpe Fuerte
 	SoundEffect* strong0;
 	SoundEffect* strong1;
 	SoundEffect* strong2;
 
+	//Ataque (whoosh)
 	SoundEffect* attack0;
 	SoundEffect* attack1;
 	SoundEffect* attack2;
 	SoundEffect* attack3;
 	SoundEffect* attack4;
 
-
+	//Muerte
 	SoundEffect* dep0;
 	SoundEffect* dep1;
 	SoundEffect* dep2;
 
+	//Ataque corazon
 	SoundEffect* heartattack0;
 	SoundEffect* heartattack1;
 	SoundEffect* heartattack2;
@@ -152,88 +158,121 @@ private:
 	SoundEffect* heartattack4;
 	SoundEffect* heartattack5;
 
+	//Boss Gato
 	SoundEffect* catMeowStatic;
 	SoundEffect* catMeowAttack;
 	SoundEffect* catMeowInit;
 	SoundEffect* catMeowWalking;
 
+	//Boss Mano
+	SoundEffect* heavyPunch0;
+	SoundEffect* heavyPunch1;
+
+	//Boss Mono
+	SoundEffect* platillos;
+
+	//Sonidos tren
+	SoundEffect* trainBackground;
+	SoundEffect* trainPipi;
+	SoundEffect* trainAlto;
+
+	//Coche
+	SoundEffect* car0;
+	SoundEffect* car1;
+	SoundEffect* car2;
+
+	//Muerte soldados
+	SoundEffect* soldierDep0;
+	SoundEffect* soldierDep1;
+	SoundEffect* soldierDep2;
+	SoundEffect* soldierDep3;
+
+	//Juego reanimar, tecla correcta o fallida
+	SoundEffect* rightNote;
+	SoundEffect* wrongNote;
+
+	//Posesion hamster
+	SoundEffect* possesion;
+
+	//Especial Sardinilla
+	SoundEffect* sardinillaSpecial0;
+
+	//Especial Keta
 	SoundEffect* ketaSpecial0;
 	SoundEffect* ketaSpecial1;
 	SoundEffect* ketaSpecial2;
 	SoundEffect* ketaSpecial3;
 	SoundEffect* ketaSpecial4;
 
+	//Especial monchi
 	SoundEffect* monchiSpecial0;
 	SoundEffect* monchiSpecial1;
 	SoundEffect* monchiSpecial2;
 	SoundEffect* monchiSpecial3;
 	SoundEffect* monchiSpecial4;
 
+	//Especial canelon
 	int canelonState = 0;
 	SoundEffect* canelonSpecial0;
 	SoundEffect* canelonSpecial1;
 
-	//Enemigos
-	SoundEffect* car0;
-	SoundEffect* car1;
-	SoundEffect* car2;
-
+	//Botones UI
 	int buttonState = 0;
 	SoundEffect* button0;
 	SoundEffect* button1;
 
-	SoundEffect* mainTheme;
+	//Musica y sonidos ambiente
+	SoundEffect* HamstersMainThemev2;
+	SoundEffect* Nivel1GameVersion;
+	SoundEffect* Nivel1Boss1_0;
+	SoundEffect* HamstersNivel2GameVersion;
+	SoundEffect* HamstersNivel2_Boss160bpm;
+	SoundEffect* HamstersNivel4_Boss2;
+	SoundEffect* HamstersNivel4GameVersion;
+
 	SoundEffect* birds;
 
+	//Recoger items
 	SoundEffect* eat0;
 	SoundEffect* eat1;
+	SoundEffect* eat2;
+	SoundEffect* eat3;
 
-	SoundEffect* soldierDep0;
-	SoundEffect* soldierDep1;
-	SoundEffect* soldierDep2;
-	SoundEffect* soldierDep3;
+	//PageNext
+	SoundEffect* pageSkip0;
+	SoundEffect* pageSkip1;
 
-	SoundEffect* trainBackground;
-	SoundEffect* trainPipi;
-	SoundEffect* trainAlto;
 
-	SoundEffect* transition0;
-	SoundEffect* transition1;
-
+	//Trampa cocina
 	SoundEffect* trapKitchen;
 
+	//Dialogos Angel (tutorial y transiciones, falta diferenciarlos)
+	int tutorialNum = 0;
+	SoundEffect* tutorial0;
+	SoundEffect* tutorial1;
+	SoundEffect* tutorial2;
+	SoundEffect* tutorial3;
+	SoundEffect* tutorial4;
+	SoundEffect* tutorial5;
+	SoundEffect* tutorial6;
+	SoundEffect* tutorial7;
+	SoundEffect* tutorial8;
+	SoundEffect* tutorial9;
+	SoundEffect* tutorial10;
 
-	SoundEffect* dialogue0;
-	SoundEffect* dialogue1;
-	SoundEffect* dialogue2;
-	SoundEffect* dialogue3;
-	SoundEffect* dialogue4;
-	SoundEffect* dialogue5;
-	SoundEffect* dialogue6;
-	SoundEffect* dialogue7;
-	SoundEffect* dialogue8;
-	SoundEffect* dialogue9;
-	SoundEffect* dialogue10;
-	SoundEffect* dialogue11;
-	SoundEffect* dialogue12;
-	SoundEffect* dialogue13;
-	SoundEffect* dialogue14;
-	SoundEffect* dialogue15;
-	SoundEffect* dialogue16;
-	SoundEffect* dialogue17;
-	SoundEffect* dialogue18;
-	SoundEffect* dialogue19;
-	SoundEffect* dialogue20;
-	SoundEffect* dialogue21;
-	SoundEffect* dialogue22;
-	SoundEffect* dialogue23;
-	SoundEffect* dialogue24;
-	SoundEffect* dialogue25;
-	SoundEffect* dialogue26;
-	SoundEffect* dialogue27;
-	SoundEffect* dialogue28;
-	SoundEffect* dialogue29;
-	SoundEffect* dialogue30;
+	int transitionNum = 0;
+	SoundEffect* transition0;
+	SoundEffect* transition1;
+	SoundEffect* transition2;
+	SoundEffect* transition3;
+	SoundEffect* transition4;
+	SoundEffect* transition5;
+	SoundEffect* transition6;
+	SoundEffect* transition7;
+	SoundEffect* transition8;
+	SoundEffect* transition9;
+	SoundEffect* transition10;
+
 
 };
 

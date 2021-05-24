@@ -75,6 +75,10 @@
       "file": "resources/images/UI/hamsterUI/heart3.png"
     },
     {
+      "id": "calcetinHead1",
+      "file": "resources/images/UI/calcetinHead.png"
+    },
+    {
       "id": "sardinillaHead1",
       "file": "resources/images/UI/hamsterUI/sardinillaHead.png"
     },
@@ -128,55 +132,67 @@
     },
     {
       "id": "sardinillaSheet",
-      "file": "resources/images/sardinilla_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/sardinilla_spritesheet.png"
     },
     {
       "id": "sardinillaSheet2",
-      "file": "resources/images/sardinilla_spritesheetHA.png"
+      "file": "resources/images/spritesheets/hamsters/sardinilla_spritesheetHA.png"
     },
     {
       "id": "sardinillaSheet3",
-      "file": "resources/images/sardinilla_spritesheetPos.png"
+      "file": "resources/images/spritesheets/hamsters/sardinilla_spritesheetPos.png"
     },
     {
       "id": "canelonSheet",
-      "file": "resources/images/canelonGod_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/canelonGod_spritesheet.png"
     },
     {
       "id": "canelonSheet2",
-      "file": "resources/images/canelonGod_spritesheetHA.png"
+      "file": "resources/images/spritesheets/hamsters/canelonGod_spritesheetHA.png"
     },
     {
       "id": "canelonSheet3",
-      "file": "resources/images/canelonGod_spritesheetPos.png"
+      "file": "resources/images/spritesheets/hamsters/canelonGod_spritesheetPos.png"
     },
     {
       "id": "canelonDemonSheet",
-      "file": "resources/images/canelonDemon_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/canelonDemon_spritesheet.png"
     },
     {
       "id": "canelonDemonSheet2",
-      "file": "resources/images/canelonDemon_spritesheetHA.png"
+      "file": "resources/images/spritesheets/hamsters/canelonDemon_spritesheetHA.png"
     },
     {
       "id": "canelonDemonSheet3",
-      "file": "resources/images/canelonDemon_spritesheetPos.png"
+      "file": "resources/images/spritesheets/hamsters/canelonDemon_spritesheetPos.png"
     },
     {
       "id": "ketaSheet",
-      "file": "resources/images/keta_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/keta_spritesheet.png"
     },
     {
       "id": "ketaSheet2",
-      "file": "resources/images/keta_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/keta_spritesheet.png"
     },
     {
       "id": "ketaSheet3",
-      "file": "resources/images/keta_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/keta_spritesheet.png"
+    },
+    {
+      "id": "monchiSheet",
+      "file": "resources/images/spritesheets/hamsters/monchi_spritesheet.png"
+    },
+    {
+      "id": "monchiSheet2",
+      "file": "resources/images/spritesheets/hamsters/monchi_spritesheet.png"
+    },
+    {
+      "id": "monchiSheet3",
+      "file": "resources/images/spritesheets/hamsters/monchi_spritesheet.png"
     },
     {
       "id": "calcetinSheet",
-      "file": "resources/images/calcetin_spritesheet.png"
+      "file": "resources/images/spritesheets/enemies/level1/calcetin_spritesheet.png"
     },
     {
       "id": "firstBoss",
@@ -188,7 +204,7 @@
     },
     {
       "id": "bullet",
-      "file": "resources/images/tennis_ball.png"
+      "file": "resources/images/pipa.png"
     },
     {
       "id": "floorTileset",
@@ -357,10 +373,6 @@
     {
       "id": "quitButtonEnter",
       "file": "resources/images/menuSprites/quitButtonEnter.png"
-    },
-    {
-      "id": "soldier1",
-      "file": "resources/images/enemies/level1/soldier1sheet.png"
     },
     {
       "id": "shadow",
@@ -616,11 +628,11 @@
     },
     {
       "id": "soldier1Sheet",
-      "file": "resources/images/soldier1_spritesheet.png"
+      "file": "resources/images/spritesheets/enemies/level1/soldier1_spritesheet.png"
     },
     {
       "id": "soldier2Sheet",
-      "file": "resources/images/soldier2_spritesheet.png"
+      "file": "resources/images/spritesheets/enemies/level1/soldier2_spritesheet.png"
     },
     {
       "id": "controles",
@@ -704,11 +716,11 @@
     },
     {
       "id": "AbilityOn",
-      "file": "resources/images/UI/keys/r.png"
+      "file": "resources/images/UI/hamsterUI/especialR.png"
     },
     {
       "id": "AbilityOff",
-      "file": "resources/images/UI/keys/rPressed.png"
+      "file": "resources/images/UI/hamsterUI/especialRpressed.png"
     },
     {
       "id": "Hexagon",
@@ -898,6 +910,10 @@
     {
       "id": "p4",
       "file": "resources/images/menuSprites/4.png"
+    },
+    {
+      "id": "monosinpatico",
+      "file": "resources/images/monosinpatico_spritesheet.png"
     }
   ],
 
@@ -1065,6 +1081,10 @@
       "file": "resources/sound/cat/catMeowWalking.wav"
     },
     {
+      "id": "sardinillaSpecial0",
+      "file": "resources/sound/specialAttack/sardinilla/sardinillaSpecial.wav"
+    },
+    {
       "id": "canelonSpecialGod",
       "file": "resources/sound/specialAttack/canelon/canelonSpecialGod.wav"
     },
@@ -1133,8 +1153,12 @@
       "file": "resources/sound/car/car2.wav"
     },
     {
+      "id": "Nivel1GameVersion",
+      "file": "resources/sound/music/Nivel1GameVersion.mp3"
+    },
+    {
       "id": "mainTheme",
-      "file": "resources/sound/music/mainTheme.mp3"
+      "file": "resources/sound/music/Nivel1GameVersion.mp3"
     },
     {
       "id": "birds",
@@ -1147,6 +1171,14 @@
     {
       "id": "eat1",
       "file": "resources/sound/pickItem/pick1.wav"
+    },
+    {
+      "id": "eat2",
+      "file": "resources/sound/pickItem/pick2.wav"
+    },
+    {
+      "id": "eat3",
+      "file": "resources/sound/pickItem/pick3.wav"
     },
     {
       "id": "soldierDep0",
@@ -1195,6 +1227,30 @@
     {
       "id": "tutorial1",
       "file": "resources/sound/dialogos/dialogo1.wav"
+    },
+    {
+      "id": "possesion",
+      "file": "resources/sound/possesion/possesion.wav"
+    },
+    {
+      "id": "heavyPunch0",
+      "file": "resources/sound/hand/heavyPunch.wav"
+    },
+    {
+      "id": "heavyPunch1",
+      "file": "resources/sound/hand/smashDown.wav"
+    },
+    {
+      "id": "platillos",
+      "file": "resources/sound/platillos/platillos.wav"
+    },
+    {
+      "id": "rightNote",
+      "file": "resources/sound/reanimationKeySound/rightNote.wav"
+    },
+    {
+      "id": "wrongNote",
+      "file": "resources/sound/reanimationKeySound/wrongNote.wav"
     }
   ],
 
@@ -1935,11 +1991,204 @@
       "attackFrame": -1
     },
     {
+      "id": "monchi_idle",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 4,
+      "cols": 10,
+      "rows": 11,
+      "frameUpdate": 200,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "monchi_move",
+      "startFrameX": 4,
+      "startFrameY": 0,
+      "duration": 6,
+      "cols": 10,
+      "rows": 11,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+
+    },
+    {
+      "id": "monchi_light_attack1",
+      "startFrameX": 0,
+      "startFrameY": 1,
+      "duration": 5,
+      "cols": 10,
+      "rows": 11,
+      "frameUpdate": 70,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": 5
+    },
+    {
+      "id": "monchi_light_attack2",
+      "startFrameX": 5,
+      "startFrameY": 1,
+      "duration": 5,
+      "cols": 10,
+      "rows": 11,
+      "frameUpdate": 70,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": 5
+    },
+    {
+      "id": "monchi_light_combo",
+      "startFrameX": 0,
+      "startFrameY": 2,
+      "duration": 7,
+      "cols": 10,
+      "rows": 11,
+      "frameUpdate": 50,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": 5
+    },
+    {
+      "id": "monchi_strong_attack",
+      "startFrameX": 7,
+      "startFrameY": 2,
+      "duration": 6,
+      "cols": 10,
+      "rows": 11,
+      "frameUpdate": 50,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": 6
+    },
+    {
+      "id": "monchi_strong_combo",
+      "startFrameX": 0,
+      "startFrameY": 2,
+      "duration": 7,
+      "cols": 10,
+      "rows": 11,
+      "frameUpdate": 50,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": 6
+    },
+    {
+      "id": "monchi_ability",
+      "startFrameX": 3,
+      "startFrameY": 3,
+      "duration": 4,
+      "cols": 10,
+      "rows": 11,
+      "frameUpdate": 60,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "monchi_hit",
+      "startFrameX": 7,
+      "startFrameY": 3,
+      "duration": 6,
+      "cols": 10,
+      "rows": 11,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "monchi_death",
+      "startFrameX": 3,
+      "startFrameY": 4,
+      "duration": 15,
+      "cols": 10,
+      "rows": 11,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "monchi_stroke",
+      "startFrameX": 8,
+      "startFrameY": 5,
+      "duration": 14,
+      "cols": 10,
+      "rows": 11,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "monchi_ghost_spawn",
+      "startFrameX": 2,
+      "startFrameY": 6,
+      "duration": 4,
+      "cols": 10,
+      "rows": 11,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "monchi_idle_ghost",
+      "attackFrame": -1
+    },
+    {
+      "id": "monchi_idle_ghost",
+      "startFrameX": 6,
+      "startFrameY": 7,
+      "duration": 4,
+      "cols": 10,
+      "rows": 11,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "monchi_stun",
+      "startFrameX": 0,
+      "startFrameY": 9,
+      "duration": 9,
+      "cols": 10,
+      "rows": 11,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "monchi_eatSoldier",
+      "startFrameX": 9,
+      "startFrameY": 9,
+      "duration": 8,
+      "cols": 10,
+      "rows": 11,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "monchi_eatSoldier2",
+      "startFrameX": 7,
+      "startFrameY": 10,
+      "duration": 8,
+      "cols": 10,
+      "rows": 11,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
       "id": "calcetin_idle",
       "startFrameX": 0,
       "startFrameY": 0,
       "duration": 4,
-      "cols": 7,
+      "cols": 8,
       "rows": 2,
       "frameUpdate": 150,
       "loop": 1,
@@ -1990,6 +2239,114 @@
       "cols": 8,
       "rows": 2,
       "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "calcetin_up",
+      "startFrameX": 0,
+      "startFrameY": 2,
+      "duration": 3,
+      "cols": 8,
+      "rows": 2,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "calcetin_death",
+      "startFrameX": 3,
+      "startFrameY": 2,
+      "duration": 16,
+      "cols": 8,
+      "rows": 2,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "calcetin_sequence",
+      "startFrameX": 3,
+      "startFrameY": 4,
+      "duration": 28,
+      "cols": 8,
+      "rows": 2,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "monosinpatico_idle",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 4,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "monosinpatico_move",
+      "startFrameX": 4,
+      "startFrameY": 0,
+      "duration": 4,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "monosinpatico_attack",
+      "startFrameX": 2,
+      "startFrameY": 1,
+      "duration": 7,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 70,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": 8
+    },
+    {
+      "id": "monosinpatico_hit",
+      "startFrameX": 3,
+      "startFrameY": 2,
+      "duration": 6,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "monosinpatico_stun",
+      "startFrameX": 3,
+      "startFrameY": 3,
+      "duration": 7,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "monosinpatico_death",
+      "startFrameX": 4,
+      "startFrameY": 4,
+      "duration": 7,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 60,
       "loop": 0,
       "chain": "",
       "attackFrame": -1
