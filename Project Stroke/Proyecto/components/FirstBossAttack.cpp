@@ -27,13 +27,13 @@ void FirstBossAttack::init() {
 
 void FirstBossAttack::update() {
 	if (state_->getState() == GameStates::RUNNING) {
-		//Quitar la animacion de ataque
-		if (entity_->getComponent<AnimEnemyStateMachine>()->getState() == EnemyStatesAnim::ATTACK)
+		//Quitar la animacion de subida
+		if (entity_->getComponent<AnimEnemyStateMachine>()->getState() == EnemyStatesAnim::UP)
 		{
 			if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
 			{
-				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
-				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, true);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::UP, false);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::IDLE, true);
 			}
 		}
 		//Deja de mostrar el collider
@@ -45,7 +45,7 @@ void FirstBossAttack::update() {
 			//Telegrafiado hasta el ataque
 			if (!stunStarted_ && sdlutils().currRealTime() > hitTime_ + beforeHitCD_) {
 
-				//ANIMACION DE ATACAR 
+				//EMPIEZA EL ATAQUE
 				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, true);
 
 				cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
@@ -79,10 +79,24 @@ void FirstBossAttack::update() {
 				stunStarted_ = true;
 
 			}
-			//Esta en el suelo
-			else if (stunStarted_ && eAttribs_->checkInvulnerability() && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
+			//Esta en el suelo, puede recibir daño 
+			/*else if (stunStarted_ && eAttribs_->checkInvulnerability() && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
 				eAttribs_->setInvincibility(false);
 				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, true);
+			}*/
+			if (entity_->getComponent<AnimEnemyStateMachine>()->getState() == EnemyStatesAnim::ATTACK)
+			{
+				if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+				{
+					if (stunStarted_ && eAttribs_->checkInvulnerability()) {
+
+						eAttribs_->setInvincibility(false);
+						entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, true);
+						entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
+
+
+					}
+				}
 			}
 			else if (stunStarted_ && !collides_ && sdlutils().currRealTime() > hitTime_ + collideStartCD_ && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
 				// Activar colisiones
@@ -96,8 +110,10 @@ void FirstBossAttack::update() {
 
 				//LE QUITAMOS LA ANIMACION DE ESTAR EN EL SUELO
 				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, false);
-				//FORZAMOS A VOLVER A IDLE
-				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::IDLE, false);
+				//FORZAMOS A LA ANIMACION DE SUBIDA
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::UP, true);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
+
 
 				//desactivar colisiones
 				collides_ = false;

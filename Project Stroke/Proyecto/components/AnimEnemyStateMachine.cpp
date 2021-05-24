@@ -48,6 +48,8 @@ void AnimEnemyStateMachine::HandleAnimState()
 	//stunned
 	if (stun)
 		currentState = EnemyStatesAnim::STUNNED;
+	if (up)
+		currentState = EnemyStatesAnim::UP;
 	
 }
 
@@ -87,6 +89,9 @@ void AnimEnemyStateMachine::CheckAnimState()
 			break;
 		case EnemyStatesAnim::ONFLOOR:
 			anim->play(sdlutils().anims().at(id + "_floor"));
+			break;
+		case EnemyStatesAnim::UP:
+			anim->play(sdlutils().anims().at(id + "_up"));
 			break;
 		}
 	}
@@ -130,6 +135,9 @@ void AnimEnemyStateMachine::setAnimBool(EnemyStatesAnim h, bool b)
 		break;
 	case EnemyStatesAnim::ONFLOOR:
 		onfloor = b;
+		break;
+	case EnemyStatesAnim::UP:
+		up = b;
 		break;
 	}
 }

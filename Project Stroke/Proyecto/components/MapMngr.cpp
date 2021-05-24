@@ -386,7 +386,7 @@ bool MapMngr::intersectBoss(const SDL_Rect& hamster) {
 	//Igual esto explota que flipas cuando no de invalid map, probablemente porque
 	//boss no vuelve a ser igual a nullptr una vez se muere yo que se problema
 	//del pibito que lea esto
-	if (boss != nullptr && boss->getComponent<FirstBossAttack>()->getCollide()) {
+	if (boss != nullptr && boss->isActive() && boss->getComponent<FirstBossAttack>()->getCollide()) {
 		auto bossRect = boss->getComponent<Transform>()->getRectCollide();
 		collide = Collisions::collides(Vector2D(hamster.x, hamster.y), hamster.w, hamster.h,
 			Vector2D(bossRect.x, bossRect.y), bossRect.w, bossRect.h);
@@ -546,7 +546,6 @@ void MapMngr::loadEnemyRoom() {
 				3
 				);
 			enemy->addComponent<AnimEnemyStateMachine>();
-			//enemy->getComponent<Animator>()->play(sdlutils().anims().at("calcetin_idle"));
 			enemy->addComponent<UI>("canelon", 4);
 
 			enemy->addComponent<FirstBossAttack>();

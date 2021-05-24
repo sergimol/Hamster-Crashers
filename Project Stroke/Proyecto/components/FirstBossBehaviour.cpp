@@ -7,7 +7,8 @@ FirstBossBehaviour::FirstBossBehaviour() :
 	waitingTime_(sdlutils().currRealTime()), waitingCD_(4000), stunTime_(0), stunCD_(1500) {
 }
 
-void FirstBossBehaviour::init() {
+void FirstBossBehaviour::init() 
+{
 	Entity* owEntity = owner_->getEntity();
 	mov_ = owEntity->getComponent<MovementSimple>();
 	assert(mov_ != nullptr);
@@ -117,7 +118,8 @@ void FirstBossBehaviour::lockHamster(int id) {
 }
 
 //Esta a rango de ataque
-bool FirstBossBehaviour::isWithinAttackRange() {
+bool FirstBossBehaviour::isWithinAttackRange()
+{
 	auto width = tr_->getW();
 	auto hamWidth = hamsterTr_->getW();
 
@@ -129,8 +131,10 @@ bool FirstBossBehaviour::isWithinAttackRange() {
 	return(hamX /*+ rangeOffsetX_*/ + hamWidth /**2*/ >= x + 3*width/4 && hamX /*+ hamWidth*/ /*- rangeOffsetX_ */<= x + 1*width/4);
 }
 
-void FirstBossBehaviour::behave() {
-	if (lockedHamster_ != nullptr) {
+void FirstBossBehaviour::behave()
+{
+	if (lockedHamster_ != nullptr)
+	{
 		// Cambia el foco si el actual muere o le da un infarto
 		if (lockedHamState_->cantBeTargeted()) {
 			lockHamster();
