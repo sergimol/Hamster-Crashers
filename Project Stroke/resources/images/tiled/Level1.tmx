@@ -842,7 +842,7 @@
   <object id="213" name="escalectris" x="6500.36" y="440" width="27.2727" height="44.9091">
    <properties>
     <property name="SpawnTime" type="float" value="5000"/>
-    <property name="sala" type="int" value="4"/>
+    <property name="sala" type="int" value="5"/>
     <property name="velocidad" type="float" value="-30"/>
     <property name="zRondas" type="int" value="1"/>
    </properties>

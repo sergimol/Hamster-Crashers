@@ -90,7 +90,8 @@ void EnemyMother::orderAttack() {
 		auto z = objetivesList_.at(i)->atacking.size();
 		for (int y = z; y < 2; y++) {
 			//se puede a�adir
-			if (!objetivesList_.at(i)->ambushing.empty() && objetivesList_.at(i)->ambushing.front()->isActive()) { // hay enemigos disponibles
+			if (!objetivesList_.at(i)->ambushing.empty() && objetivesList_.at(i)->ambushing.front()->isActive()
+				&& objetivesList_.at(i)->ambushing.front()->hasComponent<EnemyBehaviour>()) { // hay enemigos disponibles
 				objetivesList_.at(i)->atacking.push_back(objetivesList_.at(i)->ambushing.front());
 				//TODO poner las entitades en behavior attack correspondiente
 				objetivesList_.at(i)->atacking.back()->getComponent<EnemyBehaviour>()->SetBehavior(new FollowPlayer());
@@ -103,7 +104,8 @@ void EnemyMother::orderAttack() {
 		//enemigos strong
 		if (objetivesList_.at(i)->strongAtacking.empty()) {
 			//se puede a�adir
-			if (!objetivesList_.at(i)->strongAmbushing.empty() && objetivesList_.at(i)->strongAmbushing.front()->isActive()) { // hay enemigos disponibles
+			if (!objetivesList_.at(i)->strongAmbushing.empty() && objetivesList_.at(i)->strongAmbushing.front()->isActive()
+				&& objetivesList_.at(i)->strongAmbushing.front()->hasComponent<EnemyBehaviour>()) { // hay enemigos disponibles
 				objetivesList_.at(i)->strongAtacking.push_back(objetivesList_.at(i)->strongAmbushing.front());
 				//TODO poner las entitades en behavior attack correspondiente
 				objetivesList_.at(i)->strongAtacking.back()->getComponent<EnemyBehaviour>()->SetBehavior(new StrongFollowPlayer());
