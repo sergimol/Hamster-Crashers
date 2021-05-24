@@ -77,10 +77,10 @@ public:
 	void asingEnemies();
 	void orderAttack();
 	/*Change de entiity from attacking list to ambush list when stunned or out of combat*/
-	void changeFromAttackToAmbush(int hamid, std::list<Entity*>::iterator it);
+	void changeFromAttackToAmbush(int hamid, std::list<Entity*>::iterator &it);
 	//
-	void removeFromAttackList(int hamid, std::list<Entity*>::iterator it, bool strong);
-	void removeFromAmbushList(int hamid, std::list<Entity*>::iterator it, bool strong);
+	void removeFromAttackList(int hamid, std::list<Entity*>::iterator &it, bool strong);
+	void removeFromAmbushList(int hamid, std::list<Entity*>::iterator &it, bool strong);
 	
 	//No hay removefromwaiting, porque en un principio eso no deberia de ser posible ya que cuando estan en ese estado los players estan muertos
 
@@ -92,81 +92,70 @@ public:
 
 
 	void refreshLists() {
-		for (int i = 0; i < numPlayers_; i++) {
+		//for (int i = 0; i < numPlayers_; i++) {
 
-			// remove dead entities from the list of entities
-			objetivesList_.at(i)->ambushing.erase( //
-				std::remove_if( //
-					objetivesList_.at(i)->ambushing.begin(), //
-					objetivesList_.at(i)->ambushing.end(), //
-					[](const Entity* e) { //
-						return !e->isActive();
-					}), //
-				objetivesList_.at(i)->ambushing.end());
+		//	// remove dead entities from the list of entities
+		//	objetivesList_.at(i)->ambushing.erase( //
+		//		std::remove_if( //
+		//			objetivesList_.at(i)->ambushing.begin(), //
+		//			objetivesList_.at(i)->ambushing.end(), //
+		//			[](const Entity* e) { //
+		//				return !e->isActive();
+		//			}), //
+		//		objetivesList_.at(i)->ambushing.end());
 
-			// remove dead entities from the list of entities
-			objetivesList_.at(i)->atacking.erase( //
-				std::remove_if( //
-					objetivesList_.at(i)->atacking.begin(), //
-					objetivesList_.at(i)->atacking.end(), //
-					[](const Entity* e) { //
-						if (e->isActive()) {
-							return false;
-						}
-						else {
-							return true;
-						}
-					}), //
-				objetivesList_.at(i)->atacking.end());
+		//	// remove dead entities from the list of entities
+		//	objetivesList_.at(i)->atacking.erase( //
+		//		std::remove_if( //
+		//			objetivesList_.at(i)->atacking.begin(), //
+		//			objetivesList_.at(i)->atacking.end(), //
+		//			[](const Entity* e) { //
+		//				return !e->isActive();
+		//			}), //
+		//		objetivesList_.at(i)->atacking.end());
 
-			// remove dead entities from the list of entities
-			objetivesList_.at(i)->strongAmbushing.erase( //
-				std::remove_if( //
-					objetivesList_.at(i)->strongAmbushing.begin(), //
-					objetivesList_.at(i)->strongAmbushing.end(), //
-					[](const Entity* e) { //
-						return !e->isActive();
-					}), //
-				objetivesList_.at(i)->strongAmbushing.end());
+		//	// remove dead entities from the list of entities
+		//	objetivesList_.at(i)->strongAmbushing.erase( //
+		//		std::remove_if( //
+		//			objetivesList_.at(i)->strongAmbushing.begin(), //
+		//			objetivesList_.at(i)->strongAmbushing.end(), //
+		//			[](const Entity* e) { //
+		//				return !e->isActive();
+		//			}), //
+		//		objetivesList_.at(i)->strongAmbushing.end());
 
-			// remove dead entities from the list of entities
-			objetivesList_.at(i)->strongAtacking.erase( //
-				std::remove_if( //
-					objetivesList_.at(i)->strongAtacking.begin(), //
-					objetivesList_.at(i)->strongAtacking.end(), //
-					[](const Entity* e) { //
-						return !e->isActive();
-					}), //
-				objetivesList_.at(i)->strongAtacking.end());
+		//	// remove dead entities from the list of entities
+		//	objetivesList_.at(i)->strongAtacking.erase( //
+		//		std::remove_if( //
+		//			objetivesList_.at(i)->strongAtacking.begin(), //
+		//			objetivesList_.at(i)->strongAtacking.end(), //
+		//			[](const Entity* e) { //
+		//				return !e->isActive();
+		//			}), //
+		//		objetivesList_.at(i)->strongAtacking.end());
 
-			//objetivesList_.at(i)->strongAtacking.clear();
-			
-		}
-			// remove dead entities from the list of entities
-			waiting_.erase( //
-				std::remove_if( //
-					waiting_.begin(), //
-					waiting_.end(), //
-					[](const Entity* e) { //
-						if (e->isActive()) {
-							return false;
-						}
-						else {
+		//	//objetivesList_.at(i)->strongAtacking.clear();
+		//	
+		//}
+		//	// remove dead entities from the list of entities
+		//	waiting_.erase( //
+		//		std::remove_if( //
+		//			waiting_.begin(), //
+		//			waiting_.end(), //
+		//			[](const Entity* e) { //
+		//				return !e->isActive();
+		//			}), //
+		//		waiting_.end());
 
-						return true;
-						}
-					}), //
-				waiting_.end());
-
-			// remove dead entities from the list of entities
-			strongWaiting_.erase( //
-				std::remove_if( //
-					strongWaiting_.begin(), //
-					strongWaiting_.end(), //
-					[](const Entity* e) { //
-						return !e->isActive();
-					}), //
-				strongWaiting_.end());
+		//	// remove dead entities from the list of entities
+		//	strongWaiting_.erase( //
+		//		std::remove_if( //
+		//			strongWaiting_.begin(), //
+		//			strongWaiting_.end(), //
+		//			[](const Entity* e) { //
+		//				return !e->isActive();
+		//			}), //
+		//		strongWaiting_.end());
 
 	}
 

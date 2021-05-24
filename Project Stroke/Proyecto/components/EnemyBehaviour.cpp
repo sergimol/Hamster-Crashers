@@ -93,22 +93,26 @@ void EnemyBehaviour::onDisable() {
 void EnemyBehaviour::setHamId(int hId, std::list<Entity*>::iterator it, char l) {
 	hamId_ = hId;
 	listIterator = it; //es para luego hacer el quitado de la lista que no es una pila, si no un vector del que s epueden quitar o meter entidades desde cualquier direccion
+	
 	lockHamster(hId);
 	bh_->setObjetive();
 	list = l;
 }
 void EnemyBehaviour::die() {
-	entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->refreshLists();
-	//if (list == 'a') {
-	//	bool aux = entity_->hasComponent<EnemyStrongAttack>();
-	//	entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAttackList(hamId_, listIterator, aux);
-	//	list = '0';
-	//}
-	//else if (list == 'b') {
-	//	bool aux = entity_->hasComponent<EnemyStrongAttack>();
-	//	entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAmbushList(hamId_, listIterator, aux);
-	//	list = '0';
-	//}
+	//entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->refreshLists();
+	/*list = 0;
+
+	entity_->setActive(false);*/
+	if (list == 'a') {
+		bool aux = entity_->hasComponent<EnemyStrongAttack>();
+		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAttackList(hamId_, listIterator, aux);
+		list = '0';
+	}
+	else if (list == 'b') {
+		bool aux = entity_->hasComponent<EnemyStrongAttack>();
+		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->removeFromAmbushList(hamId_, listIterator, aux);
+		list = '0';
+	}
 	//se pone list a 0 porque es posible que ocurra una doble comprobacion del ataque y se llame dos veces a este metodo, y no puede ni debe eliminar dos veces un mismo iterador (error de lista)
 
 	//tiene que distinguir que tipo de behavior tiene,
@@ -116,6 +120,6 @@ void EnemyBehaviour::die() {
 	//if (bh_ == )
 }
 void EnemyBehaviour::changeToAmbush() {
-	if (entity_->isActive() && list == 'a' && listIterator._Getcont() != NULL)
+	if (entity_->isActive() && list == 'a') //no tengo ni idea ya de que tengo que comprobar, por alguna razon el iterador esta vacion cuando lelga aqui lo cual NO DEBE DE PASAR NUNCA, antes no pasaba pero sabes que a 3 dias de entregar estop no me voy a aprar a prenguntar quien lo ha roto
 		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->changeFromAttackToAmbush(hamId_, listIterator);
 }
