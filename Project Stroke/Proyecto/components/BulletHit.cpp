@@ -47,7 +47,7 @@ void BulletHit::update() {
 				auto eAttribs = e->getComponent<EntityAttribs>();
 
 				//Si estás dentro del margen de la profundidad...
-				if (eAttribs->ignoresMargin() || abs((rectCollide.y) - (eRectCollide.y)) < eAttribs->getMarginToAttack() + 70) {
+				if ((eAttribs->ignoresMargin() || abs((rectCollide.y) - (eRectCollide.y)) < eAttribs->getMarginToAttack() + 70) && !eAttribs->checkInvulnerability()) {
 
 					auto& enmStateM = e->getComponent<EnemyStateMachine>()->getState();
 
