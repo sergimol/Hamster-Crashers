@@ -71,6 +71,12 @@ MapMngr::~MapMngr() {
 }
 
 void MapMngr::update() {
+
+	if (!Mix_PlayingMusic() && BossControlSpawn) {
+		loadEnemyRoom();
+		BossControlSpawn = false;
+	}
+
 	//cout << numberEnemyRoom << " " << entity_->getMngr()->getEnemies().size() <<endl;
 	auto* camera = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
 	//	Comprobamos la colision con los triggers salas
@@ -84,7 +90,15 @@ void MapMngr::update() {
 		auto* pTr = player->getComponent<Transform>();
 		if (player->getComponent<HamsterStateMachine>()->getState() != HamStates::INFARCTED && Collisions::collides(pTr->getPos(), pTr->getW(), pTr->getH(), Vector2D(trigger.getPosition().x, trigger.getPosition().y) * scale, trigger.getAABB().width * scale, trigger.getAABB().height * scale)) {
 			RoundsPerRoom = getProp[1].getIntValue();
-			loadEnemyRoom();
+
+			if (!getProp[2].getBoolValue()) {
+				loadEnemyRoom();
+			}
+			else {
+				BossControlSpawn = true;
+				Mix_FadeOutMusic(3000);
+			}
+
 			if (getProp[0].getIntValue() != -1) {
 				camera->setGoToTracker(true);
 				camera->changeCamFollowPos(getProp[0].getIntValue() * scale);
@@ -198,7 +212,7 @@ void MapMngr::loadNewMap(string map) {
 						if (object.getName() == "spawnZone") {
 							for (int i = 0; i < hamstersToLoad_.size(); ++i) {
 								// Por si se generan mas de los que deberian
-								if(i < MAXPLAYERS)
+								if (i < MAXPLAYERS)
 									addHamster(hamstersToLoad_[i], i, object);
 							}
 						}
@@ -745,7 +759,7 @@ void MapMngr::newSceneTrigger(string newScene, const tmx::Object& object) {
 	auto trigger = entity_->getMngr()->addEntity();
 	trigger->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 1, 1);
-	trigger->addComponent<TriggerScene>(newScene,object.getProperties()[1].getIntValue());
+	trigger->addComponent<TriggerScene>(newScene, object.getProperties()[1].getIntValue());
 }
 
 void MapMngr::startChaseTrigger(const tmx::Object& object) {
