@@ -232,7 +232,11 @@ void EntityAttribs::die() {
 	Entity* e = entity_->getMngr()->addEntity();
 
 	//Le metemos un transform para su posicion
-	e->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip(), tr_->getScaleW(), tr_->getScaleH());
+	auto* traux = e->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0, 0, tr_->getFlip(), tr_->getScaleW(), tr_->getScaleH());
+
+	traux->setFloor(tr_->getFloor());
+	traux->setZ(tr_->getZ());
+	traux->setGravity(e->addComponent<Gravity>());
 
 	int tam = 0;
 
