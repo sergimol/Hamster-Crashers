@@ -224,6 +224,10 @@ public:
 		return strokeTuto_;
 	}
 
+	inline std::vector<Entity*>& getUIObjects() { 
+		return uiObjects_;
+	}
+
 	inline bool& getStrokeActive() {
 		return startStrokeActive_;
 	}
@@ -360,6 +364,17 @@ public:
 			mapHeights_.end());
 	}
 
+	void refreshUIObjects() {
+		uiObjects_.erase( //
+			std::remove_if( //
+				uiObjects_.begin(), //
+				uiObjects_.end(), //
+				[](const Entity* e) { //
+					return !e->isActive();
+				}), //
+			uiObjects_.end());
+	}
+
 	void refreshFrontGround() {
 		// remove dead entities from the list of entities
 		fgs_.erase( //
@@ -417,6 +432,7 @@ private:
 	std::vector<Entity*> deadBodies_;
 	std::vector<Entity*> items_;
 	std::vector<Entity*> wavesObjects_; //objetos como el escalectris que solo estaran durante una batalla
+	std::vector<Entity*> uiObjects_;
 
 	bool strokeTuto_ = true;
 	bool startStrokeActive_ = false;

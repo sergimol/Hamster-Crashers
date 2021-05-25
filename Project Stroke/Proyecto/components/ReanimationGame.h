@@ -8,7 +8,7 @@ class ReanimationGame : public Component
 {
 public:
 	ReanimationGame(): txUp_(nullptr), txDown_(nullptr), state_(nullptr) {};
-	~ReanimationGame() {};
+	~ReanimationGame();
 
 	void init() override;
 
@@ -27,8 +27,12 @@ private:
 	void handleKey();
 	void handleButton();
 
-	Texture* txUp_, * txDown_;
+	void deleteTextures();
+
+	Entity* txUp_, * txDown_;
 	InfarctedBody* infarct_ = nullptr;
+
+	SoundEffect* fx_;
 
 	Transform* revTrans_ = nullptr;
 
@@ -44,7 +48,7 @@ private:
 			  DROP = 2,
 			  TIME_BETWEEN_DROPS = 30; //ms
 	//Visuales del botón
-	const int OFFSET_Y = 50,
+	const int OFFSET_Y = 20,
 			  OFFSET_X = 0,
 			  WIDTH = 100,
 			  HEIGHT = 100;

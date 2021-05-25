@@ -11,6 +11,7 @@
 #include "../components/AnimHamsterStateMachine.h"
 #include "../components/ReanimationGame.h"
 #include "../components/CollisionDetec.h"
+#include "Shadow.h"
 #include "EnemyMother.h"
 
 void Stroke::init() {
@@ -96,7 +97,7 @@ void Stroke::checkChance() {
 
 	// Comprobamos que haya pasado el tiempo suficiente entre actualizaciones
 	if (t >= timeLastUpdate_ + UPDATETIME) {
-		if (hms_->getState() != HamStates::INFARCTED && ss_->checkChance(chance_, chanceFromAb_)) {
+		if (hms_->getState() != HamStates::INFARCTED && hms_->getState() != HamStates::DEAD && ss_->checkChance(chance_, chanceFromAb_)) {
 			//TODO madremia que no lo podemos desactivar porque hay que quitarlo de la lsita de player y noseque algo habra que ahcer para que la camara no explote
 			infarctHamster();
 		}
@@ -105,8 +106,6 @@ void Stroke::checkChance() {
 }
 
 void Stroke::infarctHamster() {
-
-	//Tutorial stroke
 	bool& strokeTutorial = entity_->getMngr()->getStrokeTuto();
 	if (strokeTutorial) {
 		strokeTutorial = false;
@@ -115,84 +114,87 @@ void Stroke::infarctHamster() {
 		else
 			entity_->getMngr()->getHandler<dialogosMngr>()->getComponent<dialogos>()->showStrokeTutorial("dialogo3singleplayer");
 	}
-
-	//El personaje principal pasa a estar infartado
-	auto name = entity_->getComponent<EntityAttribs>()->getId();
-	auto name2 = name;
 	//Los enemigos que le seguian dejan de hacerlo
 	auto& ents = entity_->getMngr()->getPlayers();
-
-
-	int i = 0;
-	while (i < ents.size()) {
-		if (entity_ == ents[i]) {
-			entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->cleanListHam(i);
-			i = ents.size();
+	if (ents.size() > 1) {
+		//El personaje principal pasa a estar infartado
+		auto name = entity_->getComponent<EntityAttribs>()->getId();
+		auto name2 = name;
+		int i = 0;
+		while (i < ents.size()) {
+			if (entity_ == ents[i]) {
+				entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->cleanListHam(i);
+				i = ents.size();
+			}
+			++i;
 		}
-		++i;
-	}
 
 
-	//TODO si alguien se le ocurre manera mejor para comprobar la id (posicion en el array de players, que la comente o que la ponga en todos los bucles que he ido haciendo de este tipo, son las 6 de la mañana y no quiero seguir viviendo)
+		//TODO si alguien se le ocurre manera mejor para comprobar la id (posicion en el array de players, que la comente o que la ponga en todos los bucles que he ido haciendo de este tipo, son las 6 de la mañana y no quiero seguir viviendo)
 
 
 
-	//Evitamos el uso de la habilidad
-	ab_->deactiveAbility();
-	auto& state = hms_->getState();
-	state = HamStates::INFARCTED;
+		//Evitamos el uso de la habilidad
+		ab_->deactiveAbility();
+		auto& state = hms_->getState();
+		state = HamStates::INFARCTED;
 
-	//Y cambiamos la interfaz
-	entity_->getComponent<HeartUI>()->dep();
-	entity_->getComponent<UI>()->dep("3");
+		//Y cambiamos la interfaz
+		entity_->getComponent<HeartUI>()->dep();
+		entity_->getComponent<UI>()->dep("3");
 
-	//hms_->getState() = HamStates::INFARCTED;
-	this->setActive(false);
+		//hms_->getState() = HamStates::INFARCTED;
+		this->setActive(false);
 
-	//Animacion del fantasma
-	entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STROKE, true);
-	//Activamos el control del fantasma
-	entity_->getComponent<GhostCtrl>()->setActive(true);
+		//Animacion del fantasma
+		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STROKE, true);
+		//Activamos el control del fantasma
+		entity_->getComponent<GhostCtrl>()->setActive(true);
 
-	//GENERAR PERSONAJE INFARTADO ()
-	auto* deadBody = entity_->getMngr()->addEntity();
-	auto* tr = deadBody->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip(), tr_->getScaleW(), tr_->getScaleH());
+		//GENERAR PERSONAJE INFARTADO ()
+		auto* deadBody = entity_->getMngr()->addEntity();
+		auto* tr = deadBody->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip(), tr_->getScaleW(), tr_->getScaleH());
 
-	int tam = 0;
+		int tam = 0;
 
-	if (name == "sardinilla" || name == "monchi") {
-		tam = 86;
-	}
-	else if (name == "canelon" || name == "canelonDemon") {
-		tam = 128;
-		name2 = "canelon";
+		if (name == "sardinilla" || name == "monchi") {
+			tam = 86;
+		}
+		else if (name == "canelon" || name == "canelonDemon") {
+			tam = 128;
+			name2 = "canelon";
+		}
+		else {
+			tam = 100;
+		}
+
+		deadBody->addComponent<Animator>(&sdlutils().images().at(name + "Sheet"),
+			tam,
+			tam,
+			3,
+			3,
+			220,
+			Vector2D(0, 0),
+			3)->play(sdlutils().anims().at(name2 + "_stroke"));
+		tr->setVelZ(tr_->getVelZ());
+		deadBody->addComponent<CollisionDetec>();
+		auto* gr = deadBody->addComponent<Gravity>();
+		tr->setGravity(gr);
+		deadBody->addComponent<Movement>();
+		deadBody->addComponent<InfarctedBody>(entity_);
+		deadBody->addComponent<ReanimationGame>();
+		deadBody->addComponent<Shadow>(true, true);
+		entity_->getMngr()->getDeadBodies().push_back(deadBody);
+
+		//Reseteamos chances
+		restartChance();
+
+		std::cout << "INFARTADO" << std::endl;
 	}
 	else {
-		tam = 100;
+		entity_->getComponent<EntityAttribs>()->recieveDmg(2000);
+		std::cout << "MUERTO" << std::endl;
 	}
-
-	deadBody->addComponent<Animator>(&sdlutils().images().at(name + "Sheet"),
-		tam,
-		tam,
-		3,
-		3,
-		220,
-		Vector2D(0, 0),
-		3)->play(sdlutils().anims().at(name2 + "_stroke"));
-	tr->setVelZ(tr_->getVelZ());
-	deadBody->addComponent<CollisionDetec>();
-	auto* gr = deadBody->addComponent<Gravity>();
-	tr->setGravity(gr);
-	deadBody->addComponent<Movement>();
-	deadBody->addComponent<InfarctedBody>(entity_);
-	deadBody->addComponent<ReanimationGame>();
-
-	entity_->getMngr()->getDeadBodies().push_back(deadBody);
-
-	//Reseteamos chances
-	restartChance();
-
-	std::cout << "INFARTADO" << std::endl;
 }
 
 void Stroke::onResume() {

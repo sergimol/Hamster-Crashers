@@ -10,14 +10,12 @@ using namespace std;
 
 class PossesionGame :public Component {
 public:
-	PossesionGame() : possesed(nullptr), lineH(&sdlutils().images().at("linea")), lineV(&sdlutils().images().at("lineaV")) {};
-	~PossesionGame() { if (keyGame != nullptr) delete keyGame; };
+	PossesionGame() : possesed(nullptr), lineH(nullptr), lineV(nullptr) {};
+	~PossesionGame() { deleteTextures(); };
 
 	virtual void init() override;
 
 	virtual void update() override;
-
-	virtual void render() override;
 
 	inline void setPossesed(Entity* e) { possesed = e; };
 
@@ -35,6 +33,7 @@ private:
 	void failedHit();
 	void randomiseKey();
 	void updateGamePos();
+	void deleteTextures();
 
 	Entity* possesed, * keyGame;
 	HamsterStateMachine* possesedState;
@@ -42,7 +41,7 @@ private:
 
 	SDL_Rect lineHPos, lineVPos;
 
-	Texture* lineH, * lineV;
+	Entity* lineH, * lineV;
 
 	//CONSTANTES DE TECLAS, TEXTURAS Y RELACIONADOS
 	const int numKeys = 4;
@@ -89,12 +88,12 @@ private:
 
 	bool roundPassed = false, failed = false;
 	
-	const short int maxMistakes = 59;
+	const short int maxMistakes = 500;
 
 	short int mistakes = 0;
 
 	//CONSTANTES VISUALES 
-	float H_LINE_SIZE_X = 400, H_LINE_SIZE_Y = 20, H_LINE_OFFSET_X = 300, H_LINE_OFFSET_Y = -150,
-		V_LINE_SIZE_X = 5, V_LINE_SIZE_Y = 70, V_LINE_OFFSET_X = 650, V_LINE_OFFSET_Y = -175,
+	float H_LINE_SIZE_X = 400, H_LINE_SIZE_Y = 20, H_LINE_OFFSET_X = -200, H_LINE_OFFSET_Y = -50,
+		V_LINE_SIZE_X = 5, V_LINE_SIZE_Y = 70, V_LINE_OFFSET_X = 150, V_LINE_OFFSET_Y = -75,
 		BOX_SIZE_X = 50, BOX_SIZE_Y = 50; //BOX_INI_VEL_X = 3;
 };

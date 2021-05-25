@@ -15,8 +15,8 @@ using namespace std;
 class InfarctedBody: public Component
 {
 public:
-	InfarctedBody(Entity* h): hamster(h), tx_(&sdlutils().images().at("p")), ctrlTx_(&sdlutils().images().at("b")) {};
-	~InfarctedBody() {};
+	InfarctedBody(Entity* h): hamster_(h) {};
+	~InfarctedBody() { deleteTexture(); };
 
 	virtual void init() override;
 
@@ -28,20 +28,21 @@ public:
 private:
 	void disableOtherHamster(Entity* e);
 	void enableOtherHamster();
+	void deleteTexture();
 	//Guarda la entidad del muerto (que ahora es un fantasma) y el que te revive (si hay)
-	Entity* hamster, *otherHamster;
+	Entity* hamster_, *otherHamster;
 	Ability* ab_;
 	Transform* tr_;
-	Texture* tx_, *ctrlTx_;
+	Entity* tx_ = nullptr;
 	GameStates* state_;
 
 	//Mantiene el estado del hamster QUE TE ESTÁ REVIVIENDO
 	HamStates otherState;
-	bool reviving = false;
+	bool reviving_ = false;
 
 	SDL_Rect cam;
 
-	bool show;
+	bool show_;
 	bool isCtrl;
 
 	const int KEY_WIDTH = 75;

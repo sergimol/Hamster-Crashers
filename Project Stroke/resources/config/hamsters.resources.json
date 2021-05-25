@@ -172,11 +172,11 @@
     },
     {
       "id": "ketaSheet2",
-      "file": "resources/images/spritesheets/hamsters/keta_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/keta_spritesheetHA.png"
     },
     {
       "id": "ketaSheet3",
-      "file": "resources/images/spritesheets/hamsters/keta_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/keta_spritesheetPos.png"
     },
     {
       "id": "monchiSheet",
@@ -1245,6 +1245,10 @@
     {
       "id": "catWalking",
       "file": "resources/sound/cat/catMeowWalking.wav"
+    },
+    {
+      "id": "catSleeping",
+      "file": "resources/sound/cat/catSleeping.wav"
     },
     {
       "id": "sardinillaSpecial0",

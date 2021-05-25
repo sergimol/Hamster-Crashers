@@ -15,7 +15,7 @@ public:
 	void setVolumeChannels();
 	void lowVolume(bool channel);
 	void upVolume(bool channel);
-	void resetVolumes() { fxVol_ = 1; musicVol_ = 1; };
+	void resetVolumes() { fxVol_ = 0.5; musicVol_ = 0.5; };
 	bool emptyChannel();
 	void StopTutorial();
 	void fadeout(int time) {}
@@ -25,50 +25,51 @@ public:
 
 	//volumes
 	//general
-	float fxVol_ = 1;
-	float musicVol_ = 1;
+	float fxVol_ = 0.5f;
+	float musicVol_ = 0.5f;
 	//local
+	int initMusicVol = 20;
 
-	int initLightVol = 60;
-	int initStrongVol = 60;
-	int initAttackVol = 20;
 
-	int initDepVol = 20;
-	int initHeartAttackVol = 20;
+	int initLightVol = 100;
+	int initStrongVol = 128;
+	int initAttackVol = 100;
 
-	int initCatVol = 20;
+	int initDepVol = 40;
+	int initHeartAttackVol = 40;
 
-	int initHandVol = 20;
+	int initCatVol = 40;
 
-	int initMonkeVol = 20;
+	int initHandVol = 40;
 
-	int inittrainBackgroundVol = 20;
+	int initMonkeVol = 40;
 
-	int carVol = 20;
+	int inittrainBackgroundVol = 40;
 
-	int initsoldierDepVol = 5;
+	int carVol = 40;
 
-	int notesReanimVol = 20;
-	int possesionVol = 20;
+	int initsoldierDepVol = 3;
 
-	int sardinillaSpecialVol = 30;
-	int ketaSpecialVol = 20;
-	int monchiSpecialVol = 10;
-	int canelonSpecialVol = 20;
+	int notesReanimVol = 40;
+	int possesionVol = 40;
 
-	int buttonVol = 20;
+	int sardinillaSpecialVol = 60;
+	int ketaSpecialVol = 40;
+	int monchiSpecialVol = 20;
+	int canelonSpecialVol = 40;
 
-	int initEatVol = 20;
+	int buttonVol = 128;
 
-	int pageSkipVol = 20;
-	int initTutorialVol = 20;
-	int initTransitionVol = 100;
+	int initEatVol = 40;
 
-	int inittrapKitchenVol = 20;
+	int pageSkipVol = 100;
+	int initTutorialVol = 128;
+	int initTransitionVol = 128;
 
-	int initBirdsVol = 20;
+	int inittrapKitchenVol = 40;
 
-	int initMusicVol = 5;
+	int initBirdsVol = 40;
+
 
 private:
 	int randomNum;
@@ -150,6 +151,7 @@ private:
 	SoundEffect* catMeowAttack;
 	SoundEffect* catMeowInit;
 	SoundEffect* catMeowWalking;
+	SoundEffect* catMeowSleeping;
 
 	//Boss Mano
 	SoundEffect* heavyPunch0;

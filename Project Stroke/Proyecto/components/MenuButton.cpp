@@ -244,7 +244,7 @@ void MenuButton::pressed() {
 
 	else if (buttonName_ == "musicUp") {
 		auto soundMngr = entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>();
-		if (soundMngr->musicVol_ < 2) {
+		if (soundMngr->musicVol_ < 1.0f) {
 			soundMngr->upVolume(true);
 			entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(0, true);
 		}
@@ -260,7 +260,7 @@ void MenuButton::pressed() {
 
 	else if (buttonName_ == "fxUp") {
 		auto soundMngr = entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>();
-		if (soundMngr->fxVol_ < 2) {
+		if (soundMngr->fxVol_ < 1.0f) {
 			soundMngr->upVolume(false);
 			entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(1, true);
 		}
