@@ -399,13 +399,10 @@ bool MapMngr::intersectBoss(const SDL_Rect& hamster) {
 
 	bool collide = false;
 
-	//Igual esto explota que flipas cuando no de invalid map, probablemente porque
-	//boss no vuelve a ser igual a nullptr una vez se muere yo que se problema
-	//del pibito que lea esto
 	if (boss != nullptr && boss->isActive() && boss->getComponent<FirstBossAttack>()->getCollide()) {
-		auto bossRect = boss->getComponent<Transform>()->getRectCollide();
-		collide = Collisions::collides(Vector2D(hamster.x, hamster.y), hamster.w, hamster.h,
-			Vector2D(bossRect.x, bossRect.y), bossRect.w, bossRect.h);
+			auto bossRect = boss->getComponent<Transform>()->getRectCollide();
+			collide = Collisions::collides(Vector2D(hamster.x, hamster.y), hamster.w, hamster.h,
+				Vector2D(bossRect.x, bossRect.y), bossRect.w, bossRect.h);
 	}
 	return collide;
 }
@@ -414,10 +411,7 @@ bool MapMngr::intersectFinalBoss(const SDL_Rect& hamster) {
 
 	bool collide = false;
 
-	//Igual esto explota que flipas cuando no de invalid map, probablemente porque
-	//boss no vuelve a ser igual a nullptr una vez se muere yo que se problema
-	//del pibito que lea esto
-	if (boss != nullptr && boss->getComponent<FinalBossAttack>()->getCollide()) {
+	if (boss != nullptr && boss->isActive() && boss->getComponent<FinalBossAttack>()->getCollide()) {
 		auto bossRect = boss->getComponent<Transform>()->getRectCollide();
 		collide = Collisions::collides(Vector2D(hamster.x, hamster.y), hamster.w, hamster.h,
 			Vector2D(bossRect.x, bossRect.y), bossRect.w, bossRect.h);

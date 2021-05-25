@@ -53,7 +53,7 @@ void Pray::prayAbility() {
 		auto& ents = entity_->getMngr()->getEnemies();
 		for (Entity* e : ents) {
 			//Si la entidad es un enemigo...
-			if (e->isActive()) {
+			if (e->isActive() && !e->getComponent<EntityAttribs>()->checkInvulnerability()) {
 
 				//Cogemos el transform del enemigo
 				auto eTR = e->getComponent<Transform>();
