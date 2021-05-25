@@ -15,4 +15,5 @@ private:
 	RandomNumberGenerator& r_ = sdlutils().rand();
 	const int MAXCHANCENORMAL = 35;
 	const int MAXCHANCEAB = 65;
+	const float EXTRAPERCENTAGE = 10.0f;
 };

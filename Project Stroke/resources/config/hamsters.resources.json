@@ -964,19 +964,19 @@
       "file": "resources/images/objects/apple.png"
     },
     {
-      "id": "cuboAmarillo",
+      "id": "obstacleYellow",
       "file": "resources/images/objects/CuboSpritesheetAmarillo.png"
     },
     {
-      "id": "cuboAzul",
+      "id": "obstacleBlue",
       "file": "resources/images/objects/CuboSpritesheetAzul.png"
     },
     {
-      "id": "cuboRojo",
+      "id": "obstacleRed",
       "file": "resources/images/objects/CuboSpritesheetRojo.png"
     },
     {
-      "id": "cuboVerde",
+      "id": "obstacleGreen",
       "file": "resources/images/objects/CuboSpritesheetVerde.png"
     },
     {
@@ -1810,7 +1810,7 @@
       "attackFrame": -1
     },
     {
-      "id": "obstacleBoxStatic",
+      "id": "obstacleStatic",
       "startFrameX": 0,
       "startFrameY": 0,
       "duration": 0,
@@ -1822,7 +1822,7 @@
       "attackFrame": -1
     },
     {
-      "id": "obstacleBoxHit",
+      "id": "obstacleHit",
       "startFrameX": 1,
       "startFrameY": 0,
       "duration": 0,
@@ -1830,11 +1830,11 @@
       "rows": 1,
       "frameUpdate": 60,
       "loop": 0,
-      "chain": "obstacleBoxStatic",
+      "chain": "obstacleStatic",
       "attackFrame": -1
     },
     {
-      "id": "obstacleBoxBreak",
+      "id": "obstacleBreak",
       "startFrameX": 1,
       "startFrameY": 0,
       "duration": 7,

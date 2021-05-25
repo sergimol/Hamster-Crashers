@@ -11,6 +11,7 @@
 #include "../components/Turret.h"
 #include "../components/WarCry.h"
 #include "../components/PossesionGame.h"
+#include "Image.h"
 
 #include "../utils/Collisions.h"
 
@@ -20,54 +21,88 @@ void InfarctedBody::init() {
 
 	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 
-	ab_ = hamster->getComponent<Roll>();
+	ab_ = hamster_->getComponent<Roll>();
 
-	if (ab_ == nullptr) ab_ = hamster->getComponent<Pray>();
-	if (ab_ == nullptr) ab_ = hamster->getComponent<Poison>();
-	if (ab_ == nullptr) ab_ = hamster->getComponent<Turret>();
-	if (ab_ == nullptr) ab_ = hamster->getComponent<WarCry>();
+	if (ab_ == nullptr) ab_ = hamster_->getComponent<Pray>();
+	if (ab_ == nullptr) ab_ = hamster_->getComponent<Poison>();
+	if (ab_ == nullptr) ab_ = hamster_->getComponent<Turret>();
+	if (ab_ == nullptr) ab_ = hamster_->getComponent<WarCry>();
 
 	assert(ab_ != nullptr);
 
 	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
 	assert(state_ != nullptr);
+
+	reviving_ = false;
+
+	
 }
 
 void InfarctedBody::update() {
 	if (state_->getState() == GameStates::RUNNING) {
-		auto& hamsters = entity_->getMngr()->getPlayers();
-		for (Entity* e : hamsters) {
-			if (e != hamster && !e->getComponent<HamsterStateMachine>()->cantBeTargeted()) {
-				auto* oTr = e->getComponent<Transform>();
-				assert(oTr != nullptr);
-				show = Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), oTr->getPos(), oTr->getW(), oTr->getH());
-				int eNum = e->getComponent<EntityAttribs>()->getNumber();
-				isCtrl = ih().playerHasController(eNum);
-				bool aux = false;
-				if (isCtrl)
-					aux = ih().isButtonDown(eNum, button);
-				else
-					aux = ih().isKeyDown(key);
-				if (show && aux) {
-					//Activamos el minijuego
-					entity_->getComponent<ReanimationGame>()->setActive(true);
-					entity_->getComponent<ReanimationGame>()->setRevPlayer(e);
-					//Pasamos a estar siendo revividos
-					reviving = true;
-					//Y deshabilitamos al que revive
-					disableOtherHamster(e);
+		if (!reviving_) {
+			auto& hamsters = entity_->getMngr()->getPlayers();
+			for (Entity* e : hamsters) {
+				if (e != hamster_ && !e->getComponent<HamsterStateMachine>()->cantBeTargeted()) {
+					auto* oTr = e->getComponent<Transform>();
+					assert(oTr != nullptr);
+
+					auto rect1 = tr_->getRectCollide(),
+						 rect2 = oTr->getRectCollide();
+
+					show_ = Collisions::collides(Vector2D(rect1.x, rect1.y), rect1.w, rect1.h, 
+											    Vector2D(rect2.x, rect2.y), rect2.w, rect2.h);
+
+					bool aux = false;
+					if (show_) {
+						int eNum = e->getComponent<EntityAttribs>()->getNumber();
+
+						isCtrl = ih().playerHasController(eNum);
+
+						if (isCtrl)
+							aux = ih().isButtonDown(eNum, button);
+						else
+							aux = ih().isKeyDown(key);
+
+						if (tx_ == nullptr) {
+							tx_ = new Entity(entity_->getMngr());
+							tx_->addComponent<Transform>(Vector2D(tr_->getPos().getX(),
+								tr_->getPos().getY()),
+								Vector2D(0, 0),
+								KEY_WIDTH, KEY_HEIGHT, 0, 1, 1)->setZ(tr_->getZ());
+							tx_->addComponent<Image>(isCtrl ? &sdlutils().images().at("b") : &sdlutils().images().at("p"));
+							entity_->getMngr()->getUIObjects().push_back(tx_);
+						}
+
+						if (aux) {
+							//Activamos el minijuego
+							entity_->getComponent<ReanimationGame>()->setActive(true);
+							entity_->getComponent<ReanimationGame>()->setRevPlayer(e);
+							//Pasamos a estar siendo revividos
+							reviving_ = true;
+							//Y deshabilitamos al que revive
+							disableOtherHamster(e);
+							//Quitamos el botón
+							deleteTexture();
+						}
+					}
+					else {
+						deleteTexture();
+					}
 				}
 			}
 		}
 		//En caso de que el estado del hamster que nos revive cambie, se cancela el minijuego
-		if (reviving) {
+		else{
 			if (otherHamster->getComponent<HamsterStateMachine>()->getState() != HamStates::DEFAULT) {
 				//Permitimos al otro moverse
 				enableOtherHamster();
 				//Se acaba el minijuego
 				entity_->getComponent<ReanimationGame>()->setActive(false);
 				//Dejamos de ser revividos
-				reviving = false;
+				reviving_ = false;
+
+				deleteTexture();
 			}
 		}
 	}
@@ -75,10 +110,10 @@ void InfarctedBody::update() {
 
 void InfarctedBody::render() {
 	//Si estamos en contacto con un posible "host" que nos pueda revivir, muestra la imagen del botón
-	if (show && !reviving) {
-		Vector2D renderPos = Vector2D(tr_->getPos().getX() + tr_->getW() - cam.x, tr_->getPos().getY() + tr_->getZ() - cam.y);
-		SDL_Rect dest = build_sdlrect(renderPos, KEY_WIDTH, KEY_HEIGHT);
-		tx_->render(dest);
+	if (show_ && !reviving_) {
+		/*Vector2D renderPos = Vector2D(tr_->getPos().getX() + tr_->getW() - cam.x, tr_->getPos().getY() + tr_->getZ() - cam.y);
+		SDL_Rect dest = build_sdlrect(renderPos, KEY_WIDTH, KEY_HEIGHT);*/
+		tx_->setActive(true);
 	}
 }
 
@@ -89,29 +124,31 @@ void InfarctedBody::reanimate() {
 	// Vuelve a tener disponible la habilidad
 	ab_->activateAbility();
 	// Animacion de desinfarto
-	hamster->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STROKE, false);
+	hamster_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STROKE, false);
 	// El personaje vuelve a DEFAULT
-	hamster->getComponent<HamsterStateMachine>()->getState() = HamStates::DEFAULT;
+	hamster_->getComponent<HamsterStateMachine>()->getState() = HamStates::DEFAULT;
 	// El hamster toma la posicion de su cadaver al revivir
-	hamster->getComponent<Transform>()->setPos(entity_->getComponent<Transform>()->getPos());
+	hamster_->getComponent<Transform>()->setPos(entity_->getComponent<Transform>()->getPos());
 	// Recupera el movimiento
-	hamster->getComponent<Movement>()->setActive(true);
+	hamster_->getComponent<Movement>()->setActive(true);
 	// Recupera el renderizado
-	hamster->getComponent<Animator>()->setActive(true);
+	hamster_->getComponent<Animator>()->setActive(true);
 	// Desactivamos el GhostControl en caso de que no se hubiera llegado a activar
-	hamster->getComponent<GhostCtrl>()->setActive(false);
+	hamster_->getComponent<GhostCtrl>()->setActive(false);
 	// Deshacemos la posible posesión
-	hamster->getComponent<PossesionGame>()->endPossesion();
+	hamster_->getComponent<PossesionGame>()->endPossesion();
 	// Reactivamos el infarto
-	hamster->getComponent<Stroke>()->setActive(true);
+	hamster_->getComponent<Stroke>()->setActive(true);
 	// Reactivamos la UI del corazón
-	hamster->getComponent<HeartUI>()->resurrection();
-
-
-	hamster->getComponent<UI>()->resurrection();
+	hamster_->getComponent<HeartUI>()->resurrection();
+	hamster_->getComponent<UI>()->resurrection();
 
 	entity_->setActive(false);
 	entity_->getMngr()->refreshDeadBodies();
+
+	reviving_ = false;
+
+	deleteTexture();
 }
 
 void InfarctedBody::disableOtherHamster(Entity* e) {
@@ -136,5 +173,13 @@ void InfarctedBody::enableOtherHamster() {
 		otherHamster->getComponent<LightAttack>()->setActive(true);
 		otherHamster->getComponent<StrongAttack>()->setActive(true);
 
+	}
+}
+
+void InfarctedBody::deleteTexture() {
+	if (tx_ != nullptr) {
+		tx_->setActive(false);
+		entity_->getMngr()->refreshUIObjects();
+		delete tx_; tx_ = nullptr;
 	}
 }

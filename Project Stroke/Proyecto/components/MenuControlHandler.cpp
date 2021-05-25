@@ -18,7 +18,7 @@ void MenuControlHandler::init() {
 	keymap.insert({ LEFT, SDL_SCANCODE_LEFT });
 	keymap.insert({ RIGHT, SDL_SCANCODE_RIGHT });
 	keymap.insert({ SPACE, SDL_SCANCODE_RETURN });
-	keymap.insert({ BACK, SDL_SCANCODE_ESCAPE });
+	keymap.insert({ BACK, SDL_SCANCODE_BACKSPACE });
 }
 
 

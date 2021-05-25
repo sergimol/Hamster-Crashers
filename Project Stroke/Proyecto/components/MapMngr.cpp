@@ -539,7 +539,7 @@ void MapMngr::loadEnemyRoom() {
 			enemy->addComponent<EnemyStun>();
 			numberEnemyRoom++;
 		}
-		else if (name == "firstBoss" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
+		else if (name == "firstBoss" && prop[1].getIntValue() == Room && prop[2].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* enemy = mngr_->addEntity();
 			enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, (object.getPosition().y - 300) * scale),
@@ -575,12 +575,17 @@ void MapMngr::loadEnemyRoom() {
 
 			numberEnemyRoom++;
 		}
-		else if (name == "finalBoss" && prop[0].getIntValue() == Room && prop[1].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-			//auto* enemy = mngr_->addEntity();
-			//enemy->addComponent<Transform>(
-			//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-			//	Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
+		else if (name == "finalBoss" && prop[1].getIntValue() == Room && prop[2].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
+			auto* enemy = mngr_->addEntity();
+			enemy->addComponent<Transform>(
+				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+				Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
 
+			enemy->addComponent<FinalBossManager>(hamstersToLoad_.size());
+
+			numberEnemyRoom++;
+
+			//CUANDO SE CONFIRME QUE FUNCIONA SE PUEDE BORRAR
 			//enemy->addComponent<EnemyStateMachine>();
 			//enemy->setGroup<Enemy>(true);
 
@@ -591,10 +596,6 @@ void MapMngr::loadEnemyRoom() {
 
 			//enemy->addComponent<FirstBossAttack>();
 			//enemy->addComponent<MovementSimple>();
-
-			//enemy->addComponent<FinalBossManager>(hamstersToLoad_.size());
-
-			//numberEnemyRoom++;
 		}
 		else if (name == "escalectris" && prop[1].getIntValue() == Room && prop[3].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* escalectris = mngr_->addWaveObject();
@@ -792,14 +793,14 @@ void MapMngr::addObject(const tmx::Object& object) {
 	string id = prop[1].getStringValue();
 
 	obstacle->addComponent<Animator>(&sdlutils().images().at("obstacle" + id),
-		80,
-		86,
+		100,
+		78,
 		9,
 		2,
 		220,
 		Vector2D(0, 0),
 		3
-		);
+		)->play(sdlutils().anims().at("obstacleStatic"));
 
 	if (prop[0].getBoolValue()) {
 		obstacle->addComponent<Obstacle>(id, prop[2].getIntValue());

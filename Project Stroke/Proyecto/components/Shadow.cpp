@@ -28,9 +28,9 @@ void Shadow::render() {
 
 void Shadow::update() {
 	if (gState_->getState() == GameStates::RUNNING) {
-		if (isHamster_ && hamS_->getState() != HamStates::INFARCTED)
+		/*if (isHamster_ && hamS_->getState() != HamStates::INFARCTED)
 			shadow_->update();
-		else if (!isHamster_)
+		else if (!isHamster_)*/
 			shadow_->update();
 	}
 }
