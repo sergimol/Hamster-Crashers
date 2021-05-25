@@ -942,8 +942,31 @@
     {
       "id": "Level1Boss4",
       "file": "resources/images/transitions/Level1Boss4.png"
+    },
+    {
+      "id": "cheese",
+      "file": "resources/images/objects/chees.png"
+    },
+    {
+      "id": "apple",
+      "file": "resources/images/objects/apple.png"
+    },
+    {
+      "id": "cuboAmarillo",
+      "file": "resources/images/objects/CuboSpritesheetAmarillo.png"
+    },
+    {
+      "id": "cuboAzul",
+      "file": "resources/images/objects/CuboSpritesheetAzul.png"
+    },
+    {
+      "id": "cuboRojo",
+      "file": "resources/images/objects/CuboSpritesheetRojo.png"
+    },
+    {
+      "id": "cuboVerde",
+      "file": "resources/images/objects/CuboSpritesheetVerde.png"
     }
-
   ],
 
   "messages": [
@@ -2412,6 +2435,18 @@
       "duration": 7,
       "cols": 6,
       "rows": 6,
+      "frameUpdate": 60,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "CuboDestroyed",
+      "startFrameX": 1,
+      "startFrameY": 0,
+      "duration": 7,
+      "cols": 8,
+      "rows": 1,
       "frameUpdate": 60,
       "loop": 0,
       "chain": "",

@@ -50,17 +50,13 @@ void Obstacle::createItem() {
 	
 	int r = sdlutils().rand().nextInt(0, 10);
 	
-	if (r < 5) {
-		it.tex = &sdlutils().images().at("heart3");
-		it.ty = ItemType::Nut;
-	}
-	else if (r < 8){
-		it.tex = &sdlutils().images().at("heart1");
+	if (r < 6){
+		it.tex = &sdlutils().images().at("apple");
 		it.ty = ItemType::Apple;
 	}
 	else {
-		it.tex = &sdlutils().images().at("heart2");
-		it.ty = ItemType::WaterMelon;
+		it.tex = &sdlutils().images().at("cheese");
+		it.ty = ItemType::Cheese;
 	}
 	e->addComponent<Transform>(Vector2D(tr_->getPos().getX()+ (tr_->getW()/2) - 25, tr_->getPos().getY() + (tr_->getH() / 2) - 25), Vector2D(0, 0), 50, 50, 0, tr_->getScaleW(), tr_->getScaleH());
 	e->addComponent<Image>(it.tex);
