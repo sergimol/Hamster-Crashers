@@ -30,60 +30,62 @@ void BulletHit::update() {
 
 		for (Entity* e : ents) {
 
-			//Cogemos la camara
-			cam_ = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-			//Cogemos el transform del enemigo
-			auto eTR = e->getComponent<Transform>();
-			auto eRectCollide = eTR->getRectCollide();
-			auto rectCollide = tr_->getRectCollide();
+			if (e->isActive()) {
+				//Cogemos la camara
+				cam_ = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
+				//Cogemos el transform del enemigo
+				auto eTR = e->getComponent<Transform>();
+				auto eRectCollide = eTR->getRectCollide();
+				auto rectCollide = tr_->getRectCollide();
 
 
-			Vector2D newPos = Vector2D(eRectCollide.x - cam_.x, eRectCollide.y - cam_.y);
+				Vector2D newPos = Vector2D(eRectCollide.x - cam_.x, eRectCollide.y - cam_.y);
 
-			Vector2D otherPos = Vector2D(rectCollide.x - cam_.x, rectCollide.y - cam_.y);
+				Vector2D otherPos = Vector2D(rectCollide.x - cam_.x, rectCollide.y - cam_.y);
 
-			//Y comprobamos si colisiona
-			if (Collisions::collides(otherPos, rectCollide.w, rectCollide.h, newPos, eRectCollide.w, eRectCollide.h)) {
-				auto eAttribs = e->getComponent<EntityAttribs>();
+				//Y comprobamos si colisiona
+				if (Collisions::collides(otherPos, rectCollide.w, rectCollide.h, newPos, eRectCollide.w, eRectCollide.h)) {
+					auto eAttribs = e->getComponent<EntityAttribs>();
 
-				//Si estás dentro del margen de la profundidad...
-				if ((eAttribs->ignoresMargin() || abs((rectCollide.y) - (eRectCollide.y)) < eAttribs->getMarginToAttack() + 70) && !eAttribs->checkInvulnerability()) {
+					//Si estás dentro del margen de la profundidad...
+					if ((eAttribs->ignoresMargin() || abs((rectCollide.y) - (eRectCollide.y)) < eAttribs->getMarginToAttack() + 70) && !eAttribs->checkInvulnerability()) {
 
-					auto& enmStateM = e->getComponent<EnemyStateMachine>()->getState();
+						auto& enmStateM = e->getComponent<EnemyStateMachine>()->getState();
 
-					//Aturdir
-					if (enmStateM != EnemyStates::ENM_DEAD) {
-						//Si tiene stun, se aplica
-						EnemyStun* enmStun = e->getComponent<EnemyStun>();
-						if (enmStun != nullptr && enmStun->isActive()) {
+						//Aturdir
+						if (enmStateM != EnemyStates::ENM_DEAD) {
+							//Si tiene stun, se aplica
+							EnemyStun* enmStun = e->getComponent<EnemyStun>();
+							if (enmStun != nullptr && enmStun->isActive()) {
 
-							e->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
+								e->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
 
-							//Si no estaba aturdido ya
-							if (enmStateM != EnemyStates::ENM_STUNNED) {
-								//Aturdimos al enemigo
-								enmStateM = EnemyStates::ENM_STUNNED;
+								//Si no estaba aturdido ya
+								if (enmStateM != EnemyStates::ENM_STUNNED) {
+									//Aturdimos al enemigo
+									enmStateM = EnemyStates::ENM_STUNNED;
+								}
+								//Reiniciamos tiempo de stun
+								enmStun->restartStunTime(false);
 							}
-							//Reiniciamos tiempo de stun
-							enmStun->restartStunTime(false);
-						}
-						//Si tiene Knockback, se aplica
-						Knockback* enmKnockback = e->getComponent<Knockback>();
-						if (enmKnockback != nullptr) {
-							//Damos la vuelta si es atacado por detras
-							auto& enmFlip = eTR->getFlip();
-							if (enmFlip == tr_->getFlip())
-								enmFlip = !enmFlip;
+							//Si tiene Knockback, se aplica
+							Knockback* enmKnockback = e->getComponent<Knockback>();
+							if (enmKnockback != nullptr) {
+								//Damos la vuelta si es atacado por detras
+								auto& enmFlip = eTR->getFlip();
+								if (enmFlip == tr_->getFlip())
+									enmFlip = !enmFlip;
 
-							enmKnockback->knockback();
+								enmKnockback->knockback();
+							}
 						}
+						//Le restamos la vida al enemigo
+						e->getComponent<EntityAttribs>()->recieveDmg(dmg_);
+
+						//Desactivamos la bala
+						entity_->setActive(false);
+						entity_->getMngr()->refreshEnemies();
 					}
-					//Le restamos la vida al enemigo
-					e->getComponent<EntityAttribs>()->recieveDmg(dmg_);
-
-					//Desactivamos la bala
-					entity_->setActive(false);
-					entity_->getMngr()->refreshEnemies();
 				}
 			}
 		}

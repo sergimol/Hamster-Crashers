@@ -260,6 +260,7 @@ void EntityAttribs::die() {
 	//TODO WHY ¿?
 	//Si la persona que muere es un hamster...
 	if (!entity_->hasGroup<Enemy>()) {
+
 		//Ponemos su UI a 'Muerto'
 		e->addComponent<UI>(id_, entity_->getComponent<UI>()->getPosUI())->dep("2");
 		hms_->getState() = HamStates::DEAD;
@@ -275,6 +276,11 @@ void EntityAttribs::die() {
 		//entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", false);
 	}
 	else {
+		if (entity_->getMngr()->getHandler<Boss>() == entity_)
+			entity_->getMngr()->setHandler<Boss>(nullptr);
+		else if (entity_->getMngr()->getHandler<FinalBoss>() == entity_)
+			entity_->getMngr()->setHandler<FinalBoss>(nullptr);
+		
 		//solamente para los enemigos
 		//entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala
 		e->addComponent<Dying>();
