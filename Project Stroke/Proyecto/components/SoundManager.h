@@ -99,7 +99,9 @@ private:
 
 	void  playPageSkip();
 
+	void  playHandInit();
 	void  playHandPunch();
+	void  playHandHit();
 
 	int pickRandom(int max);
 
@@ -152,8 +154,18 @@ private:
 	SoundEffect* catMeowSleeping;
 
 	//Boss Mano
+	SoundEffect* handInit0;
+	SoundEffect* handInit1;
+
 	SoundEffect* heavyPunch0;
 	SoundEffect* heavyPunch1;
+
+	SoundEffect* handHit0;
+	SoundEffect* handHit1;
+	SoundEffect* handHit2;
+
+	SoundEffect* handDep;
+	
 
 	//Boss Mono
 	SoundEffect* platillos;
