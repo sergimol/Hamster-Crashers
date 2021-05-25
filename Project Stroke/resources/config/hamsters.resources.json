@@ -667,6 +667,22 @@
       "file": "resources/images/catSmoking.png"
     },
     {
+      "id": "vitroGranOn",
+      "file": "resources/images/objects/trampaGranOn.png"
+    },
+    {
+      "id": "vitroGranOff",
+      "file": "resources/images/objects/trampaGranOff.png"
+    },
+    {
+      "id": "vitroPeqOn",
+      "file": "resources/images/objects/trampaPeqOn.png"
+    },
+    {
+      "id": "vitroPeqOff",
+      "file": "resources/images/objects/trampaPeqOff.png"
+    },
+    {
       "id": "1920x1080Button",
       "file": "resources/images/menuSprites/quitButton.png"
     },

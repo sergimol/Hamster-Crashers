@@ -4,7 +4,7 @@
 #include "../ecs/Manager.h"
 #include "Dying.h"
 
-TimeTrap::TimeTrap(Texture* tx) : latency(1000), tex_(tx), time_(0.0f), lastTime_(0.0f), gamestate(nullptr)  {
+TimeTrap::TimeTrap(Texture* tx, Texture* txoff, float latencia) : latency(latencia), texON_(tx), texOFF_(txoff), time_(0.0f), lastTime_(0.0f), gamestate(nullptr)  {
 
 }
 
@@ -14,7 +14,7 @@ void TimeTrap::init()  {
 	assert(gamestate != nullptr);
 
 
-	tex_->setBlendMode(SDL_BLENDMODE_BLEND);
+	texON_->setBlendMode(SDL_BLENDMODE_BLEND);
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 }
@@ -32,21 +32,20 @@ void TimeTrap::render() {
 
 	EntityAttribs* attribs = entity_->getComponent<EntityAttribs>();
 
-	//Color verdoso cuando está envenenado
-	if (attribs != nullptr && attribs->getPoisoned())
-		SDL_SetTextureColorMod(tex_->getSDLText(), 148, 236, 130);
-	else
-		SDL_SetTextureColorMod(tex_->getSDLText(), 255, 255, 255);
-
-	if (tr_->getFlip())
-		tex_->render(dest, tr_->getRot(), SDL_FLIP_HORIZONTAL);
-	else
-		tex_->render(dest, tr_->getRot());
+	if (tr_->getFlip()) {
+		texOFF_->render(dest, tr_->getRot(), SDL_FLIP_HORIZONTAL);
+		texON_->render(dest, tr_->getRot(), SDL_FLIP_HORIZONTAL);
+	}
+	else {
+		texOFF_->render(dest, tr_->getRot(), SDL_FLIP_HORIZONTAL);
+		texON_->render(dest, tr_->getRot());
+	}
 
 	//std::cout << renderPos.getX() << " " << renderPos.getY() << "\n";
 }
 
 TimeTrap::~TimeTrap() {
+	entity_->setActive(false);
 	entity_->getMngr()->refreshObstacles();
 }
 
@@ -61,12 +60,12 @@ void TimeTrap::update() {
 		if (currentState > 0) {
 			entity_->getComponent<ContactDamage>()->setActive(true);
 
-			tex_->setAlpha(255);
+			texON_->setAlpha(255);
 		}
 		else {
 			entity_->getComponent<ContactDamage>()->setActive(false);
 
-			tex_->setAlpha(255.0f * (1.0f + currentState));
+			texON_->setAlpha(255.0f * (1.0f + currentState));
 
 			//entity_->getComponent<Image>().
 		}	

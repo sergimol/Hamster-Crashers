@@ -5,7 +5,7 @@
 using namespace std;
 class TimeTrap: public Component {
 public:
-	TimeTrap(Texture* tx);
+	TimeTrap(Texture* tx, Texture* txoff, float latencia);
 	//TimeTrap(string id, short int hits) : id_(id), hits_(hits) {};
 	virtual ~TimeTrap();
 	
@@ -22,7 +22,8 @@ private:
 
 
 	int alpha;
-	Texture* tex_;
+	Texture* texON_;
+	Texture* texOFF_;
 	float alphaCalc;
 
 
