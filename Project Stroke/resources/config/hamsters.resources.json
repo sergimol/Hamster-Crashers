@@ -1399,6 +1399,18 @@
       "file": "resources/sound/dialogos/dialogo1.wav"
     },
     {
+      "id": "tutorial2",
+      "file": "resources/sound/dialogos/dialogo2.wav"
+    },
+    {
+      "id": "tutorial3",
+      "file": "resources/sound/dialogos/dialogo3.wav"
+    },
+    {
+      "id": "tutorial3single",
+      "file": "resources/sound/dialogos/dialogo3single.wav"
+    },
+    {
       "id": "possesion",
       "file": "resources/sound/possesion/possesion.wav"
     },

@@ -236,6 +236,7 @@ private:
 	SoundEffect* tutorial8;
 	SoundEffect* tutorial9;
 	SoundEffect* tutorial10;
+	SoundEffect* tutorialsingle;
 
 	int transitionNum = 0;
 	SoundEffect* transition0;

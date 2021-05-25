@@ -105,8 +105,10 @@ void SoundManager::init() {
 
 	tutorial0 = &sdlutils().soundEffects().at("tutorial0");
 	tutorial1 = &sdlutils().soundEffects().at("tutorial1");
-	tutorial2 = &sdlutils().soundEffects().at("catMeowInit");
-	tutorial3 = &sdlutils().soundEffects().at("catMeowInit");
+	tutorial2 = &sdlutils().soundEffects().at("tutorial2");
+	tutorial3 = &sdlutils().soundEffects().at("tutorial3");
+	tutorialsingle = &sdlutils().soundEffects().at("tutorial3single");
+
 	tutorial4 = &sdlutils().soundEffects().at("catMeowInit");
 	tutorial5 = &sdlutils().soundEffects().at("catMeowInit");
 	tutorial6 = &sdlutils().soundEffects().at("catMeowInit");
@@ -292,11 +294,11 @@ void SoundManager::setVolumeChannels() {
 
 void SoundManager::lowVolume(bool musicChannel) {
 	//if (musicVol_ > 0 && fxVol_ > 0) {
-		if (musicChannel)
-			musicVol_ = musicVol_ - 0.1f;
+	if (musicChannel)
+		musicVol_ = musicVol_ - 0.1f;
 
-		else
-			fxVol_ = fxVol_ - 0.1f;
+	else
+		fxVol_ = fxVol_ - 0.1f;
 	//}
 
 	setVolumeChannels();
@@ -443,6 +445,9 @@ void SoundManager::play(std::string soundName) {
 	}
 	else if (soundName == "tutorial") {
 		playTutorial();
+	}
+	else if (soundName == "tutorialsingle") {
+		tutorialsingle->play(0, 7);
 	}
 	else if (soundName == "stopTutorial") {
 		StopTutorial();
@@ -634,34 +639,34 @@ void SoundManager::playTutorial() {
 		tutorial0->play(0, 7);
 		break;
 	case 1:
-		tutorial0->play(0, 7);
-		break;
-	case 2:
 		tutorial1->play(0, 7);
 		break;
-	case 3:
+	case 2:
 		tutorial2->play(0, 7);
 		break;
-	case 4:
+	case 3:
 		tutorial3->play(0, 7);
 		break;
-	case 5:
+	case 4:
 		tutorial4->play(0, 7);
 		break;
-	case 6:
+	case 5:
 		tutorial5->play(0, 7);
 		break;
-	case 7:
+	case 6:
 		tutorial6->play(0, 7);
 		break;
-	case 8:
+	case 7:
 		tutorial7->play(0, 7);
 		break;
-	case 9:
+	case 8:
 		tutorial8->play(0, 7);
 		break;
-	case 10:
+	case 9:
 		tutorial9->play(0, 7);
+		break;
+	case 10:
+		tutorial10->play(0, 7);
 		break;
 	case 11:
 		tutorial10->play(0, 7);
