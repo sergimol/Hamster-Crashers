@@ -186,7 +186,7 @@ void MenuButton::pressed() {
 	}
 	else if (buttonName_ == "musicDown") {
 		auto soundMngr = entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>();
-		if (soundMngr->musicVol_ > 0.1f) {
+		if (soundMngr->musicVol_ > 0.099f) {
 			soundMngr->lowVolume(true);
 			entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(0, false);
 		}
@@ -202,7 +202,7 @@ void MenuButton::pressed() {
 
 	else if (buttonName_ == "fxDown") {
 		auto soundMngr = entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>();
-		if (soundMngr->fxVol_ > 0.1f) {
+		if (soundMngr->fxVol_ > 0.099f) {
 			soundMngr->lowVolume(false);
 			entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(1, false);
 		}
@@ -227,11 +227,7 @@ void MenuButton::pressed() {
 	}
 
 	else if (buttonName_ == "reset") {
-		sdlutils().setWidth(1920.0);
-		sdlutils().setHeight(1080.0);
-
-		SDL_SetWindowSize(sdlutils().window(), sdlutils().width(), sdlutils().height());
-		SDL_RenderSetScale(sdlutils().renderer(), 1.0f, 1.0f);
+		sdlutils().setResolutionIndex(RESOLUTIONSCOUNT - 1);
 
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetVolumes();
 		entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->resetIndicators();

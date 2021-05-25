@@ -547,47 +547,91 @@
       "file": "resources/images/menuSprites/resolutions/fullscreen.png"
     },
     {
-      "id": "bar0",
+      "id": "musicBar0",
       "file": "resources/images/menuSprites/barLevels/bar0.png"
     },
     {
-      "id": "bar1",
+      "id": "musicBar1",
       "file": "resources/images/menuSprites/barLevels/bar1.png"
     },
     {
-      "id": "bar2",
+      "id": "musicBar2",
       "file": "resources/images/menuSprites/barLevels/bar2.png"
     },
     {
-      "id": "bar3",
+      "id": "musicBar3",
       "file": "resources/images/menuSprites/barLevels/bar3.png"
     },
     {
-      "id": "bar4",
+      "id": "musicBar4",
       "file": "resources/images/menuSprites/barLevels/bar4.png"
     },
     {
-      "id": "bar5",
+      "id": "musicBar5",
       "file": "resources/images/menuSprites/barLevels/bar5.png"
     },
     {
-      "id": "bar6",
+      "id": "musicBar6",
       "file": "resources/images/menuSprites/barLevels/bar6.png"
     },
     {
-      "id": "bar7",
+      "id": "musicBar7",
       "file": "resources/images/menuSprites/barLevels/bar7.png"
     },
     {
-      "id": "bar8",
+      "id": "musicBar8",
       "file": "resources/images/menuSprites/barLevels/bar8.png"
     },
     {
-      "id": "bar9",
+      "id": "musicBar9",
       "file": "resources/images/menuSprites/barLevels/bar9.png"
     },
     {
-      "id": "bar10",
+      "id": "musicBar10",
+      "file": "resources/images/menuSprites/barLevels/bar10.png"
+    },
+    {
+      "id": "fxBar0",
+      "file": "resources/images/menuSprites/barLevels/bar0.png"
+    },
+    {
+      "id": "fxBar1",
+      "file": "resources/images/menuSprites/barLevels/bar1.png"
+    },
+    {
+      "id": "fxBar2",
+      "file": "resources/images/menuSprites/barLevels/bar2.png"
+    },
+    {
+      "id": "fxBar3",
+      "file": "resources/images/menuSprites/barLevels/bar3.png"
+    },
+    {
+      "id": "fxBar4",
+      "file": "resources/images/menuSprites/barLevels/bar4.png"
+    },
+    {
+      "id": "fxBar5",
+      "file": "resources/images/menuSprites/barLevels/bar5.png"
+    },
+    {
+      "id": "fxBar6",
+      "file": "resources/images/menuSprites/barLevels/bar6.png"
+    },
+    {
+      "id": "fxBar7",
+      "file": "resources/images/menuSprites/barLevels/bar7.png"
+    },
+    {
+      "id": "fxBar8",
+      "file": "resources/images/menuSprites/barLevels/bar8.png"
+    },
+    {
+      "id": "fxBar9",
+      "file": "resources/images/menuSprites/barLevels/bar9.png"
+    },
+    {
+      "id": "fxBar10",
       "file": "resources/images/menuSprites/barLevels/bar10.png"
     },
     {

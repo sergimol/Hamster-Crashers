@@ -129,12 +129,13 @@ void SoundManager::init() {
 	transition10 = &sdlutils().soundEffects().at("tutorial0");
 
 
-	setVolumeChannels();
-	Mix_AllocateChannels(16);
 
 	Vector2D vol = sdlutils().volumes();
 	musicVol_ = vol.getX();
 	fxVol_ = vol.getY();
+
+	setVolumeChannels();
+	Mix_AllocateChannels(16);
 }
 
 void SoundManager::StopTutorial() {
@@ -292,22 +293,34 @@ void SoundManager::setVolumeChannels() {
 
 void SoundManager::lowVolume(bool musicChannel) {
 	//if (musicVol_ > 0 && fxVol_ > 0) {
-		if (musicChannel)
-			musicVol_ = musicVol_ - 0.1f;
+	if (musicChannel) {
+		musicVol_ = musicVol_ - 0.1f;
+		if (musicVol_ < 0)
+			musicVol_ = 0;
+		sdlutils().setMusicVol(musicVol_);
+	}
 
-		else
-			fxVol_ = fxVol_ - 0.1f;
+	else {
+		fxVol_ = fxVol_ - 0.1f;
+		if (fxVol_ < 0)
+			fxVol_ = 0;
+		sdlutils().setFxVol(fxVol_);
+	}
 	//}
 
 	setVolumeChannels();
 }
 
 void SoundManager::upVolume(bool musicChannel) {
-	if (musicChannel)
+	if (musicChannel) {
 		musicVol_ = musicVol_ + 0.1f;
+		sdlutils().setMusicVol(musicVol_);
+	}
 
-	else
+	else {
 		fxVol_ = fxVol_ + 0.1f;
+		sdlutils().setFxVol(fxVol_);
+	}
 
 	setVolumeChannels();
 }
