@@ -840,36 +840,42 @@
    <properties>
     <property name="CameraCoordX" type="int" value="650"/>
     <property name="Rounds" type="int" value="1"/>
+    <property name="zBoss" type="bool" value="false"/>
    </properties>
   </object>
   <object id="137" name="2" x="1957.91" y="259.913" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="1980"/>
     <property name="Rounds" type="int" value="2"/>
+    <property name="zBoss" type="bool" value="false"/>
    </properties>
   </object>
   <object id="138" name="3" x="3273.91" y="319.83" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="3330"/>
     <property name="Rounds" type="int" value="2"/>
+    <property name="zBoss" type="bool" value="false"/>
    </properties>
   </object>
   <object id="139" name="4" x="4755.91" y="327.83" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="4800"/>
     <property name="Rounds" type="int" value="2"/>
+    <property name="zBoss" type="bool" value="false"/>
    </properties>
   </object>
   <object id="140" name="5" x="5960.5" y="261.25" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="6150"/>
     <property name="Rounds" type="int" value="2"/>
+    <property name="zBoss" type="bool" value="false"/>
    </properties>
   </object>
   <object id="141" name="6" x="8452.17" y="192.917" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="8650"/>
     <property name="Rounds" type="int" value="3"/>
+    <property name="zBoss" type="bool" value="false"/>
    </properties>
   </object>
  </objectgroup>

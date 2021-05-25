@@ -34,11 +34,17 @@ private:
 	State cameraState;
 	bool GoToTracker;
 	void checkBounds();
+	void camShake();
+
 	MapMngr* map_;
+	GameStates* states_;
+
+	float camShake_;
+	bool down_;
 
 public:
 
-	Camera(SDL_Rect cam) : camera_(cam), cameraFollowPos_(Vector2D()), cameraState(State::Players), map_(nullptr) {}
+	Camera(SDL_Rect cam) : camera_(cam), cameraFollowPos_(Vector2D()), cameraState(State::Players), map_(nullptr), camShake_(0), down_(true) {}
 
 	virtual ~Camera() {}
 	void init() override;

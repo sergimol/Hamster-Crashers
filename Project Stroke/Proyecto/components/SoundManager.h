@@ -18,7 +18,7 @@ public:
 	void resetVolumes() { fxVol_ = 1; musicVol_ = 1; };
 	bool emptyChannel();
 	void StopTutorial();
-
+	void fadeout(int time) {}
 	//FADEPRUEBA
 	//entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->fadeOut(3000);
 	//void fadeIn(int time);
