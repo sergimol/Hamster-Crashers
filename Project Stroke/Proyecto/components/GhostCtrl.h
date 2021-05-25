@@ -11,10 +11,10 @@
 class GhostCtrl: public Component
 {
 public:
-	GhostCtrl() : tr_(nullptr), mv_(nullptr), keyTx_(&sdlutils().images().at("q")), buttonTx_(&sdlutils().images().at("b")), state_(nullptr) {
+	GhostCtrl() : tr_(nullptr), mv_(nullptr), state_(nullptr), keyTx_(nullptr) {
 		active_ = false;
 	};
-	~GhostCtrl() {};
+	~GhostCtrl() { deleteKey(); };
 
 	virtual void init() override;
 
@@ -22,19 +22,26 @@ public:
 
 	virtual void render() override;
 
-
+	virtual void onDisable() override;
 
 private:
+	void generateKey();
+	void updateKey();
+	void deleteKey();
+
 	Transform* tr_;
 	HamStates st_;
 	Movement* mv_;
-	Texture* keyTx_;
-	Texture* buttonTx_;
+
+	Entity* keyTx_;
+
 	SDL_Rect cam;
+
 	GameStates* state_;
 
 	const int KEY_WIDTH = 100;
 	const int KEY_HEIGHT = 100;
+
 	const SDL_Keycode key_ = SDLK_q;
 	const SDL_GameControllerButton button_ = SDL_CONTROLLER_BUTTON_B;
 

@@ -10,5 +10,5 @@ public:
 	//virtual void decreaseChance();
 	virtual bool checkChance(int chanceNORMAL, int chanceAB);
 private:
-	const float EXTRAPERCENTAGE = 7.0f;
+	const float EXTRAPERCENTAGE = 8.0f;
 };

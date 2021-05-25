@@ -211,10 +211,10 @@ void ControlHandler::handleController() {
 			if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_START)) {
 				states_->setState(GameStates::PAUSE);
 			}
-			if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_B)) {
-
+			if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_BACK)) {
 				//para depurar le voy a provocar un infarto
-				entity_->getComponent<Stroke>()->INFARCT();
+				if(debug)
+					entity_->getComponent<Stroke>()->INFARCT();
 			}
 		}
 	}

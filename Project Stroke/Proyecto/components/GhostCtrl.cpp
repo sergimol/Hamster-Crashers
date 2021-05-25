@@ -4,6 +4,7 @@
 #include "../utils/Collisions.h"
 #include "../components/PossesionGame.h"
 #include "../components/Animator.h"
+#include "Image.h"
 
 
 void GhostCtrl::init() {
@@ -27,12 +28,26 @@ void GhostCtrl::update() {
 			if (e != entity_ && !e->getComponent<HamsterStateMachine>()->cantBeTargeted()) {
 				auto* oTr = e->getComponent<Transform>();
 				assert(oTr != nullptr);
-				show_ = Collisions::collides(tr_->getPos(), tr_->getW(), tr_->getH(), oTr->getPos(), oTr->getW(), oTr->getH());
+
+				auto rect1 = tr_->getRectCollide(),
+					rect2 = oTr->getRectCollide();
+
+				show_ = Collisions::collides(Vector2D(rect1.x, rect1.y), rect1.w, rect1.h,
+					Vector2D(rect2.x, rect2.y), rect2.w, rect2.h);
+
 				if (show_) {
 					int n = entity_->getComponent<EntityAttribs>()->getNumber();
 					isController_ = ih().playerHasController(n);
+
+					generateKey();
+
+					updateKey();
+
 					if((isController_ && ih().isButtonDown(n, button_)) || (!isController_ && ih().isKeyDown(key_)))
 						startPossesion(e);
+				}
+				else {
+					deleteKey();
 				}
 			}
 		}
@@ -41,7 +56,7 @@ void GhostCtrl::update() {
 
 void GhostCtrl::render() {
 	//Si estamos en contacto con un posible "host" para poseer, muestra la imagen del botón
-	if (show_) {
+	/*if (show_) {
 		cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 		Vector2D renderPos = Vector2D(tr_->getPos().getX() - cam.x, tr_->getPos().getY() + tr_->getZ() - cam.y);
 		SDL_Rect dest = build_sdlrect(renderPos, KEY_WIDTH, KEY_HEIGHT);
@@ -49,7 +64,7 @@ void GhostCtrl::render() {
 			buttonTx_->render(dest);
 		else
 			keyTx_->render(dest);
-	}
+	}*/
 }
 
 void GhostCtrl::startPossesion(Entity* e) {
@@ -68,4 +83,36 @@ void GhostCtrl::startPossesion(Entity* e) {
 
 	poss->setPossesed(e);
 	poss->setActive(true);
+
+	//keyTx_(&sdlutils().images().at("q")), buttonTx_(&sdlutils().images().at("b"))
+}
+
+void GhostCtrl::generateKey() {
+	if (keyTx_ == nullptr) {
+		keyTx_ = new Entity(entity_->getMngr());
+		auto pos = tr_->getPos();
+		keyTx_->addComponent<Transform>(Vector2D(pos.getX() + tr_->getW()/2, pos.getY()),
+			Vector2D(0, 0),
+			KEY_WIDTH, KEY_HEIGHT, 0, 1, 1)->setZ(tr_->getZ());
+		keyTx_->addComponent<Image>(&sdlutils().images().at(isController_ ? "b" : "q"));
+		entity_->getMngr()->getUIObjects().push_back(keyTx_);
+	}
+}
+
+void GhostCtrl::updateKey() {
+	if (keyTx_ != nullptr) {
+		auto pos = tr_->getPos();
+		keyTx_->getComponent<Transform>()->setPos(Vector2D(pos.getX() + tr_->getW()/2, pos.getY()));
+	}
+}
+
+void GhostCtrl::deleteKey() {
+	if (keyTx_ != nullptr) {
+		delete keyTx_;
+		keyTx_ = nullptr;
+	}
+}
+
+void GhostCtrl::onDisable() {
+	deleteKey();
 }
