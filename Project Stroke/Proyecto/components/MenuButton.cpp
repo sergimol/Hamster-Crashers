@@ -220,6 +220,7 @@ void MenuButton::pressed() {
 		indctrs[0]->getComponent<MenuIndicator>()->updateTexture(true);
 
 		menuMngr->moveToFirstSelectable();
+		menuMngr->setLastUnselectable(buttonName_);
 
 		auto selectedIndicator = mngr->addMenu();
 		selectedIndicator->addComponent<MenuIndicator>("p" + to_string(sdlutils().hamstersChosen()), Vector2D(dest_.x + 90, dest_.y), stateNumber_);
