@@ -17,7 +17,7 @@ private:
 	int trainVel_;
 
 public:
-	BackGround(Texture* im, float vel);
+	BackGround(Texture* im, float vel, bool train);
 	virtual ~BackGround() {};
 	virtual void update();
 };

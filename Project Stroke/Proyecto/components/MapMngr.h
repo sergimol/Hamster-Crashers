@@ -43,14 +43,14 @@ private:
 	int RoundsCount = 0;
 	float mapHeight_ = 0;
 	bool collisionCreated = false;
-	const float scale = 3; // 2.4 tren
+	float scale = 3; // 2.4 tren
 	bool BossControlSpawn = false;
 
 	std::queue<tmx::Object> TriggerftCamera;
 	vector<string> hamstersToLoad_;
 
 	void addHamster(string name, int i,const tmx::Object& object);
-	void addParaxall(int lvl);
+	void addParaxall(int lvl, bool front, bool train);
 public:
 	MapMngr() : Room(0) {};
 	~MapMngr();
