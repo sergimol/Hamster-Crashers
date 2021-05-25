@@ -680,8 +680,8 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 	hamster1->addComponent<AnimHamsterStateMachine>();
 	hamster1->addComponent<Gravity>();
 	hamster1->addComponent<CollisionDetec>();
-	hamster1->addComponent<Movement>();
 	hamster1->addComponent<MovementInChase>()->setActive(false);
+	hamster1->addComponent<Movement>();
 
 	tr->setGravity(hamster1->getComponent<Gravity>());
 
@@ -762,6 +762,7 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 //			}), //
 //		roomTrigger.end());
 //}
+
 void MapMngr::newSceneTrigger(string newScene, const tmx::Object& object) {
 
 	//Creamos una entidad

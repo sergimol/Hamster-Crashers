@@ -250,7 +250,13 @@ public:
 				menus_.begin(), //
 				menus_.end(), //
 				[](const Entity* e) { //
-					return !e->isActive();
+					if (e->isActive()) {
+						return false;
+					}
+					else {
+						delete e;
+						return true;
+					}
 				}), //
 			menus_.end());
 	}

@@ -37,7 +37,7 @@ private:
 	GameStates* states_;
 	MenuButtonManager* menu_;
 
-	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
+	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE, BACK };
 
 	std::map<KEYS ,SDL_Scancode> keymap;
 
@@ -46,6 +46,8 @@ private:
 	bool handleMouse();
 
 	bool mouseInButton(float x, float y, SDL_Rect const& button);
+
+	void back();
 
 
 	int stateNumber_, lastMouseX_ = 0, lastMouseY_ = 0;

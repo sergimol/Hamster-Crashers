@@ -4,19 +4,27 @@
 void Camera::init() {
 	map_ = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>();
 	assert(map_ != nullptr);
+
+	states_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(states_ != nullptr);
 }
 
 void Camera::update() {
-	if (cameraState == Players)
-		followPlayer();
-	else if (cameraState == GoingTo)
-		Goto();
-	else if (cameraState == Static)
-		StaticCamera();
-	else if (cameraState == BossCat)
-		followBossCat();
+	if (states_->getState()==GameStates::RUNNING) {
+		if (cameraState == Players)
+			followPlayer();
+		else if (cameraState == GoingTo)
+			Goto();
+		else if (cameraState == Static)
+			StaticCamera();
+		else if (cameraState == BossCat)
+			followBossCat();
 
-	checkBounds();
+		checkBounds();
+
+		//camShake();
+		camera_.y = camPos.getY() - camera_.h / 2.0 - camShake_;
+	}
 }
 
 void Camera::checkBounds() {
@@ -131,11 +139,19 @@ Vector2D Camera::newObjetivo() {
 	}
 	if (aux != heightMap_)
 		map_->setMaxH(map_->getMaxH() + (aux - heightMap_));
-	//else
-		//map_->setMaxH(camera_.h - heightMap_);
 
 	CamStaticPos.setY(CamStaticPos.getY() + upOffset - heightMap_);
 	return CamStaticPos;
+}
+
+void Camera::camShake() {
+	
+	if (down_)
+		camShake_ = sdlutils().lerp(20, camShake_, 0.75);
+	else 
+		camShake_ = sdlutils().lerp(0, camShake_, 0.75);
+
+	if ((camShake_ - 20 < 0.1 && camShake_ - 20 > -0.1) || (camShake_  < 0.1 && camShake_  > -0.1)) down_ = !down_;
 }
 
 //Cambia el punto al que sigue la camara

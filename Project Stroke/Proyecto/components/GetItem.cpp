@@ -36,11 +36,8 @@ void GetItem::update() {
 				case ItemType::Apple:
 					entity_->getComponent<EntityAttribs>()->heal(APPLEHP);
 					break;
-				case ItemType::WaterMelon:
-					this->entity_->getComponent<EntityAttribs>()->heal(WATERHP);
-					break;
-				case ItemType::Nut:
-					this->entity_->getComponent<EntityAttribs>()->heal(NUTHP);
+				case ItemType::Cheese:
+					this->entity_->getComponent<EntityAttribs>()->heal(CHEESE);
 					break;
 				default:
 					break;

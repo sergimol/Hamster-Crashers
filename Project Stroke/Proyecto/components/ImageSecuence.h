@@ -22,9 +22,9 @@ public:
 	virtual void render() override;
 
 private:
-	stack<Texture*> keyTextures;
+	stack<Entity*> keyAnimations;
 
-	const string level1 = "Mapa",
+	const string level1 = "Level1Boss",
 		level2 = "Lvl1Javi",
 		controls = "controls",
 		hasMuerto = "hasMuerto",

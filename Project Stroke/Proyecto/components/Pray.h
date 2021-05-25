@@ -13,10 +13,13 @@ public:
 
 	virtual void endAbility() override;
 
+	void stopUseAbility();
 private:
 	bool evil_;
 	int dmg_;
 	int heal_;
+
+	bool dontUseAbility;
 
 	void prayAbility();
 };

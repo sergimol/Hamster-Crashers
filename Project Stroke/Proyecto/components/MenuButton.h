@@ -29,6 +29,8 @@ public:
 
 	void setSelectable(bool s);
 	bool selectable() { return selectable_; };
+
+	string getName() { return buttonName_; };
 private:
 	//Nombre del personaje que contiene la UI, todo en minusculas
 	std::string buttonName_;

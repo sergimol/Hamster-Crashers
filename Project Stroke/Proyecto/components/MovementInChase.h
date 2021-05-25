@@ -34,7 +34,6 @@ public:
 
 	Vector2D getLastDir() { return lastDir_; };
 
-protected:
 private:
 
 	const float jump_ = 35.0f, gravity_ = 4.8f, jumpTimer_ = 10.0f;

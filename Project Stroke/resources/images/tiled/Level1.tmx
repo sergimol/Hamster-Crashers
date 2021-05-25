@@ -299,10 +299,10 @@
     <property name="zzId" value="monosinpatico"/>
    </properties>
   </object>
-  <object id="102" name="newScene" x="10133.4" y="219.743" width="65.3333" height="346.667">
+  <object id="102" name="newScene" x="10084.9" y="83.3794" width="65.3333" height="346.667">
    <properties>
     <property name="newMap" value="Level1Boss"/>
-    <property name="numT" type="int" value="1"/>
+    <property name="numT" type="int" value="0"/>
    </properties>
   </object>
   <object id="142" name="enemigo" x="1072.36" y="479.545" width="27.2727" height="44.9091">
