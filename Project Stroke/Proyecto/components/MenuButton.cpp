@@ -173,8 +173,12 @@ void MenuButton::pressed() {
 		selectedIndicator->addComponent<MenuIndicator>("p" + to_string(sdlutils().hamstersChosen()), Vector2D(dest_.x + 90, dest_.y), stateNumber_);
 		indctrs.push_back(selectedIndicator);
 
+		//Cuando haya seleccionado a los hamsters...
 		if (sdlutils().hamstersToChoose() <= 0) {
-			mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Level1.tmx");
+			//Hago una transicion para presentar el nivel inicial
+			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level1", true, 0);
+
+			//mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Level2.tmx");
 			state_->setState(GameStates::RUNNING);
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1GameVersion");
 		}
