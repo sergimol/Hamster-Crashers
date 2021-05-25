@@ -76,7 +76,7 @@ public:
 	void startChaseTrigger(const tmx::Object& obj);
 
 	inline void addHamster(string name) { hamstersToLoad_.push_back(name); };
-	inline void removeHamster(string name) { hamstersToLoad_.back().erase(); };
+	inline void removeHamster() { hamstersToLoad_.pop_back(); };
 	inline void clearHamstersVector() { hamstersToLoad_.clear(); };
 
 	void addObject(const tmx::Object& object);

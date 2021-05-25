@@ -2,6 +2,7 @@
 #include "SoundManager.h"
 void GameStates::init() {
 	state_ = MAINMENU;
+	lastState_ = MAINMENU;
 	//state_ = CONTROLS;
 	//state_ = SELECTION;	
 

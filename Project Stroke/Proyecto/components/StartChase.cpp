@@ -43,8 +43,8 @@ void StartChase::update() {
 					if (id == "sardinilla") {
 						hamsters->getComponent<Roll>()->deactiveAbility();
 					}
-					else if (id == "canelon")
-						hamsters->getComponent<Pray>()->deactiveAbility();
+					else if (id == "canelon" || id == "canelonDemon")
+						hamsters->getComponent<Pray>()->stopUseAbility();
 					else if (id == "keta")
 						hamsters->getComponent<Poison>()->deactiveAbility();
 					else
@@ -55,18 +55,14 @@ void StartChase::update() {
 
 					hamsters->getComponent<Movement>()->setActive(false);
 
-					//Activamos la gravedad
-					entity_->getMngr()->getHandler<Cat_>()->getComponent<Transform>()->setVelZ(50);
+					//Quitamos su velocidad
+					hamsters->getComponent<Transform>()->setVel(Vector2D(0,0));
 
-					//Desactivamos el Move y Ability
-					hamsters->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::MOVE,false);
-					hamsters->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::ABILITY,false);
+					//Desactivamos el Move y Ability (Idle se activa por defecto)
+					hamsters->getComponent<AnimHamsterStateMachine>()->resetAnim();
 
-					//Y activamos el Idle
-					hamsters->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::IDLE,true);
 
-					//Y METEMOS UNA ANIMACIÓN TO WAPA AL GATO EN ESTOS SEGUNDOS DE ESPERA
-				
+					//Y METEMOS UNA ANIMACIÓN TO WAPA AL GATO EN ESTOS SEGUNDOS DE ESPERA AAAAAAAAAAAAAAAAAAAAAA TODO
 				}
 			}
 		}

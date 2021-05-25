@@ -2,38 +2,63 @@
 #include "../sdlutils/InputHandler.h"
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
+#include "Transform.h"
 #include "Transition.h"
 
-
-ImageSecuence::ImageSecuence(string newScene) {
-	if (newScene == level1) {
-		keyTextures.push(&sdlutils().images().at("transition"));
-		keyTextures.push(&sdlutils().images().at("transition"));
-		keyTextures.push(&sdlutils().images().at("transition"));
-	}
-	else if (newScene == level2) {
-		keyTextures.push(&sdlutils().images().at("sardinilla"));
-		keyTextures.push(&sdlutils().images().at("keta"));
-		keyTextures.push(&sdlutils().images().at("canelon"));
-	}
-	else if (newScene == controls) {
-		controles = true;
-		keyTextures.push(&sdlutils().images().at("controles"));
-	}
-	else if (newScene == hasMuerto) {
-		gameOver = true;
-		keyTextures.push(&sdlutils().images().at("hasMuerto"));
-	}
-	else if (newScene == hasGanado) {
-		gameOver = true;
-		keyTextures.push(&sdlutils().images().at("hasGanado"));
-	}
-	else if (newScene == level1Boss) {
-		keyTextures.push(&sdlutils().images().at("hasGanado"));
-	}
+ImageSecuence::ImageSecuence(string newScene) :newScene_(newScene) {
+	//Te comes una verga
 }
 
 void ImageSecuence::init() {
+	if (newScene_ == level1) {
+		auto anim = entity_->getMngr()->addEntity();
+		anim->addComponent<Transform>(Vector2D(sdlutils().width() / 5, sdlutils().height() / 5), Vector2D(0, 0), 1000, 1000, 0, 1, 1);
+		anim->addComponent<Animator>(
+			&sdlutils().images().at("canelonSheet"),
+			128,
+			128,
+			3,
+			3,
+			220,
+			Vector2D(0, 0),
+			3
+			)->setActive(false);
+		keyAnimations.push(anim);
+		auto anim2 = entity_->getMngr()->addEntity();
+		anim2->addComponent<Transform>(Vector2D(sdlutils().width() / 5, sdlutils().height() / 5), Vector2D(0, 0), 1000, 1000, 0, 1, 1);
+		anim2->addComponent<Animator>(
+			&sdlutils().images().at("sardinillaSheet"),
+			86,
+			86,
+			3,
+			3,
+			220,
+			Vector2D(0, 0),
+			3
+			);
+		keyAnimations.push(anim2);
+	}
+	else if (newScene_ == level2) {
+		/*	keyAnimations.push(&sdlutils().images().at("sardinilla"));
+			keyAnimations.push(&sdlutils().images().at("keta"));
+			keyAnimations.push(&sdlutils().images().at("canelon"));*/
+	}
+	else if (newScene_ == controls) {
+		controles = true;
+		//keyAnimations.push(&sdlutils().images().at("controles"));
+	}
+	else if (newScene_ == hasMuerto) {
+		gameOver = true;
+		//keyAnimations.push(&sdlutils().images().at("hasMuerto"));
+	}
+	else if (newScene_ == hasGanado) {
+		gameOver = true;
+		//keyAnimations.push(&sdlutils().images().at("hasGanado"));
+	}
+	else if (newScene_ == level1Boss) {
+		//keyAnimations.push(&sdlutils().images().at("hasGanado"));
+	}
+
 	imageRect.x = 0;
 	imageRect.y = 0;
 	imageRect.w = sdlutils().width();
@@ -45,18 +70,21 @@ void ImageSecuence::init() {
 void ImageSecuence::update() {
 	if (entity_->isActive()) {
 		if (!trans_->isFading() && (ih().keyDownEvent() || ih().isButtonDownEvent())) {
-			if (!keyTextures.empty()) {
+			if (!keyAnimations.empty()) {
 				trans_->startFadeIn();
 				next = true;
 			}
 		}
 
 		if (next && !trans_->isFadingOut()) {
-			keyTextures.pop();
+			keyAnimations.top()->setActive(false);
+			keyAnimations.pop();
+			if (!keyAnimations.empty())
+				keyAnimations.top()->getComponent<Animator>()->setActive(true);
 			next = false;
 		}
 
-		if (keyTextures.empty() && !trans_->isFadingOut()) {
+		if (keyAnimations.empty() && !trans_->isFadingOut()) {
 			if (controles) {
 				entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>()->setState(GameStates::RUNNING);
 				controles = false;
@@ -72,6 +100,6 @@ void ImageSecuence::update() {
 }
 
 void ImageSecuence::render() {
-	if (!keyTextures.empty())
-		keyTextures.top()->render(imageRect);
+	//if (!keyAnimations.empty())
+	//	keyAnimations.top()->getComponent<Animator>()->render();
 }
