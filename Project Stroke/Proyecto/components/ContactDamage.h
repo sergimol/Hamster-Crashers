@@ -26,6 +26,7 @@ public:
 	void render() override;
 
 	bool CheckCollisions(const SDL_Rect& enemyRect, bool finCombo);
+	bool CheckCollisionsCat(const SDL_Rect& enemyRect, bool finCombo);
 	bool CheckCollisionsEnemies(const SDL_Rect& enemyRect, bool finCombo);
 	void updateRect();
 

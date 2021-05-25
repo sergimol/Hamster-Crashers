@@ -238,15 +238,24 @@ void MapMngr::loadNewMap(string map) {
 							auto* enemy = entity_->getMngr()->addEntity();
 							enemy->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-								Vector2D(), 256.0f, 2 * 256.0f, 0.0f, 1, 1);
+								Vector2D(), 440.0f * scale, 350.0f * scale, 0.0f, 0.6, 1);
+
+							//Le dejamos durmiendo
+							enemy->addComponent<Animator>(&sdlutils().images().at("cat"),
+								440,
+								350,
+								3,
+								3,
+								220,
+								Vector2D(),
+								3)->play(sdlutils().anims().at("cat_sleeping"));
 
 							//Le metemos gravedad
 							enemy->getComponent<Transform>()->setGravity(enemy->addComponent<Gravity>());
 
 							enemy->addComponent<CatMovement>();
 
-							enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
-							enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
+							enemy->addComponent<EntityAttribs>();
 							enemy->addComponent<ContactDamage>(20, 30, false, false, false);
 							enemy->getMngr()->setHandler<Cat_>(enemy);
 						}

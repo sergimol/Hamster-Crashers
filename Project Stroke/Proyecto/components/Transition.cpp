@@ -115,7 +115,7 @@ void Transition::changeScene(string nameScene, bool changeMap, int numTransition
 void Transition::sceneTransition() {
 	change = false;
 	if (changeMap_) {
-		//Desactivamos todas las entidades (Salvo la cámara)
+		//Desactivamos todas las entidades (Salvo la cï¿½mara)
 		for (Entity* e : entity_->getMngr()->getEntities()) {
 			//Si la entidad que voy a coger no es la camara...
 			if (e->getMngr()->getHandler<Camera__>() != e && e->getMngr()->getHandler<LevelHandlr>() != e
