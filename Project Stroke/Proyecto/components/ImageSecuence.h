@@ -24,7 +24,7 @@ public:
 private:
 	stack<Entity*> keyAnimations;
 
-	const string level1 = "Level1Boss",
+	const string level1 = "Level1",
 		level2 = "Lvl1Javi",
 		controls = "controls",
 		hasMuerto = "hasMuerto",
@@ -38,8 +38,6 @@ private:
 	bool controles = false;
 
 	bool gameOver = false;
-
-	SDL_Rect imageRect;
 
 	Transition* trans_;
 };
