@@ -38,7 +38,7 @@ void SoundManager::init() {
 	catMeowAttack = &sdlutils().soundEffects().at("catMeowAttack");
 	catMeowInit = &sdlutils().soundEffects().at("catMeowInit");
 	catMeowWalking = &sdlutils().soundEffects().at("catWalking");
-
+	catMeowSleeping = &sdlutils().soundEffects().at("catSleeping");
 	//HandBoss
 	heavyPunch0 = &sdlutils().soundEffects().at("heavyPunch0");
 	heavyPunch1 = &sdlutils().soundEffects().at("heavyPunch1");
@@ -287,21 +287,23 @@ void SoundManager::setVolumeChannels() {
 }
 
 void SoundManager::lowVolume(bool musicChannel) {
-	if (musicChannel)
-		musicVol_ = musicVol_ - 0.2f;
+	//if (musicVol_ > 0 && fxVol_ > 0) {
+		if (musicChannel)
+			musicVol_ = musicVol_ - 0.1f;
 
-	else
-		fxVol_ = fxVol_ - 0.2f;
+		else
+			fxVol_ = fxVol_ - 0.1f;
+	//}
 
 	setVolumeChannels();
 }
 
 void SoundManager::upVolume(bool musicChannel) {
 	if (musicChannel)
-		musicVol_ = musicVol_ + 0.2f;
+		musicVol_ = musicVol_ + 0.1f;
 
 	else
-		fxVol_ = fxVol_ + 0.2f;
+		fxVol_ = fxVol_ + 0.1f;
 
 	setVolumeChannels();
 }
@@ -361,6 +363,9 @@ void SoundManager::play(std::string soundName) {
 		catMeowAttack->play();
 	}
 	else if (soundName == "catMeowWalking") {
+		catMeowWalking->play();
+	}
+	else if (soundName == "catMeowSleeping") {
 		catMeowWalking->play();
 	}
 
@@ -622,10 +627,10 @@ void SoundManager::playTutorial() {
 	switch (tutorialNum)
 	{
 	case 0:
-		tutorial0->play(0,7);
+		tutorial0->play(0, 7);
 		break;
 	case 1:
-		tutorial0->play(0,7);
+		tutorial0->play(0, 7);
 		break;
 	case 2:
 		tutorial1->play(0, 7);

@@ -1247,6 +1247,10 @@
       "file": "resources/sound/cat/catMeowWalking.wav"
     },
     {
+      "id": "catSleeping",
+      "file": "resources/sound/cat/catSleeping.wav"
+    },
+    {
       "id": "sardinillaSpecial0",
       "file": "resources/sound/specialAttack/sardinilla/sardinillaSpecial.wav"
     },
