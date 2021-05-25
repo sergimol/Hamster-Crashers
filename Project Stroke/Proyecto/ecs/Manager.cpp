@@ -90,44 +90,51 @@ void Manager::update() {
 
 void Manager::render() {
 	//RENDERIZA FONDOS
-	auto b = bgs_.size();
-	for (auto i = 0u; i < b; i++)
+	auto s = bgs_.size();
+	for (auto i = 0u; i < s; i++)
 		bgs_[i]->render();
 
 	//RENDERIZA FONDOS
-	auto mb = menuBgs_.size();
-	for (auto i = 0u; i < mb; i++) {
+	s = menuBgs_.size();
+	for (auto i = 0u; i < s; i++) {
 		if (menuBgs_[i]->isActive())
 			menuBgs_[i]->render();
 	}
 
 	//RENDERIZA TILES
-	auto w = tiles_.size();
-	for (auto i = 0u; i < w; i++)
+	s = tiles_.size();
+	for (auto i = 0u; i < s; i++)
 		tiles_[i]->render();
 
 	//RENDERIZA TRAMPAS (EN EL SUELO)
-	auto t = traps_.size();
-	for (auto i = 0u; i < t; i++)
+	s = traps_.size();
+	for (auto i = 0u; i < s; i++)
 		traps_[i]->render();
 
 
 	//RENDERIZA ENTIDADES
-	auto n = entities_.size();
-	for (auto i = 0u; i < n; i++)
+	s = entities_.size();
+	for (auto i = 0u; i < s; i++)
 		entities_[i]->render();
 
 	//RENDERIZA POR DELANTE
-	auto f = fgs_.size();
-	for (auto i = 0u; i < f; i++)
+	s = fgs_.size();
+	for (auto i = 0u; i < s; i++)
 		fgs_[i]->render();
 
-	auto m = menus_.size();
-	for (auto i = 0u; i < m; i++)
+	//RENDER DE UI (MINIJUEGO DE INFARTO)
+	s = uiObjects_.size();
+	for (auto i = 0u; i < s; i++) {
+		if(uiObjects_[i]->isActive())
+			uiObjects_[i]->render();
+	}
+
+	s = menus_.size();
+	for (auto i = 0u; i < s; i++)
 		menus_[i]->render();
 
-	auto wo = wavesObjects_.size();
-	for (auto i = 0u; i < wo; i++)
+	s = wavesObjects_.size();
+	for (auto i = 0u; i < s; i++)
 		wavesObjects_[i]->render();
 }
 
