@@ -32,10 +32,10 @@ private:
 
 	//Para que se rendericen por delante
 	bool front_ = false;
-
+	bool trainMod_;
 
 public:
-	Parallax(Texture* im, float vel, Vector2D size, Vector2D pos, bool front);
+	Parallax(Texture* im, float vel, Vector2D size, Vector2D pos, bool front, bool train);
 	virtual ~Parallax() {};
 	virtual void update();
 	virtual void init();

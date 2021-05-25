@@ -7,13 +7,14 @@
 
 
 
-Parallax::Parallax(Texture* im, float vel, Vector2D size, Vector2D pos, bool front)
+Parallax::Parallax(Texture* im, float vel, Vector2D size, Vector2D pos, bool front, bool trainMod)
 {
 	tex_ = im;
 	pxVel_ = vel;
 	texSize_ = size;
 	texPos_ = pos;
 	front_ = front;
+	trainMod_ = trainMod;
 }
 
 //CREA LOS 3 BACKGROUNDS
@@ -25,7 +26,7 @@ void Parallax::init()
 	else backLeft = entity_->getMngr()->addBackGround();
 	backLeft->addComponent<Transform>(texPos_, Vector2D(0, 0), texSize_.getX(), texSize_.getY(),
 		0.0, 1, 1);
-	backLeft->addComponent<BackGround>(tex_, pxVel_);
+	backLeft->addComponent<BackGround>(tex_, pxVel_, trainMod_);
 	leftTr_ = backLeft->getComponent<Transform>();
 	assert(leftTr_ != nullptr);
 
@@ -35,7 +36,7 @@ void Parallax::init()
 	else backCenter = entity_->getMngr()->addBackGround();
 	backCenter->addComponent<Transform>(Vector2D(texPos_.getX() + texSize_.getX(), texPos_.getY()), Vector2D(0, 0), texSize_.getX(), texSize_.getY()
 		, 0.0, 1, 1);
-	backCenter->addComponent<BackGround>(tex_, pxVel_);
+	backCenter->addComponent<BackGround>(tex_, pxVel_, trainMod_);
 	centerTr_ = backCenter->getComponent<Transform>();
 	assert(centerTr_ != nullptr);
 
@@ -45,7 +46,7 @@ void Parallax::init()
 	else backRight = entity_->getMngr()->addBackGround();
 	backRight->addComponent<Transform>(Vector2D(texPos_.getX() + texSize_.getX() * 2, texPos_.getY()), Vector2D(0, 0), texSize_.getX(), texSize_.getY(),
 		0.0, 1, 1);
-	backRight->addComponent<BackGround>(tex_, pxVel_);
+	backRight->addComponent<BackGround>(tex_, pxVel_, trainMod_);
 	rightTr_ = backRight->getComponent<Transform>();
 	assert(rightTr_ != nullptr);
 
