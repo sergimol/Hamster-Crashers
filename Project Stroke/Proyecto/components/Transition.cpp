@@ -20,7 +20,6 @@ void Transition::init() {
 
 	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
 	assert(state_ != nullptr);
-
 }
 
 void Transition::update() {
@@ -38,7 +37,6 @@ void Transition::render() {
 		tx_->render(blackRect);
 	}
 }
-
 
 void Transition::fadeOut() {
 	//FADE out
