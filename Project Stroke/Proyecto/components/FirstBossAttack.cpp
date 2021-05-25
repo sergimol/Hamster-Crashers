@@ -93,8 +93,6 @@ void FirstBossAttack::update() {
 						//LE PASAMOS AL ESTADO DEL SUELO Y QUITAMOS EL ATAQUE
 						entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, true);
 						entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
-
-
 					}
 				}
 			}

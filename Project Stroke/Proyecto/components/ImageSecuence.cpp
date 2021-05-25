@@ -11,7 +11,7 @@ ImageSecuence::ImageSecuence(string newScene) :newScene_(newScene) {
 
 void ImageSecuence::init() {
 	if (newScene_ == level1) {
-		auto anim = entity_->getMngr()->addEntity();
+		/*auto anim = entity_->getMngr()->addEntity();
 		anim->addComponent<Transform>(Vector2D(sdlutils().width() / 5, sdlutils().height() / 5), Vector2D(0, 0), 1000, 1000, 0, 1, 1);
 		anim->addComponent<Animator>(
 			&sdlutils().images().at("canelonSheet"),
@@ -36,7 +36,7 @@ void ImageSecuence::init() {
 			Vector2D(0, 0),
 			3
 			);
-		keyAnimations.push(anim2);
+		keyAnimations.push(anim2);*/
 	}
 	else if (newScene_ == level2) {
 		/*	keyAnimations.push(&sdlutils().images().at("sardinilla"));

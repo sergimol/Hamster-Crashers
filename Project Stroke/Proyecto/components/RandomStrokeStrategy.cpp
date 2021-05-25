@@ -2,25 +2,30 @@
 
 
 void RandomStrokeStrategy::increaseChanceAB(int n, int& chanceAB) {
-	chanceAB += n;
+	/*chanceAB += n;
 	if (chanceAB > MAXCHANCEAB)
-		chanceAB = MAXCHANCEAB;
+		chanceAB = MAXCHANCEAB;*/
+
+	chanceAB += n * EXTRAPERCENTAGE;
 }
 
 void RandomStrokeStrategy::increaseChanceNORMAL(int n, int& chanceNORMAL) {
-	chanceNORMAL += n;
+	/*chanceNORMAL += n;
 	if (chanceNORMAL > MAXCHANCENORMAL)
-		chanceNORMAL = MAXCHANCENORMAL;
+		chanceNORMAL = MAXCHANCENORMAL;*/
+
+	chanceNORMAL += n * EXTRAPERCENTAGE;
 }
 //void RandomStrokeStrategy::decreaseChance() {
 //
 // }
 bool RandomStrokeStrategy::checkChance(int chanceNORMAL, int chanceAB) {
-	int i = 0;
-	i += r_.nextInt(1, MAXCHANCE);
-	i += r_.nextInt(1, MAXCHANCE);
+	//int i = 0;
+	//i += r_.nextInt(1, MAXCHANCE);
+	//i += r_.nextInt(1, MAXCHANCE);
 
 
-	//std::cout << i << " -- " << chanceAB + chanceNORMAL << std::endl;
-	return i/2 < chanceAB + chanceNORMAL;
+	////std::cout << i << " -- " << chanceAB + chanceNORMAL << std::endl;
+	//return i/2 < chanceAB + chanceNORMAL;
+	return  chanceAB + chanceNORMAL >= MAXCHANCE;
 }

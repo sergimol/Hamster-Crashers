@@ -14,7 +14,7 @@ void KeyGame::init() {
 
 void KeyGame::render() {
 	SDL_Rect box = build_sdlrect(tr_->getPos(), tr_->getW(), tr_->getH());
-	if (!down)
+	if (!down_)
 		tx_->render(box);
 	else
 		txDown_->render(box);
@@ -22,40 +22,40 @@ void KeyGame::render() {
 
 void KeyGame::update() {
 	if (state_->getState() == GameStates::RUNNING){
-		progress += speed;
+		if (dirX_ > 0) progress_ += speed_ / 2;
+		else if (dirX_ < 0) progress_ += 1.5f * speed_;
+		else progress_ += speed_;
 
-		if (tr_->getPos().getX() > trail.x + trail.w) {
+
+		if (tr_->getPos().getX() > hitmarker_.x + hitmarker_.w) {
 			goBack();
 		}
 
-		if (pressed && sdlutils().currRealTime() > timer + pressedTime) {
-			down = false;
+		if (pressed_ && sdlutils().currRealTime() > timer_ + pressedTime_) {
+			pressed_ = false;
+			down_ = false;
 		} 
 	}
 }
 
 // Devuelve a la posición inicial y notifica a Possesion
 void KeyGame::goBack() {
-	tr_->getPos() = Vector2D(trail.x, trail.y);
+	tr_->getPos() = Vector2D(trail_.x, trail_.y);
 	poss_->reachedEnd();
-	pressed = false;
-	progress = 0;
+	pressed_ = false;
+	progress_ = 0;
 }
 
 //Comprueba si es un acierto y se anima
 bool KeyGame::hitSkillCheck() {
-	if (!pressed) {
-		pressed = true;
-		down = true;
-		timer = sdlutils().currRealTime();
-	}
+	pressed_ = true;
+	down_ = true;
+	timer_ = sdlutils().currRealTime();
+	
 	float x = tr_->getPos().getX(), y = tr_->getPos().getY();
-	auto* cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
-	/*x -= cam->getCamPos().getX() / 2.0f;
-	y -= cam->getCamPos().getY() / 2.0f;*/
 
 	return Collisions::collides(Vector2D(x, y), tr_->getW(), tr_->getH(), 
-						Vector2D(hitmarker.x, hitmarker.y), hitmarker.w, hitmarker.h);
+						Vector2D(hitmarker_.x, hitmarker_.y), hitmarker_.w, hitmarker_.h);
 }
 
 //void KeyGame::setKey() {
@@ -71,11 +71,15 @@ bool KeyGame::hitSkillCheck() {
 //	tr_->setPos(iniPos);
 //}
 
-void KeyGame::updateGamePos(const SDL_Rect& hit, const SDL_Rect& trai) {
-	hitmarker = hit;
-	trail = trai;
+void KeyGame::updateGamePos(const SDL_Rect& hit, const SDL_Rect& trai, int dir) {
+	dirX_ = dir;
+	
+	hitmarker_ = hit;
+	trail_ = trai;
+
 	auto newPos = tr_->getPos();
-	newPos.setX(trail.x + tr_->getW() / 2 + progress);
-	newPos.setY(trail.y - tr_->getH() / 2);
+	newPos.setX(trail_.x + tr_->getW() / 2 + progress_);
+	newPos.setY(trail_.y - tr_->getH() / 2);
+	
 	tr_->setPos(newPos);
 }

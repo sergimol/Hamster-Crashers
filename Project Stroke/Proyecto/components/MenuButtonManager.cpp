@@ -89,7 +89,7 @@ void MenuButtonManager::init() {
 		auto backgrText = &sdlutils().images().at("hamsterSelectorBlank");
 		background_ = entity_->getMngr()->addMenuBackground(); 
 		background_->addComponent<Transform>(Vector2D(0, -250), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
-		background_->addComponent<BackGround>(backgrText, 0);
+		background_->addComponent<BackGround>(backgrText, 0, false);
 
 		auto* playerSelectingIndicator = mngr->addMenu();
 		playerSelectingIndicator->addComponent<MenuIndicator>("p", Vector2D(140, 25), stateNumber_);
@@ -118,7 +118,7 @@ void MenuButtonManager::init() {
 		auto backgrText = &sdlutils().images().at("mainMenuBlank");
 		background_ = entity_->getMngr()->addMenuBackground();
 		background_->addComponent<Transform>(Vector2D(0, -250), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
-		background_->addComponent<BackGround>(backgrText, 0);
+		background_->addComponent<BackGround>(backgrText, 0, false);
 	}
 	else if (menuMode_ == "optionsMenu") {
 		buttonsMagnitude_ = Vector2D(2, 4);

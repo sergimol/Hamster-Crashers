@@ -1,4 +1,5 @@
 #include "Transition.h"
+#include "Transform.h"
 #include "ImageSecuence.h"
 #include "SoundManager.h"
 #include "MapMngr.h"
@@ -99,6 +100,11 @@ void Transition::fadeIn() {
 }
 
 void Transition::changeScene(string nameScene, bool changeMap, int numTransitions) {
+	auto& ents = entity_->getMngr()->getPlayers();
+	for (Entity* e : ents) {
+		e->getComponent<Transform>()->setFloor(0);
+		e->getComponent<Transform>()->setZ(0);
+	}
 	change = true;
 	changeMap_ = changeMap;
 	nameScene_ = nameScene;
@@ -132,6 +138,7 @@ void Transition::sceneTransition() {
 			e->setActive(false);
 
 		entity_->getMngr()->refreshFrontGround();
+		//entity_->getMngr()->refreshParallax();
 
 		entity_->getMngr()->refreshDeadBodies();
 		entity_->getMngr()->refreshEnemies();
