@@ -475,7 +475,7 @@ void MapMngr::loadEnemyRoom() {
 
 			enemy->setGroup<Enemy>(true);
 
-			enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, prop[3].getStringValue(), Vector2D(3.6, 2), 0, 0, 5, 70);
+			enemy->addComponent<EntityAttribs>(150 + ((hamstersToLoad_.size() - 1) * 75), 0.0, prop[3].getStringValue(), Vector2D(3.6, 2), 0, 0, 5, 70);
 
 			enemy->addComponent<Animator>(
 				&sdlutils().images().at(prop[3].getStringValue() + "Sheet"),
@@ -520,7 +520,7 @@ void MapMngr::loadEnemyRoom() {
 			enemy->addComponent<EnemyStateMachine>();
 			enemy->setGroup<Enemy>(true);
 
-			enemy->addComponent<EntityAttribs>(300 + ((hamstersToLoad_.size() - 1) * 100), 0.0, prop[3].getStringValue(), Vector2D(3.6, 2), 0, 0, 5, true, false, true);
+			enemy->addComponent<EntityAttribs>(250 + ((hamstersToLoad_.size() - 1) * 75), 0.0, prop[3].getStringValue(), Vector2D(3.6, 2), 0, 0, 5, true, false, true);
 
 			enemy->addComponent<Animator>(
 				&sdlutils().images().at(prop[3].getStringValue() + "Sheet"),
@@ -703,7 +703,7 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 
 	//Habilidad
 	if (name == "sardinilla") hamster1->addComponent<Roll>();
-	else if (name == "canelon") hamster1->addComponent<Pray>(20000, 10);
+	else if (name == "canelon") hamster1->addComponent<Pray>(30, 10);
 	else if (name == "keta") hamster1->addComponent<Poison>(50);
 	else if (name == "monchi") {
 		hamster1->addComponent<Turret>();
