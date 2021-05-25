@@ -30,6 +30,7 @@ void ObstacleMoveable::update()
 			
 			//el coche funciona de manera independiente tiene un lifeTime que lo desactivara a si mismo
 			//pero tmb podemos destruirlo desde aca de ser necesario
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("coche");
 
 			auto* coche = entity_->getMngr()->addEntity();
 			
