@@ -1,6 +1,7 @@
 #include "Transition.h"
 #include "Transform.h"
 #include "ImageSecuence.h"
+#include "EnemyMother.h"
 #include "SoundManager.h"
 #include "MapMngr.h"
 #include "../sdlutils/SDLUtils.h"
@@ -115,12 +116,12 @@ void Transition::changeScene(string nameScene, bool changeMap, int numTransition
 void Transition::sceneTransition() {
 	change = false;
 	if (changeMap_) {
-		//Desactivamos todas las entidades (Salvo la cámara)
+		//Y eliminamos TODO
 		for (Entity* e : entity_->getMngr()->getEntities()) {
-			//Si la entidad que voy a coger no es la camara...
-			if (e->getMngr()->getHandler<Camera__>() != e && e->getMngr()->getHandler<LevelHandlr>() != e
-				&& e->getMngr()->getHandler<StateMachine>() != e && e->getMngr()->getHandler<Mother>() != e
-				&& e->getMngr()->getHandler<PauseMenu>() != e && e->getMngr()->getHandler<Map>() != e && e->getMngr()->getHandler<SoundManager>() != e)
+
+			if (e->getMngr()->getHandler<Camera__>() != e
+				&& e->getMngr()->getHandler<StateMachine>() != e && e->getMngr()->getHandler<Mother>() != e &&
+				e->getMngr()->getHandler<Map>() != e && e->getMngr()->getHandler<SoundManager>() != e)
 				//La elimino
 				e->setActive(false);
 		}
@@ -138,15 +139,21 @@ void Transition::sceneTransition() {
 			e->setActive(false);
 
 		entity_->getMngr()->refreshFrontGround();
-		//entity_->getMngr()->refreshParallax();
+		entity_->getMngr()->refreshTiles();
+		entity_->getMngr()->refreshMapHeight();
+		entity_->getMngr()->refreshParallax();
+		entity_->getMngr()->refreshForeground();
+
 
 		entity_->getMngr()->refreshDeadBodies();
 		entity_->getMngr()->refreshEnemies();
 		entity_->getMngr()->refreshItems();
 		entity_->getMngr()->refreshObstacles();
 		entity_->getMngr()->refreshPlayers();
+		entity_->getMngr()->refresh();
 
 		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearColliders();
+		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->resetNumPlayers();
 	}
 
 	//Y creamos uno nuevo

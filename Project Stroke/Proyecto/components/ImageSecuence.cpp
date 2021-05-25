@@ -142,7 +142,7 @@ void ImageSecuence::init() {
 	else if (newScene_ == level2) {
 	//Cinematica 13
 	auto anim13 = entity_->getMngr()->addEntity();
-	anim13->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim13->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
 	anim13->addComponent<Animator>(
 		&sdlutils().images().at("cine13"),
 		1920,
@@ -157,7 +157,7 @@ void ImageSecuence::init() {
 
 	//Cinematica 12
 	auto anim12 = entity_->getMngr()->addEntity();
-	anim12->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim12->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
 	anim12->addComponent<Animator>(
 		&sdlutils().images().at("cine12"),
 		1920,
@@ -167,12 +167,12 @@ void ImageSecuence::init() {
 		220,
 		Vector2D(0, 0),
 		3
-		);
+		)->setActive(false);
 	keyAnimations.push(anim12);
 
 	//Cinematica 11
 	auto anim11 = entity_->getMngr()->addEntity();
-	anim11->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim11->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
 	anim11->addComponent<Animator>(
 		&sdlutils().images().at("cine11"),
 		1920,
@@ -187,7 +187,7 @@ void ImageSecuence::init() {
 
 	//Cinematica 10
 	auto anim10 = entity_->getMngr()->addEntity();
-	anim10->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim10->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
 	anim10->addComponent<Animator>(
 		&sdlutils().images().at("cine10"),
 		1920,
@@ -197,12 +197,12 @@ void ImageSecuence::init() {
 		220,
 		Vector2D(0, 0),
 		3
-		);
+		)->setActive(false);
 	keyAnimations.push(anim10);
 
 	//Cinematica 9
 	auto anim9 = entity_->getMngr()->addEntity();
-	anim9->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim9->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
 	anim9->addComponent<Animator>(
 		&sdlutils().images().at("cine9"),
 		1920,
@@ -212,7 +212,7 @@ void ImageSecuence::init() {
 		220,
 		Vector2D(0, 0),
 		3
-		)->setActive(false);
+		);
 	keyAnimations.push(anim9);
 
 

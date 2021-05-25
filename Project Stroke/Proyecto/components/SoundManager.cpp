@@ -43,6 +43,14 @@ void SoundManager::init() {
 	heavyPunch0 = &sdlutils().soundEffects().at("heavyPunch0");
 	heavyPunch1 = &sdlutils().soundEffects().at("heavyPunch1");
 
+	handInit0 = &sdlutils().soundEffects().at("handInit0");
+	handInit1 = &sdlutils().soundEffects().at("handInit1");
+
+	handHit0 = &sdlutils().soundEffects().at("handHit0");
+	handHit1 = &sdlutils().soundEffects().at("handHit1");
+	handHit2 = &sdlutils().soundEffects().at("handHit2");
+
+	handDep = &sdlutils().soundEffects().at("handDep");
 	//Mono andando adonde ira
 	platillos = &sdlutils().soundEffects().at("platillos");
 
@@ -105,8 +113,10 @@ void SoundManager::init() {
 
 	tutorial0 = &sdlutils().soundEffects().at("tutorial0");
 	tutorial1 = &sdlutils().soundEffects().at("tutorial1");
-	tutorial2 = &sdlutils().soundEffects().at("catMeowInit");
-	tutorial3 = &sdlutils().soundEffects().at("catMeowInit");
+	tutorial2 = &sdlutils().soundEffects().at("tutorial2");
+	tutorial3 = &sdlutils().soundEffects().at("tutorial3");
+	tutorialsingle = &sdlutils().soundEffects().at("tutorial3single");
+
 	tutorial4 = &sdlutils().soundEffects().at("catMeowInit");
 	tutorial5 = &sdlutils().soundEffects().at("catMeowInit");
 	tutorial6 = &sdlutils().soundEffects().at("catMeowInit");
@@ -129,12 +139,13 @@ void SoundManager::init() {
 	transition10 = &sdlutils().soundEffects().at("tutorial0");
 
 
-	setVolumeChannels();
-	Mix_AllocateChannels(16);
 
 	Vector2D vol = sdlutils().volumes();
 	musicVol_ = vol.getX();
 	fxVol_ = vol.getY();
+
+	setVolumeChannels();
+	Mix_AllocateChannels(16);
 }
 
 void SoundManager::StopTutorial() {
@@ -187,6 +198,12 @@ void SoundManager::setVolumeChannels() {
 	//Boss Mano
 	heavyPunch0->setChannelVolume(fxVol_ * initHandVol);
 	heavyPunch1->setChannelVolume(fxVol_ * initHandVol);
+	handInit0->setChannelVolume(fxVol_ * initHandVol);
+	handInit1->setChannelVolume(fxVol_ * initHandVol);
+	handHit0->setChannelVolume(fxVol_ * initHandVol);
+	handHit1->setChannelVolume(fxVol_ * initHandVol);
+	handHit2->setChannelVolume(fxVol_ * initHandVol);
+	handDep->setChannelVolume(fxVol_ * initHandVol);
 
 	//Boss Mono
 	platillos->setChannelVolume(fxVol_ * initMonkeVol);
@@ -292,22 +309,34 @@ void SoundManager::setVolumeChannels() {
 
 void SoundManager::lowVolume(bool musicChannel) {
 	//if (musicVol_ > 0 && fxVol_ > 0) {
-		if (musicChannel)
-			musicVol_ = musicVol_ - 0.1f;
+	if (musicChannel) {
+		musicVol_ = musicVol_ - 0.1f;
+		if (musicVol_ < 0)
+			musicVol_ = 0;
+		sdlutils().setMusicVol(musicVol_);
+	}
 
-		else
-			fxVol_ = fxVol_ - 0.1f;
+	else {
+		fxVol_ = fxVol_ - 0.1f;
+		if (fxVol_ < 0)
+			fxVol_ = 0;
+		sdlutils().setFxVol(fxVol_);
+	}
 	//}
 
 	setVolumeChannels();
 }
 
 void SoundManager::upVolume(bool musicChannel) {
-	if (musicChannel)
+	if (musicChannel) {
 		musicVol_ = musicVol_ + 0.1f;
+		sdlutils().setMusicVol(musicVol_);
+	}
 
-	else
+	else {
 		fxVol_ = fxVol_ + 0.1f;
+		sdlutils().setFxVol(fxVol_);
+	}
 
 	setVolumeChannels();
 }
@@ -374,8 +403,17 @@ void SoundManager::play(std::string soundName) {
 	}
 
 	//Boss Mano
+	else if (soundName == "handInit") {
+		playHandInit();
+	}
 	else if (soundName == "handPunch") {
 		playHandPunch();
+	}
+	else if (soundName == "handHit") {
+		playHandHit();
+	}
+	else if (soundName == "handDep") {
+		handDep->play();
 	}
 
 	//Boss Mono
@@ -443,6 +481,9 @@ void SoundManager::play(std::string soundName) {
 	}
 	else if (soundName == "tutorial") {
 		playTutorial();
+	}
+	else if (soundName == "tutorialsingle") {
+		tutorialsingle->play(0, 7);
 	}
 	else if (soundName == "stopTutorial") {
 		StopTutorial();
@@ -634,34 +675,34 @@ void SoundManager::playTutorial() {
 		tutorial0->play(0, 7);
 		break;
 	case 1:
-		tutorial0->play(0, 7);
-		break;
-	case 2:
 		tutorial1->play(0, 7);
 		break;
-	case 3:
+	case 2:
 		tutorial2->play(0, 7);
 		break;
-	case 4:
+	case 3:
 		tutorial3->play(0, 7);
 		break;
-	case 5:
+	case 4:
 		tutorial4->play(0, 7);
 		break;
-	case 6:
+	case 5:
 		tutorial5->play(0, 7);
 		break;
-	case 7:
+	case 6:
 		tutorial6->play(0, 7);
 		break;
-	case 8:
+	case 7:
 		tutorial7->play(0, 7);
 		break;
-	case 9:
+	case 8:
 		tutorial8->play(0, 7);
 		break;
-	case 10:
+	case 9:
 		tutorial9->play(0, 7);
+		break;
+	case 10:
+		tutorial10->play(0, 7);
 		break;
 	case 11:
 		tutorial10->play(0, 7);
@@ -869,6 +910,20 @@ void SoundManager::playsoldierDep() {
 	}
 }
 
+void SoundManager::playHandInit() {
+	randomNum = pickRandom(2);
+	switch (randomNum)
+	{
+	case 0:
+		handInit0->play();
+		break;
+	case 1:
+		handInit1->play();
+		break;
+	default:
+		break;
+	}
+}
 
 void SoundManager::playHandPunch() {
 	randomNum = pickRandom(2);
@@ -879,6 +934,24 @@ void SoundManager::playHandPunch() {
 		break;
 	case 1:
 		heavyPunch1->play();
+		break;
+	default:
+		break;
+	}
+}
+
+void SoundManager::playHandHit() {
+	randomNum = pickRandom(3);
+	switch (randomNum)
+	{
+	case 0:
+		handHit0->play();
+		break;
+	case 1:
+		handHit1->play();
+		break;
+	case 2:
+		handHit2->play();
 		break;
 	default:
 		break;
