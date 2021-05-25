@@ -11,9 +11,8 @@
 #include "../components/HamsterStateMachine.h"
 #include "../components/Animator.h"
 
-const int APPLEHP = 20;
-const int WATERHP = 50;
-const int NUTHP = 10;
+const int APPLEHP = 30;
+const int CHEESE = 60;
 
 class GetItem : public Component {
 public:

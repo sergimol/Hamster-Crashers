@@ -58,6 +58,7 @@ void Manager::refresh() {
 
 	//TODO lo ahgo aqui porque no las estoy poniendo en entidades
 	refreshWavesObjects();
+	refreshMenus();
 }
 
 void Manager::update() {

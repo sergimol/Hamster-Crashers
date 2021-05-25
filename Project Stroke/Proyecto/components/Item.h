@@ -6,8 +6,7 @@
 const enum class ItemType
 {
 	Apple,
-	WaterMelon,
-	Nut
+	Cheese
 };
 
 struct ItemInfo {
