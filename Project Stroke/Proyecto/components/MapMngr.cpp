@@ -443,101 +443,101 @@ void MapMngr::loadEnemyRoom() {
 		auto& prop = object.getProperties();
 
 		if (name == "enemigo" && prop[1].getIntValue() == Room && prop[2].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-			//auto* enemy = mngr_->addEntity();
+			auto* enemy = mngr_->addEntity();
 
-			//auto* enTr = enemy->addComponent<Transform>(
-			//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-			//	Vector2D(), 86 * scale, 86 * scale, 0.0f, 0, 0, 0.4, 0.5);
-			///*
-			//hamster1->addComponent<Transform>(
-			//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-			//	Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.5);*/
+			auto* enTr = enemy->addComponent<Transform>(
+				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+				Vector2D(), 86 * scale, 86 * scale, 0.0f, 0, 0, 0.4, 0.5);
+			/*
+			hamster1->addComponent<Transform>(
+				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+				Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.5);*/
 
 
 
-			//enTr->setFloor(prop[0].getIntValue() * TAM_CELDA * scale);
-			//enTr->setZ(prop[0].getIntValue() * TAM_CELDA * scale);
-			//enTr->getFlip() = true;
-			//enemy->addComponent<EnemyStateMachine>();
-			////1º: False porque no es un hamster //2º: True porque usa de referencia el rect de colision
-			//enemy->addComponent<Shadow>(false, true);
+			enTr->setFloor(prop[0].getIntValue() * TAM_CELDA * scale);
+			enTr->setZ(prop[0].getIntValue() * TAM_CELDA * scale);
+			enTr->getFlip() = true;
+			enemy->addComponent<EnemyStateMachine>();
+			//1º: False porque no es un hamster //2º: True porque usa de referencia el rect de colision
+			enemy->addComponent<Shadow>(false, true);
 
-			//enemy->setGroup<Enemy>(true);
+			enemy->setGroup<Enemy>(true);
 
-			//enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, prop[3].getStringValue(), Vector2D(3.6, 2), 0, 0, 5, 70);
+			enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, prop[3].getStringValue(), Vector2D(3.6, 2), 0, 0, 5, 70);
 
-			//enemy->addComponent<Animator>(
-			//	&sdlutils().images().at(prop[3].getStringValue() + "Sheet"),
-			//	86,
-			//	86,
-			//	3,
-			//	3,
-			//	220,
-			//	Vector2D(0, 0),
-			//	3
-			//	);
-			//enemy->addComponent<AnimEnemyStateMachine>();
+			enemy->addComponent<Animator>(
+				&sdlutils().images().at(prop[3].getStringValue() + "Sheet"),
+				86,
+				86,
+				3,
+				3,
+				220,
+				Vector2D(0, 0),
+				3
+				);
+			enemy->addComponent<AnimEnemyStateMachine>();
 
-			////enemy->addComponent<UI>("canelon", 4);
+			//enemy->addComponent<UI>("canelon", 4);
 
-			//enemy->addComponent<EnemyAttack>();
-			//enemy->addComponent<Knockback>();
-			//enTr->setGravity(enemy->addComponent<Gravity>());
-			//enemy->addComponent<CollisionDetec>();
-			//enemy->addComponent<MovementSimple>();
+			enemy->addComponent<EnemyAttack>();
+			enemy->addComponent<Knockback>();
+			enTr->setGravity(enemy->addComponent<Gravity>());
+			enemy->addComponent<CollisionDetec>();
+			enemy->addComponent<MovementSimple>();
 
-			//enemy->addComponent<EnemyBehaviour>(new IddleEnemy());
+			enemy->addComponent<EnemyBehaviour>(new IddleEnemy());
 
-			//enemies.push_back(enemy);
-			////anyadir a los cuidados de la madre
-			//mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addEnemy(enemy);
+			enemies.push_back(enemy);
+			//anyadir a los cuidados de la madre
+			mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addEnemy(enemy);
 
-			//enemy->addComponent<EnemyStun>();
-			//numberEnemyRoom++;
+			enemy->addComponent<EnemyStun>();
+			numberEnemyRoom++;
 		}
 		else if (name == "enemigoFuerte" && prop[1].getIntValue() == Room && prop[2].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS	
-			//auto* enemy = mngr_->addEntity();
-			//auto* enTr = enemy->addComponent<Transform>(
-			//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-			//	Vector2D(), 128 * scale, 128 * scale, 0.0f, 0, 0, 0.3, 0.5);
+			auto* enemy = mngr_->addEntity();
+			auto* enTr = enemy->addComponent<Transform>(
+				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+				Vector2D(), 128 * scale, 128 * scale, 0.0f, 0, 0, 0.3, 0.5);
 
-			//enTr->setFloor(prop[0].getIntValue() * TAM_CELDA * scale);
-			//enTr->setZ(prop[0].getIntValue() * TAM_CELDA * scale);
-			//enTr->getFlip() = true;
+			enTr->setFloor(prop[0].getIntValue() * TAM_CELDA * scale);
+			enTr->setZ(prop[0].getIntValue() * TAM_CELDA * scale);
+			enTr->getFlip() = true;
 
-			//enemy->addComponent<EnemyStateMachine>();
-			//enemy->setGroup<Enemy>(true);
+			enemy->addComponent<EnemyStateMachine>();
+			enemy->setGroup<Enemy>(true);
 
-			//enemy->addComponent<EntityAttribs>(300 + ((hamstersToLoad_.size() - 1) * 100), 0.0, prop[3].getStringValue(), Vector2D(3.6, 2), 0, 0, 5, true, false, true);
+			enemy->addComponent<EntityAttribs>(300 + ((hamstersToLoad_.size() - 1) * 100), 0.0, prop[3].getStringValue(), Vector2D(3.6, 2), 0, 0, 5, true, false, true);
 
-			//enemy->addComponent<Animator>(
-			//	&sdlutils().images().at(prop[3].getStringValue() + "Sheet"),
-			//	128,
-			//	128,
-			//	3,
-			//	3,
-			//	220,
-			//	Vector2D(0, 0),
-			//	3
-			//	);
-			//enemy->addComponent<AnimEnemyStateMachine>();
+			enemy->addComponent<Animator>(
+				&sdlutils().images().at(prop[3].getStringValue() + "Sheet"),
+				128,
+				128,
+				3,
+				3,
+				220,
+				Vector2D(0, 0),
+				3
+				);
+			enemy->addComponent<AnimEnemyStateMachine>();
 
-			//enemy->addComponent<EnemyAttack>();
-			//enemy->addComponent<EnemyStrongAttack>();
-			//enemy->addComponent<Knockback>();
-			//enTr->setGravity(enemy->addComponent<Gravity>());
-			//enemy->addComponent<CollisionDetec>();
-			//enemy->addComponent<MovementSimple>();
+			enemy->addComponent<EnemyAttack>();
+			enemy->addComponent<EnemyStrongAttack>();
+			enemy->addComponent<Knockback>();
+			enTr->setGravity(enemy->addComponent<Gravity>());
+			enemy->addComponent<CollisionDetec>();
+			enemy->addComponent<MovementSimple>();
 
-			//enemy->addComponent<EnemyBehaviour>(new IddleEnemy());
+			enemy->addComponent<EnemyBehaviour>(new IddleEnemy());
 
-			//enemies.push_back(enemy);
+			enemies.push_back(enemy);
 
-			////anyadir a los cuidados de la madre
-			//mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addEnemy(enemy);
+			//anyadir a los cuidados de la madre
+			mngr_->getHandler<Mother>()->getComponent<EnemyMother>()->addEnemy(enemy);
 
-			//enemy->addComponent<EnemyStun>();
-			//numberEnemyRoom++;
+			enemy->addComponent<EnemyStun>();
+			numberEnemyRoom++;
 		}
 		else if (name == "firstBoss" && prop[1].getIntValue() == Room && prop[2].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* enemy = mngr_->addEntity();
