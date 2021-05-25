@@ -964,19 +964,19 @@
       "file": "resources/images/objects/apple.png"
     },
     {
-      "id": "cuboAmarillo",
+      "id": "obstacleYellow",
       "file": "resources/images/objects/CuboSpritesheetAmarillo.png"
     },
     {
-      "id": "cuboAzul",
+      "id": "obstacleBlue",
       "file": "resources/images/objects/CuboSpritesheetAzul.png"
     },
     {
-      "id": "cuboRojo",
+      "id": "obstacleRed",
       "file": "resources/images/objects/CuboSpritesheetRojo.png"
     },
     {
-      "id": "cuboVerde",
+      "id": "obstacleGreen",
       "file": "resources/images/objects/CuboSpritesheetVerde.png"
     }
   ],

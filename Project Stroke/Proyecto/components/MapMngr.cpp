@@ -798,8 +798,8 @@ void MapMngr::addObject(const tmx::Object& object) {
 	string id = prop[1].getStringValue();
 
 	obstacle->addComponent<Animator>(&sdlutils().images().at("obstacle" + id),
-		80,
-		86,
+		100,
+		78,
 		9,
 		2,
 		220,
