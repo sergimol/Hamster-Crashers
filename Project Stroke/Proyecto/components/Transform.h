@@ -167,6 +167,8 @@ public:
 		if (state_->getState() == GameStates::RUNNING) {
 			//Movidas de gravedad
 			if (grv_ != nullptr && grv_->isActive()) {
+				if (!(entity_->hasComponent<Movement>() || entity_->hasComponent<MovementSimple>() || entity_->hasComponent<MovementInChase>()))
+					grv_->checkHeight(rectCollide);
 				z_ += velZ_;
 			}
 
