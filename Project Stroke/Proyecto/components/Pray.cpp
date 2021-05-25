@@ -59,10 +59,8 @@ void Pray::prayAbility() {
 				auto eTR = e->getComponent<Transform>();
 				auto eRectCollide = eTR->getRectCollide();
 
-				Vector2D newPos = Vector2D(eRectCollide.x - cam.x, eRectCollide.y - cam.y);
-
 				//Y comprobamos si colisiona
-				if (Collisions::collides(newPos, eRectCollide.w, eRectCollide.h, Vector2D(cam.x, cam.y), cam.w, cam.h)) {
+				if (Collisions::collides(Vector2D(eRectCollide.x, eRectCollide.y), eRectCollide.w, eRectCollide.h, Vector2D(cam.x, cam.y), cam.w, cam.h)) {
 					// Sonido de golpe una sola vez
 					if (!hasHit)
 						entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
@@ -116,10 +114,10 @@ void Pray::prayAbility() {
 			auto eTR = e->getComponent<Transform>();
 			auto eRectCollide = eTR->getRectCollide();
 
-			Vector2D newPos = Vector2D(eRectCollide.x - cam.x, eRectCollide.y - cam.y);
+			//Vector2D newPos = Vector2D(eRectCollide.x - cam.x, eRectCollide.y - cam.y);
 
 			//Y comprobamos si colisiona
-			if (Collisions::collides(newPos, eRectCollide.w, eRectCollide.h, Vector2D(cam.x, cam.y), cam.w, cam.h)) {
+			if (Collisions::collides(Vector2D(eRectCollide.x, eRectCollide.y), eRectCollide.w, eRectCollide.h, Vector2D(cam.x, cam.y), cam.w, cam.h)) {
 
 				//Curamos
 				auto& state = st_->getState();
