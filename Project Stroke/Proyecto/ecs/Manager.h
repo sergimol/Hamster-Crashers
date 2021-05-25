@@ -354,7 +354,13 @@ public:
 				traps_.begin(), //
 				traps_.end(), //
 				[](const Entity* e) { //
-					return !e->isActive();
+					if (e->isActive()) {
+						return false;
+					}
+					else {
+						delete e;
+						return true;
+					}
 				}), //
 			traps_.end());
 	}
