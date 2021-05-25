@@ -800,7 +800,7 @@ void MapMngr::addObject(const tmx::Object& object) {
 		220,
 		Vector2D(0, 0),
 		3
-		);
+		)->play(sdlutils().anims().at("obstacleStatic"));
 
 	if (prop[0].getBoolValue()) {
 		obstacle->addComponent<Obstacle>(id, prop[2].getIntValue());

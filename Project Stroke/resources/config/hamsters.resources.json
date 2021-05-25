@@ -1806,7 +1806,7 @@
       "attackFrame": -1
     },
     {
-      "id": "obstacleBoxStatic",
+      "id": "obstacleStatic",
       "startFrameX": 0,
       "startFrameY": 0,
       "duration": 0,
@@ -1818,7 +1818,7 @@
       "attackFrame": -1
     },
     {
-      "id": "obstacleBoxHit",
+      "id": "obstacleHit",
       "startFrameX": 1,
       "startFrameY": 0,
       "duration": 0,
@@ -1826,11 +1826,11 @@
       "rows": 1,
       "frameUpdate": 60,
       "loop": 0,
-      "chain": "obstacleBoxStatic",
+      "chain": "obstacleStatic",
       "attackFrame": -1
     },
     {
-      "id": "obstacleBoxBreak",
+      "id": "obstacleBreak",
       "startFrameX": 1,
       "startFrameY": 0,
       "duration": 7,
