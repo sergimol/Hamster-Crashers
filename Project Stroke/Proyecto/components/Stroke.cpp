@@ -79,9 +79,10 @@ void Stroke::decreaseChance() {
 void Stroke::checkChance() {
 	int t = sdlutils().currRealTime();
 	// Comprobaci�n de la reducci�n de la probabilidad
-	if (t >= timeLastDecrease_ + TIMEBETWEENDECREASES) {
+	if (t >= timeLastDecrease_ + TIMEBETWEENDECREASES && t >= timeLastIncrease_ + TIMETODECREASE) {
 		chance_ -= NORMALDECREASE;
 		chanceFromAb_ -= NORMALDECREASE;
+
 		if (chance_ < MINVALUE)
 			chance_ = MINVALUE;
 		if (chanceFromAb_ < 0)
