@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="left-up" width="160" height="9" tilewidth="64" tileheight="64" infinite="0" nextlayerid="19" nextobjectid="216">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="left-up" width="160" height="9" tilewidth="64" tileheight="64" infinite="0" nextlayerid="19" nextobjectid="218">
  <properties>
   <property name="MaxH" type="int" value="9"/>
  </properties>
@@ -166,7 +166,7 @@
   <object id="75" name="enemigo" x="2614.41" y="501.046" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="3"/>
+    <property name="sala" type="int" value="4"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -174,7 +174,7 @@
   <object id="76" name="enemigo" x="2630.35" y="393.228" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="3"/>
+    <property name="sala" type="int" value="4"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -182,7 +182,7 @@
   <object id="77" name="enemigo" x="2441.2" y="392.197" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -190,7 +190,7 @@
   <object id="78" name="enemigo" x="1507.32" y="379.166" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -198,7 +198,7 @@
   <object id="79" name="enemigo" x="1450.9" y="424.166" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -206,7 +206,7 @@
   <object id="80" name="enemigo" x="2427.14" y="475.046" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -214,7 +214,7 @@
   <object id="81" name="enemigo" x="2389.14" y="376.561" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -222,7 +222,7 @@
   <object id="82" name="enemigo" x="1438.9" y="375.166" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -230,7 +230,7 @@
   <object id="83" name="enemigo" x="2350.17" y="388.772" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -238,7 +238,7 @@
   <object id="89" name="enemigoFuerte" x="3773.56" y="398.258" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="3"/>
+    <property name="sala" type="int" value="4"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="monosinpatico"/>
    </properties>
@@ -246,7 +246,7 @@
   <object id="92" name="enemigo" x="4150.71" y="404.318" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="4"/>
+    <property name="sala" type="int" value="5"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -254,7 +254,7 @@
   <object id="93" name="enemigo" x="4123.38" y="512.439" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="4"/>
+    <property name="sala" type="int" value="5"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -262,7 +262,7 @@
   <object id="94" name="enemigo" x="5045.44" y="454.499" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="4"/>
+    <property name="sala" type="int" value="5"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -270,7 +270,7 @@
   <object id="97" name="enemigo" x="5160.54" y="516.076" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="4"/>
+    <property name="sala" type="int" value="5"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -278,7 +278,7 @@
   <object id="98" name="enemigo" x="5165.63" y="481.652" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="4"/>
+    <property name="sala" type="int" value="5"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -286,7 +286,7 @@
   <object id="100" name="enemigo" x="5197.38" y="473.166" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="4"/>
+    <property name="sala" type="int" value="5"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -294,7 +294,7 @@
   <object id="101" name="enemigoFuerte" x="5190.35" y="408.439" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="4"/>
+    <property name="sala" type="int" value="5"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="monosinpatico"/>
    </properties>
@@ -324,7 +324,7 @@
   <object id="145" name="enemigo" x="1412.36" y="406.545" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -332,7 +332,7 @@
   <object id="146" name="enemigo" x="1424.36" y="456.545" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -340,7 +340,7 @@
   <object id="147" name="enemigo" x="2404.36" y="425.788" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -348,7 +348,7 @@
   <object id="148" name="enemigo" x="2463.36" y="427.303" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -356,7 +356,7 @@
   <object id="149" name="enemigo" x="1516.88" y="433.061" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -364,7 +364,7 @@
   <object id="150" name="enemigo" x="2365" y="408.03" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -372,7 +372,7 @@
   <object id="151" name="enemigo" x="2391.85" y="462.636" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -380,7 +380,7 @@
   <object id="152" name="enemigo" x="1560.88" y="448.758" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -388,7 +388,7 @@
   <object id="153" name="enemigo" x="1552.85" y="386.333" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="2"/>
+    <property name="sala" type="int" value="3"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -396,7 +396,7 @@
   <object id="156" name="enemigoFuerte" x="3796.15" y="442.121" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="3"/>
+    <property name="sala" type="int" value="4"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="monosinpatico"/>
    </properties>
@@ -404,7 +404,7 @@
   <object id="157" name="enemigo" x="3833" y="451.727" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="3"/>
+    <property name="sala" type="int" value="4"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -412,7 +412,7 @@
   <object id="159" name="enemigo" x="2651.69" y="514.303" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="3"/>
+    <property name="sala" type="int" value="4"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -420,7 +420,7 @@
   <object id="160" name="enemigo" x="2661.03" y="444.788" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="3"/>
+    <property name="sala" type="int" value="4"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -428,7 +428,7 @@
   <object id="161" name="enemigo" x="2675.64" y="476.802" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="3"/>
+    <property name="sala" type="int" value="4"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -436,7 +436,7 @@
   <object id="162" name="enemigo" x="5059.7" y="520.212" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="4"/>
+    <property name="sala" type="int" value="5"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -444,7 +444,7 @@
   <object id="163" name="enemigo" x="4189.28" y="510.031" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="4"/>
+    <property name="sala" type="int" value="5"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -452,7 +452,7 @@
   <object id="164" name="enemigo" x="4194.37" y="475.607" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="4"/>
+    <property name="sala" type="int" value="5"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -460,7 +460,7 @@
   <object id="165" name="enemigo" x="4226.12" y="467.121" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="4"/>
+    <property name="sala" type="int" value="5"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -468,7 +468,7 @@
   <object id="166" name="enemigoFuerte" x="4219.09" y="402.394" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="4"/>
+    <property name="sala" type="int" value="5"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="monosinpatico"/>
    </properties>
@@ -476,7 +476,7 @@
   <object id="169" name="enemigoFuerte" x="5388.22" y="481.424" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="5"/>
+    <property name="sala" type="int" value="6"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="monosinpatico"/>
    </properties>
@@ -484,7 +484,7 @@
   <object id="170" name="enemigo" x="5393.01" y="529.364" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="5"/>
+    <property name="sala" type="int" value="6"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -492,7 +492,7 @@
   <object id="171" name="enemigo" x="5398.1" y="494.94" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="5"/>
+    <property name="sala" type="int" value="6"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -500,7 +500,7 @@
   <object id="172" name="enemigo" x="5376.85" y="438.454" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="5"/>
+    <property name="sala" type="int" value="6"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -508,7 +508,7 @@
   <object id="173" name="enemigoFuerte" x="5412.82" y="418.727" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="5"/>
+    <property name="sala" type="int" value="6"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="monosinpatico"/>
    </properties>
@@ -516,7 +516,7 @@
   <object id="174" name="enemigo" x="6355.22" y="447.424" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="5"/>
+    <property name="sala" type="int" value="6"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -524,7 +524,7 @@
   <object id="175" name="enemigo" x="6384.01" y="495.364" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="5"/>
+    <property name="sala" type="int" value="6"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -532,7 +532,7 @@
   <object id="176" name="enemigo" x="6389.1" y="460.94" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="5"/>
+    <property name="sala" type="int" value="6"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -540,7 +540,7 @@
   <object id="177" name="enemigoFuerte" x="6420.85" y="452.454" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="5"/>
+    <property name="sala" type="int" value="6"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="monosinpatico"/>
    </properties>
@@ -548,7 +548,7 @@
   <object id="178" name="enemigoFuerte" x="6351.82" y="387.727" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="5"/>
+    <property name="sala" type="int" value="6"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="monosinpatico"/>
    </properties>
@@ -556,7 +556,7 @@
   <object id="179" name="enemigo" x="5450.49" y="495.757" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="5"/>
+    <property name="sala" type="int" value="6"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -564,7 +564,7 @@
   <object id="180" name="enemigo" x="5455.58" y="461.333" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="5"/>
+    <property name="sala" type="int" value="6"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -572,7 +572,7 @@
   <object id="181" name="enemigo" x="5449.49" y="434.757" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="5"/>
+    <property name="sala" type="int" value="6"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -580,7 +580,7 @@
   <object id="182" name="enemigo" x="6456.58" y="405.333" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="5"/>
+    <property name="sala" type="int" value="6"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -588,7 +588,7 @@
   <object id="183" name="enemigo" x="6439.49" y="488.757" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="5"/>
+    <property name="sala" type="int" value="6"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -596,7 +596,7 @@
   <object id="184" name="enemigo" x="6444.58" y="454.333" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="1"/>
-    <property name="sala" type="int" value="5"/>
+    <property name="sala" type="int" value="6"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -604,7 +604,7 @@
   <object id="185" name="enemigoFuerte" x="8004.2" y="467.424" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="monosinpatico"/>
    </properties>
@@ -612,7 +612,7 @@
   <object id="186" name="enemigo" x="8009.99" y="526.697" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -620,7 +620,7 @@
   <object id="187" name="enemigo" x="8014.08" y="480.94" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -628,7 +628,7 @@
   <object id="188" name="enemigo" x="7992.83" y="424.454" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -636,7 +636,7 @@
   <object id="189" name="enemigoFuerte" x="8030.8" y="425.727" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="monosinpatico"/>
    </properties>
@@ -644,7 +644,7 @@
   <object id="190" name="enemigo" x="8827.2" y="431.757" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -652,7 +652,7 @@
   <object id="191" name="enemigo" x="8835.99" y="502.364" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -660,7 +660,7 @@
   <object id="192" name="enemigo" x="8841.08" y="467.94" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -668,7 +668,7 @@
   <object id="193" name="enemigoFuerte" x="8872.83" y="459.454" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="monosinpatico"/>
    </properties>
@@ -676,7 +676,7 @@
   <object id="194" name="enemigoFuerte" x="8865.8" y="394.727" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="monosinpatico"/>
    </properties>
@@ -684,7 +684,7 @@
   <object id="195" name="enemigo" x="8068.47" y="502.757" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -692,7 +692,7 @@
   <object id="196" name="enemigo" x="8073.56" y="468.333" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -700,7 +700,7 @@
   <object id="197" name="enemigo" x="8067.47" y="441.757" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -708,7 +708,7 @@
   <object id="198" name="enemigo" x="8908.56" y="412.333" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -716,7 +716,7 @@
   <object id="199" name="enemigo" x="8891.47" y="495.757" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -724,7 +724,7 @@
   <object id="200" name="enemigo" x="8896.56" y="461.333" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -732,7 +732,7 @@
   <object id="201" name="enemigoFuerte" x="8961.03" y="385.545" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="2"/>
     <property name="zzId" value="monosinpatico"/>
    </properties>
@@ -740,7 +740,7 @@
   <object id="202" name="enemigoFuerte" x="8971.7" y="458.879" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="2"/>
     <property name="zzId" value="monosinpatico"/>
    </properties>
@@ -748,7 +748,7 @@
   <object id="203" name="enemigo" x="8137.03" y="461.545" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="2"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -756,7 +756,7 @@
   <object id="204" name="enemigo" x="8171.7" y="525.545" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="2"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -764,7 +764,7 @@
   <object id="205" name="enemigo" x="8158.62" y="495.516" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="2"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -772,7 +772,7 @@
   <object id="206" name="enemigo" x="8148.77" y="408.909" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="2"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -780,7 +780,7 @@
   <object id="207" name="enemigo" x="8971.96" y="515.516" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="2"/>
     <property name="zzId" value="soldier1"/>
    </properties>
@@ -788,7 +788,7 @@
   <object id="208" name="enemigo" x="8952.77" y="434.242" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="2"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="7"/>
     <property name="zRondas" type="int" value="2"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -796,7 +796,7 @@
   <object id="209" name="enemigo" x="3860.36" y="494.545" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="3"/>
+    <property name="sala" type="int" value="4"/>
     <property name="zRondas" type="int" value="1"/>
     <property name="zzId" value="soldier2"/>
    </properties>
@@ -805,7 +805,7 @@
   <object id="211" name="escalectris" x="5299" y="512" width="27.2727" height="44.9091">
    <properties>
     <property name="SpawnTime" type="float" value="5000"/>
-    <property name="sala" type="int" value="4"/>
+    <property name="sala" type="int" value="5"/>
     <property name="velocidad" type="float" value="-30"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
@@ -813,7 +813,7 @@
   <object id="212" name="escalectris" x="5299" y="413" width="27.2727" height="44.9091">
    <properties>
     <property name="SpawnTime" type="float" value="5200"/>
-    <property name="sala" type="int" value="4"/>
+    <property name="sala" type="int" value="5"/>
     <property name="velocidad" type="float" value="-30"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
@@ -821,7 +821,7 @@
   <object id="213" name="escalectris" x="6562.36" y="440" width="27.2727" height="44.9091">
    <properties>
     <property name="SpawnTime" type="float" value="5000"/>
-    <property name="sala" type="int" value="5"/>
+    <property name="sala" type="int" value="6"/>
     <property name="velocidad" type="float" value="-30"/>
     <property name="zRondas" type="int" value="1"/>
    </properties>
@@ -829,7 +829,7 @@
   <object id="214" name="escalectris" x="5500.36" y="355" width="27.2727" height="44.9091">
    <properties>
     <property name="SpawnTime" type="float" value="5000"/>
-    <property name="sala" type="int" value="5"/>
+    <property name="sala" type="int" value="6"/>
     <property name="velocidad" type="float" value="30"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
@@ -843,35 +843,42 @@
     <property name="zBoss" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="137" name="2" x="1957.91" y="259.913" width="13" height="255.5">
+  <object id="216" name="2" x="1344" y="352" width="13" height="255.5">
+   <properties>
+    <property name="CameraCoordX" type="int" value="1344"/>
+    <property name="Rounds" type="int" value="0"/>
+    <property name="zBoss" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="137" name="3" x="1957.91" y="259.913" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="1980"/>
     <property name="Rounds" type="int" value="2"/>
     <property name="zBoss" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="138" name="3" x="3273.91" y="319.83" width="13" height="255.5">
+  <object id="138" name="4" x="3273.91" y="319.83" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="3330"/>
     <property name="Rounds" type="int" value="2"/>
     <property name="zBoss" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="139" name="4" x="4755.91" y="327.83" width="13" height="255.5">
+  <object id="139" name="5" x="4755.91" y="327.83" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="4800"/>
     <property name="Rounds" type="int" value="2"/>
     <property name="zBoss" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="140" name="5" x="5960.5" y="261.25" width="13" height="255.5">
+  <object id="140" name="6" x="5960.5" y="261.25" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="6150"/>
     <property name="Rounds" type="int" value="2"/>
     <property name="zBoss" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="141" name="6" x="8452.17" y="192.917" width="13" height="255.5">
+  <object id="141" name="7" x="8452.17" y="192.917" width="13" height="255.5">
    <properties>
     <property name="CameraCoordX" type="int" value="8650"/>
     <property name="Rounds" type="int" value="3"/>
