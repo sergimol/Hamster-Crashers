@@ -61,6 +61,7 @@
   <object id="62" name="newScene" x="2.66667" y="54.6667" width="64" height="278.667">
    <properties>
     <property name="newMap" value="Lvl1Javi"/>
+    <property name="numT" type="int" value="3"/>
    </properties>
   </object>
   <object id="64" name="startChase" x="355.997" y="74.6666" width="81.3333" height="272"/>

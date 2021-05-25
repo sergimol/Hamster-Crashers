@@ -44,6 +44,7 @@ private:
 	float mapHeight_ = 0;
 	bool collisionCreated = false;
 	const float scale = 3; // 2.4 tren
+	bool BossControlSpawn = false;
 
 	std::queue<tmx::Object> TriggerftCamera;
 	vector<string> hamstersToLoad_;

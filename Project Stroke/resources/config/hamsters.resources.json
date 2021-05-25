@@ -763,14 +763,6 @@
       "file": "resources/images/dialogue/explicacion2.png"
     },
     {
-      "id": "dialogo3",
-      "file": "resources/images/dialogue/dialogo3.png"
-    },
-    {
-      "id": "explicacion3",
-      "file": "resources/images/dialogue/explicacion3.png"
-    },
-    {
       "id": "Lvl1Javi0",
       "file": "resources/images/dialogue/explicacion0.png"
     },
@@ -930,7 +922,28 @@
     {
       "id": "monosinpaticoSheet",
       "file": "resources/images/monosinpatico_spritesheet.png"
+    },
+    {
+      "id": "Level1Boss0",
+      "file": "resources/images/transitions/Level1Boss0.png"
+    },
+    {
+      "id": "Level1Boss1",
+      "file": "resources/images/transitions/Level1Boss1.png"
+    },
+    {
+      "id": "Level1Boss2",
+      "file": "resources/images/transitions/Level1Boss2.png"
+    },
+    {
+      "id": "Level1Boss3",
+      "file": "resources/images/transitions/Level1Boss3.png"
+    },
+    {
+      "id": "Level1Boss4",
+      "file": "resources/images/transitions/Level1Boss4.png"
     }
+
   ],
 
   "messages": [

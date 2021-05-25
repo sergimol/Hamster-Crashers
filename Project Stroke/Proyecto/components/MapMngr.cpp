@@ -71,6 +71,12 @@ MapMngr::~MapMngr() {
 }
 
 void MapMngr::update() {
+
+	if (!Mix_PlayingMusic() && BossControlSpawn) {
+		loadEnemyRoom();
+		BossControlSpawn = false;
+	}
+
 	//cout << numberEnemyRoom << " " << entity_->getMngr()->getEnemies().size() <<endl;
 	auto* camera = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
 	//	Comprobamos la colision con los triggers salas
@@ -84,7 +90,15 @@ void MapMngr::update() {
 		auto* pTr = player->getComponent<Transform>();
 		if (player->getComponent<HamsterStateMachine>()->getState() != HamStates::INFARCTED && Collisions::collides(pTr->getPos(), pTr->getW(), pTr->getH(), Vector2D(trigger.getPosition().x, trigger.getPosition().y) * scale, trigger.getAABB().width * scale, trigger.getAABB().height * scale)) {
 			RoundsPerRoom = getProp[1].getIntValue();
-			loadEnemyRoom();
+
+			if (!getProp[2].getBoolValue()) {
+				loadEnemyRoom();
+			}
+			else {
+				BossControlSpawn = true;
+				Mix_FadeOutMusic(3000);
+			}
+
 			if (getProp[0].getIntValue() != -1) {
 				camera->setGoToTracker(true);
 				camera->changeCamFollowPos(getProp[0].getIntValue() * scale);
@@ -198,7 +212,7 @@ void MapMngr::loadNewMap(string map) {
 						if (object.getName() == "spawnZone") {
 							for (int i = 0; i < hamstersToLoad_.size(); ++i) {
 								// Por si se generan mas de los que deberian
-								if(i < MAXPLAYERS)
+								if (i < MAXPLAYERS)
 									addHamster(hamstersToLoad_[i], i, object);
 							}
 						}
@@ -436,9 +450,17 @@ void MapMngr::loadEnemyRoom() {
 
 		if (name == "enemigo" && prop[1].getIntValue() == Room && prop[2].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* enemy = mngr_->addEntity();
+
 			auto* enTr = enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(), 86 * scale, 86 * scale, 0.0f, 0.4, 0.5);
+				Vector2D(), 86 * scale, 86 * scale, 0.0f, 0, 0, 0.4, 0.5);
+			/*
+			hamster1->addComponent<Transform>(
+				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+				Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.5);*/
+
+
+
 			enTr->setFloor(prop[0].getIntValue() * TAM_CELDA * scale);
 			enTr->setZ(prop[0].getIntValue() * TAM_CELDA * scale);
 			enTr->getFlip() = true;
@@ -483,7 +505,8 @@ void MapMngr::loadEnemyRoom() {
 			auto* enemy = mngr_->addEntity();
 			auto* enTr = enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(), 128 * scale, 128 * scale, 0.0f, 0.3, 0.5);
+				Vector2D(), 128 * scale, 128 * scale, 0.0f, 0, 0, 0.3, 0.5);
+
 			enTr->setFloor(prop[0].getIntValue() * TAM_CELDA * scale);
 			enTr->setZ(prop[0].getIntValue() * TAM_CELDA * scale);
 			enTr->getFlip() = true;
@@ -491,7 +514,7 @@ void MapMngr::loadEnemyRoom() {
 			enemy->addComponent<EnemyStateMachine>();
 			enemy->setGroup<Enemy>(true);
 
-			enemy->addComponent<EntityAttribs>(200 + ((hamstersToLoad_.size() - 1) * 100), 0.0, prop[3].getStringValue(), Vector2D(3.6, 2), 0, 0, 5, 70);
+			enemy->addComponent<EntityAttribs>(300 + ((hamstersToLoad_.size() - 1) * 100), 0.0, prop[3].getStringValue(), Vector2D(3.6, 2), 0, 0, 5, true, false, true);
 
 			enemy->addComponent<Animator>(
 				&sdlutils().images().at(prop[3].getStringValue() + "Sheet"),
@@ -531,7 +554,7 @@ void MapMngr::loadEnemyRoom() {
 			enemy->addComponent<EnemyStateMachine>();
 			enemy->setGroup<Enemy>(true);
 
-			enemy->addComponent<EntityAttribs>(600 + (hamstersToLoad_.size() * 100), 0.0, "calcetin", Vector2D(4.5, 2), 0, 0, 20, true, true);
+			enemy->addComponent<EntityAttribs>(600 + (hamstersToLoad_.size() * 100), 0.0, "calcetin", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
 
 			//enemy->addComponent<Image>(&sdlutils().images().at("firstBoss"));
 			enemy->addComponent<Animator>(
@@ -567,7 +590,7 @@ void MapMngr::loadEnemyRoom() {
 			//enemy->addComponent<EnemyStateMachine>();
 			//enemy->setGroup<Enemy>(true);
 
-			//enemy->addComponent<EntityAttribs>(600 + (hamstersToLoad_.size() * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true);
+			//enemy->addComponent<EntityAttribs>(600 + (hamstersToLoad_.size() * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
 
 			//enemy->addComponent<Image>(&sdlutils().images().at("firstBoss"));
 			//enemy->addComponent<UI>("canelon", 4);
@@ -657,8 +680,8 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 	hamster1->addComponent<AnimHamsterStateMachine>();
 	hamster1->addComponent<Gravity>();
 	hamster1->addComponent<CollisionDetec>();
-	hamster1->addComponent<Movement>();
 	hamster1->addComponent<MovementInChase>()->setActive(false);
+	hamster1->addComponent<Movement>();
 
 	tr->setGravity(hamster1->getComponent<Gravity>());
 
@@ -739,13 +762,14 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 //			}), //
 //		roomTrigger.end());
 //}
+
 void MapMngr::newSceneTrigger(string newScene, const tmx::Object& object) {
 
 	//Creamos una entidad
 	auto trigger = entity_->getMngr()->addEntity();
 	trigger->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 1, 1);
-	trigger->addComponent<TriggerScene>(newScene);
+	trigger->addComponent<TriggerScene>(newScene, object.getProperties()[1].getIntValue());
 }
 
 void MapMngr::startChaseTrigger(const tmx::Object& object) {
@@ -807,7 +831,7 @@ void MapMngr::addTrap(const tmx::Object& object, int x, int y) {
 	trap->addComponent<TimeTrap>(&sdlutils().images().at("catSmoking"));
 
 	//int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty
-	trap->addComponent<EntityAttribs>(1, 10.0f, "trap1", Vector2D(), 1, 0.0f, 1, true, false);
+	trap->addComponent<EntityAttribs>(1, 10.0f, "trap1", Vector2D(), 1, 0.0f, 1, true, false, false);
 	//trap->addComponent<Image>(&sdlutils().images().at("catSmoking"));
 
 	/*
