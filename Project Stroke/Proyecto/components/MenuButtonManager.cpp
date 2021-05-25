@@ -60,7 +60,7 @@ void MenuButtonManager::init() {
 		buttons_[0][1] = optionsbutton;
 
 		auto* quitbutton = mngr->addMenu();
-		quitbutton->addComponent<MenuButton>("quit", Vector2D(870, 700), stateNumber_);
+		quitbutton->addComponent<MenuButton>("exit", Vector2D(870, 700), stateNumber_);
 		buttons_[0][2] = quitbutton;
 	}
 	else if (menuMode_ == "hamsterMenu") {

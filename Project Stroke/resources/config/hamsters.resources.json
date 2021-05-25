@@ -375,6 +375,14 @@
       "file": "resources/images/menuSprites/quitButtonEnter.png"
     },
     {
+      "id": "exitButton",
+      "file": "resources/images/menuSprites/exitButton.png"
+    },
+    {
+      "id": "exitButtonEnter",
+      "file": "resources/images/menuSprites/exitButtonEnter.png"
+    },
+    {
       "id": "shadow",
       "file": "resources/images/shadow.png"
     },

@@ -41,11 +41,11 @@ public:
 	EnemyMother();
 	virtual ~EnemyMother() {
 		for (int i = 0; i < numPlayers_; i++) {
+			delete objetivesList_.at(i);
 			objetivesList_.at(i)->ambushing.clear();
 			objetivesList_.at(i)->atacking.clear();
 			objetivesList_.at(i)->strongAmbushing.clear();
 			objetivesList_.at(i)->strongAtacking.clear();
-			 delete objetivesList_.at(i);
 		}
 		objetivesList_.clear();
 		waiting_.clear();
@@ -89,7 +89,7 @@ public:
 	void cleanListHam(int hamId);
 	void cleanListHamAmbush(int hamId);
 	void cleanListHamAttacking(int hamId);
-
+	void resetNumPlayers() { numPlayers_ = 0; numEnemies_ = 0; };
 
 	void refreshLists() {
 		for (int i = 0; i < numPlayers_; i++) {

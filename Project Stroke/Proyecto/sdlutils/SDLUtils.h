@@ -15,6 +15,8 @@
 #include "VirtualTimer.h"
 #include "Animation.h"
 
+using namespace std;
+
 const int RESOLUTIONSCOUNT = 7;
 
 class SDLUtils: public Singleton<SDLUtils> {
@@ -82,6 +84,10 @@ public:
 		return hamstersChosen_;
 	}
 
+	inline Vector2D volumes() {
+		return Vector2D(musicVol_, fxVol_);
+	}
+
 	inline void setResolution() {
 		width_ = widths_[resolutionIndex_];
 		height_ = heights_[resolutionIndex_];
@@ -112,8 +118,8 @@ public:
 		setResolution();
 	}
 
-	inline std::string resolutionString(int i) {
-		return std::to_string((int)widths_[i]) + "x" + std::to_string((int)heights_[i]);
+	inline string resolutionString(int i) {
+		return to_string((int)widths_[i]) + "x" + to_string((int)heights_[i]);
 	}
 
 	inline void setWidth(int widthAux) {
@@ -130,6 +136,10 @@ public:
 	
 	inline void setHamstersChosen(int hamsters) {
 		hamstersChosen_ = hamsters;
+	}
+
+	inline bool angelUnlocked() {
+		return angelUnlocked_;
 	}
 
 	// toggle to full-screen/window mode
@@ -223,8 +233,8 @@ private:
 	std::string windowTitle_; // window title
 	int width_; // window width
 	int height_; // window height
-	int hamstersToChoose_; // número de hamsters a elegir en el menú de selección
-	int hamstersChosen_; // número de hamstes ya elegidos
+	int hamstersToChoose_; // nï¿½mero de hamsters a elegir en el menï¿½ de selecciï¿½n
+	int hamstersChosen_; // nï¿½mero de hamstes ya elegidos
 
 	SDL_Window *window_; // the window
 	SDL_Renderer *renderer_; // the renderer
@@ -242,8 +252,12 @@ private:
 	// Arrays con ancho y alto de todas las resoluciones
 	float widths_[RESOLUTIONSCOUNT] = { 800, 854, 1024, 1280, 1280, 1280, 1920 };
 	float heights_[RESOLUTIONSCOUNT] = { 600, 480, 768, 720, 960, 1024, 1080 };
-	// Indice de la resolución actual dentro de los arrays
-	int resolutionIndex_ = RESOLUTIONSCOUNT - 1; // se inicia en 1920x1080
+	// Indice de la resoluciï¿½n actual dentro de los arrays
+	int resolutionIndex_ = RESOLUTIONSCOUNT - 1;
+	bool angelUnlocked_ = false;
+	bool tutorialDone_ = false;
+	int fxVol_ = 1;
+	int musicVol_ = 1;
 };
 
 
