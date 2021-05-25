@@ -502,6 +502,7 @@ void MapMngr::loadEnemyRoom() {
 				Vector2D(), 128 * scale, 128 * scale, 0.0f, 0, 0, 0.3, 0.5);
 
 			enTr->setFloor(prop[0].getIntValue() * TAM_CELDA * scale);
+			enTr->setFloor(prop[0].getIntValue() * TAM_CELDA * scale);
 			enTr->setZ(prop[0].getIntValue() * TAM_CELDA * scale);
 			enTr->getFlip() = true;
 
