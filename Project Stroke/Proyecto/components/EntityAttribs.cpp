@@ -85,7 +85,7 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	state_(nullptr)
 {}
 
-EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty) :
+EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty, bool canBPois) :
 	playerNumber_(number),
 	id_(id),
 	health_(life),
@@ -104,7 +104,7 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	critDamage_(1.5),
 
 	poisonDamage_(2),
-	canBePoisoned_(false),
+	canBePoisoned_(canBPois),
 	poisonProbability_(poisonProb),
 	canPoison_(poisonProbability_ > 0),
 	poisoned_(false),
@@ -120,7 +120,8 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	hms_(nullptr),
 	hmsText_(nullptr),
 	enmState_(nullptr),
-	tr_(nullptr)
+	tr_(nullptr),
+	state_(nullptr)
 {}
 
 EntityAttribs::~EntityAttribs() {
@@ -231,7 +232,11 @@ void EntityAttribs::die() {
 	Entity* e = entity_->getMngr()->addEntity();
 
 	//Le metemos un transform para su posicion
-	e->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0, tr_->getZ(), tr_->getFlip(), tr_->getScaleW(), tr_->getScaleH());
+	auto* traux = e->addComponent<Transform>(tr_->getPos(), Vector2D(0, 0), tr_->getW(), tr_->getH(), 0, 0, tr_->getFlip(), tr_->getScaleW(), tr_->getScaleH());
+
+	traux->setFloor(tr_->getFloor());
+	traux->setZ(tr_->getZ());
+	traux->setGravity(e->addComponent<Gravity>());
 
 	int tam = 0;
 
@@ -259,6 +264,7 @@ void EntityAttribs::die() {
 	//TODO WHY ¿?
 	//Si la persona que muere es un hamster...
 	if (!entity_->hasGroup<Enemy>()) {
+
 		//Ponemos su UI a 'Muerto'
 		e->addComponent<UI>(id_, entity_->getComponent<UI>()->getPosUI())->dep("2");
 		hms_->getState() = HamStates::DEAD;
@@ -274,6 +280,11 @@ void EntityAttribs::die() {
 		//entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", false);
 	}
 	else {
+		if (entity_->getMngr()->getHandler<Boss>() == entity_)
+			entity_->getMngr()->setHandler<Boss>(nullptr);
+		else if (entity_->getMngr()->getHandler<FinalBoss>() == entity_)
+			entity_->getMngr()->setHandler<FinalBoss>(nullptr);
+		
 		//solamente para los enemigos
 		//entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala
 		e->addComponent<Dying>();

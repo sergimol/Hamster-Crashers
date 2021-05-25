@@ -93,6 +93,11 @@ void dialogos::unshow() {
 
 void dialogos::changeDialogue() {
 	dialogueNum++;
+	//activamos el infarto, comienza la aventura
+	if (dialogueNum == 2) {
+		entity_->getMngr()->getStrokeActive() = true;
+	}
+
 	dialogoText_ = &sdlutils().images().at("dialogo" + to_string(dialogueNum));
 	explicacionText_ = &sdlutils().images().at("explicacion" + to_string(dialogueNum));
 }
@@ -109,4 +114,17 @@ void dialogos::dialogoStateChange() {
 	//Controla la primera vez, para que no te cambie de dialogo la primera vez que sale
 	if (firstDialogue)
 		firstDialogue = false;
+}
+
+//"dialogo3" o "dialogo3singleplayer" dependiendo del num de jugadores
+void dialogos::showStrokeTutorial(std::string text) {
+	//el sonido tendrá que ser diferente si es single o no
+	if (text == "dialogo3")
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("tutorial");
+	else
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("tutorial");
+
+	dialogoText_ = &sdlutils().images().at(text);
+	explicacionText_ = &sdlutils().images().at("explicacion3");
+	showDialogue = true;
 }

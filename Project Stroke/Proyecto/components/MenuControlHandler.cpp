@@ -2,6 +2,7 @@
 #include <cmath>
 #include "../sdlutils/InputHandler.h"
 #include "../ecs/Entity.h"
+#include "MapMngr.h"
 
 using namespace std;
 
@@ -17,6 +18,7 @@ void MenuControlHandler::init() {
 	keymap.insert({ LEFT, SDL_SCANCODE_LEFT });
 	keymap.insert({ RIGHT, SDL_SCANCODE_RIGHT });
 	keymap.insert({ SPACE, SDL_SCANCODE_RETURN });
+	keymap.insert({ BACK, SDL_SCANCODE_BACKSPACE });
 }
 
 
@@ -82,6 +84,11 @@ bool MenuControlHandler::handleController(int controller) {
 		handled = true;
 	}
 	
+	else if (ih().isButtonDown(controller, SDL_CONTROLLER_BUTTON_B)) {
+		back();
+		handled = true;
+	}
+	
 	return handled;
 	/*auto gameState = states_->getState();
 	if (ih().isButtonDown(controller, SDL_CONTROLLER_BUTTON_START) && gameState == GameStates::PAUSE) {
@@ -116,6 +123,11 @@ bool MenuControlHandler::handleKeyboard() {
 
 	if (ih().isKeyDown(keymap.at(SPACE))) {
 		menu_->pressButton();
+		return true;
+	}
+
+	if (ih().isKeyDown(keymap.at(BACK))) {
+		back();
 		return true;
 	}
 
@@ -185,5 +197,50 @@ bool MenuControlHandler::mouseInButton(float x, float y, SDL_Rect const& button)
 	}
 
 	return true;
+}
+
+void MenuControlHandler::back()
+{
+	if (stateNumber_ == GameStates::HAMSTERSELECTION) {
+		sdlutils().setHamstersChosen(sdlutils().hamstersChosen() - 1);
+
+		menu_->moveToFirstSelectable();
+
+		if (sdlutils().hamstersChosen() < 0) {
+			states_->goBack();
+			sdlutils().setHamstersChosen(0);
+		}
+		else {
+			sdlutils().setHamstersToChoose(sdlutils().hamstersToChoose() + 1);
+
+			auto* mapa = entity_->getMngr()->getHandler<Map>();
+			mapa->getComponent<MapMngr>()->removeHamster();
+
+			auto& indctrs = menu_->getIndicators();
+			indctrs[0]->getComponent<MenuIndicator>()->updateTexture(false);
+			indctrs.back()->setActive(false);
+			//entity_->getMngr()->refreshMenus();
+
+			auto& buttons = menu_->getButtons();
+			auto magnitude = menu_->getMagnitude();
+			auto lastUnselectable = menu_->getLastUnselectable();
+
+			// En x solo porque el menu de seleccion es completamente horizontal
+			for (int i = 0; i < magnitude.getX(); ++i) {
+				auto b = buttons[i][0]->getComponent<MenuButton>();
+				if (b->getName() == lastUnselectable)
+					b->setSelectable(true);
+			}
+		}
+	}
+	else if (stateNumber_ == GameStates::PAUSE) {
+		states_->setState(GameStates::RUNNING);
+	}
+	else if (stateNumber_ == GameStates::OPTIONS) {
+		states_->goBack();
+	}
+	else if (stateNumber_ == GameStates::PLAYERSELECTION) {
+		states_->setState(GameStates::MAINMENU);
+	}
 }
 

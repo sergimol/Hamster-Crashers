@@ -28,7 +28,7 @@ void FinalBossManager::init() {
 	hand_->addComponent<EnemyStateMachine>();
 	hand_->setGroup<Enemy>(true);
 
-	handAttribs_ = hand_->addComponent<EntityAttribs>(800 + (hamsNum_ * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true);
+	handAttribs_ = hand_->addComponent<EntityAttribs>(800 + (hamsNum_ * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
 	hand_->addComponent<UI>("canelon", 4);
 
 	hand_->addComponent<Image>(&sdlutils().images().at("firstBoss"));
@@ -48,7 +48,7 @@ void FinalBossManager::init() {
 	fist_->addComponent<EnemyStateMachine>();
 	fist_->setGroup<Enemy>(true);
 
-	fistAttribs_ = fist_->addComponent<EntityAttribs>(800 + (hamsNum_ * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true);
+	fistAttribs_ = fist_->addComponent<EntityAttribs>(800 + (hamsNum_ * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
 
 	fist_->addComponent<Image>(&sdlutils().images().at("firstBoss"));
 

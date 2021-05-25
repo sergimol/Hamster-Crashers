@@ -219,12 +219,19 @@ public:
 	inline std::vector<Entity*>& getWavesObjects() {
 		return wavesObjects_;
 	}
+		
+	inline bool& getStrokeTuto() {
+		return strokeTuto_;
+	}
 
 	inline std::vector<Entity*>& getUIObjects() { 
 		return uiObjects_;
 	}
 
-	
+	inline bool& getStrokeActive() {
+		return startStrokeActive_;
+	}
+
 	void update();
 	void render();
 	void refresh();
@@ -247,7 +254,13 @@ public:
 				menus_.begin(), //
 				menus_.end(), //
 				[](const Entity* e) { //
-					return !e->isActive();
+					if (e->isActive()) {
+						return false;
+					}
+					else {
+						delete e;
+						return true;
+					}
 				}), //
 			menus_.end());
 	}
@@ -420,5 +433,8 @@ private:
 	std::vector<Entity*> items_;
 	std::vector<Entity*> wavesObjects_; //objetos como el escalectris que solo estaran durante una batalla
 	std::vector<Entity*> uiObjects_;
+
+	bool strokeTuto_ = true;
+	bool startStrokeActive_ = false;
 };
 

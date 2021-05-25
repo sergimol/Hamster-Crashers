@@ -30,6 +30,7 @@ void ObstacleMoveable::update()
 			
 			//el coche funciona de manera independiente tiene un lifeTime que lo desactivara a si mismo
 			//pero tmb podemos destruirlo desde aca de ser necesario
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("coche");
 
 			auto* coche = entity_->getMngr()->addEntity();
 			
@@ -54,7 +55,7 @@ void ObstacleMoveable::update()
 				coche->addComponent<Image>(&sdlutils().images().at("coche1")); //por testing sin animacion
 			else
 				coche->addComponent<Image>(&sdlutils().images().at("coche2")); //por testing sin animacion
-			coche->addComponent<ContactDamage>(10, 10, true, true, true);
+			coche->addComponent<ContactDamage>(10, 50, true, true, true);
 
 
 			if (vel >= 0)

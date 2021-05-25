@@ -1,4 +1,5 @@
 #include "../components/Stroke.h"
+#include "../components/dialogos.h"
 #include "../components/Roll.h"
 #include "../components/Poison.h"
 #include "../components/Pray.h"
@@ -35,7 +36,7 @@ void Stroke::init() {
 
 void Stroke::update() {
 	if (state_->getState() == GameStates::RUNNING) {
-		if (ih().isKeyDown(SDLK_z) && entity_->getComponent<EntityAttribs>()->getId() == "keta") 
+		if (ih().isKeyDown(SDLK_z) && entity_->getComponent<EntityAttribs>()->getId() == "keta")
 			INFARCT();
 		checkChance();
 	}
@@ -43,6 +44,10 @@ void Stroke::update() {
 }
 
 void Stroke::increaseChance(int n, bool fromAbility) {
+	//Si no se ha activado no hace nada
+	if (!entity_->getMngr()->getStrokeActive())
+		return;
+
 	if (hms_->getState() != HamStates::INFARCTED) {
 		if (!fromAbility) {
 			ss_->increaseChanceNORMAL(n, chance_);
@@ -67,7 +72,7 @@ void Stroke::decreaseChance() {
 		chance_ -= (chance_ * DECREASEPERCENTAGE) / 100;
 
 		//Llamamos a la UI para que el corazon palpite más rapido
-		entity_->getComponent<HeartUI>()->increaseLatency((chanceFromAb_ + chance_)/10);
+		entity_->getComponent<HeartUI>()->increaseLatency((chanceFromAb_ + chance_) / 10);
 	}
 }
 
@@ -75,8 +80,8 @@ void Stroke::checkChance() {
 	int t = sdlutils().currRealTime();
 	// Comprobaci�n de la reducci�n de la probabilidad
 	if (t >= timeLastDecrease_ + TIMEBETWEENDECREASES) {
-		chance_-= NORMALDECREASE;
-		chanceFromAb_-= NORMALDECREASE;
+		chance_ -= NORMALDECREASE;
+		chanceFromAb_ -= NORMALDECREASE;
 		if (chance_ < MINVALUE)
 			chance_ = MINVALUE;
 		if (chanceFromAb_ < 0)
@@ -101,7 +106,14 @@ void Stroke::checkChance() {
 }
 
 void Stroke::infarctHamster() {
-	
+	bool& strokeTutorial = entity_->getMngr()->getStrokeTuto();
+	if (strokeTutorial) {
+		strokeTutorial = false;
+		if (sdlutils().hamstersChosen() != 1)
+			entity_->getMngr()->getHandler<dialogosMngr>()->getComponent<dialogos>()->showStrokeTutorial("dialogo3");
+		else
+			entity_->getMngr()->getHandler<dialogosMngr>()->getComponent<dialogos>()->showStrokeTutorial("dialogo3singleplayer");
+	}
 	//Los enemigos que le seguian dejan de hacerlo
 	auto& ents = entity_->getMngr()->getPlayers();
 	if (ents.size() > 1) {

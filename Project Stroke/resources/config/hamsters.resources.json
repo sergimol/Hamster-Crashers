@@ -771,6 +771,10 @@
       "file": "resources/images/dialogue/explicacion3.png"
     },
     {
+      "id": "dialogo3singleplayer",
+      "file": "resources/images/dialogue/dialogo3single.png"
+    },
+    {
       "id": "Lvl1Javi0",
       "file": "resources/images/dialogue/explicacion0.png"
     },
@@ -950,8 +954,131 @@
     {
       "id": "Level1Boss4",
       "file": "resources/images/transitions/Level1Boss4.png"
+    },
+    {
+      "id": "cheese",
+      "file": "resources/images/objects/chees.png"
+    },
+    {
+      "id": "apple",
+      "file": "resources/images/objects/apple.png"
+    },
+    {
+      "id": "obstacleYellow",
+      "file": "resources/images/objects/CuboSpritesheetAmarillo.png"
+    },
+    {
+      "id": "obstacleBlue",
+      "file": "resources/images/objects/CuboSpritesheetAzul.png"
+    },
+    {
+      "id": "obstacleRed",
+      "file": "resources/images/objects/CuboSpritesheetRojo.png"
+    },
+    {
+      "id": "obstacleGreen",
+      "file": "resources/images/objects/CuboSpritesheetVerde.png"
+    },
+    {
+      "id": "cine1",
+      "file": "resources/images/transitions/inicio/cinematica1.jpg"
+    },
+    {
+      "id": "cine2",
+      "file": "resources/images/transitions/inicio/cinematica2.jpg"
+    },
+    {
+      "id": "cine3",
+      "file": "resources/images/transitions/inicio/cinematica3.jpg"
+    },
+    {
+      "id": "cine4",
+      "file": "resources/images/transitions/inicio/cinematica4.jpg"
+    },
+    {
+      "id": "cine5",
+      "file": "resources/images/transitions/inicio/cinematica5.jpg"
+    },
+    {
+      "id": "cine6",
+      "file": "resources/images/transitions/inicio/cinematica6.jpg"
+    },
+    {
+      "id": "cine7",
+      "file": "resources/images/transitions/inicio/cinematica7.jpg"
+    },
+    {
+      "id": "cine8",
+      "file": "resources/images/transitions/inicio/cinematica8.jpg"
+    },
+    {
+      "id": "cine9",
+      "file": "resources/images/transitions/level1level2/cinematica9.jpg"
+    },
+    {
+      "id": "cine10",
+      "file": "resources/images/transitions/level1level2/cinematica10.jpg"
+    },
+    {
+      "id": "cine11",
+      "file": "resources/images/transitions/level1level2/cinematica11.jpg"
+    },
+    {
+      "id": "cine12",
+      "file": "resources/images/transitions/level1level2/cinematica12.jpg"
+    },
+    {
+      "id": "cine13",
+      "file": "resources/images/transitions/level1level2/cinematica13.jpg"
+    },
+    {
+      "id": "cine14",
+      "file": "resources/images/transitions/level2level3/cinematica14.jpg"
+    },
+    {
+      "id": "cine15",
+      "file": "resources/images/transitions/level2level3/cinematica15.jpg"
+    },
+    {
+      "id": "cine16",
+      "file": "resources/images/transitions/level2level3/cinematica16.jpg"
+    },
+    {
+      "id": "cine17",
+      "file": "resources/images/transitions/level3micro/cinematica17.jpg"
+    },
+    {
+      "id": "cine18",
+      "file": "resources/images/transitions/level3micro/cinematica18.jpg"
+    },
+    {
+      "id": "cine19",
+      "file": "resources/images/transitions/final/cinematica19.jpg"
+    },
+    {
+      "id": "cine20",
+      "file": "resources/images/transitions/final/cinematica20.jpg"
+    },
+    {
+      "id": "cine21",
+      "file": "resources/images/transitions/final/cinematica21.jpg"
+    },
+    {
+      "id": "cine22",
+      "file": "resources/images/transitions/final/cinematica22.jpg"
+    },
+    {
+      "id": "cine23",
+      "file": "resources/images/transitions/final/cinematica23.jpg"
+    },
+    {
+      "id": "cine24",
+      "file": "resources/images/transitions/final/cinematica24.jpg"
+    },
+    {
+      "id": "cine25",
+      "file": "resources/images/transitions/final/cinematica25.jpg"
     }
-
   ],
 
   "messages": [
@@ -1318,6 +1445,18 @@
 
   "anims": [
     {
+      "id": "cinematic_anim",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 2,
+      "cols": 2,
+      "rows": 1,
+      "frameUpdate": 300,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
       "id": "sardinilla_idle",
       "startFrameX": 0,
       "startFrameY": 0,
@@ -1667,36 +1806,36 @@
       "attackFrame": -1
     },
     {
-      "id": "obstacleBoxStatic",
+      "id": "obstacleStatic",
       "startFrameX": 0,
-      "startFrameY": 1,
+      "startFrameY": 0,
       "duration": 0,
-      "cols": 9,
-      "rows": 2,
+      "cols": 8,
+      "rows": 1,
       "frameUpdate": 60,
       "loop": 1,
       "chain": "",
       "attackFrame": -1
     },
     {
-      "id": "obstacleBoxHit",
-      "startFrameX": 0,
-      "startFrameY": 1,
-      "duration": 9,
-      "cols": 9,
-      "rows": 2,
+      "id": "obstacleHit",
+      "startFrameX": 1,
+      "startFrameY": 0,
+      "duration": 0,
+      "cols": 8,
+      "rows": 1,
       "frameUpdate": 60,
       "loop": 0,
-      "chain": "obstacleBoxStatic",
+      "chain": "obstacleStatic",
       "attackFrame": -1
     },
     {
-      "id": "obstacleBoxBreak",
-      "startFrameX": 0,
+      "id": "obstacleBreak",
+      "startFrameX": 1,
       "startFrameY": 0,
-      "duration": 9,
-      "cols": 9,
-      "rows": 2,
+      "duration": 7,
+      "cols": 8,
+      "rows": 1,
       "frameUpdate": 60,
       "loop": 0,
       "chain": "",

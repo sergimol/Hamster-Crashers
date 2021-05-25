@@ -33,18 +33,27 @@ public:
 	void updateIndicator(int i, bool isUp);
 	void resetIndicators();
 
-	vector<vector<Entity*>> getButtons() const& { return buttons_; };
 	Vector2D getMagnitude() const& { return buttonsMagnitude_; };
 
 	void setButtonPos(int x, int y);
 
+	void setLastUnselectable(string l) { lastUnselectable_ = l; };
+	string getLastUnselectable() { return lastUnselectable_; };
+
+	inline vector<vector<Entity*>>& getButtons() {
+		return buttons_;
+	}
+
 	inline vector<Entity*>& getIndicators() {
 		return indicators_;
 	}
+
 private:
 	string menuMode_;
 	//Numero del estado en el que se muestra el men�
 	int stateNumber_;
+	// para volver atrás
+	string lastUnselectable_ = "";
 
 	//Controla el boton activo dentro de la rejilla
 	Vector2D buttonsPosition_;

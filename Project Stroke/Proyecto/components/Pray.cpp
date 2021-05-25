@@ -13,7 +13,7 @@
 #include "../utils/Collisions.h"
 #include "EntityAttribs.h"
 
-Pray::Pray(int dmg, int heal) : Ability(2000), dmg_(dmg), heal_(heal), evil_(false) {
+Pray::Pray(int dmg, int heal) : Ability(2000), dmg_(dmg), heal_(heal), evil_(false), dontUseAbility(false) {
 };
 
 Pray::~Pray() {
@@ -27,9 +27,18 @@ void Pray::action() {
 }
 
 void Pray::endAbility() {
-	prayAbility();
+	if (!dontUseAbility)
+		prayAbility();
+
 	entity_->getComponent<ControlHandler>()->setActive(true);
 	entity_->getComponent<EntityAttribs>()->setInvincibility(false);
+}
+
+void Pray::stopUseAbility()
+{
+	dontUseAbility = true;
+	Ability::deactiveAbility();
+	dontUseAbility = false;
 }
 
 void Pray::prayAbility() {
@@ -44,7 +53,7 @@ void Pray::prayAbility() {
 		auto& ents = entity_->getMngr()->getEnemies();
 		for (Entity* e : ents) {
 			//Si la entidad es un enemigo...
-			if (e->isActive()) {
+			if (e->isActive() && !e->getComponent<EntityAttribs>()->checkInvulnerability()) {
 
 				//Cogemos el transform del enemigo
 				auto eTR = e->getComponent<Transform>();

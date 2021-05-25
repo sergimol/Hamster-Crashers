@@ -54,7 +54,7 @@ void MicroOndasManager::init() {
 	right_->setGroup<Enemy>(true);
 	
 	right_->addComponent<EnemyStateMachine>();
-	rightAttribs_ = right_->addComponent<EntityAttribs>(100 + (hamsNum_ * 50), 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 20, true, false);
+	rightAttribs_ = right_->addComponent<EntityAttribs>(100 + (hamsNum_ * 50), 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 20, true, false, false);
 	
 	right_->addComponent<EnemyAttack>();
 	right_->addComponent<MovementSimple>();
@@ -74,7 +74,7 @@ void MicroOndasManager::init() {
 	
 
 	left_->addComponent<EnemyStateMachine>();
-	leftAttribs_ = left_->addComponent<EntityAttribs>(100 + (hamsNum_ * 50), 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 20, true, false);
+	leftAttribs_ = left_->addComponent<EntityAttribs>(100 + (hamsNum_ * 50), 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 20, true, false, false);
 	
 	left_->addComponent<EnemyAttack>();
 	left_->addComponent<MovementSimple>();
@@ -96,7 +96,7 @@ void MicroOndasManager::init() {
 	
 
 	bateria_->addComponent<EnemyStateMachine>();
-	bateriaAttribs_ = bateria_->addComponent<EntityAttribs>(100 + (hamsNum_ * 50), 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 20, true, true);
+	bateriaAttribs_ = bateria_->addComponent<EntityAttribs>(100 + (hamsNum_ * 50), 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
 	
 	bateria_->addComponent<EnemyAttack>();
 	bateria_->addComponent<MovementSimple>();

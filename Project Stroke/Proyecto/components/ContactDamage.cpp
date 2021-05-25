@@ -2,6 +2,7 @@
 #include "Stroke.h"
 #include "Combos.h"
 #include "Stun.h"
+#include "EnemyStun.h"
 #include "Knockback.h"
 #include "ControlHandler.h"
 #include "StrongAttack.h"
@@ -273,7 +274,7 @@ bool ContactDamage::CheckCollisionsEnemies(const SDL_Rect& enemyRect, bool finCo
 
 						if (hamStateM != EnemyStates::ENM_DEAD) {
 							//Si tiene stun, se aplica
-							Stun* stun = ents[i]->getComponent<Stun>();
+							EnemyStun* stun = ents[i]->getComponent<EnemyStun>();
 							if (stun != nullptr && stun->isActive()) {
 
 								//Si no estaba aturdido ya
@@ -285,7 +286,7 @@ bool ContactDamage::CheckCollisionsEnemies(const SDL_Rect& enemyRect, bool finCo
 									ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
 								}
 								//Reiniciamos tiempo de stun
-								stun->restartStunTime();
+								stun->restartStunTime(false);
 							}
 						}
 					}
@@ -309,7 +310,7 @@ bool ContactDamage::CheckCollisionsEnemies(const SDL_Rect& enemyRect, bool finCo
 
 						if (hamStateM != EnemyStates::ENM_DEAD) {
 							//Si tiene stun, se aplica
-							Stun* stun = ents[i]->getComponent<Stun>();
+							EnemyStun* stun = ents[i]->getComponent<EnemyStun>();
 							if (stun != nullptr && stun->isActive()) {
 
 								//Si no estaba aturdido ya
@@ -321,7 +322,7 @@ bool ContactDamage::CheckCollisionsEnemies(const SDL_Rect& enemyRect, bool finCo
 									ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
 								}
 								//Reiniciamos tiempo de stun
-								stun->restartStunTime();
+								stun->restartStunTime(false);
 							}
 						}
 					}

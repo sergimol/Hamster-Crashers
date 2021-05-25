@@ -30,6 +30,14 @@ void Animator::render() {
 		Vector2D renderPos = Vector2D(tr_->getPos().getX() - cam.x, tr_->getPos().getY() - tr_->getZ() - cam.y);
 		SDL_Rect dest = build_sdlrect(renderPos, tr_->getW(), tr_->getH());
 
+
+		EntityAttribs* attribs = entity_->getComponent<EntityAttribs>();
+		//Color verdoso cuando esta envenenado
+		if (attribs != nullptr && attribs->getPoisoned())
+			SDL_SetTextureColorMod(tex_->getSDLText(), 179, 0, 255);
+		else
+			SDL_SetTextureColorMod(tex_->getSDLText(), 255, 255, 255);
+
 		if (debug) {
 			SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 255, 0, 255);
 

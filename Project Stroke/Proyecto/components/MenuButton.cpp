@@ -23,6 +23,7 @@ MenuButton::MenuButton(std::string n, Vector2D position, int stateNum) :
 
 void MenuButton::init() {
 	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
+	assert(state_ != nullptr);
 }
 
 void MenuButton::render() {
@@ -76,8 +77,8 @@ void MenuButton::exited() {
 void MenuButton::setSelectable(bool s)
 {
 	selectable_ = s;
-	
-	if(selectable_)
+
+	if (selectable_)
 		button_ = &sdlutils().images().at(buttonName_ + "Button");
 	else
 		button_ = &sdlutils().images().at(buttonName_ + "ButtonUnselectable");
@@ -101,10 +102,10 @@ void MenuButton::pressed() {
 	}
 	else if (buttonName_ == "online") {
 		state_->setState(GameStates::PLAYERSELECTION);
-		
+
 		Vector2D pos = entity_->getMngr()->getHandler<MainMenu>()->getComponent<MenuControlHandler>()->getMousePos();
 		entity_->getMngr()->getHandler<PlayerQuantityMenu>()->getComponent<MenuControlHandler>()->setMousePos(pos);
-		
+
 		entity_->getMngr()->getHandler<PlayerQuantityMenu>()->getComponent<MenuButtonManager>()->onResume();
 		//entity_->getMngr()->getHandler<MainMenu>()->getComponent<MenuButtonManager>()->updateKeymap(MenuButtonManager::SPACE, false);
 	}
@@ -220,6 +221,7 @@ void MenuButton::pressed() {
 		indctrs[0]->getComponent<MenuIndicator>()->updateTexture(true);
 
 		menuMngr->moveToFirstSelectable();
+		menuMngr->setLastUnselectable(buttonName_);
 
 		auto selectedIndicator = mngr->addMenu();
 		selectedIndicator->addComponent<MenuIndicator>("p" + to_string(sdlutils().hamstersChosen()), Vector2D(dest_.x + 90, dest_.y), stateNumber_);
