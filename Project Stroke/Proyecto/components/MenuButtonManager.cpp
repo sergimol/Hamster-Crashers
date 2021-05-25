@@ -161,11 +161,11 @@ void MenuButtonManager::init() {
 		buttons_[1][3] = backButton;
 
 		auto* musicVolumeIndicator = mngr->addMenu();
-		musicVolumeIndicator->addComponent<MenuIndicator>("bar", Vector2D(725, 150), stateNumber_);
+		musicVolumeIndicator->addComponent<MenuIndicator>("musicBar", Vector2D(725, 150), stateNumber_);
 		indicators_.push_back(musicVolumeIndicator);
 
 		auto* fxVolumeIndicator = mngr->addMenu();
-		fxVolumeIndicator->addComponent<MenuIndicator>("bar", Vector2D(725, 350), stateNumber_);
+		fxVolumeIndicator->addComponent<MenuIndicator>("fxBar", Vector2D(725, 350), stateNumber_);
 		indicators_.push_back(fxVolumeIndicator);
 
 		auto* resolutionIndicator = mngr->addMenu();

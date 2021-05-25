@@ -25,7 +25,7 @@ private:
 	stack<Entity*> keyAnimations;
 
 	const string level1 = "Level1",
-		level2 = "Lvl1Javi",
+		level2 = "Level2",
 		controls = "controls",
 		hasMuerto = "hasMuerto",
 		hasGanado = "hasGanado",
