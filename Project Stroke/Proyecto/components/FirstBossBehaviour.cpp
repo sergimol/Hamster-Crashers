@@ -146,7 +146,6 @@ void FirstBossBehaviour::behave()
 			startBehavior_ = true;
 			anim_->setAnimBool(EnemyStatesAnim::SEQUENCE, false);
 			//Empieza la musica del boss
-			Entity* owEntity = owner_->getEntity();
 			owEntity->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1Boss1_0");
 
 		}

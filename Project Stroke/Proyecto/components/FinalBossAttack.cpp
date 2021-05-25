@@ -7,6 +7,7 @@
 #include "StrongAttack.h"
 #include "LightAttack.h"
 #include "AnimHamsterStateMachine.h"
+#include "AnimEnemyStateMachine.h"
 #include "CollisionDetec.h"
 
 #include "../sdlutils/SDLUtils.h"
@@ -31,6 +32,16 @@ void FinalBossAttack::init() {
 
 void FinalBossAttack::update() {
 	if (state_->getState() == GameStates::RUNNING) {
+
+		//Quitar la animacion de subida
+		if (entity_->getComponent<AnimEnemyStateMachine>()->getState() == EnemyStatesAnim::UP)
+		{
+			if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+			{
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::UP, false);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::IDLE, true);
+			}
+		}
 		//Deja de mostrar el collider
 		if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
 			DEBUG_isAttacking_ = false;
@@ -46,6 +57,10 @@ void FinalBossAttack::update() {
 
 void FinalBossAttack::slam() {
 	if (!stunStarted_ && sdlutils().currRealTime() > hitTime_ + beforeHitCD_) {
+
+		//EMPIEZA EL ATAQUE
+		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, true);
+
 		cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 		auto sizeW = tr_->getW();
 		auto& pos = tr_->getPos();
@@ -77,18 +92,42 @@ void FinalBossAttack::slam() {
 		stunStarted_ = true;
 
 	}
-	else if (stunStarted_ && eAttribs_->checkInvulnerability() && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
-		eAttribs_->setInvincibility(false);
+	//HA LLEGADO AL SUELO
+	if (entity_->getComponent<AnimEnemyStateMachine>()->getState() == EnemyStatesAnim::ATTACK)
+	{
+		if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+		{
+			if (stunStarted_ && eAttribs_->checkInvulnerability()) {
+
+				eAttribs_->setInvincibility(false);
+
+				//LE PASAMOS AL ESTADO DEL SUELO Y QUITAMOS EL ATAQUE
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, true);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
+			}
+		}
 	}
+	//else if (stunStarted_ && eAttribs_->checkInvulnerability() && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
+	//	eAttribs_->setInvincibility(false);
+	//}
 	else if (stunStarted_ && !collides_ && sdlutils().currRealTime() > hitTime_ + collideStartCD_ && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
 		// Activar colisiones
 		collides_ = true;
 	}
+	//SE LEVANTA
 	else if (stunStarted_ && sdlutils().currRealTime() > hitTime_ + afterHitCD_) {
 		eAttribs_->setInvincibility(true);
 		attackStarted_ = false;
 		stunStarted_ = false;
 		attackFinished_ = true;
+
+		//QUITAMOS TODOS LOS ESTADOS QUE PUEDEN INTERFERIR
+		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, false);
+		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
+		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, false);
+
+		//FORZAMOS A LA ANIMACION DE SUBIDA
+		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::UP, true);
 
 		// Desactivar colisiones
 		collides_ = false;
@@ -231,7 +270,6 @@ bool FinalBossAttack::CheckCollisions(const SDL_Rect& enemyRect, bool swipe) {
 				else
 					hamKnockback->knockback(75);
 
-				//TO DO: AAAAAAAAAAAAAAAAAAAAAAAAAAAAADFÑUIOGHFPIUEGHFPIUEAFGPIAUEF COJONES LAS COLISIONES DE MIERDA QUE LO JODEN TODO
 
 				SDL_Rect rectPlayer = tr_->getRectCollide();
 				rectPlayer.x += hamKnockback->getKnockback();
