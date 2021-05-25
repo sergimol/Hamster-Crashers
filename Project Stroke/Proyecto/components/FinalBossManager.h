@@ -12,6 +12,7 @@
 
 #include "Transform.h"
 #include "HamsterStateMachine.h"
+#include "AnimEnemyStateMachine.h" 
 #include "Animator.h"
 #include "Image.h"
 #include "EntityAttribs.h"
@@ -80,5 +81,10 @@ private:
 
 	float stunTime_; //Tiempo parado antes de recuperar el comportamiento
 	float stunCD_;
+
+	bool startBehavior_;
+
+	AnimEnemyStateMachine* handAnim_; //
+	AnimEnemyStateMachine* fistAnim_; //
 };
 

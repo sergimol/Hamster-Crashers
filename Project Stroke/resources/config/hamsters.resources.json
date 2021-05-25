@@ -172,11 +172,11 @@
     },
     {
       "id": "ketaSheet2",
-      "file": "resources/images/spritesheets/hamsters/keta_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/keta_spritesheetHA.png"
     },
     {
       "id": "ketaSheet3",
-      "file": "resources/images/spritesheets/hamsters/keta_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/keta_spritesheetPos.png"
     },
     {
       "id": "monchiSheet",
@@ -373,6 +373,14 @@
     {
       "id": "quitButtonEnter",
       "file": "resources/images/menuSprites/quitButtonEnter.png"
+    },
+    {
+      "id": "exitButton",
+      "file": "resources/images/menuSprites/exitButton.png"
+    },
+    {
+      "id": "exitButtonEnter",
+      "file": "resources/images/menuSprites/exitButtonEnter.png"
     },
     {
       "id": "shadow",
@@ -2564,6 +2572,42 @@
       "cols": 6,
       "rows": 6,
       "frameUpdate": 60,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "cat_sleeping",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 8,
+      "cols": 5,
+      "rows": 7,
+      "frameUpdate": 140,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "cat_wakeup",
+      "startFrameX": 3,
+      "startFrameY": 1,
+      "duration": 15,
+      "cols": 5,
+      "rows": 7,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "cat_chasing",
+      "startFrameX": 3,
+      "startFrameY": 4,
+      "duration": 8,
+      "cols": 5,
+      "rows": 7,
+      "frameUpdate": 100,
       "loop": 0,
       "chain": "",
       "attackFrame": -1

@@ -131,6 +131,10 @@ void SoundManager::init() {
 
 	setVolumeChannels();
 	Mix_AllocateChannels(16);
+
+	Vector2D vol = sdlutils().volumes();
+	musicVol_ = vol.getX();
+	fxVol_ = vol.getY();
 }
 
 void SoundManager::StopTutorial() {

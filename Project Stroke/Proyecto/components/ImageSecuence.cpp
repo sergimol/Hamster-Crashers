@@ -4,44 +4,219 @@
 #include "../ecs/Manager.h"
 #include "Transform.h"
 #include "Transition.h"
+#include "../sdlutils/SDLUtils.h"
 
 ImageSecuence::ImageSecuence(string newScene) :newScene_(newScene) {
 	//Te comes una verga
 }
 
 void ImageSecuence::init() {
+	float offsetCamera = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getUpOffset();
 	if (newScene_ == level1) {
-		auto anim = entity_->getMngr()->addEntity();
-		anim->addComponent<Transform>(Vector2D(sdlutils().width() / 5, sdlutils().height() / 5), Vector2D(0, 0), 1000, 1000, 0, 1, 1);
-		anim->addComponent<Animator>(
-			&sdlutils().images().at("canelonSheet"),
-			128,
-			128,
+		//Cinematica 8
+		auto anim8 = entity_->getMngr()->addEntity();
+		anim8->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+		anim8->addComponent<Animator>(
+			&sdlutils().images().at("cine8"),
+			1920,
+			1080,
 			3,
 			3,
 			220,
 			Vector2D(0, 0),
 			3
 			)->setActive(false);
-		keyAnimations.push(anim);
+		keyAnimations.push(anim8);
+
+		//Cinematica 7
+		auto anim7 = entity_->getMngr()->addEntity();
+		anim7->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+		anim7->addComponent<Animator>(
+			&sdlutils().images().at("cine7"),
+			1920,
+			1080,
+			3,
+			3,
+			220,
+			Vector2D(0, 0),
+			3
+			)->setActive(false);
+		keyAnimations.push(anim7);
+
+		//Cinematica 6
+		auto anim6 = entity_->getMngr()->addEntity();
+		anim6->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+		anim6->addComponent<Animator>(
+			&sdlutils().images().at("cine6"),
+			1920,
+			1080,
+			3,
+			3,
+			220,
+			Vector2D(0, 0),
+			3
+			)->setActive(false);
+		keyAnimations.push(anim6);
+
+		//Cinematica 5
+		auto anim5 = entity_->getMngr()->addEntity();
+		anim5->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+		anim5->addComponent<Animator>(
+			&sdlutils().images().at("cine5"),
+			1920,
+			1080,
+			3,
+			3,
+			220,
+			Vector2D(0, 0),
+			3
+			)->setActive(false);
+		keyAnimations.push(anim5);
+
+		//Cinematica 4
+		auto anim4 = entity_->getMngr()->addEntity();
+		anim4->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+		anim4->addComponent<Animator>(
+			&sdlutils().images().at("cine4"),
+			1920,
+			1080,
+			3,
+			3,
+			220,
+			Vector2D(0, 0),
+			3
+			)->setActive(false);
+		keyAnimations.push(anim4);
+
+		//Cinematica 3
+		auto anim3 = entity_->getMngr()->addEntity();
+		anim3->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+		anim3->addComponent<Animator>(
+			&sdlutils().images().at("cine3"),
+			1920,
+			1080,
+			3,
+			3,
+			220,
+			Vector2D(0, 0),
+			3
+			)->setActive(false);
+		keyAnimations.push(anim3);
+
+		//Cinematica 2
 		auto anim2 = entity_->getMngr()->addEntity();
-		anim2->addComponent<Transform>(Vector2D(sdlutils().width() / 5, sdlutils().height() / 5), Vector2D(0, 0), 1000, 1000, 0, 1, 1);
+		anim2->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
 		anim2->addComponent<Animator>(
-			&sdlutils().images().at("sardinillaSheet"),
-			86,
-			86,
+			&sdlutils().images().at("cine2"),
+			1920,
+			1080,
+			3,
+			3,
+			220,
+			Vector2D(0, 0),
+			3
+			)->setActive(false);
+		keyAnimations.push(anim2);
+
+		//Cinematica 1
+		auto anim1 = entity_->getMngr()->addEntity();
+		anim1->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+		anim1->addComponent<Animator>(
+			&sdlutils().images().at("cine1"),
+			1920,
+			1080,
 			3,
 			3,
 			220,
 			Vector2D(0, 0),
 			3
 			);
-		keyAnimations.push(anim2);
+		keyAnimations.push(anim1);
+
+		keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
+
+	}
+	else if (newScene_ == level1Boss) {
+		//keyAnimations.push(&sdlutils().images().at("hasGanado"));
 	}
 	else if (newScene_ == level2) {
-		/*	keyAnimations.push(&sdlutils().images().at("sardinilla"));
-			keyAnimations.push(&sdlutils().images().at("keta"));
-			keyAnimations.push(&sdlutils().images().at("canelon"));*/
+	//Cinematica 13
+	auto anim13 = entity_->getMngr()->addEntity();
+	anim13->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim13->addComponent<Animator>(
+		&sdlutils().images().at("cine13"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		)->setActive(false);
+	keyAnimations.push(anim13);
+
+	//Cinematica 12
+	auto anim12 = entity_->getMngr()->addEntity();
+	anim12->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim12->addComponent<Animator>(
+		&sdlutils().images().at("cine12"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		);
+	keyAnimations.push(anim12);
+
+	//Cinematica 11
+	auto anim11 = entity_->getMngr()->addEntity();
+	anim11->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim11->addComponent<Animator>(
+		&sdlutils().images().at("cine11"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		)->setActive(false);
+	keyAnimations.push(anim11);
+
+	//Cinematica 10
+	auto anim10 = entity_->getMngr()->addEntity();
+	anim10->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim10->addComponent<Animator>(
+		&sdlutils().images().at("cine10"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		);
+	keyAnimations.push(anim10);
+
+	//Cinematica 9
+	auto anim9 = entity_->getMngr()->addEntity();
+	anim9->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim9->addComponent<Animator>(
+		&sdlutils().images().at("cine9"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		)->setActive(false);
+	keyAnimations.push(anim9);
+
+
+	keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
 	}
 	else if (newScene_ == controls) {
 		controles = true;
@@ -55,14 +230,6 @@ void ImageSecuence::init() {
 		gameOver = true;
 		//keyAnimations.push(&sdlutils().images().at("hasGanado"));
 	}
-	else if (newScene_ == level1Boss) {
-		//keyAnimations.push(&sdlutils().images().at("hasGanado"));
-	}
-
-	imageRect.x = 0;
-	imageRect.y = 0;
-	imageRect.w = sdlutils().width();
-	imageRect.h = sdlutils().height();
 
 	trans_ = entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>();
 }
@@ -79,8 +246,10 @@ void ImageSecuence::update() {
 		if (next && !trans_->isFadingOut()) {
 			keyAnimations.top()->setActive(false);
 			keyAnimations.pop();
-			if (!keyAnimations.empty())
+			if (!keyAnimations.empty()) {
 				keyAnimations.top()->getComponent<Animator>()->setActive(true);
+				keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
+			}
 			next = false;
 		}
 

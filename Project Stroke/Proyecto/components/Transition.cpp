@@ -138,6 +138,7 @@ void Transition::sceneTransition() {
 			e->setActive(false);
 
 		entity_->getMngr()->refreshFrontGround();
+		//entity_->getMngr()->refreshParallax();
 
 		entity_->getMngr()->refreshDeadBodies();
 		entity_->getMngr()->refreshEnemies();

@@ -93,11 +93,12 @@ void WarCry::slowEnemies(bool notEndAb) {
 
 			//Cogemos el transform del enemigo
 		auto eTR = e->getComponent<Transform>();
+		auto eRectCollide = eTR->getRectCollide();
 
-		Vector2D newPos = Vector2D(eTR->getPos().getX(), eTR->getPos().getY());
+		//Vector2D newPos = Vector2D(eTR->getPos().getX(), eTR->getPos().getY());
 
 		//Y comprobamos si colisiona
-		if (Collisions::collides(newPos, eTR->getW(), eTR->getH(), Vector2D(cam.x, cam.y), cam.w, cam.h)) {
+		if (Collisions::collides(Vector2D(eRectCollide.x, eRectCollide.y), eRectCollide.w, eRectCollide.h, Vector2D(cam.x, cam.y), cam.w, cam.h)) {
 
 			EntityAttribs* eAttribs = e->getComponent<EntityAttribs>();
 			Knockback* eKnockback = e->getComponent<Knockback>();

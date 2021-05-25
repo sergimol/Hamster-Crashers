@@ -1,5 +1,3 @@
-// This file is part of the course TPV2@UCM - Samir Genaim
-
 #pragma once
 
 #include "../ecs/Component.h"
@@ -15,7 +13,7 @@ public:
 	void setVolumeChannels();
 	void lowVolume(bool channel);
 	void upVolume(bool channel);
-	void resetVolumes() { fxVol_ = 0.5; musicVol_ = 0.5; };
+	void resetVolumes() { fxVol_ = 0.5; musicVol_ = 0.5; setVolumeChannels(); };
 	bool emptyChannel();
 	void StopTutorial();
 	void fadeout(int time) {}

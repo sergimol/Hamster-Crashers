@@ -293,7 +293,13 @@ public:
 				tiles_.begin(), //
 				tiles_.end(), //
 				[](const Entity* e) { //
-					return !e->isActive();
+					if (e->isActive()) {
+						return false;
+					}
+					else {
+						delete e;
+						return true;
+					}
 				}), //
 			tiles_.end());
 	}
@@ -359,7 +365,13 @@ public:
 				mapHeights_.begin(), //
 				mapHeights_.end(), //
 				[](const Entity* e) { //
-					return !e->isActive();
+					if (e->isActive()) {
+						return false;
+					}
+					else {
+						delete e;
+						return true;
+					}
 				}), //
 			mapHeights_.end());
 	}
@@ -391,6 +403,24 @@ public:
 					}
 				}), //
 			fgs_.end());
+	}
+
+	void refreshParallax() {
+		// remove dead entities from the list of entities
+		bgs_.erase( //
+			std::remove_if( //
+				bgs_.begin(), //
+				bgs_.end(), //
+				[](const Entity* e) { //
+					if (e->isActive()) {
+						return false;
+					}
+					else {
+						delete e;
+						return true;
+					}
+				}), //
+			bgs_.end());
 	}
 
 	void refreshWavesObjects() {

@@ -1,6 +1,6 @@
 #include "BackGround.h"
 
-BackGround::BackGround(Texture* im, float vel) : Image(im), trainVel_(85), trainMode_(false)
+BackGround::BackGround(Texture* im, float vel, bool train) : Image(im), trainVel_(85), trainMode_(train)
 {
 	//Asignamos la textura
 	tex_ = im;

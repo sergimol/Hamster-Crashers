@@ -5,7 +5,7 @@ FinalBossManager::FinalBossManager(int hamN) :
 	tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr),
 	lockedHamster_(nullptr), hamsterTr_(nullptr), attackAvailable_(false),
 	waitingTime_(sdlutils().currRealTime()), waitingCD_(4000), stunTime_(0), stunCD_(1500),
-	hamsNum_(hamN), handAttribs_(nullptr), fistAttribs_(nullptr) {
+	hamsNum_(hamN), handAttribs_(nullptr), fistAttribs_(nullptr), startBehavior_(false) {
 }
 
 void FinalBossManager::init() {
@@ -31,8 +31,18 @@ void FinalBossManager::init() {
 	handAttribs_ = hand_->addComponent<EntityAttribs>(800 + (hamsNum_ * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
 	hand_->addComponent<UI>("canelon", 4);
 
-	hand_->addComponent<Image>(&sdlutils().images().at("firstBoss"));
-
+	//hand_->addComponent<Image>(&sdlutils().images().at("firstBoss"));
+	hand_->addComponent<Animator>(
+		&sdlutils().images().at("calcetinSheet"),
+		164,
+		600,
+		3,
+		3,
+		100,
+		Vector2D(0, 0),
+		3
+		);
+	handAnim_ = hand_->addComponent<AnimEnemyStateMachine>();
 	bossAtk_ = hand_->addComponent<FinalBossAttack>();
 	movHand_ = hand_->addComponent<MovementSimple>();
 
@@ -51,6 +61,7 @@ void FinalBossManager::init() {
 	fistAttribs_ = fist_->addComponent<EntityAttribs>(800 + (hamsNum_ * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
 
 	fist_->addComponent<Image>(&sdlutils().images().at("firstBoss"));
+	//fistAnim_ = fist_->addComponent<AnimEnemyStateMachine>();
 
 	bossPunch_ = fist_->addComponent<FinalBossPunch>();
 	movPunch_ = fist_->addComponent<MovementSimple>();
@@ -58,6 +69,9 @@ void FinalBossManager::init() {
 	entity_->getMngr()->getEnemies().push_back(fist_);
 
 	handTurn_ = sdlutils().rand().nextInt(0, 2) == 0;
+
+	//EMPEZAMOS CON LA CINEMATICA
+	handAnim_->setAnimBool(EnemyStatesAnim::SEQUENCE, true);
 }
 
 
@@ -121,7 +135,22 @@ bool FinalBossManager::isWithinAttackRange(Transform* tr, bool fist) {
 }
 
 void FinalBossManager::update() {
-	if (lockedHamster_ != nullptr && lockedHamStatePunch_ != nullptr) {
+
+	//COMPROBACION DE CINEMATICA
+	if (!startBehavior_)
+	{
+		//FIN DE CINEMATICA
+		if (handAnim_->getState() == EnemyStatesAnim::SEQUENCE && hand_->getComponent<Animator>()->OnAnimationFrameEnd())
+		{
+			startBehavior_ = true;
+			handAnim_->setAnimBool(EnemyStatesAnim::SEQUENCE, false);
+			//Empieza la musica del boss
+			hand_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1Boss1_0");
+
+		}
+	}
+	//SE ACABA LA CINEMATICA, EMPIEZA EL COMPORTAMIENTO DEL BOSS
+	else if (lockedHamster_ != nullptr && lockedHamStatePunch_ != nullptr) {
 
 		if (bossAtk_->checkAttackFinished() || bossPunch_->checkAttackFinished()) {
 			handTurn_ = sdlutils().rand().nextInt(0, 100) < 65;
@@ -161,7 +190,7 @@ void FinalBossManager::update() {
 			//waitingTime_ = sdlutils().currRealTime();
 		}
 	}
-	else
+	else if (startBehavior_)
 		lockHamster();
 }
 
