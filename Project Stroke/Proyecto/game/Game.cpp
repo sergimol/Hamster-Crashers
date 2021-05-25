@@ -68,7 +68,7 @@ Game::~Game() {
 void Game::init() {
 
 	SDLUtils::init("Squeak Ship", 1920, 1080, "resources/config/hamsters.resources.json");
-
+	sdlutils().loadData();
 	//SDL_SetWindowFullscreen(sdlutils().window(), SDL_WINDOW_FULLSCREEN);	//   SDL_WINDOW_FULLSCREEN  ||   SDL_WINDOW_FULLSCREEN_DESKTOP
 
 	//CAMBIAR TAMAÑO DE PANTALLA, ESCALA DEL RENDER Y ALTERNAR ENTRE PANTALLA COMPLETA
@@ -196,7 +196,7 @@ void Game::start() {
 		if (frameTime < 20)
 			SDL_Delay(20 - frameTime);
 	}
-
+	sdlutils().saveData();
 }
 
 //void Game::updateCamera() {

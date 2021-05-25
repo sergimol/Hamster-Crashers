@@ -122,7 +122,7 @@ void dialogos::showStrokeTutorial(std::string text) {
 	if (text == "dialogo3")
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("tutorial");
 	else
-		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("tutorial");
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("tutorialsingle");
 
 	dialogoText_ = &sdlutils().images().at(text);
 	explicacionText_ = &sdlutils().images().at("explicacion3");
