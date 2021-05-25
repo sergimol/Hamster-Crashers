@@ -125,7 +125,7 @@ void AnimHamsterStateMachine::CheckAnimState()
 }
 
 //PONE A TRUE O FALSE LOS BOOLEANOS DE ANIMACION
-void AnimHamsterStateMachine::setAnimBool(HamStatesAnim h, bool b) 
+void AnimHamsterStateMachine::setAnimBool(HamStatesAnim h, bool b)
 {
 
 	switch (h)
@@ -170,4 +170,19 @@ void AnimHamsterStateMachine::setAnimBool(HamStatesAnim h, bool b)
 		stroke = b;
 		break;
 	}
+}
+
+void AnimHamsterStateMachine::resetAnim()
+{
+	//Dejamos Idle por defecto
+	idle = true;
+	move = false;
+	ability = false;
+	lAttack = false;
+	lCombo = false;
+	sAttack = false;
+	sCombo = false;
+	hit = false;
+	stun = false;
+	stroke = false;
 }

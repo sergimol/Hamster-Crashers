@@ -60,6 +60,8 @@ public:
 
 	void setAnimBool(HamStatesAnim h, bool b);
 
+	void resetAnim();
+
 	bool isOnAttack() {
 		return(currentState == HamStatesAnim::LIGHTATTACK || currentState == HamStatesAnim::LIGHTCOMBO
 			|| currentState == HamStatesAnim::STRONGATTACK || currentState == HamStatesAnim::STRONGCOMBO);
