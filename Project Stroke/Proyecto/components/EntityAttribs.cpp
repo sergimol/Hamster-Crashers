@@ -292,6 +292,9 @@ void EntityAttribs::die() {
 		enmState_->getState() = EnemyStates::ENM_DEAD;
 		if (id_ == "soldier1" || id_ == "soldier2")
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("soldierDep");
+		else if (id_ == "calcetin") {
+			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 0);
+		}
 		entity_->setActive(false);
 	}
 
