@@ -1419,6 +1419,30 @@
       "file": "resources/sound/hand/smashDown.wav"
     },
     {
+      "id": "handHit0",
+      "file": "resources/sound/hand/hit0.wav"
+    },
+    {
+      "id": "handHit1",
+      "file": "resources/sound/hand/hit1.wav"
+    },
+    {
+      "id": "handHit2",
+      "file": "resources/sound/hand/hit2.wav"
+    },
+    {
+      "id": "handDep",
+      "file": "resources/sound/hand/dep.wav"
+    },
+    {
+      "id": "handInit0",
+      "file": "resources/sound/hand/init0.wav"
+    },
+    {
+      "id": "handInit1",
+      "file": "resources/sound/hand/init1.wav"
+    },
+    {
       "id": "platillos",
       "file": "resources/sound/platillos/platillos.wav"
     },
