@@ -23,6 +23,7 @@ public:
 	void changeShow() { showDialogue = !showDialogue; };
 	void changeDialogue();
 	void dialogoStateChange();
+	void showStrokeTutorial(std::string text);
 private:
 	//Texturas de dialogos
 	Texture* angelText_;
