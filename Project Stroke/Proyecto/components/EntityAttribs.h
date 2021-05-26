@@ -7,6 +7,7 @@
 #include "HeartUI.h"
 #include "HamsterStateMachine.h"
 #include "EnemyStateMachine.h"
+#include "SoundManager.h"
 
 const int INVINCIBLECD = 200;
 

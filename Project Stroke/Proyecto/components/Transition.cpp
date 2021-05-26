@@ -109,6 +109,7 @@ void Transition::changeScene(string nameScene, bool changeMap, int numTransition
 		e->getComponent<Transform>()->setFloor(0);
 		e->getComponent<Transform>()->setZ(0);
 	}
+	entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->setMaxH(0);
 	change = true;
 	changeMap_ = changeMap;
 	nameScene_ = nameScene;

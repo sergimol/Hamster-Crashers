@@ -140,6 +140,12 @@ void MapMngr::loadNewMap(string map) {
 	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
 
 	if (map_.load(map)) {
+		if (map == "resources/images/tiled/Level1Boss.tmx") {
+			scale = 2.5f;
+		}
+		else if (map == "resources/images/tiled/Level2.tmx") {
+			scale = 3.0f;
+		}
 
 		mapHeight_ = map_.getProperties()[0].getIntValue() * TAM_CELDA * scale;
 
@@ -155,6 +161,17 @@ void MapMngr::loadNewMap(string map) {
 		//Hay colisiones
 		collisionCreated = true;
 
+		//Fondos
+		if (map == "resources/images/tiled/Level1.tmx")
+			addParaxall(1, true, false);
+		else if (map == "resources/images/tiled/Level1Boss.tmx") {
+			//scale = 2.5f;
+			addParaxall(1, false, true);
+		}
+		else if (map == "resources/images/tiled/Level2.tmx") {
+			//scale = 3.0f;
+			addParaxall(2, true, false);
+		}
 
 		//Dimensiones de los tiles
 		tilesDimensions_ = map_.getTileSize();
@@ -171,18 +188,6 @@ void MapMngr::loadNewMap(string map) {
 			//Guardamos las texturas de los tilesets
 			tilesetsArr[i] = &sdlutils().images().at(tileset.getName());	//El nombre del tileset en Tiled y la textura png DEBEN llamarse igual
 			i++;
-		}
-
-		//Fondos
-		if (map == "resources/images/tiled/Level1.tmx")
-			addParaxall(1, true, false);
-		else if (map == "resources/images/tiled/Level1Boss.tmx") {
-			addParaxall(1, false, true);
-			scale = 2.4;
-		}
-		else if (map == "resources/images/tiled/Level2.tmx") {
-			addParaxall(2, true, false);
-			scale = 3;
 		}
 
 		for (const auto& layer : layers)
@@ -238,15 +243,24 @@ void MapMngr::loadNewMap(string map) {
 							auto* enemy = entity_->getMngr()->addEntity();
 							enemy->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-								Vector2D(), 256.0f, 2 * 256.0f, 0.0f, 1, 1);
+								Vector2D(), 440.0f * scale, 350.0f * scale, 0.0f, 0.6, 1);
+
+							//Le dejamos durmiendo
+							enemy->addComponent<Animator>(&sdlutils().images().at("cat"),
+								440,
+								350,
+								3,
+								3,
+								220,
+								Vector2D(),
+								3)->play(sdlutils().anims().at("cat_sleeping"));
 
 							//Le metemos gravedad
 							enemy->getComponent<Transform>()->setGravity(enemy->addComponent<Gravity>());
 
 							enemy->addComponent<CatMovement>();
 
-							enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
-							enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
+							enemy->addComponent<EntityAttribs>();
 							enemy->addComponent<ContactDamage>(20, 30, false, false, false);
 							enemy->getMngr()->setHandler<Cat_>(enemy);
 						}
@@ -337,6 +351,7 @@ void MapMngr::loadNewMap(string map) {
 				}
 			}
 		}
+
 		//ENEMIGO
 		//Una vez terminamos de cargar todas las entidades y tiles de las CAPAS, cargamos los enemigos de la sala 0
 		//LoadEnemyRoom();

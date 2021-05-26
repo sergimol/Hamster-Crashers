@@ -183,6 +183,10 @@ void EntityAttribs::update() {
 //Resta el da�o y devuelve true si ha muerto
 bool EntityAttribs::recieveDmg(int dmg) {
 	health_ -= dmg;
+
+	if(hms_ != nullptr)
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("hamsterlighthit");
+
 	//Timer de invulnerabilidad
 	damageInvulTime_ = sdlutils().currRealTime();
 	afterDamageInvul_ = true;
@@ -254,7 +258,7 @@ void EntityAttribs::die() {
 	else if (id_ == "canelon" || id_ == "canelonDemon" || id_ == "monosinpatico") {
 		tam = 128;
 	}
-	else if (id_ == "keta"){
+	else if (id_ == "keta") {
 		tam = 100;
 	}
 	//Y reproducimos la animacion de muerto
@@ -297,11 +301,17 @@ void EntityAttribs::die() {
 		}
 	}
 	else {
-		if (entity_->getMngr()->getHandler<Boss>() == entity_)
+		if (entity_->getMngr()->getHandler<Boss>() == entity_) {
 			entity_->getMngr()->setHandler<Boss>(nullptr);
-		else if (entity_->getMngr()->getHandler<FinalBoss>() == entity_)
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
+
+		}
+		else if (entity_->getMngr()->getHandler<FinalBoss>() == entity_) {
 			entity_->getMngr()->setHandler<FinalBoss>(nullptr);
-		
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
+
+		}
+
 		//solamente para los enemigos
 		//entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala
 		e->addComponent<Dying>();
