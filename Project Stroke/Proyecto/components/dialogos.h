@@ -58,4 +58,6 @@ private:
 	bool firstDialogue_ = true;
 	float position = 3.0f;			//Desplaza verticalmente los destrects
 
+	bool DONTRENDERANYTHING = false;
+
 };
