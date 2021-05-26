@@ -3,6 +3,7 @@
 #include "EntityAttribs.h"
 #include "SoundManager.h"
 #include "GameStates.h"
+#include "Cloud.h"
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 
@@ -31,7 +32,7 @@ void GetItem::update() {
 				SDL_Rect rI = eTR->getRectCollide();
 
 				//Y comprobamos si colisiona
-				if (Collisions::collides(Vector2D(rH.x, rH.y), rH.w, rH.h, Vector2D(rI.x, rI.y), rI.w, rI.h)) {
+				if (e->getComponent<Cloud>() == nullptr && Collisions::collides(Vector2D(rH.x, rH.y), rH.w, rH.h, Vector2D(rI.x, rI.y), rI.w, rI.h)) {
 					//Comprobamos el tipo
 					switch (e->getComponent<Item>()->getItem()) {
 					case ItemType::Apple:
