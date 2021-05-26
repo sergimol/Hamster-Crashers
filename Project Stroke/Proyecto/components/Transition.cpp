@@ -71,6 +71,7 @@ void Transition::fadeIn() {
 	//FADE IN
 	if (alpha == SDL_ALPHA_OPAQUE) {
 		if ( numTReference > 0) {
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stopTutorial");
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("nextPage");
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("transition");
 			numTReference--;
@@ -162,6 +163,7 @@ void Transition::sceneTransition() {
 void Transition::createMap() {
 	//Y creamos uno nuevo
 	if (nameScene_ == "hasMuerto" || nameScene_ == "final") {
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetNumInts();
 		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->resetCamera();
 		//Vuelve a renderizar el menu
 		state_->setState(GameStates::MAINMENU);

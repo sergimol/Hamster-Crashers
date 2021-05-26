@@ -34,7 +34,7 @@ public:
 	int initAttackVol = 100;
 
 	int initDepVol = 40;
-	int initHeartAttackVol = 40;
+	int initHeartAttackVol = 50;
 
 	int initCatVol = 40;
 
@@ -48,27 +48,27 @@ public:
 
 	int initsoldierDepVol = 3;
 
-	int notesReanimVol = 40;
-	int possesionVol = 40;
+	int notesReanimVol = 120;
+	int possesionVol = 120;
 
-	int sardinillaSpecialVol = 60;
-	int ketaSpecialVol = 40;
+	int sardinillaSpecialVol = 120;
+	int ketaSpecialVol = 120;
 	int monchiSpecialVol = 20;
-	int canelonSpecialVol = 40;
+	int canelonSpecialVol = 120;
 
 	int buttonVol = 128;
 
 	int initEatVol = 40;
 
-	int pageSkipVol = 100;
+	int pageSkipVol = 128;
 	int initTutorialVol = 128;
 	int initTransitionVol = 128;
 
-	int inittrapKitchenVol = 40;
+	int inittrapKitchenVol = 128;
 
 	int initBirdsVol = 40;
 
-
+	void resetNumInts();
 private:
 	int randomNum;
 
@@ -301,6 +301,5 @@ private:
 	Music* HamstersNivel4GameVersion;
 
 	SoundEffect* birds;
-
 };
 

@@ -184,9 +184,6 @@ void EntityAttribs::update() {
 bool EntityAttribs::recieveDmg(int dmg) {
 	health_ -= dmg;
 
-	if(hms_ != nullptr)
-		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("hamsterlighthit");
-
 	//Timer de invulnerabilidad
 	damageInvulTime_ = sdlutils().currRealTime();
 	afterDamageInvul_ = true;
@@ -320,7 +317,8 @@ void EntityAttribs::die() {
 		if (id_ == "soldier1" || id_ == "soldier2")
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("soldierDep");
 		else if (id_ == "calcetin") {
-			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 0);
+			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 5);
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
 		}
 		entity_->setActive(false);
 	}

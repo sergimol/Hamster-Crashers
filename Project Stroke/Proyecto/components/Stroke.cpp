@@ -109,6 +109,7 @@ void Stroke::checkChance() {
 
 void Stroke::infarctHamster() {
 
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("heartattack");
 	auto hams_ = entity_->getMngr()->getPlayers();
 	bool allDead = true;
 	for (Entity* e : hams_) {
