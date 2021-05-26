@@ -169,7 +169,7 @@ void Transition::sceneTransition() {
 
 void Transition::createMap() {
 	//Y creamos uno nuevo
-	if (nameScene_ == "hasMuerto") {
+	if (nameScene_ == "hasMuerto" || nameScene_ == "final") {
 		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->resetCamera();
 		//Vuelve a renderizar el menu
 		state_->setState(GameStates::MAINMENU);
