@@ -175,6 +175,10 @@ void EntityAttribs::update() {
 //Resta el da�o y devuelve true si ha muerto
 bool EntityAttribs::recieveDmg(int dmg) {
 	health_ -= dmg;
+
+	if(hms_ != nullptr)
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("hamsterlighthit");
+
 	//Timer de invulnerabilidad
 	damageInvulTime_ = sdlutils().currRealTime();
 	afterDamageInvul_ = true;
