@@ -50,7 +50,7 @@ private:
 	vector<string> hamstersToLoad_;
 
 	void addHamster(string name, int i,const tmx::Object& object);
-	void addParaxall(int lvl, bool front, bool train);
+	void addParaxall(int lvl, bool front, bool train, int v1, int v2, int v3, int v4);
 public:
 	MapMngr() : Room(0) {};
 	~MapMngr();
@@ -74,6 +74,7 @@ public:
 	inline void reduceNumberEnemyRoom() { numberEnemyRoom--; };
 	void newSceneTrigger(string newName, const tmx::Object& obj);
 	void startChaseTrigger(const tmx::Object& obj);
+	void startMusic(const tmx::Object& obj);
 
 	inline void addHamster(string name) { hamstersToLoad_.push_back(name); };
 	inline void removeHamster() { hamstersToLoad_.pop_back(); };

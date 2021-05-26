@@ -180,7 +180,6 @@ void MenuButton::pressed() {
 			//Hago una transicion para presentar el nivel inicial
 			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level1", true, 8);
 
-			//mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Level2.tmx");
 			state_->setState(GameStates::RUNNING);
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1GameVersion");
 		}
@@ -248,6 +247,7 @@ void MenuButton::pressed() {
 	else if (buttonName_ == "exit") {
 		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->resetCamera();
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetNumInts();
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopCatSounds();
 		//Vuelve a renderizar el menu
 		state_->setState(GameStates::MAINMENU);
 

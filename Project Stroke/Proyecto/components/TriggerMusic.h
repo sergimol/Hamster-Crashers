@@ -5,12 +5,12 @@
 
 using namespace std;
 
-class TriggerScene : public Component {
+class TriggerMusic : public Component {
 public:
-	TriggerScene(string newScene,int numTransition) :nameScene(newScene),  canChange(true), numT(numTransition) {
+	TriggerMusic(string musicName):play(false),musicName_(musicName),tr_(nullptr) {
 	};
 	
-	virtual ~TriggerScene() {};
+	virtual ~TriggerMusic() {};
 
 	virtual void init() override;
 
@@ -19,8 +19,8 @@ public:
 
 
 private:
-	string nameScene;
 	Transform* tr_;
-	bool canChange;
-	int numT;
+	bool play;
+	string musicName_;
+
 };
