@@ -22,7 +22,7 @@ void Camera::update() {
 
 		checkBounds();
 
-		//camShake();
+		if(cShake_) camShake();
 		camera_.y = camPos.getY() - camera_.h / 2.0 - camShake_;
 	}
 }

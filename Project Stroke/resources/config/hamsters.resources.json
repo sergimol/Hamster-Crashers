@@ -19,6 +19,10 @@
       "file": "resources/images/heart.png"
     },
     {
+      "id": "creditos",
+      "file": "resources/images/creditos.png"
+    },
+    {
       "id": "sardinilla",
       "file": "resources/images/sardinilla.png"
     },
@@ -257,6 +261,18 @@
     {
       "id": "sueloJardin",
       "file": "resources/images/tiled/tileSetSueloLevel2.png"
+    },
+    {
+      "id": "objetosJardin",
+      "file": "resources/images/tiled/tilesetObjetosLevel2.png"
+    },
+    {
+      "id": "objetosJardinSombra",
+      "file": "resources/images/tiled/tilesetSombrasObjetosLevel2.png"
+    },
+    {
+      "id": "sueloCocina",
+      "file": "resources/images/tiled/tileSetSueloLevel3.png"
     },
     {
       "id": "q",
@@ -1727,6 +1743,22 @@
     {
       "id": "page4",
       "file": "resources/sound/pages/page4.wav"
+    },
+    {
+      "id": "microwaveBep",
+      "file": "resources/sound/microwave/bep.wav"
+    },
+    {
+      "id": "microwaveExplosion",
+      "file": "resources/sound/microwave/explosiondef.wav"
+    },
+    {
+      "id": "microwaveStatic",
+      "file": "resources/sound/microwave/static.wav"
+    },
+    {
+      "id": "tiktak",
+      "file": "resources/sound/microwave/tiktak.wav"
     }
   ],
 

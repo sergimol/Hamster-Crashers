@@ -42,7 +42,7 @@ private:
 
 	float camShake_;
 	bool down_;
-
+	bool cShake_;
 public:
 
 	Camera(SDL_Rect cam) : camera_(cam), cameraFollowPos_(Vector2D()), cameraState(State::Players), map_(nullptr), camShake_(0), down_(true) {}
@@ -57,6 +57,9 @@ public:
 	inline Vector2D getCamPos() const { return camPos; };
 	inline float getUpOffset() const { return upOffset; };
 	inline float getHeightMap() const { return heightMap_; };
+	inline void setcShake(bool b) { cShake_ = b; };
+
+	inline void setHeightMap(int h) { heightMap_ = h; };
 	void resetCamera();
 	Vector2D cameraFollowPos_;	//Guarda el punto de la posición de la camara cuando lo lea
 

@@ -15,7 +15,9 @@ public:
 	void resetVolumes() { fxVol_ = 0.5; musicVol_ = 0.5; sdlutils().setMusicVol(musicVol_); sdlutils().setFxVol(fxVol_); };
 	bool emptyChannel();
 	void StopTutorial();
-	void fadeout(int time) {}
+	void StopBossSounds();
+
+	void refreshMusicVol();
 	//FADEPRUEBA
 	//entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->fadeOut(3000);
 	//void fadeIn(int time);
@@ -27,24 +29,24 @@ public:
 	//local
 	int initMusicVol = 35;
 
-	int initLightVol = 90;
+	int initLightVol = 80;
 	int initStrongVol = 128;
-	int initAttackVol = 100;
+	int initAttackVol = 90;
 
 	int initDepVol = 40;
 	int initHeartAttackVol = 50;
 
-	int initCatVol = 40;
+	int initCatVol = 80;
 
 	int initHandVol = 80;
 
-	int initMonkeVol = 40;
+	int initMonkeVol = 128;
 
 	int inittrainBackgroundVol = 40;
 
 	int carVol = 60;
 
-	int initsoldierDepVol = 50;
+	int initsoldierDepVol = 65;
 
 	int notesReanimVol = 120;
 	int possesionVol = 120;
@@ -54,17 +56,21 @@ public:
 	int monchiSpecialVol = 120;
 	int canelonSpecialVol = 120;
 
-	int buttonVol = 100;
+	int buttonVol = 128;
 
 	int initEatVol = 60;
 
 	int pageSkipVol = 128;
-	int initTutorialVol = 80;
-	int initTransitionVol = 80;
+	int initTutorialVol = 70;
+	int initTransitionVol = 70;
 
 	int inittrapKitchenVol = 80;
 
-	int initBirdsVol = 100;
+	int initBirdsVol = 128;
+
+	int initMicrowaveVol = 128;
+	int initMicrowaveExplosionVol = 60;
+
 
 	void resetNumInts();
 private:
@@ -291,5 +297,11 @@ private:
 	Music* HamstersNivel4GameVersion;
 
 	SoundEffect* birds;
+
+	SoundEffect* microBep;
+	SoundEffect* microExplosion;
+	SoundEffect* microStatic;
+	SoundEffect* microTiktak;
+
 };
 

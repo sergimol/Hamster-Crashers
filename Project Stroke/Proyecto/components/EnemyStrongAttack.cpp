@@ -22,16 +22,18 @@ void EnemyStrongAttack::init() {
 }
 
 void EnemyStrongAttack::update() {
+
 	if (state_->getState() == GameStates::RUNNING) {
 		//Deja de mostrar el collider
 		if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
 			DEBUG_isAttacking_ = false;
 		}
 
-	
+
 		if (entity_->getComponent<AnimEnemyStateMachine>() != nullptr)
 		{
-			if (attackStarted_) 
+
+			if (attackStarted_)
 			{
 				//SE MANTIENE PEGANDO
 				if (sdlutils().currRealTime() > durationTime_ + beforeHitCD_) {
@@ -59,15 +61,14 @@ void EnemyStrongAttack::update() {
 					//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
 					//Si se colisiona..
-					if (CheckCollisions(attRect_, true))
-						//Suena el hit y le pega
-						entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stronghit");
-					//Si no colisiona..
-					else
-						//Suena el attackSound
-						entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
 
-					
+					if (CheckCollisions(attRect_, true)) {
+						//Suena el hit y le pega
+						if (entity_->getComponent<EntityAttribs>()->getId() == "monosinpatico")
+							entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("platillos");
+						else
+							entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stronghit");
+					}
 
 					DEBUG_isAttacking_ = true;
 				}
