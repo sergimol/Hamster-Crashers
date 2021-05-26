@@ -47,6 +47,7 @@ void StrongAttack::update() {
 bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 	bool canHit = false;
 	bool finCombo = false;
+	bool hasHit = false;
 
 	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 	//Cogemos todas las entidades del juego
@@ -68,6 +69,17 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 
 				//Comprobamos si está en la misma Z o relativamente cerca
 				if (eAttribs->ignoresMargin() || (abs((tr_->getRectCollide().y) - (eColRect.y)) < eAttribs->getMarginToAttack())) {
+
+					if (!hasHit) {
+						if (entity_->getMngr()->getHandler<Boss>() == ents[i] || entity_->getMngr()->getHandler<FinalBoss>() == ents[i]) {
+							entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handHit");
+						}
+						else
+							entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
+
+						hasHit = true;
+					}
+
 					//A�adimos a los combos
 					if (!canHit)
 						finCombo = entity_->getComponent<Combos>()->checkCombo(1);
@@ -211,16 +223,17 @@ void StrongAttack::attack() {
 
 			//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
-			//Si se colisiona..
-			if (CheckCollisions(attRect_))
-				//Suena el hit y le pega
-				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stronghit");
-			//Si no colisiona..
-			else {
-				//Suena el attackSound
+					//Si se colisiona..
+			if (!CheckCollisions(attRect_)) {
+				//	//Suena el hit y le pega
+				//	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
+				//}
+				////Si no colisiona..
+				//else {
+					//Suena el attackSound
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
-				//Animacion de ataque
-				anim_->setAnimBool(HamStatesAnim::STRONGATTACK, true);
+				//Animacion de ataque normalito
+				anim_->setAnimBool(HamStatesAnim::LIGHTATTACK, true);
 			}
 
 			DEBUG_isAttacking_ = true;

@@ -82,8 +82,8 @@ void MapMngr::update() {
 	//	Comprobamos la colision con los triggers salas
 	tmx::Object trigger;
 	auto& players = entity_->getMngr()->getPlayers();
-	if (!TriggerftCamera.empty())
-		trigger = TriggerftCamera.front(); //Recorrer triggers
+	if (!triggerFtCamera.empty())
+		trigger = triggerFtCamera.front(); //Recorrer triggers
 
 	auto& getProp = trigger.getProperties();
 	for (Entity* player : players) {
@@ -105,7 +105,7 @@ void MapMngr::update() {
 				camera->changeCamState(State::GoingTo);
 			}
 			//Borrar el punto de la camara del vector
-			TriggerftCamera.pop();
+			triggerFtCamera.pop();
 
 			//TUTORIAL
 			if (!sdlutils().tutorialDone() && stoi(trigger.getName()) < 4) {
@@ -140,20 +140,15 @@ void MapMngr::loadNewMap(string map) {
 	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
 
 	if (map_.load(map)) {
+
 		if (map == "resources/images/tiled/Level1Boss.tmx") {
 			scale = 2.5f;
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
 		}
 		else if (map == "resources/images/tiled/Level2.tmx") {
 			scale = 3.0f;
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stopbirds");
-
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
 		}
-		else if (map == "resources/images/tiled/Level3.tmx") {
-			//scale = 3.0f;
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stopbirds");
 
-		}
 
 		mapHeight_ = map_.getProperties()[0].getIntValue() * TAM_CELDA * scale;
 
@@ -215,7 +210,7 @@ void MapMngr::loadNewMap(string map) {
 					//Guardamos todos los triggers de cambio de sala
 					for (auto object : objects)
 					{
-						TriggerftCamera.push(object);
+						triggerFtCamera.push(object);
 					}
 				}
 				else if (layer->getName() == "entities") {
@@ -612,9 +607,9 @@ void MapMngr::loadEnemyRoom() {
 			auto* enemy = mngr_->addEntity();
 			enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
+				Vector2D(),256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
 
-			enemy->addComponent<FinalBossManager>(hamstersToLoad_.size());
+			enemy->addComponent<FinalBossManager>(hamstersToLoad_.size(), scale);
 
 			numberEnemyRoom++;
 
@@ -873,6 +868,14 @@ void MapMngr::addTrap(const tmx::Object& object, int x, int y) {
 
 	trap->addComponent<EntityAttribs>(1, 10.0f, "trap1", Vector2D(), 1, 0.0f, 1, true, false, false);
 
+}
+
+void MapMngr::resetTriggerList()
+{
+	while (!triggerFtCamera.empty())
+	{
+		triggerFtCamera.pop();
+	}
 }
 
 void MapMngr::clearColliders() {
