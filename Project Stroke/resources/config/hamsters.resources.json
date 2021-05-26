@@ -215,6 +215,18 @@
       "file": "resources/images/spritesheets/enemies/level3/fist_spritesheet.png"
     },
     {
+      "id": "bichoSheet",
+      "file": "resources/images/spritesheets/enemies/level2/bicho_spritesheet.png"
+    },
+    {
+      "id": "naranjaSheet",
+      "file": "resources/images/spritesheets/enemies/level3/naranja_spritesheet.png"
+    },
+    {
+      "id": "rataSheet",
+      "file": "resources/images/spritesheets/enemies/level2/rata_spritesheet.png"
+    },
+    {
       "id": "firstBoss",
       "file": "resources/images/boss1.png"
     },
@@ -3154,6 +3166,234 @@
       "cols": 19,
       "rows": 1,
       "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "bicho_idle",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 4,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "bicho_move",
+      "startFrameX": 4,
+      "startFrameY": 0,
+      "duration": 6,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "bicho_attack",
+      "startFrameX": 4,
+      "startFrameY": 1,
+      "duration": 6,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": 8
+    },
+    {
+      "id": "bicho_hit",
+      "startFrameX": 4,
+      "startFrameY": 2,
+      "duration": 4,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 70,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "bicho_stun",
+      "startFrameX": 2,
+      "startFrameY": 3,
+      "duration": 7,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "bicho_death",
+      "startFrameX": 4,
+      "startFrameY": 4,
+      "duration": 5,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 80,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "rata_idle",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 4,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "rata_move",
+      "startFrameX": 4,
+      "startFrameY": 0,
+      "duration": 6,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "rata_attack",
+      "startFrameX": 4,
+      "startFrameY": 1,
+      "duration": 5,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": 8
+    },
+    {
+      "id": "rata_strongattack",
+      "startFrameX": 4,
+      "startFrameY": 1,
+      "duration": 5,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": 8
+    },
+    {
+      "id": "rata_hit",
+      "startFrameX": 3,
+      "startFrameY": 2,
+      "duration": 4,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 70,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "rata_stun",
+      "startFrameX": 1,
+      "startFrameY": 3,
+      "duration": 7,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "rata_death",
+      "startFrameX": 2,
+      "startFrameY": 4,
+      "duration": 5,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 80,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "naranja_idle",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 3,
+      "cols": 5,
+      "rows": 5,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "naranja_move",
+      "startFrameX": 3,
+      "startFrameY": 0,
+      "duration": 6,
+      "cols": 5,
+      "rows": 5,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "naranja_attack",
+      "startFrameX": 4,
+      "startFrameY": 1,
+      "duration": 5,
+      "cols": 5,
+      "rows": 5,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": 8
+    },
+    {
+      "id": "naranja_hit",
+      "startFrameX": 4,
+      "startFrameY": 2,
+      "duration": 4,
+      "cols": 5,
+      "rows": 5,
+      "frameUpdate": 70,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "naranja_stun",
+      "startFrameX": 4,
+      "startFrameY": 2,
+      "duration": 4,
+      "cols": 5,
+      "rows": 5,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "naranja_death",
+      "startFrameX": 3,
+      "startFrameY": 3,
+      "duration": 6,
+      "cols": 5,
+      "rows": 5,
+      "frameUpdate": 80,
       "loop": 0,
       "chain": "",
       "attackFrame": -1

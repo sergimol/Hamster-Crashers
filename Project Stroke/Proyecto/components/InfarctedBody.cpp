@@ -78,6 +78,8 @@ void InfarctedBody::update() {
 							//Activamos el minijuego
 							entity_->getComponent<ReanimationGame>()->setActive(true);
 							entity_->getComponent<ReanimationGame>()->setRevPlayer(e);
+							//Sonido
+							entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("possesion");
 							//Pasamos a estar siendo revividos
 							reviving_ = true;
 							//Y deshabilitamos al que revive
@@ -136,7 +138,7 @@ void InfarctedBody::reanimate() {
 	// Desactivamos el GhostControl en caso de que no se hubiera llegado a activar
 	hamster_->getComponent<GhostCtrl>()->setActive(false);
 	// Deshacemos la posible posesión
-	hamster_->getComponent<PossesionGame>()->endPossesion();
+	hamster_->getComponent<PossesionGame>()->endPossesion();;
 	// Reactivamos el infarto
 	hamster_->getComponent<Stroke>()->setActive(true);
 	// Devolvemos la sombra

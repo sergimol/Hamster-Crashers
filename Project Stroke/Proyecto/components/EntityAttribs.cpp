@@ -258,7 +258,7 @@ void EntityAttribs::die() {
 	else if (id_ == "keta") {
 		tam = 100;
 	}
-	e->addComponent<Shadow>(false, false);
+	e->addComponent<Shadow>(false, true);
 	//Y reproducimos la animacion de muerto
 	e->addComponent<Animator>(&sdlutils().images().at(id_ + "Sheet"),
 		tam,
