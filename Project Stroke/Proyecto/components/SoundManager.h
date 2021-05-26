@@ -15,7 +15,7 @@ public:
 	void resetVolumes() { fxVol_ = 0.5; musicVol_ = 0.5; sdlutils().setMusicVol(musicVol_); sdlutils().setFxVol(fxVol_); };
 	bool emptyChannel();
 	void StopTutorial();
-	void StopCatSounds();
+	void StopBossSounds();
 
 	void refreshMusicVol();
 	//FADEPRUEBA

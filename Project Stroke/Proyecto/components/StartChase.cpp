@@ -69,7 +69,7 @@ void StartChase::update() {
 					cam_->changeCamState(State::GoingTo);
 					cam_->changeCamFollowPos(tr_->getPos().getX() - (sdlutils().width() / 2 - tr_->getW() + 10 ));
 
-					entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopCatSounds();
+					entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopBossSounds();
 
 					//Levantamos al gato
 					entity_->getMngr()->getHandler<Cat_>()->getComponent<Animator>()->play(sdlutils().anims().at("cat_wakeup"));
