@@ -4,6 +4,7 @@
 
 #include <cassert>
 
+
 #include "../json/JSON.h"
 
 SDLUtils::SDLUtils() :
@@ -30,6 +31,51 @@ SDLUtils::SDLUtils(std::string windowTitle, int width, int height,
 SDLUtils::~SDLUtils() {
 	closeSDLExtensions();
 	closeWindow();
+}
+
+void SDLUtils::loadData()
+{
+	ifstream file;
+	file.open("resources/config/savedata.dat");
+	if (file.is_open()) {
+		string dataId;
+		while (!file.eof()) {
+			file >> dataId;
+			if (dataId == "angelUnlocked")
+				file >> angelUnlocked_;
+
+			else if (dataId == "resolution") {
+				file >> resolutionIndex_;
+				setResolution();
+			}
+
+			else if (dataId == "vol") 
+				file >> musicVol_ >> fxVol_;
+
+			else if (dataId == "tutorialDone")
+				file >> tutorialDone_;
+		}
+		file.close();
+	}
+	else {
+		resolutionIndex_ = RESOLUTIONSCOUNT - 1;
+		angelUnlocked_ = false;
+		tutorialDone_ = false;
+		fxVol_ = 0.5;
+		musicVol_ = 0.5;
+	}
+}
+
+void SDLUtils::saveData() {
+	ofstream file;
+	file.open("resources/config/savedata.dat", ofstream::out | ofstream::trunc);
+	if (file.is_open()) {
+		file << "angelUnlocked " << angelUnlocked_ << endl;
+		file << "resolution " << resolutionIndex_ << endl;
+		file << "vol " << musicVol_ << " " << fxVol_ << endl;
+		file << "tutorialDone " << tutorialDone_ << endl;
+		file.close();
+	}
 }
 
 void SDLUtils::initWindow() {

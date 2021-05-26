@@ -13,7 +13,7 @@ public:
 	void setVolumeChannels();
 	void lowVolume(bool channel);
 	void upVolume(bool channel);
-	void resetVolumes() { fxVol_ = 0.5; musicVol_ = 0.5; setVolumeChannels(); };
+	void resetVolumes() { fxVol_ = 0.5; musicVol_ = 0.5; setVolumeChannels(); sdlutils().setMusicVol(musicVol_); sdlutils().setFxVol(fxVol_); };
 	bool emptyChannel();
 	void StopTutorial();
 	void fadeout(int time) {}
@@ -255,6 +255,7 @@ private:
 	SoundEffect* tutorial8;
 	SoundEffect* tutorial9;
 	SoundEffect* tutorial10;
+	SoundEffect* tutorialsingle;
 
 	int transitionNum = 0;
 	SoundEffect* transition0;

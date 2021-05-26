@@ -144,9 +144,11 @@ void FirstBossBehaviour::behave()
 		if (anim_->getState() == EnemyStatesAnim::SEQUENCE && owEntity->getComponent<Animator>()->OnAnimationFrameEnd())
 		{
 			startBehavior_ = true;
+
 			anim_->setAnimBool(EnemyStatesAnim::SEQUENCE, false);
 			//Empieza la musica del boss
 			owEntity->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1Boss1_0");
+			owEntity->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handInit");
 
 		}
 	}

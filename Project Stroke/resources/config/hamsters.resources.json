@@ -555,47 +555,91 @@
       "file": "resources/images/menuSprites/resolutions/fullscreen.png"
     },
     {
-      "id": "bar0",
+      "id": "musicBar0",
       "file": "resources/images/menuSprites/barLevels/bar0.png"
     },
     {
-      "id": "bar1",
+      "id": "musicBar1",
       "file": "resources/images/menuSprites/barLevels/bar1.png"
     },
     {
-      "id": "bar2",
+      "id": "musicBar2",
       "file": "resources/images/menuSprites/barLevels/bar2.png"
     },
     {
-      "id": "bar3",
+      "id": "musicBar3",
       "file": "resources/images/menuSprites/barLevels/bar3.png"
     },
     {
-      "id": "bar4",
+      "id": "musicBar4",
       "file": "resources/images/menuSprites/barLevels/bar4.png"
     },
     {
-      "id": "bar5",
+      "id": "musicBar5",
       "file": "resources/images/menuSprites/barLevels/bar5.png"
     },
     {
-      "id": "bar6",
+      "id": "musicBar6",
       "file": "resources/images/menuSprites/barLevels/bar6.png"
     },
     {
-      "id": "bar7",
+      "id": "musicBar7",
       "file": "resources/images/menuSprites/barLevels/bar7.png"
     },
     {
-      "id": "bar8",
+      "id": "musicBar8",
       "file": "resources/images/menuSprites/barLevels/bar8.png"
     },
     {
-      "id": "bar9",
+      "id": "musicBar9",
       "file": "resources/images/menuSprites/barLevels/bar9.png"
     },
     {
-      "id": "bar10",
+      "id": "musicBar10",
+      "file": "resources/images/menuSprites/barLevels/bar10.png"
+    },
+    {
+      "id": "fxBar0",
+      "file": "resources/images/menuSprites/barLevels/bar0.png"
+    },
+    {
+      "id": "fxBar1",
+      "file": "resources/images/menuSprites/barLevels/bar1.png"
+    },
+    {
+      "id": "fxBar2",
+      "file": "resources/images/menuSprites/barLevels/bar2.png"
+    },
+    {
+      "id": "fxBar3",
+      "file": "resources/images/menuSprites/barLevels/bar3.png"
+    },
+    {
+      "id": "fxBar4",
+      "file": "resources/images/menuSprites/barLevels/bar4.png"
+    },
+    {
+      "id": "fxBar5",
+      "file": "resources/images/menuSprites/barLevels/bar5.png"
+    },
+    {
+      "id": "fxBar6",
+      "file": "resources/images/menuSprites/barLevels/bar6.png"
+    },
+    {
+      "id": "fxBar7",
+      "file": "resources/images/menuSprites/barLevels/bar7.png"
+    },
+    {
+      "id": "fxBar8",
+      "file": "resources/images/menuSprites/barLevels/bar8.png"
+    },
+    {
+      "id": "fxBar9",
+      "file": "resources/images/menuSprites/barLevels/bar9.png"
+    },
+    {
+      "id": "fxBar10",
       "file": "resources/images/menuSprites/barLevels/bar10.png"
     },
     {
@@ -633,6 +677,22 @@
     {
       "id": "level2background4",
       "file": "resources/images/backgrounds/level2/level2parallax4.png"
+    },
+    {
+      "id": "level3background1",
+      "file": "resources/images/backgrounds/level2/level3parallax1.jpg"
+    },
+    {
+      "id": "level3background2",
+      "file": "resources/images/backgrounds/level2/level3parallax1.png"
+    },
+    {
+      "id": "level3background3",
+      "file": "resources/images/backgrounds/level3/level2parallax3.png"
+    },
+    {
+      "id": "level3background4",
+      "file": "resources/images/backgrounds/level3/level3parallax4.png"
     },
     {
       "id": "hamsterSelectorBlank",
@@ -1110,6 +1170,10 @@
     {
       "id": "cine25",
       "file": "resources/images/transitions/final/cinematica25.jpg"
+    },
+    {
+      "id": "cat",
+      "file": "resources/images/spritesheets/enemies/level2/cat_spritesheet.png"
     }
   ],
 
@@ -1441,6 +1505,18 @@
     {
       "id": "tutorial1",
       "file": "resources/sound/dialogos/dialogo1.wav"
+    },
+    {
+      "id": "tutorial2",
+      "file": "resources/sound/dialogos/dialogo2.wav"
+    },
+    {
+      "id": "tutorial3",
+      "file": "resources/sound/dialogos/dialogo3.wav"
+    },
+    {
+      "id": "tutorial3single",
+      "file": "resources/sound/dialogos/dialogo3single.wav"
     },
     {
       "id": "possesion",
@@ -2676,7 +2752,7 @@
       "cols": 5,
       "rows": 7,
       "frameUpdate": 100,
-      "loop": 0,
+      "loop": 1,
       "chain": "",
       "attackFrame": -1
     }
