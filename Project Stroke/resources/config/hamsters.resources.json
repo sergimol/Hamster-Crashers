@@ -1727,6 +1727,22 @@
     {
       "id": "page4",
       "file": "resources/sound/pages/page4.wav"
+    },
+    {
+      "id": "microwaveBep",
+      "file": "resources/sound/microwave/bep.wav"
+    },
+    {
+      "id": "microwaveExplosion",
+      "file": "resources/sound/microwave/explosiondef.wav"
+    },
+    {
+      "id": "microwaveStatic",
+      "file": "resources/sound/microwave/static.wav"
+    },
+    {
+      "id": "tiktak",
+      "file": "resources/sound/microwave/tiktak.wav"
     }
   ],
 

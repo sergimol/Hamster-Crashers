@@ -154,6 +154,12 @@ void SoundManager::init() {
 	page3 = &sdlutils().soundEffects().at("page3");
 	page4 = &sdlutils().soundEffects().at("page4");
 
+	microBep = &sdlutils().soundEffects().at("microwaveBep");
+	microExplosion = &sdlutils().soundEffects().at("microwaveExplosion");
+	microStatic = &sdlutils().soundEffects().at("microwaveStatic");
+	microTiktak = &sdlutils().soundEffects().at("tiktak");
+
+
 	Vector2D vol = sdlutils().volumes();
 	musicVol_ = vol.getX();
 	fxVol_ = vol.getY();
@@ -298,11 +304,11 @@ void SoundManager::play(std::string soundName) {
 	}
 	else if (soundName == "catMeowWalking") {
 		catMeowWalking->setChannelVolume(fxVol_ * initCatVol);
-		catMeowWalking->play(11,6);
+		catMeowWalking->play(11, 6);
 	}
 	else if (soundName == "catMeowSleeping") {
 		catMeowSleeping->setChannelVolume(fxVol_ * initCatVol);
-		catMeowSleeping->play(0,6);
+		catMeowSleeping->play(0, 6);
 	}
 
 	//Boss Mano
@@ -386,7 +392,7 @@ void SoundManager::play(std::string soundName) {
 	else if (soundName == "birds") {
 		// sonidos ambiente
 		birds->setChannelVolume(fxVol_ * initBirdsVol);
- 		birds->play(0,5);
+		birds->play(0, 5);
 	}
 
 
@@ -430,22 +436,22 @@ void SoundManager::play(std::string soundName) {
 	//CANCIONES
 	else if (soundName == "HamstersMainThemev2") {
 		Mix_HaltMusic();
-		HamstersMainThemev2->setMusicVolume(musicVol_* initMusicVol);
+		HamstersMainThemev2->setMusicVolume(musicVol_ * initMusicVol);
 		HamstersMainThemev2->play(200);
 	}
 	else if (soundName == "Nivel1GameVersion") {
 		Mix_HaltMusic();
-		Nivel1GameVersion->setMusicVolume(musicVol_* initMusicVol);
+		Nivel1GameVersion->setMusicVolume(musicVol_ * initMusicVol);
 		Nivel1GameVersion->play(200);
 	}
 	else if (soundName == "Nivel1Boss1_0") {
 		Mix_HaltMusic();
-		Nivel1Boss1_0->setMusicVolume(musicVol_* initMusicVol);
+		Nivel1Boss1_0->setMusicVolume(musicVol_ * initMusicVol);
 		Nivel1Boss1_0->play(200);
 	}
 	else if (soundName == "HamstersNivel2GameVersion") {
 		Mix_HaltMusic();
-		HamstersNivel2GameVersion->setMusicVolume(musicVol_* initMusicVol);
+		HamstersNivel2GameVersion->setMusicVolume(musicVol_ * initMusicVol);
 		HamstersNivel2GameVersion->play(200);
 	}
 	else if (soundName == "HamstersNivel2_Boss160bpm") {
@@ -455,13 +461,29 @@ void SoundManager::play(std::string soundName) {
 	}
 	else if (soundName == "HamstersNivel4_Boss2") {
 		Mix_HaltMusic();
-		HamstersNivel4_Boss2->setMusicVolume(musicVol_* initMusicVol);
+		HamstersNivel4_Boss2->setMusicVolume(musicVol_ * initMusicVol);
 		HamstersNivel4_Boss2->play(200);
 	}
 	else if (soundName == "HamstersNivel4GameVersion") {
 		Mix_HaltMusic();
-		HamstersNivel4GameVersion->setMusicVolume(musicVol_* initMusicVol);
+		HamstersNivel4GameVersion->setMusicVolume(musicVol_ * initMusicVol);
 		HamstersNivel4GameVersion->play(200);
+	}
+	else if (soundName == "microwaveBep") {
+		microBep->setChannelVolume(fxVol_ * initMicrowaveVol);
+		microBep->play(0);
+	}
+	else if (soundName == "microwaveExplosion") {
+		microExplosion->setChannelVolume(fxVol_ * initMicrowaveExplosionVol);
+		microExplosion->play(0);
+	}
+	else if (soundName == "microwaveStatic") {
+		microStatic->setChannelVolume(fxVol_ * initMicrowaveVol);
+		microStatic->play(0);
+	}
+	else if (soundName == "tiktak") {
+		microTiktak->setChannelVolume(fxVol_ * initMicrowaveVol);
+		microTiktak->play(0);
 	}
 
 }
