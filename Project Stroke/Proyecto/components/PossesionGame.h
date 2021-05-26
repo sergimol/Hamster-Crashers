@@ -10,14 +10,14 @@ using namespace std;
 
 class PossesionGame :public Component {
 public:
-	PossesionGame() : possesed(nullptr), lineH(nullptr), lineV(nullptr) {};
+	PossesionGame() : possesed_(nullptr), lineH_(nullptr), lineV_(nullptr) {};
 	~PossesionGame() { deleteTextures(); };
 
 	virtual void init() override;
 
 	virtual void update() override;
 
-	inline void setPossesed(Entity* e) { possesed = e; };
+	inline void setPossesed(Entity* e) { possesed_ = e; };
 
 	virtual void onEnable() override;
 
@@ -35,62 +35,62 @@ private:
 	void updateGamePos();
 	void deleteTextures();
 
-	Entity* possesed, * keyGame;
-	HamsterStateMachine* possesedState;
+	Entity* possesed_, * keyGame_;
+	HamsterStateMachine* possesedState_;
 	GameStates* state_;
 
-	SDL_Rect lineHPos, lineVPos;
+	SDL_Rect lineHPos_, lineVPos_;
 
-	Entity* lineH, * lineV;
+	Entity* lineH_, * lineV_;
 
 	//CONSTANTES DE TECLAS, TEXTURAS Y RELACIONADOS
-	const int numKeys = 4;
+	const int numKeys_ = 4;
 
-	const array<Texture*, 4> keyTextures{ &sdlutils().images().at("w") , 
+	const array<Texture*, 4> keyTextures_{ &sdlutils().images().at("w") , 
 										  &sdlutils().images().at("a2"), 
 										  &sdlutils().images().at("s"),  
 										  &sdlutils().images().at("d")};
 
-	const array<Texture*, 4> keyDownTextures{ &sdlutils().images().at("wPressed") ,
+	const array<Texture*, 4> keyDownTextures_{ &sdlutils().images().at("wPressed") ,
 										  &sdlutils().images().at("a2Pressed"),
 										  &sdlutils().images().at("sPressed"),
 										  &sdlutils().images().at("dPressed") };
 
 
 
-	const array<SDL_Keycode, 4> keyCodes{ SDLK_w, 
+	const array<SDL_Keycode, 4> keyCodes_{ SDLK_w, 
 		  								  SDLK_a, 
 										  SDLK_s, 
 										  SDLK_d };
 
-	const array<Texture*, 4> buttonTextures{ &sdlutils().images().at("a"), 
+	const array<Texture*, 4> buttonTextures_{ &sdlutils().images().at("a"), 
 											 &sdlutils().images().at("b"), 
 											 &sdlutils().images().at("x"), 
 											 &sdlutils().images().at("y") };
 
-	const array<Texture*, 4> buttonDownTextures{ &sdlutils().images().at("aPressed"),
+	const array<Texture*, 4> buttonDownTextures_{ &sdlutils().images().at("aPressed"),
 											 &sdlutils().images().at("bPressed"),
 											 &sdlutils().images().at("xPressed"),
 											 &sdlutils().images().at("yPressed") };
 
-	const array<SDL_GameControllerButton, 4> buttonCodes{ SDL_CONTROLLER_BUTTON_A, 
+	const array<SDL_GameControllerButton, 4> buttonCodes_{ SDL_CONTROLLER_BUTTON_A, 
 														  SDL_CONTROLLER_BUTTON_B, 
 														  SDL_CONTROLLER_BUTTON_X, 
 														  SDL_CONTROLLER_BUTTON_Y };
 
-	SDL_Keycode actualKey;
-	SDL_GameControllerButton actualButton;
+	SDL_Keycode actualKey_;
+	SDL_GameControllerButton actualButton_;
 
 	// Para obtener el estado de los botones del mando que corresponde
 	int playerNumber_;
 	
 	//CONTROL DEL MINIJUEGO
 
-	bool roundPassed = false, failed = false;
+	bool roundPassed_ = false, failed_ = false;
 	
-	const short int maxMistakes = 500;
+	const short int maxMistakes_ = 3;
 
-	short int mistakes = 0;
+	short int mistakes_ = 0;
 
 	//CONSTANTES VISUALES 
 	float H_LINE_SIZE_X = 400, H_LINE_SIZE_Y = 20, H_LINE_OFFSET_X = -200, H_LINE_OFFSET_Y = -50,

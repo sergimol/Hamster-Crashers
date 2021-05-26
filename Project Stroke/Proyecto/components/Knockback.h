@@ -19,12 +19,13 @@ public:
 	void init() override;
 	void knockback();
 	void knockback(int kVel);
+	void doKnockback(int kVel);
 	inline void setKnockbackDistance(int val) { knockbackVel_ = val; }
 	inline int getKnockback() const { return knockbackVel_; }
 
 private:
 	Transform* tr_;
 	int knockbackVel_;
+	AnimHamsterStateMachine* hms_;
 	//bool isStunned_;
-}
-;
+};

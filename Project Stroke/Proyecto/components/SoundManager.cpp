@@ -169,6 +169,15 @@ void SoundManager::init() {
 	Mix_AllocateChannels(16);
 }
 
+void SoundManager::resetNumInts() {
+	randomNum = 0;
+	canelonState = 0;
+	canelonState = 0;
+	buttonState = 0;
+	tutorialNum = 0;
+	transitionNum = 0;
+}
+
 void SoundManager::StopTutorial() {
 	Mix_HaltChannel(7);
 }
@@ -509,7 +518,10 @@ void SoundManager::play(std::string soundName) {
 
 
 	else if (soundName == "birds") {
-		birds->play(200);
+		birds->play(200, 6);
+	}
+	else if (soundName == "stopbirds") {
+		birds->haltChannel(6);
 	}
 
 	//Recoger items

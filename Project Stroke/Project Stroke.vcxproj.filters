@@ -486,6 +486,9 @@
     <ClCompile Include="Proyecto\components\Animator.cpp">
       <Filter>Archivos de origen\components\Animation</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\ReanimationAlone.cpp">
+      <Filter>Archivos de origen\components\Entity\Hamster\Stroke</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -835,6 +838,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\LifeTime.h">
       <Filter>Archivos de encabezado\Components\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\ReanimationAlone.h">
+      <Filter>Archivos de encabezado\Components\Entity\Hamster\Stroke</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

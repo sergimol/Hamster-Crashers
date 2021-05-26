@@ -12,7 +12,7 @@ const enum class HamStatesAnim {
 	STRONGATTACK, STRONGCOMBO,
 	HITTED, STUNNED, DEAD,
 	STROKE, GHOST,
-	DEFAULT
+	DEFAULT, STROKE_ALONE
 };
 
 
@@ -39,6 +39,7 @@ private:
 	bool lCombo;
 	bool sCombo;
 	bool stroke;
+	bool strokeAlone;
 	bool ability;
 
 public: 
