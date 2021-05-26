@@ -64,7 +64,7 @@ void Parallax::checkRelativePos()
 	camPos_ = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 
 	//Calcula la futura y
-	float y = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->getMaxH() - camPos_.h + camOffset_;
+	float y = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->getMaxH() - camPos_.h + camOffset_ - 380;
 
 	//Si se llega al principio o al final se rotan llas tres imágenes
 	if (camPos_.x >= rightTr_->getPos().getX())

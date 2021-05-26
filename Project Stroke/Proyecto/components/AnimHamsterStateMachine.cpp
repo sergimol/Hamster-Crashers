@@ -60,6 +60,8 @@ void AnimHamsterStateMachine::HandleAnimState()
 	if (stroke)
 		currentState = HamStatesAnim::STROKE;
 
+	if (strokeAlone)
+		currentState = HamStatesAnim::STROKE_ALONE;
 }
 
 //Cambia las animaciones dependiendo del estado del hamster
@@ -116,6 +118,9 @@ void AnimHamsterStateMachine::CheckAnimState()
 		case HamStatesAnim::STROKE:
 			anim->play(sdlutils().anims().at(id + "_ghost_spawn"));
 			break;
+		case HamStatesAnim::STROKE_ALONE:
+			anim->play(sdlutils().anims().at(id + "_stroke"));
+			break;
 		}
 	}
 
@@ -168,6 +173,9 @@ void AnimHamsterStateMachine::setAnimBool(HamStatesAnim h, bool b)
 		break;
 	case HamStatesAnim::STROKE:
 		stroke = b;
+		break;
+	case HamStatesAnim::STROKE_ALONE:
+		strokeAlone = b;
 		break;
 	}
 }
