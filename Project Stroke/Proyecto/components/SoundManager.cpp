@@ -180,7 +180,7 @@ void SoundManager::StopTutorial() {
 	Mix_HaltChannel(7);
 }
 
-void SoundManager::StopCatSounds() {
+void SoundManager::StopBossSounds() {
 	Mix_HaltChannel(6);
 	Mix_HaltChannel(5);
 }
@@ -340,7 +340,7 @@ void SoundManager::play(std::string soundName) {
 	else if (soundName == "trainBackground") {
 		//Sonidos tren
 		trainBackground->setChannelVolume(fxVol_ * inittrainBackgroundVol);
-		trainBackground->play(200);
+		trainBackground->play(200,6);
 	}
 	else if (soundName == "trainPipi") {
 		trainPipi->setChannelVolume(fxVol_ * inittrainBackgroundVol);

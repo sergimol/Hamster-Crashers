@@ -263,6 +263,18 @@
       "file": "resources/images/tiled/tileSetSueloLevel2.png"
     },
     {
+      "id": "objetosJardin",
+      "file": "resources/images/tiled/tilesetObjetosLevel2.png"
+    },
+    {
+      "id": "objetosJardinSombra",
+      "file": "resources/images/tiled/tilesetSombrasObjetosLevel2.png"
+    },
+    {
+      "id": "sueloCocina",
+      "file": "resources/images/tiled/tileSetSueloLevel3.png"
+    },
+    {
       "id": "q",
       "file": "resources/images/tecla_Q.png"
     },

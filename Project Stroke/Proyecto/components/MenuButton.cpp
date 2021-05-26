@@ -247,7 +247,7 @@ void MenuButton::pressed() {
 	else if (buttonName_ == "exit") {
 		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->resetCamera();
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetNumInts();
-		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopCatSounds();
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopBossSounds();
 		//Vuelve a renderizar el menu
 		state_->setState(GameStates::MAINMENU);
 
