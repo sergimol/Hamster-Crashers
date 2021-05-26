@@ -1172,6 +1172,10 @@
       "file": "resources/images/transitions/final/cinematica25.jpg"
     },
     {
+      "id": "cineMuerte",
+      "file": "resources/images/transitions/cinematicaMuerte.jpg"
+    },
+    {
       "id": "cat",
       "file": "resources/images/spritesheets/enemies/level2/cat_spritesheet.png"
     }
