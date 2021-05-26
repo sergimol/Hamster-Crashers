@@ -122,7 +122,7 @@ void MovementInChase::update() {
 		SDL_Rect rectPlayer = tr_->getRectCollide();
 		rectPlayer.x += goalVel_.getX();
 		rectPlayer.y += goalVel_.getY() + tr_->getFloor();
-		
+
 		SDL_Rect rectFoot = tr_->getRectCollide();
 		rectFoot.x += goalVel_.getX();
 		rectFoot.y += goalVel_.getY() + tr_->getFloor();
@@ -132,12 +132,20 @@ void MovementInChase::update() {
 			col_->tryToMoveObs(dir, goalVel_, rectFoot, false);		//Intenta moverse
 		}
 
-		if(grav_->isActive())
+		if (hms_->getState() != HamStates::STUNNED && grav_->isActive())
 			grav_->checkHeight(rectPlayer);					//Comprobamos que no tenga que subir un escalon
+		else {
+			grav_->checkHeight(rectPlayer);					//Comprobamos que no tenga que subir un escalon
+
+		}
 
 		if (grav_->getStuck())			vel.setX(0);				//Si lo tiene que subir y no salta no se mueve en x
 
-	//SALTO	
+
+		if (grav_->GetHeighCh() && jump_ != 45.0f) jump_ = 45.0f;
+		else if (!grav_->GetHeighCh() && jump_ != 35.0f) jump_ = 35.0f;
+
+		//SALTO	
 		if (z <= grav_->getFloor()) {
 			auto* combo = entity_->getComponent<Combos>();
 			if (combo != nullptr) {

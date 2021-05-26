@@ -235,10 +235,10 @@ void MapMngr::loadNewMap(string map) {
 							startChaseTrigger(object);
 						}
 						else if (object.getName() == "secondBoss") { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-							auto* enemy = entity_->getMngr()->addEntity();
+							auto* enemy = entity_->getMngr()->addTrap();
 							enemy->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-								Vector2D(), 440.0f * scale, 350.0f * scale, 0.0f, 0.6, 1);
+								Vector2D(), 300.0f * scale, 240.0f * scale, 0.0f, 0.4, 1);
 
 							//Le dejamos durmiendo
 							enemy->addComponent<Animator>(&sdlutils().images().at("cat"),
@@ -256,7 +256,7 @@ void MapMngr::loadNewMap(string map) {
 							enemy->addComponent<CatMovement>();
 
 							enemy->addComponent<EntityAttribs>();
-							enemy->addComponent<ContactDamage>(20, 30, false, false, false);
+							enemy->addComponent<ContactDamage>(10, 200, false, false, false);
 							enemy->getMngr()->setHandler<Cat_>(enemy);
 						}
 						else if (object.getName() == "microondas") { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
@@ -561,7 +561,7 @@ void MapMngr::loadEnemyRoom() {
 			numberEnemyRoom++;
 		}
 		else if (name == "firstBoss" && prop[1].getIntValue() == Room && prop[2].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-			auto* enemy = mngr_->addEntity();
+			auto* enemy = mngr_->addTrap();
 			enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, (object.getPosition().y - 300) * scale),
 				Vector2D(), scale * 164.0f, scale * 600.0f, 0.0f, 0.5f, 1.0f)->getFlip() = true;
@@ -786,6 +786,7 @@ void MapMngr::newSceneTrigger(string newScene, const tmx::Object& object) {
 	trigger->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 1, 1);
 	trigger->addComponent<TriggerScene>(newScene, object.getProperties()[1].getIntValue());
+	trigger->getMngr()->setHandler<TriggetCat>(trigger);
 }
 
 void MapMngr::startChaseTrigger(const tmx::Object& object) {
