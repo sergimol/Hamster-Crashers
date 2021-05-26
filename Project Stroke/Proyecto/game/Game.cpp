@@ -70,6 +70,7 @@ void Game::init() {
 	SDLUtils::init("Squeak Ship", 1920, 1080, "resources/config/hamsters.resources.json");
 	sdlutils().loadData();
 	
+	mngr_->getStrokeActive() = sdlutils().tutorialDone();
 	//SDL_SetWindowFullscreen(sdlutils().window(), SDL_WINDOW_FULLSCREEN);	//   SDL_WINDOW_FULLSCREEN  ||   SDL_WINDOW_FULLSCREEN_DESKTOP
 
 	//CAMBIAR TAMAÑO DE PANTALLA, ESCALA DEL RENDER Y ALTERNAR ENTRE PANTALLA COMPLETA
