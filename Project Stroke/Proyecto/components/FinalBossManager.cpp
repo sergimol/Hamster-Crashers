@@ -52,16 +52,26 @@ void FinalBossManager::init() {
 
 	fist_ = entity_->getMngr()->addEntity(); //Referencia al puño
 	fistTr_ = fist_->addComponent<Transform>(
-		tr_->getPos(), Vector2D(), 256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f);
+		tr_->getPos(), Vector2D(), scale_ * 164.0f, scale_ * 300.0f, 0.0f, 0.8f, 0.8f);
 	fistTr_->getFlip() = true;
 
 	fist_->addComponent<EnemyStateMachine>();
 	fist_->setGroup<Enemy>(true);
 
-	fistAttribs_ = fist_->addComponent<EntityAttribs>(800 + (hamsNum_ * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
+	fistAttribs_ = fist_->addComponent<EntityAttribs>(800 + (hamsNum_ * 100), 0.0, "fist", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
 
-	fist_->addComponent<Image>(&sdlutils().images().at("firstBoss"));
-	//fistAnim_ = fist_->addComponent<AnimEnemyStateMachine>();
+	//fist_->addComponent<Image>(&sdlutils().images().at("firstBoss"));
+	fist_->addComponent<Animator>(
+		&sdlutils().images().at("fistSheet"),
+		164,
+		300,
+		3,
+		3,
+		100,
+		Vector2D(0, 0),
+		3
+		);
+	fistAnim_ = fist_->addComponent<AnimEnemyStateMachine>();
 
 	bossPunch_ = fist_->addComponent<FinalBossPunch>();
 	movPunch_ = fist_->addComponent<MovementSimple>();
