@@ -81,6 +81,8 @@ void MenuButton::setSelectable(bool s)
 
 	if (selectable_)
 		button_ = &sdlutils().images().at(buttonName_ + "Button");
+	else if(buttonName_ == "angel" && !sdlutils().angelUnlocked())
+		button_ = &sdlutils().images().at(buttonName_ + "ButtonLocked");
 	else
 		button_ = &sdlutils().images().at(buttonName_ + "ButtonUnselectable");
 
@@ -152,7 +154,7 @@ void MenuButton::pressed() {
 	else if (buttonName_ == "quit") {
 		ih().startQuitEvent();
 	}
-	else if (buttonName_ == "sardinilla" || buttonName_ == "keta" || buttonName_ == "monchi" || buttonName_ == "canelon") {
+	else if (buttonName_ == "sardinilla" || buttonName_ == "keta" || buttonName_ == "monchi" || buttonName_ == "canelon" || buttonName_ == "angel") {
 		auto* mapa = entity_->getMngr()->getHandler<Map>();
 		mapa->getComponent<MapMngr>()->addHamster(buttonName_);
 
@@ -170,7 +172,7 @@ void MenuButton::pressed() {
 		menuMngr->setLastUnselectable(buttonName_);
 
 		auto selectedIndicator = mngr->addMenu();
-		selectedIndicator->addComponent<MenuIndicator>("p" + to_string(sdlutils().hamstersChosen()), Vector2D(dest_.x + 90, dest_.y), stateNumber_);
+		selectedIndicator->addComponent<MenuIndicator>("p" + to_string(sdlutils().hamstersChosen()), Vector2D(dest_.x + 45, dest_.y - 70), stateNumber_);
 		indctrs.push_back(selectedIndicator);
 
 		//Cuando haya seleccionado a los hamsters...

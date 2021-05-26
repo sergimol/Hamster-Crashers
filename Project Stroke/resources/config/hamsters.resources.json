@@ -443,6 +443,22 @@
       "file": "resources/images/menuSprites/canelonButtonUnselectable.png"
     },
     {
+      "id": "angelButton",
+      "file": "resources/images/menuSprites/angelButton.png"
+    },
+    {
+      "id": "angelButtonEnter",
+      "file": "resources/images/menuSprites/angelButtonEnter.png"
+    },
+    {
+      "id": "angelButtonUnselectable",
+      "file": "resources/images/menuSprites/angelButtonUnselectable.png"
+    },
+    {
+      "id": "angelButtonLocked",
+      "file": "resources/images/menuSprites/angelButtonLocked.png"
+    },
+    {
       "id": "backButton",
       "file": "resources/images/menuSprites/backButton.png"
     },
@@ -681,6 +697,10 @@
     {
       "id": "hamsterSelectorBlank",
       "file": "resources/images/menuSprites/hamsterSelectorBlank.png"
+    },
+    {
+      "id": "hamsterSelectorBlankLocked",
+      "file": "resources/images/menuSprites/hamsterSelectorBlankLocked.png"
     },
     {
       "id": "mainMenuBlank",
