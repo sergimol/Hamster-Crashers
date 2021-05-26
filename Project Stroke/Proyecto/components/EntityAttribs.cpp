@@ -301,6 +301,7 @@ void EntityAttribs::die() {
 		if (entity_->getMngr()->getHandler<Boss>() == entity_) {
 			entity_->getMngr()->setHandler<Boss>(nullptr);
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
+			Mix_FadeOutMusic(2000);
 
 		}
 		else if (entity_->getMngr()->getHandler<FinalBoss>() == entity_) {

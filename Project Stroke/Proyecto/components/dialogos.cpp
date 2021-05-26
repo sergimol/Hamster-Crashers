@@ -37,7 +37,7 @@ dialogos::dialogos()
 
 void dialogos::render() {
 	//Controlamos que solo se renderice cuando se tenga que mostrar
-	if (renderDialogues) {
+	if (renderDialogues && !DONTRENDERANYTHING) {
 		barText_->render(barDest);
 		dialogoText_->render(dialogoDest);
 		explicacionText_->render(explicacionDest);
@@ -46,38 +46,43 @@ void dialogos::render() {
 }
 
 void dialogos::update() {
-	if (showDialogue_) {
-		renderDialogues = true;
-		if (sdlutils().currRealTime() > altTime_ + altCD_) {
-			if (isAlt_) {
-				explicacionText_ = &sdlutils().images().at("explicacion" + to_string(dialogueNum_));
+
+	if (!DONTRENDERANYTHING) {
+
+
+		if (showDialogue_) {
+			renderDialogues = true;
+			if (sdlutils().currRealTime() > altTime_ + altCD_) {
+				if (isAlt_) {
+					explicacionText_ = &sdlutils().images().at("explicacion" + to_string(dialogueNum_));
+				}
+				else {
+					explicacionText_ = &sdlutils().images().at("explicacion" + to_string(dialogueNum_) + "alt");
+				}
+				isAlt_ = !isAlt_;
+				altTime_ = sdlutils().currRealTime();
 			}
-			else {
-				explicacionText_ = &sdlutils().images().at("explicacion" + to_string(dialogueNum_) + "alt");
-			}
-			isAlt_ = !isAlt_;
-			altTime_ = sdlutils().currRealTime();
+
+			show();
 		}
+		else
+			unshow();
 
-		show();
-	}
-	else
-		unshow();
+		angelDest.y = angelDestI.y * position;
+		barDest.y = barDestI.y * position;
+		dialogoDest.y = dialogoDestI.y * position;
+		explicacionDest.y = explicacionDestI.y * position;
 
-	angelDest.y = angelDestI.y * position;
-	barDest.y = barDestI.y * position;
-	dialogoDest.y = dialogoDestI.y * position;
-	explicacionDest.y = explicacionDestI.y * position;
-
-	//Oculta el dialogo cuando termina el audio
-	if (showDialogue_ && entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->emptyChannel())
-	{
-		//Cambiamos el estado de mostrarse a no mostrarse
-		showDialogue_ = false;
-	}
-	if (ih().isKeyDown(SDL_SCANCODE_RETURN) || ih().isAnyBButtonDown()) {
-		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopTutorial();
-		showDialogue_ = false;
+		//Oculta el dialogo cuando termina el audio
+		if (showDialogue_ && entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->emptyChannel())
+		{
+			//Cambiamos el estado de mostrarse a no mostrarse
+			showDialogue_ = false;
+		}
+		if (ih().isKeyDown(SDL_SCANCODE_RETURN) || ih().isAnyBButtonDown()) {
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopTutorial();
+			showDialogue_ = false;
+		}
 	}
 }
 //Muestra los dialogos
@@ -92,11 +97,12 @@ void dialogos::unshow() {
 	if (position < 3.0f) {
 		position = position + 0.1f;
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stopTutorial");
-
 	}
 	else {
 		renderDialogues = false;
 	}
+	if (dialogueNum_ >= 3)
+		DONTRENDERANYTHING = true;
 }
 
 void dialogos::changeDialogue() {
