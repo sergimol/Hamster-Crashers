@@ -835,6 +835,14 @@
       "file": "resources/images/UI/hamsterUI/especialRpressed.png"
     },
     {
+      "id": "AbilityOnB",
+      "file": "resources/images/UI/hamsterUI/especialRB.png"
+    },
+    {
+      "id": "AbilityOffB",
+      "file": "resources/images/UI/hamsterUI/especialRBpressed.png"
+    },
+    {
       "id": "Hexagon",
       "file": "resources/images/UI/bossUI/bossIconHead.png"
     },

@@ -17,8 +17,8 @@ void Ability::init() {
 	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
 	assert(state_ != nullptr);
 
+	playerNum_ = entity_->getComponent<EntityAttribs>()->getNumber();
 	auto* ui = entity_->getComponent<UI>();
-	auto name = entity_->getComponent<EntityAttribs>()->getId();
 
 	txtOn = &sdlutils().images().at("AbilityOn");
 	txtOff = &sdlutils().images().at("AbilityOff");
@@ -45,6 +45,14 @@ void Ability::update() {
 			onUse_ = false;
 			endAbility();
 			state = HamStates::DEFAULT;
+		}
+		if (ih().playerHasController(playerNum_)) {
+			txtOn = &sdlutils().images().at("AbilityOnB");
+			txtOff = &sdlutils().images().at("AbilityOffB");
+		}
+		else {
+			txtOn = &sdlutils().images().at("AbilityOn");
+			txtOff = &sdlutils().images().at("AbilityOff");
 		}
 	}
 }
