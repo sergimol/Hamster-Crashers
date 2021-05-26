@@ -3,6 +3,7 @@
 #include "ImageSecuence.h"
 #include "EnemyMother.h"
 #include "MenuButton.h"
+#include "Creditos.h"
 #include "MenuIndicator.h"
 #include "MenuButtonManager.h"
 #include "SoundManager.h"
@@ -136,6 +137,13 @@ void Transition::sceneTransition() {
 		for (Entity* e : entity_->getMngr()->getFgs())
 			e->setActive(false);
 
+		for (Entity* e : entity_->getMngr()->getWavesObjects())
+			e->setActive(false);
+
+		for (Entity* e : entity_->getMngr()->getTraps())
+			e->setActive(false);
+
+
 		entity_->getMngr()->refreshFrontGround();
 		entity_->getMngr()->refreshTiles();
 		entity_->getMngr()->refreshMapHeight();
@@ -148,10 +156,16 @@ void Transition::sceneTransition() {
 		entity_->getMngr()->refreshItems();
 		entity_->getMngr()->refreshObstacles();
 		entity_->getMngr()->refreshPlayers();
+		entity_->getMngr()->refreshWavesObjects();
+		entity_->getMngr()->refreshTraps();
 		entity_->getMngr()->refresh();
 
-		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearColliders();
 		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->resetNumPlayers();
+
+		auto map = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>();
+		map->clearColliders();
+
+		map->resetTriggerList();
 	}
 
 	//Y creamos uno nuevo
@@ -162,7 +176,11 @@ void Transition::sceneTransition() {
 
 void Transition::createMap() {
 	//Y creamos uno nuevo
-	if (nameScene_ == "hasMuerto" || nameScene_ == "final") {
+	if (nameScene_ == "final") {
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetNumInts();
+		entity_->addComponent<Creditos>();
+	}
+	else if (nameScene_ == "hasMuerto") {
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetNumInts();
 		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->resetCamera();
 		//Vuelve a renderizar el menu

@@ -33,39 +33,28 @@ void ContactDamage::update() {
 void ContactDamage::updateRect() {
 
 	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-	auto sizeW = tr_->getW();
-	auto sizeH = tr_->getH();
-	auto& pos = tr_->getPos();
 
 	//crear el rectangulo que va a hacer el contact damage
 
-	attRect_.w = sizeW;
-	attRect_.h = sizeH;
-	attRect_.x = pos.getX() - cam.x;
-	attRect_.y = pos.getY() - cam.y;
+	attRect_ = tr_->getRectCollide();
+
+	attRect_.x = attRect_.x - cam.x;
+	attRect_.y = attRect_.y - cam.y;
 
 	//Comprobamos si colisiona con alguno de los players
 
-	//Si es el gato...
-	if (entity_->hasComponent<CatMovement>()) {
-		attRect_ = tr_->getRectCollide();
-		if (CheckCollisionsCat(attRect_, true))
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
-	}
-	//Si se colisiona..
-	else if (CheckCollisions(attRect_, true))
+	////Si se colisiona..
+	if (CheckCollisions(attRect_, true))
 		//Suena el hit y le pega
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
 
 	if (damageEnemies_ && CheckCollisionsEnemies(attRect_, false))
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
 
-
 	//this.anims.play(pegarse)
 
 		DEBUG_isAttacking_ = true;
 	time_ = sdlutils().currRealTime();
-
 }
 
 bool ContactDamage::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {

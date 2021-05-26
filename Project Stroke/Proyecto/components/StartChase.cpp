@@ -69,8 +69,12 @@ void StartChase::update() {
 					cam_->changeCamState(State::GoingTo);
 					cam_->changeCamFollowPos(tr_->getPos().getX() - (sdlutils().width() / 2 - tr_->getW() + 10 ));
 
+					//Levantamos al gato
 					entity_->getMngr()->getHandler<Cat_>()->getComponent<Animator>()->play(sdlutils().anims().at("cat_wakeup"));
 
+					//Y movemos el trigger
+					auto& pos = entity_->getMngr()->getHandler<TriggetCat>()->getComponent<Transform>()->getPos();
+					pos = pos + Vector2D(500,0);
 				}
 			}
 		}

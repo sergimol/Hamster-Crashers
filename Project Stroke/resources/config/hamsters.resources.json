@@ -207,6 +207,10 @@
       "file": "resources/images/spritesheets/enemies/level3/mano_spritesheet.png"
     },
     {
+      "id": "fistSheet",
+      "file": "resources/images/spritesheets/enemies/level3/puno_spritesheet.png"
+    },
+    {
       "id": "firstBoss",
       "file": "resources/images/boss1.png"
     },
@@ -3017,6 +3021,66 @@
       "duration": 22,
       "cols": 8,
       "rows": 8,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "fist_attack",
+      "startFrameX": 0,
+      "startFrameY": 1,
+      "duration": 5,
+      "cols": 19,
+      "rows": 1,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "fist_shadow",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 1,
+      "cols": 19,
+      "rows": 1,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "fist_up",
+      "startFrameX": 6,
+      "startFrameY": 0,
+      "duration": 3,
+      "cols": 19,
+      "rows": 1,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "fist_hit",
+      "startFrameX": 9,
+      "startFrameY": 0,
+      "duration": 4,
+      "cols": 19,
+      "rows": 1,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "fist_death",
+      "startFrameX": 13,
+      "startFrameY": 0,
+      "duration": 6,
+      "cols": 19,
+      "rows": 1,
       "frameUpdate": 100,
       "loop": 0,
       "chain": "",
