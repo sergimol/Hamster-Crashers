@@ -4,7 +4,7 @@
 #include "../ecs/Manager.h"
 #include "Dying.h"
 
-TimeTrap::TimeTrap(Texture* tx, Texture* txoff, float latencia) : latency(latencia), texON_(tx), texOFF_(txoff), time_(0.0f), lastTime_(0.0f), gamestate(nullptr)  {
+TimeTrap::TimeTrap(Texture* tx, Texture* txoff, float latencia) : latency(latencia), texON_(tx), texOFF_(txoff), time_(0.0f), lastTime_(0.0f), gamestate(nullptr), activado(false)  {
 
 }
 
@@ -61,8 +61,14 @@ void TimeTrap::update() {
 			entity_->getComponent<ContactDamage>()->setActive(true);
 
 			texON_->setAlpha(255);
+
+			if (!activado) {
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("trapKitchen");
+			}
+			activado = true;
 		}
 		else {
+			activado = false;
 			entity_->getComponent<ContactDamage>()->setActive(false);
 
 			texON_->setAlpha(255.0f * (1.0f + currentState));
