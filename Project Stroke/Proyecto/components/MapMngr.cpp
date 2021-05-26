@@ -723,7 +723,6 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 		FairStrokeStrategy* farirStrat = new FairStrokeStrategy();
 		hamster1->addComponent<Stroke>(farirStrat);
 	}
-
 	hamster1->addComponent<Knockback>();
 	hamster1->addComponent<GetItem>();
 

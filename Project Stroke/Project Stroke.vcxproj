@@ -184,6 +184,7 @@
     <ClCompile Include="Proyecto\components\MenuControlHandler.cpp" />
     <ClCompile Include="Proyecto\components\MovementInChase.cpp" />
     <ClCompile Include="Proyecto\components\ObstacleMoveable.cpp" />
+    <ClCompile Include="Proyecto\components\ReanimationAlone.cpp" />
     <ClCompile Include="Proyecto\components\ShadowFollow.cpp" />
     <ClCompile Include="Proyecto\components\FollowPlayer.cpp" />
     <ClCompile Include="Proyecto\components\GameStates.cpp" />
@@ -287,6 +288,7 @@
     <ClInclude Include="Proyecto\components\MenuControlHandler.h" />
     <ClInclude Include="Proyecto\components\MovementInChase.h" />
     <ClInclude Include="Proyecto\components\ObstacleMoveable.h" />
+    <ClInclude Include="Proyecto\components\ReanimationAlone.h" />
     <ClInclude Include="Proyecto\components\ShadowFollow.h" />
     <ClInclude Include="Proyecto\components\FollowPlayer.h" />
     <ClInclude Include="Proyecto\components\GameStates.h" />
