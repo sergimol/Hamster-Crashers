@@ -141,10 +141,12 @@ void MapMngr::loadNewMap(string map) {
 
 	if (map_.load(map)) {
 		if (map == "resources/images/tiled/Level1Boss.tmx") {
-			scale = 2.5f;
+			scale = 2.4f;
+			entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setcShake(true);
 		}
 		else if (map == "resources/images/tiled/Level2.tmx") {
 			scale = 3.0f;
+			entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setcShake(true);
 		}
 
 		mapHeight_ = map_.getProperties()[0].getIntValue() * TAM_CELDA * scale;
@@ -163,13 +165,12 @@ void MapMngr::loadNewMap(string map) {
 
 		//Fondos
 		if (map == "resources/images/tiled/Level1.tmx")
-			addParaxall(1, true, false);
-		else if (map == "resources/images/tiled/Level1Boss.tmx") {
-			addParaxall(1, false, true);
-		}
-		else if (map == "resources/images/tiled/Level2.tmx") {
-			addParaxall(2, true, false);
-		}
+			addParaxall(1, true, false, 7, 10, 15, 10);
+		else if (map == "resources/images/tiled/Level1Boss.tmx")
+			addParaxall(1, false, true, 7, 10, 15, 10);
+		else if (map == "resources/images/tiled/Level2.tmx")
+			addParaxall(2, true, false, 7, 10, 1, 10);
+
 
 		//Dimensiones de los tiles
 		tilesDimensions_ = map_.getTileSize();
@@ -357,7 +358,7 @@ void MapMngr::loadNewMap(string map) {
 	}
 }
 
-void MapMngr::addParaxall(int lvl, bool front, bool train) {
+void MapMngr::addParaxall(int lvl, bool front, bool train, int v1, int v2, int v3, int v4) {
 	auto upH = mapHeight_ - cam->getCam().h + cam->getUpOffset() - 380;
 
 	string l = "level" + to_string(lvl);
@@ -365,23 +366,23 @@ void MapMngr::addParaxall(int lvl, bool front, bool train) {
 	auto* o = entity_->getMngr()->addBackGround();
 	o->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 	//Para meter un fondo meter esto									velocidad		tamaño			posicion
-	o->addComponent<Parallax>(&sdlutils().images().at(l + "background1"), 7, Vector2D(1920, 1839), Vector2D(0, upH), false, train);
+	o->addComponent<Parallax>(&sdlutils().images().at(l + "background1"), v1, Vector2D(1920, 1839), Vector2D(0, upH), false, train);
 
 	auto* p = entity_->getMngr()->addBackGround();
 	p->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 	//Para meter un fondo meter esto									velocidad		tamaño			posicion
-	p->addComponent<Parallax>(&sdlutils().images().at(l + "background2"), 10, Vector2D(1920, 1839), Vector2D(0, upH), false, train);
+	p->addComponent<Parallax>(&sdlutils().images().at(l + "background2"), v2, Vector2D(1920, 1839), Vector2D(0, upH), false, train);
 
 	auto* q = entity_->getMngr()->addBackGround();
 	q->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 	//Para meter un fondo meter esto									velocidad		tamaño			posicion
-	q->addComponent<Parallax>(&sdlutils().images().at(l + "background3"), 15, Vector2D(1920, 1839), Vector2D(0, upH), false, train);
+	q->addComponent<Parallax>(&sdlutils().images().at(l + "background3"), v3, Vector2D(1920, 1839), Vector2D(0, upH), false, train);
 
 	if (front) {
 		auto* r = entity_->getMngr()->addFrontGround();
 		r->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 		//Para meter un fondo meter esto									velocidad		tamaño			posicion
-		r->addComponent<Parallax>(&sdlutils().images().at(l + "background4"), 10, Vector2D(1920, 1839), Vector2D(0, upH), true, train);
+		r->addComponent<Parallax>(&sdlutils().images().at(l + "background4"), v4, Vector2D(1920, 1839), Vector2D(0, upH), true, train);
 	}
 }
 
@@ -816,7 +817,7 @@ void MapMngr::addObject(const tmx::Object& object) {
 
 	string id = prop[1].getStringValue();
 
-		obstacle->addComponent<Shadow>(false, true);
+	obstacle->addComponent<Shadow>(false, true);
 
 	obstacle->addComponent<Animator>(&sdlutils().images().at("obstacle" + id),
 		100,

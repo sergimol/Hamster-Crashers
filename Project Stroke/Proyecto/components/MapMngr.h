@@ -50,7 +50,7 @@ private:
 	vector<string> hamstersToLoad_;
 
 	void addHamster(string name, int i,const tmx::Object& object);
-	void addParaxall(int lvl, bool front, bool train);
+	void addParaxall(int lvl, bool front, bool train, int v1, int v2, int v3, int v4);
 public:
 	MapMngr() : Room(0) {};
 	~MapMngr();
