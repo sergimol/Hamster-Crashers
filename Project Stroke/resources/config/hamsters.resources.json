@@ -680,15 +680,15 @@
     },
     {
       "id": "level3background1",
-      "file": "resources/images/backgrounds/level2/level3parallax1.jpg"
+      "file": "resources/images/backgrounds/level3/level3parallax1.jpg"
     },
     {
       "id": "level3background2",
-      "file": "resources/images/backgrounds/level2/level3parallax1.png"
+      "file": "resources/images/backgrounds/level3/level3parallax1.png"
     },
     {
       "id": "level3background3",
-      "file": "resources/images/backgrounds/level3/level2parallax3.png"
+      "file": "resources/images/backgrounds/level3/level3parallax3.png"
     },
     {
       "id": "level3background4",
@@ -1487,6 +1487,14 @@
       "file": "resources/sound/train/pasoAlto.wav"
     },
     {
+      "id": "transition0",
+      "file": "resources/sound/transition/transition0.wav"
+    },
+    {
+      "id": "transition1",
+      "file": "resources/sound/transition/transition1.wav"
+    },
+    {
       "id": "trapKitchen",
       "file": "resources/sound/traps/traps0.wav"
     },
@@ -1509,14 +1517,6 @@
     {
       "id": "tutorial3single",
       "file": "resources/sound/dialogos/dialogo3single.wav"
-    },
-    {
-      "id": "transition0",
-      "file": "resources/sound/transition/transition0.wav"
-    },
-    {
-      "id": "transition1",
-      "file": "resources/sound/transition/transition1.wav"
     },
     {
       "id": "possesion",
