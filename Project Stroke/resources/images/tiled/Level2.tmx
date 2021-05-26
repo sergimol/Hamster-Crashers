@@ -647,6 +647,25 @@
     <property name="zzId" value="soldier2"/>
    </properties>
   </object>
+  <object id="424" name="secondBoss" x="8930.67" y="48.0004" width="106.667" height="105.333"/>
+  <object id="425" name="startChase" x="8909.66" y="0" width="81.3333" height="316"/>
+  <object id="426" name="newScene" x="-74.6667" y="23.3332" width="64" height="278.667">
+   <properties>
+    <property name="newMap" value="Lvl1Javi"/>
+    <property name="numT" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="427" name="newScene" x="-74.6667" y="23.3332" width="64" height="278.667">
+   <properties>
+    <property name="newMap" value="Level1"/>
+    <property name="numT" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="428" name="startMusic" x="8242.37" y="-1.0303" width="81.3333" height="316">
+   <properties>
+    <property name="name" value="catMeowSleeping"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="7" name="Salas">
   <object id="221" name="1" x="811.697" y="138.915" width="13" height="255.5">

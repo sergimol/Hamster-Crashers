@@ -14,6 +14,9 @@ class Creditos : public Component
 	virtual void render() override;
 
 	void backToMenu();
+
+	void endCreditos();
+
 private:
 	Texture* tex_;
 	SDL_Rect imRect_;

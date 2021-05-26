@@ -88,6 +88,7 @@ class ObstacleMoveable;
 class LifeTime;
 class ReanimationAlone;
 class Creditos;
+class TriggerMusic;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -177,6 +178,7 @@ class Creditos;
 	ObstacleMoveable, \
 	LifeTime, \
 	ReanimationAlone, \
+	TriggerMusic, \
 	Creditos	
 
 // groups
@@ -211,6 +213,7 @@ struct PlayerQuantityMenu;
 struct HamsterSelectionMenu;
 struct OptionsMenu;
 struct dialogosMngr;
+struct TriggetCat;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
@@ -229,8 +232,8 @@ struct dialogosMngr;
 					Cat_, \
 					MainMenu, \
 					OptionsMenu, \
+					TriggetCat, \
 					dialogosMngr
-
 
 //systems
 

@@ -13,13 +13,6 @@ void SoundManager::init() {
 	light9 = &sdlutils().soundEffects().at("light9");
 	light10 = &sdlutils().soundEffects().at("light10");
 
-	hamLight0 = &sdlutils().soundEffects().at("hamsterlight0");
-	hamLight1 = &sdlutils().soundEffects().at("hamsterlight1");
-	hamLight2 = &sdlutils().soundEffects().at("hamsterlight2");
-	hamLight3 = &sdlutils().soundEffects().at("hamsterlight3");
-	hamLight4 = &sdlutils().soundEffects().at("hamsterlight4");
-
-
 	strong0 = &sdlutils().soundEffects().at("strong0");
 	strong1 = &sdlutils().soundEffects().at("strong1");
 	strong2 = &sdlutils().soundEffects().at("strong2");
@@ -165,7 +158,6 @@ void SoundManager::init() {
 	musicVol_ = vol.getX();
 	fxVol_ = vol.getY();
 
-	setVolumeChannels();
 	Mix_AllocateChannels(16);
 }
 
@@ -182,178 +174,9 @@ void SoundManager::StopTutorial() {
 	Mix_HaltChannel(7);
 }
 
-void SoundManager::setVolumeChannels() {
-	//Golpe
-	light0->setChannelVolume(fxVol_ * initLightVol);
-	light1->setChannelVolume(fxVol_ * initLightVol);
-	light2->setChannelVolume(fxVol_ * initLightVol);
-	light3->setChannelVolume(fxVol_ * initLightVol);
-	light4->setChannelVolume(fxVol_ * initLightVol);
-	light5->setChannelVolume(fxVol_ * initLightVol);
-	light6->setChannelVolume(fxVol_ * initLightVol);
-	light7->setChannelVolume(fxVol_ * initLightVol);
-	light8->setChannelVolume(fxVol_ * initLightVol);
-
-	hamLight0->setChannelVolume(fxVol_ * initLightVol);
-	hamLight1->setChannelVolume(fxVol_ * initLightVol);
-	hamLight2->setChannelVolume(fxVol_ * initLightVol);
-	hamLight3->setChannelVolume(fxVol_ * initLightVol);
-	hamLight4->setChannelVolume(fxVol_ * initLightVol);
-
-	//Golpe Fuerte
-	strong0->setChannelVolume(fxVol_ * initStrongVol);
-	strong1->setChannelVolume(fxVol_ * initStrongVol);
-	strong2->setChannelVolume(fxVol_ * initStrongVol);
-
-	//Ataque (whoosh)
-	attack0->setChannelVolume(fxVol_ * initAttackVol);
-	attack1->setChannelVolume(fxVol_ * initAttackVol);
-	attack2->setChannelVolume(fxVol_ * initAttackVol);
-	attack3->setChannelVolume(fxVol_ * initAttackVol);
-	attack4->setChannelVolume(fxVol_ * initAttackVol);
-
-	//Muerte
-	dep0->setChannelVolume(fxVol_ * initDepVol);
-	dep1->setChannelVolume(fxVol_ * initDepVol);
-	dep2->setChannelVolume(fxVol_ * initDepVol);
-
-	//Ataque corazon
-	heartattack0->setChannelVolume(fxVol_ * initHeartAttackVol);
-	heartattack1->setChannelVolume(fxVol_ * initHeartAttackVol);
-	heartattack2->setChannelVolume(fxVol_ * initHeartAttackVol);
-	heartattack3->setChannelVolume(fxVol_ * initHeartAttackVol);
-	heartattack4->setChannelVolume(fxVol_ * initHeartAttackVol);
-	heartattack5->setChannelVolume(fxVol_ * initHeartAttackVol);
-
-	//Boss Gato
-	catMeowStatic->setChannelVolume(fxVol_ * initCatVol);
-	catMeowAttack->setChannelVolume(fxVol_ * initCatVol);
-	catMeowInit->setChannelVolume(fxVol_ * initCatVol);
-	catMeowWalking->setChannelVolume(fxVol_ * initCatVol);
-
-	//Boss Mano
-	heavyPunch0->setChannelVolume(fxVol_ * initHandVol);
-	heavyPunch1->setChannelVolume(fxVol_ * initHandVol);
-	handInit0->setChannelVolume(fxVol_ * initHandVol);
-	handInit1->setChannelVolume(fxVol_ * initHandVol);
-	handHit0->setChannelVolume(fxVol_ * initHandVol);
-	handHit1->setChannelVolume(fxVol_ * initHandVol);
-	handHit2->setChannelVolume(fxVol_ * initHandVol);
-	handDep->setChannelVolume(fxVol_ * initHandVol);
-
-	//Boss Mono
-	platillos->setChannelVolume(fxVol_ * initMonkeVol);
-
-	//Sonidos tren
-	trainBackground->setChannelVolume(fxVol_ * inittrainBackgroundVol);
-	trainPipi->setChannelVolume(fxVol_ * inittrainBackgroundVol);
-	trainAlto->setChannelVolume(fxVol_ * inittrainBackgroundVol);
-
-	//Coche
-	car0->setChannelVolume(fxVol_ * carVol);
-	car1->setChannelVolume(fxVol_ * carVol);
-	car2->setChannelVolume(fxVol_ * carVol);
-
-	//Muerte soldados
-	soldierDep0->setChannelVolume(fxVol_ * initsoldierDepVol);
-	soldierDep1->setChannelVolume(fxVol_ * initsoldierDepVol);
-	soldierDep2->setChannelVolume(fxVol_ * initsoldierDepVol);
-	soldierDep3->setChannelVolume(fxVol_ * initsoldierDepVol);
-
-	//Juego reanimar, tecla correcta o fallida
-	rightNote->setChannelVolume(fxVol_ * notesReanimVol);
-	wrongNote->setChannelVolume(fxVol_ * notesReanimVol);
-
-	//Posesion hamster
-	possesion->setChannelVolume(fxVol_ * possesionVol);
-
-	//Especial Sardinilla
-	sardinillaSpecial0->setChannelVolume(fxVol_ * sardinillaSpecialVol);
-
-	//Especial Keta
-	ketaSpecial0->setChannelVolume(fxVol_ * ketaSpecialVol);
-	ketaSpecial1->setChannelVolume(fxVol_ * ketaSpecialVol);
-	ketaSpecial2->setChannelVolume(fxVol_ * ketaSpecialVol);
-	ketaSpecial3->setChannelVolume(fxVol_ * ketaSpecialVol);
-	ketaSpecial4->setChannelVolume(fxVol_ * ketaSpecialVol);
-
-	//Especial monchi
-	monchiSpecial0->setChannelVolume(fxVol_ * monchiSpecialVol);
-	monchiSpecial1->setChannelVolume(fxVol_ * monchiSpecialVol);
-	monchiSpecial2->setChannelVolume(fxVol_ * monchiSpecialVol);
-	monchiSpecial3->setChannelVolume(fxVol_ * monchiSpecialVol);
-	monchiSpecial4->setChannelVolume(fxVol_ * monchiSpecialVol);
-
-	//Especial canelon
-	canelonSpecial0->setChannelVolume(fxVol_ * canelonSpecialVol);
-	canelonSpecial1->setChannelVolume(fxVol_ * canelonSpecialVol);
-
-	//Botones UI
-	button0->setChannelVolume(fxVol_ * buttonVol);
-	button1->setChannelVolume(fxVol_ * buttonVol);
-
-	//Recoger items
-	eat0->setChannelVolume(fxVol_ * initEatVol);
-	eat1->setChannelVolume(fxVol_ * initEatVol);
-	eat2->setChannelVolume(fxVol_ * initEatVol);
-	eat3->setChannelVolume(fxVol_ * initEatVol);
-
-	//Trampa cocina
-	trapKitchen->setChannelVolume(fxVol_ * inittrapKitchenVol);
-
-	//PageNext
-	pageSkip0->setChannelVolume(fxVol_ * pageSkipVol);
-	pageSkip1->setChannelVolume(fxVol_ * pageSkipVol);
-
-	//Dialogos Angel (tutorial y transiciones, falta diferenciarlos)
-	tutorial0->setChannelVolume(fxVol_ * initTutorialVol);
-	tutorial1->setChannelVolume(fxVol_ * initTutorialVol);
-	tutorial2->setChannelVolume(fxVol_ * initTutorialVol);
-	tutorial3->setChannelVolume(fxVol_ * initTutorialVol);
-	tutorial4->setChannelVolume(fxVol_ * initTutorialVol);
-	tutorial5->setChannelVolume(fxVol_ * initTutorialVol);
-	tutorial6->setChannelVolume(fxVol_ * initTutorialVol);
-	tutorial7->setChannelVolume(fxVol_ * initTutorialVol);
-	tutorial8->setChannelVolume(fxVol_ * initTutorialVol);
-	tutorial9->setChannelVolume(fxVol_ * initTutorialVol);
-	tutorial10->setChannelVolume(fxVol_ * initTutorialVol);
-
-	transition0->setChannelVolume(fxVol_ * initTransitionVol);
-	transition1->setChannelVolume(fxVol_ * initTransitionVol);
-	transition2->setChannelVolume(fxVol_ * initTransitionVol);
-	transition3->setChannelVolume(fxVol_ * initTransitionVol);
-	transition4->setChannelVolume(fxVol_ * initTransitionVol);
-	transition5->setChannelVolume(fxVol_ * initTransitionVol);
-	transition6->setChannelVolume(fxVol_ * initTransitionVol);
-	transition7->setChannelVolume(fxVol_ * initTransitionVol);
-	transition8->setChannelVolume(fxVol_ * initTransitionVol);
-	transition9->setChannelVolume(fxVol_ * initTransitionVol);
-	transition10->setChannelVolume(fxVol_ * initTransitionVol);
-	transition11->setChannelVolume(fxVol_ * initTransitionVol);
-	transition12->setChannelVolume(fxVol_ * initTransitionVol);
-	transition13->setChannelVolume(fxVol_ * initTransitionVol);
-	transition14->setChannelVolume(fxVol_ * initTransitionVol);
-	transition15->setChannelVolume(fxVol_ * initTransitionVol);
-	transition16->setChannelVolume(fxVol_ * initTransitionVol);
-	transition17->setChannelVolume(fxVol_ * initTransitionVol);
-	transition18->setChannelVolume(fxVol_ * initTransitionVol);
-	transition19->setChannelVolume(fxVol_ * initTransitionVol);
-	transition20->setChannelVolume(fxVol_ * initTransitionVol);
-	transition21->setChannelVolume(fxVol_ * initTransitionVol);
-	transition22->setChannelVolume(fxVol_ * initTransitionVol);
-	transition23->setChannelVolume(fxVol_ * initTransitionVol);
-
-	// sonidos ambiente
-	birds->setChannelVolume(fxVol_ * initBirdsVol);
-
-	//Canciones
-	HamstersMainThemev2->setMusicVolume(musicVol_ * initMusicVol);
-	Nivel1GameVersion->setMusicVolume(musicVol_ * initMusicVol);
-	Nivel1Boss1_0->setMusicVolume(musicVol_ * initMusicVol);
-	HamstersNivel2GameVersion->setMusicVolume(musicVol_ * initMusicVol);
-	HamstersNivel2_Boss160bpm->setMusicVolume(musicVol_ * initMusicVol);
-	HamstersNivel4_Boss2->setMusicVolume(musicVol_ * initMusicVol);
-	HamstersNivel4GameVersion->setMusicVolume(musicVol_ * initMusicVol);
+void SoundManager::StopCatSounds() {
+	Mix_HaltChannel(6);
+	Mix_HaltChannel(5);
 }
 
 void SoundManager::lowVolume(bool musicChannel) {
@@ -374,7 +197,6 @@ void SoundManager::lowVolume(bool musicChannel) {
 		}
 	}
 
-	setVolumeChannels();
 }
 
 void SoundManager::upVolume(bool musicChannel) {
@@ -388,7 +210,6 @@ void SoundManager::upVolume(bool musicChannel) {
 		sdlutils().setFxVol(fxVol_);
 	}
 
-	setVolumeChannels();
 }
 
 bool SoundManager::emptyChannel() {
@@ -399,144 +220,196 @@ bool SoundManager::emptyChannel() {
 		return false;
 }
 
+void SoundManager::refreshMusicVol() {
+	HamstersMainThemev2->setMusicVolume(musicVol_ * initMusicVol);
+	Nivel1GameVersion->setMusicVolume(musicVol_ * initMusicVol);
+	Nivel1Boss1_0->setMusicVolume(musicVol_ * initMusicVol);
+	HamstersNivel2GameVersion->setMusicVolume(musicVol_ * initMusicVol);
+	HamstersNivel2_Boss160bpm->setMusicVolume(musicVol_ * initMusicVol);
+	HamstersNivel4_Boss2->setMusicVolume(musicVol_ * initMusicVol);
+	HamstersNivel4GameVersion->setMusicVolume(musicVol_ * initMusicVol);
+}
 
 void SoundManager::play(std::string soundName) {
 	//Golpe
 	if (soundName == "lighthit") {
+		//Golpe
+		light0->setChannelVolume(fxVol_ * initLightVol);
 		playLighthit();
-	}
-	//Golpe
-	if (soundName == "hamsterlighthit") {
-		playHamsterLighthit();
 	}
 	//Golpe Fuerte
 	else if (soundName == "stronghit") {
+		//Golpe Fuerte
+		strong0->setChannelVolume(fxVol_ * initStrongVol);
 		playStronghit();
 	}
 	//Ataque (whoosh)
 	else if (soundName == "attack") {
+		//Ataque (whoosh)
+		attack0->setChannelVolume(fxVol_ * initAttackVol);
 		playAttack();
 	}
 	//Muerte
 	else if (soundName == "dep") {
+		//Muerte
+		dep0->setChannelVolume(fxVol_ * initDepVol);
 		playDep();
 	}
 	//Ataque corazon
 	else if (soundName == "heartattack") {
+		//Ataque corazon
+		heartattack0->setChannelVolume(fxVol_ * initHeartAttackVol);
 		playHeartattack();
 	}
 
 	//Especiales Hamsters
 	else if (soundName == "sardinillaSpecial") {
+		//Especial Sardinilla
+		sardinillaSpecial0->setChannelVolume(fxVol_ * sardinillaSpecialVol);
 		sardinillaSpecial0->play();
 	}
 	else if (soundName == "ketaSpecial") {
+		//Especial Keta
+		ketaSpecial0->setChannelVolume(fxVol_ * ketaSpecialVol);
 		playKetaSpecial();
 	}
 	else if (soundName == "monchiSpecial") {
+		//Especial monchi
+		monchiSpecial0->setChannelVolume(fxVol_ * monchiSpecialVol);
 		playMonchiSpecial();
 	}
 	else if (soundName == "canelonSpecial") {
+		//Especial canelon
+		canelonSpecial0->setChannelVolume(fxVol_ * canelonSpecialVol);
 		playCanelonSpecial();
 	}
 	//Boss Gato
 	else if (soundName == "catMeowInit") {
+		catMeowInit->setChannelVolume(fxVol_ * initCatVol);
 		catMeowInit->play();
 	}
 	else if (soundName == "catMeowStatic") {
+		catMeowStatic->setChannelVolume(fxVol_ * initCatVol);
 		catMeowStatic->play();
 	}
 	else if (soundName == "catMeowAttack") {
+		catMeowAttack->setChannelVolume(fxVol_ * initCatVol);
 		catMeowAttack->play();
 	}
 	else if (soundName == "catMeowWalking") {
-		catMeowWalking->play();
+		catMeowWalking->setChannelVolume(fxVol_ * initCatVol);
+		catMeowWalking->play(11,6);
 	}
 	else if (soundName == "catMeowSleeping") {
-		catMeowWalking->play();
+		catMeowSleeping->setChannelVolume(fxVol_ * initCatVol);
+		catMeowSleeping->play(0,6);
 	}
 
 	//Boss Mano
 	else if (soundName == "handInit") {
+		handInit0->setChannelVolume(fxVol_ * initHandVol);
 		playHandInit();
 	}
 	else if (soundName == "handPunch") {
+		heavyPunch0->setChannelVolume(fxVol_ * initHandVol);
 		playHandPunch();
 	}
 	else if (soundName == "handHit") {
+		handHit0->setChannelVolume(fxVol_ * initHandVol);
 		playHandHit();
 	}
 	else if (soundName == "handDep") {
+		handDep->setChannelVolume(fxVol_ * initHandVol);
 		handDep->play();
 	}
 
 	//Boss Mono
 	else if (soundName == "platillos") {
+		//Boss Mono
+		platillos->setChannelVolume(fxVol_ * initMonkeVol);
 		platillos->play();
 	}
 
 	//Sonidos tren
 	else if (soundName == "trainBackground") {
-
+		//Sonidos tren
+		trainBackground->setChannelVolume(fxVol_ * inittrainBackgroundVol);
 		trainBackground->play(200);
 	}
 	else if (soundName == "trainPipi") {
-
+		trainPipi->setChannelVolume(fxVol_ * inittrainBackgroundVol);
 		trainPipi->play();
 	}
 	else if (soundName == "trainPasoalto") {
-
+		trainAlto->setChannelVolume(fxVol_ * inittrainBackgroundVol);
 		trainAlto->play();
 	}
 
 	//Enemigo coche
 	else if (soundName == "coche") {
+		//Coche
+		car0->setChannelVolume(fxVol_ * carVol);
 		playCar();
 	}
 
 	//Muerte soldados
 	else if (soundName == "soldierDep") {
+		//Muerte soldados
+		soldierDep0->setChannelVolume(fxVol_ * initsoldierDepVol);
 		playsoldierDep();
 	}
 
 	//Juego reanimar, tecla correcta o fallida
 	else if (soundName == "rightNote") {
-		rightNote->play(0);
+		rightNote->setChannelVolume(fxVol_ * notesReanimVol);
+		rightNote->play();
 	}
 	else if (soundName == "wrongNote") {
-		wrongNote->play(0);
+		wrongNote->setChannelVolume(fxVol_ * notesReanimVol);
+		wrongNote->play();
 	}
 	//Posesion hamster
 	else if (soundName == "possesion") {
-		possesion->play(0);
+		//Posesion hamster
+		possesion->setChannelVolume(fxVol_ * possesionVol);
+		possesion->play();
 	}
 
 	//Botones UI
 	else if (soundName == "button") {
-		button1->play(0);
+		//Botones UI
+		button0->setChannelVolume(fxVol_ * buttonVol);
+		button1->play();
 	}
 
 
 	else if (soundName == "birds") {
-		birds->play(200, 6);
+		// sonidos ambiente
+		birds->setChannelVolume(fxVol_ * initBirdsVol);
+ 		birds->play(0,5);
 	}
-	else if (soundName == "stopbirds") {
-		birds->haltChannel(6);
-	}
+
 
 	//Recoger items
 	else if (soundName == "eatItem") {
+		//Recoger items
+		eat0->setChannelVolume(fxVol_ * initEatVol);
 		playEat();
 	}
 
 	//Transiciones
 	else if (soundName == "transition") {
+		transition0->setChannelVolume(fxVol_ * initTransitionVol);
 		playTransition();
 	}
 	else if (soundName == "nextPage") {
+		//PageNext
+		pageSkip0->setChannelVolume(fxVol_ * pageSkipVol);
 		playPageSkip();
 	}
 	else if (soundName == "tutorial") {
+		//Dialogos Angel
+		tutorial0->setChannelVolume(fxVol_ * initTutorialVol);
 		playTutorial();
 	}
 	else if (soundName == "tutorialsingle") {
@@ -548,6 +421,8 @@ void SoundManager::play(std::string soundName) {
 
 	//Trampa cocina
 	else if (soundName == "trapKitchen") {
+		//Trampa cocina
+		trapKitchen->setChannelVolume(fxVol_ * inittrapKitchenVol);
 		trapKitchen->play(0);
 	}
 
@@ -555,32 +430,40 @@ void SoundManager::play(std::string soundName) {
 	//CANCIONES
 	else if (soundName == "HamstersMainThemev2") {
 		Mix_HaltMusic();
+		HamstersMainThemev2->setMusicVolume(musicVol_* initMusicVol);
 		HamstersMainThemev2->play(200);
 	}
 	else if (soundName == "Nivel1GameVersion") {
 		Mix_HaltMusic();
+		Nivel1GameVersion->setMusicVolume(musicVol_* initMusicVol);
 		Nivel1GameVersion->play(200);
 	}
 	else if (soundName == "Nivel1Boss1_0") {
 		Mix_HaltMusic();
+		Nivel1Boss1_0->setMusicVolume(musicVol_* initMusicVol);
 		Nivel1Boss1_0->play(200);
 	}
 	else if (soundName == "HamstersNivel2GameVersion") {
 		Mix_HaltMusic();
+		HamstersNivel2GameVersion->setMusicVolume(musicVol_* initMusicVol);
 		HamstersNivel2GameVersion->play(200);
 	}
 	else if (soundName == "HamstersNivel2_Boss160bpm") {
 		Mix_HaltMusic();
+		HamstersNivel2_Boss160bpm->setMusicVolume(musicVol_ * initMusicVol);
 		HamstersNivel2_Boss160bpm->play(200);
 	}
 	else if (soundName == "HamstersNivel4_Boss2") {
 		Mix_HaltMusic();
+		HamstersNivel4_Boss2->setMusicVolume(musicVol_* initMusicVol);
 		HamstersNivel4_Boss2->play(200);
 	}
 	else if (soundName == "HamstersNivel4GameVersion") {
 		Mix_HaltMusic();
+		HamstersNivel4GameVersion->setMusicVolume(musicVol_* initMusicVol);
 		HamstersNivel4GameVersion->play(200);
 	}
+
 }
 
 int SoundManager::pickRandom(int max) {
@@ -625,30 +508,6 @@ void SoundManager::playLighthit() {
 		break;
 	case 10:
 		light10->play();
-		break;
-	default:
-		break;
-	}
-}
-
-void SoundManager::playHamsterLighthit() {
-	randomNum = pickRandom(5);
-	switch (randomNum)
-	{
-	case 0:
-		hamLight0->play();
-		break;
-	case 1:
-		hamLight1->play();
-		break;
-	case 2:
-		hamLight2->play();
-		break;
-	case 3:
-		hamLight3->play();
-		break;
-	case 4:
-		hamLight4->play();
 		break;
 	default:
 		break;

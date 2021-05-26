@@ -62,16 +62,19 @@ void FinalBossAttack::slam() {
 		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, true);
 
 		cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-		auto sizeW = tr_->getW();
-		auto& pos = tr_->getPos();
 
-		attRect_.w = sizeW; //Esto que cuadre con la mano cuando sea
-		attRect_.h = sdlutils().height();
+		auto rectCollide = tr_->getRectCollide();
+
+		//auto sizeW = rectCollide.w;
+		//auto& pos = tr_->getPos();
+
+		attRect_.w = rectCollide.w; //Esto que cuadre con la mano cuando sea
+		attRect_.h = rectCollide.h;
 
 		//Cogemos el rect completo del jefe
 
-		attRect_.x = pos.getX() - cam.x;
-		attRect_.y = pos.getY() - cam.y; //Pos inicial de esquina arriba
+		attRect_.x = rectCollide.x - cam.x;
+		attRect_.y = rectCollide.y - cam.y; //Pos inicial de esquina arriba
 
 		//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
@@ -147,6 +150,7 @@ void FinalBossAttack::swipe() {
 	if (!swipeCharge_ && pos.getX() + vel.getX() < cam.x + cam.w - sizeW)
 		vel.setX(sdlutils().lerp(70, vel.getX(), 0.8));
 	else if (!swipeCharge_) {
+		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, true);
 		swipeCharge_ = true;
 		hitTime_ = sdlutils().currRealTime();
 	}
@@ -172,6 +176,15 @@ void FinalBossAttack::swipe() {
 		swipeCharge_ = false;
 		attackFinished_ = true;
 		maxSlaps_ = sdlutils().rand().nextInt(2, 5);
+
+		//QUITAMOS TODOS LOS ESTADOS QUE PUEDEN INTERFERIR
+		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, false);
+		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
+		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, false);
+
+		//FORZAMOS A LA ANIMACION DE SUBIDA
+		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::UP, true);
+
 		attackCount_ = 0;
 	}
 }

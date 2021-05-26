@@ -141,6 +141,32 @@ public:
 		return (isButtonDownEvent_ && buttonStates_[controller][button]);
 	}
 
+	inline bool isAnyBButtonDown() {
+		for (int i = 0; i < MAXPLAYERS; ++i) {
+			if (controllers_[i] != nullptr) {
+				if (buttonStates_[i][SDL_CONTROLLER_BUTTON_B])
+					return true;
+			}
+			else
+				break;
+		}
+
+		return false;
+	}
+
+	inline bool isAnyAButtonDown() {
+		for (int i = 0; i < MAXPLAYERS; ++i) {
+			if (controllers_[i] != nullptr) {
+				if (buttonStates_[i][SDL_CONTROLLER_BUTTON_A])
+					return true;
+			}
+			else
+				break;
+		}
+
+		return false;
+	}
+
 	inline bool isButtonUp(int controller, SDL_GameControllerButton button) {
 		if (controllers_[controller] == nullptr)
 			return false;

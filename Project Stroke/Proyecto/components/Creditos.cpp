@@ -12,6 +12,7 @@ void Creditos::init() {
 	imRect_.x = 0;
 	imRect_.y = 0;
 	timer = sdlutils().currRealTime();
+	scrolling = true;
 }
 
 void Creditos::update() {
@@ -20,13 +21,20 @@ void Creditos::update() {
 		timer = sdlutils().currRealTime();
 	}
 	else if (!scrolling && sdlutils().currRealTime() > timer + ENDWAIT) {
-		backToMenu();
-		entity_->removeComponent<Creditos>();
+		endCreditos();
 	}
 	if (imRect_.y == -imRect_.w + 1080 && scrolling) {
 		scrolling = false;
 		timer = sdlutils().currRealTime();
 	}
+	if (ih().isKeyDown(SDL_SCANCODE_SPACE) || ih().isAnyAButtonDown()) {
+		endCreditos();
+	}
+}
+
+void Creditos::endCreditos() {
+	backToMenu();
+	entity_->removeComponent<Creditos>();
 }
 
 void Creditos::backToMenu() {

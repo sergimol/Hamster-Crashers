@@ -10,13 +10,15 @@ public:
 
 	void init() override;
 	void play(std::string soundName);
-	void setVolumeChannels();
 	void lowVolume(bool channel);
 	void upVolume(bool channel);
-	void resetVolumes() { fxVol_ = 0.5; musicVol_ = 0.5; setVolumeChannels(); sdlutils().setMusicVol(musicVol_); sdlutils().setFxVol(fxVol_); };
+	void resetVolumes() { fxVol_ = 0.5; musicVol_ = 0.5; sdlutils().setMusicVol(musicVol_); sdlutils().setFxVol(fxVol_); };
 	bool emptyChannel();
 	void StopTutorial();
+	void StopCatSounds();
+
 	void fadeout(int time) {}
+	void refreshMusicVol();
 	//FADEPRUEBA
 	//entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->fadeOut(3000);
 	//void fadeIn(int time);
@@ -26,54 +28,52 @@ public:
 	float fxVol_ = 0.5f;
 	float musicVol_ = 0.5f;
 	//local
-	int initMusicVol = 10;
-	int nextPage = 128;
+	int initMusicVol = 35;
 
-	int initLightVol = 100;
+	int initLightVol = 80;
 	int initStrongVol = 128;
-	int initAttackVol = 100;
+	int initAttackVol = 90;
 
 	int initDepVol = 40;
 	int initHeartAttackVol = 50;
 
-	int initCatVol = 40;
+	int initCatVol = 80;
 
-	int initHandVol = 40;
+	int initHandVol = 80;
 
 	int initMonkeVol = 40;
 
 	int inittrainBackgroundVol = 40;
 
-	int carVol = 40;
+	int carVol = 60;
 
-	int initsoldierDepVol = 3;
+	int initsoldierDepVol = 65;
 
 	int notesReanimVol = 120;
 	int possesionVol = 120;
 
 	int sardinillaSpecialVol = 120;
 	int ketaSpecialVol = 120;
-	int monchiSpecialVol = 20;
+	int monchiSpecialVol = 120;
 	int canelonSpecialVol = 120;
 
 	int buttonVol = 128;
 
-	int initEatVol = 40;
+	int initEatVol = 60;
 
 	int pageSkipVol = 128;
-	int initTutorialVol = 128;
-	int initTransitionVol = 128;
+	int initTutorialVol = 70;
+	int initTransitionVol = 70;
 
-	int inittrapKitchenVol = 128;
+	int inittrapKitchenVol = 80;
 
-	int initBirdsVol = 40;
+	int initBirdsVol = 128;
 
 	void resetNumInts();
 private:
 	int randomNum;
 
 	void playLighthit();
-	void playHamsterLighthit();
 
 	void playStronghit();
 
@@ -120,13 +120,6 @@ private:
 	SoundEffect* light8;
 	SoundEffect* light9;
 	SoundEffect* light10;
-
-	//Golpe Hamster 
-	SoundEffect* hamLight0;
-	SoundEffect* hamLight1;
-	SoundEffect* hamLight2;
-	SoundEffect* hamLight3;
-	SoundEffect* hamLight4;
 
 	//Golpe Fuerte
 	SoundEffect* strong0;
