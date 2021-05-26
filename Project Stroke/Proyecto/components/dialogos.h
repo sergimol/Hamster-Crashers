@@ -6,6 +6,7 @@
 #include "../sdlutils/Texture.h"
 #include "../sdlutils/SDLUtils.h"
 #include "EntityAttribs.h"
+#include "Animator.h"
 
 
 class dialogos : public Component {
@@ -20,7 +21,7 @@ public:
 	void show();
 	void unshow();
 
-	void changeShow() { showDialogue = !showDialogue; };
+	void changeShow() { showDialogue_ = !showDialogue_; };
 	void changeDialogue();
 	void dialogoStateChange();
 	void showStrokeTutorial(std::string text);
@@ -30,6 +31,9 @@ private:
 	Texture* barText_;
 	Texture* dialogoText_;
 	Texture* explicacionText_;
+
+	int altTime_;
+	int altCD_;
 
 	//Posiciones de los destRects
 	Vector2D angelRenderPos;
@@ -48,10 +52,11 @@ private:
 	SDL_Rect dialogoDest;		//Dialogo
 	SDL_Rect explicacionDest;	//Explicacion
 
-	int dialogueNum = 0;
-	bool showDialogue = false;
+	int dialogueNum_ = 0;
+	bool showDialogue_ = false;
+	bool isAlt_ = false;
 	bool renderDialogues = false;
-	bool firstDialogue = true;
+	bool firstDialogue_ = true;
 	float position = 3.0f;			//Desplaza verticalmente los destrects
 
 
