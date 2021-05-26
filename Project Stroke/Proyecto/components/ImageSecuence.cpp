@@ -415,7 +415,7 @@ void ImageSecuence::init() {
 	auto anim19 = entity_->getMngr()->addEntity();
 	anim19->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
 	anim19->addComponent<Animator>(
-		&sdlutils().images().at("cine19"),
+		&sdlutils().images().at("cineMuerte"),
 		1920,
 		1080,
 		3,

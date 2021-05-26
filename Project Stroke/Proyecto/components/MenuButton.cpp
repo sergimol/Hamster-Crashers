@@ -81,7 +81,7 @@ void MenuButton::setSelectable(bool s)
 
 	if (selectable_)
 		button_ = &sdlutils().images().at(buttonName_ + "Button");
-	else if(buttonName_ == "angel" && !sdlutils().angelUnlocked())
+	else if (buttonName_ == "angel" && !sdlutils().angelUnlocked())
 		button_ = &sdlutils().images().at(buttonName_ + "ButtonLocked");
 	else
 		button_ = &sdlutils().images().at(buttonName_ + "ButtonUnselectable");
@@ -240,8 +240,8 @@ void MenuButton::pressed() {
 	}
 
 	else if (buttonName_ == "exit") {
-	entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->resetCamera();
-
+		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->resetCamera();
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetNumInts();
 		//Vuelve a renderizar el menu
 		state_->setState(GameStates::MAINMENU);
 
@@ -307,7 +307,7 @@ void MenuButton::pressed() {
 
 		for (int j = 0; j < but.size(); ++j) {
 			auto mb = but[j][0]->getComponent<MenuButton>();
-			if(mb->getName() != "angel" || sdlutils().angelUnlocked())
+			if (mb->getName() != "angel" || sdlutils().angelUnlocked())
 				mb->setSelectable(true);
 		}
 
