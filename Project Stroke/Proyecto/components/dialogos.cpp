@@ -34,14 +34,7 @@ dialogos::dialogos()
 	altTime_ = sdlutils().currRealTime();
 	altCD_ = 1750;
 }
-void dialogos::init() {
-	keymap.insert({ UP, SDL_SCANCODE_W });
-	keymap.insert({ DOWN, SDL_SCANCODE_S });
-	keymap.insert({ LEFT, SDL_SCANCODE_A });
-	keymap.insert({ RIGHT, SDL_SCANCODE_D });
-	keymap.insert({ SPACE, SDL_SCANCODE_SPACE });
 
-}
 void dialogos::render() {
 	//Controlamos que solo se renderice cuando se tenga que mostrar
 	if (renderDialogues) {
@@ -82,7 +75,7 @@ void dialogos::update() {
 		//Cambiamos el estado de mostrarse a no mostrarse
 		showDialogue_ = false;
 	}
-	if (ih().isKeyDown(keymap.at(SPACE))) {
+	if (ih().isKeyDown(SDL_SCANCODE_RETURN) || ih().isAnyBButtonDown()) {
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopTutorial();
 		showDialogue_ = false;
 	}
@@ -146,4 +139,5 @@ void dialogos::showStrokeTutorial(std::string text) {
 	dialogoText_ = &sdlutils().images().at(text);
 	explicacionText_ = &sdlutils().images().at("explicacion3");
 	showDialogue_ = true;
+	sdlutils().setTutorialDone();
 }

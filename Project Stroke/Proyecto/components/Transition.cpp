@@ -3,6 +3,7 @@
 #include "ImageSecuence.h"
 #include "EnemyMother.h"
 #include "MenuButton.h"
+#include "Creditos.h"
 #include "MenuIndicator.h"
 #include "MenuButtonManager.h"
 #include "SoundManager.h"
@@ -162,7 +163,11 @@ void Transition::sceneTransition() {
 
 void Transition::createMap() {
 	//Y creamos uno nuevo
-	if (nameScene_ == "hasMuerto" || nameScene_ == "final") {
+	if (nameScene_ == "final") {
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetNumInts();
+		entity_->addComponent<Creditos>();
+	}
+	else if (nameScene_ == "hasMuerto") {
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetNumInts();
 		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->resetCamera();
 		//Vuelve a renderizar el menu

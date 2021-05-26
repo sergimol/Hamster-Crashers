@@ -51,6 +51,7 @@ protected:
 	Animator* anim_;
 	GameStates* state_;
 	long unsigned int timer_, cooldown_; //Contador para ver CADA CUANTO puede usar una habilidad
+	int playerNum_;
 
 	Texture* txtOn, * txtOff;
 	SDL_Rect txtPos;
