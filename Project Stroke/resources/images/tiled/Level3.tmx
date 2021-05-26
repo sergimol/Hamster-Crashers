@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="left-up" width="160" height="9" tilewidth="64" tileheight="64" infinite="0" nextlayerid="22" nextobjectid="480">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="left-up" width="160" height="9" tilewidth="64" tileheight="64" infinite="0" nextlayerid="22" nextobjectid="489">
  <properties>
   <property name="MaxH" type="int" value="9"/>
  </properties>
@@ -872,6 +872,78 @@
     <property name="Altura" type="int" value="0"/>
     <property name="sala" type="int" value="6"/>
     <property name="zRondas" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="480" name="obstacle" x="2505.39" y="399.273" width="68" height="56">
+   <properties>
+    <property name="aRomp" type="bool" value="true"/>
+    <property name="id" value="Blue"/>
+    <property name="jgolpes" type="int" value="2"/>
+    <property name="z" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="481" name="obstacle" x="2711.45" y="514.424" width="68" height="56">
+   <properties>
+    <property name="aRomp" type="bool" value="true"/>
+    <property name="id" value="Yellow"/>
+    <property name="jgolpes" type="int" value="2"/>
+    <property name="z" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="482" name="obstacle" x="5441.39" y="405.455" width="68" height="56">
+   <properties>
+    <property name="aRomp" type="bool" value="true"/>
+    <property name="id" value="Green"/>
+    <property name="jgolpes" type="int" value="2"/>
+    <property name="z" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="483" name="obstacle" x="5711.09" y="493.333" width="68" height="56">
+   <properties>
+    <property name="aRomp" type="bool" value="true"/>
+    <property name="id" value="Blue"/>
+    <property name="jgolpes" type="int" value="2"/>
+    <property name="z" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="484" name="obstacle" x="7129.64" y="408.364" width="68" height="56">
+   <properties>
+    <property name="aRomp" type="bool" value="true"/>
+    <property name="id" value="Green"/>
+    <property name="jgolpes" type="int" value="2"/>
+    <property name="z" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="485" name="obstacle" x="7696.3" y="505.333" width="68" height="56">
+   <properties>
+    <property name="aRomp" type="bool" value="true"/>
+    <property name="id" value="Blue"/>
+    <property name="jgolpes" type="int" value="2"/>
+    <property name="z" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="486" name="obstacle" x="8872.06" y="426.545" width="68" height="56">
+   <properties>
+    <property name="aRomp" type="bool" value="true"/>
+    <property name="id" value="Yellow"/>
+    <property name="jgolpes" type="int" value="2"/>
+    <property name="z" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="487" name="obstacle" x="9153.88" y="514.424" width="68" height="56">
+   <properties>
+    <property name="aRomp" type="bool" value="true"/>
+    <property name="id" value="Red"/>
+    <property name="jgolpes" type="int" value="2"/>
+    <property name="z" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="488" name="obstacle" x="9050.85" y="423.515" width="68" height="56">
+   <properties>
+    <property name="aRomp" type="bool" value="true"/>
+    <property name="id" value="Green"/>
+    <property name="jgolpes" type="int" value="2"/>
+    <property name="z" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>
