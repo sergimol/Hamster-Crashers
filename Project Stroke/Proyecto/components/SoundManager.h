@@ -17,7 +17,6 @@ public:
 	void StopTutorial();
 	void StopCatSounds();
 
-	void fadeout(int time) {}
 	void refreshMusicVol();
 	//FADEPRUEBA
 	//entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->fadeOut(3000);
@@ -41,7 +40,7 @@ public:
 
 	int initHandVol = 80;
 
-	int initMonkeVol = 40;
+	int initMonkeVol = 128;
 
 	int inittrainBackgroundVol = 40;
 

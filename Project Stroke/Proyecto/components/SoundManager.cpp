@@ -301,7 +301,7 @@ void SoundManager::play(std::string soundName) {
 	}
 	else if (soundName == "catMeowSleeping") {
 		catMeowSleeping->setChannelVolume(fxVol_ * initCatVol);
-		catMeowSleeping->play();
+		catMeowSleeping->play(0,6);
 	}
 
 	//Boss Mano
@@ -385,7 +385,7 @@ void SoundManager::play(std::string soundName) {
 	else if (soundName == "birds") {
 		// sonidos ambiente
 		birds->setChannelVolume(fxVol_ * initBirdsVol);
- 		birds->play();
+ 		birds->play(0,5);
 	}
 
 
