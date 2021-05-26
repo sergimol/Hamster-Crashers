@@ -645,7 +645,7 @@
   <object id="425" name="startChase" x="8905.66" y="66" width="81.3333" height="316"/>
   <object id="427" name="newScene" x="-102.667" y="103.333" width="64" height="278.667">
    <properties>
-    <property name="newMap" value="Level1"/>
+    <property name="newMap" value="Level3"/>
     <property name="numT" type="int" value="0"/>
    </properties>
   </object>

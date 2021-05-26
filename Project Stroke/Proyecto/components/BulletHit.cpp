@@ -9,7 +9,7 @@
 #include "EntityAttribs.h"
 #include "../utils/Collisions.h"
 
-BulletHit::BulletHit() : dmg_(20), state_(nullptr), tr_(nullptr) {
+BulletHit::BulletHit() : dmg_(12), state_(nullptr), tr_(nullptr) {
 }
 
 BulletHit::~BulletHit() {

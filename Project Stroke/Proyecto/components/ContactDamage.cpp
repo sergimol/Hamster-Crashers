@@ -394,7 +394,7 @@ bool ContactDamage::CheckCollisionsEnemies(const SDL_Rect& enemyRect, bool finCo
 
 	for (int i = 0; i < ents.size(); ++i) {
 		//Si la entidad es un player...
-		if (ents[i]->isActive() && ents[i]->getComponent<Transform>() != nullptr) {
+		if (ents[i]->isActive() && ents[i]->hasComponent<Transform>()) {
 			//Cogemos el transform del player
 			auto eTR = ents[i]->getComponent<Transform>();
 			SDL_Rect eColRect;
