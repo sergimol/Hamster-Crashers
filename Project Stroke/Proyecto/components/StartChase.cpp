@@ -69,8 +69,13 @@ void StartChase::update() {
 					cam_->changeCamState(State::GoingTo);
 					cam_->changeCamFollowPos(tr_->getPos().getX() - (sdlutils().width() / 2 - tr_->getW() + 10 ));
 
+					entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopCatSounds();
+
 					//Levantamos al gato
 					entity_->getMngr()->getHandler<Cat_>()->getComponent<Animator>()->play(sdlutils().anims().at("cat_wakeup"));
+
+					entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("catMeowInit");
+
 
 					//Y movemos el trigger
 					auto& pos = entity_->getMngr()->getHandler<TriggetCat>()->getComponent<Transform>()->getPos();
@@ -104,6 +109,10 @@ void StartChase::start() {
 	entity_->getMngr()->getHandler<Cat_>()->getComponent<CatMovement>()->start();
 
 	entity_->getMngr()->getHandler<Cat_>()->getComponent<Animator>()->play(sdlutils().anims().at("cat_chasing"));
+
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("catMeowStatic");
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("catMeowWalking");
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersNivel2_Boss160bpm");
 
 	for (Entity* hamsters : entity_->getMngr()->getPlayers()) {
 

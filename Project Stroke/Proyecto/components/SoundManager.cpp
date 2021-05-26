@@ -176,6 +176,7 @@ void SoundManager::StopTutorial() {
 
 void SoundManager::StopCatSounds() {
 	Mix_HaltChannel(6);
+	Mix_HaltChannel(5);
 }
 
 void SoundManager::lowVolume(bool musicChannel) {
@@ -297,11 +298,11 @@ void SoundManager::play(std::string soundName) {
 	}
 	else if (soundName == "catMeowWalking") {
 		catMeowWalking->setChannelVolume(fxVol_ * initCatVol);
-		catMeowWalking->play(0,6);
+		catMeowWalking->play(11,6);
 	}
 	else if (soundName == "catMeowSleeping") {
 		catMeowSleeping->setChannelVolume(fxVol_ * initCatVol);
-		catMeowSleeping->play();
+		catMeowSleeping->play(0,6);
 	}
 
 	//Boss Mano
@@ -385,7 +386,7 @@ void SoundManager::play(std::string soundName) {
 	else if (soundName == "birds") {
 		// sonidos ambiente
 		birds->setChannelVolume(fxVol_ * initBirdsVol);
- 		birds->play();
+ 		birds->play(0,5);
 	}
 
 

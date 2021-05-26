@@ -27,10 +27,11 @@ void TriggerMusic::update() {
 
 				//Reproducimos el sonido
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play(musicName_);
+				Mix_FadeOutMusic(2000);
 
 
 				//Y eliminamos el trigger de evento
-				entity_->setActive(false);
+				//entity_->setActive(false);
 			}
 		}
 	}

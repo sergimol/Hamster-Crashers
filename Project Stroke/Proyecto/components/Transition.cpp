@@ -125,6 +125,10 @@ void Transition::sceneTransition() {
 				e->setActive(false);
 		}
 
+		//Elimino los efectos del nivel anterior
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopCatSounds();
+
+
 		for (Entity* e : entity_->getMngr()->getTiles())
 			e->setActive(false);
 
