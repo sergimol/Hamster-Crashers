@@ -146,4 +146,5 @@ void dialogos::showStrokeTutorial(std::string text) {
 	dialogoText_ = &sdlutils().images().at(text);
 	explicacionText_ = &sdlutils().images().at("explicacion3");
 	showDialogue_ = true;
+	sdlutils().setTutorialDone();
 }
