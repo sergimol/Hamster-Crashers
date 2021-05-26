@@ -159,7 +159,9 @@ bool MenuControlHandler::handleMouse() {
 						menu_->setButtonPos(i, e);
 						if (states_->getState() == GameStates::HAMSTERSELECTION) {
 							auto in = menu_->getIndicators();
-							in[0]->getComponent<MenuIndicator>()->moveToButton(i);
+							auto but = menu_->getButtons();
+							SDL_Rect r = but[i][0]->getComponent<MenuButton>()->getRect();
+							in[0]->getComponent<MenuIndicator>()->moveToButton(r.x);
 						}
 						if (click) {
 							menu_->pressButton();

@@ -132,9 +132,9 @@
   </object>
  </objectgroup>
  <objectgroup id="7" name="Salas">
-  <object id="210" name="1" x="437.5" y="128.25" width="13" height="255.5">
+  <object id="210" name="1" x="487.5" y="-118.75" width="13" height="638.5">
    <properties>
-    <property name="CameraCoordX" type="int" value="650"/>
+    <property name="CameraCoordX" type="int" value="550"/>
     <property name="Rounds" type="int" value="1"/>
     <property name="zBoss" type="bool" value="false"/>
    </properties>
