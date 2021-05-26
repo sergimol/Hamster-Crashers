@@ -153,6 +153,7 @@
     <ClCompile Include="Proyecto\components\AnimHamsterStateMachine.cpp" />
     <ClCompile Include="Proyecto\components\BackGround.cpp" />
     <ClCompile Include="Proyecto\components\Behavior.cpp" />
+    <ClCompile Include="Proyecto\components\Creditos.cpp" />
     <ClCompile Include="Proyecto\components\dialogos.cpp" />
     <ClCompile Include="Proyecto\components\FinalBossAttack.cpp" />
     <ClCompile Include="Proyecto\components\FinalBossManager.cpp" />
@@ -184,6 +185,7 @@
     <ClCompile Include="Proyecto\components\MenuControlHandler.cpp" />
     <ClCompile Include="Proyecto\components\MovementInChase.cpp" />
     <ClCompile Include="Proyecto\components\ObstacleMoveable.cpp" />
+    <ClCompile Include="Proyecto\components\ReanimationAlone.cpp" />
     <ClCompile Include="Proyecto\components\ShadowFollow.cpp" />
     <ClCompile Include="Proyecto\components\FollowPlayer.cpp" />
     <ClCompile Include="Proyecto\components\GameStates.cpp" />
@@ -255,6 +257,7 @@
     <ClInclude Include="Proyecto\components\AnimHamsterStateMachine.h" />
     <ClInclude Include="Proyecto\components\BackGround.h" />
     <ClInclude Include="Proyecto\components\Behavior.h" />
+    <ClInclude Include="Proyecto\components\Creditos.h" />
     <ClInclude Include="Proyecto\components\dialogos.h" />
     <ClInclude Include="Proyecto\components\FinalBossAttack.h" />
     <ClInclude Include="Proyecto\components\FinalBossManager.h" />
@@ -287,6 +290,7 @@
     <ClInclude Include="Proyecto\components\MenuControlHandler.h" />
     <ClInclude Include="Proyecto\components\MovementInChase.h" />
     <ClInclude Include="Proyecto\components\ObstacleMoveable.h" />
+    <ClInclude Include="Proyecto\components\ReanimationAlone.h" />
     <ClInclude Include="Proyecto\components\ShadowFollow.h" />
     <ClInclude Include="Proyecto\components\FollowPlayer.h" />
     <ClInclude Include="Proyecto\components\GameStates.h" />

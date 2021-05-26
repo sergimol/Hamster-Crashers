@@ -161,6 +161,14 @@ public:
 	inline bool angelUnlocked() {
 		return angelUnlocked_;
 	}
+	
+	inline bool tutorialDone() {
+		return tutorialDone_;
+	}
+
+	inline void setTutorialDone() {
+		tutorialDone_ = true;
+	}
 
 	// toggle to full-screen/window mode
 	inline void toggleFullScreen() {

@@ -203,6 +203,10 @@
       "file": "resources/images/spritesheets/enemies/level1/calcetin_spritesheet.png"
     },
     {
+      "id": "manoSheet",
+      "file": "resources/images/spritesheets/enemies/level3/mano_spritesheet.png"
+    },
+    {
       "id": "firstBoss",
       "file": "resources/images/boss1.png"
     },
@@ -443,6 +447,22 @@
       "file": "resources/images/menuSprites/canelonButtonUnselectable.png"
     },
     {
+      "id": "angelButton",
+      "file": "resources/images/menuSprites/angelButton.png"
+    },
+    {
+      "id": "angelButtonEnter",
+      "file": "resources/images/menuSprites/angelButtonEnter.png"
+    },
+    {
+      "id": "angelButtonUnselectable",
+      "file": "resources/images/menuSprites/angelButtonUnselectable.png"
+    },
+    {
+      "id": "angelButtonLocked",
+      "file": "resources/images/menuSprites/angelButtonLocked.png"
+    },
+    {
       "id": "backButton",
       "file": "resources/images/menuSprites/backButton.png"
     },
@@ -679,8 +699,28 @@
       "file": "resources/images/backgrounds/level2/level2parallax4.png"
     },
     {
+      "id": "level3background1",
+      "file": "resources/images/backgrounds/level3/level3parallax1.jpg"
+    },
+    {
+      "id": "level3background2",
+      "file": "resources/images/backgrounds/level3/level3parallax2.png"
+    },
+    {
+      "id": "level3background3",
+      "file": "resources/images/backgrounds/level3/level3parallax3.png"
+    },
+    {
+      "id": "level3background4",
+      "file": "resources/images/backgrounds/level3/level3parallax4.png"
+    },
+    {
       "id": "hamsterSelectorBlank",
       "file": "resources/images/menuSprites/hamsterSelectorBlank.png"
+    },
+    {
+      "id": "hamsterSelectorBlankLocked",
+      "file": "resources/images/menuSprites/hamsterSelectorBlankLocked.png"
     },
     {
       "id": "mainMenuBlank",
@@ -799,6 +839,14 @@
       "file": "resources/images/UI/hamsterUI/especialRpressed.png"
     },
     {
+      "id": "AbilityOnB",
+      "file": "resources/images/UI/hamsterUI/especialRB.png"
+    },
+    {
+      "id": "AbilityOffB",
+      "file": "resources/images/UI/hamsterUI/especialRBpressed.png"
+    },
+    {
       "id": "Hexagon",
       "file": "resources/images/UI/bossUI/bossIconHead.png"
     },
@@ -823,12 +871,20 @@
       "file": "resources/images/dialogue/explicacion0.png"
     },
     {
+      "id": "explicacion0alt",
+      "file": "resources/images/dialogue/explicacion0alt.png"
+    },
+    {
       "id": "dialogo1",
       "file": "resources/images/dialogue/dialogo1.png"
     },
     {
       "id": "explicacion1",
       "file": "resources/images/dialogue/explicacion1.png"
+    },
+    {
+      "id": "explicacion1alt",
+      "file": "resources/images/dialogue/explicacion1alt.png"
     },
     {
       "id": "dialogo2",
@@ -839,12 +895,20 @@
       "file": "resources/images/dialogue/explicacion2.png"
     },
     {
+      "id": "explicacion2alt",
+      "file": "resources/images/dialogue/explicacion2alt.png"
+    },
+    {
       "id": "dialogo3",
       "file": "resources/images/dialogue/dialogo3.png"
     },
     {
       "id": "explicacion3",
       "file": "resources/images/dialogue/explicacion3.png"
+    },
+    {
+      "id": "explicacion3alt",
+      "file": "resources/images/dialogue/explicacion3alt.png"
     },
     {
       "id": "dialogo3singleplayer",
@@ -1156,6 +1220,10 @@
       "file": "resources/images/transitions/final/cinematica25.jpg"
     },
     {
+      "id": "cineMuerte",
+      "file": "resources/images/transitions/cinematicaMuerte.jpg"
+    },
+    {
       "id": "cat",
       "file": "resources/images/spritesheets/enemies/level2/cat_spritesheet.png"
     }
@@ -1241,6 +1309,26 @@
     {
       "id": "light10",
       "file": "resources/sound/hit/light/light10.wav"
+    },
+    {
+      "id": "hamsterlight0",
+      "file": "resources/sound/hit/hamster/hamsterHit0.wav"
+    },
+    {
+      "id": "hamsterlight1",
+      "file": "resources/sound/hit/hamster/hamsterHit1.wav"
+    },
+    {
+      "id": "hamsterlight2",
+      "file": "resources/sound/hit/hamster/hamsterHit2.wav"
+    },
+    {
+      "id": "hamsterlight3",
+      "file": "resources/sound/hit/hamster/hamsterHit3.wav"
+    },
+    {
+      "id": "hamsterlight4",
+      "file": "resources/sound/hit/hamster/hamsterHit4.wav"
     },
     {
       "id": "strong0",
@@ -1451,14 +1539,6 @@
       "file": "resources/sound/train/pasoAlto.wav"
     },
     {
-      "id": "transition0",
-      "file": "resources/sound/transition/transition0.wav"
-    },
-    {
-      "id": "transition1",
-      "file": "resources/sound/transition/transition1.wav"
-    },
-    {
       "id": "trapKitchen",
       "file": "resources/sound/traps/traps0.wav"
     },
@@ -1481,6 +1561,102 @@
     {
       "id": "tutorial3single",
       "file": "resources/sound/dialogos/dialogo3single.wav"
+    },
+    {
+      "id": "transition0",
+      "file": "resources/sound/transition/Inicio-Doblado/1.mp3"
+    },
+    {
+      "id": "transition1",
+      "file": "resources/sound/transition/Inicio-Doblado/2.mp3"
+    },
+    {
+      "id": "transition2",
+      "file": "resources/sound/transition/Inicio-Doblado/3.mp3"
+    },
+    {
+      "id": "transition3",
+      "file": "resources/sound/transition/Inicio-Doblado/4.mp3"
+    },
+    {
+      "id": "transition4",
+      "file": "resources/sound/transition/Inicio-Doblado/5.mp3"
+    },
+    {
+      "id": "transition5",
+      "file": "resources/sound/transition/Inicio-Doblado/6.mp3"
+    },
+    {
+      "id": "transition6",
+      "file": "resources/sound/transition/Inicio-Doblado/7.mp3"
+    },
+    {
+      "id": "transition7",
+      "file": "resources/sound/transition/Inicio-Doblado/8.mp3"
+    },
+    {
+      "id": "transition8",
+      "file": "resources/sound/transition/level1level2-Doblado/1.mp3"
+    },
+    {
+      "id": "transition9",
+      "file": "resources/sound/transition/level1level2-Doblado/2.mp3"
+    },
+    {
+      "id": "transition10",
+      "file": "resources/sound/transition/level1level2-Doblado/3.mp3"
+    },
+    {
+      "id": "transition11",
+      "file": "resources/sound/transition/level1level2-Doblado/4.mp3"
+    },
+    {
+      "id": "transition12",
+      "file": "resources/sound/transition/level1level2-Doblado/5.mp3"
+    },
+    {
+      "id": "transition13",
+      "file": "resources/sound/transition/level2level3-Doblado/1.mp3"
+    },
+    {
+      "id": "transition14",
+      "file": "resources/sound/transition/level2level3-Doblado/2.mp3"
+    },
+    {
+      "id": "transition15",
+      "file": "resources/sound/transition/level2level3-Doblado/3.mp3"
+    },
+    {
+      "id": "transition16",
+      "file": "resources/sound/transition/level3micro-Doblado/1.mp3"
+    },
+    {
+      "id": "transition17",
+      "file": "resources/sound/transition/level3micro-Doblado/2.mp3"
+    },
+    {
+      "id": "transition18",
+      "file": "resources/sound/transition/final-Doblado/1.mp3"
+    },
+    {
+      "id": "transition19",
+      "file": "resources/sound/transition/final-Doblado/2.mp3"
+    },
+    {
+      "id": "transition20",
+      "file": "resources/sound/transition/final-Doblado/3.mp3"
+    },
+    {
+      "id": "transition21",
+      "file": "resources/sound/transition/final-Doblado/4.mp3"
+    },
+    {
+      "id": "transition22",
+      "file": "resources/sound/transition/final-Doblado/5.mp3"
+    },
+    {
+      "id": "transition23",
+      "file": "resources/sound/transition/final-Doblado/6.mp3"
     },
     {
       "id": "possesion",
@@ -1529,6 +1705,26 @@
     {
       "id": "wrongNote",
       "file": "resources/sound/reanimationKeySound/wrongNote.wav"
+    },
+    {
+      "id": "page0",
+      "file": "resources/sound/pages/page0.wav"
+    },
+    {
+      "id": "page1",
+      "file": "resources/sound/pages/page1.wav"
+    },
+    {
+      "id": "page2",
+      "file": "resources/sound/pages/page2.wav"
+    },
+    {
+      "id": "page3",
+      "file": "resources/sound/pages/page3.wav"
+    },
+    {
+      "id": "page4",
+      "file": "resources/sound/pages/page4.wav"
     }
   ],
 
@@ -1566,6 +1762,18 @@
   "anims": [
     {
       "id": "cinematic_anim",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 2,
+      "cols": 2,
+      "rows": 1,
+      "frameUpdate": 300,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "cinematic_static",
       "startFrameX": 0,
       "startFrameY": 0,
       "duration": 2,
@@ -2717,6 +2925,102 @@
       "rows": 7,
       "frameUpdate": 100,
       "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "mano_idle",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 4,
+      "cols": 8,
+      "rows": 8,
+      "frameUpdate": 150,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "mano_move",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 4,
+      "cols": 8,
+      "rows": 8,
+      "frameUpdate": 150,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "mano_attack",
+      "startFrameX": 4,
+      "startFrameY": 0,
+      "duration": 8,
+      "cols": 8,
+      "rows": 8,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "mano_hit",
+      "startFrameX": 4,
+      "startFrameY": 1,
+      "duration": 4,
+      "cols": 8,
+      "rows": 8,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "calcetin_floor",
+      "startFrameX": 7,
+      "startFrameY": 1,
+      "duration": 1,
+      "cols": 8,
+      "rows": 8,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "mano_up",
+      "startFrameX": 0,
+      "startFrameY": 2,
+      "duration": 3,
+      "cols": 8,
+      "rows": 8,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "mano_death",
+      "startFrameX": 3,
+      "startFrameY": 2,
+      "duration": 16,
+      "cols": 8,
+      "rows": 8,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "mano_sequence",
+      "startFrameX": 3,
+      "startFrameY": 4,
+      "duration": 22,
+      "cols": 8,
+      "rows": 8,
+      "frameUpdate": 100,
+      "loop": 0,
       "chain": "",
       "attackFrame": -1
     }

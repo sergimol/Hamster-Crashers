@@ -20,15 +20,15 @@ void PossesionGame::init() {
 //Comprueba que la tecla sea pulsada y la keyGame esté chocando con el marcador
 void PossesionGame::update() {
 	if (state_->getState() == GameStates::RUNNING) {
-		if (keyGame != nullptr)
-			keyGame->update();
+		if (keyGame_ != nullptr)
+			keyGame_->update();
 
 		bool success = false;
 
 		// Si el fantasma se está controlando con mando
 		if (ih().playerHasController(playerNumber_)) {
 			if (ih().isButtonDownEvent()) {
-				success = ih().isButtonDown(playerNumber_, actualButton) && keyGame->getComponent<KeyGame>()->hitSkillCheck();
+				success = ih().isButtonDown(playerNumber_, actualButton_) && keyGame_->getComponent<KeyGame>()->hitSkillCheck();
 
 				if (success)
 					succesfulHit();
@@ -38,7 +38,7 @@ void PossesionGame::update() {
 		}
 		// Si se está controlando con teclado
 		else if (ih().keyDownEvent()) {
-			success = ih().isKeyDown(actualKey) && keyGame->getComponent<KeyGame>()->hitSkillCheck();
+			success = ih().isKeyDown(actualKey_) && keyGame_->getComponent<KeyGame>()->hitSkillCheck();
 
 			if (success)
 				succesfulHit();
@@ -46,7 +46,7 @@ void PossesionGame::update() {
 				failedHit();
 		}
 		//Si se muere o infarta el poseido, se acaba la posesion
-		if (possesedState->cantBeTargeted()) {
+		if (possesedState_->cantBeTargeted()) {
 			endPossesion();
 		}
 
@@ -59,50 +59,50 @@ void PossesionGame::onEnable() {
 }
 
 void PossesionGame::onDisable() {
-	mistakes = 0;
-	roundPassed = false;
-	failed = false;
-	possesed = nullptr;
+	mistakes_ = 0;
+	roundPassed_ = false;
+	failed_ = false;
+	possesed_ = nullptr;
 
 	deleteTextures();
 }
 
 void PossesionGame::start() {
-	assert(possesed != nullptr);
+	assert(possesed_ != nullptr);
 	//Tomamos el estado del poseído para comprobar que sigue vivo y no infartado mientras le ayudamos
-	possesedState = possesed->getComponent<HamsterStateMachine>();
+	possesedState_ = possesed_->getComponent<HamsterStateMachine>();
 
 	playerNumber_ = entity_->getComponent<EntityAttribs>()->getNumber();
 
 	updateGamePos();
 
-	auto tr = possesed->getComponent<Transform>();
+	auto tr = possesed_->getComponent<Transform>();
 	auto pos = tr->getPos();
 
 	//Horizontal
-	if (lineH == nullptr) {
-		lineH = new Entity(entity_->getMngr());
-		lineH->addComponent<Transform>(Vector2D(pos.getX() + H_LINE_OFFSET_X, pos.getY() + H_LINE_OFFSET_Y),
+	if (lineH_ == nullptr) {
+		lineH_ = new Entity(entity_->getMngr());
+		lineH_->addComponent<Transform>(Vector2D(pos.getX() + H_LINE_OFFSET_X, pos.getY() + H_LINE_OFFSET_Y),
 			Vector2D(0, 0),
 			H_LINE_SIZE_X, H_LINE_SIZE_Y, 0, 1, 1)->setZ(tr->getZ());
-		lineH->addComponent<Image>(&sdlutils().images().at("linea"));
-		entity_->getMngr()->getUIObjects().push_back(lineH);
+		lineH_->addComponent<Image>(&sdlutils().images().at("linea"));
+		entity_->getMngr()->getUIObjects().push_back(lineH_);
 	}
 	//Vertical
-	if (lineV == nullptr) {
-		lineV = new Entity(entity_->getMngr());
-		lineV->addComponent<Transform>(Vector2D(pos.getX() + V_LINE_OFFSET_X, pos.getY() + V_LINE_OFFSET_Y),
+	if (lineV_ == nullptr) {
+		lineV_ = new Entity(entity_->getMngr());
+		lineV_->addComponent<Transform>(Vector2D(pos.getX() + V_LINE_OFFSET_X, pos.getY() + V_LINE_OFFSET_Y),
 			Vector2D(0, 0),
 			V_LINE_SIZE_X, V_LINE_SIZE_Y, 0, 1, 1)->setZ(tr->getZ());
-		lineV->addComponent<Image>(&sdlutils().images().at("lineaV"));
-		entity_->getMngr()->getUIObjects().push_back(lineV);
+		lineV_->addComponent<Image>(&sdlutils().images().at("lineaV"));
+		entity_->getMngr()->getUIObjects().push_back(lineV_);
 	}
 	//Crea la entidad del QuickTimeEvent
-	if (keyGame == nullptr) {
-		keyGame = new Entity(entity_->getMngr());
-		keyGame->addComponent<Transform>(Vector2D(lineHPos.x - BOX_SIZE_X / 2, lineHPos.y - BOX_SIZE_Y / 2), Vector2D(0, 0), BOX_SIZE_X, BOX_SIZE_Y, 0, 1, 1);
-		keyGame->addComponent<KeyGame>(lineHPos, lineVPos, this, possesed->getComponent<EntityAttribs>()->getVel().getX());
-		entity_->getMngr()->getUIObjects().push_back(keyGame);
+	if (keyGame_ == nullptr) {
+		keyGame_ = new Entity(entity_->getMngr());
+		keyGame_->addComponent<Transform>(Vector2D(lineHPos_.x - BOX_SIZE_X / 2, lineHPos_.y - BOX_SIZE_Y / 2), Vector2D(0, 0), BOX_SIZE_X, BOX_SIZE_Y, 0, 1, 1);
+		keyGame_->addComponent<KeyGame>(lineHPos_, lineVPos_, this, possesed_->getComponent<EntityAttribs>()->getVel().getX());
+		entity_->getMngr()->getUIObjects().push_back(keyGame_);
 	}
 	
 
@@ -110,44 +110,46 @@ void PossesionGame::start() {
 }
 
 void PossesionGame::updateGamePos() {
-	if (possesed != nullptr) {
-		auto tr = possesed->getComponent<Transform>();
+	if (possesed_ != nullptr) {
+		auto tr = possesed_->getComponent<Transform>();
 		auto pos = tr->getPos();
 
 		float x = pos.getX() + tr->getW() / 2,
 			y = pos.getY() - tr->getZ();
 
-		if (lineH != nullptr)
-			lineH->getComponent<Transform>()->setPos(Vector2D(x + H_LINE_OFFSET_X, y + H_LINE_OFFSET_Y));
-		if (lineV != nullptr)
-			lineV->getComponent<Transform>()->setPos(Vector2D(x + V_LINE_OFFSET_X, y + V_LINE_OFFSET_Y));
+		if (lineH_ != nullptr)
+			lineH_->getComponent<Transform>()->setPos(Vector2D(x + H_LINE_OFFSET_X, y + H_LINE_OFFSET_Y));
+		if (lineV_ != nullptr)
+			lineV_->getComponent<Transform>()->setPos(Vector2D(x + V_LINE_OFFSET_X, y + V_LINE_OFFSET_Y));
 
 		auto cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 		x -= cam.x;
 		y -= cam.y;
 
 		pos.set(x + H_LINE_OFFSET_X, y + H_LINE_OFFSET_Y);
-		lineHPos = build_sdlrect(pos, H_LINE_SIZE_X, H_LINE_SIZE_Y);
+		lineHPos_ = build_sdlrect(pos, H_LINE_SIZE_X, H_LINE_SIZE_Y);
 
 		pos.set(x + V_LINE_OFFSET_X, y + V_LINE_OFFSET_Y);
-		lineVPos = build_sdlrect(pos, V_LINE_SIZE_X, V_LINE_SIZE_Y);
+		lineVPos_ = build_sdlrect(pos, V_LINE_SIZE_X, V_LINE_SIZE_Y);
 
-		if (keyGame != nullptr) {
+		if (keyGame_ != nullptr) {
 			//Dir = 0, 1, -1 en funcio de si va palante, patras o esta quieto
 			float dir = tr->getVel().getX() > 0 ? 1 : tr->getVel().getX() < 0 ? -1 : 0;
-			keyGame->getComponent<KeyGame>()->updateGamePos(lineVPos, lineHPos,  dir);
+			keyGame_->getComponent<KeyGame>()->updateGamePos(lineVPos_, lineHPos_,  dir);
 		}
 	}
 }
 
 void PossesionGame::reachedEnd() {
-	if (!roundPassed)
-		mistakes++;
-	
-	roundPassed = false;
-	failed = false;
+	if (!roundPassed_)
+		mistakes_++;
+	else if (!failed_)
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("wrongNote");
 
-	if (mistakes >= maxMistakes) {
+	roundPassed_ = false;
+	failed_ = false;
+
+	if (mistakes_ >= maxMistakes_) {
 		endPossesion();
 	}
 	else {
@@ -159,10 +161,10 @@ void PossesionGame::succesfulHit() {
 	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("rightNote");
 
 	//Si no hemos fallado la prueba antes, se da por pasada
-	if(!failed) roundPassed = true;
+	if(!failed_) roundPassed_ = true;
 	
 	//Se decrementa la probabilidad de infarto
-	auto* str = possesed->getComponent<Stroke>();
+	auto* str = possesed_->getComponent<Stroke>();
 	assert(str != nullptr);
 
 	str->decreaseChance();
@@ -170,15 +172,15 @@ void PossesionGame::succesfulHit() {
 
 void PossesionGame::failedHit() {
 	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("wrongNote");
-	failed = true;
+	failed_ = true;
 }
 
 //Se elimina la key y se desactiva el componente al acabar
 void PossesionGame::endPossesion() {
-	if (keyGame != nullptr && lineH != nullptr && lineV != nullptr) {
-		keyGame->setActive(false);
-		lineH->setActive(false);
-		lineV->setActive(false);
+	if (keyGame_ != nullptr && lineH_ != nullptr && lineV_ != nullptr) {
+		keyGame_->setActive(false);
+		lineH_->setActive(false);
+		lineV_->setActive(false);
 
 		entity_->getMngr()->refreshUIObjects();
 		
@@ -189,32 +191,32 @@ void PossesionGame::endPossesion() {
 
 //Coge una key y su respectiva imagen aleatorias
 void PossesionGame::randomiseKey() {
-	auto rand = sdlutils().rand().nextInt(0, numKeys);
+	auto rand = sdlutils().rand().nextInt(0, numKeys_);
 	if (ih().playerHasController(playerNumber_)) {
-		actualButton = buttonCodes[rand];
-		keyGame->getComponent<KeyGame>()->setTexture(buttonTextures[rand]);
-		keyGame->getComponent<KeyGame>()->setTextureDown(buttonDownTextures[rand]);
+		actualButton_ = buttonCodes_[rand];
+		keyGame_->getComponent<KeyGame>()->setTexture(buttonTextures_[rand]);
+		keyGame_->getComponent<KeyGame>()->setTextureDown(buttonDownTextures_[rand]);
 	}
 	else{
-		actualKey = keyCodes[rand];
-		keyGame->getComponent<KeyGame>()->setTexture(keyTextures[rand]);
-		keyGame->getComponent<KeyGame>()->setTextureDown(keyDownTextures[rand]);
+		actualKey_ = keyCodes_[rand];
+		keyGame_->getComponent<KeyGame>()->setTexture(keyTextures_[rand]);
+		keyGame_->getComponent<KeyGame>()->setTextureDown(keyDownTextures_[rand]);
 	}
 }
 
 void PossesionGame::deleteTextures() {
-	if (keyGame != nullptr) {
-		delete keyGame;
-		keyGame = nullptr;
+	if (keyGame_ != nullptr) {
+		delete keyGame_;
+		keyGame_ = nullptr;
 	}
 
-	if (lineH != nullptr) {
-		delete lineH;
-		lineH = nullptr;
+	if (lineH_ != nullptr) {
+		delete lineH_;
+		lineH_ = nullptr;
 	}
 
-	if (lineV != nullptr) {
-		delete lineV;
-		lineV = nullptr;
+	if (lineV_ != nullptr) {
+		delete lineV_;
+		lineV_ = nullptr;
 	}
 }

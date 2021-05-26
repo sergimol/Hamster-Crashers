@@ -180,6 +180,8 @@ void Movement::onDisable()
 {
 	//auto& vel = tr_->getVel();
 	//vel = Vector2D();
+
+	tr_->setVel(Vector2D(0,0));
 }
 
 void Movement::onResume() {

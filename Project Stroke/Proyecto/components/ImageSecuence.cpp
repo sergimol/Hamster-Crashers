@@ -410,7 +410,25 @@ void ImageSecuence::init() {
 
 	keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
 	}
+	else if (newScene_ == hasMuerto) {
+	//Cinematica 19
+	auto anim19 = entity_->getMngr()->addEntity();
+	anim19->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim19->addComponent<Animator>(
+		&sdlutils().images().at("cineMuerte"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		);
+	keyAnimations.push(anim19);
 
+
+	keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
+	}
 	trans_ = entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>();
 }
 

@@ -10,10 +10,9 @@ public:
 
 	void init() override;
 	void play(std::string soundName);
-	void setVolumeChannels();
 	void lowVolume(bool channel);
 	void upVolume(bool channel);
-	void resetVolumes() { fxVol_ = 0.5; musicVol_ = 0.5; setVolumeChannels(); sdlutils().setMusicVol(musicVol_); sdlutils().setFxVol(fxVol_); };
+	void resetVolumes() { fxVol_ = 0.5; musicVol_ = 0.5; sdlutils().setMusicVol(musicVol_); sdlutils().setFxVol(fxVol_); };
 	bool emptyChannel();
 	void StopTutorial();
 	void fadeout(int time) {}
@@ -26,49 +25,48 @@ public:
 	float fxVol_ = 0.5f;
 	float musicVol_ = 0.5f;
 	//local
-	int initMusicVol = 20;
+	int initMusicVol = 35;
 
-
-	int initLightVol = 100;
+	int initLightVol = 90;
 	int initStrongVol = 128;
 	int initAttackVol = 100;
 
 	int initDepVol = 40;
-	int initHeartAttackVol = 40;
+	int initHeartAttackVol = 50;
 
 	int initCatVol = 40;
 
-	int initHandVol = 40;
+	int initHandVol = 80;
 
 	int initMonkeVol = 40;
 
 	int inittrainBackgroundVol = 40;
 
-	int carVol = 40;
+	int carVol = 60;
 
-	int initsoldierDepVol = 3;
+	int initsoldierDepVol = 50;
 
-	int notesReanimVol = 40;
-	int possesionVol = 40;
+	int notesReanimVol = 120;
+	int possesionVol = 120;
 
-	int sardinillaSpecialVol = 60;
-	int ketaSpecialVol = 40;
-	int monchiSpecialVol = 20;
-	int canelonSpecialVol = 40;
+	int sardinillaSpecialVol = 120;
+	int ketaSpecialVol = 120;
+	int monchiSpecialVol = 120;
+	int canelonSpecialVol = 120;
 
-	int buttonVol = 128;
+	int buttonVol = 100;
 
-	int initEatVol = 40;
+	int initEatVol = 60;
 
-	int pageSkipVol = 100;
-	int initTutorialVol = 128;
-	int initTransitionVol = 128;
+	int pageSkipVol = 128;
+	int initTutorialVol = 80;
+	int initTransitionVol = 80;
 
-	int inittrapKitchenVol = 40;
+	int inittrapKitchenVol = 80;
 
-	int initBirdsVol = 40;
+	int initBirdsVol = 100;
 
-
+	void resetNumInts();
 private:
 	int randomNum;
 
@@ -119,7 +117,6 @@ private:
 	SoundEffect* light8;
 	SoundEffect* light9;
 	SoundEffect* light10;
-
 
 	//Golpe Fuerte
 	SoundEffect* strong0;
@@ -262,6 +259,27 @@ private:
 	SoundEffect* transition8;
 	SoundEffect* transition9;
 	SoundEffect* transition10;
+	SoundEffect* transition11;
+	SoundEffect* transition12;
+	SoundEffect* transition13;
+	SoundEffect* transition14;
+	SoundEffect* transition15;
+	SoundEffect* transition16;
+	SoundEffect* transition17;
+	SoundEffect* transition18;
+	SoundEffect* transition19;
+	SoundEffect* transition20;
+	SoundEffect* transition21;
+	SoundEffect* transition22;
+	SoundEffect* transition23;
+
+	//Page transitions
+	SoundEffect* page0;
+	SoundEffect* page1;
+	SoundEffect* page2;
+	SoundEffect* page3;
+	SoundEffect* page4;
+
 
 	//Musica y sonidos ambiente
 	Music* HamstersMainThemev2;
@@ -273,6 +291,5 @@ private:
 	Music* HamstersNivel4GameVersion;
 
 	SoundEffect* birds;
-
 };
 

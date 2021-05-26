@@ -86,6 +86,8 @@ class Subtitulos;
 class MenuAnim;
 class ObstacleMoveable;
 class LifeTime;
+class ReanimationAlone;
+class Creditos;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -173,7 +175,9 @@ class LifeTime;
 	Subtitulos,\
 	MenuAnim,\
 	ObstacleMoveable, \
-	LifeTime
+	LifeTime, \
+	ReanimationAlone, \
+	Creditos	
 
 // groups
 

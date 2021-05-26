@@ -146,6 +146,7 @@ void FinalBossManager::update() {
 			handAnim_->setAnimBool(EnemyStatesAnim::SEQUENCE, false);
 			//Empieza la musica del boss
 			hand_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1Boss1_0");
+			hand_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handInit");
 
 		}
 	}

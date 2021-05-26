@@ -108,7 +108,7 @@ void MapMngr::update() {
 			TriggerftCamera.pop();
 
 			//TUTORIAL
-			if (stoi(trigger.getName()) < 4) {
+			if (!sdlutils().tutorialDone() && stoi(trigger.getName()) < 4) {
 				entity_->getMngr()->getHandler<dialogosMngr>()->getComponent<dialogos>()->dialogoStateChange();
 			}
 		}
@@ -140,6 +140,20 @@ void MapMngr::loadNewMap(string map) {
 	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
 
 	if (map_.load(map)) {
+		if (map == "resources/images/tiled/Level1Boss.tmx") {
+			scale = 2.5f;
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
+		}
+		else if (map == "resources/images/tiled/Level2.tmx") {
+			scale = 3.0f;
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stopbirds");
+
+		}
+		else if (map == "resources/images/tiled/Level3.tmx") {
+			//scale = 3.0f;
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stopbirds");
+
+		}
 
 		mapHeight_ = map_.getProperties()[0].getIntValue() * TAM_CELDA * scale;
 
@@ -155,6 +169,15 @@ void MapMngr::loadNewMap(string map) {
 		//Hay colisiones
 		collisionCreated = true;
 
+		//Fondos
+		if (map == "resources/images/tiled/Level1.tmx")
+			addParaxall(1, true, false);
+		else if (map == "resources/images/tiled/Level1Boss.tmx") {
+			addParaxall(1, false, true);
+		}
+		else if (map == "resources/images/tiled/Level2.tmx") {
+			addParaxall(2, true, false);
+		}
 
 		//Dimensiones de los tiles
 		tilesDimensions_ = map_.getTileSize();
@@ -171,18 +194,6 @@ void MapMngr::loadNewMap(string map) {
 			//Guardamos las texturas de los tilesets
 			tilesetsArr[i] = &sdlutils().images().at(tileset.getName());	//El nombre del tileset en Tiled y la textura png DEBEN llamarse igual
 			i++;
-		}
-
-		//Fondos
-		if (map == "resources/images/tiled/Level1.tmx")
-			addParaxall(1, true, false);
-		else if (map == "resources/images/tiled/Level1Boss.tmx") {
-			addParaxall(1, false, true);
-			scale = 2.4;
-		}
-		else if (map == "resources/images/tiled/Level2.tmx") {
-			addParaxall(2, true, false);
-			scale = 3;
 		}
 
 		for (const auto& layer : layers)
@@ -346,6 +357,7 @@ void MapMngr::loadNewMap(string map) {
 				}
 			}
 		}
+
 		//ENEMIGO
 		//Una vez terminamos de cargar todas las entidades y tiles de las CAPAS, cargamos los enemigos de la sala 0
 		//LoadEnemyRoom();
@@ -354,30 +366,30 @@ void MapMngr::loadNewMap(string map) {
 }
 
 void MapMngr::addParaxall(int lvl, bool front, bool train) {
-	auto upH = mapHeight_ - cam->getCam().h + cam->getUpOffset();
+	auto upH = mapHeight_ - cam->getCam().h + cam->getUpOffset() - 380;
 
 	string l = "level" + to_string(lvl);
 
 	auto* o = entity_->getMngr()->addBackGround();
 	o->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 	//Para meter un fondo meter esto									velocidad		tamaño			posicion
-	o->addComponent<Parallax>(&sdlutils().images().at(l + "background1"), 7, Vector2D(1920, 1459), Vector2D(0, upH), false, train);
+	o->addComponent<Parallax>(&sdlutils().images().at(l + "background1"), 7, Vector2D(1920, 1839), Vector2D(0, upH), false, train);
 
 	auto* p = entity_->getMngr()->addBackGround();
 	p->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 	//Para meter un fondo meter esto									velocidad		tamaño			posicion
-	p->addComponent<Parallax>(&sdlutils().images().at(l + "background2"), 10, Vector2D(1920, 1459), Vector2D(0, upH), false, train);
+	p->addComponent<Parallax>(&sdlutils().images().at(l + "background2"), 10, Vector2D(1920, 1839), Vector2D(0, upH), false, train);
 
 	auto* q = entity_->getMngr()->addBackGround();
 	q->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 	//Para meter un fondo meter esto									velocidad		tamaño			posicion
-	q->addComponent<Parallax>(&sdlutils().images().at(l + "background3"), 15, Vector2D(1920, 1459), Vector2D(0, upH), false, train);
+	q->addComponent<Parallax>(&sdlutils().images().at(l + "background3"), 15, Vector2D(1920, 1839), Vector2D(0, upH), false, train);
 
 	if (front) {
 		auto* r = entity_->getMngr()->addFrontGround();
 		r->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 		//Para meter un fondo meter esto									velocidad		tamaño			posicion
-		r->addComponent<Parallax>(&sdlutils().images().at(l + "background4"), 10, Vector2D(1920, 1459), Vector2D(0, upH), true, train);
+		r->addComponent<Parallax>(&sdlutils().images().at(l + "background4"), 10, Vector2D(1920, 1839), Vector2D(0, upH), true, train);
 	}
 }
 
@@ -648,14 +660,14 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 		hamster1->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.5);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20, 70);
+		hamster1->addComponent<EntityAttribs>(150, 0.0, name, Vector2D(7, 3.5), i, 0, 20, 70);
 	}
 	else if (name == "keta") {
 		tam = 100;
 		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + object.getAABB().width) * scale, object.getPosition().y * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.25);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 100, 20, 70);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 10, 20, 70);
 	}
 	else if (name == "monchi") {
 		tam = 86;
@@ -732,7 +744,6 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 		FairStrokeStrategy* farirStrat = new FairStrokeStrategy();
 		hamster1->addComponent<Stroke>(farirStrat);
 	}
-
 	hamster1->addComponent<Knockback>();
 	hamster1->addComponent<GetItem>();
 
@@ -808,11 +819,13 @@ void MapMngr::addObject(const tmx::Object& object) {
 	// int : pos en Z. Necesario meterlo a mano desde Tile
 
 	obstacle->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, prop[3].getIntValue(), false, 0.75, 0.75);
+		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, prop[3].getIntValue(), false, 0.75, 0.6);
 
 
 
 	string id = prop[1].getStringValue();
+
+	obstacle->addComponent<Shadow>(false, true);
 
 	obstacle->addComponent<Animator>(&sdlutils().images().at("obstacle" + id),
 		100,
@@ -831,8 +844,6 @@ void MapMngr::addObject(const tmx::Object& object) {
 	else {
 		obstacle->addComponent<Obstacle>(id);
 	}
-
-	obstacle->addComponent<Shadow>(false, false);
 
 	entity_->getMngr()->getObstacles().push_back(obstacle);
 }

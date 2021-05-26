@@ -91,6 +91,8 @@ void FinalBossAttack::slam() {
 
 		stunStarted_ = true;
 
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handPunch");
+
 	}
 	//HA LLEGADO AL SUELO
 	if (entity_->getComponent<AnimEnemyStateMachine>()->getState() == EnemyStatesAnim::ATTACK)

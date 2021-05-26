@@ -1,15 +1,19 @@
 #include "KeyGame.h"
 #include "../utils/Collisions.h"
 #include "../sdlutils/Texture.h"
+#include "PossesionGame.h"
+#include "ReanimationAlone.h"
 
 void KeyGame::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 
-	assert(poss_ != nullptr);
-
 	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
 	assert(state_ != nullptr);
+
+	if (speed_ > 5) {
+		speed_ = 5;
+	}
 }
 
 void KeyGame::render() {
@@ -41,7 +45,8 @@ void KeyGame::update() {
 // Devuelve a la posición inicial y notifica a Possesion
 void KeyGame::goBack() {
 	tr_->getPos() = Vector2D(trail_.x, trail_.y);
-	poss_->reachedEnd();
+	if (poss_ != nullptr) poss_->reachedEnd();
+	if (reanim_ != nullptr) reanim_->reachedEnd();
 	pressed_ = false;
 	progress_ = 0;
 }
