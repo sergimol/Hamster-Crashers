@@ -10,6 +10,7 @@
 #include "../utils/Vector2D.h"
 
 #include "../utils/Singleton.h"
+#include "SDLUtils.h"
 
 using namespace std;
 
@@ -239,6 +240,18 @@ public:
 			SDL_HapticRunEffect(haptics_[id], 0, 1);
 	}
 
+	// Hay un fallo que invierte los mandos si están conectados al principio, este método es un arreglo para ese fallo
+	inline void invertControllerIds() {
+		auto i = sdlutils().currRealTime();
+		if (i < 8000) {
+			sysToGameId.clear();
+			for (int i = 0; i < actualControllers_; ++i) {
+				sysToGameId.emplace(i, actualControllers_ - 1 - i);
+				gameToSysId[actualControllers_ - 1 - i] = i;
+			}
+		}
+	}
+
 private:
 	InputHandler() {
 		kbState_ = SDL_GetKeyboardState(0);
@@ -394,6 +407,8 @@ private:
 			totalControllers_++;
 			sysToGameId.emplace(id, gId);
 			gameToSysId[gId] = id;
+			
+			
 		}
 	}
 

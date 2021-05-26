@@ -69,6 +69,7 @@ void Game::init() {
 
 	SDLUtils::init("Squeak Ship", 1920, 1080, "resources/config/hamsters.resources.json");
 	sdlutils().loadData();
+	
 	//SDL_SetWindowFullscreen(sdlutils().window(), SDL_WINDOW_FULLSCREEN);	//   SDL_WINDOW_FULLSCREEN  ||   SDL_WINDOW_FULLSCREEN_DESKTOP
 
 	//CAMBIAR TAMAÑO DE PANTALLA, ESCALA DEL RENDER Y ALTERNAR ENTRE PANTALLA COMPLETA
@@ -162,7 +163,6 @@ void Game::start() {
 	SDL_Event event;
 
 	//Cargamos tiled
-
 	while (!exit) {
 
 
@@ -171,6 +171,8 @@ void Game::start() {
 		ih().clearState();
 		while (SDL_PollEvent(&event))
 			ih().update(event);
+
+		ih().invertControllerIds();
 
 		if (ih().onQuit()) {
 			exit = true;
