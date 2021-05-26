@@ -46,7 +46,7 @@ void KeyGame::update() {
 void KeyGame::goBack() {
 	tr_->getPos() = Vector2D(trail_.x, trail_.y);
 	if (poss_ != nullptr) poss_->reachedEnd();
-	if (reanim_ != nullptr) reanim_->reachedEnd();
+	else if (reanim_ != nullptr) reanim_->reachedEnd();
 	pressed_ = false;
 	progress_ = 0;
 }

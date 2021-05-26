@@ -4,6 +4,7 @@
 #include "../utils/Collisions.h"
 #include "../components/PossesionGame.h"
 #include "../components/Animator.h"
+#include "../components/Shadow.h"
 #include "Image.h"
 
 
@@ -68,11 +69,11 @@ void GhostCtrl::render() {
 }
 
 void GhostCtrl::startPossesion(Entity* e) {
+	deleteKey();
 	//Quitamos el movimiento y la imagen al poseer
 	mv_->setActive(false);
 	entity_->getComponent<Animator>()->setActive(false);
-
-	//animacion meterse dentro?------
+	entity_->getComponent<Shadow>()->setActive(false);
 
 	//Paramos el componente para que deje de buscar jugadores
 	show_ = false;
@@ -84,6 +85,7 @@ void GhostCtrl::startPossesion(Entity* e) {
 	poss->setPossesed(e);
 	poss->setActive(true);
 
+	e->getComponent<Animator>()->setTexture(&sdlutils().images().at(e->getComponent<EntityAttribs>()->getId() + "Sheet2"));
 	//keyTx_(&sdlutils().images().at("q")), buttonTx_(&sdlutils().images().at("b"))
 }
 
@@ -91,9 +93,11 @@ void GhostCtrl::generateKey() {
 	if (keyTx_ == nullptr) {
 		keyTx_ = new Entity(entity_->getMngr());
 		auto pos = tr_->getPos();
-		keyTx_->addComponent<Transform>(Vector2D(pos.getX() + tr_->getW()/2, pos.getY()),
+		auto tr = keyTx_->addComponent<Transform>(Vector2D(pos.getX() + tr_->getW() / 2, pos.getY()),
 			Vector2D(0, 0),
-			KEY_WIDTH, KEY_HEIGHT, 0, 1, 1)->setZ(tr_->getZ());
+			KEY_WIDTH, KEY_HEIGHT, 0, tr_->getZ(), false, 1, 1);
+		tr->setZ(tr_->getZ());
+		tr->setFloor(tr_->getFloor());
 		keyTx_->addComponent<Image>(&sdlutils().images().at(isController_ ? "b" : "q"));
 		entity_->getMngr()->getUIObjects().push_back(keyTx_);
 	}

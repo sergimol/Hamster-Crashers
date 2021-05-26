@@ -11,6 +11,7 @@
 #include "../components/Turret.h"
 #include "../components/WarCry.h"
 #include "../components/PossesionGame.h"
+#include "../components/Shadow.h"
 #include "Image.h"
 
 #include "../utils/Collisions.h"
@@ -66,8 +67,7 @@ void InfarctedBody::update() {
 
 						if (tx_ == nullptr) {
 							tx_ = new Entity(entity_->getMngr());
-							tx_->addComponent<Transform>(Vector2D(tr_->getPos().getX(),
-								tr_->getPos().getY()),
+							tx_->addComponent<Transform>(Vector2D(tr_->getPos().getX(), tr_->getPos().getY()),
 								Vector2D(0, 0),
 								KEY_WIDTH, KEY_HEIGHT, 0, 1, 1)->setZ(tr_->getZ());
 							tx_->addComponent<Image>(isCtrl ? &sdlutils().images().at("b") : &sdlutils().images().at("p"));
@@ -139,6 +139,8 @@ void InfarctedBody::reanimate() {
 	hamster_->getComponent<PossesionGame>()->endPossesion();
 	// Reactivamos el infarto
 	hamster_->getComponent<Stroke>()->setActive(true);
+	// Devolvemos la sombra
+	hamster_->getComponent<Shadow>()->setActive(true);
 	// Reactivamos la UI del corazón
 	hamster_->getComponent<HeartUI>()->resurrection();
 	hamster_->getComponent<UI>()->resurrection();
