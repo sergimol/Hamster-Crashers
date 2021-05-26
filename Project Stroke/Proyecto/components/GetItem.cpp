@@ -21,31 +21,33 @@ void GetItem::update() {
 		cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 		for (Entity* e : ents) {
 			//Si la entidad es un item...
+			if (e->isActive()) {
 				//Cogemos el transform del item
-			auto eTR = e->getComponent<Transform>();
+				auto eTR = e->getComponent<Transform>();
 
-			//Creamos nuestroRect
-			SDL_Rect rH = tr_->getRectCollide();
+				//Creamos nuestroRect
+				SDL_Rect rH = tr_->getRectCollide();
 
-			SDL_Rect rI = eTR->getRectCollide();
+				SDL_Rect rI = eTR->getRectCollide();
 
-			//Y comprobamos si colisiona
-			if (Collisions::collides(Vector2D(rH.x, rH.y), rH.w, rH.h, Vector2D(rI.x, rI.y), rI.w, rI.h)) {
-				//Comprobamos el tipo
-				switch (e->getComponent<Item>()->getItem()) {
-				case ItemType::Apple:
-					entity_->getComponent<EntityAttribs>()->heal(APPLEHP);
-					break;
-				case ItemType::Cheese:
-					this->entity_->getComponent<EntityAttribs>()->heal(CHEESE);
-					break;
-				default:
-					break;
+				//Y comprobamos si colisiona
+				if (Collisions::collides(Vector2D(rH.x, rH.y), rH.w, rH.h, Vector2D(rI.x, rI.y), rI.w, rI.h)) {
+					//Comprobamos el tipo
+					switch (e->getComponent<Item>()->getItem()) {
+					case ItemType::Apple:
+						entity_->getComponent<EntityAttribs>()->heal(APPLEHP);
+						break;
+					case ItemType::Cheese:
+						this->entity_->getComponent<EntityAttribs>()->heal(CHEESE);
+						break;
+					default:
+						break;
+					}
+					entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("eatItem");
+
+					e->setActive(false);
+					entity_->getMngr()->refreshItems();
 				}
-				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("eatItem");
-
-				e->setActive(false);
-				entity_->getMngr()->refreshItems();
 			}
 		}
 	}

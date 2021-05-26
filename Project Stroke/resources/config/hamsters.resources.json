@@ -79,6 +79,14 @@
       "file": "resources/images/UI/calcetinHead.png"
     },
     {
+      "id": "calcetinHead2",
+      "file": "resources/images/UI/calcetinHead.png"
+    },
+    {
+      "id": "calcetinHead3",
+      "file": "resources/images/UI/calcetinHead.png"
+    },
+    {
       "id": "sardinillaHead1",
       "file": "resources/images/UI/hamsterUI/sardinillaHead.png"
     },
@@ -547,47 +555,91 @@
       "file": "resources/images/menuSprites/resolutions/fullscreen.png"
     },
     {
-      "id": "bar0",
+      "id": "musicBar0",
       "file": "resources/images/menuSprites/barLevels/bar0.png"
     },
     {
-      "id": "bar1",
+      "id": "musicBar1",
       "file": "resources/images/menuSprites/barLevels/bar1.png"
     },
     {
-      "id": "bar2",
+      "id": "musicBar2",
       "file": "resources/images/menuSprites/barLevels/bar2.png"
     },
     {
-      "id": "bar3",
+      "id": "musicBar3",
       "file": "resources/images/menuSprites/barLevels/bar3.png"
     },
     {
-      "id": "bar4",
+      "id": "musicBar4",
       "file": "resources/images/menuSprites/barLevels/bar4.png"
     },
     {
-      "id": "bar5",
+      "id": "musicBar5",
       "file": "resources/images/menuSprites/barLevels/bar5.png"
     },
     {
-      "id": "bar6",
+      "id": "musicBar6",
       "file": "resources/images/menuSprites/barLevels/bar6.png"
     },
     {
-      "id": "bar7",
+      "id": "musicBar7",
       "file": "resources/images/menuSprites/barLevels/bar7.png"
     },
     {
-      "id": "bar8",
+      "id": "musicBar8",
       "file": "resources/images/menuSprites/barLevels/bar8.png"
     },
     {
-      "id": "bar9",
+      "id": "musicBar9",
       "file": "resources/images/menuSprites/barLevels/bar9.png"
     },
     {
-      "id": "bar10",
+      "id": "musicBar10",
+      "file": "resources/images/menuSprites/barLevels/bar10.png"
+    },
+    {
+      "id": "fxBar0",
+      "file": "resources/images/menuSprites/barLevels/bar0.png"
+    },
+    {
+      "id": "fxBar1",
+      "file": "resources/images/menuSprites/barLevels/bar1.png"
+    },
+    {
+      "id": "fxBar2",
+      "file": "resources/images/menuSprites/barLevels/bar2.png"
+    },
+    {
+      "id": "fxBar3",
+      "file": "resources/images/menuSprites/barLevels/bar3.png"
+    },
+    {
+      "id": "fxBar4",
+      "file": "resources/images/menuSprites/barLevels/bar4.png"
+    },
+    {
+      "id": "fxBar5",
+      "file": "resources/images/menuSprites/barLevels/bar5.png"
+    },
+    {
+      "id": "fxBar6",
+      "file": "resources/images/menuSprites/barLevels/bar6.png"
+    },
+    {
+      "id": "fxBar7",
+      "file": "resources/images/menuSprites/barLevels/bar7.png"
+    },
+    {
+      "id": "fxBar8",
+      "file": "resources/images/menuSprites/barLevels/bar8.png"
+    },
+    {
+      "id": "fxBar9",
+      "file": "resources/images/menuSprites/barLevels/bar9.png"
+    },
+    {
+      "id": "fxBar10",
       "file": "resources/images/menuSprites/barLevels/bar10.png"
     },
     {
@@ -657,6 +709,22 @@
     {
       "id": "catSmoking",
       "file": "resources/images/catSmoking.png"
+    },
+    {
+      "id": "vitroGranOn",
+      "file": "resources/images/objects/trampaGranOn.png"
+    },
+    {
+      "id": "vitroGranOff",
+      "file": "resources/images/objects/trampaGranOff.png"
+    },
+    {
+      "id": "vitroPeqOn",
+      "file": "resources/images/objects/trampaPeqOn.png"
+    },
+    {
+      "id": "vitroPeqOff",
+      "file": "resources/images/objects/trampaPeqOff.png"
     },
     {
       "id": "1920x1080Button",
@@ -1403,6 +1471,18 @@
       "file": "resources/sound/dialogos/dialogo1.wav"
     },
     {
+      "id": "tutorial2",
+      "file": "resources/sound/dialogos/dialogo2.wav"
+    },
+    {
+      "id": "tutorial3",
+      "file": "resources/sound/dialogos/dialogo3.wav"
+    },
+    {
+      "id": "tutorial3single",
+      "file": "resources/sound/dialogos/dialogo3single.wav"
+    },
+    {
       "id": "possesion",
       "file": "resources/sound/possesion/possesion.wav"
     },
@@ -1413,6 +1493,30 @@
     {
       "id": "heavyPunch1",
       "file": "resources/sound/hand/smashDown.wav"
+    },
+    {
+      "id": "handHit0",
+      "file": "resources/sound/hand/hit0.wav"
+    },
+    {
+      "id": "handHit1",
+      "file": "resources/sound/hand/hit1.wav"
+    },
+    {
+      "id": "handHit2",
+      "file": "resources/sound/hand/hit2.wav"
+    },
+    {
+      "id": "handDep",
+      "file": "resources/sound/hand/dep.wav"
+    },
+    {
+      "id": "handInit0",
+      "file": "resources/sound/hand/init0.wav"
+    },
+    {
+      "id": "handInit1",
+      "file": "resources/sound/hand/init1.wav"
     },
     {
       "id": "platillos",
