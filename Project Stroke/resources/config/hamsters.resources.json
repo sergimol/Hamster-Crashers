@@ -1259,6 +1259,26 @@
       "file": "resources/sound/hit/light/light10.wav"
     },
     {
+      "id": "hamsterlight0",
+      "file": "resources/sound/hit/hamster/hamsterHit0.wav"
+    },
+    {
+      "id": "hamsterlight1",
+      "file": "resources/sound/hit/hamster/hamsterHit1.wav"
+    },
+    {
+      "id": "hamsterlight2",
+      "file": "resources/sound/hit/hamster/hamsterHit2.wav"
+    },
+    {
+      "id": "hamsterlight3",
+      "file": "resources/sound/hit/hamster/hamsterHit3.wav"
+    },
+    {
+      "id": "hamsterlight4",
+      "file": "resources/sound/hit/hamster/hamsterHit4.wav"
+    },
+    {
       "id": "strong0",
       "file": "resources/sound/hit/strong/strong0.wav"
     },

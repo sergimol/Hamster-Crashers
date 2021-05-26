@@ -73,6 +73,7 @@ private:
 	int randomNum;
 
 	void playLighthit();
+	void playHamsterLighthit();
 
 	void playStronghit();
 
@@ -120,6 +121,12 @@ private:
 	SoundEffect* light9;
 	SoundEffect* light10;
 
+	//Golpe Hamster 
+	SoundEffect* hamLight0;
+	SoundEffect* hamLight1;
+	SoundEffect* hamLight2;
+	SoundEffect* hamLight3;
+	SoundEffect* hamLight4;
 
 	//Golpe Fuerte
 	SoundEffect* strong0;

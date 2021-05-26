@@ -176,8 +176,8 @@ void EntityAttribs::update() {
 bool EntityAttribs::recieveDmg(int dmg) {
 	health_ -= dmg;
 
-	//if (hms_ != nullptr)
-		//entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
+	if(hms_ != nullptr)
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("hamsterlighthit");
 
 	//Timer de invulnerabilidad
 	damageInvulTime_ = sdlutils().currRealTime();

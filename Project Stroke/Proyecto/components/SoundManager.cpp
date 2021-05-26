@@ -13,6 +13,13 @@ void SoundManager::init() {
 	light9 = &sdlutils().soundEffects().at("light9");
 	light10 = &sdlutils().soundEffects().at("light10");
 
+	hamLight0 = &sdlutils().soundEffects().at("hamsterlight0");
+	hamLight1 = &sdlutils().soundEffects().at("hamsterlight1");
+	hamLight2 = &sdlutils().soundEffects().at("hamsterlight2");
+	hamLight3 = &sdlutils().soundEffects().at("hamsterlight3");
+	hamLight4 = &sdlutils().soundEffects().at("hamsterlight4");
+
+
 	strong0 = &sdlutils().soundEffects().at("strong0");
 	strong1 = &sdlutils().soundEffects().at("strong1");
 	strong2 = &sdlutils().soundEffects().at("strong2");
@@ -163,6 +170,12 @@ void SoundManager::setVolumeChannels() {
 	light6->setChannelVolume(fxVol_ * initLightVol);
 	light7->setChannelVolume(fxVol_ * initLightVol);
 	light8->setChannelVolume(fxVol_ * initLightVol);
+
+	hamLight0->setChannelVolume(fxVol_ * initLightVol);
+	hamLight1->setChannelVolume(fxVol_ * initLightVol);
+	hamLight2->setChannelVolume(fxVol_ * initLightVol);
+	hamLight3->setChannelVolume(fxVol_ * initLightVol);
+	hamLight4->setChannelVolume(fxVol_ * initLightVol);
 
 	//Golpe Fuerte
 	strong0->setChannelVolume(fxVol_ * initStrongVol);
@@ -354,6 +367,10 @@ void SoundManager::play(std::string soundName) {
 	//Golpe
 	if (soundName == "lighthit") {
 		playLighthit();
+	}
+	//Golpe
+	if (soundName == "hamsterlighthit") {
+		playHamsterLighthit();
 	}
 	//Golpe Fuerte
 	else if (soundName == "stronghit") {
@@ -568,6 +585,30 @@ void SoundManager::playLighthit() {
 		break;
 	case 10:
 		light10->play();
+		break;
+	default:
+		break;
+	}
+}
+
+void SoundManager::playHamsterLighthit() {
+	randomNum = pickRandom(5);
+	switch (randomNum)
+	{
+	case 0:
+		hamLight0->play();
+		break;
+	case 1:
+		hamLight1->play();
+		break;
+	case 2:
+		hamLight2->play();
+		break;
+	case 3:
+		hamLight3->play();
+		break;
+	case 4:
+		hamLight4->play();
 		break;
 	default:
 		break;
