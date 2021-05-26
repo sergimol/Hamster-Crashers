@@ -189,7 +189,9 @@ void Transition::createMap() {
 		}
 
 		for (int j = 0; j < but.size(); ++j) {
-			but[j][0]->getComponent<MenuButton>()->setSelectable(true);
+			auto mb = but[j][0]->getComponent<MenuButton>();
+			if (mb->getName() != "angel" || sdlutils().angelUnlocked())
+				mb->setSelectable(true);
 		}
 
 		i[0]->getComponent<MenuIndicator>()->reset();
