@@ -6,7 +6,7 @@
 
 class Creditos : public Component
 {public:
-	Creditos() : tex_(&sdlutils().images().at("canelonSheet")) {};
+	Creditos() : tex_(&sdlutils().images().at("creditos")) {};
 	~Creditos() {
 	};
 	virtual void init() override;
@@ -14,6 +14,9 @@ class Creditos : public Component
 	virtual void render() override;
 
 	void backToMenu();
+
+	void endCreditos();
+
 private:
 	Texture* tex_;
 	SDL_Rect imRect_;
@@ -21,7 +24,7 @@ private:
 	bool scrolling = true;
 
 	int timer = 0;
-	const int UPDATE = 50;
+	const int UPDATE = 5;
 	const int ENDWAIT = 5000;
 };
 

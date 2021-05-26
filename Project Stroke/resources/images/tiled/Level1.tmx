@@ -296,7 +296,7 @@
     <property name="zzId" value="monosinpatico"/>
    </properties>
   </object>
-  <object id="102" name="newScene" x="10105.9" y="89.3794" width="65.3333" height="346.667">
+  <object id="102" name="newScene" x="10105.9" y="3.3794" width="65.3333" height="562.667">
    <properties>
     <property name="newMap" value="Level1Boss"/>
     <property name="numT" type="int" value="0"/>
@@ -831,7 +831,7 @@
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
-  <object id="218" name="obstacle" x="3952" y="400" width="68" height="56">
+  <object id="218" name="obstacle" x="3884" y="405" width="68" height="56">
    <properties>
     <property name="aRomp" type="bool" value="true"/>
     <property name="id" value="Green"/>
@@ -839,7 +839,7 @@
     <property name="z" type="int" value="0"/>
    </properties>
   </object>
-  <object id="219" name="obstacle" x="4000" y="464" width="68" height="56">
+  <object id="219" name="obstacle" x="4062" y="489" width="68" height="56">
    <properties>
     <property name="aRomp" type="bool" value="true"/>
     <property name="id" value="Red"/>
@@ -847,7 +847,7 @@
     <property name="z" type="int" value="0"/>
    </properties>
   </object>
-  <object id="220" name="obstacle" x="7168" y="352" width="68" height="56">
+  <object id="220" name="obstacle" x="6954" y="412" width="68" height="56">
    <properties>
     <property name="aRomp" type="bool" value="true"/>
     <property name="id" value="Blue"/>
@@ -855,7 +855,7 @@
     <property name="z" type="int" value="0"/>
    </properties>
   </object>
-  <object id="221" name="obstacle" x="7200" y="416" width="68" height="56">
+  <object id="221" name="obstacle" x="7152" y="450" width="68" height="56">
    <properties>
     <property name="aRomp" type="bool" value="true"/>
     <property name="id" value="Yellow"/>
@@ -863,7 +863,7 @@
     <property name="z" type="int" value="0"/>
    </properties>
   </object>
-  <object id="222" name="obstacle" x="7280" y="368" width="68" height="56">
+  <object id="222" name="obstacle" x="7314" y="348" width="68" height="56">
    <properties>
     <property name="aRomp" type="bool" value="true"/>
     <property name="id" value="Red"/>
@@ -871,7 +871,7 @@
     <property name="z" type="int" value="0"/>
    </properties>
   </object>
-  <object id="223" name="obstacle" x="9536" y="224" width="68" height="56">
+  <object id="223" name="obstacle" x="9250" y="306" width="68" height="56">
    <properties>
     <property name="aRomp" type="bool" value="true"/>
     <property name="id" value="Blue"/>
@@ -879,7 +879,7 @@
     <property name="z" type="int" value="0"/>
    </properties>
   </object>
-  <object id="224" name="obstacle" x="9616" y="176" width="68" height="56">
+  <object id="224" name="obstacle" x="9504" y="162" width="68" height="56">
    <properties>
     <property name="aRomp" type="bool" value="true"/>
     <property name="id" value="Yellow"/>
@@ -887,7 +887,7 @@
     <property name="z" type="int" value="0"/>
    </properties>
   </object>
-  <object id="225" name="obstacle" x="9712" y="224" width="68" height="56">
+  <object id="225" name="obstacle" x="9690" y="246" width="68" height="56">
    <properties>
     <property name="aRomp" type="bool" value="true"/>
     <property name="id" value="Green"/>
@@ -895,7 +895,7 @@
     <property name="z" type="int" value="0"/>
    </properties>
   </object>
-  <object id="226" name="obstacle" x="9792" y="160" width="68" height="56">
+  <object id="226" name="obstacle" x="9808" y="142" width="68" height="56">
    <properties>
     <property name="aRomp" type="bool" value="true"/>
     <property name="id" value="Red"/>

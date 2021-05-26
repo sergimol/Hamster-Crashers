@@ -183,9 +183,8 @@ void PossesionGame::endPossesion() {
 		lineV_->setActive(false);
 
 		entity_->getMngr()->refreshUIObjects();
-		
-		deleteTextures();
 	}
+	possesed_->getComponent<Animator>()->setTexture(&sdlutils().images().at(possesed_->getComponent<EntityAttribs>()->getId() + "Sheet"));
 	this->setActive(false);
 }
 

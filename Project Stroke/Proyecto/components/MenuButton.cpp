@@ -178,9 +178,8 @@ void MenuButton::pressed() {
 		//Cuando haya seleccionado a los hamsters...
 		if (sdlutils().hamstersToChoose() <= 0) {
 			//Hago una transicion para presentar el nivel inicial
-			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 0);
+			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level1", true, 8);
 
-			//mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Level2.tmx");
 			state_->setState(GameStates::RUNNING);
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1GameVersion");
 		}
@@ -191,6 +190,7 @@ void MenuButton::pressed() {
 		if (soundMngr->musicVol_ > 0.099f) {
 			soundMngr->lowVolume(true);
 			entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(0, false);
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->refreshMusicVol();
 		}
 	}
 
@@ -199,6 +199,7 @@ void MenuButton::pressed() {
 		if (soundMngr->musicVol_ < 1.0f) {
 			soundMngr->upVolume(true);
 			entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(0, true);
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->refreshMusicVol();
 		}
 	}
 
@@ -207,6 +208,8 @@ void MenuButton::pressed() {
 		if (soundMngr->fxVol_ > 0.099f) {
 			soundMngr->lowVolume(false);
 			entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(1, false);
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->refreshMusicVol();
+
 		}
 	}
 
@@ -215,6 +218,8 @@ void MenuButton::pressed() {
 		if (soundMngr->fxVol_ < 1.0f) {
 			soundMngr->upVolume(false);
 			entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(1, true);
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->refreshMusicVol();
+
 		}
 	}
 
@@ -242,6 +247,7 @@ void MenuButton::pressed() {
 	else if (buttonName_ == "exit") {
 		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->resetCamera();
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetNumInts();
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopBossSounds();
 		//Vuelve a renderizar el menu
 		state_->setState(GameStates::MAINMENU);
 
@@ -289,10 +295,13 @@ void MenuButton::pressed() {
 		entity_->getMngr()->refreshTraps();
 		entity_->getMngr()->refresh();
 
-		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearColliders();
+		auto map = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>();
+		map->clearColliders();
 
 		//Eliminamos a todos los hamsters
-		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearHamstersVector();
+		map->clearHamstersVector();
+
+		map->resetTriggerList();
 
 		sdlutils().setHamstersChosen(0);
 		sdlutils().setHamstersToChoose(0);

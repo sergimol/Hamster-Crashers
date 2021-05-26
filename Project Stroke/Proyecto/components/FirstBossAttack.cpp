@@ -32,6 +32,7 @@ void FirstBossAttack::update() {
 		{
 			if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
 			{
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("trainPipi");
 				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::UP, false);
 				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::IDLE, true);
 			}
@@ -48,6 +49,8 @@ void FirstBossAttack::update() {
 				//EMPIEZA EL ATAQUE
 				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, true);
 
+				int r = sdlutils().rand().nextInt(0, 5);
+				if (r < 2) entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("trainPasoalto");
 				cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 				auto rectCollide = tr_->getRectCollide();
 

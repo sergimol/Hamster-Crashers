@@ -104,7 +104,7 @@ void Transition::changeScene(string nameScene, bool changeMap, int numTransition
 		e->getComponent<Transform>()->setFloor(0);
 		e->getComponent<Transform>()->setZ(0);
 	}
-	entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->setMaxH(0);
+	entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setHeightMap(0);
 	change = true;
 	changeMap_ = changeMap;
 	nameScene_ = nameScene;
@@ -124,6 +124,10 @@ void Transition::sceneTransition() {
 				//La elimino
 				e->setActive(false);
 		}
+
+		//Elimino los efectos del nivel anterior
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopBossSounds();
+
 
 		for (Entity* e : entity_->getMngr()->getTiles())
 			e->setActive(false);
@@ -160,8 +164,12 @@ void Transition::sceneTransition() {
 		entity_->getMngr()->refreshTraps();
 		entity_->getMngr()->refresh();
 
-		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearColliders();
 		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->resetNumPlayers();
+
+		auto map = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>();
+		map->clearColliders();
+
+		map->resetTriggerList();
 	}
 
 	//Y creamos uno nuevo

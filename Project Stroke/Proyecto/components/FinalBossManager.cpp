@@ -1,9 +1,9 @@
 #include "FinalBossManager.h"
 #include "Stroke.h"
 
-FinalBossManager::FinalBossManager(int hamN) :
+FinalBossManager::FinalBossManager(int hamN, float scale) :
 	tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr),
-	lockedHamster_(nullptr), hamsterTr_(nullptr), attackAvailable_(false),
+	lockedHamster_(nullptr), hamsterTr_(nullptr), attackAvailable_(false), scale_(scale),
 	waitingTime_(sdlutils().currRealTime()), waitingCD_(4000), stunTime_(0), stunCD_(1500),
 	hamsNum_(hamN), handAttribs_(nullptr), fistAttribs_(nullptr), startBehavior_(false) {
 }
@@ -22,18 +22,18 @@ void FinalBossManager::init() {
 
 	hand_ = entity_->getMngr()->addEntity();		//Referencia a la mano
 	handTr_ = hand_->addComponent<Transform>(
-		tr_->getPos(), Vector2D(), 256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f);
+		tr_->getPos(), Vector2D(), scale_ * 164.0f, scale_ * 600.0f, 0.0f, 0.4, 0.6);
 	handTr_->getFlip() = true;
 
 	hand_->addComponent<EnemyStateMachine>();
 	hand_->setGroup<Enemy>(true);
 
-	handAttribs_ = hand_->addComponent<EntityAttribs>(800 + (hamsNum_ * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
+	handAttribs_ = hand_->addComponent<EntityAttribs>(800 + (hamsNum_ * 100), 0.0, "mano", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
 	hand_->addComponent<UI>("canelon", 4);
 
 	//hand_->addComponent<Image>(&sdlutils().images().at("firstBoss"));
 	hand_->addComponent<Animator>(
-		&sdlutils().images().at("calcetinSheet"),
+		&sdlutils().images().at("manoSheet"),
 		164,
 		600,
 		3,
@@ -52,16 +52,26 @@ void FinalBossManager::init() {
 
 	fist_ = entity_->getMngr()->addEntity(); //Referencia al puño
 	fistTr_ = fist_->addComponent<Transform>(
-		tr_->getPos(), Vector2D(), 256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f);
+		tr_->getPos(), Vector2D(), scale_ * 164.0f, scale_ * 300.0f, 0.0f, 0.8f, 0.8f);
 	fistTr_->getFlip() = true;
 
 	fist_->addComponent<EnemyStateMachine>();
 	fist_->setGroup<Enemy>(true);
 
-	fistAttribs_ = fist_->addComponent<EntityAttribs>(800 + (hamsNum_ * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
+	fistAttribs_ = fist_->addComponent<EntityAttribs>(800 + (hamsNum_ * 100), 0.0, "fist", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
 
-	fist_->addComponent<Image>(&sdlutils().images().at("firstBoss"));
-	//fistAnim_ = fist_->addComponent<AnimEnemyStateMachine>();
+	//fist_->addComponent<Image>(&sdlutils().images().at("firstBoss"));
+	fist_->addComponent<Animator>(
+		&sdlutils().images().at("fistSheet"),
+		164,
+		300,
+		3,
+		3,
+		100,
+		Vector2D(0, 0),
+		3
+		);
+	fistAnim_ = fist_->addComponent<AnimEnemyStateMachine>();
 
 	bossPunch_ = fist_->addComponent<FinalBossPunch>();
 	movPunch_ = fist_->addComponent<MovementSimple>();

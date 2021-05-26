@@ -46,6 +46,8 @@ private:
 	float attackDurationCD_;
 	float beforeHitCD_;
 
+	int soundTimer = 500;
+
 	bool attackStarted_;
 }
 ;

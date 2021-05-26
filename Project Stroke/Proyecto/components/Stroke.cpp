@@ -184,7 +184,7 @@ void Stroke::infarctHamster() {
 		else {
 			tam = 100;
 		}
-
+		deadBody->addComponent<Shadow>(true, true);
 		deadBody->addComponent<Animator>(&sdlutils().images().at(name + "Sheet"),
 			tam,
 			tam,
@@ -195,12 +195,14 @@ void Stroke::infarctHamster() {
 			3)->play(sdlutils().anims().at(name2 + "_stroke"));
 		tr->setVelZ(tr_->getVelZ());
 		deadBody->addComponent<CollisionDetec>();
-		auto* gr = deadBody->addComponent<Gravity>();
-		tr->setGravity(gr);
+
+		tr->setFloor(tr_->getFloor());
+		tr->setZ(tr_->getZ());
+		tr->setGravity(deadBody->addComponent<Gravity>());
+		
 		deadBody->addComponent<Movement>();
 		deadBody->addComponent<InfarctedBody>(entity_);
 		deadBody->addComponent<ReanimationGame>();
-		deadBody->addComponent<Shadow>(true, true);
 		entity_->getMngr()->getDeadBodies().push_back(deadBody);
 
 		//Reseteamos chances

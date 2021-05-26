@@ -492,6 +492,9 @@
     <ClCompile Include="Proyecto\components\Creditos.cpp">
       <Filter>Archivos de origen\components</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\TriggerMusic.cpp">
+      <Filter>Archivos de origen\components\Entity\Enemy\EnemyBehaviour\BossBehavior</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -847,6 +850,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\Creditos.h">
       <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\TriggerMusic.h">
+      <Filter>Archivos de encabezado\Components\Entity\Enemy\EnemyBehaviour\BossBehaviour</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

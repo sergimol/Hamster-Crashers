@@ -22,7 +22,7 @@
 
 class FinalBossManager : public Component {
 public:
-	FinalBossManager(int hamN);
+	FinalBossManager(int hamN, float scale);
 
 	virtual ~FinalBossManager() {};
 
@@ -68,6 +68,7 @@ private:
 	MovementSimple* movPunch_;
 	
 	int hamsNum_;
+	float scale_;
 
 	int rangeOffsetX_; // Esta movida habra que balancearla
 	int rangeOffsetY_; // Esta movida habra que balancearla

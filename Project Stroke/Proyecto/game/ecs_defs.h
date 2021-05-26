@@ -88,6 +88,7 @@ class ObstacleMoveable;
 class LifeTime;
 class ReanimationAlone;
 class Creditos;
+class TriggerMusic;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -177,6 +178,7 @@ class Creditos;
 	ObstacleMoveable, \
 	LifeTime, \
 	ReanimationAlone, \
+	TriggerMusic, \
 	Creditos	
 
 // groups

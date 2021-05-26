@@ -9,7 +9,6 @@ public:
 	ReanimationAlone() : lineH_(nullptr), lineV_(nullptr) {};
 	~ReanimationAlone() { deleteTextures(); };
 
-
 	virtual void init() override;
 
 	virtual void update() override;

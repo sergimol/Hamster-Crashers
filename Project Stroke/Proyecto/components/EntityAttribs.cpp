@@ -258,6 +258,7 @@ void EntityAttribs::die() {
 	else if (id_ == "keta") {
 		tam = 100;
 	}
+	e->addComponent<Shadow>(false, false);
 	//Y reproducimos la animacion de muerto
 	e->addComponent<Animator>(&sdlutils().images().at(id_ + "Sheet"),
 		tam,
@@ -279,7 +280,7 @@ void EntityAttribs::die() {
 		hms_->getState() = HamStates::DEAD;
 		//Desactivamos el componente del hasmter vivo
 		entity_->getComponent<Animator>()->setActive(false);
-		entity_->getComponent<Shadow>()->setActive(false);
+		//entity_->getComponent<Shadow>()->setActive(false);
 
 		//TODO arreglar camara, y demas objetos que den problemas con el como se esta desactivando el hamster,
 		//hacerlo a mano cada vez que os den problemas porque desactivar la entidad del hamster 
@@ -300,7 +301,9 @@ void EntityAttribs::die() {
 	else {
 		if (entity_->getMngr()->getHandler<Boss>() == entity_) {
 			entity_->getMngr()->setHandler<Boss>(nullptr);
+			entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setcShake(false);
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
+			Mix_FadeOutMusic(2000);
 
 		}
 		else if (entity_->getMngr()->getHandler<FinalBoss>() == entity_) {
