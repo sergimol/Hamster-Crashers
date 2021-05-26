@@ -142,9 +142,17 @@ void MapMngr::loadNewMap(string map) {
 	if (map_.load(map)) {
 		if (map == "resources/images/tiled/Level1Boss.tmx") {
 			scale = 2.5f;
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
 		}
 		else if (map == "resources/images/tiled/Level2.tmx") {
 			scale = 3.0f;
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stopbirds");
+
+		}
+		else if (map == "resources/images/tiled/Level3.tmx") {
+			//scale = 3.0f;
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stopbirds");
+
 		}
 
 		mapHeight_ = map_.getProperties()[0].getIntValue() * TAM_CELDA * scale;
@@ -816,7 +824,7 @@ void MapMngr::addObject(const tmx::Object& object) {
 
 	string id = prop[1].getStringValue();
 
-		obstacle->addComponent<Shadow>(false, true);
+	obstacle->addComponent<Shadow>(false, true);
 
 	obstacle->addComponent<Animator>(&sdlutils().images().at("obstacle" + id),
 		100,
