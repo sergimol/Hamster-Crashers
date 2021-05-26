@@ -211,6 +211,7 @@ struct PlayerQuantityMenu;
 struct HamsterSelectionMenu;
 struct OptionsMenu;
 struct dialogosMngr;
+struct TriggetCat;
 #define _HDLRS_LIST_ Hamster1 , \
 					Hamster2, \
 					Hamster3, \
@@ -229,8 +230,8 @@ struct dialogosMngr;
 					Cat_, \
 					MainMenu, \
 					OptionsMenu, \
+					TriggetCat, \
 					dialogosMngr
-
 
 //systems
 

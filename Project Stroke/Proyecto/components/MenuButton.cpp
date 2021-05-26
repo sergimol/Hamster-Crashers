@@ -178,7 +178,7 @@ void MenuButton::pressed() {
 		//Cuando haya seleccionado a los hamsters...
 		if (sdlutils().hamstersToChoose() <= 0) {
 			//Hago una transicion para presentar el nivel inicial
-			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level1", true, 8);
+			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 0);
 
 			//mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Level2.tmx");
 			state_->setState(GameStates::RUNNING);
@@ -264,9 +264,6 @@ void MenuButton::pressed() {
 		for (Entity* e : entity_->getMngr()->getTiles())
 			e->setActive(false);
 
-		for (Entity* e : entity_->getMngr()->getTraps())
-			e->setActive(false);
-
 		for (Entity* e : entity_->getMngr()->getMapH())
 			e->setActive(false);
 
@@ -277,6 +274,9 @@ void MenuButton::pressed() {
 			e->setActive(false);
 
 		for (Entity* e : entity_->getMngr()->getWavesObjects())
+			e->setActive(false);
+
+		for (Entity* e : entity_->getMngr()->getTraps())
 			e->setActive(false);
 
 		entity_->getMngr()->refreshFrontGround();
@@ -295,10 +295,13 @@ void MenuButton::pressed() {
 		entity_->getMngr()->refreshTraps();
 		entity_->getMngr()->refresh();
 
-		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearColliders();
+		auto map = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>();
+		map->clearColliders();
 
 		//Eliminamos a todos los hamsters
-		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearHamstersVector();
+		map->clearHamstersVector();
+
+		map->resetTriggerList();
 
 		sdlutils().setHamstersChosen(0);
 		sdlutils().setHamstersToChoose(0);
