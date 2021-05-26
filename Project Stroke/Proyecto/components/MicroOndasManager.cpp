@@ -4,13 +4,15 @@
 #include "controlHandler.h"
 #include "Stun.h"
 #include "AnimHamsterStateMachine.h"
+#include "Transition.h"
 
 MicroOndasManager::MicroOndasManager(int hamN, Texture* tx, Texture* tx2) :
 	tr_(nullptr),
 	hamsNum_(hamN), rightAttribs_(nullptr), leftAttribs_(nullptr),
 	timer_(0), timeToEnd_(30000), lastTime_(sdlutils().currRealTime()),
 	phaseComplete_(false), hamsterDead_(false), tx_(tx), txBat_(tx2),
-	auxX(0), auxY(0), hits_(1), damageInPercent_(0.25f), gamestate(nullptr)
+	auxX(0), auxY(0), hits_(1), damageInPercent_(0.25f), gamestate(nullptr),
+	defeated(false), startEnding_(0), waitEnding_(2000)
 {
 }
 
@@ -115,6 +117,16 @@ void MicroOndasManager::init() {
 	entity_->addComponent<UI>("canelon", 4);
 
 	handTurn_ = sdlutils().rand().nextInt(0, 2) == 0;
+
+	//Sonidos
+
+
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("microwaveBep");
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("tiktak");
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("microwaveStatic");
+
+
+
 }
 
 
@@ -163,18 +175,20 @@ void MicroOndasManager::update() {
 	//Contrareloj del nivel microondas 
 	//cuando llegue a 0 mataria a todos los jugadores
 	//dependiendo del tiempo que le quede se aplicaro un difunicado a la pantalla de color rojo/naranja
-
-	//la suma del tiempo
+	if (gamestate->getState() == GameStates::RUNNING)
+		timer_ += sdlutils().currRealTime() - lastTime_;
+	
+	lastTime_ = sdlutils().currRealTime();
+		
+		//la suma del tiempo
 	if (!phaseComplete_) {
 
 		//si el estado del jeugo no esta en pausa
 		//TODO 
 		//seria esta parte la unica que no se actualiza el resto daria igual, el last time si que es necesario 
 		//que se actualice para que al volver al estado funcione de forma correcta
-		if (gamestate->getState() == GameStates::RUNNING)
-		timer_ += sdlutils().currRealTime() - lastTime_;
+		
 
-		lastTime_ = sdlutils().currRealTime();
 
 
 		if (!hamsterDead_) {
@@ -241,8 +255,26 @@ void MicroOndasManager::update() {
 			tx_->setAlpha(10.0f + (205.0f * timer_/ timeToEnd_));
 		}
 	}
-	else
-		tx_->setAlpha(0.0f);
+	else { //microondas KO
+		//tx_->setAlpha(0.0f);
+		if (!defeated) {
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopBossSounds();
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("microwaveExplosion");
+			defeated = true;
+
+			startEnding_ = timer_;
+
+			//camera sake
+		}
+		else if (timer_ >= startEnding_ + waitEnding_){
+			//cosasextras
+
+			//ahy que apañarlo .tm
+			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level1", true, 6);
+		}
+
+		//transition de meurte del boss
+	}
 
 }
 
