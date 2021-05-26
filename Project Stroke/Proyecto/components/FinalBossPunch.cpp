@@ -7,6 +7,7 @@
 #include "StrongAttack.h"
 #include "LightAttack.h"
 #include "AnimHamsterStateMachine.h"
+#include "AnimEnemyStateMachine.h"
 
 FinalBossPunch::FinalBossPunch() :
 	tr_(nullptr), cooldown_(1300), time_(sdlutils().currRealTime()), attRect_(), DEBUG_isAttacking_(false),
@@ -26,14 +27,18 @@ void FinalBossPunch::init() {
 
 void FinalBossPunch::update() {
 	if (state_->getState() == GameStates::RUNNING) {
+		entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::IDLE, true);
 		//Deja de mostrar el collider
 		if (sdlutils().currRealTime() > time_ + cooldown_ / 1.5) {
 			DEBUG_isAttacking_ = false;
 		}
 		if (attackStarted_) {
-
 			//Telegrafiado hasta el ataque
 			if (!stunStarted_ && sdlutils().currRealTime() > hitTime_ + beforeHitCD_) {
+
+				//EMPIEZA EL ATAQUE
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, true);
+
 				cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 				auto sizeW = tr_->getW();
 				auto& pos = tr_->getPos();
@@ -67,14 +72,44 @@ void FinalBossPunch::update() {
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handPunch");
 
 			}
-			else if (eAttribs_->checkInvulnerability() && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
-				eAttribs_->setInvincibility(false);
+			//HA LLEGADO AL SUELO
+			if (entity_->getComponent<AnimEnemyStateMachine>()->getState() == EnemyStatesAnim::ATTACK)
+			{
+				if (entity_->getComponent<Animator>()->OnAnimationFrameEnd())
+				{
+					if (stunStarted_ && eAttribs_->checkInvulnerability()) {
+
+						eAttribs_->setInvincibility(false);
+
+						//LE PASAMOS AL ESTADO DEL SUELO Y QUITAMOS EL ATAQUE
+						entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, true);
+						entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
+					}
+				}
 			}
+	/*		else if (eAttribs_->checkInvulnerability() && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
+				eAttribs_->setInvincibility(false);
+			}*/
 			else if (stunStarted_ && sdlutils().currRealTime() > hitTime_ + afterHitCD_) {
 				eAttribs_->setInvincibility(true);
 				attackStarted_ = false;
 				stunStarted_ = false;
 				attackFinished_= true;
+
+				//QUITAMOS TODOS LOS ESTADOS QUE PUEDEN INTERFERIR
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ONFLOOR, false);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::ATTACK, false);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, false);
+
+				//FORZAMOS A LA ANIMACION DE SUBIDA
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::UP, true);
+			}
+		}
+		if (entity_->getComponent<AnimEnemyStateMachine>()->getState() == EnemyStatesAnim::UP) {
+			if (entity_->getComponent<Animator>()->OnAnimationFrameEnd()){
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::UP, false);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::IDLE, true);
+
 			}
 		}
 	}

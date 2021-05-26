@@ -149,7 +149,6 @@ void MapMngr::loadNewMap(string map) {
 		}
 		else if (map == "resources/images/tiled/Level2.tmx") {
 			scale = 3.0f;
-			entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setcShake(true);
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
 		}
 

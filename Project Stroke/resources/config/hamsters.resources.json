@@ -212,7 +212,7 @@
     },
     {
       "id": "fistSheet",
-      "file": "resources/images/spritesheets/enemies/level3/puno_spritesheet.png"
+      "file": "resources/images/spritesheets/enemies/level3/fist_spritesheet.png"
     },
     {
       "id": "firstBoss",
@@ -1743,6 +1743,22 @@
     {
       "id": "page4",
       "file": "resources/sound/pages/page4.wav"
+    },
+    {
+      "id": "microwaveBep",
+      "file": "resources/sound/microwave/bep.wav"
+    },
+    {
+      "id": "microwaveExplosion",
+      "file": "resources/sound/microwave/explosiondef.wav"
+    },
+    {
+      "id": "microwaveStatic",
+      "file": "resources/sound/microwave/static.wav"
+    },
+    {
+      "id": "tiktak",
+      "file": "resources/sound/microwave/tiktak.wav"
     }
   ],
 
@@ -3055,7 +3071,19 @@
       "attackFrame": -1
     },
     {
-      "id": "fist_shadow",
+      "id": "fist_idle",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 1,
+      "cols": 19,
+      "rows": 1,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "fist_move",
       "startFrameX": 0,
       "startFrameY": 0,
       "duration": 1,
@@ -3071,6 +3099,18 @@
       "startFrameX": 6,
       "startFrameY": 0,
       "duration": 3,
+      "cols": 19,
+      "rows": 1,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "fist_floor",
+      "startFrameX": 3,
+      "startFrameY": 0,
+      "duration": 1,
       "cols": 19,
       "rows": 1,
       "frameUpdate": 100,
