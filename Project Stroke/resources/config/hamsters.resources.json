@@ -1263,8 +1263,6 @@
     }
   ],
 
-
-
   "sounds": [
     {
       "id": "light0",
@@ -2977,7 +2975,7 @@
       "attackFrame": -1
     },
     {
-      "id": "calcetin_floor",
+      "id": "mano_floor",
       "startFrameX": 7,
       "startFrameY": 1,
       "duration": 1,

@@ -604,9 +604,9 @@ void MapMngr::loadEnemyRoom() {
 			auto* enemy = mngr_->addEntity();
 			enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(),/* 5*23.27f*/256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
+				Vector2D(),256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
 
-			enemy->addComponent<FinalBossManager>(hamstersToLoad_.size());
+			enemy->addComponent<FinalBossManager>(hamstersToLoad_.size(), scale);
 
 			numberEnemyRoom++;
 
