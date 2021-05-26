@@ -8,6 +8,12 @@
 #include "GravityEntity.h"
 #include "AnimEnemyStateMachine.h"
 #include "Shadow.h"
+#include "MenuButton.h"
+#include "MenuButtonManager.h"
+#include "MenuControlHandler.h"
+#include "SoundManager.h"
+#include "MapMngr.h"
+#include "EnemyMother.h"
 
 EntityAttribs::EntityAttribs() :
 	health_(100),
@@ -43,7 +49,9 @@ EntityAttribs::EntityAttribs() :
 	hmsText_(nullptr),
 	enmState_(nullptr),
 	tr_(nullptr),
-	state_(nullptr)
+	state_(nullptr),
+
+	allDead(false)
 {}
 
 EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, int marg) :
@@ -276,8 +284,17 @@ void EntityAttribs::die() {
 		//hacerlo a mano cada vez que os den problemas porque desactivar la entidad del hamster 
 		//NO ES UNA OPCION
 
-
-		//entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", false);
+		auto hams_ = entity_->getMngr()->getPlayers();
+		allDead = true;
+		for (Entity* e : hams_) {
+			auto sta = e->getComponent<HamsterStateMachine>()->getState();
+			if (sta != HamStates::DEAD && sta != HamStates::INFARCTED) {
+				allDead = false;
+			}
+		}
+		if (allDead) {
+			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", true, 0);
+		}
 	}
 	else {
 		if (entity_->getMngr()->getHandler<Boss>() == entity_)

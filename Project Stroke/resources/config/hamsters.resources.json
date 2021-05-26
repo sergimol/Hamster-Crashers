@@ -1573,6 +1573,18 @@
       "attackFrame": -1
     },
     {
+      "id": "cinematic_static",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 2,
+      "cols": 2,
+      "rows": 1,
+      "frameUpdate": 300,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
       "id": "sardinilla_idle",
       "startFrameX": 0,
       "startFrameY": 0,

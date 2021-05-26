@@ -162,3 +162,9 @@ void Camera::changeCamFollowPos(int objetive) {
 	if (GoToTracker)
 		cameraFollowPos_.setX(objetive);
 }
+
+void Camera::resetCamera() {
+	camera_.x = 0;
+	camera_.y = 0;
+	camPos = Vector2D(0, 0);
+}
