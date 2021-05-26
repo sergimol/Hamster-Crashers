@@ -48,6 +48,8 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 	//Cogemos a los enemigos
 	auto& ents = entity_->getMngr()->getEnemies();
 
+	bool hasHit = false;
+
 	for (int i = 0; i < ents.size(); ++i) {
 		//Si la entidad es un enemigo...
 		if (ents[i]->isActive() && ents[i]->hasGroup<Enemy>()) {
@@ -61,6 +63,17 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 
 			//Y comprobamos si colisiona y si no es invulnerable
 			if (!eAttribs->checkInvulnerability() && Collisions::collides(Vector2D(rectPlayer.x, rectPlayer.y), rectPlayer.w, rectPlayer.h, newPos, eColRect.w, eColRect.h)) {
+
+				if (!hasHit) {
+					if (entity_->getMngr()->getHandler<Boss>() == ents[i] || entity_->getMngr()->getHandler<FinalBoss>() == ents[i]) {
+						entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handHit");
+					}
+					else
+						entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
+
+					hasHit = true;
+				}
+
 
 				//Comprobamos si está en la misma Z o relativamente cerca
 				if (eAttribs->ignoresMargin() || (abs((tr_->getRectCollide().y) - (eColRect.y)) < eAttribs->getMarginToAttack())) {
@@ -122,7 +135,7 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 							EnemyStun* enmStun = ents[i]->getComponent<EnemyStun>();
 							if (enmStun != nullptr && enmStun->isActive()) {
 
-								
+
 
 								//Si no estaba aturdido ya
 								if (enmStateM != EnemyStates::ENM_STUNNED) {
@@ -234,12 +247,13 @@ void LightAttack::attack() {
 			//Comprobamos si colisiona con alguno de los enemigos que tiene delante
 
 			//Si se colisiona..
-			if (CheckCollisions(attRect_))
-				//Suena el hit y le pega
-				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
-			//Si no colisiona..
-			else {
-				//Suena el attackSound
+			if (!CheckCollisions(attRect_)) {
+				//	//Suena el hit y le pega
+				//	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
+				//}
+				////Si no colisiona..
+				//else {
+					//Suena el attackSound
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
 				//Animacion de ataque normalito
 				anim_->setAnimBool(HamStatesAnim::LIGHTATTACK, true);
