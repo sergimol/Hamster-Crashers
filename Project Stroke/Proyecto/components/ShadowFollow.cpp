@@ -66,10 +66,10 @@ void ShadowFollow::update() {
 
 	float newX, newY;
 	newX = otherX - width_ / 2;
-	newY = otherY - height_ / 2;
+	newY = otherY - height_ / 2 - tr_->getFloor() - (tr_->getZ()-tr_->getFloor());
 
 	//ACTUALIZAMOS POSICIÓN, TAMAÑO Y TOMAMOS EL SUELO DEL PLAYER
-	tr_->getPos().set(newX, newY);
+	tr_->setPos(Vector2D(newX, newY));
 
 	tr_->setH(height_);
 	tr_->setW(width_);

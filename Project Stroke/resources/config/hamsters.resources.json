@@ -3226,7 +3226,7 @@
       "id": "bicho_death",
       "startFrameX": 4,
       "startFrameY": 4,
-      "duration": 5,
+      "duration": 4,
       "cols": 6,
       "rows": 6,
       "frameUpdate": 80,
