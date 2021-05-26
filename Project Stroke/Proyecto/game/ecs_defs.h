@@ -87,6 +87,7 @@ class MenuAnim;
 class ObstacleMoveable;
 class LifeTime;
 class ReanimationAlone;
+class Creditos;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -175,7 +176,8 @@ class ReanimationAlone;
 	MenuAnim,\
 	ObstacleMoveable, \
 	LifeTime, \
-	ReanimationAlone
+	ReanimationAlone, \
+	Creditos	
 
 // groups
 
