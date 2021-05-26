@@ -46,7 +46,7 @@ private:
 	float scale = 3; // 2.4 tren
 	bool BossControlSpawn = false;
 
-	std::queue<tmx::Object> TriggerftCamera;
+	std::queue<tmx::Object> triggerFtCamera;
 	vector<string> hamstersToLoad_;
 
 	void addHamster(string name, int i,const tmx::Object& object);
@@ -82,6 +82,7 @@ public:
 
 	void addObject(const tmx::Object& object);
 	void addTrap(const tmx::Object& object, int x, int y);
+	void resetTriggerList();
 
 	void clearColliders();
 };

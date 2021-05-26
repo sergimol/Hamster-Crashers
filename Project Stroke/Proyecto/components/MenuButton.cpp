@@ -190,6 +190,7 @@ void MenuButton::pressed() {
 		if (soundMngr->musicVol_ > 0.099f) {
 			soundMngr->lowVolume(true);
 			entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(0, false);
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->refreshMusicVol();
 		}
 	}
 
@@ -198,6 +199,7 @@ void MenuButton::pressed() {
 		if (soundMngr->musicVol_ < 1.0f) {
 			soundMngr->upVolume(true);
 			entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(0, true);
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->refreshMusicVol();
 		}
 	}
 
@@ -206,6 +208,8 @@ void MenuButton::pressed() {
 		if (soundMngr->fxVol_ > 0.099f) {
 			soundMngr->lowVolume(false);
 			entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(1, false);
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->refreshMusicVol();
+
 		}
 	}
 
@@ -214,6 +218,8 @@ void MenuButton::pressed() {
 		if (soundMngr->fxVol_ < 1.0f) {
 			soundMngr->upVolume(false);
 			entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(1, true);
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->refreshMusicVol();
+
 		}
 	}
 
@@ -288,10 +294,13 @@ void MenuButton::pressed() {
 		entity_->getMngr()->refreshTraps();
 		entity_->getMngr()->refresh();
 
-		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearColliders();
+		auto map = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>();
+		map->clearColliders();
 
 		//Eliminamos a todos los hamsters
-		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearHamstersVector();
+		map->clearHamstersVector();
+
+		map->resetTriggerList();
 
 		sdlutils().setHamstersChosen(0);
 		sdlutils().setHamstersToChoose(0);
