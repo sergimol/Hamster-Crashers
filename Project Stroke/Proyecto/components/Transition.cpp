@@ -76,7 +76,7 @@ void Transition::fadeIn() {
 		if (subs_ != nullptr && numTReference > 0) {
 			subs_->dialogoStateChange();
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("nextPage");
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("transition");
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stronghit");
 			numTReference--;
 		}
 	}
