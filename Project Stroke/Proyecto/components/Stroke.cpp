@@ -106,8 +106,6 @@ void Stroke::checkChance() {
 		}
 		timeLastUpdate_ = t;
 	}
-
-	std::cout << chance_  << " - "<< chanceFromAb_ << std::endl;
 }
 
 void Stroke::infarctHamster() {
