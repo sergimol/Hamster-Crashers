@@ -41,12 +41,6 @@ void Transition::render() {
 }
 
 void Transition::fadeOut() {
-	//FADE out
-	if (alpha == SDL_ALPHA_TRANSPARENT) {
-		if (subs_ != nullptr) {
-			subs_->changeShow();
-		}
-	}
 
 	// Comprueba si hay textura
 	if (tx_) {
@@ -73,10 +67,9 @@ void Transition::fadeOut() {
 void Transition::fadeIn() {
 	//FADE IN
 	if (alpha == SDL_ALPHA_OPAQUE) {
-		if (subs_ != nullptr && numTReference > 0) {
-			subs_->dialogoStateChange();
+		if ( numTReference > 0) {
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("nextPage");
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stronghit");
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("transition");
 			numTReference--;
 		}
 	}
@@ -159,8 +152,7 @@ void Transition::sceneTransition() {
 	//Y creamos uno nuevo
 	auto* images = entity_->getMngr()->addFrontGround();
 	images->addComponent<ImageSecuence>(nameScene_);
-	if (numT != 0)
-		subs_ = images->addComponent<Subtitulos>(nameScene_, numT);
+
 }
 
 void Transition::createMap() {

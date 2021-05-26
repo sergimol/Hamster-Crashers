@@ -26,8 +26,8 @@ public:
 	float fxVol_ = 0.5f;
 	float musicVol_ = 0.5f;
 	//local
-	int initMusicVol = 20;
-
+	int initMusicVol = 10;
+	int nextPage = 128;
 
 	int initLightVol = 100;
 	int initStrongVol = 128;
@@ -269,6 +269,27 @@ private:
 	SoundEffect* transition8;
 	SoundEffect* transition9;
 	SoundEffect* transition10;
+	SoundEffect* transition11;
+	SoundEffect* transition12;
+	SoundEffect* transition13;
+	SoundEffect* transition14;
+	SoundEffect* transition15;
+	SoundEffect* transition16;
+	SoundEffect* transition17;
+	SoundEffect* transition18;
+	SoundEffect* transition19;
+	SoundEffect* transition20;
+	SoundEffect* transition21;
+	SoundEffect* transition22;
+	SoundEffect* transition23;
+
+	//Page transitions
+	SoundEffect* page0;
+	SoundEffect* page1;
+	SoundEffect* page2;
+	SoundEffect* page3;
+	SoundEffect* page4;
+
 
 	//Musica y sonidos ambiente
 	Music* HamstersMainThemev2;

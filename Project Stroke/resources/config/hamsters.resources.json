@@ -680,7 +680,7 @@
     },
     {
       "id": "level3background1",
-      "file": "resources/images/backgrounds/level2/level3parallax1.jpg"
+      "file": "resources/images/backgrounds/level3/level3parallax1.jpg"
     },
     {
       "id": "level3background2",
@@ -688,7 +688,7 @@
     },
     {
       "id": "level3background3",
-      "file": "resources/images/backgrounds/level3/level2parallax3.png"
+      "file": "resources/images/backgrounds/level3/level3parallax3.png"
     },
     {
       "id": "level3background4",
@@ -1512,11 +1512,99 @@
     },
     {
       "id": "transition0",
-      "file": "resources/sound/transition/transition0.wav"
+      "file": "resources/sound/transition/Inicio-Doblado/1.mp3"
     },
     {
       "id": "transition1",
-      "file": "resources/sound/transition/transition1.wav"
+      "file": "resources/sound/transition/Inicio-Doblado/2.mp3"
+    },
+    {
+      "id": "transition2",
+      "file": "resources/sound/transition/Inicio-Doblado/3.mp3"
+    },
+    {
+      "id": "transition3",
+      "file": "resources/sound/transition/Inicio-Doblado/4.mp3"
+    },
+    {
+      "id": "transition4",
+      "file": "resources/sound/transition/Inicio-Doblado/5.mp3"
+    },
+    {
+      "id": "transition5",
+      "file": "resources/sound/transition/Inicio-Doblado/6.mp3"
+    },
+    {
+      "id": "transition6",
+      "file": "resources/sound/transition/Inicio-Doblado/7.mp3"
+    },
+    {
+      "id": "transition7",
+      "file": "resources/sound/transition/Inicio-Doblado/8.mp3"
+    },
+    {
+      "id": "transition8",
+      "file": "resources/sound/transition/level1level2-Doblado/1.mp3"
+    },
+    {
+      "id": "transition9",
+      "file": "resources/sound/transition/level1level2-Doblado/2.mp3"
+    },
+    {
+      "id": "transition10",
+      "file": "resources/sound/transition/level1level2-Doblado/3.mp3"
+    },
+    {
+      "id": "transition11",
+      "file": "resources/sound/transition/level1level2-Doblado/4.mp3"
+    },
+    {
+      "id": "transition12",
+      "file": "resources/sound/transition/level1level2-Doblado/5.mp3"
+    },
+    {
+      "id": "transition13",
+      "file": "resources/sound/transition/level2level3-Doblado/1.mp3"
+    },
+    {
+      "id": "transition14",
+      "file": "resources/sound/transition/level2level3-Doblado/2.mp3"
+    },
+    {
+      "id": "transition15",
+      "file": "resources/sound/transition/level2level3-Doblado/3.mp3"
+    },
+    {
+      "id": "transition16",
+      "file": "resources/sound/transition/level3micro-Doblado/1.mp3"
+    },
+    {
+      "id": "transition17",
+      "file": "resources/sound/transition/level3micro-Doblado/2.mp3"
+    },
+    {
+      "id": "transition18",
+      "file": "resources/sound/transition/final-Doblado/1.mp3"
+    },
+    {
+      "id": "transition19",
+      "file": "resources/sound/transition/final-Doblado/2.mp3"
+    },
+    {
+      "id": "transition20",
+      "file": "resources/sound/transition/final-Doblado/3.mp3"
+    },
+    {
+      "id": "transition21",
+      "file": "resources/sound/transition/final-Doblado/4.mp3"
+    },
+    {
+      "id": "transition22",
+      "file": "resources/sound/transition/final-Doblado/5.mp3"
+    },
+    {
+      "id": "transition23",
+      "file": "resources/sound/transition/final-Doblado/6.mp3"
     },
     {
       "id": "possesion",
@@ -1565,6 +1653,26 @@
     {
       "id": "wrongNote",
       "file": "resources/sound/reanimationKeySound/wrongNote.wav"
+    },
+    {
+      "id": "page0",
+      "file": "resources/sound/pages/page0.wav"
+    },
+    {
+      "id": "page1",
+      "file": "resources/sound/pages/page1.wav"
+    },
+    {
+      "id": "page2",
+      "file": "resources/sound/pages/page2.wav"
+    },
+    {
+      "id": "page3",
+      "file": "resources/sound/pages/page3.wav"
+    },
+    {
+      "id": "page4",
+      "file": "resources/sound/pages/page4.wav"
     }
   ],
 
