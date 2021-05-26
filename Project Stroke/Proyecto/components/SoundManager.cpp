@@ -13,6 +13,13 @@ void SoundManager::init() {
 	light9 = &sdlutils().soundEffects().at("light9");
 	light10 = &sdlutils().soundEffects().at("light10");
 
+	hamLight0 = &sdlutils().soundEffects().at("hamsterlight0");
+	hamLight1 = &sdlutils().soundEffects().at("hamsterlight1");
+	hamLight2 = &sdlutils().soundEffects().at("hamsterlight2");
+	hamLight3 = &sdlutils().soundEffects().at("hamsterlight3");
+	hamLight4 = &sdlutils().soundEffects().at("hamsterlight4");
+
+
 	strong0 = &sdlutils().soundEffects().at("strong0");
 	strong1 = &sdlutils().soundEffects().at("strong1");
 	strong2 = &sdlutils().soundEffects().at("strong2");
@@ -113,8 +120,10 @@ void SoundManager::init() {
 
 	tutorial0 = &sdlutils().soundEffects().at("tutorial0");
 	tutorial1 = &sdlutils().soundEffects().at("tutorial1");
-	tutorial2 = &sdlutils().soundEffects().at("catMeowInit");
-	tutorial3 = &sdlutils().soundEffects().at("catMeowInit");
+	tutorial2 = &sdlutils().soundEffects().at("tutorial2");
+	tutorial3 = &sdlutils().soundEffects().at("tutorial3");
+	tutorialsingle = &sdlutils().soundEffects().at("tutorial3single");
+
 	tutorial4 = &sdlutils().soundEffects().at("catMeowInit");
 	tutorial5 = &sdlutils().soundEffects().at("catMeowInit");
 	tutorial6 = &sdlutils().soundEffects().at("catMeowInit");
@@ -161,6 +170,12 @@ void SoundManager::setVolumeChannels() {
 	light6->setChannelVolume(fxVol_ * initLightVol);
 	light7->setChannelVolume(fxVol_ * initLightVol);
 	light8->setChannelVolume(fxVol_ * initLightVol);
+
+	hamLight0->setChannelVolume(fxVol_ * initLightVol);
+	hamLight1->setChannelVolume(fxVol_ * initLightVol);
+	hamLight2->setChannelVolume(fxVol_ * initLightVol);
+	hamLight3->setChannelVolume(fxVol_ * initLightVol);
+	hamLight4->setChannelVolume(fxVol_ * initLightVol);
 
 	//Golpe Fuerte
 	strong0->setChannelVolume(fxVol_ * initStrongVol);
@@ -353,6 +368,10 @@ void SoundManager::play(std::string soundName) {
 	if (soundName == "lighthit") {
 		playLighthit();
 	}
+	//Golpe
+	if (soundName == "hamsterlighthit") {
+		playHamsterLighthit();
+	}
 	//Golpe Fuerte
 	else if (soundName == "stronghit") {
 		playStronghit();
@@ -480,6 +499,9 @@ void SoundManager::play(std::string soundName) {
 	else if (soundName == "tutorial") {
 		playTutorial();
 	}
+	else if (soundName == "tutorialsingle") {
+		tutorialsingle->play(0, 7);
+	}
 	else if (soundName == "stopTutorial") {
 		StopTutorial();
 	}
@@ -563,6 +585,30 @@ void SoundManager::playLighthit() {
 		break;
 	case 10:
 		light10->play();
+		break;
+	default:
+		break;
+	}
+}
+
+void SoundManager::playHamsterLighthit() {
+	randomNum = pickRandom(5);
+	switch (randomNum)
+	{
+	case 0:
+		hamLight0->play();
+		break;
+	case 1:
+		hamLight1->play();
+		break;
+	case 2:
+		hamLight2->play();
+		break;
+	case 3:
+		hamLight3->play();
+		break;
+	case 4:
+		hamLight4->play();
 		break;
 	default:
 		break;
@@ -670,34 +716,34 @@ void SoundManager::playTutorial() {
 		tutorial0->play(0, 7);
 		break;
 	case 1:
-		tutorial0->play(0, 7);
-		break;
-	case 2:
 		tutorial1->play(0, 7);
 		break;
-	case 3:
+	case 2:
 		tutorial2->play(0, 7);
 		break;
-	case 4:
+	case 3:
 		tutorial3->play(0, 7);
 		break;
-	case 5:
+	case 4:
 		tutorial4->play(0, 7);
 		break;
-	case 6:
+	case 5:
 		tutorial5->play(0, 7);
 		break;
-	case 7:
+	case 6:
 		tutorial6->play(0, 7);
 		break;
-	case 8:
+	case 7:
 		tutorial7->play(0, 7);
 		break;
-	case 9:
+	case 8:
 		tutorial8->play(0, 7);
 		break;
-	case 10:
+	case 9:
 		tutorial9->play(0, 7);
+		break;
+	case 10:
+		tutorial10->play(0, 7);
 		break;
 	case 11:
 		tutorial10->play(0, 7);

@@ -695,6 +695,22 @@
       "file": "resources/images/backgrounds/level2/level2parallax4.png"
     },
     {
+      "id": "level3background1",
+      "file": "resources/images/backgrounds/level3/level3parallax1.jpg"
+    },
+    {
+      "id": "level3background2",
+      "file": "resources/images/backgrounds/level3/level3parallax2.png"
+    },
+    {
+      "id": "level3background3",
+      "file": "resources/images/backgrounds/level3/level3parallax3.png"
+    },
+    {
+      "id": "level3background4",
+      "file": "resources/images/backgrounds/level3/level3parallax4.png"
+    },
+    {
       "id": "hamsterSelectorBlank",
       "file": "resources/images/menuSprites/hamsterSelectorBlank.png"
     },
@@ -1174,6 +1190,10 @@
     {
       "id": "cine25",
       "file": "resources/images/transitions/final/cinematica25.jpg"
+    },
+    {
+      "id": "cat",
+      "file": "resources/images/spritesheets/enemies/level2/cat_spritesheet.png"
     }
   ],
 
@@ -1257,6 +1277,26 @@
     {
       "id": "light10",
       "file": "resources/sound/hit/light/light10.wav"
+    },
+    {
+      "id": "hamsterlight0",
+      "file": "resources/sound/hit/hamster/hamsterHit0.wav"
+    },
+    {
+      "id": "hamsterlight1",
+      "file": "resources/sound/hit/hamster/hamsterHit1.wav"
+    },
+    {
+      "id": "hamsterlight2",
+      "file": "resources/sound/hit/hamster/hamsterHit2.wav"
+    },
+    {
+      "id": "hamsterlight3",
+      "file": "resources/sound/hit/hamster/hamsterHit3.wav"
+    },
+    {
+      "id": "hamsterlight4",
+      "file": "resources/sound/hit/hamster/hamsterHit4.wav"
     },
     {
       "id": "strong0",
@@ -1487,6 +1527,18 @@
       "file": "resources/sound/dialogos/dialogo1.wav"
     },
     {
+      "id": "tutorial2",
+      "file": "resources/sound/dialogos/dialogo2.wav"
+    },
+    {
+      "id": "tutorial3",
+      "file": "resources/sound/dialogos/dialogo3.wav"
+    },
+    {
+      "id": "tutorial3single",
+      "file": "resources/sound/dialogos/dialogo3single.wav"
+    },
+    {
       "id": "possesion",
       "file": "resources/sound/possesion/possesion.wav"
     },
@@ -1570,6 +1622,18 @@
   "anims": [
     {
       "id": "cinematic_anim",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 2,
+      "cols": 2,
+      "rows": 1,
+      "frameUpdate": 300,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "cinematic_static",
       "startFrameX": 0,
       "startFrameY": 0,
       "duration": 2,
@@ -2720,7 +2784,7 @@
       "cols": 5,
       "rows": 7,
       "frameUpdate": 100,
-      "loop": 0,
+      "loop": 1,
       "chain": "",
       "attackFrame": -1
     }

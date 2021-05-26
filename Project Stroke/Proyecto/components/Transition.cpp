@@ -2,6 +2,9 @@
 #include "Transform.h"
 #include "ImageSecuence.h"
 #include "EnemyMother.h"
+#include "MenuButton.h"
+#include "MenuIndicator.h"
+#include "MenuButtonManager.h"
 #include "SoundManager.h"
 #include "MapMngr.h"
 #include "../sdlutils/SDLUtils.h"
@@ -25,7 +28,7 @@ void Transition::init() {
 }
 
 void Transition::update() {
-	if (state_->getState() == GameStates::RUNNING || state_->getState() == GameStates::CONTROLS) {
+	if (state_->getState() == GameStates::RUNNING || state_->getState() == GameStates::CONTROLS || state_->getState() ==  GameStates::MAINMENU) {
 		if (fadingOut)
 			fadeOut();
 
@@ -106,6 +109,7 @@ void Transition::changeScene(string nameScene, bool changeMap, int numTransition
 		e->getComponent<Transform>()->setFloor(0);
 		e->getComponent<Transform>()->setZ(0);
 	}
+	entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->setMaxH(0);
 	change = true;
 	changeMap_ = changeMap;
 	nameScene_ = nameScene;
@@ -165,7 +169,34 @@ void Transition::sceneTransition() {
 
 void Transition::createMap() {
 	//Y creamos uno nuevo
-	if (changeMap_) {
+	if (nameScene_ == "hasMuerto") {
+		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->resetCamera();
+		//Vuelve a renderizar el menu
+		state_->setState(GameStates::MAINMENU);
+
+		//Eliminamos a todos los hamsters
+		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearHamstersVector();
+
+		sdlutils().setHamstersChosen(0);
+		sdlutils().setHamstersToChoose(0);
+
+		auto* hsm = entity_->getMngr()->getHandler<HamsterSelectionMenu>()->getComponent<MenuButtonManager>();
+
+		auto& i = hsm->getIndicators();
+		auto& but = hsm->getButtons();
+		for (int h = 1; h < i.size(); h++) {
+			i[h]->setActive(false);
+		}
+
+		for (int j = 0; j < but.size(); ++j) {
+			but[j][0]->getComponent<MenuButton>()->setSelectable(true);
+		}
+
+		i[0]->getComponent<MenuIndicator>()->reset();
+
+		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::Players);
+	}
+	else if (changeMap_) {
 		auto* mapa = entity_->getMngr()->getHandler<Map>();
 		mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/" + nameScene_ + ".tmx");
 

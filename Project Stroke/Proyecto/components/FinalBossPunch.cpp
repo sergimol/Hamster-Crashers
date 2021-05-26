@@ -63,6 +63,9 @@ void FinalBossPunch::update() {
 				time_ = sdlutils().currRealTime();
 
 				stunStarted_ = true;
+
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handPunch");
+
 			}
 			else if (eAttribs_->checkInvulnerability() && sdlutils().currRealTime() <= hitTime_ + afterHitCD_) {
 				eAttribs_->setInvincibility(false);

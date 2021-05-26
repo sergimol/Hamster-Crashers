@@ -73,6 +73,7 @@ private:
 	int randomNum;
 
 	void playLighthit();
+	void playHamsterLighthit();
 
 	void playStronghit();
 
@@ -120,6 +121,12 @@ private:
 	SoundEffect* light9;
 	SoundEffect* light10;
 
+	//Golpe Hamster 
+	SoundEffect* hamLight0;
+	SoundEffect* hamLight1;
+	SoundEffect* hamLight2;
+	SoundEffect* hamLight3;
+	SoundEffect* hamLight4;
 
 	//Golpe Fuerte
 	SoundEffect* strong0;
@@ -248,6 +255,7 @@ private:
 	SoundEffect* tutorial8;
 	SoundEffect* tutorial9;
 	SoundEffect* tutorial10;
+	SoundEffect* tutorialsingle;
 
 	int transitionNum = 0;
 	SoundEffect* transition0;

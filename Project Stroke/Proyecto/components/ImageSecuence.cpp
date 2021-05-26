@@ -218,19 +218,217 @@ void ImageSecuence::init() {
 
 	keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
 	}
-	else if (newScene_ == controls) {
-		controles = true;
-		//keyAnimations.push(&sdlutils().images().at("controles"));
+	else if (newScene_ == level3) {
+	//Cinematica 16
+	auto anim16 = entity_->getMngr()->addEntity();
+	anim16->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim16->addComponent<Animator>(
+		&sdlutils().images().at("cine16"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		)->setActive(false);
+	keyAnimations.push(anim16);
+
+	//Cinematica 15
+	auto anim15 = entity_->getMngr()->addEntity();
+	anim15->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim15->addComponent<Animator>(
+		&sdlutils().images().at("cine15"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		)->setActive(false);
+	keyAnimations.push(anim15);
+
+	//Cinematica 14
+	auto anim14 = entity_->getMngr()->addEntity();
+	anim14->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim14->addComponent<Animator>(
+		&sdlutils().images().at("cine14"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		);
+	keyAnimations.push(anim14);
+
+
+	keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
+	}
+	else if (newScene_ == level3Micro) {
+	//Cinematica 18
+	auto anim18 = entity_->getMngr()->addEntity();
+	anim18->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim18->addComponent<Animator>(
+		&sdlutils().images().at("cine18"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		)->setActive(false);
+	keyAnimations.push(anim18);
+
+	//Cinematica 17
+	auto anim17 = entity_->getMngr()->addEntity();
+	anim17->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim17->addComponent<Animator>(
+		&sdlutils().images().at("cine17"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		);
+	keyAnimations.push(anim17);
+
+
+	keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
+	}
+	else if (newScene_ == final) {
+	//Cinematica 25
+	auto anim25 = entity_->getMngr()->addEntity();
+	anim25->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim25->addComponent<Animator>(
+		&sdlutils().images().at("cine25"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		)->setActive(false);
+	keyAnimations.push(anim25);
+
+	//Cinematica 24
+	auto anim24 = entity_->getMngr()->addEntity();
+	anim24->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim24->addComponent<Animator>(
+		&sdlutils().images().at("cine24"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		)->setActive(false);
+	keyAnimations.push(anim24);
+
+	//Cinematica 23
+	auto anim23 = entity_->getMngr()->addEntity();
+	anim23->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim23->addComponent<Animator>(
+		&sdlutils().images().at("cine23"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		)->setActive(false);
+	keyAnimations.push(anim23);
+
+	//Cinematica 22
+	auto anim22 = entity_->getMngr()->addEntity();
+	anim22->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim22->addComponent<Animator>(
+		&sdlutils().images().at("cine22"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		)->setActive(false);
+	keyAnimations.push(anim22);
+
+	//Cinematica 21
+	auto anim21 = entity_->getMngr()->addEntity();
+	anim21->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim21->addComponent<Animator>(
+		&sdlutils().images().at("cine21"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		)->setActive(false);
+	keyAnimations.push(anim21);
+
+	//Cinematica 20
+	auto anim20 = entity_->getMngr()->addEntity();
+	anim20->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim20->addComponent<Animator>(
+		&sdlutils().images().at("cine20"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		)->setActive(false);
+	keyAnimations.push(anim20);
+
+	//Cinematica 19
+	auto anim19 = entity_->getMngr()->addEntity();
+	anim19->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim19->addComponent<Animator>(
+		&sdlutils().images().at("cine19"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		);
+	keyAnimations.push(anim19);
+
+
+	keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
 	}
 	else if (newScene_ == hasMuerto) {
-		gameOver = true;
-		//keyAnimations.push(&sdlutils().images().at("hasMuerto"));
-	}
-	else if (newScene_ == hasGanado) {
-		gameOver = true;
-		//keyAnimations.push(&sdlutils().images().at("hasGanado"));
-	}
+	//Cinematica 19
+	auto anim19 = entity_->getMngr()->addEntity();
+	anim19->addComponent<Transform>(Vector2D(0, offsetCamera), Vector2D(0, 0), 1920, 1080, 0, 1, 1);
+	anim19->addComponent<Animator>(
+		&sdlutils().images().at("cine19"),
+		1920,
+		1080,
+		3,
+		3,
+		220,
+		Vector2D(0, 0),
+		3
+		);
+	keyAnimations.push(anim19);
 
+
+	keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
+	}
 	trans_ = entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>();
 }
 

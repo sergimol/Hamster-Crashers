@@ -240,6 +240,8 @@ void MenuButton::pressed() {
 	}
 
 	else if (buttonName_ == "exit") {
+	entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->resetCamera();
+
 		//Vuelve a renderizar el menu
 		state_->setState(GameStates::MAINMENU);
 
@@ -256,6 +258,9 @@ void MenuButton::pressed() {
 		for (Entity* e : entity_->getMngr()->getTiles())
 			e->setActive(false);
 
+		for (Entity* e : entity_->getMngr()->getTraps())
+			e->setActive(false);
+
 		for (Entity* e : entity_->getMngr()->getMapH())
 			e->setActive(false);
 
@@ -263,6 +268,9 @@ void MenuButton::pressed() {
 			e->setActive(false);
 
 		for (Entity* e : entity_->getMngr()->getFgs())
+			e->setActive(false);
+
+		for (Entity* e : entity_->getMngr()->getWavesObjects())
 			e->setActive(false);
 
 		entity_->getMngr()->refreshFrontGround();
@@ -277,6 +285,8 @@ void MenuButton::pressed() {
 		entity_->getMngr()->refreshItems();
 		entity_->getMngr()->refreshObstacles();
 		entity_->getMngr()->refreshPlayers();
+		entity_->getMngr()->refreshWavesObjects();
+		entity_->getMngr()->refreshTraps();
 		entity_->getMngr()->refresh();
 
 		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearColliders();
