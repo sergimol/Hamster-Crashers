@@ -1154,6 +1154,10 @@
     {
       "id": "cine25",
       "file": "resources/images/transitions/final/cinematica25.jpg"
+    },
+    {
+      "id": "cat",
+      "file": "resources/images/spritesheets/enemies/level2/cat_spritesheet.png"
     }
   ],
 
@@ -2712,7 +2716,7 @@
       "cols": 5,
       "rows": 7,
       "frameUpdate": 100,
-      "loop": 0,
+      "loop": 1,
       "chain": "",
       "attackFrame": -1
     }

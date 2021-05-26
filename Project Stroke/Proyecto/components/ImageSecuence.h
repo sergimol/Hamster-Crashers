@@ -26,6 +26,9 @@ private:
 
 	const string level1 = "Level1",
 		level2 = "Level2",
+		level3 = "Level3",
+		level3Micro = "Level3Micro",
+		final = "Final",
 		controls = "controls",
 		hasMuerto = "hasMuerto",
 		hasGanado = "hasGanado",

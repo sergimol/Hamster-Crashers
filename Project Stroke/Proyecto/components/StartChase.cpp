@@ -61,8 +61,16 @@ void StartChase::update() {
 					//Desactivamos el Move y Ability (Idle se activa por defecto)
 					hamsters->getComponent<AnimHamsterStateMachine>()->resetAnim();
 
+					//Y hacemos que la camara siga al gato
+					auto* cam_ = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
+					auto tr_ = entity_->getMngr()->getHandler<Cat_>()->getComponent<Transform>();
+					cam_->setGoToCat(true);
+					cam_->setGoToTracker(true);
+					cam_->changeCamState(State::GoingTo);
+					cam_->changeCamFollowPos(tr_->getPos().getX() - (sdlutils().width() / 2 - tr_->getW() + 10 ));
 
-					//Y METEMOS UNA ANIMACIÓN TO WAPA AL GATO EN ESTOS SEGUNDOS DE ESPERA AAAAAAAAAAAAAAAAAAAAAA TODO
+					entity_->getMngr()->getHandler<Cat_>()->getComponent<Animator>()->play(sdlutils().anims().at("cat_wakeup"));
+
 				}
 			}
 		}
@@ -91,14 +99,11 @@ void StartChase::start() {
 	//Damos velocidad al gato
 	entity_->getMngr()->getHandler<Cat_>()->getComponent<CatMovement>()->start();
 
+	entity_->getMngr()->getHandler<Cat_>()->getComponent<Animator>()->play(sdlutils().anims().at("cat_chasing"));
 
 	for (Entity* hamsters : entity_->getMngr()->getPlayers()) {
 
 		//Activamos el nuevo sistema de movimiento a cada hamster
 		hamsters->getComponent<MovementInChase>()->setActive(true);
 	}
-
-	//Y hacemos que la camara siga al gato
-	//PONER AQUI EL TRANSITION PARA QUE NO CAMBIE LA CAMARA BRUSCAMENTE AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-	entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::BossCat);
 }

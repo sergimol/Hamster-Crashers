@@ -46,10 +46,17 @@ void ContactDamage::updateRect() {
 
 	//Comprobamos si colisiona con alguno de los players
 
+	//Si es el gato...
+	if (entity_->hasComponent<CatMovement>()) {
+		attRect_ = tr_->getRectCollide();
+		if (CheckCollisionsCat(attRect_, true))
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
+	}
 	//Si se colisiona..
-	if (CheckCollisions(attRect_, true))
+	else if (CheckCollisions(attRect_, true))
 		//Suena el hit y le pega
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
+
 	if (damageEnemies_ && CheckCollisionsEnemies(attRect_, false))
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
 
@@ -225,6 +232,170 @@ bool ContactDamage::CheckCollisions(const SDL_Rect& enemyRect, bool finCombo) {
 	return canHit;
 }
 
+
+bool ContactDamage::CheckCollisionsCat(const SDL_Rect& enemyRect, bool finCombo) {
+	bool canHit = false;
+
+	//Cogemos todas las entidades del juego
+	auto& ents = entity_->getMngr()->getPlayers();
+
+	for (int i = 0; i < ents.size(); ++i) {
+		//Si la entidad es un player...
+
+			//Cogemos el transform del player
+		auto eTR = ents[i]->getComponent<Transform>();
+		SDL_Rect eColRect;
+		if (!useFeet_)
+			eColRect = eTR->getRectCollide();
+		else
+			eColRect = eTR->getRectCollideFeet();
+
+		//Vector2D newPos = Vector2D(eTR->getPos().getX() - cam.x, eTR->getPos().getY() - cam.y);
+		Vector2D enemyPos = Vector2D(enemyRect.x, enemyRect.y);
+		EntityAttribs* eAttribs = ents[i]->getComponent<EntityAttribs>();
+
+		//Y comprobamos si colisiona
+		//es can attacks porque coninciden lso estados
+
+		//si no esta saltando el player en caso de que asi sea
+
+		if (!damageInJump_ || !ents[i]->getComponent<Combos>()->isJumping())
+			if (ents[i]->getComponent<HamsterStateMachine>()->canAttack() && Collisions::collides(Vector2D(eColRect.x - cam.x, eColRect.y - cam.y), eColRect.w, eColRect.h, enemyPos, enemyRect.w, enemyRect.h)) {
+				//TODO no voy a definir una entidad ahora
+				//int dmg = entity_->getComponent<EntityAttribs>()->getDmg();
+
+				//Comprobamos si está en la misma Z o relativamente cerca
+				if (eAttribs->ignoresMargin()) {
+
+					if (abs((tr_->getPos().getY() + tr_->getH()) - (eTR->getPos().getY() + eTR->getH())) < eAttribs->getMarginToAttack()) {
+
+
+
+
+						//if (finCombo) {
+						//	if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.01); //Aumentar probabilidad critico
+						//	//Empujar y stun al aliado
+						//}
+						canHit = true;
+						//Le restamos la vida al aliado
+						ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg_);
+
+						auto& hamStateM = ents[i]->getComponent<HamsterStateMachine>()->getState();
+
+						if (hamStateM != HamStates::DEAD && hamStateM != HamStates::INFARCTED) {
+							//Si tiene stun, se aplica
+							Stun* stun = ents[i]->getComponent<Stun>();
+							if (stun != nullptr && stun->isActive()) {
+
+								//Si no estaba aturdido ya
+								if (hamStateM != HamStates::STUNNED) {
+									//Aturdimos al hamster
+									hamStateM = HamStates::STUNNED;
+
+									//Animaci�n de stun
+									ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
+
+									//Desactivamos control de movimiento 
+									ControlHandler* ctrl = ents[i]->getComponent<ControlHandler>();
+									if (ctrl != nullptr)
+										ctrl->setActive(false);
+
+									//Desactivamos componentes de ataque
+									StrongAttack* strAtt = ents[i]->getComponent<StrongAttack>();
+									if (strAtt != nullptr)
+										strAtt->setActive(false);
+
+									LightAttack* lghtAtt = ents[i]->getComponent<LightAttack>();
+									if (lghtAtt != nullptr)
+										lghtAtt->setActive(false);
+
+								}
+								//Reiniciamos tiempo de stun
+								stun->restartStunTime();
+							}
+						}
+					}
+				}
+				else {
+					//if (finCombo) {
+					//	if (!canHit) entity_->getComponent<EntityAttribs>()->addCritProbability(0.01); //Aumentar probabilidad critico
+					//	//Empujar y stun al aliado
+					//}
+					canHit = true;
+					//Le restamos la vida al aliado
+					ents[i]->getComponent<EntityAttribs>()->recieveDmg(dmg_);
+
+					auto& hamStateM = ents[i]->getComponent<HamsterStateMachine>()->getState();
+
+					if (hamStateM != HamStates::DEAD && hamStateM != HamStates::INFARCTED) {
+						//Si tiene stun, se aplica
+						Stun* stun = ents[i]->getComponent<Stun>();
+						if (stun != nullptr && stun->isActive()) {
+
+							//Si no estaba aturdido ya
+							if (hamStateM != HamStates::STUNNED) {
+								//Aturdimos al hamster
+								hamStateM = HamStates::STUNNED;
+
+								//Animaci�n de stun
+								ents[i]->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::HITTED, true);
+
+								//Desactivamos control de movimiento 
+								ControlHandler* ctrl = ents[i]->getComponent<ControlHandler>();
+								if (ctrl != nullptr)
+									ctrl->setActive(false);
+
+								//Desactivamos componentes de ataque
+								StrongAttack* strAtt = ents[i]->getComponent<StrongAttack>();
+								if (strAtt != nullptr)
+									strAtt->setActive(false);
+
+								LightAttack* lghtAtt = ents[i]->getComponent<LightAttack>();
+								if (lghtAtt != nullptr)
+									lghtAtt->setActive(false);
+
+							}
+							//Reiniciamos tiempo de stun
+							stun->restartStunTime();
+						}
+					}
+
+				}
+				//Si tiene Knockback, se aplica
+				if (canHit) {
+
+					Knockback* hamKnockback = ents[i]->getComponent<Knockback>();
+					if (hamKnockback != nullptr && hamKnockback->isActive()) {
+						//Damos la vuelta si es atacado por detras
+
+						//DEPENDE DE LA posicion de X y el width al medio
+						//attRect_.x;
+						//attRect_.w;
+						//allyRect.w;
+						//allyRect.x;
+						//allyRect.x;
+
+						//MIRADNOA AL DERECHA ES !flip, izquierda es flip, por default quuiero que sea !flip
+						auto& hamFlip = eTR->getFlip();
+						if (attRect_.x + (attRect_.w / 2) > eColRect.x - cam.x + (eColRect.w / 2)) //esta a ala izquierda entonces !flip
+						{
+							hamFlip = false;
+						}
+						else {
+							hamFlip = true;
+						}
+						hamKnockback->knockback(directionKnockback);
+					}
+
+				}
+			}
+
+	}
+	entity_->getMngr()->refreshPlayers();
+
+
+	return canHit;
+}
 
 bool ContactDamage::CheckCollisionsEnemies(const SDL_Rect& enemyRect, bool finCombo) {
 	bool canHit = false;
