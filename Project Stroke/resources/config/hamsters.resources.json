@@ -207,6 +207,10 @@
       "file": "resources/images/spritesheets/enemies/level3/mano_spritesheet.png"
     },
     {
+      "id": "fistSheet",
+      "file": "resources/images/spritesheets/enemies/level3/puno_spritesheet.png"
+    },
+    {
       "id": "firstBoss",
       "file": "resources/images/boss1.png"
     },
