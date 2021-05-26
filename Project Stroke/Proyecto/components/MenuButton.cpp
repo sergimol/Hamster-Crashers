@@ -289,10 +289,13 @@ void MenuButton::pressed() {
 		entity_->getMngr()->refreshTraps();
 		entity_->getMngr()->refresh();
 
-		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearColliders();
+		auto map = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>();
+		map->clearColliders();
 
 		//Eliminamos a todos los hamsters
-		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearHamstersVector();
+		map->clearHamstersVector();
+
+		map->resetTriggerList();
 
 		sdlutils().setHamstersChosen(0);
 		sdlutils().setHamstersToChoose(0);

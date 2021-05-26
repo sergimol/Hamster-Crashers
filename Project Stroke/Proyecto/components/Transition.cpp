@@ -151,8 +151,12 @@ void Transition::sceneTransition() {
 		entity_->getMngr()->refreshPlayers();
 		entity_->getMngr()->refresh();
 
-		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearColliders();
 		entity_->getMngr()->getHandler<Mother>()->getComponent<EnemyMother>()->resetNumPlayers();
+
+		auto map = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>();
+		map->clearColliders();
+
+		map->resetTriggerList();
 	}
 
 	//Y creamos uno nuevo

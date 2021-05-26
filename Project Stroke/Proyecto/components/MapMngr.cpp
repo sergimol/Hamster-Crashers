@@ -82,8 +82,8 @@ void MapMngr::update() {
 	//	Comprobamos la colision con los triggers salas
 	tmx::Object trigger;
 	auto& players = entity_->getMngr()->getPlayers();
-	if (!TriggerftCamera.empty())
-		trigger = TriggerftCamera.front(); //Recorrer triggers
+	if (!triggerFtCamera.empty())
+		trigger = triggerFtCamera.front(); //Recorrer triggers
 
 	auto& getProp = trigger.getProperties();
 	for (Entity* player : players) {
@@ -105,7 +105,7 @@ void MapMngr::update() {
 				camera->changeCamState(State::GoingTo);
 			}
 			//Borrar el punto de la camara del vector
-			TriggerftCamera.pop();
+			triggerFtCamera.pop();
 
 			//TUTORIAL
 			if (!sdlutils().tutorialDone() && stoi(trigger.getName()) < 4) {
@@ -215,7 +215,7 @@ void MapMngr::loadNewMap(string map) {
 					//Guardamos todos los triggers de cambio de sala
 					for (auto object : objects)
 					{
-						TriggerftCamera.push(object);
+						triggerFtCamera.push(object);
 					}
 				}
 				else if (layer->getName() == "entities") {
@@ -872,6 +872,14 @@ void MapMngr::addTrap(const tmx::Object& object, int x, int y) {
 
 	trap->addComponent<EntityAttribs>(1, 10.0f, "trap1", Vector2D(), 1, 0.0f, 1, true, false, false);
 
+}
+
+void MapMngr::resetTriggerList()
+{
+	while (!triggerFtCamera.empty())
+	{
+		triggerFtCamera.pop();
+	}
 }
 
 void MapMngr::clearColliders() {
