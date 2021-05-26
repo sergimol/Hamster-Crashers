@@ -489,6 +489,9 @@
     <ClCompile Include="Proyecto\components\ReanimationAlone.cpp">
       <Filter>Archivos de origen\components\Entity\Hamster\Stroke</Filter>
     </ClCompile>
+    <ClCompile Include="Proyecto\components\Creditos.cpp">
+      <Filter>Archivos de origen\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proyecto\sdlutils\Font.h">
@@ -841,6 +844,9 @@
     </ClInclude>
     <ClInclude Include="Proyecto\components\ReanimationAlone.h">
       <Filter>Archivos de encabezado\Components\Entity\Hamster\Stroke</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyecto\components\Creditos.h">
+      <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
