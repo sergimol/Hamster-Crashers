@@ -1,5 +1,6 @@
 #include "../components/Stroke.h"
 #include "../components/dialogos.h"
+#include "../components/Transition.h"
 #include "../components/Roll.h"
 #include "../components/Poison.h"
 #include "../components/Pray.h"
@@ -11,6 +12,7 @@
 #include "../components/AnimHamsterStateMachine.h"
 #include "../components/ReanimationGame.h"
 #include "../components/CollisionDetec.h"
+#include "../components/ReanimationAlone.h"
 #include "Shadow.h"
 #include "EnemyMother.h"
 
@@ -107,6 +109,19 @@ void Stroke::checkChance() {
 }
 
 void Stroke::infarctHamster() {
+
+	auto hams_ = entity_->getMngr()->getPlayers();
+	bool allDead = true;
+	for (Entity* e : hams_) {
+		auto sta = e->getComponent<HamsterStateMachine>()->getState();
+		if (sta != HamStates::DEAD && sta != HamStates::INFARCTED) {
+			allDead = false;
+		}
+	}
+	if (allDead) {
+		entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", true, 0);
+	}
+
 	bool& strokeTutorial = entity_->getMngr()->getStrokeTuto();
 	if (strokeTutorial) {
 		strokeTutorial = false;
@@ -193,7 +208,27 @@ void Stroke::infarctHamster() {
 		std::cout << "INFARTADO" << std::endl;
 	}
 	else {
-		entity_->getComponent<EntityAttribs>()->recieveDmg(2000);
+		//entity_->getComponent<EntityAttribs>()->recieveDmg(2000);
+		//Evitamos el uso de la habilidad
+		ab_->deactiveAbility();
+		auto& state = hms_->getState();
+		state = HamStates::INFARCTED_ALONE;
+
+		//Y cambiamos la interfaz
+		entity_->getComponent<HeartUI>()->dep();
+		//entity_->getComponent<UI>()->dep("3");
+
+		//hms_->getState() = HamStates::INFARCTED;
+		this->setActive(false);
+
+		//Animacion del fantasma
+		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STROKE_ALONE, true);
+
+		entity_->getComponent<Movement>()->setActive(false);
+
+		entity_->addComponent<ReanimationAlone>();
+
+		restartChance();
 		std::cout << "MUERTO" << std::endl;
 	}
 }

@@ -98,7 +98,6 @@ void Camera::Goto() {
 		cameraState = Players;
 }
 
-
 //Calcula el punto al que tiene que ir la camara con el punto de direcci�n dado
 Vector2D Camera::newObjetivo() {
 	Vector2D CamStaticPos;
@@ -161,4 +160,10 @@ void Camera::changeCamFollowPos(int objetive) {
 
 	if (GoToTracker)
 		cameraFollowPos_.setX(objetive);
+}
+
+void Camera::resetCamera() {
+	camera_.x = 0;
+	camera_.y = 0;
+	camPos = Vector2D(0, 0);
 }

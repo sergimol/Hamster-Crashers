@@ -6,7 +6,7 @@
 #include "GameStates.h"
 #include <string>
 
-const enum class HamStates { DEFAULT, INFARCTED, ABILITY, STUNNED, DEAD};
+const enum class HamStates { DEFAULT, INFARCTED, ABILITY, STUNNED, DEAD, INFARCTED_ALONE};
 
 class HamsterStateMachine : public Component
 {
@@ -21,7 +21,8 @@ public:
 	
 	inline bool canMove() const { return (currentState == HamStates::DEFAULT || 
 										  currentState == HamStates::ABILITY || 
-										  currentState == HamStates::INFARCTED ); };
+										  currentState == HamStates::INFARCTED ||
+										  currentState == HamStates::INFARCTED_ALONE); };
 
 	inline bool canAttack() const { return currentState == HamStates::DEFAULT; };
 

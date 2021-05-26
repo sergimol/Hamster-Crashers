@@ -101,16 +101,9 @@ void MenuIndicator::reset()
 	}
 }
 
-void MenuIndicator::moveX(bool isRight) {
-	if (isRight)
-		dest_.x += 450;
-	else
-		dest_.x -= 450;
-}
-
-// Para mover los indicadores del menu de seleccion de hamsters
-void MenuIndicator::moveToButton(int but)
-{
-	// Abra cadabra
-	dest_.x = 140 + 450 * but;
+// Para mover los indicadores del menu de seleccion de hamsters
+void MenuIndicator::moveToButton(int x)
+{
+	// Abra cadabra
+	dest_.x = x + 45;
 }
