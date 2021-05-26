@@ -34,6 +34,7 @@
 #include "../components/HeightObject.h"
 #include "../components//AnimHamsterStateMachine.h"
 #include "../components/Swallow.h"
+#include "../components/TriggerMusic.h"
 #include "../ecs/Camera.h"
 #include "../components/EnemyBehaviour.h"
 #include "../components/IddleEnemy.h"
@@ -244,6 +245,9 @@ void MapMngr::loadNewMap(string map) {
 						}
 						else if (object.getName() == "startChase") {
 							startChaseTrigger(object);
+						}
+						else if (object.getName() == "startMusic") {
+							startMusic(object);
 						}
 						else if (object.getName() == "secondBoss") { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 							auto* enemy = entity_->getMngr()->addTrap();
@@ -807,6 +811,16 @@ void MapMngr::startChaseTrigger(const tmx::Object& object) {
 	trigger->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 1, 1);
 	trigger->addComponent<StartChase>();
+}
+
+
+void MapMngr::startMusic(const tmx::Object& object) {
+
+	//Creamos una entidad
+	auto trigger = entity_->getMngr()->addEntity();
+	trigger->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, 1, 1);
+	trigger->addComponent<TriggerMusic>(object.getProperties()[0].getStringValue());
 }
 
 void MapMngr::addObject(const tmx::Object& object) {

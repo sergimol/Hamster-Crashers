@@ -74,6 +74,7 @@ public:
 	inline void reduceNumberEnemyRoom() { numberEnemyRoom--; };
 	void newSceneTrigger(string newName, const tmx::Object& obj);
 	void startChaseTrigger(const tmx::Object& obj);
+	void startMusic(const tmx::Object& obj);
 
 	inline void addHamster(string name) { hamstersToLoad_.push_back(name); };
 	inline void removeHamster() { hamstersToLoad_.pop_back(); };
