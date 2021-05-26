@@ -29,5 +29,6 @@ private:
 
 	GameStates* gamestate;
 	float time_, lastTime_;
+	bool  activado;
 
 };
