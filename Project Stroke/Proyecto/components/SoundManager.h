@@ -68,6 +68,10 @@ public:
 
 	int initBirdsVol = 128;
 
+	int initMicrowaveVol = 128;
+	int initMicrowaveExplosionVol = 60;
+
+
 	void resetNumInts();
 private:
 	int randomNum;
@@ -293,5 +297,11 @@ private:
 	Music* HamstersNivel4GameVersion;
 
 	SoundEffect* birds;
+
+	SoundEffect* microBep;
+	SoundEffect* microExplosion;
+	SoundEffect* microStatic;
+	SoundEffect* microTiktak;
+
 };
 
