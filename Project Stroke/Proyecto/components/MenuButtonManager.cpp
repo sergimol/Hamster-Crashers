@@ -71,7 +71,7 @@ void MenuButtonManager::init() {
 		}
 
 		auto* sardinillabutton = mngr->addMenu();
-		sardinillabutton->addComponent<MenuButton>("sardinilla", Vector2D(125, 114), stateNumber_);
+		sardinillabutton->addComponent<MenuButton>("sardinilla", Vector2D(129, 116), stateNumber_);
 		buttons_[0][0] = sardinillabutton;
 
 		auto* ketabutton = mngr->addMenu();
