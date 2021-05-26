@@ -22,10 +22,7 @@ public:
 	void updateTexture(bool isUp);
 	void reset();
 	
-	// Para el indicador del jugador que está eligiendo
-	void moveX(bool isRight);
-
-	void moveToButton(int but);
+	void moveToButton(int x);
 
 private:
 	//Nombre del indicador

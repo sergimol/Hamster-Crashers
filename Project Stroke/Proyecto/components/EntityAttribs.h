@@ -152,6 +152,8 @@ private:
 	int poisonCD_;
 	int updateCD_;
 
+	bool allDead;
+
 	std::string id_;
 
 	Vector2D velocity_;

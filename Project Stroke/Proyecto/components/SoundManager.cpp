@@ -113,9 +113,6 @@ void SoundManager::init() {
 	trainPipi = &sdlutils().soundEffects().at("trainPipi");
 	trainAlto = &sdlutils().soundEffects().at("trainAlto");
 
-	pageSkip0 = &sdlutils().soundEffects().at("transition0");
-	pageSkip1 = &sdlutils().soundEffects().at("transition1");
-
 	trapKitchen = &sdlutils().soundEffects().at("trapKitchen");
 
 	tutorial0 = &sdlutils().soundEffects().at("tutorial0");
@@ -133,19 +130,36 @@ void SoundManager::init() {
 	tutorial10 = &sdlutils().soundEffects().at("catMeowInit");
 
 
-	transition0 = &sdlutils().soundEffects().at("tutorial0");
-	transition1 = &sdlutils().soundEffects().at("tutorial0");
-	transition2 = &sdlutils().soundEffects().at("tutorial0");
-	transition3 = &sdlutils().soundEffects().at("tutorial0");
-	transition4 = &sdlutils().soundEffects().at("tutorial0");
-	transition5 = &sdlutils().soundEffects().at("tutorial0");
-	transition6 = &sdlutils().soundEffects().at("tutorial0");
-	transition7 = &sdlutils().soundEffects().at("tutorial0");
-	transition8 = &sdlutils().soundEffects().at("tutorial0");
-	transition9 = &sdlutils().soundEffects().at("tutorial0");
-	transition10 = &sdlutils().soundEffects().at("tutorial0");
+	transition0 = &sdlutils().soundEffects().at("transition0");
+	transition1 = &sdlutils().soundEffects().at("transition1");
+	transition2 = &sdlutils().soundEffects().at("transition2");
+	transition3 = &sdlutils().soundEffects().at("transition3");
+	transition4 = &sdlutils().soundEffects().at("transition4");
+	transition5 = &sdlutils().soundEffects().at("transition5");
+	transition6 = &sdlutils().soundEffects().at("transition6");
+	transition7 = &sdlutils().soundEffects().at("transition7");
+	transition8 = &sdlutils().soundEffects().at("transition8");
+	transition9 = &sdlutils().soundEffects().at("transition9");
+	transition10 = &sdlutils().soundEffects().at("transition10");
+	transition11 = &sdlutils().soundEffects().at("transition11");
+	transition12 = &sdlutils().soundEffects().at("transition12");
+	transition13 = &sdlutils().soundEffects().at("transition13");
+	transition14 = &sdlutils().soundEffects().at("transition14");
+	transition15 = &sdlutils().soundEffects().at("transition15");
+	transition16 = &sdlutils().soundEffects().at("transition16");
+	transition17 = &sdlutils().soundEffects().at("transition17");
+	transition18 = &sdlutils().soundEffects().at("transition18");
+	transition19 = &sdlutils().soundEffects().at("transition19");
+	transition20 = &sdlutils().soundEffects().at("transition20");
+	transition21 = &sdlutils().soundEffects().at("transition21");
+	transition22 = &sdlutils().soundEffects().at("transition22");
+	transition23 = &sdlutils().soundEffects().at("transition23");
 
-
+	page0 = &sdlutils().soundEffects().at("page0");
+	page1 = &sdlutils().soundEffects().at("page1");
+	page2 = &sdlutils().soundEffects().at("page2");
+	page3 = &sdlutils().soundEffects().at("page3");
+	page4 = &sdlutils().soundEffects().at("page4");
 
 	Vector2D vol = sdlutils().volumes();
 	musicVol_ = vol.getX();
@@ -306,6 +320,19 @@ void SoundManager::setVolumeChannels() {
 	transition8->setChannelVolume(fxVol_ * initTransitionVol);
 	transition9->setChannelVolume(fxVol_ * initTransitionVol);
 	transition10->setChannelVolume(fxVol_ * initTransitionVol);
+	transition11->setChannelVolume(fxVol_ * initTransitionVol);
+	transition12->setChannelVolume(fxVol_ * initTransitionVol);
+	transition13->setChannelVolume(fxVol_ * initTransitionVol);
+	transition14->setChannelVolume(fxVol_ * initTransitionVol);
+	transition15->setChannelVolume(fxVol_ * initTransitionVol);
+	transition16->setChannelVolume(fxVol_ * initTransitionVol);
+	transition17->setChannelVolume(fxVol_ * initTransitionVol);
+	transition18->setChannelVolume(fxVol_ * initTransitionVol);
+	transition19->setChannelVolume(fxVol_ * initTransitionVol);
+	transition20->setChannelVolume(fxVol_ * initTransitionVol);
+	transition21->setChannelVolume(fxVol_ * initTransitionVol);
+	transition22->setChannelVolume(fxVol_ * initTransitionVol);
+	transition23->setChannelVolume(fxVol_ * initTransitionVol);
 
 	// sonidos ambiente
 	birds->setChannelVolume(fxVol_ * initBirdsVol);
@@ -321,21 +348,22 @@ void SoundManager::setVolumeChannels() {
 }
 
 void SoundManager::lowVolume(bool musicChannel) {
-	//if (musicVol_ > 0 && fxVol_ > 0) {
-	if (musicChannel) {
-		musicVol_ = musicVol_ - 0.1f;
-		if (musicVol_ < 0)
-			musicVol_ = 0;
-		sdlutils().setMusicVol(musicVol_);
-	}
+	if (musicVol_ > 0 && fxVol_ > 0) {
+		if (musicChannel) {
+			musicVol_ = musicVol_ - 0.1f;
+			if (musicVol_ < 0)
+				musicVol_ = 0;
+			sdlutils().setMusicVol(musicVol_);
 
-	else {
-		fxVol_ = fxVol_ - 0.1f;
-		if (fxVol_ < 0)
-			fxVol_ = 0;
-		sdlutils().setFxVol(fxVol_);
+		}
+
+		else {
+			fxVol_ = fxVol_ - 0.1f;
+			if (fxVol_ < 0)
+				fxVol_ = 0;
+			sdlutils().setFxVol(fxVol_);
+		}
 	}
-	//}
 
 	setVolumeChannels();
 }
@@ -763,10 +791,19 @@ void SoundManager::playPageSkip() {
 	switch (randomNum)
 	{
 	case 0:
-		pageSkip0->play();
+		page0->play();
 		break;
 	case 1:
-		pageSkip0->play();
+		page1->play();
+		break;
+	case 2:
+		page2->play();
+		break;
+	case 3:
+		page3->play();
+		break;
+	case 4:
+		page4->play();
 		break;
 	default:
 		break;
@@ -809,6 +846,45 @@ void SoundManager::playTransition() {
 		break;
 	case 10:
 		transition10->play(0, 7);
+		break;
+	case 11:
+		transition11->play(0, 7);
+		break;
+	case 12:
+		transition12->play(0, 7);
+		break;
+	case 13:
+		transition13->play(0, 7);
+		break;
+	case 14:
+		transition14->play(0, 7);
+		break;
+	case 15:
+		transition15->play(0, 7);
+		break;
+	case 16:
+		transition16->play(0, 7);
+		break;
+	case 17:
+		transition17->play(0, 7);
+		break;
+	case 18:
+		transition18->play(0, 7);
+		break;
+	case 19:
+		transition19->play(0, 7);
+		break;
+	case 20:
+		transition20->play(0, 7);
+		break;
+	case 21:
+		transition21->play(0, 7);
+		break;
+	case 22:
+		transition22->play(0, 7);
+		break;
+	case 23:
+		transition23->play(0, 7);
 		break;
 	default:
 		break;
