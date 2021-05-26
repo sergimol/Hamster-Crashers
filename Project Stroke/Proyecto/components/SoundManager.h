@@ -107,6 +107,8 @@ private:
 	void  playHandPunch();
 	void  playHandHit();
 
+	void playTrap();
+
 	int pickRandom(int max);
 
 
@@ -236,7 +238,9 @@ private:
 
 
 	//Trampa cocina
-	SoundEffect* trapKitchen;
+	SoundEffect* trapKitchen0;
+	SoundEffect* trapKitchen1;
+	SoundEffect* trapKitchen2;
 
 	//Dialogos Angel (tutorial y transiciones, falta diferenciarlos)
 	int tutorialNum = 0;

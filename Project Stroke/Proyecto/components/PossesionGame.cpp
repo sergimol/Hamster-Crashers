@@ -177,15 +177,17 @@ void PossesionGame::failedHit() {
 
 //Se elimina la key y se desactiva el componente al acabar
 void PossesionGame::endPossesion() {
-	if (keyGame_ != nullptr && lineH_ != nullptr && lineV_ != nullptr) {
-		keyGame_->setActive(false);
-		lineH_->setActive(false);
-		lineV_->setActive(false);
+	if (active_) {
+		if (keyGame_ != nullptr && lineH_ != nullptr && lineV_ != nullptr) {
+			keyGame_->setActive(false);
+			lineH_->setActive(false);
+			lineV_->setActive(false);
 
-		entity_->getMngr()->refreshUIObjects();
+			entity_->getMngr()->refreshUIObjects();
+		}
+		possesed_->getComponent<Animator>()->setTexture(&sdlutils().images().at(possesed_->getComponent<EntityAttribs>()->getId() + "Sheet"));
+		this->setActive(false);
 	}
-	possesed_->getComponent<Animator>()->setTexture(&sdlutils().images().at(possesed_->getComponent<EntityAttribs>()->getId() + "Sheet"));
-	this->setActive(false);
 }
 
 //Coge una key y su respectiva imagen aleatorias

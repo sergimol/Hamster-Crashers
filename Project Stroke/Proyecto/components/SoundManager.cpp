@@ -23,7 +23,7 @@ void SoundManager::init() {
 	attack3 = &sdlutils().soundEffects().at("attack3");
 	attack4 = &sdlutils().soundEffects().at("attack4");
 
-
+	possesion = &sdlutils().soundEffects().at("possesion");
 
 	dep0 = &sdlutils().soundEffects().at("dep0");
 	dep1 = &sdlutils().soundEffects().at("dep1");
@@ -106,7 +106,9 @@ void SoundManager::init() {
 	trainPipi = &sdlutils().soundEffects().at("trainPipi");
 	trainAlto = &sdlutils().soundEffects().at("trainAlto");
 
-	trapKitchen = &sdlutils().soundEffects().at("trapKitchen");
+	trapKitchen0 = &sdlutils().soundEffects().at("trapKitchen0");
+	trapKitchen1 = &sdlutils().soundEffects().at("trapKitchen1");
+	trapKitchen2 = &sdlutils().soundEffects().at("trapKitchen2");
 
 	tutorial0 = &sdlutils().soundEffects().at("tutorial0");
 	tutorial1 = &sdlutils().soundEffects().at("tutorial1");
@@ -428,8 +430,8 @@ void SoundManager::play(std::string soundName) {
 	//Trampa cocina
 	else if (soundName == "trapKitchen") {
 		//Trampa cocina
-		trapKitchen->setChannelVolume(fxVol_ * inittrapKitchenVol);
-		trapKitchen->play(0);
+		trapKitchen0->setChannelVolume(fxVol_ * inittrapKitchenVol);
+		playTrap();
 	}
 
 
@@ -479,11 +481,11 @@ void SoundManager::play(std::string soundName) {
 	}
 	else if (soundName == "microwaveStatic") {
 		microStatic->setChannelVolume(fxVol_ * initMicrowaveVol);
-		microStatic->play(0);
+		microStatic->play(100,5);
 	}
 	else if (soundName == "tiktak") {
 		microTiktak->setChannelVolume(fxVol_ * initMicrowaveVol);
-		microTiktak->play(0);
+		microTiktak->play(100,6);
 	}
 
 }
@@ -962,6 +964,25 @@ void SoundManager::playHandHit() {
 		break;
 	case 2:
 		handHit2->play();
+		break;
+	default:
+		break;
+	}
+}
+
+void SoundManager::playTrap() {
+	randomNum = pickRandom(3);
+
+	switch (randomNum)
+	{
+	case 0:
+		trapKitchen0->play();
+		break;
+	case 1:
+		trapKitchen1->play();
+		break;
+	case 2:
+		trapKitchen2->play();
 		break;
 	default:
 		break;

@@ -60,7 +60,7 @@ private:
 	float lastTime_;
 	float timer_;
 
-	bool phaseComplete_;
+	bool phaseComplete_, defeated;
 	bool hamsterDead_;
 
 	//las texturas que mostraran el progreso de la fase
@@ -80,5 +80,7 @@ private:
 
 	int hits_;
 	float damageInPercent_;
+
+	float startEnding_, waitEnding_;
 };
 

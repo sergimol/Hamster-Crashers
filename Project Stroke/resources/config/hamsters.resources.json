@@ -1577,8 +1577,16 @@
       "file": "resources/sound/train/pasoAlto.wav"
     },
     {
-      "id": "trapKitchen",
+      "id": "trapKitchen0",
       "file": "resources/sound/traps/traps0.wav"
+    },
+    {
+      "id": "trapKitchen1",
+      "file": "resources/sound/traps/traps1.wav"
+    },
+    {
+      "id": "trapKitchen2",
+      "file": "resources/sound/traps/traps2.wav"
     },
     {
       "id": "tutorial0",

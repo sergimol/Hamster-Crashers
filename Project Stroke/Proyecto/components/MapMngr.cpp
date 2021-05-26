@@ -272,19 +272,23 @@ void MapMngr::loadNewMap(string map) {
 							enemy->getMngr()->setHandler<Cat_>(enemy);
 						}
 						else if (object.getName() == "microondas") { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
-							//auto* micro = entity_->getMngr()->addEntity();
+							auto* micro = entity_->getMngr()->addEntity();
 
-							//micro->addComponent<Transform>(
-							//	Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-							//	Vector2D(), 256.0f, 2 * 256.0f, 0.0f, 1, 1);
+							micro->addComponent<Transform>(
+								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
+								Vector2D(), 256.0f, 2 * 256.0f, 0.0f, 1, 1);
 
-							//micro->addComponent<EntityAttribs>(300 + 150 * hamstersToLoad_.size(), 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 20, true, false);
+							micro->addComponent<EntityAttribs>(300 + 150 * hamstersToLoad_.size(), 0.0, "soldier1", Vector2D(0, 0), 0, 0, 20, true, false, false);
+							/*EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, int marg);
+							EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty, bool canBPois);*/
 
-							////enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
-							//micro->addComponent<MicroOndasManager>(hamstersToLoad_.size(), &sdlutils().images().at("anaranjado"), &sdlutils().images().at("puntoDeLuz"));
-							////enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
-							////enemy->addComponent<ContactDamage>(20, 30);
-							////enemy->getMngr()->setHandler<Pussy>(enemy);
+
+
+							//enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
+							micro->addComponent<MicroOndasManager>(hamstersToLoad_.size(), &sdlutils().images().at("anaranjado"), &sdlutils().images().at("puntoDeLuz"));
+							//enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
+							//enemy->addComponent<ContactDamage>(20, 30);
+							//enemy->getMngr()->setHandler<Pussy>(enemy);
 						}
 						else if (object.getName() == "trap") {
 							addTrap(object, object.getPosition().x, object.getPosition().y);
