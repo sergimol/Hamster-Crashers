@@ -23,7 +23,7 @@ void Creditos::update() {
 	else if (!scrolling && sdlutils().currRealTime() > timer + ENDWAIT) {
 		endCreditos();
 	}
-	if (imRect_.y == -imRect_.w + 1080 && scrolling) {
+	if (imRect_.y == -imRect_.h + 1080 && scrolling) {
 		scrolling = false;
 		timer = sdlutils().currRealTime();
 	}
