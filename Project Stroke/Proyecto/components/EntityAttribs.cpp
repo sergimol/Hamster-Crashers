@@ -249,10 +249,10 @@ void EntityAttribs::die() {
 
 	int tam = 0;
 
-	if (id_ == "sardinilla" || id_ == "monchi" || id_ == "soldier1" || id_ == "soldier2") {
+	if (id_ == "sardinilla" || id_ == "monchi" || id_ == "soldier1" || id_ == "soldier2" || id_ == "bicho" || id_ == "naranja") {
 		tam = 86;
 	}
-	else if (id_ == "canelon" || id_ == "canelonDemon" || id_ == "monosinpatico") {
+	else if (id_ == "canelon" || id_ == "canelonDemon" || id_ == "monosinpatico" || id_ == "rata") {
 		tam = 128;
 	}
 	else if (id_ == "keta") {
@@ -280,7 +280,6 @@ void EntityAttribs::die() {
 		hms_->getState() = HamStates::DEAD;
 		//Desactivamos el componente del hasmter vivo
 		entity_->getComponent<Animator>()->setActive(false);
-		//entity_->getComponent<Shadow>()->setActive(false);
 
 		//TODO arreglar camara, y demas objetos que den problemas con el como se esta desactivando el hamster,
 		//hacerlo a mano cada vez que os den problemas porque desactivar la entidad del hamster 
@@ -319,6 +318,8 @@ void EntityAttribs::die() {
 		enmState_->getState() = EnemyStates::ENM_DEAD;
 		if (id_ == "soldier1" || id_ == "soldier2")
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("soldierDep");
+		else if (id_ == "bicho" || id_ == "rata" || id_ == "naranja")
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("dep");
 		else if (id_ == "calcetin") {
 			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 5);
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
@@ -347,8 +348,6 @@ void EntityAttribs::heal(int hp) {
 	}
 	if (entity_->hasComponent<UI>())
 		entity_->getComponent<UI>()->bar(hp);
-
-	std::cout << "ave maria" << health_ << std::endl;
 }
 
 void EntityAttribs::addCritProbability(float probability) {

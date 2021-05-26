@@ -148,6 +148,7 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 						}
 
 						//ANIMACION DE HIT DEL ENEMIGO
+						if (ents[i]->hasComponent<AnimEnemyStateMachine>())
 						ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
 
 						//Si tiene Knockback, se aplica

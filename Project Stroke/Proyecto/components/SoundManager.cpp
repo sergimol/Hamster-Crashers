@@ -481,11 +481,11 @@ void SoundManager::play(std::string soundName) {
 	}
 	else if (soundName == "microwaveStatic") {
 		microStatic->setChannelVolume(fxVol_ * initMicrowaveVol);
-		microStatic->play(0);
+		microStatic->play(100,5);
 	}
 	else if (soundName == "tiktak") {
 		microTiktak->setChannelVolume(fxVol_ * initMicrowaveVol);
-		microTiktak->play(0);
+		microTiktak->play(100,6);
 	}
 
 }

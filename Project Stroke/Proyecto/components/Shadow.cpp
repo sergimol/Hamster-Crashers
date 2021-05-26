@@ -14,8 +14,10 @@ void Shadow::init() {
 
 
 	//INICIALIZA SOMBRA CON VALORES DEL PADRE
-	shadow_->addComponent<Transform>(Vector2D(tr_->getPos().getX(), tr_->getPos().getY()),
-		Vector2D(), tr_->getW(), tr_->getH() / 3, 0.0f, 0, 1);
+	auto* tr = shadow_->addComponent<Transform>(Vector2D(tr_->getPos().getX(), tr_->getPos().getY()),
+		Vector2D(0, 0), tr_->getW(), tr_->getH() / 3, 0.0f, 0, 1);
+	tr->setFloor(tr_->getFloor());
+	tr->setZ(tr_->getZ());
 	shadow_->addComponent<Image>(&sdlutils().images().at("shadow"));
 	shadow_->addComponent<ShadowFollow>(tr_, useCollision_);
 }
@@ -31,6 +33,6 @@ void Shadow::update() {
 		/*if (isHamster_ && hamS_->getState() != HamStates::INFARCTED)
 			shadow_->update();
 		else if (!isHamster_)*/
-			shadow_->update();
+		shadow_->update();
 	}
 }
