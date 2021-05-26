@@ -813,11 +813,13 @@ void MapMngr::addObject(const tmx::Object& object) {
 	// int : pos en Z. Necesario meterlo a mano desde Tile
 
 	obstacle->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, prop[3].getIntValue(), false, 0.75, 0.75);
+		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, prop[3].getIntValue(), false, 0.75, 0.6);
 
 
 
 	string id = prop[1].getStringValue();
+
+		obstacle->addComponent<Shadow>(false, true);
 
 	obstacle->addComponent<Animator>(&sdlutils().images().at("obstacle" + id),
 		100,
@@ -836,8 +838,6 @@ void MapMngr::addObject(const tmx::Object& object) {
 	else {
 		obstacle->addComponent<Obstacle>(id);
 	}
-
-	obstacle->addComponent<Shadow>(false, false);
 
 	entity_->getMngr()->getObstacles().push_back(obstacle);
 }
