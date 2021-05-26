@@ -26,8 +26,18 @@ void Stun::update() {
 				strAtt_->setActive(true);
 				lghtAtt_->setActive(true);
 			}
-			
+
 			hamCtrl_->setActive(true);
+
+			auto animHamsterState = entity_->getComponent<AnimHamsterStateMachine>();
+			//Reseteamos las animaciones
+			animHamsterState->resetAnim();
+
+			if (entity_->getComponent<MovementInChase>()->isActive()) {
+				animHamsterState->setAnimBool(HamStatesAnim::IDLE, false);
+				animHamsterState->setAnimBool(HamStatesAnim::MOVE, true);
+			}
+
 			state = HamStates::DEFAULT;
 		}
 	}

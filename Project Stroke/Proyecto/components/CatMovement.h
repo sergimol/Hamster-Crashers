@@ -26,7 +26,7 @@ private:
 	Transform* tr_;
 	Gravity* grav_;
 
-	const int VEL = -5;
+	const int VEL = -20;
 
 };
 

@@ -36,7 +36,7 @@ public:
 
 private:
 
-	const float jump_ = 35.0f, gravity_ = 4.8f, jumpTimer_ = 10.0f;
+	float jump_ = 35.0f, gravity_ = 4.8f, jumpTimer_ = 10.0f;
 
 	Transform* tr_;
 	CollisionDetec* col_;
@@ -50,7 +50,7 @@ private:
 	Stroke* stroke_;*/
 	Vector2D speed_, goalVel_, lastDir_;
 
-	const Vector2D baseSpeed_ = Vector2D(-5, 0);
+	const Vector2D baseSpeed_ = Vector2D(-20, 0);
 	
 	std::map<KEYS, bool> keymap;
 };
