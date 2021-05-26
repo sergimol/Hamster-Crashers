@@ -23,7 +23,7 @@ void SoundManager::init() {
 	attack3 = &sdlutils().soundEffects().at("attack3");
 	attack4 = &sdlutils().soundEffects().at("attack4");
 
-
+	possesion = &sdlutils().soundEffects().at("possesion");
 
 	dep0 = &sdlutils().soundEffects().at("dep0");
 	dep1 = &sdlutils().soundEffects().at("dep1");
