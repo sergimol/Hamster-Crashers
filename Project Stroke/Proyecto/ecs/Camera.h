@@ -33,6 +33,7 @@ private:
 	Vector2D newObjetivo();
 	State cameraState;
 	bool GoToTracker;
+	bool goToCat;
 	void checkBounds();
 	void camShake();
 
@@ -56,9 +57,11 @@ public:
 	inline Vector2D getCamPos() const { return camPos; };
 	inline float getUpOffset() const { return upOffset; };
 	inline float getHeightMap() const { return heightMap_; };
+	void resetCamera();
 	Vector2D cameraFollowPos_;	//Guarda el punto de la posición de la camara cuando lo lea
 
 	void setGoToTracker(bool objetivo) {GoToTracker = objetivo;};
+	void setGoToCat(bool objetivo) {goToCat = objetivo;};
 	
 	inline void setMap(MapMngr* m) { map_ = m; };
 };

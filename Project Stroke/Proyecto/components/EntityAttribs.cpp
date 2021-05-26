@@ -8,6 +8,12 @@
 #include "GravityEntity.h"
 #include "AnimEnemyStateMachine.h"
 #include "Shadow.h"
+#include "MenuButton.h"
+#include "MenuButtonManager.h"
+#include "MenuControlHandler.h"
+#include "SoundManager.h"
+#include "MapMngr.h"
+#include "EnemyMother.h"
 
 EntityAttribs::EntityAttribs() :
 	health_(100),
@@ -43,7 +49,9 @@ EntityAttribs::EntityAttribs() :
 	hmsText_(nullptr),
 	enmState_(nullptr),
 	tr_(nullptr),
-	state_(nullptr)
+	state_(nullptr),
+
+	allDead(false)
 {}
 
 EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, int marg) :
@@ -175,6 +183,10 @@ void EntityAttribs::update() {
 //Resta el da�o y devuelve true si ha muerto
 bool EntityAttribs::recieveDmg(int dmg) {
 	health_ -= dmg;
+
+	if(hms_ != nullptr)
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("hamsterlighthit");
+
 	//Timer de invulnerabilidad
 	damageInvulTime_ = sdlutils().currRealTime();
 	afterDamageInvul_ = true;
@@ -246,7 +258,7 @@ void EntityAttribs::die() {
 	else if (id_ == "canelon" || id_ == "canelonDemon" || id_ == "monosinpatico") {
 		tam = 128;
 	}
-	else if (id_ == "keta"){
+	else if (id_ == "keta") {
 		tam = 100;
 	}
 	//Y reproducimos la animacion de muerto
@@ -276,15 +288,30 @@ void EntityAttribs::die() {
 		//hacerlo a mano cada vez que os den problemas porque desactivar la entidad del hamster 
 		//NO ES UNA OPCION
 
-
-		//entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", false);
+		auto hams_ = entity_->getMngr()->getPlayers();
+		allDead = true;
+		for (Entity* e : hams_) {
+			auto sta = e->getComponent<HamsterStateMachine>()->getState();
+			if (sta != HamStates::DEAD && sta != HamStates::INFARCTED) {
+				allDead = false;
+			}
+		}
+		if (allDead) {
+			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", true, 0);
+		}
 	}
 	else {
-		if (entity_->getMngr()->getHandler<Boss>() == entity_)
+		if (entity_->getMngr()->getHandler<Boss>() == entity_) {
 			entity_->getMngr()->setHandler<Boss>(nullptr);
-		else if (entity_->getMngr()->getHandler<FinalBoss>() == entity_)
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
+
+		}
+		else if (entity_->getMngr()->getHandler<FinalBoss>() == entity_) {
 			entity_->getMngr()->setHandler<FinalBoss>(nullptr);
-		
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
+
+		}
+
 		//solamente para los enemigos
 		//entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala
 		e->addComponent<Dying>();
@@ -292,6 +319,9 @@ void EntityAttribs::die() {
 		enmState_->getState() = EnemyStates::ENM_DEAD;
 		if (id_ == "soldier1" || id_ == "soldier2")
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("soldierDep");
+		else if (id_ == "calcetin") {
+			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 0);
+		}
 		entity_->setActive(false);
 	}
 

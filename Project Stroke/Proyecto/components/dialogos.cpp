@@ -11,8 +11,8 @@ dialogos::dialogos()
 	//Texturas
 	angelText_ = &sdlutils().images().at("dialogoAngel");
 	barText_ = &sdlutils().images().at("dialogoBarra");
-	dialogoText_ = &sdlutils().images().at("dialogo" + to_string(dialogueNum));
-	explicacionText_ = &sdlutils().images().at("explicacion" + to_string(dialogueNum));
+	dialogoText_ = &sdlutils().images().at("dialogo" + to_string(dialogueNum_));
+	explicacionText_ = &sdlutils().images().at("explicacion" + to_string(dialogueNum_));
 
 	//Positions
 	angelRenderPos = Vector2D(0, sdlutils().height() - angelText_->height());
@@ -30,6 +30,9 @@ dialogos::dialogos()
 	barDest = barDestI;
 	dialogoDest = dialogoDestI;
 	explicacionDest = explicacionDestI;
+
+	altTime_ = sdlutils().currRealTime();
+	altCD_ = 1750;
 }
 void dialogos::init() {
 	keymap.insert({ UP, SDL_SCANCODE_W });
@@ -37,6 +40,7 @@ void dialogos::init() {
 	keymap.insert({ LEFT, SDL_SCANCODE_A });
 	keymap.insert({ RIGHT, SDL_SCANCODE_D });
 	keymap.insert({ SPACE, SDL_SCANCODE_SPACE });
+
 }
 void dialogos::render() {
 	//Controlamos que solo se renderice cuando se tenga que mostrar
@@ -49,8 +53,19 @@ void dialogos::render() {
 }
 
 void dialogos::update() {
-	if (showDialogue) {
+	if (showDialogue_) {
 		renderDialogues = true;
+		if (sdlutils().currRealTime() > altTime_ + altCD_) {
+			if (isAlt_) {
+				explicacionText_ = &sdlutils().images().at("explicacion" + to_string(dialogueNum_));
+			}
+			else {
+				explicacionText_ = &sdlutils().images().at("explicacion" + to_string(dialogueNum_) + "alt");
+			}
+			isAlt_ = !isAlt_;
+			altTime_ = sdlutils().currRealTime();
+		}
+
 		show();
 	}
 	else
@@ -62,14 +77,14 @@ void dialogos::update() {
 	explicacionDest.y = explicacionDestI.y * position;
 
 	//Oculta el dialogo cuando termina el audio
-	if (showDialogue && entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->emptyChannel())
+	if (showDialogue_ && entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->emptyChannel())
 	{
 		//Cambiamos el estado de mostrarse a no mostrarse
-		showDialogue = false;
+		showDialogue_ = false;
 	}
 	if (ih().isKeyDown(keymap.at(SPACE))) {
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopTutorial();
-		showDialogue = false;
+		showDialogue_ = false;
 	}
 }
 //Muestra los dialogos
@@ -92,39 +107,43 @@ void dialogos::unshow() {
 }
 
 void dialogos::changeDialogue() {
-	dialogueNum++;
+	dialogueNum_++;
 	//activamos el infarto, comienza la aventura
-	if (dialogueNum == 2) {
+	if (dialogueNum_ == 2) {
 		entity_->getMngr()->getStrokeActive() = true;
 	}
 
-	dialogoText_ = &sdlutils().images().at("dialogo" + to_string(dialogueNum));
-	explicacionText_ = &sdlutils().images().at("explicacion" + to_string(dialogueNum));
+	dialogoText_ = &sdlutils().images().at("dialogo" + to_string(dialogueNum_));
+	explicacionText_ = &sdlutils().images().at("explicacion" + to_string(dialogueNum_));
 }
 
 //Controla toda la movida buena suerte lo programe hace 30 mins y no se que hice
 void dialogos::dialogoStateChange() {
 	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("tutorial");
 	//Cambiamos el dialogo cuando no se esta mostrando la movida
-	if (!firstDialogue)
+	if (!firstDialogue_)
 		changeDialogue();
+
+	altTime_ = sdlutils().currRealTime();
+
 	//Cambiamos el estado de mostrarse a no mostrarse
-	showDialogue = true;
+	showDialogue_ = true;
 
 	//Controla la primera vez, para que no te cambie de dialogo la primera vez que sale
-	if (firstDialogue)
-		firstDialogue = false;
+	if (firstDialogue_)
+		firstDialogue_ = false;
 }
 
 //"dialogo3" o "dialogo3singleplayer" dependiendo del num de jugadores
 void dialogos::showStrokeTutorial(std::string text) {
+	dialogueNum_++;
 	//el sonido tendrá que ser diferente si es single o no
 	if (text == "dialogo3")
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("tutorial");
 	else
-		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("tutorial");
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("tutorialsingle");
 
 	dialogoText_ = &sdlutils().images().at(text);
 	explicacionText_ = &sdlutils().images().at("explicacion3");
-	showDialogue = true;
+	showDialogue_ = true;
 }

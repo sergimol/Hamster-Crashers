@@ -108,7 +108,7 @@ void MapMngr::update() {
 			TriggerftCamera.pop();
 
 			//TUTORIAL
-			if (stoi(trigger.getName()) < 4) {
+			if (!sdlutils().tutorialDone() && stoi(trigger.getName()) < 4) {
 				entity_->getMngr()->getHandler<dialogosMngr>()->getComponent<dialogos>()->dialogoStateChange();
 			}
 		}
@@ -140,6 +140,12 @@ void MapMngr::loadNewMap(string map) {
 	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
 
 	if (map_.load(map)) {
+		if (map == "resources/images/tiled/Level1Boss.tmx") {
+			scale = 2.5f;
+		}
+		else if (map == "resources/images/tiled/Level2.tmx") {
+			scale = 3.0f;
+		}
 
 		mapHeight_ = map_.getProperties()[0].getIntValue() * TAM_CELDA * scale;
 
@@ -155,6 +161,15 @@ void MapMngr::loadNewMap(string map) {
 		//Hay colisiones
 		collisionCreated = true;
 
+		//Fondos
+		if (map == "resources/images/tiled/Level1.tmx")
+			addParaxall(1, true, false);
+		else if (map == "resources/images/tiled/Level1Boss.tmx") {
+			addParaxall(1, false, true);
+		}
+		else if (map == "resources/images/tiled/Level2.tmx") {
+			addParaxall(2, true, false);
+		}
 
 		//Dimensiones de los tiles
 		tilesDimensions_ = map_.getTileSize();
@@ -171,18 +186,6 @@ void MapMngr::loadNewMap(string map) {
 			//Guardamos las texturas de los tilesets
 			tilesetsArr[i] = &sdlutils().images().at(tileset.getName());	//El nombre del tileset en Tiled y la textura png DEBEN llamarse igual
 			i++;
-		}
-
-		//Fondos
-		if (map == "resources/images/tiled/Level1.tmx")
-			addParaxall(1, true, false);
-		else if (map == "resources/images/tiled/Level1Boss.tmx") {
-			addParaxall(1, false, true);
-			scale = 2.4;
-		}
-		else if (map == "resources/images/tiled/Level2.tmx") {
-			addParaxall(2, true, false);
-			scale = 3;
 		}
 
 		for (const auto& layer : layers)
@@ -238,15 +241,24 @@ void MapMngr::loadNewMap(string map) {
 							auto* enemy = entity_->getMngr()->addEntity();
 							enemy->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-								Vector2D(), 256.0f, 2 * 256.0f, 0.0f, 1, 1);
+								Vector2D(), 440.0f * scale, 350.0f * scale, 0.0f, 0.6, 1);
+
+							//Le dejamos durmiendo
+							enemy->addComponent<Animator>(&sdlutils().images().at("cat"),
+								440,
+								350,
+								3,
+								3,
+								220,
+								Vector2D(),
+								3)->play(sdlutils().anims().at("cat_sleeping"));
 
 							//Le metemos gravedad
 							enemy->getComponent<Transform>()->setGravity(enemy->addComponent<Gravity>());
 
 							enemy->addComponent<CatMovement>();
 
-							enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
-							enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
+							enemy->addComponent<EntityAttribs>();
 							enemy->addComponent<ContactDamage>(20, 30, false, false, false);
 							enemy->getMngr()->setHandler<Cat_>(enemy);
 						}
@@ -337,6 +349,7 @@ void MapMngr::loadNewMap(string map) {
 				}
 			}
 		}
+
 		//ENEMIGO
 		//Una vez terminamos de cargar todas las entidades y tiles de las CAPAS, cargamos los enemigos de la sala 0
 		//LoadEnemyRoom();
@@ -345,30 +358,30 @@ void MapMngr::loadNewMap(string map) {
 }
 
 void MapMngr::addParaxall(int lvl, bool front, bool train) {
-	auto upH = mapHeight_ - cam->getCam().h + cam->getUpOffset();
+	auto upH = mapHeight_ - cam->getCam().h + cam->getUpOffset() - 380;
 
 	string l = "level" + to_string(lvl);
 
 	auto* o = entity_->getMngr()->addBackGround();
 	o->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 	//Para meter un fondo meter esto									velocidad		tamaño			posicion
-	o->addComponent<Parallax>(&sdlutils().images().at(l + "background1"), 7, Vector2D(1920, 1459), Vector2D(0, upH), false, train);
+	o->addComponent<Parallax>(&sdlutils().images().at(l + "background1"), 7, Vector2D(1920, 1839), Vector2D(0, upH), false, train);
 
 	auto* p = entity_->getMngr()->addBackGround();
 	p->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 	//Para meter un fondo meter esto									velocidad		tamaño			posicion
-	p->addComponent<Parallax>(&sdlutils().images().at(l + "background2"), 10, Vector2D(1920, 1459), Vector2D(0, upH), false, train);
+	p->addComponent<Parallax>(&sdlutils().images().at(l + "background2"), 10, Vector2D(1920, 1839), Vector2D(0, upH), false, train);
 
 	auto* q = entity_->getMngr()->addBackGround();
 	q->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 	//Para meter un fondo meter esto									velocidad		tamaño			posicion
-	q->addComponent<Parallax>(&sdlutils().images().at(l + "background3"), 15, Vector2D(1920, 1459), Vector2D(0, upH), false, train);
+	q->addComponent<Parallax>(&sdlutils().images().at(l + "background3"), 15, Vector2D(1920, 1839), Vector2D(0, upH), false, train);
 
 	if (front) {
 		auto* r = entity_->getMngr()->addFrontGround();
 		r->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), 1920, 1459, 0.0, 1, 1);
 		//Para meter un fondo meter esto									velocidad		tamaño			posicion
-		r->addComponent<Parallax>(&sdlutils().images().at(l + "background4"), 10, Vector2D(1920, 1459), Vector2D(0, upH), true, train);
+		r->addComponent<Parallax>(&sdlutils().images().at(l + "background4"), 10, Vector2D(1920, 1839), Vector2D(0, upH), true, train);
 	}
 }
 
@@ -639,14 +652,14 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 		hamster1->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.5);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(7, 3.5), i, 0, 20, 70);
+		hamster1->addComponent<EntityAttribs>(150, 0.0, name, Vector2D(7, 3.5), i, 0, 20, 70);
 	}
 	else if (name == "keta") {
 		tam = 100;
 		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + object.getAABB().width) * scale, object.getPosition().y * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.25);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 100, 20, 70);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 10, 20, 70);
 	}
 	else if (name == "monchi") {
 		tam = 86;
@@ -797,11 +810,13 @@ void MapMngr::addObject(const tmx::Object& object) {
 	// int : pos en Z. Necesario meterlo a mano desde Tile
 
 	obstacle->addComponent<Transform>(Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, prop[3].getIntValue(), false, 0.75, 0.75);
+		Vector2D(), object.getAABB().width * scale, object.getAABB().height * scale, 0.0f, prop[3].getIntValue(), false, 0.75, 0.6);
 
 
 
 	string id = prop[1].getStringValue();
+
+		obstacle->addComponent<Shadow>(false, true);
 
 	obstacle->addComponent<Animator>(&sdlutils().images().at("obstacle" + id),
 		100,
@@ -821,46 +836,34 @@ void MapMngr::addObject(const tmx::Object& object) {
 		obstacle->addComponent<Obstacle>(id);
 	}
 
-	obstacle->addComponent<Shadow>(false, false);
-
 	entity_->getMngr()->getObstacles().push_back(obstacle);
 }
 
 void MapMngr::addTrap(const tmx::Object& object, int x, int y) {
+	auto& prop = object.getProperties();
+
+
 	auto* trap = entity_->getMngr()->addTrap();
 
-	string id = "Box";
+	if (prop[1].getIntValue() == 0) {
 
-	trap->addComponent<Transform>(Vector2D(x * scale, y * scale),
-		Vector2D(), 50 * scale, 50 * scale, 0.0f, 0.75, 0.75);
-	trap->addComponent<ContactDamage>(10, 30, true, true, true);
-	trap->addComponent<TimeTrap>(&sdlutils().images().at("catSmoking"));
+		trap->addComponent<Transform>(Vector2D(x * scale, y * scale),
+			Vector2D(), 64 * scale, 64 * scale, 0.0f, 1, 1);
 
-	//int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty
+		trap->addComponent<ContactDamage>(3, 30, true, true, true);
+		trap->addComponent<TimeTrap>(&sdlutils().images().at("vitroPeqOn"), &sdlutils().images().at("vitroPeqOff"), prop[0].getFloatValue());
+	}
+	if (prop[1].getIntValue() == 1) {
+
+		trap->addComponent<Transform>(Vector2D(x * scale, y * scale),
+			Vector2D(), 128 * scale, 128 * scale, 0.0f, 1, 1);
+
+		trap->addComponent<ContactDamage>(3, 30, true, true, true);
+		trap->addComponent<TimeTrap>(&sdlutils().images().at("vitroGranOn"), &sdlutils().images().at("vitroGranOff"), prop[0].getFloatValue());
+	}
+
 	trap->addComponent<EntityAttribs>(1, 10.0f, "trap1", Vector2D(), 1, 0.0f, 1, true, false, false);
-	//trap->addComponent<Image>(&sdlutils().images().at("catSmoking"));
 
-	/*
-	trap->addComponent<Animator>(&sdlutils().images().at("obstacle" + id),
-		80,
-		86,
-		9,
-		2,
-		220,
-		Vector2D(0, 0),
-		3
-		);
-	*/
-
-	//if(object.breakable)
-	//trap->addComponent<Obstacle>(id, 3);
-
-	//1º: False, porque no es un hamster //2º: False, porque usa de referencia el rect del Animator
-	//trap->addComponent<Shadow>(false, false);
-	//else
-	//obstacle->addComponent<Obstacle>(id);
-
-	//entity_->getMngr()->getTraps().push_back(trap);
 }
 
 void MapMngr::clearColliders() {

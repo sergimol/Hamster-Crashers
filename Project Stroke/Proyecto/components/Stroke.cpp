@@ -1,5 +1,6 @@
 #include "../components/Stroke.h"
 #include "../components/dialogos.h"
+#include "../components/Transition.h"
 #include "../components/Roll.h"
 #include "../components/Poison.h"
 #include "../components/Pray.h"
@@ -108,6 +109,19 @@ void Stroke::checkChance() {
 }
 
 void Stroke::infarctHamster() {
+
+	auto hams_ = entity_->getMngr()->getPlayers();
+	bool allDead = true;
+	for (Entity* e : hams_) {
+		auto sta = e->getComponent<HamsterStateMachine>()->getState();
+		if (sta != HamStates::DEAD && sta != HamStates::INFARCTED) {
+			allDead = false;
+		}
+	}
+	if (allDead) {
+		entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", true, 0);
+	}
+
 	bool& strokeTutorial = entity_->getMngr()->getStrokeTuto();
 	if (strokeTutorial) {
 		strokeTutorial = false;

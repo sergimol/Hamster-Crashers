@@ -13,7 +13,7 @@ public:
 	void setVolumeChannels();
 	void lowVolume(bool channel);
 	void upVolume(bool channel);
-	void resetVolumes() { fxVol_ = 0.5; musicVol_ = 0.5; setVolumeChannels(); };
+	void resetVolumes() { fxVol_ = 0.5; musicVol_ = 0.5; setVolumeChannels(); sdlutils().setMusicVol(musicVol_); sdlutils().setFxVol(fxVol_); };
 	bool emptyChannel();
 	void StopTutorial();
 	void fadeout(int time) {}
@@ -26,8 +26,8 @@ public:
 	float fxVol_ = 0.5f;
 	float musicVol_ = 0.5f;
 	//local
-	int initMusicVol = 20;
-
+	int initMusicVol = 10;
+	int nextPage = 128;
 
 	int initLightVol = 100;
 	int initStrongVol = 128;
@@ -73,6 +73,7 @@ private:
 	int randomNum;
 
 	void playLighthit();
+	void playHamsterLighthit();
 
 	void playStronghit();
 
@@ -99,7 +100,9 @@ private:
 
 	void  playPageSkip();
 
+	void  playHandInit();
 	void  playHandPunch();
+	void  playHandHit();
 
 	int pickRandom(int max);
 
@@ -118,6 +121,12 @@ private:
 	SoundEffect* light9;
 	SoundEffect* light10;
 
+	//Golpe Hamster 
+	SoundEffect* hamLight0;
+	SoundEffect* hamLight1;
+	SoundEffect* hamLight2;
+	SoundEffect* hamLight3;
+	SoundEffect* hamLight4;
 
 	//Golpe Fuerte
 	SoundEffect* strong0;
@@ -152,8 +161,18 @@ private:
 	SoundEffect* catMeowSleeping;
 
 	//Boss Mano
+	SoundEffect* handInit0;
+	SoundEffect* handInit1;
+
 	SoundEffect* heavyPunch0;
 	SoundEffect* heavyPunch1;
+
+	SoundEffect* handHit0;
+	SoundEffect* handHit1;
+	SoundEffect* handHit2;
+
+	SoundEffect* handDep;
+	
 
 	//Boss Mono
 	SoundEffect* platillos;
@@ -236,6 +255,7 @@ private:
 	SoundEffect* tutorial8;
 	SoundEffect* tutorial9;
 	SoundEffect* tutorial10;
+	SoundEffect* tutorialsingle;
 
 	int transitionNum = 0;
 	SoundEffect* transition0;
@@ -249,6 +269,27 @@ private:
 	SoundEffect* transition8;
 	SoundEffect* transition9;
 	SoundEffect* transition10;
+	SoundEffect* transition11;
+	SoundEffect* transition12;
+	SoundEffect* transition13;
+	SoundEffect* transition14;
+	SoundEffect* transition15;
+	SoundEffect* transition16;
+	SoundEffect* transition17;
+	SoundEffect* transition18;
+	SoundEffect* transition19;
+	SoundEffect* transition20;
+	SoundEffect* transition21;
+	SoundEffect* transition22;
+	SoundEffect* transition23;
+
+	//Page transitions
+	SoundEffect* page0;
+	SoundEffect* page1;
+	SoundEffect* page2;
+	SoundEffect* page3;
+	SoundEffect* page4;
+
 
 	//Musica y sonidos ambiente
 	Music* HamstersMainThemev2;

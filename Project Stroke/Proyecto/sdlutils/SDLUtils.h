@@ -5,6 +5,8 @@
 #include "SDL.h"
 #include <string>
 #include <map>
+#include <fstream>
+#include <iostream>
 
 #include "../utils/Singleton.h"
 #include "RandomNumberGenerator.h"
@@ -56,7 +58,7 @@ public:
 	}
 
 	// clear the renderer with a given SDL_Color
-	inline void clearRenderer(SDL_Color bg = build_sdlcolor(0xAAAAAFF)) {
+	inline void clearRenderer(SDL_Color bg = build_sdlcolor(0x0000000)) {
 		SDL_SetRenderDrawColor(renderer_, COLOREXP(bg));
 		SDL_RenderClear(renderer_);
 	}
@@ -109,6 +111,12 @@ public:
 		setResolution();
 	}
 
+	inline void setResolutionIndex(int i) {
+		resolutionIndex_ = i;
+
+		setResolution();
+	}
+
 	inline void higherResolution() {
 		if (resolutionIndex_ < RESOLUTIONSCOUNT - 1)
 			resolutionIndex_++;
@@ -120,6 +128,10 @@ public:
 
 	inline string resolutionString(int i) {
 		return to_string((int)widths_[i]) + "x" + to_string((int)heights_[i]);
+	}
+
+	inline int resolutionIndex() {
+		return resolutionIndex_;
 	}
 
 	inline void setWidth(int widthAux) {
@@ -138,8 +150,20 @@ public:
 		hamstersChosen_ = hamsters;
 	}
 
+	inline void setMusicVol(float v) {
+		musicVol_ = v;
+	}
+
+	inline void setFxVol(float v) {
+		fxVol_ = v;
+	}
+
 	inline bool angelUnlocked() {
 		return angelUnlocked_;
+	}
+	
+	inline bool tutorialDone() {
+		return tutorialDone_;
 	}
 
 	// toggle to full-screen/window mode
@@ -218,6 +242,9 @@ public:
 		return (a + f * (b - a));
 	}
 
+	void loadData();
+	void saveData();
+
 private:
 	SDLUtils();
 	SDLUtils(std::string windowTitle, int width, int height);
@@ -233,8 +260,8 @@ private:
 	std::string windowTitle_; // window title
 	int width_; // window width
 	int height_; // window height
-	int hamstersToChoose_; // nï¿½mero de hamsters a elegir en el menï¿½ de selecciï¿½n
-	int hamstersChosen_; // nï¿½mero de hamstes ya elegidos
+	int hamstersToChoose_; // número de hamsters a elegir en el menú de selección
+	int hamstersChosen_; // número de hamstes ya elegidos
 
 	SDL_Window *window_; // the window
 	SDL_Renderer *renderer_; // the renderer
@@ -252,12 +279,12 @@ private:
 	// Arrays con ancho y alto de todas las resoluciones
 	float widths_[RESOLUTIONSCOUNT] = { 800, 854, 1024, 1280, 1280, 1280, 1920 };
 	float heights_[RESOLUTIONSCOUNT] = { 600, 480, 768, 720, 960, 1024, 1080 };
-	// Indice de la resoluciï¿½n actual dentro de los arrays
-	int resolutionIndex_ = RESOLUTIONSCOUNT - 1;
-	bool angelUnlocked_ = false;
-	bool tutorialDone_ = false;
-	int fxVol_ = 1;
-	int musicVol_ = 1;
+	// Indice de la resolución actual dentro de los arrays
+	int resolutionIndex_;
+	bool angelUnlocked_;
+	bool tutorialDone_;
+	float fxVol_;
+	float musicVol_;
 };
 
 

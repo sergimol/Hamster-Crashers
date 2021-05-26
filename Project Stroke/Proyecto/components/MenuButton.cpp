@@ -81,6 +81,8 @@ void MenuButton::setSelectable(bool s)
 
 	if (selectable_)
 		button_ = &sdlutils().images().at(buttonName_ + "Button");
+	else if(buttonName_ == "angel" && !sdlutils().angelUnlocked())
+		button_ = &sdlutils().images().at(buttonName_ + "ButtonLocked");
 	else
 		button_ = &sdlutils().images().at(buttonName_ + "ButtonUnselectable");
 
@@ -152,7 +154,7 @@ void MenuButton::pressed() {
 	else if (buttonName_ == "quit") {
 		ih().startQuitEvent();
 	}
-	else if (buttonName_ == "sardinilla" || buttonName_ == "keta" || buttonName_ == "monchi" || buttonName_ == "canelon") {
+	else if (buttonName_ == "sardinilla" || buttonName_ == "keta" || buttonName_ == "monchi" || buttonName_ == "canelon" || buttonName_ == "angel") {
 		auto* mapa = entity_->getMngr()->getHandler<Map>();
 		mapa->getComponent<MapMngr>()->addHamster(buttonName_);
 
@@ -170,13 +172,13 @@ void MenuButton::pressed() {
 		menuMngr->setLastUnselectable(buttonName_);
 
 		auto selectedIndicator = mngr->addMenu();
-		selectedIndicator->addComponent<MenuIndicator>("p" + to_string(sdlutils().hamstersChosen()), Vector2D(dest_.x + 90, dest_.y), stateNumber_);
+		selectedIndicator->addComponent<MenuIndicator>("p" + to_string(sdlutils().hamstersChosen()), Vector2D(dest_.x + 45, dest_.y - 70), stateNumber_);
 		indctrs.push_back(selectedIndicator);
 
 		//Cuando haya seleccionado a los hamsters...
 		if (sdlutils().hamstersToChoose() <= 0) {
 			//Hago una transicion para presentar el nivel inicial
-			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level1", true, 0);
+			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level1", true, 8);
 
 			//mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/Level2.tmx");
 			state_->setState(GameStates::RUNNING);
@@ -186,7 +188,7 @@ void MenuButton::pressed() {
 	}
 	else if (buttonName_ == "musicDown") {
 		auto soundMngr = entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>();
-		if (soundMngr->musicVol_ > 0.1f) {
+		if (soundMngr->musicVol_ > 0.099f) {
 			soundMngr->lowVolume(true);
 			entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(0, false);
 		}
@@ -202,7 +204,7 @@ void MenuButton::pressed() {
 
 	else if (buttonName_ == "fxDown") {
 		auto soundMngr = entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>();
-		if (soundMngr->fxVol_ > 0.1f) {
+		if (soundMngr->fxVol_ > 0.099f) {
 			soundMngr->lowVolume(false);
 			entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->updateIndicator(1, false);
 		}
@@ -227,11 +229,7 @@ void MenuButton::pressed() {
 	}
 
 	else if (buttonName_ == "reset") {
-		sdlutils().setWidth(1920.0);
-		sdlutils().setHeight(1080.0);
-
-		SDL_SetWindowSize(sdlutils().window(), sdlutils().width(), sdlutils().height());
-		SDL_RenderSetScale(sdlutils().renderer(), 1.0f, 1.0f);
+		sdlutils().setResolutionIndex(RESOLUTIONSCOUNT - 1);
 
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetVolumes();
 		entity_->getMngr()->getHandler<OptionsMenu>()->getComponent<MenuButtonManager>()->resetIndicators();
@@ -242,6 +240,8 @@ void MenuButton::pressed() {
 	}
 
 	else if (buttonName_ == "exit") {
+	entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->resetCamera();
+
 		//Vuelve a renderizar el menu
 		state_->setState(GameStates::MAINMENU);
 
@@ -258,6 +258,9 @@ void MenuButton::pressed() {
 		for (Entity* e : entity_->getMngr()->getTiles())
 			e->setActive(false);
 
+		for (Entity* e : entity_->getMngr()->getTraps())
+			e->setActive(false);
+
 		for (Entity* e : entity_->getMngr()->getMapH())
 			e->setActive(false);
 
@@ -265,6 +268,9 @@ void MenuButton::pressed() {
 			e->setActive(false);
 
 		for (Entity* e : entity_->getMngr()->getFgs())
+			e->setActive(false);
+
+		for (Entity* e : entity_->getMngr()->getWavesObjects())
 			e->setActive(false);
 
 		entity_->getMngr()->refreshFrontGround();
@@ -279,6 +285,8 @@ void MenuButton::pressed() {
 		entity_->getMngr()->refreshItems();
 		entity_->getMngr()->refreshObstacles();
 		entity_->getMngr()->refreshPlayers();
+		entity_->getMngr()->refreshWavesObjects();
+		entity_->getMngr()->refreshTraps();
 		entity_->getMngr()->refresh();
 
 		entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->clearColliders();
@@ -298,7 +306,9 @@ void MenuButton::pressed() {
 		}
 
 		for (int j = 0; j < but.size(); ++j) {
-			but[j][0]->getComponent<MenuButton>()->setSelectable(true);
+			auto mb = but[j][0]->getComponent<MenuButton>();
+			if(mb->getName() != "angel" || sdlutils().angelUnlocked())
+				mb->setSelectable(true);
 		}
 
 		i[0]->getComponent<MenuIndicator>()->reset();

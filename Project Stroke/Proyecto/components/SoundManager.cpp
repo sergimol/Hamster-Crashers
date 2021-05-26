@@ -13,6 +13,13 @@ void SoundManager::init() {
 	light9 = &sdlutils().soundEffects().at("light9");
 	light10 = &sdlutils().soundEffects().at("light10");
 
+	hamLight0 = &sdlutils().soundEffects().at("hamsterlight0");
+	hamLight1 = &sdlutils().soundEffects().at("hamsterlight1");
+	hamLight2 = &sdlutils().soundEffects().at("hamsterlight2");
+	hamLight3 = &sdlutils().soundEffects().at("hamsterlight3");
+	hamLight4 = &sdlutils().soundEffects().at("hamsterlight4");
+
+
 	strong0 = &sdlutils().soundEffects().at("strong0");
 	strong1 = &sdlutils().soundEffects().at("strong1");
 	strong2 = &sdlutils().soundEffects().at("strong2");
@@ -43,6 +50,14 @@ void SoundManager::init() {
 	heavyPunch0 = &sdlutils().soundEffects().at("heavyPunch0");
 	heavyPunch1 = &sdlutils().soundEffects().at("heavyPunch1");
 
+	handInit0 = &sdlutils().soundEffects().at("handInit0");
+	handInit1 = &sdlutils().soundEffects().at("handInit1");
+
+	handHit0 = &sdlutils().soundEffects().at("handHit0");
+	handHit1 = &sdlutils().soundEffects().at("handHit1");
+	handHit2 = &sdlutils().soundEffects().at("handHit2");
+
+	handDep = &sdlutils().soundEffects().at("handDep");
 	//Mono andando adonde ira
 	platillos = &sdlutils().soundEffects().at("platillos");
 
@@ -98,15 +113,14 @@ void SoundManager::init() {
 	trainPipi = &sdlutils().soundEffects().at("trainPipi");
 	trainAlto = &sdlutils().soundEffects().at("trainAlto");
 
-	pageSkip0 = &sdlutils().soundEffects().at("transition0");
-	pageSkip1 = &sdlutils().soundEffects().at("transition1");
-
 	trapKitchen = &sdlutils().soundEffects().at("trapKitchen");
 
 	tutorial0 = &sdlutils().soundEffects().at("tutorial0");
 	tutorial1 = &sdlutils().soundEffects().at("tutorial1");
-	tutorial2 = &sdlutils().soundEffects().at("catMeowInit");
-	tutorial3 = &sdlutils().soundEffects().at("catMeowInit");
+	tutorial2 = &sdlutils().soundEffects().at("tutorial2");
+	tutorial3 = &sdlutils().soundEffects().at("tutorial3");
+	tutorialsingle = &sdlutils().soundEffects().at("tutorial3single");
+
 	tutorial4 = &sdlutils().soundEffects().at("catMeowInit");
 	tutorial5 = &sdlutils().soundEffects().at("catMeowInit");
 	tutorial6 = &sdlutils().soundEffects().at("catMeowInit");
@@ -116,25 +130,43 @@ void SoundManager::init() {
 	tutorial10 = &sdlutils().soundEffects().at("catMeowInit");
 
 
-	transition0 = &sdlutils().soundEffects().at("tutorial0");
-	transition1 = &sdlutils().soundEffects().at("tutorial0");
-	transition2 = &sdlutils().soundEffects().at("tutorial0");
-	transition3 = &sdlutils().soundEffects().at("tutorial0");
-	transition4 = &sdlutils().soundEffects().at("tutorial0");
-	transition5 = &sdlutils().soundEffects().at("tutorial0");
-	transition6 = &sdlutils().soundEffects().at("tutorial0");
-	transition7 = &sdlutils().soundEffects().at("tutorial0");
-	transition8 = &sdlutils().soundEffects().at("tutorial0");
-	transition9 = &sdlutils().soundEffects().at("tutorial0");
-	transition10 = &sdlutils().soundEffects().at("tutorial0");
+	transition0 = &sdlutils().soundEffects().at("transition0");
+	transition1 = &sdlutils().soundEffects().at("transition1");
+	transition2 = &sdlutils().soundEffects().at("transition2");
+	transition3 = &sdlutils().soundEffects().at("transition3");
+	transition4 = &sdlutils().soundEffects().at("transition4");
+	transition5 = &sdlutils().soundEffects().at("transition5");
+	transition6 = &sdlutils().soundEffects().at("transition6");
+	transition7 = &sdlutils().soundEffects().at("transition7");
+	transition8 = &sdlutils().soundEffects().at("transition8");
+	transition9 = &sdlutils().soundEffects().at("transition9");
+	transition10 = &sdlutils().soundEffects().at("transition10");
+	transition11 = &sdlutils().soundEffects().at("transition11");
+	transition12 = &sdlutils().soundEffects().at("transition12");
+	transition13 = &sdlutils().soundEffects().at("transition13");
+	transition14 = &sdlutils().soundEffects().at("transition14");
+	transition15 = &sdlutils().soundEffects().at("transition15");
+	transition16 = &sdlutils().soundEffects().at("transition16");
+	transition17 = &sdlutils().soundEffects().at("transition17");
+	transition18 = &sdlutils().soundEffects().at("transition18");
+	transition19 = &sdlutils().soundEffects().at("transition19");
+	transition20 = &sdlutils().soundEffects().at("transition20");
+	transition21 = &sdlutils().soundEffects().at("transition21");
+	transition22 = &sdlutils().soundEffects().at("transition22");
+	transition23 = &sdlutils().soundEffects().at("transition23");
 
-
-	setVolumeChannels();
-	Mix_AllocateChannels(16);
+	page0 = &sdlutils().soundEffects().at("page0");
+	page1 = &sdlutils().soundEffects().at("page1");
+	page2 = &sdlutils().soundEffects().at("page2");
+	page3 = &sdlutils().soundEffects().at("page3");
+	page4 = &sdlutils().soundEffects().at("page4");
 
 	Vector2D vol = sdlutils().volumes();
 	musicVol_ = vol.getX();
 	fxVol_ = vol.getY();
+
+	setVolumeChannels();
+	Mix_AllocateChannels(16);
 }
 
 void SoundManager::StopTutorial() {
@@ -152,6 +184,12 @@ void SoundManager::setVolumeChannels() {
 	light6->setChannelVolume(fxVol_ * initLightVol);
 	light7->setChannelVolume(fxVol_ * initLightVol);
 	light8->setChannelVolume(fxVol_ * initLightVol);
+
+	hamLight0->setChannelVolume(fxVol_ * initLightVol);
+	hamLight1->setChannelVolume(fxVol_ * initLightVol);
+	hamLight2->setChannelVolume(fxVol_ * initLightVol);
+	hamLight3->setChannelVolume(fxVol_ * initLightVol);
+	hamLight4->setChannelVolume(fxVol_ * initLightVol);
 
 	//Golpe Fuerte
 	strong0->setChannelVolume(fxVol_ * initStrongVol);
@@ -187,6 +225,12 @@ void SoundManager::setVolumeChannels() {
 	//Boss Mano
 	heavyPunch0->setChannelVolume(fxVol_ * initHandVol);
 	heavyPunch1->setChannelVolume(fxVol_ * initHandVol);
+	handInit0->setChannelVolume(fxVol_ * initHandVol);
+	handInit1->setChannelVolume(fxVol_ * initHandVol);
+	handHit0->setChannelVolume(fxVol_ * initHandVol);
+	handHit1->setChannelVolume(fxVol_ * initHandVol);
+	handHit2->setChannelVolume(fxVol_ * initHandVol);
+	handDep->setChannelVolume(fxVol_ * initHandVol);
 
 	//Boss Mono
 	platillos->setChannelVolume(fxVol_ * initMonkeVol);
@@ -276,6 +320,19 @@ void SoundManager::setVolumeChannels() {
 	transition8->setChannelVolume(fxVol_ * initTransitionVol);
 	transition9->setChannelVolume(fxVol_ * initTransitionVol);
 	transition10->setChannelVolume(fxVol_ * initTransitionVol);
+	transition11->setChannelVolume(fxVol_ * initTransitionVol);
+	transition12->setChannelVolume(fxVol_ * initTransitionVol);
+	transition13->setChannelVolume(fxVol_ * initTransitionVol);
+	transition14->setChannelVolume(fxVol_ * initTransitionVol);
+	transition15->setChannelVolume(fxVol_ * initTransitionVol);
+	transition16->setChannelVolume(fxVol_ * initTransitionVol);
+	transition17->setChannelVolume(fxVol_ * initTransitionVol);
+	transition18->setChannelVolume(fxVol_ * initTransitionVol);
+	transition19->setChannelVolume(fxVol_ * initTransitionVol);
+	transition20->setChannelVolume(fxVol_ * initTransitionVol);
+	transition21->setChannelVolume(fxVol_ * initTransitionVol);
+	transition22->setChannelVolume(fxVol_ * initTransitionVol);
+	transition23->setChannelVolume(fxVol_ * initTransitionVol);
 
 	// sonidos ambiente
 	birds->setChannelVolume(fxVol_ * initBirdsVol);
@@ -291,23 +348,36 @@ void SoundManager::setVolumeChannels() {
 }
 
 void SoundManager::lowVolume(bool musicChannel) {
-	//if (musicVol_ > 0 && fxVol_ > 0) {
-		if (musicChannel)
+	if (musicVol_ > 0 && fxVol_ > 0) {
+		if (musicChannel) {
 			musicVol_ = musicVol_ - 0.1f;
+			if (musicVol_ < 0)
+				musicVol_ = 0;
+			sdlutils().setMusicVol(musicVol_);
 
-		else
+		}
+
+		else {
 			fxVol_ = fxVol_ - 0.1f;
-	//}
+			if (fxVol_ < 0)
+				fxVol_ = 0;
+			sdlutils().setFxVol(fxVol_);
+		}
+	}
 
 	setVolumeChannels();
 }
 
 void SoundManager::upVolume(bool musicChannel) {
-	if (musicChannel)
+	if (musicChannel) {
 		musicVol_ = musicVol_ + 0.1f;
+		sdlutils().setMusicVol(musicVol_);
+	}
 
-	else
+	else {
 		fxVol_ = fxVol_ + 0.1f;
+		sdlutils().setFxVol(fxVol_);
+	}
 
 	setVolumeChannels();
 }
@@ -325,6 +395,10 @@ void SoundManager::play(std::string soundName) {
 	//Golpe
 	if (soundName == "lighthit") {
 		playLighthit();
+	}
+	//Golpe
+	if (soundName == "hamsterlighthit") {
+		playHamsterLighthit();
 	}
 	//Golpe Fuerte
 	else if (soundName == "stronghit") {
@@ -374,8 +448,17 @@ void SoundManager::play(std::string soundName) {
 	}
 
 	//Boss Mano
+	else if (soundName == "handInit") {
+		playHandInit();
+	}
 	else if (soundName == "handPunch") {
 		playHandPunch();
+	}
+	else if (soundName == "handHit") {
+		playHandHit();
+	}
+	else if (soundName == "handDep") {
+		handDep->play();
 	}
 
 	//Boss Mono
@@ -443,6 +526,9 @@ void SoundManager::play(std::string soundName) {
 	}
 	else if (soundName == "tutorial") {
 		playTutorial();
+	}
+	else if (soundName == "tutorialsingle") {
+		tutorialsingle->play(0, 7);
 	}
 	else if (soundName == "stopTutorial") {
 		StopTutorial();
@@ -527,6 +613,30 @@ void SoundManager::playLighthit() {
 		break;
 	case 10:
 		light10->play();
+		break;
+	default:
+		break;
+	}
+}
+
+void SoundManager::playHamsterLighthit() {
+	randomNum = pickRandom(5);
+	switch (randomNum)
+	{
+	case 0:
+		hamLight0->play();
+		break;
+	case 1:
+		hamLight1->play();
+		break;
+	case 2:
+		hamLight2->play();
+		break;
+	case 3:
+		hamLight3->play();
+		break;
+	case 4:
+		hamLight4->play();
 		break;
 	default:
 		break;
@@ -634,34 +744,34 @@ void SoundManager::playTutorial() {
 		tutorial0->play(0, 7);
 		break;
 	case 1:
-		tutorial0->play(0, 7);
-		break;
-	case 2:
 		tutorial1->play(0, 7);
 		break;
-	case 3:
+	case 2:
 		tutorial2->play(0, 7);
 		break;
-	case 4:
+	case 3:
 		tutorial3->play(0, 7);
 		break;
-	case 5:
+	case 4:
 		tutorial4->play(0, 7);
 		break;
-	case 6:
+	case 5:
 		tutorial5->play(0, 7);
 		break;
-	case 7:
+	case 6:
 		tutorial6->play(0, 7);
 		break;
-	case 8:
+	case 7:
 		tutorial7->play(0, 7);
 		break;
-	case 9:
+	case 8:
 		tutorial8->play(0, 7);
 		break;
-	case 10:
+	case 9:
 		tutorial9->play(0, 7);
+		break;
+	case 10:
+		tutorial10->play(0, 7);
 		break;
 	case 11:
 		tutorial10->play(0, 7);
@@ -681,10 +791,19 @@ void SoundManager::playPageSkip() {
 	switch (randomNum)
 	{
 	case 0:
-		pageSkip0->play();
+		page0->play();
 		break;
 	case 1:
-		pageSkip0->play();
+		page1->play();
+		break;
+	case 2:
+		page2->play();
+		break;
+	case 3:
+		page3->play();
+		break;
+	case 4:
+		page4->play();
 		break;
 	default:
 		break;
@@ -727,6 +846,45 @@ void SoundManager::playTransition() {
 		break;
 	case 10:
 		transition10->play(0, 7);
+		break;
+	case 11:
+		transition11->play(0, 7);
+		break;
+	case 12:
+		transition12->play(0, 7);
+		break;
+	case 13:
+		transition13->play(0, 7);
+		break;
+	case 14:
+		transition14->play(0, 7);
+		break;
+	case 15:
+		transition15->play(0, 7);
+		break;
+	case 16:
+		transition16->play(0, 7);
+		break;
+	case 17:
+		transition17->play(0, 7);
+		break;
+	case 18:
+		transition18->play(0, 7);
+		break;
+	case 19:
+		transition19->play(0, 7);
+		break;
+	case 20:
+		transition20->play(0, 7);
+		break;
+	case 21:
+		transition21->play(0, 7);
+		break;
+	case 22:
+		transition22->play(0, 7);
+		break;
+	case 23:
+		transition23->play(0, 7);
 		break;
 	default:
 		break;
@@ -869,6 +1027,20 @@ void SoundManager::playsoldierDep() {
 	}
 }
 
+void SoundManager::playHandInit() {
+	randomNum = pickRandom(2);
+	switch (randomNum)
+	{
+	case 0:
+		handInit0->play();
+		break;
+	case 1:
+		handInit1->play();
+		break;
+	default:
+		break;
+	}
+}
 
 void SoundManager::playHandPunch() {
 	randomNum = pickRandom(2);
@@ -879,6 +1051,24 @@ void SoundManager::playHandPunch() {
 		break;
 	case 1:
 		heavyPunch1->play();
+		break;
+	default:
+		break;
+	}
+}
+
+void SoundManager::playHandHit() {
+	randomNum = pickRandom(3);
+	switch (randomNum)
+	{
+	case 0:
+		handHit0->play();
+		break;
+	case 1:
+		handHit1->play();
+		break;
+	case 2:
+		handHit2->play();
 		break;
 	default:
 		break;
