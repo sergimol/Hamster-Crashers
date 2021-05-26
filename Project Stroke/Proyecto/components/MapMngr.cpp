@@ -171,10 +171,11 @@ void MapMngr::loadNewMap(string map) {
 		if (map == "resources/images/tiled/Level1.tmx")
 			addParaxall(1, true, false, 7, 10, 15, 10);
 		else if (map == "resources/images/tiled/Level1Boss.tmx")
-			addParaxall(1, false, true, 7, 10, 15, 10);
+			addParaxall(1, false, true, 7, 10, 15, 0);
 		else if (map == "resources/images/tiled/Level2.tmx")
 			addParaxall(2, true, false, 7, 10, 1, 10);
-
+		else if(map == "resources/images/tiled/Level3.tmx")
+			addParaxall(3, false, false, 10, 0, 0, 0);
 
 		//Dimensiones de los tiles
 		tilesDimensions_ = map_.getTileSize();

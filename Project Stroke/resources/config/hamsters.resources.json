@@ -272,7 +272,15 @@
     },
     {
       "id": "sueloCocina",
-      "file": "resources/images/tiled/tileSetSueloLevel3.png"
+      "file": "resources/images/tiled/tilesetSueloLevel3.png"
+    },
+    {
+      "id": "objetosCocina",
+      "file": "resources/images/tiled/tilesetObjetosLevel3.png"
+    },
+    {
+      "id": "objetosCocinaSombra",
+      "file": "resources/images/tiled/tilesetSombrasObjetosLevel3.png"
     },
     {
       "id": "q",
