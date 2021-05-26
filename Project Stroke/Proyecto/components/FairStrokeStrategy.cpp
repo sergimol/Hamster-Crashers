@@ -3,7 +3,7 @@
 
 
 void FairStrokeStrategy::increaseChanceAB(int n, int& chanceAB) {
-	chanceAB += n * EXTRAPERCENTAGE;
+	chanceAB += n * EXTRAPERCENTAGE * 2;
 }
 
 void FairStrokeStrategy::increaseChanceNORMAL(int n, int& chanceNORMAL) {

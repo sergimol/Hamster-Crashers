@@ -52,8 +52,8 @@ private:
 	const int UPDATETIME = 3000, // Tiempo entre comprobaciones de infarto
 		//MAXAB = 65, // Máximo de probabilidad de infarto que se puede recibir por habilidades
 		//MAXCHANCE = 35, // Máximo de probabilidad de infarto que se puede recibir por salto y ataque
-		TIMETODECREASE = 3000, // Tiempo que debe pasar para empezar a reducir el infarto
-		TIMEBETWEENDECREASES = 150, // Tiempo entre reducciones de la probabilidad
+		TIMETODECREASE = 3500, // Tiempo que debe pasar para empezar a reducir el infarto
+		TIMEBETWEENDECREASES = 250, // Tiempo entre reducciones de la probabilidad
 		NORMALDECREASE = 75, //Decremento de forma natural
 		MINVALUE = 5, //Mínimo porcentaje de infarto
 		DECREASEPERCENTAGE = 35, // Porcentaje que se reduce por acierto en el minijuego

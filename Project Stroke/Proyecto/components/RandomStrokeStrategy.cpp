@@ -6,7 +6,7 @@ void RandomStrokeStrategy::increaseChanceAB(int n, int& chanceAB) {
 	if (chanceAB > MAXCHANCEAB)
 		chanceAB = MAXCHANCEAB;*/
 
-	chanceAB += n * EXTRAPERCENTAGE;
+	chanceAB += n * EXTRAPERCENTAGE * 2;
 }
 
 void RandomStrokeStrategy::increaseChanceNORMAL(int n, int& chanceNORMAL) {
@@ -14,7 +14,7 @@ void RandomStrokeStrategy::increaseChanceNORMAL(int n, int& chanceNORMAL) {
 	if (chanceNORMAL > MAXCHANCENORMAL)
 		chanceNORMAL = MAXCHANCENORMAL;*/
 
-	chanceNORMAL += n * EXTRAPERCENTAGE;
+	chanceNORMAL += n * EXTRAPERCENTAGE * 1.5f;
 }
 //void RandomStrokeStrategy::decreaseChance() {
 //
