@@ -166,6 +166,10 @@ public:
 		return tutorialDone_;
 	}
 
+	inline void setTutorialDone() {
+		tutorialDone_ = true;
+	}
+
 	// toggle to full-screen/window mode
 	inline void toggleFullScreen() {
 		auto flags = SDL_GetWindowFlags(window_);

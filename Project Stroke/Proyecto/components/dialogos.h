@@ -17,7 +17,6 @@ public:
 
 	void render() override;
 	void update() override;
-	void init() override;
 	void show();
 	void unshow();
 
@@ -58,9 +57,5 @@ private:
 	bool renderDialogues = false;
 	bool firstDialogue_ = true;
 	float position = 3.0f;			//Desplaza verticalmente los destrects
-
-
-	const enum KEYS { UP, DOWN, LEFT, RIGHT, SPACE };
-	std::map<KEYS, SDL_Scancode> keymap;
 
 };
