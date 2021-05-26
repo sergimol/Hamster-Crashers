@@ -140,20 +140,15 @@ void MapMngr::loadNewMap(string map) {
 	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
 
 	if (map_.load(map)) {
+
 		if (map == "resources/images/tiled/Level1Boss.tmx") {
 			scale = 2.5f;
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
 		}
 		else if (map == "resources/images/tiled/Level2.tmx") {
 			scale = 3.0f;
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stopbirds");
-
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
 		}
-		else if (map == "resources/images/tiled/Level3.tmx") {
-			//scale = 3.0f;
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stopbirds");
 
-		}
 
 		mapHeight_ = map_.getProperties()[0].getIntValue() * TAM_CELDA * scale;
 

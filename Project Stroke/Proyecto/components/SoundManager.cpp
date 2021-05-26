@@ -174,6 +174,10 @@ void SoundManager::StopTutorial() {
 	Mix_HaltChannel(7);
 }
 
+void SoundManager::StopCatSounds() {
+	Mix_HaltChannel(6);
+}
+
 void SoundManager::lowVolume(bool musicChannel) {
 	if (musicVol_ > 0 && fxVol_ > 0) {
 		if (musicChannel) {
@@ -215,6 +219,15 @@ bool SoundManager::emptyChannel() {
 		return false;
 }
 
+void SoundManager::refreshMusicVol() {
+	HamstersMainThemev2->setMusicVolume(musicVol_ * initMusicVol);
+	Nivel1GameVersion->setMusicVolume(musicVol_ * initMusicVol);
+	Nivel1Boss1_0->setMusicVolume(musicVol_ * initMusicVol);
+	HamstersNivel2GameVersion->setMusicVolume(musicVol_ * initMusicVol);
+	HamstersNivel2_Boss160bpm->setMusicVolume(musicVol_ * initMusicVol);
+	HamstersNivel4_Boss2->setMusicVolume(musicVol_ * initMusicVol);
+	HamstersNivel4GameVersion->setMusicVolume(musicVol_ * initMusicVol);
+}
 
 void SoundManager::play(std::string soundName) {
 	//Golpe
@@ -284,7 +297,7 @@ void SoundManager::play(std::string soundName) {
 	}
 	else if (soundName == "catMeowWalking") {
 		catMeowWalking->setChannelVolume(fxVol_ * initCatVol);
-		catMeowWalking->play();
+		catMeowWalking->play(0,6);
 	}
 	else if (soundName == "catMeowSleeping") {
 		catMeowSleeping->setChannelVolume(fxVol_ * initCatVol);
@@ -348,35 +361,33 @@ void SoundManager::play(std::string soundName) {
 	//Juego reanimar, tecla correcta o fallida
 	else if (soundName == "rightNote") {
 		rightNote->setChannelVolume(fxVol_ * notesReanimVol);
-		rightNote->play(0);
+		rightNote->play();
 	}
 	else if (soundName == "wrongNote") {
 		wrongNote->setChannelVolume(fxVol_ * notesReanimVol);
-		wrongNote->play(0);
+		wrongNote->play();
 	}
 	//Posesion hamster
 	else if (soundName == "possesion") {
 		//Posesion hamster
 		possesion->setChannelVolume(fxVol_ * possesionVol);
-		possesion->play(0);
+		possesion->play();
 	}
 
 	//Botones UI
 	else if (soundName == "button") {
 		//Botones UI
 		button0->setChannelVolume(fxVol_ * buttonVol);
-		button1->play(0);
+		button1->play();
 	}
 
 
 	else if (soundName == "birds") {
 		// sonidos ambiente
 		birds->setChannelVolume(fxVol_ * initBirdsVol);
-		birds->play(200, 6);
+ 		birds->play();
 	}
-	else if (soundName == "stopbirds") {
-		birds->haltChannel(6);
-	}
+
 
 	//Recoger items
 	else if (soundName == "eatItem") {
@@ -451,6 +462,7 @@ void SoundManager::play(std::string soundName) {
 		HamstersNivel4GameVersion->setMusicVolume(musicVol_* initMusicVol);
 		HamstersNivel4GameVersion->play(200);
 	}
+
 }
 
 int SoundManager::pickRandom(int max) {
