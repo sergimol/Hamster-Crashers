@@ -8,15 +8,26 @@ MenuIndicator::MenuIndicator(std::string n, Vector2D position, int stateNum) :
 	stateNumber_(stateNum)
 {
 	// Volúmenes
-	if (indicatorName_ == "bar") {
+	if (indicatorName_ == "musicBar") {
 		for (int i = 0; i <= 10; ++i) {
 			possibleTextures_.push_back(&sdlutils().images().at(indicatorName_ + to_string(i)));
 			texturesCount_++;
 		}
 
-		indicatorIndex_ = 5;
+		indicatorIndex_ = sdlutils().volumes().getX() * 10;
 		indicator_ = possibleTextures_[indicatorIndex_];
 	}
+
+	else if (indicatorName_ == "fxBar") {
+		for (int i = 0; i <= 10; ++i) {
+			possibleTextures_.push_back(&sdlutils().images().at(indicatorName_ + to_string(i)));
+			texturesCount_++;
+		}
+
+		indicatorIndex_ = sdlutils().volumes().getY() * 10;
+		indicator_ = possibleTextures_[indicatorIndex_];
+	}
+
 	// Resoluciones
 	else if (indicatorName_ == "resolutionIndicator") {
 		for (int i = 0; i < RESOLUTIONSCOUNT; ++i) {
@@ -24,7 +35,7 @@ MenuIndicator::MenuIndicator(std::string n, Vector2D position, int stateNum) :
 			texturesCount_++;
 		}
 
-		indicatorIndex_ = RESOLUTIONSCOUNT - 1;
+		indicatorIndex_ = sdlutils().resolutionIndex();
 		indicator_ = possibleTextures_[indicatorIndex_];
 	}
 	else if (indicatorName_ == "p") {
@@ -74,7 +85,7 @@ void MenuIndicator::updateTexture(bool isUp)
 void MenuIndicator::reset()
 {
 	// Volúmenes
-	if (indicatorName_ == "bar") {
+	if (indicatorName_ == "musicBar" || indicatorName_ == "fxBar") {
 		indicatorIndex_ = 5;
 		indicator_ = possibleTextures_[indicatorIndex_];
 	}
@@ -84,7 +95,6 @@ void MenuIndicator::reset()
 		indicatorIndex_ = RESOLUTIONSCOUNT - 1;
 		indicator_ = possibleTextures_[indicatorIndex_];
 	}
-
 	else if (indicatorName_ == "p") {
 		indicatorIndex_ = 0;
 		indicator_ = possibleTextures_[indicatorIndex_];

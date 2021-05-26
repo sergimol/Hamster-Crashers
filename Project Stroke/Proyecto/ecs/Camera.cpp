@@ -10,7 +10,7 @@ void Camera::init() {
 }
 
 void Camera::update() {
-	if (states_->getState()==GameStates::RUNNING) {
+	if (states_->getState() == GameStates::RUNNING) {
 		if (cameraState == Players)
 			followPlayer();
 		else if (cameraState == GoingTo)
@@ -60,11 +60,10 @@ void Camera::followBossCat() {
 	auto cat = entity_->getMngr()->getHandler<Cat_>()->getComponent<Transform>();
 
 	//Camara sigue al gato dejándolo justo en la esquina derecha
-	camPos = cat->getPos() - Vector2D(sdlutils().width() / 2 - cat->getW(), 0);
+	camPos = cat->getPos() - Vector2D(sdlutils().width() / 2 - cat->getW() + 10, 0);
 
 	//Actualizamos la posicion de la camara
 	camera_.x = camPos.getX() - camera_.w / 2;
-	camera_.y = camPos.getY() - camera_.h / 2;
 }
 
 void Camera::StaticCamera() {
@@ -90,10 +89,11 @@ void Camera::Goto() {
 
 	camera_.y = CamStaticPos.getY() - camera_.h / 2;
 
+	if (check1 && goToCat)
+		cameraState = BossCat;
 	//Cuando se ajusta la camara pasa al estado "Static"
-	if (check1 && GoToTracker)
+	else if (check1 && GoToTracker)
 		cameraState = Static;
-
 	else if (check1 && !GoToTracker)
 		cameraState = Players;
 }
@@ -144,10 +144,10 @@ Vector2D Camera::newObjetivo() {
 }
 
 void Camera::camShake() {
-	
+
 	if (down_)
 		camShake_ = sdlutils().lerp(20, camShake_, 0.75);
-	else 
+	else
 		camShake_ = sdlutils().lerp(0, camShake_, 0.75);
 
 	if ((camShake_ - 20 < 0.1 && camShake_ - 20 > -0.1) || (camShake_  < 0.1 && camShake_  > -0.1)) down_ = !down_;

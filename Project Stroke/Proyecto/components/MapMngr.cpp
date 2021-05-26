@@ -243,15 +243,24 @@ void MapMngr::loadNewMap(string map) {
 							auto* enemy = entity_->getMngr()->addEntity();
 							enemy->addComponent<Transform>(
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-								Vector2D(), 256.0f, 2 * 256.0f, 0.0f, 1, 1);
+								Vector2D(), 440.0f * scale, 350.0f * scale, 0.0f, 0.6, 1);
+
+							//Le dejamos durmiendo
+							enemy->addComponent<Animator>(&sdlutils().images().at("cat"),
+								440,
+								350,
+								3,
+								3,
+								220,
+								Vector2D(),
+								3)->play(sdlutils().anims().at("cat_sleeping"));
 
 							//Le metemos gravedad
 							enemy->getComponent<Transform>()->setGravity(enemy->addComponent<Gravity>());
 
 							enemy->addComponent<CatMovement>();
 
-							enemy->addComponent<EntityAttribs>()->setIgnoreMargin(false);
-							enemy->addComponent<Image>(&sdlutils().images().at("catSmoking"));
+							enemy->addComponent<EntityAttribs>();
 							enemy->addComponent<ContactDamage>(20, 30, false, false, false);
 							enemy->getMngr()->setHandler<Cat_>(enemy);
 						}
@@ -834,40 +843,30 @@ void MapMngr::addObject(const tmx::Object& object) {
 }
 
 void MapMngr::addTrap(const tmx::Object& object, int x, int y) {
+	auto& prop = object.getProperties();
+
+
 	auto* trap = entity_->getMngr()->addTrap();
 
-	string id = "Box";
+	if (prop[1].getIntValue() == 0) {
 
-	trap->addComponent<Transform>(Vector2D(x * scale, y * scale),
-		Vector2D(), 50 * scale, 50 * scale, 0.0f, 0.75, 0.75);
-	trap->addComponent<ContactDamage>(10, 30, true, true, true);
-	trap->addComponent<TimeTrap>(&sdlutils().images().at("catSmoking"));
+		trap->addComponent<Transform>(Vector2D(x * scale, y * scale),
+			Vector2D(), 64 * scale, 64 * scale, 0.0f, 1, 1);
 
-	//int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty
+		trap->addComponent<ContactDamage>(3, 30, true, true, true);
+		trap->addComponent<TimeTrap>(&sdlutils().images().at("vitroPeqOn"), &sdlutils().images().at("vitroPeqOff"), prop[0].getFloatValue());
+	}
+	if (prop[1].getIntValue() == 1) {
+
+		trap->addComponent<Transform>(Vector2D(x * scale, y * scale),
+			Vector2D(), 128 * scale, 128 * scale, 0.0f, 1, 1);
+
+		trap->addComponent<ContactDamage>(3, 30, true, true, true);
+		trap->addComponent<TimeTrap>(&sdlutils().images().at("vitroGranOn"), &sdlutils().images().at("vitroGranOff"), prop[0].getFloatValue());
+	}
+
 	trap->addComponent<EntityAttribs>(1, 10.0f, "trap1", Vector2D(), 1, 0.0f, 1, true, false, false);
-	//trap->addComponent<Image>(&sdlutils().images().at("catSmoking"));
 
-	/*
-	trap->addComponent<Animator>(&sdlutils().images().at("obstacle" + id),
-		80,
-		86,
-		9,
-		2,
-		220,
-		Vector2D(0, 0),
-		3
-		);
-	*/
-
-	//if(object.breakable)
-	//trap->addComponent<Obstacle>(id, 3);
-
-	//1º: False, porque no es un hamster //2º: False, porque usa de referencia el rect del Animator
-	//trap->addComponent<Shadow>(false, false);
-	//else
-	//obstacle->addComponent<Obstacle>(id);
-
-	//entity_->getMngr()->getTraps().push_back(trap);
 }
 
 void MapMngr::clearColliders() {
