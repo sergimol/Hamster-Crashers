@@ -14,7 +14,7 @@ MicroOndasManager::MicroOndasManager(int hamN, Texture* tx, Texture* tx2) :
 	timer_(0), timeToEnd_(30000), lastTime_(sdlutils().currRealTime()),
 	phaseComplete_(false), hamsterDead_(false), tx_(tx), txBat_(tx2),
 	auxX(0), auxY(0), hits_(1), damageInPercent_(0.25f), gamestate(nullptr),
-	defeated(false), startEnding_(0), waitEnding_(2000)
+	defeated(false), startEnding_(0), waitEnding_(2500)
 {
 }
 
