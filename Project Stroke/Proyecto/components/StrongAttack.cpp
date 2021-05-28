@@ -74,7 +74,7 @@ bool StrongAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 						if (entity_->getMngr()->getHandler<Boss>() == ents[i] || entity_->getMngr()->getHandler<FinalBoss>() == ents[i]) {
 							entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handHit");
 						}
-						else if (ents[i]->hasComponent<WarCry>())
+						else if (entity_->hasComponent<WarCry>())
 							entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("angelstrongHit");
 						else
 							entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
