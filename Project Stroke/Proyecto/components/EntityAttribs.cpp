@@ -279,7 +279,7 @@ void EntityAttribs::die() {
 		tamX = tamY = 100;
 	}
 	else if (id_ == "pirulo1" || id_ == "pirulo2") {
-		tamX = 96; 
+		tamX = 96;
 		tamY = 186;
 	}
 	else if (id_ == "piruloGordo") {
@@ -326,33 +326,35 @@ void EntityAttribs::die() {
 		}
 	}
 	else {
-	/*	if (entity_->getMngr()->getHandler<Boss>() == entity_) {
+		/*	if (entity_->getMngr()->getHandler<Boss>() == entity_) {
 
-		}
-		else */if (entity_->getMngr()->getHandler<FinalBoss>() == entity_) {
-			entity_->getMngr()->setHandler<FinalBoss>(nullptr);
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
-			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level3Boss", true, 2);
-		}
+			}
+			else */if (entity_->getMngr()->getHandler<FinalBoss>() == entity_) {
+				entity_->getMngr()->setHandler<FinalBoss>(nullptr);
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
+				entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level3Boss", true, 2);
+			}
 
-		//solamente para los enemigos
-		//entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala
-		e->addComponent<Dying>();
-		//e->getComponent<Transform>()->setGravity(e->addComponent<Gravity>());
-		enmState_->getState() = EnemyStates::ENM_DEAD;
-		if (id_ == "soldier1" || id_ == "soldier2")
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("soldierDep");
-		else if (id_ == "bicho" || id_ == "rata" || id_ == "naranja")
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("dep");
-		else if (id_ == "calcetin") {
-			entity_->getMngr()->setHandler<Boss>(nullptr);
-			entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setcShake(false);
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
-			Mix_FadeOutMusic(2000);
-			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 5);
-		}
+			//solamente para los enemigos
+			//entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala
+			e->addComponent<Dying>();
+			//e->getComponent<Transform>()->setGravity(e->addComponent<Gravity>());
+			enmState_->getState() = EnemyStates::ENM_DEAD;
+			if (id_ == "soldier1" || id_ == "soldier2")
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("soldierDep");
+			else if (id_ == "bicho" || id_ == "rata" || id_ == "naranja")
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("dep");
+			else if (id_ == "angel")
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("angelDep");
+			else if (id_ == "calcetin") {
+				entity_->getMngr()->setHandler<Boss>(nullptr);
+				entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setcShake(false);
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
+				Mix_FadeOutMusic(2000);
+				entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 5);
+			}
 
-		entity_->setActive(false);
+			entity_->setActive(false);
 	}
 
 

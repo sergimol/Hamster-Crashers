@@ -165,9 +165,9 @@ void SoundManager::init() {
 	AngelAttack0 = &sdlutils().soundEffects().at("AngelAttack0");
 	AngelAttack1 = &sdlutils().soundEffects().at("AngelAttack1");
 	AngelAttack2 = &sdlutils().soundEffects().at("AngelAttack2");
-	AngelAttack3 = &sdlutils().soundEffects().at("AngelAttack3");
-	AngelAttack4 = &sdlutils().soundEffects().at("AngelAttack4");
-	AngelAttack5 = &sdlutils().soundEffects().at("AngelAttack5");
+	AngelStrongAttack3 = &sdlutils().soundEffects().at("AngelDamage1");
+	AngelStrongAttack4 = &sdlutils().soundEffects().at("AngelDamage2");
+	AngelStrongAttack5 = &sdlutils().soundEffects().at("AngelDamage3");
 
 	AngelHit0 = &sdlutils().soundEffects().at("AngelDamage0");
 	AngelHit1 = &sdlutils().soundEffects().at("AngelDamage1");
@@ -512,6 +512,10 @@ void SoundManager::play(std::string soundName) {
 	else if (soundName == "angelAttack") {
 		AngelAttack0->setChannelVolume(fxVol_ * initAngelVol);
 		playAngelAttack();
+	}
+	else if (soundName == "angelstrongHit") {
+	AngelAttack0->setChannelVolume(fxVol_ * initAngelVol);
+	playAngelStrongAttack();
 	}
 	else if (soundName == "angelDep") {
 		AngelDep->setChannelVolume(fxVol_ * initAngelVol);
@@ -1020,7 +1024,7 @@ void SoundManager::playTrap() {
 }
 
 void SoundManager::playAngelAttack() {
-	randomNum = pickRandom(5);
+	randomNum = pickRandom(3);
 
 	switch (randomNum)
 	{
@@ -1033,14 +1037,24 @@ void SoundManager::playAngelAttack() {
 	case 2:
 		AngelAttack2->play();
 		break;
-	case 3:
-		AngelAttack3->play();
+	default:
 		break;
-	case 4:
-		AngelAttack4->play();
+	}
+}
+
+void SoundManager::playAngelStrongAttack() {
+	randomNum = pickRandom(2);
+
+	switch (randomNum)
+	{
+	case 0:
+		AngelStrongAttack3->play();
 		break;
-	case 5:
-		AngelAttack5->play();
+	case 1:
+		AngelStrongAttack4->play();
+		break;
+	case 2:
+		AngelStrongAttack5->play();
 		break;
 	default:
 		break;
@@ -1048,7 +1062,7 @@ void SoundManager::playAngelAttack() {
 }
 
 void SoundManager::playAngelHit() {
-	randomNum = pickRandom(3);
+	randomNum = pickRandom(2);
 
 	switch (randomNum)
 	{
