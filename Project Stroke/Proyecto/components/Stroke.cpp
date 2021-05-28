@@ -103,7 +103,7 @@ void Stroke::checkChance() {
 	if (t >= timeLastUpdate_ + UPDATETIME) {
 		if (hms_->getState() != HamStates::INFARCTED && hms_->getState() != HamStates::DEAD && ss_->checkChance(chance_, chanceFromAb_)) {
 			//TODO madremia que no lo podemos desactivar porque hay que quitarlo de la lsita de player y noseque algo habra que ahcer para que la camara no explote
-			infarctHamster();
+			//infarctHamster();
 		}
 		timeLastUpdate_ = t;
 	}
