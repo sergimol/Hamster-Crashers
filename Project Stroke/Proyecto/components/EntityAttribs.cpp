@@ -177,7 +177,22 @@ void EntityAttribs::update() {
 				poisoned_ = false;
 			}
 		}
-		if (allDead && entity_->getComponent<Animator>()->OnAnimationFrameEnd()) {
+		//PONER AQUI ONANIMATIONEND cuando furrule 
+		if (allDead /*&& entity_->getComponent<Animator>()->OnAnimationFrameEnd*/) {
+
+			auto hamsters = entity_->getMngr()->getPlayers();
+			int contador = 0;
+			for (Entity* e : hamsters) {
+				if (e->getComponent<EntityAttribs>()->isDead())
+					contador++;
+			}
+			if (contador == hamsters.size()) {
+				auto cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
+				cam->changeCamState(State::Players);
+				cam->setGoToCat(false);
+				cam->setGoToTracker(false);
+			}
+
 			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", true, 0);
 		}
 	}
@@ -239,6 +254,8 @@ bool EntityAttribs::recieveDmg(int dmg) {
 }
 
 void EntityAttribs::die() {
+	//Ponemos la camara en estatico
+	//entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::Static)
 
 	//Creamos una entidad
 	Entity* e = entity_->getMngr()->addEntity();
@@ -322,8 +339,8 @@ void EntityAttribs::die() {
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("dep");
 		else if (id_ == "calcetin") {
 			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 5);
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
 		}
+
 		entity_->setActive(false);
 	}
 

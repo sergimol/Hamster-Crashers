@@ -181,9 +181,8 @@ void MenuButton::pressed() {
 			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level1", true, 8);
 
 			state_->setState(GameStates::RUNNING);
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1GameVersion");
 		}
-		//entity_->getMngr()->getHandler<HamsterSelectionMenu>()->getComponent<MenuButtonManager>()->updateKeymap(MenuButtonManager::SPACE, false);
+		Mix_FadeOutMusic(500);
 	}
 	else if (buttonName_ == "musicDown") {
 		auto soundMngr = entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>();
@@ -248,6 +247,9 @@ void MenuButton::pressed() {
 		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->resetCamera();
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetNumInts();
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopBossSounds();
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopTutorial();
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersMainThemev2");
+
 		//Vuelve a renderizar el menu
 		state_->setState(GameStates::MAINMENU);
 

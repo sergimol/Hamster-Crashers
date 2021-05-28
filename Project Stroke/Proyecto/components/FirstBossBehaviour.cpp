@@ -4,11 +4,11 @@
 
 FirstBossBehaviour::FirstBossBehaviour() :
 	mov_(nullptr), tr_(nullptr), rangeOffsetX_(250), rangeOffsetY_(100), lockedHamState_(nullptr),
-	lockedHamster_(nullptr), hamsterTr_(nullptr), anim_(nullptr),  hamsId_(-1), attackAvailable_(false), 
+	lockedHamster_(nullptr), hamsterTr_(nullptr), anim_(nullptr), hamsId_(-1), attackAvailable_(false),
 	waitingTime_(sdlutils().currRealTime()), waitingCD_(4000), stunTime_(0), stunCD_(1500), startBehavior_(false) {
 }
 
-void FirstBossBehaviour::init() 
+void FirstBossBehaviour::init()
 {
 	Entity* owEntity = owner_->getEntity();
 	mov_ = owEntity->getComponent<MovementSimple>();
@@ -131,13 +131,13 @@ bool FirstBossBehaviour::isWithinAttackRange()
 	int hamX = hamPos.getX(),
 		x = pos.getX();
 
-	return(hamX /*+ rangeOffsetX_*/ + hamWidth /**2*/ >= x + 3*width/4 && hamX /*+ hamWidth*/ /*- rangeOffsetX_ */<= x + 1*width/4);
+	return(hamX /*+ rangeOffsetX_*/ + hamWidth /**2*/ >= x + 3 * width / 4 && hamX /*+ hamWidth*/ /*- rangeOffsetX_ */ <= x + 1 * width / 4);
 }
 
-void FirstBossBehaviour::behave() 
+void FirstBossBehaviour::behave()
 {
 	//COMPROBACION DE CINEMATICA
-	if (!startBehavior_ )
+	if (!startBehavior_)
 	{
 		//FIN DE CINEMATICA
 		Entity* owEntity = owner_->getEntity();
@@ -146,10 +146,12 @@ void FirstBossBehaviour::behave()
 			startBehavior_ = true;
 
 			anim_->setAnimBool(EnemyStatesAnim::SEQUENCE, false);
+
+		}
+		else if (anim_->getState() == EnemyStatesAnim::SEQUENCE && owEntity->getComponent<Animator>()->OnAnimationFrame(0)) {
 			//Empieza la musica del boss
 			owEntity->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1Boss1_0");
 			owEntity->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handInit");
-
 		}
 	}
 	//SE ACABA LA CINEMATICA, EMPIEZA EL COMPORTAMIENTO DEL BOSS
@@ -182,7 +184,7 @@ void FirstBossBehaviour::behave()
 					mov_->updateKeymap(MovementSimple::LEFT, true);
 				else
 					mov_->updateKeymap(MovementSimple::LEFT, false);
-				if (x < hamX/* - rangeOffsetX_ / 2 */- tr_->getW()/ 4)
+				if (x < hamX/* - rangeOffsetX_ / 2 */ - tr_->getW() / 4)
 					mov_->updateKeymap(MovementSimple::RIGHT, true);
 				else
 					mov_->updateKeymap(MovementSimple::RIGHT, false);
