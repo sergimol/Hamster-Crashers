@@ -532,6 +532,25 @@ Microondas
 Tutoriales (Ángel)
 Transiciones
 
+## 6 - QA
+
+![Difi-Impresiones](https://user-images.githubusercontent.com/62880649/120051186-ee550300-c01f-11eb-8907-6c9f693fc201.png)
+
+A pesar de querer sacar 2 demos y poder comprobar que las mecánicas y niveles funcionaban como lo previsto, sólo fuimos capaces de sacar una demo tras el Hito 2, aun así, nos ha sido de gran utilidad, pues al estar centrado en la sensación de juego de combate, nos dio un backup para saber que por lo menos el combate iba pulido gracias a las conclusiones de este formulario .
+
+El feedback general era positivo, la gente veía fluidas las animaciones, el golpes y los sonidos eran adecuados. Nos comentaron que a veces la sensación era extraña porque el golpe no iba en timing con la animación, era un error que teníamos anotado y que finalmente pudimos arreglar en los enemigos pero no en los hamsters por la arquitectura del sistema de combos, que no merecía la pena refactorizar.
+
+Lo más claro del QA fue ver que los enemigos era demasiado fáciles, poca gente perdía siquiera vida durante la demo, el problema era el timing de ataque de los enemigos
+Lo ajustamos y subimos algo el timing de ataques y dificultad, aunque tampoco nos hemos excedido. 
+Este QA no sólo nos ha dado info sobre el feedback del juego, también nos ha enseñado un poco más a hacer QA, pues vimos que había preguntas realmente inútiles, como el uso de los mandos y el teclado o “Impresiones generales”.
+
+El plan era sacar una demo con otro formulario con sugerencias y algunas preguntas pero sobretodo nos interesaba hacer QA más privado, observando al usuario y viendo si los niveles y sistema de infarto son lo acordado y previsto.
+![Control](https://user-images.githubusercontent.com/62880649/120051202-02990000-c020-11eb-9f31-293b8917a459.png)
+![Cooldown-Anims](https://user-images.githubusercontent.com/62880649/120051217-0fb5ef00-c020-11eb-8972-33de78cc9652.png)
+![Sonidos-Habilidad](https://user-images.githubusercontent.com/62880649/120051225-1a708400-c020-11eb-94dc-4ccf6bd6908a.png)
+![Dificultad](https://user-images.githubusercontent.com/62880649/120051247-28bea000-c020-11eb-99bd-b91702045428.png)
+
+
 
 
 ## Referencias 
