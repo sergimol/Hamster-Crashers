@@ -85,7 +85,7 @@ void GhostCtrl::startPossesion(Entity* e) {
 	poss->setPossesed(e);
 	poss->setActive(true);
 
-	e->getComponent<Animator>()->setTexture(&sdlutils().images().at(e->getComponent<EntityAttribs>()->getId() + "Sheet2"));
+	//e->getComponent<Animator>()->setTexture(&sdlutils().images().at(e->getComponent<EntityAttribs>()->getId() + "Sheet3"));
 	//keyTx_(&sdlutils().images().at("q")), buttonTx_(&sdlutils().images().at("b"))
 }
 

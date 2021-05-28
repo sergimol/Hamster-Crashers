@@ -60,7 +60,7 @@ void Stroke::increaseChance(int n, bool fromAbility) {
 
 		entity_->getComponent<HeartUI>()->increaseLatency(chanceFromAb_ + chance_);
 
-		if (chance_ + chanceFromAb_ > CHANGECOLORVALUE)
+		if (chance_ + chanceFromAb_ > CHANGECOLORVALUE )
 			entity_->getComponent<Animator>()->setTexture(&sdlutils().images().at(entity_->getComponent<EntityAttribs>()->getId() + "Sheet2"));
 
 		timeLastIncrease_ = sdlutils().currRealTime();
@@ -76,6 +76,7 @@ void Stroke::decreaseChance() {
 		//Llamamos a la UI para que el corazon palpite más rapido
 		entity_->getComponent<HeartUI>()->increaseLatency((chanceFromAb_ + chance_) / 10);
 	}
+	if (chance_ <= MINVALUE) entity_->getComponent<Animator>()->setTexture(&sdlutils().images().at(entity_->getComponent<EntityAttribs>()->getId() + "Sheet3"));
 }
 
 void Stroke::checkChance() {
@@ -92,7 +93,7 @@ void Stroke::checkChance() {
 
 		entity_->getComponent<HeartUI>()->increaseLatency(chanceFromAb_ + chance_);
 
-		if (chance_ + chanceFromAb_ < CHANGECOLORVALUE)
+		if (chance_ + chanceFromAb_ < CHANGECOLORVALUE && chance_ > MINVALUE)
 			entity_->getComponent<Animator>()->setTexture(&sdlutils().images().at(entity_->getComponent<EntityAttribs>()->getId() + "Sheet"));
 
 		timeLastDecrease_ = t;
@@ -199,7 +200,7 @@ void Stroke::infarctHamster() {
 		tr->setFloor(tr_->getFloor());
 		tr->setZ(tr_->getZ());
 		tr->setGravity(deadBody->addComponent<Gravity>());
-		
+
 		deadBody->addComponent<Movement>();
 		deadBody->addComponent<InfarctedBody>(entity_);
 		deadBody->addComponent<ReanimationGame>();

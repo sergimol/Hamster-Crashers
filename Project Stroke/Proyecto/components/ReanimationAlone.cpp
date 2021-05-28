@@ -193,7 +193,7 @@ void ReanimationAlone::endPossesion() {
 		deleteTextures();
 	}
 	this->setActive(false);
-
+	
 	reanimate();
 }
 
