@@ -544,6 +544,7 @@ void MapMngr::loadEnemyRoom() {
 			enTr->getFlip() = true;
 
 			enemy->addComponent<EnemyStateMachine>();
+			enemy->addComponent<Shadow>(false, true);
 			enemy->setGroup<Enemy>(true);
 
 			enemy->addComponent<EntityAttribs>(250 + ((hamstersToLoad_.size() - 1) * 75), 0.0, prop[3].getStringValue(), Vector2D(3.6, 2), 0, 0, 5, true, false, true);
