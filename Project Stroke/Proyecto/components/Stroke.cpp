@@ -228,7 +228,9 @@ void Stroke::infarctHamster() {
 		//Animacion del fantasma
 		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STROKE_ALONE, true);
 
-		entity_->getComponent<Movement>()->setActive(false);
+		entity_->getComponent<LightAttack>()->setActive(false);
+
+		entity_->getComponent<StrongAttack>()->setActive(false);
 
 		entity_->addComponent<ReanimationAlone>();
 

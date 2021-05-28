@@ -64,7 +64,9 @@ void Movement::update() {
 
 	if (state_->getState() == GameStates::RUNNING) {
 		auto& vel = tr_->getVel();
-		auto& state = hms_->getState();
+		HamStates state = HamStates::INFARCTED; 
+		if(hms_ != nullptr)
+			state = hms_->getState();
 		auto& z = tr_->getZ();
 		auto& velZ = tr_->getVelZ();
 
@@ -77,13 +79,15 @@ void Movement::update() {
 			dir.setY(1.0f);
 		}
 
-		if (keymap.at(RIGHT)) {
-			dir.setX(1.0f);
-			tr_->getFlip() = false;
-		}
-		else if (keymap.at(LEFT)) {
-			dir.setX(-1.0f);
-			tr_->getFlip() = true;
+		if (state != HamStates::INFARCTED_ALONE){
+			if (keymap.at(RIGHT)) {
+				dir.setX(1.0f);
+				tr_->getFlip() = false;
+			}
+			else if (keymap.at(LEFT)) {
+				dir.setX(-1.0f);
+				tr_->getFlip() = true;
+			}
 		}
 
 		if (dir.magnitude() != 0) {
