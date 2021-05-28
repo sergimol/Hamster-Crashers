@@ -751,7 +751,6 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 		hamster1->addComponent<Stroke>(farirStrat);
 	}
 	hamster1->addComponent<Knockback>();
-	hamster1->addComponent<GetItem>();
 
 	//Handlr
 	hamster1->addComponent<ControlHandler>(hamster1->getComponent<EntityAttribs>()->getNumber());
