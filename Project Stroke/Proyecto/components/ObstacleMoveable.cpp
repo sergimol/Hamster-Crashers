@@ -57,7 +57,6 @@ void ObstacleMoveable::update()
 				coche->addComponent<Image>(&sdlutils().images().at("coche2")); //por testing sin animacion
 			coche->addComponent<ContactDamage>(5, 50, true, true, true);
 
-
 			if (vel >= 0)
 				coche->getComponent<Transform>()->getFlip() = true;
 
