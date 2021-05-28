@@ -177,6 +177,9 @@ void EntityAttribs::update() {
 				poisoned_ = false;
 			}
 		}
+		if (allDead && entity_->getComponent<Animator>()->OnAnimationFrameEnd()) {
+			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", true, 0);
+		}
 	}
 }
 
@@ -292,9 +295,6 @@ void EntityAttribs::die() {
 			if (sta != HamStates::DEAD && sta != HamStates::INFARCTED) {
 				allDead = false;
 			}
-		}
-		if (allDead) {
-			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", true, 0);
 		}
 	}
 	else {
