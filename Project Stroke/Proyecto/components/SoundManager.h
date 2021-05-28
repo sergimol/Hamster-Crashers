@@ -71,8 +71,8 @@ public:
 	int initMicrowaveVol = 128;
 	int initMicrowaveExplosionVol = 60;
 
-	int initAngelVol = 100;
-	int angelUlti = 60;
+	int initAngelVol = 80;
+	int angelUlti = 80;
 
 	void resetNumInts();
 private:

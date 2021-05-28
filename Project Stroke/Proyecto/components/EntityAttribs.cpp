@@ -208,9 +208,13 @@ bool EntityAttribs::recieveDmg(int dmg) {
 	//Actualizamos la healthBar
 	if (entity_->hasComponent<UI>())
 		entity_->getComponent<UI>()->bar(-dmg);
+	if(id_ == "angel")
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("angelHit");
 	//Si la vida ha bajado de 0...
 	if (health_ <= 0) {
 		if (hms_ != nullptr) {
+			if (id_ == "angel")
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("angelDep");
 			hms_->getState() = HamStates::DEAD;
 			auto& ents = entity_->getMngr()->getPlayers();
 
