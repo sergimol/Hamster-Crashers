@@ -119,6 +119,18 @@
       "file": "resources/images/UI//hamsterUI/ketaHeadGhost.png"
     },
     {
+      "id": "angelHead1",
+      "file": "resources/images/UI//hamsterUI/ketaHead.png"
+    },
+    {
+      "id": "angelHead2",
+      "file": "resources/images/UI//hamsterUI/ketaHeadDep.png"
+    },
+    {
+      "id": "angelHead3",
+      "file": "resources/images/UI//hamsterUI/ketaHeadGhost.png"
+    },
+    {
       "id": "monchiHead1",
       "file": "resources/images/UI//hamsterUI/monchiHead.png"
     },
@@ -3736,7 +3748,7 @@
       "rows": 8,
       "frameUpdate": 100,
       "loop": 0,
-      "chain": "monchi_idle_ghost",
+      "chain": "angel_idle_ghost",
       "attackFrame": -1
     },
     {
