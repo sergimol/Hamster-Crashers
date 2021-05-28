@@ -177,7 +177,22 @@ void EntityAttribs::update() {
 				poisoned_ = false;
 			}
 		}
-		if (allDead && entity_->getComponent<Animator>()->OnAnimationFrameEnd()) {
+		//PONER AQUI ONANIMATIONEND cuando furrule 
+		if (allDead /*&& entity_->getComponent<Animator>()->OnAnimationFrameEnd*/) {
+
+			auto hamsters = entity_->getMngr()->getPlayers();
+			int contador = 0;
+			for (Entity* e : hamsters) {
+				if (e->getComponent<EntityAttribs>()->isDead())
+					contador++;
+			}
+			if (contador == hamsters.size()) {
+				auto cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
+				cam->changeCamState(State::Players);
+				cam->setGoToCat(false);
+				cam->setGoToTracker(false);
+			}
+
 			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", true, 0);
 		}
 	}
@@ -239,6 +254,8 @@ bool EntityAttribs::recieveDmg(int dmg) {
 }
 
 void EntityAttribs::die() {
+	//Ponemos la camara en estatico
+	//entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::Static)
 
 	//Creamos una entidad
 	Entity* e = entity_->getMngr()->addEntity();
