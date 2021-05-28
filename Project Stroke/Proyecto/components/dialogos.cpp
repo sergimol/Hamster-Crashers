@@ -135,7 +135,7 @@ void dialogos::dialogoStateChange() {
 
 //"dialogo3" o "dialogo3singleplayer" dependiendo del num de jugadores
 void dialogos::showStrokeTutorial(std::string text) {
-	if (sdlutils().tutorialDone()) {
+	if (!sdlutils().tutorialDone()) {
 		dialogueNum_++;
 		//el sonido tendrá que ser diferente si es single o no
 		if (text == "dialogo3")

@@ -102,6 +102,7 @@ void Transition::fadeIn() {
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1GameVersion");
 			}
 			else if (nameScene_ == "Level2" && playeasonido) {
+				sdlutils().setTutorialDone();
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersNivel2GameVersion");
 			}
