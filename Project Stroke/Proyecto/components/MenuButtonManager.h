@@ -48,6 +48,7 @@ public:
 		return indicators_;
 	}
 
+	void unlockAngelBackground();
 private:
 	string menuMode_;
 	//Numero del estado en el que se muestra el men�
