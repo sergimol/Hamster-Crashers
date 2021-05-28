@@ -93,7 +93,7 @@ void Stroke::checkChance() {
 
 		entity_->getComponent<HeartUI>()->increaseLatency(chanceFromAb_ + chance_);
 
-		if (chance_ + chanceFromAb_ < CHANGECOLORVALUE && chance_ > MINVALUE)
+		if (chance_ + chanceFromAb_ < CHANGECOLORVALUE && chance_ + chanceFromAb_ > MINVALUE)
 			entity_->getComponent<Animator>()->setTexture(&sdlutils().images().at(entity_->getComponent<EntityAttribs>()->getId() + "Sheet"));
 
 		timeLastDecrease_ = t;

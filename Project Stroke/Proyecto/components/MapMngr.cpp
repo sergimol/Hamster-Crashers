@@ -268,7 +268,7 @@ void MapMngr::loadNewMap(string map) {
 							enemy->addComponent<CatMovement>();
 
 							enemy->addComponent<EntityAttribs>();
-							enemy->addComponent<ContactDamage>(10, 200, false, false, false);
+							enemy->addComponent<ContactDamage>(30, 200, false, false, false);
 							enemy->getMngr()->setHandler<Cat_>(enemy);
 						}
 						else if (object.getName() == "microondas") { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
