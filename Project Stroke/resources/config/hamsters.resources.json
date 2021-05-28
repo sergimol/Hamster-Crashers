@@ -212,11 +212,11 @@
     },
     {
       "id": "monchiSheet2",
-      "file": "resources/images/spritesheets/hamsters/monchi_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/monchi_spritesheetHA.png"
     },
     {
       "id": "monchiSheet3",
-      "file": "resources/images/spritesheets/hamsters/monchi_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/monchi_spritesheetPos.png"
     },
     {
       "id": "angelSheet",
@@ -224,11 +224,11 @@
     },
     {
       "id": "angelSheet2",
-      "file": "resources/images/spritesheets/hamsters/angel_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/angel_spritesheetHA.png"
     },
     {
       "id": "angelSheet3",
-      "file": "resources/images/spritesheets/hamsters/angel_spritesheet.png"
+      "file": "resources/images/spritesheets/hamsters/angel_spritesheetPos.png"
     },
     {
       "id": "calcetinSheet",
@@ -3735,7 +3735,7 @@
       "id": "angel_stroke",
       "startFrameX": 6,
       "startFrameY": 5,
-      "duration": 5,
+      "duration": 6,
       "cols": 8,
       "rows": 8,
       "frameUpdate": 100,

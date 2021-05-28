@@ -175,7 +175,7 @@ void Stroke::infarctHamster() {
 
 		int tam = 0;
 
-		if (name == "sardinilla" || name == "monchi") {
+		if (name == "sardinilla" || name == "monchi" || name == "angel") {
 			tam = 86;
 		}
 		else if (name == "canelon" || name == "canelonDemon") {
