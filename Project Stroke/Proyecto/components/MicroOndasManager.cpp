@@ -53,7 +53,7 @@ void MicroOndasManager::init() {
 
 	right_ = entity_->getMngr()->addEntity();		//Referencia a los cables derechos
 	rightTr_ = right_->addComponent<Transform>(
-		tr_->getPos() + Vector2D(256 * auxScale,0 ), Vector2D(), 96 * auxScale, 186 * auxScale, 0.0f, 0.8f, 0.8f);
+		tr_->getPos() + Vector2D(224 * auxScale,0 ), Vector2D(), 96 * auxScale, 186 * auxScale, 0.0f, 0.8f, 0.8f);
 
 	right_->setGroup<Enemy>(true);
 	
