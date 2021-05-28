@@ -1,7 +1,7 @@
 THE SQUEAKSHIP
 
 
-(CAPTURA DE PANTALLA DEL JUEGO)
+![H4thv5](https://user-images.githubusercontent.com/62661210/120047344-a1b7fa80-c014-11eb-9cb7-911a31d6d375.png)
 
 
 Juegos Asados
