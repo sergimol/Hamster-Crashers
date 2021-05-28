@@ -11,7 +11,7 @@
 MicroOndasManager::MicroOndasManager(int hamN, Texture* tx, Texture* tx2) :
 	tr_(nullptr),
 	hamsNum_(hamN), rightAttribs_(nullptr), leftAttribs_(nullptr),
-	timer_(0), timeToEnd_(30000), lastTime_(sdlutils().currRealTime()),
+	timer_(0), timeToEnd_(90000), lastTime_(sdlutils().currRealTime()),
 	phaseComplete_(false), hamsterDead_(false), tx_(tx), txBat_(tx2),
 	auxX(0), auxY(0), hits_(1), damageInPercent_(0.25f), gamestate(nullptr),
 	defeated(false), startEnding_(0), waitEnding_(2500)
@@ -58,7 +58,7 @@ void MicroOndasManager::init() {
 	right_->setGroup<Enemy>(true);
 	
 	right_->addComponent<EnemyStateMachine>();
-	rightAttribs_ = right_->addComponent<EntityAttribs>(100 + (hamsNum_ * 50), 0.0, "pirulo2", Vector2D(4.5, 2), 0, 0, 20, true, false, false);
+	rightAttribs_ = right_->addComponent<EntityAttribs>(300 + (hamsNum_ * 50), 0.0, "pirulo2", Vector2D(4.5, 2), 0, 0, 20, true, false, false);
 	
 	right_->addComponent<EnemyAttack>();
 	right_->addComponent<MovementSimple>();
@@ -86,7 +86,7 @@ void MicroOndasManager::init() {
 	
 
 	left_->addComponent<EnemyStateMachine>();
-	leftAttribs_ = left_->addComponent<EntityAttribs>(100 + (hamsNum_ * 50), 0.0, "pirulo1", Vector2D(4.5, 2), 0, 0, 20, true, false, false);
+	leftAttribs_ = left_->addComponent<EntityAttribs>(300 + (hamsNum_ * 50), 0.0, "pirulo1", Vector2D(4.5, 2), 0, 0, 20, true, false, false);
 	
 	left_->addComponent<EnemyAttack>();
 	left_->addComponent<MovementSimple>();
@@ -115,7 +115,7 @@ void MicroOndasManager::init() {
 	
 
 	bateria_->addComponent<EnemyStateMachine>();
-	bateriaAttribs_ = bateria_->addComponent<EntityAttribs>(100 + (hamsNum_ * 50), 0.0, "piruloGordo", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
+	bateriaAttribs_ = bateria_->addComponent<EntityAttribs>(300 + (hamsNum_ * 50), 0.0, "piruloGordo", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
 	
 	bateria_->addComponent<EnemyAttack>();
 	bateria_->addComponent<MovementSimple>();
@@ -139,7 +139,7 @@ void MicroOndasManager::init() {
 	//añadir la interafz de la vida
 	
 
-	entity_->addComponent<UI>("canelon", 4);
+	entity_->addComponent<UI>("micro", 4);
 
 	handTurn_ = sdlutils().rand().nextInt(0, 2) == 0;
 
@@ -231,10 +231,9 @@ void MicroOndasManager::update() {
 				e->getComponent<EntityAttribs>()->setLife(e->getComponent<EntityAttribs>()->getMaxLife()  - e->getComponent<EntityAttribs>()->getMaxLife() * timer_ / timeToEnd_);
 				//e->getComponent<EntityAttribs>()->die();
 				//cada cuarto de tiempo le hace daño
-				if ((timer_ / timeToEnd_) >= ((float)hits_ * damageInPercent_)) {
+				if ((timer_ / timeToEnd_) >= ((float)hits_ * damageInPercent_) && !e->getComponent<EntityAttribs>()->checkInvulnerability()) {
 					//como le doy una tollina a un bicho?
 					auto& hamStateM = e->getComponent<HamsterStateMachine>()->getState();
-					if (hamStateM != HamStates::ABILITY) {
 
 						e->getComponent<EntityAttribs>()->recieveDmg(0);
 						//sonido de la ostia
@@ -242,7 +241,6 @@ void MicroOndasManager::update() {
 						entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
 
 
-					}
 					if (hamStateM != HamStates::DEAD && hamStateM != HamStates::INFARCTED) {
 						//Si tiene stun, se aplica
 						Stun* stun = e->getComponent<Stun>();

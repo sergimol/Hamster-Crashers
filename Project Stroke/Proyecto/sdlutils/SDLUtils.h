@@ -170,6 +170,10 @@ public:
 		tutorialDone_ = true;
 	}
 
+	inline void unlockAngel() {
+		angelUnlocked_ = true;
+	}
+
 	// toggle to full-screen/window mode
 	inline void toggleFullScreen() {
 		auto flags = SDL_GetWindowFlags(window_);
