@@ -1272,15 +1272,15 @@
       "file": "resources/images/spritesheets/enemies/level2/cat_spritesheet.png"
     },
     {
-      "id": "pirulo1",
+      "id": "pirulo1Sheet",
       "file": "resources/images/spritesheets/enemies/level4/pirulo1_spritesheet.png"
     },
     {
-      "id": "pirulo2",
+      "id": "pirulo2Sheet",
       "file": "resources/images/spritesheets/enemies/level4/pirulo2_spritesheet.png"
     },
     {
-      "id": "piruloGordo",
+      "id": "piruloGordoSheet",
       "file": "resources/images/spritesheets/enemies/level4/pirulogordo_spritesheet.png"
     }
   ],
@@ -3459,7 +3459,7 @@
       "attackFrame": -1
     },
     {
-      "id": "pirulo_idle",
+      "id": "pirulo1_idle",
       "startFrameX": 0,
       "startFrameY": 0,
       "duration": 10,
@@ -3471,7 +3471,7 @@
       "attackFrame": -1
     },
     {
-      "id": "pirulo_hit",
+      "id": "pirulo1_hit",
       "startFrameX": 10,
       "startFrameY": 0,
       "duration": 2,
@@ -3483,7 +3483,43 @@
       "attackFrame": -1
     },
     {
-      "id": "pirulo_death",
+      "id": "pirulo1_death",
+      "startFrameX": 12,
+      "startFrameY": 0,
+      "duration": 6,
+      "cols": 18,
+      "rows": 1,
+      "frameUpdate": 80,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "pirulo2_idle",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 10,
+      "cols": 18,
+      "rows": 1,
+      "frameUpdate": 80,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "pirulo2_hit",
+      "startFrameX": 10,
+      "startFrameY": 0,
+      "duration": 2,
+      "cols": 18,
+      "rows": 1,
+      "frameUpdate": 80,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "pirulo2_death",
       "startFrameX": 12,
       "startFrameY": 0,
       "duration": 6,
