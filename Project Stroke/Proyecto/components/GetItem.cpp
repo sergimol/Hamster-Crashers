@@ -32,7 +32,7 @@ void GetItem::update() {
 				SDL_Rect rI = eTR->getRectCollide();
 
 				//Y comprobamos si colisiona
-				if (!e->hasComponent<Cloud>() && Collisions::collides(Vector2D(rH.x, rH.y), rH.w, rH.h, Vector2D(rI.x, rI.y), rI.w, rI.h)) {
+				if (e->hasComponent<Item>() && Collisions::collides(Vector2D(rH.x, rH.y), rH.w, rH.h, Vector2D(rI.x, rI.y), rI.w, rI.h)) {
 					//Comprobamos el tipo
 					switch (e->getComponent<Item>()->getItem()) {
 					case ItemType::Apple:
