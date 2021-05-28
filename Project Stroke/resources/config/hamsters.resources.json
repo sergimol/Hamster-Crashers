@@ -35,6 +35,10 @@
       "file": "resources/images/canelon.png"
     },
     {
+      "id": "microHead1",
+      "file": "resources/images/microondas.png"
+    },
+    {
       "id": "monchi",
       "file": "resources/images/monchi.png"
     },
@@ -293,7 +297,7 @@
     {
       "id": "objetosCocinaSombra",
       "file": "resources/images/tiled/tilesetSombrasObjetosLevel3.png"
-    }, 
+    },
     {
       "id": "microondas",
       "file": "resources/images/tiled/tilesetMicroondas.png"

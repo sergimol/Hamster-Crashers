@@ -139,7 +139,7 @@ void MicroOndasManager::init() {
 	//añadir la interafz de la vida
 	
 
-	entity_->addComponent<UI>("canelon", 4);
+	entity_->addComponent<UI>("micro", 4);
 
 	handTurn_ = sdlutils().rand().nextInt(0, 2) == 0;
 
