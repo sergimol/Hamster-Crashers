@@ -62,6 +62,7 @@ void Transition::fadeOut() {
 	if (alpha >= SDL_ALPHA_OPAQUE) {
 		alpha = SDL_ALPHA_OPAQUE;
 		alphaCalc = (float)SDL_ALPHA_OPAQUE;
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("nextPage");
 		if (change)
 			sceneTransition();
 		startFadeOut();
@@ -73,7 +74,6 @@ void Transition::fadeIn() {
 	if (alpha == SDL_ALPHA_OPAQUE) {
 		if ( numTReference > 0) {
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stopTutorial");
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("nextPage");
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("transition");
 			numTReference--;
 		}
@@ -95,6 +95,23 @@ void Transition::fadeIn() {
 		alpha = SDL_ALPHA_TRANSPARENT;
 		alphaCalc = (float)SDL_ALPHA_TRANSPARENT;
 		fadingIn = false;
+		if (numTReference == 0)
+		{
+			if (nameScene_ == "Level1" && playeasonido) {
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1GameVersion");
+			}
+			else if (nameScene_ == "Level2" && playeasonido) {
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersNivel2GameVersion");
+			}
+			else if (nameScene_ == "Level3" && playeasonido) {
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersNivel4GameVersion");
+			}
+			else if (nameScene_ == "Level3Micro" && playeasonido) {
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersNivel4_Boss2");
+			}
+			playeasonido = !playeasonido;
+		}
 	}
 }
 
@@ -127,6 +144,7 @@ void Transition::sceneTransition() {
 
 		//Elimino los efectos del nivel anterior
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopBossSounds();
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopTutorial();
 
 
 		for (Entity* e : entity_->getMngr()->getTiles())

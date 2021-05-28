@@ -298,7 +298,7 @@ void SoundManager::play(std::string soundName) {
 	}
 	else if (soundName == "catMeowStatic") {
 		catMeowStatic->setChannelVolume(fxVol_ * initCatVol);
-		catMeowStatic->play();
+		catMeowStatic->play(11, 6);
 	}
 	else if (soundName == "catMeowAttack") {
 		catMeowAttack->setChannelVolume(fxVol_ * initCatVol);
