@@ -298,17 +298,13 @@ void EntityAttribs::die() {
 		}
 	}
 	else {
-		if (entity_->getMngr()->getHandler<Boss>() == entity_) {
-			entity_->getMngr()->setHandler<Boss>(nullptr);
-			entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setcShake(false);
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
-			Mix_FadeOutMusic(2000);
+	/*	if (entity_->getMngr()->getHandler<Boss>() == entity_) {
 
 		}
-		else if (entity_->getMngr()->getHandler<FinalBoss>() == entity_) {
+		else */if (entity_->getMngr()->getHandler<FinalBoss>() == entity_) {
 			entity_->getMngr()->setHandler<FinalBoss>(nullptr);
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
-
+			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level3Boss", true, 2);
 		}
 
 		//solamente para los enemigos
@@ -321,9 +317,14 @@ void EntityAttribs::die() {
 		else if (id_ == "bicho" || id_ == "rata" || id_ == "naranja")
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("dep");
 		else if (id_ == "calcetin") {
+			entity_->getMngr()->setHandler<Boss>(nullptr);
+			entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setcShake(false);
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
+			Mix_FadeOutMusic(2000);
 			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 5);
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
 		}
+
 		entity_->setActive(false);
 	}
 
