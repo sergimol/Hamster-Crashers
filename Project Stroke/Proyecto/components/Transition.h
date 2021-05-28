@@ -61,6 +61,7 @@ private:
 	
 	GameStates* state_;
 	Subtitulos* subs_;
+	bool playeasonido = true;
 };
 
 

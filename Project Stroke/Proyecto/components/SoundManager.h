@@ -38,7 +38,7 @@ public:
 
 	int initCatVol = 80;
 
-	int initHandVol = 80;
+	int initHandVol = 128;
 
 	int initMonkeVol = 128;
 
@@ -52,7 +52,7 @@ public:
 	int possesionVol = 120;
 
 	int sardinillaSpecialVol = 120;
-	int ketaSpecialVol = 120;
+	int ketaSpecialVol = 80;
 	int monchiSpecialVol = 120;
 	int canelonSpecialVol = 120;
 
@@ -61,8 +61,8 @@ public:
 	int initEatVol = 60;
 
 	int pageSkipVol = 128;
-	int initTutorialVol = 70;
-	int initTransitionVol = 70;
+	int initTutorialVol = 60;
+	int initTransitionVol = 60;
 
 	int inittrapKitchenVol = 80;
 

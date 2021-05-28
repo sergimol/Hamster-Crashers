@@ -74,8 +74,14 @@ void ReanimationGame::handleButton() {
 
 void ReanimationGame::render() {
 	if (txUp_ != nullptr && txDown_ != nullptr) {
-		if (down) { txDown_->setActive(true);  txUp_->setActive(false);}
-		else { txDown_->setActive(false);  txUp_->setActive(true); }
+		if (down) { 
+			txDown_->getComponent<Image>()->setActive(true);  
+			txUp_->getComponent<Image>()->setActive(false);
+		}
+		else { 
+			txDown_->getComponent<Image>()->setActive(false);  
+			txUp_->getComponent<Image>()->setActive(true); 
+		}
 	}
 }
 
@@ -126,18 +132,18 @@ void ReanimationGame::setRevPlayer(Entity* e)
 	if (txUp_ == nullptr) {
 		txUp_ = new Entity(entity_->getMngr());
 		txUp_->addComponent<Transform>(Vector2D(tr->getPos().getX() + tr->getW() / 2,
-			tr->getPos().getY()),
+			tr->getPos().getY() - tr->getZ()),
 			Vector2D(0, 0),
-			WIDTH, HEIGHT, 0, 1, 1)->setZ(tr->getZ());
+			WIDTH, HEIGHT, 0, 1, 1)->setFloor(tr->getFloor());
 		txUp_->addComponent<Image>(&sdlutils().images().at(useController ? "a" : "a2"));
 		entity_->getMngr()->getUIObjects().push_back(txUp_);
 	}
 	if (txDown_ == nullptr) {
 		txDown_ = new Entity(entity_->getMngr());
 		txDown_->addComponent<Transform>(Vector2D(tr->getPos().getX() + tr->getW() / 2,
-			tr->getPos().getY()),
+			tr->getPos().getY() - tr->getZ()),
 			Vector2D(0, 0),
-			WIDTH, HEIGHT, 0, 1, 1)->setZ(tr->getZ());
+			WIDTH, HEIGHT, 0, 1, 1)->setFloor(tr->getFloor());
 		txDown_->addComponent<Image>(&sdlutils().images().at(useController ? "aPressed" : "a2Pressed"));
 		entity_->getMngr()->getUIObjects().push_back(txDown_);
 	}

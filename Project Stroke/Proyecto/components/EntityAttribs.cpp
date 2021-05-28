@@ -339,8 +339,8 @@ void EntityAttribs::die() {
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("dep");
 		else if (id_ == "calcetin") {
 			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 5);
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
 		}
+
 		entity_->setActive(false);
 	}
 
