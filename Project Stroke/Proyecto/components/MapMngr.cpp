@@ -484,7 +484,7 @@ void MapMngr::loadEnemyRoom() {
 
 			auto* enTr = enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(), 86 * scale, 86 * scale, 0.0f, 0, 0, 0.4, 0.5);
+				Vector2D(), 86 * scale, 86 * scale, 0.0f, 0, 0, 0.3, 0.35);
 			/*
 			hamster1->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
@@ -536,7 +536,7 @@ void MapMngr::loadEnemyRoom() {
 			auto* enemy = mngr_->addEntity();
 			auto* enTr = enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(), 128 * scale, 128 * scale, 0.0f, 0, 0, 0.3, 0.5);
+				Vector2D(), 128 * scale, 128 * scale, 0.0f, 0, 0, 0.35, 0.4);
 
 			enTr->setFloor(prop[0].getIntValue() * TAM_CELDA * scale);
 			enTr->setFloor(prop[0].getIntValue() * TAM_CELDA * scale);
