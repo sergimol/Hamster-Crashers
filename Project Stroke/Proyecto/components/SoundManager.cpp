@@ -162,6 +162,20 @@ void SoundManager::init() {
 	microTiktak = &sdlutils().soundEffects().at("tiktak");
 
 
+	AngelAttack0 = &sdlutils().soundEffects().at("AngelAttack0");
+	AngelAttack1 = &sdlutils().soundEffects().at("AngelAttack1");
+	AngelAttack2 = &sdlutils().soundEffects().at("AngelAttack2");
+	AngelAttack3 = &sdlutils().soundEffects().at("AngelAttack3");
+	AngelAttack4 = &sdlutils().soundEffects().at("AngelAttack4");
+	AngelAttack5 = &sdlutils().soundEffects().at("AngelAttack5");
+
+	AngelHit0 = &sdlutils().soundEffects().at("AngelDamage0");
+	AngelHit1 = &sdlutils().soundEffects().at("AngelDamage1");
+	AngelHit2 = &sdlutils().soundEffects().at("AngelDamage2");
+	AngelHit3 = &sdlutils().soundEffects().at("AngelDamage3");
+
+	AngelDep = &sdlutils().soundEffects().at("Angeldep");
+
 	Vector2D vol = sdlutils().volumes();
 	musicVol_ = vol.getX();
 	fxVol_ = vol.getY();
@@ -298,7 +312,7 @@ void SoundManager::play(std::string soundName) {
 	}
 	else if (soundName == "catMeowStatic") {
 		catMeowStatic->setChannelVolume(fxVol_ * initCatVol);
-		catMeowStatic->play();
+		catMeowStatic->play(11, 6);
 	}
 	else if (soundName == "catMeowAttack") {
 		catMeowAttack->setChannelVolume(fxVol_ * initCatVol);
@@ -342,7 +356,7 @@ void SoundManager::play(std::string soundName) {
 	else if (soundName == "trainBackground") {
 		//Sonidos tren
 		trainBackground->setChannelVolume(fxVol_ * inittrainBackgroundVol);
-		trainBackground->play(200,6);
+		trainBackground->play(200, 6);
 	}
 	else if (soundName == "trainPipi") {
 		trainPipi->setChannelVolume(fxVol_ * inittrainBackgroundVol);
@@ -471,6 +485,8 @@ void SoundManager::play(std::string soundName) {
 		HamstersNivel4GameVersion->setMusicVolume(musicVol_ * initMusicVol);
 		HamstersNivel4GameVersion->play(200);
 	}
+
+	//MICROONDAS
 	else if (soundName == "microwaveBep") {
 		microBep->setChannelVolume(fxVol_ * initMicrowaveVol);
 		microBep->play(0);
@@ -481,11 +497,25 @@ void SoundManager::play(std::string soundName) {
 	}
 	else if (soundName == "microwaveStatic") {
 		microStatic->setChannelVolume(fxVol_ * initMicrowaveVol);
-		microStatic->play(100,5);
+		microStatic->play(100, 5);
 	}
 	else if (soundName == "tiktak") {
 		microTiktak->setChannelVolume(fxVol_ * initMicrowaveVol);
-		microTiktak->play(100,6);
+		microTiktak->play(100, 6);
+	}
+
+	//ANGEL
+	else if (soundName == "angelHit") {
+		AngelHit0->setChannelVolume(fxVol_ * initAngelVol);
+		playAngelHit();
+	}
+	else if (soundName == "angelAttack") {
+		AngelAttack0->setChannelVolume(fxVol_ * initAngelVol);
+		playAngelAttack();
+	}
+	else if (soundName == "angelDep") {
+		AngelDep->setChannelVolume(fxVol_ * initAngelVol);
+		AngelDep->play();
 	}
 
 }
@@ -983,6 +1013,56 @@ void SoundManager::playTrap() {
 		break;
 	case 2:
 		trapKitchen2->play();
+		break;
+	default:
+		break;
+	}
+}
+
+void SoundManager::playAngelAttack() {
+	randomNum = pickRandom(5);
+
+	switch (randomNum)
+	{
+	case 0:
+		AngelAttack0->play();
+		break;
+	case 1:
+		AngelAttack1->play();
+		break;
+	case 2:
+		AngelAttack2->play();
+		break;
+	case 3:
+		AngelAttack3->play();
+		break;
+	case 4:
+		AngelAttack4->play();
+		break;
+	case 5:
+		AngelAttack5->play();
+		break;
+	default:
+		break;
+	}
+}
+
+void SoundManager::playAngelHit() {
+	randomNum = pickRandom(3);
+
+	switch (randomNum)
+	{
+	case 0:
+		AngelHit0->play();
+		break;
+	case 1:
+		AngelHit1->play();
+		break;
+	case 2:
+		AngelHit2->play();
+		break;
+	case 3:
+		AngelHit3->play();
 		break;
 	default:
 		break;

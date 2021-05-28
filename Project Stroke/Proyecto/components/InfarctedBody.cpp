@@ -54,27 +54,27 @@ void InfarctedBody::update() {
 					show_ = Collisions::collides(Vector2D(rect1.x, rect1.y), rect1.w, rect1.h, 
 											    Vector2D(rect2.x, rect2.y), rect2.w, rect2.h);
 
-					bool aux = false;
+					bool clicked = false;
 					if (show_) {
 						int eNum = e->getComponent<EntityAttribs>()->getNumber();
 
 						isCtrl = ih().playerHasController(eNum);
 
 						if (isCtrl)
-							aux = ih().isButtonDown(eNum, button);
+							clicked = ih().isButtonDown(eNum, button);
 						else
-							aux = ih().isKeyDown(key);
+							clicked = ih().isKeyDown(key);
 
 						if (tx_ == nullptr) {
 							tx_ = new Entity(entity_->getMngr());
-							tx_->addComponent<Transform>(Vector2D(tr_->getPos().getX(), tr_->getPos().getY()),
+							tx_->addComponent<Transform>(Vector2D(tr_->getPos().getX(), tr_->getPos().getY() - tr_->getZ()),
 								Vector2D(0, 0),
-								KEY_WIDTH, KEY_HEIGHT, 0, 1, 1)->setZ(tr_->getZ());
+								KEY_WIDTH, KEY_HEIGHT, 0, 1, 1)->setFloor(tr_->getFloor());
 							tx_->addComponent<Image>(isCtrl ? &sdlutils().images().at("b") : &sdlutils().images().at("p"));
 							entity_->getMngr()->getUIObjects().push_back(tx_);
 						}
 
-						if (aux) {
+						if (clicked) {
 							//Activamos el minijuego
 							entity_->getComponent<ReanimationGame>()->setActive(true);
 							entity_->getComponent<ReanimationGame>()->setRevPlayer(e);
@@ -87,9 +87,6 @@ void InfarctedBody::update() {
 							//Quitamos el botón
 							deleteTexture();
 						}
-					}
-					else {
-						deleteTexture();
 					}
 				}
 			}
@@ -112,10 +109,15 @@ void InfarctedBody::update() {
 
 void InfarctedBody::render() {
 	//Si estamos en contacto con un posible "host" que nos pueda revivir, muestra la imagen del botón
-	if (show_ && !reviving_) {
-		/*Vector2D renderPos = Vector2D(tr_->getPos().getX() + tr_->getW() - cam.x, tr_->getPos().getY() + tr_->getZ() - cam.y);
-		SDL_Rect dest = build_sdlrect(renderPos, KEY_WIDTH, KEY_HEIGHT);*/
-		tx_->setActive(true);
+	if (tx_ != nullptr) {
+		if (show_ && !reviving_) {
+			/*Vector2D renderPos = Vector2D(tr_->getPos().getX() + tr_->getW() - cam.x, tr_->getPos().getY() + tr_->getZ() - cam.y);
+			SDL_Rect dest = build_sdlrect(renderPos, KEY_WIDTH, KEY_HEIGHT);*/
+			tx_->getComponent<Image>()->setActive(true);
+		}
+		else {
+			tx_->getComponent<Image>()->setActive(false);
+		}
 	}
 }
 

@@ -109,7 +109,7 @@ void MapMngr::update() {
 			triggerFtCamera.pop();
 
 			//TUTORIAL
-			if (!sdlutils().tutorialDone() && stoi(trigger.getName()) < 4) {
+			if (!sdlutils().tutorialDone() && stoi(trigger.getName()) < 4 ) {
 				entity_->getMngr()->getHandler<dialogosMngr>()->getComponent<dialogos>()->dialogoStateChange();
 			}
 		}
