@@ -340,7 +340,7 @@ void EntityAttribs::die() {
 				boss->die();
 				entity_->getMngr()->setHandler<FinalBoss>(nullptr);
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
-				entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level3Boss", true, 2);
+				entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level1", true, 2);
 			}
 		}
 		//solamente para los enemigos
