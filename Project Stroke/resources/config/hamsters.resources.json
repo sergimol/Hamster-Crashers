@@ -1817,16 +1817,16 @@
       "file": "resources/sound/angelHamster/atacar2.mp3"
     },
     {
-      "id": "AngelAttack3",
-      "file": "resources/sound/angelHamster/atacar3.mp3"
+      "id": "AngelStrongAttack3",
+      "file": "resources/sound/angelHamster/strongatacar3.mp3"
     },
     {
-      "id": "AngelAttack4",
-      "file": "resources/sound/angelHamster/atacar4.mp3"
+      "id": "AngelStrongAttack4",
+      "file": "resources/sound/angelHamster/strongatacar4.mp3"
     },
     {
-      "id": "AngelAttack5",
-      "file": "resources/sound/angelHamster/atacar5.mp3"
+      "id": "AngelStrongAttack5",
+      "file": "resources/sound/angelHamster/strongatacar5.mp3"
     },
     {
       "id": "Angeldep",

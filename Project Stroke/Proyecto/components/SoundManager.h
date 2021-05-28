@@ -98,18 +98,19 @@ private:
 
 	void playCar();
 
-	void  playEat();
+	void playEat();
 
-	void  playsoldierDep();
+	void playsoldierDep();
 
-	void  playPageSkip();
+	void playPageSkip();
 
-	void  playHandInit();
-	void  playHandPunch();
-	void  playHandHit();
+	void playHandInit();
+	void playHandPunch();
+	void playHandHit();
 
-	void  playAngelHit();
-	void  playAngelAttack();
+	void playAngelHit();
+	void playAngelAttack();
+	void playAngelStrongAttack();
 
 	void playTrap();
 
@@ -174,7 +175,7 @@ private:
 	SoundEffect* handHit2;
 
 	SoundEffect* handDep;
-	
+
 
 	//Boss Mono
 	SoundEffect* platillos;
@@ -315,9 +316,9 @@ private:
 	SoundEffect* AngelAttack0;
 	SoundEffect* AngelAttack1;
 	SoundEffect* AngelAttack2;
-	SoundEffect* AngelAttack3;
-	SoundEffect* AngelAttack4;
-	SoundEffect* AngelAttack5;
+	SoundEffect* AngelStrongAttack3;
+	SoundEffect* AngelStrongAttack4;
+	SoundEffect* AngelStrongAttack5;
 
 	SoundEffect* AngelHit0;
 	SoundEffect* AngelHit1;

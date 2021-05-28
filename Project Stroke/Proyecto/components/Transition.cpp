@@ -109,9 +109,12 @@ void Transition::fadeIn() {
 			else if (nameScene_ == "Level3" && playeasonido) {
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersNivel4GameVersion");
 			}
-			else if (nameScene_ == "Level3Micro" && playeasonido) {
+			else if (nameScene_ == "Level3Boss" && playeasonido) {
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersNivel4_Boss2");
 			}
+			/*else if (nameScene_ == "Level3Micro" && playeasonido) {
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersNivel4_Boss2");
+			}*/
 			else if (nameScene_ == "final" && playeasonido) {
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1GameVersion");
 			}
