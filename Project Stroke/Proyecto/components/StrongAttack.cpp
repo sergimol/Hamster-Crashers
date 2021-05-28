@@ -234,7 +234,7 @@ void StrongAttack::attack() {
 					//Suena el attackSound
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("attack");
 				//Animacion de ataque normalito
-				anim_->setAnimBool(HamStatesAnim::LIGHTATTACK, true);
+				anim_->setAnimBool(HamStatesAnim::STRONGATTACK, true);
 			}
 
 			DEBUG_isAttacking_ = true;
