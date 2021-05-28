@@ -52,6 +52,8 @@ void ReanimationAlone::update() {
 					succesfulHit();
 				else
 					failedHit();
+
+				keyGame_->getComponent<KeyGame>()->goBack();
 			}
 		}
 		// Si se está controlando con teclado
@@ -62,6 +64,8 @@ void ReanimationAlone::update() {
 				succesfulHit();
 			else
 				failedHit();
+
+			keyGame_->getComponent<KeyGame>()->goBack();
 		}
 		////Si se muere o infarta el poseido, se acaba la posesion
 		//if (hamState_->cantBeTargeted()) {
@@ -96,7 +100,7 @@ void ReanimationAlone::start() {
 		lineH_ = new Entity(entity_->getMngr());
 		lineH_->addComponent<Transform>(Vector2D(pos.getX() + H_LINE_OFFSET_X, pos.getY() + H_LINE_OFFSET_Y),
 			Vector2D(0, 0),
-			H_LINE_SIZE_X, H_LINE_SIZE_Y, 0, 1, 1)->setZ(tr->getZ());
+			H_LINE_SIZE_X, H_LINE_SIZE_Y, 0, 1, 1)->setFloor(tr->getFloor());
 		lineH_->addComponent<Image>(&sdlutils().images().at("linea"));
 		entity_->getMngr()->getUIObjects().push_back(lineH_);
 	}
@@ -105,14 +109,14 @@ void ReanimationAlone::start() {
 		lineV_ = new Entity(entity_->getMngr());
 		lineV_->addComponent<Transform>(Vector2D(pos.getX() + V_LINE_OFFSET_X, pos.getY() + V_LINE_OFFSET_Y),
 			Vector2D(0, 0),
-			V_LINE_SIZE_X, V_LINE_SIZE_Y, 0, 1, 1)->setZ(tr->getZ());
+			V_LINE_SIZE_X, V_LINE_SIZE_Y, 0, 1, 1)->setFloor(tr->getFloor());
 		lineV_->addComponent<Image>(&sdlutils().images().at("lineaV"));
 		entity_->getMngr()->getUIObjects().push_back(lineV_);
 	}
 	//Crea la entidad del QuickTimeEvent
 	if (keyGame_ == nullptr) {
 		keyGame_ = new Entity(entity_->getMngr());
-		keyGame_->addComponent<Transform>(Vector2D(lineHPos_.x - BOX_SIZE_X / 2, lineHPos_.y - BOX_SIZE_Y / 2), Vector2D(0, 0), BOX_SIZE_X, BOX_SIZE_Y, 0, 1, 1);
+		keyGame_->addComponent<Transform>(Vector2D(lineHPos_.x - BOX_SIZE_X / 2, lineHPos_.y - BOX_SIZE_Y / 2), Vector2D(0, 0), BOX_SIZE_X, BOX_SIZE_Y, 0, 1, 1)->setFloor(tr->getFloor());
 		keyGame_->addComponent<KeyGame>(lineHPos_, lineVPos_, this, entity_->getComponent<EntityAttribs>()->getVel().getX());
 		entity_->getMngr()->getUIObjects().push_back(keyGame_);
 	}
@@ -173,7 +177,7 @@ void ReanimationAlone::succesfulHit() {
 	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("rightNote");
 
 	//Si no hemos fallado la prueba antes, se da por pasada
-	if (!failed_) roundPassed_ = true;
+	 roundPassed_ = true;
 }
 
 void ReanimationAlone::failedHit() {
@@ -198,7 +202,6 @@ void ReanimationAlone::endPossesion() {
 }
 
 void ReanimationAlone::reanimate() {
-	entity_->getComponent<Movement>()->setActive(true);
 	entity_->getComponent<LightAttack>()->setActive(true);
 	entity_->getComponent<StrongAttack>()->setActive(true);
 
@@ -208,17 +211,10 @@ void ReanimationAlone::reanimate() {
 	entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STROKE_ALONE, false);
 	// El personaje vuelve a DEFAULT
 	entity_->getComponent<HamsterStateMachine>()->getState() = HamStates::DEFAULT;
-	// Recupera el movimiento
-	entity_->getComponent<Movement>()->setActive(true);
-	// Recupera el renderizado
-	entity_->getComponent<Animator>()->setActive(true);
 	// Reactivamos el infarto
 	entity_->getComponent<Stroke>()->setActive(true);
-	//Devolvemos el movimiento
-	entity_->getComponent<Movement>()->setActive(true);
 	// Reactivamos la UI del corazón
 	entity_->getComponent<HeartUI>()->resurrection();
-	//entity_->getComponent<UI>()->resurrection();
 
 }
 

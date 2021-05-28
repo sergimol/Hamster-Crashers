@@ -34,6 +34,8 @@ void PossesionGame::update() {
 					succesfulHit();
 				else
 					failedHit();
+
+				keyGame_->getComponent<KeyGame>()->goBack();
 			}
 		}
 		// Si se está controlando con teclado
@@ -44,6 +46,8 @@ void PossesionGame::update() {
 				succesfulHit();
 			else
 				failedHit();
+
+			keyGame_->getComponent<KeyGame>()->goBack();
 		}
 		//Si se muere o infarta el poseido, se acaba la posesion
 		if (possesedState_->cantBeTargeted()) {
@@ -84,7 +88,7 @@ void PossesionGame::start() {
 		lineH_ = new Entity(entity_->getMngr());
 		lineH_->addComponent<Transform>(Vector2D(pos.getX() + H_LINE_OFFSET_X, pos.getY() + H_LINE_OFFSET_Y),
 			Vector2D(0, 0),
-			H_LINE_SIZE_X, H_LINE_SIZE_Y, 0, 1, 1)->setZ(tr->getZ());
+			H_LINE_SIZE_X, H_LINE_SIZE_Y, 0, 1, 1)->setFloor(tr->getFloor());
 		lineH_->addComponent<Image>(&sdlutils().images().at("linea"));
 		entity_->getMngr()->getUIObjects().push_back(lineH_);
 	}
@@ -93,14 +97,14 @@ void PossesionGame::start() {
 		lineV_ = new Entity(entity_->getMngr());
 		lineV_->addComponent<Transform>(Vector2D(pos.getX() + V_LINE_OFFSET_X, pos.getY() + V_LINE_OFFSET_Y),
 			Vector2D(0, 0),
-			V_LINE_SIZE_X, V_LINE_SIZE_Y, 0, 1, 1)->setZ(tr->getZ());
+			V_LINE_SIZE_X, V_LINE_SIZE_Y, 0, 1, 1)->setFloor(tr->getFloor());
 		lineV_->addComponent<Image>(&sdlutils().images().at("lineaV"));
 		entity_->getMngr()->getUIObjects().push_back(lineV_);
 	}
 	//Crea la entidad del QuickTimeEvent
 	if (keyGame_ == nullptr) {
 		keyGame_ = new Entity(entity_->getMngr());
-		keyGame_->addComponent<Transform>(Vector2D(lineHPos_.x - BOX_SIZE_X / 2, lineHPos_.y - BOX_SIZE_Y / 2), Vector2D(0, 0), BOX_SIZE_X, BOX_SIZE_Y, 0, 1, 1);
+		keyGame_->addComponent<Transform>(Vector2D(lineHPos_.x - BOX_SIZE_X / 2, lineHPos_.y - BOX_SIZE_Y / 2), Vector2D(0, 0), BOX_SIZE_X, BOX_SIZE_Y, 0, 1, 1)->setFloor(tr->getFloor());
 		keyGame_->addComponent<KeyGame>(lineHPos_, lineVPos_, this, possesed_->getComponent<EntityAttribs>()->getVel().getX());
 		entity_->getMngr()->getUIObjects().push_back(keyGame_);
 	}
@@ -117,11 +121,14 @@ void PossesionGame::updateGamePos() {
 		float x = pos.getX() + tr->getW() / 2,
 			y = pos.getY() - tr->getZ();
 
-		if (lineH_ != nullptr)
+		if (lineH_ != nullptr) {
 			lineH_->getComponent<Transform>()->setPos(Vector2D(x + H_LINE_OFFSET_X, y + H_LINE_OFFSET_Y));
-		if (lineV_ != nullptr)
+			lineH_->getComponent<Transform>()->setFloor(tr->getFloor());
+		}
+		if (lineV_ != nullptr) {
 			lineV_->getComponent<Transform>()->setPos(Vector2D(x + V_LINE_OFFSET_X, y + V_LINE_OFFSET_Y));
-
+			lineV_->getComponent<Transform>()->setFloor(tr->getFloor());
+		}
 		auto cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 		x -= cam.x;
 		y -= cam.y;
@@ -141,11 +148,10 @@ void PossesionGame::updateGamePos() {
 }
 
 void PossesionGame::reachedEnd() {
-	if (!roundPassed_)
+	if (!roundPassed_) {
 		mistakes_++;
-	else if (!failed_)
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("wrongNote");
-
+	}
 	roundPassed_ = false;
 	failed_ = false;
 
@@ -161,7 +167,7 @@ void PossesionGame::succesfulHit() {
 	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("rightNote");
 
 	//Si no hemos fallado la prueba antes, se da por pasada
-	if(!failed_) roundPassed_ = true;
+	roundPassed_ = true;
 	
 	//Se decrementa la probabilidad de infarto
 	auto* str = possesed_->getComponent<Stroke>();

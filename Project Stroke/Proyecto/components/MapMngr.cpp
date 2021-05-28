@@ -109,7 +109,7 @@ void MapMngr::update() {
 			triggerFtCamera.pop();
 
 			//TUTORIAL
-			if (!sdlutils().tutorialDone() && stoi(trigger.getName()) < 4) {
+			if (!sdlutils().tutorialDone() && stoi(trigger.getName()) < 4 ) {
 				entity_->getMngr()->getHandler<dialogosMngr>()->getComponent<dialogos>()->dialogoStateChange();
 			}
 		}
@@ -141,7 +141,6 @@ void MapMngr::loadNewMap(string map) {
 	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
 
 	if (map_.load(map)) {
-
 		if (map == "resources/images/tiled/Level1Boss.tmx") {
 			scale = 2.4f;
 			entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setcShake(true);
@@ -151,7 +150,6 @@ void MapMngr::loadNewMap(string map) {
 			scale = 3.0f;
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
 		}
-
 
 		mapHeight_ = map_.getProperties()[0].getIntValue() * TAM_CELDA * scale;
 
@@ -278,7 +276,7 @@ void MapMngr::loadNewMap(string map) {
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 2 * 256.0f, 0.0f, 1, 1);
 
-							micro->addComponent<EntityAttribs>(300 + 150 * hamstersToLoad_.size(), 0.0, "soldier1", Vector2D(0, 0), 0, 0, 20, true, false, false);
+							micro->addComponent<EntityAttribs>(900 + 150 * hamstersToLoad_.size(), 0.0, "soldier1", Vector2D(0, 0), 0, 0, 20, true, false, false);
 							/*EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, int marg);
 							EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty, bool canBPois);*/
 
@@ -673,7 +671,7 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + object.getAABB().width) * scale, object.getPosition().y * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.25);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 10, 20, 70);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 10, 200000000, 70);
 	}
 	else if (name == "monchi") {
 		tam = 86;
@@ -751,7 +749,6 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 		hamster1->addComponent<Stroke>(farirStrat);
 	}
 	hamster1->addComponent<Knockback>();
-	hamster1->addComponent<GetItem>();
 
 	//Handlr
 	hamster1->addComponent<ControlHandler>(hamster1->getComponent<EntityAttribs>()->getNumber());

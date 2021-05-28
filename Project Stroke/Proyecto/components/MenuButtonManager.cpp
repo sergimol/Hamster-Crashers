@@ -90,12 +90,14 @@ void MenuButtonManager::init() {
 		angelbutton->addComponent<MenuButton>("angel", Vector2D(1510, 118), stateNumber_);
 		buttons_[4][0] = angelbutton;
 
-		auto backgrText = &sdlutils().images().at("hamsterSelectorBlank");
+		Texture* backgrText;
 
 		if (!sdlutils().angelUnlocked()) {
 			angelbutton->getComponent<MenuButton>()->setSelectable(false);
 			backgrText = &sdlutils().images().at("hamsterSelectorBlankLocked");
 		}
+		else
+			backgrText = &sdlutils().images().at("hamsterSelectorBlank");
 
 		background_ = entity_->getMngr()->addMenuBackground(); 
 		background_->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
@@ -335,4 +337,10 @@ void MenuButtonManager::updateIndicator(int i, bool isUp) {
 void MenuButtonManager::resetIndicators() {
 	for (int i = 0; i < indicators_.size(); ++i)
 		indicators_[i]->getComponent<MenuIndicator>()->reset();
+}
+
+void MenuButtonManager::unlockAngelBackground() {
+	// Hago esto porque cambiarle la textura al fondo no funciona, así que hay quitar el fondo y volverlo a crear
+	background_->removeComponent<BackGround>();
+	background_->addComponent<BackGround>(&sdlutils().images().at("hamsterSelectorBlank"), 0, false);
 }

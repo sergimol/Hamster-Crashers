@@ -48,7 +48,7 @@ void GhostCtrl::update() {
 						startPossesion(e);
 				}
 				else {
-					deleteKey();
+					if (keyTx_ != nullptr) keyTx_->getComponent<Image>()->setActive(false);
 				}
 			}
 		}
@@ -57,15 +57,15 @@ void GhostCtrl::update() {
 
 void GhostCtrl::render() {
 	//Si estamos en contacto con un posible "host" para poseer, muestra la imagen del botón
-	/*if (show_) {
-		cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-		Vector2D renderPos = Vector2D(tr_->getPos().getX() - cam.x, tr_->getPos().getY() + tr_->getZ() - cam.y);
-		SDL_Rect dest = build_sdlrect(renderPos, KEY_WIDTH, KEY_HEIGHT);
-		if (isController_)
-			buttonTx_->render(dest);
-		else
-			keyTx_->render(dest);
+	/*if (keyTx_ != nullptr) {
+		if (show_) {
+
+		}
+		else {
+
+		}
 	}*/
+
 }
 
 void GhostCtrl::startPossesion(Entity* e) {
@@ -93,25 +93,29 @@ void GhostCtrl::generateKey() {
 	if (keyTx_ == nullptr) {
 		keyTx_ = new Entity(entity_->getMngr());
 		auto pos = tr_->getPos();
-		auto tr = keyTx_->addComponent<Transform>(Vector2D(pos.getX() + tr_->getW() / 2, pos.getY()),
+		keyTx_->addComponent<Transform>(Vector2D(pos.getX() + tr_->getW() / 2, pos.getY() - tr_->getZ()),
 			Vector2D(0, 0),
-			KEY_WIDTH, KEY_HEIGHT, 0, tr_->getZ(), false, 1, 1);
-		tr->setZ(tr_->getZ());
-		tr->setFloor(tr_->getFloor());
+			KEY_WIDTH, KEY_HEIGHT, 0, 1, 1)->setFloor(tr_->getFloor());
 		keyTx_->addComponent<Image>(&sdlutils().images().at(isController_ ? "b" : "q"));
 		entity_->getMngr()->getUIObjects().push_back(keyTx_);
+	}
+	else {
+		keyTx_->getComponent<Image>()->setActive(true);
 	}
 }
 
 void GhostCtrl::updateKey() {
 	if (keyTx_ != nullptr) {
 		auto pos = tr_->getPos();
-		keyTx_->getComponent<Transform>()->setPos(Vector2D(pos.getX() + tr_->getW()/2, pos.getY()));
+		keyTx_->getComponent<Transform>()->setPos(Vector2D(pos.getX() + tr_->getW()/2, pos.getY() - tr_->getZ()));
+		keyTx_->getComponent<Transform>()->setFloor(tr_->getFloor());
 	}
 }
 
 void GhostCtrl::deleteKey() {
 	if (keyTx_ != nullptr) {
+		keyTx_->setActive(false);
+		entity_->getMngr()->refreshUIObjects();
 		delete keyTx_;
 		keyTx_ = nullptr;
 	}

@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include "ImageSecuence.h"
 #include "EnemyMother.h"
+#include "../ecs/Camera.h"
 #include "MenuButton.h"
 #include "Creditos.h"
 #include "MenuIndicator.h"
@@ -62,6 +63,7 @@ void Transition::fadeOut() {
 	if (alpha >= SDL_ALPHA_OPAQUE) {
 		alpha = SDL_ALPHA_OPAQUE;
 		alphaCalc = (float)SDL_ALPHA_OPAQUE;
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("nextPage");
 		if (change)
 			sceneTransition();
 		startFadeOut();
@@ -73,7 +75,6 @@ void Transition::fadeIn() {
 	if (alpha == SDL_ALPHA_OPAQUE) {
 		if ( numTReference > 0) {
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("stopTutorial");
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("nextPage");
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("transition");
 			numTReference--;
 		}
@@ -95,6 +96,27 @@ void Transition::fadeIn() {
 		alpha = SDL_ALPHA_TRANSPARENT;
 		alphaCalc = (float)SDL_ALPHA_TRANSPARENT;
 		fadingIn = false;
+		if (numTReference == 0)
+		{
+			if (nameScene_ == "Level1" && playeasonido) {
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1GameVersion");
+			}
+			else if (nameScene_ == "Level2" && playeasonido) {
+				sdlutils().setTutorialDone();
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersNivel2GameVersion");
+			}
+			else if (nameScene_ == "Level3" && playeasonido) {
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersNivel4GameVersion");
+			}
+			else if (nameScene_ == "Level3Micro" && playeasonido) {
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersNivel4_Boss2");
+			}
+			else if (nameScene_ == "final" && playeasonido) {
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1GameVersion");
+			}
+			playeasonido = !playeasonido;
+		}
 	}
 }
 
@@ -127,6 +149,7 @@ void Transition::sceneTransition() {
 
 		//Elimino los efectos del nivel anterior
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopBossSounds();
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopTutorial();
 
 
 		for (Entity* e : entity_->getMngr()->getTiles())
@@ -183,6 +206,11 @@ void Transition::createMap() {
 	if (nameScene_ == "final") {
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetNumInts();
 		entity_->addComponent<Creditos>();
+		// Desbloqueo de angel
+		sdlutils().unlockAngel();
+		auto hms = entity_->getMngr()->getHandler<HamsterSelectionMenu>()->getComponent<MenuButtonManager>();
+		hms->getButtons()[4][0]->getComponent<MenuButton>()->setSelectable(true);
+		hms->unlockAngelBackground();
 	}
 	else if (nameScene_ == "hasMuerto") {
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetNumInts();
@@ -215,13 +243,22 @@ void Transition::createMap() {
 		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::Players);
 	}
 	else if (changeMap_) {
+		if (nameScene_ == "Level3") {
+			auto cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
+			cam->changeCamState(State::Players);
+			cam->setGoToCat(false);
+			cam->setGoToTracker(false);
+		}
 		auto* mapa = entity_->getMngr()->getHandler<Map>();
 		mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/" + nameScene_ + ".tmx");
 
 		//Metemos al mapa en el Handler de Map
-		entity_->getMngr()->setHandler<Map>(mapa);
+		//entity_->getMngr()->setHandler<Map>(mapa);
 
-		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setMap(mapa->getComponent<MapMngr>());
+		auto cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
+
+		cam->changeCamState(State::Players);
+		cam->setMap(mapa->getComponent<MapMngr>());
 	}
 }
 
