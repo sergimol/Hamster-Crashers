@@ -120,15 +120,15 @@
     },
     {
       "id": "angelHead1",
-      "file": "resources/images/UI//hamsterUI/ketaHead.png"
+      "file": "resources/images/UI//hamsterUI/angelHead.png"
     },
     {
       "id": "angelHead2",
-      "file": "resources/images/UI//hamsterUI/ketaHeadDep.png"
+      "file": "resources/images/UI//hamsterUI/angelHeadDep.png"
     },
     {
       "id": "angelHead3",
-      "file": "resources/images/UI//hamsterUI/ketaHeadGhost.png"
+      "file": "resources/images/UI//hamsterUI/angelHeadGhost.png"
     },
     {
       "id": "monchiHead1",
@@ -1875,6 +1875,10 @@
     {
       "id": "AngelDamage3",
       "file": "resources/sound/angelHamster/recibirDamages3.mp3"
+    },
+    {
+      "id": "angelUlti",
+      "file": "resources/sound/angelHamster/ultiAngel.wav"
     }
   ],
 

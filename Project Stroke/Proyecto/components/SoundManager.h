@@ -72,6 +72,7 @@ public:
 	int initMicrowaveExplosionVol = 60;
 
 	int initAngelVol = 100;
+	int angelUlti = 60;
 
 	void resetNumInts();
 private:
@@ -326,7 +327,7 @@ private:
 	SoundEffect* AngelHit3;
 
 	SoundEffect* AngelDep;
-
+	SoundEffect* AngelUlti;
 
 };
 
