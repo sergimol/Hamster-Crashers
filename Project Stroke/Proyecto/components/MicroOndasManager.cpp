@@ -5,18 +5,21 @@
 #include "Stun.h"
 #include "AnimHamsterStateMachine.h"
 #include "Transition.h"
+#include "Animator.h"
+#include "AnimEnemyStateMachine.h"
 
 MicroOndasManager::MicroOndasManager(int hamN, Texture* tx, Texture* tx2) :
 	tr_(nullptr),
 	hamsNum_(hamN), rightAttribs_(nullptr), leftAttribs_(nullptr),
-	timer_(0), timeToEnd_(30000), lastTime_(sdlutils().currRealTime()),
+	timer_(0), timeToEnd_(90000), lastTime_(sdlutils().currRealTime()),
 	phaseComplete_(false), hamsterDead_(false), tx_(tx), txBat_(tx2),
 	auxX(0), auxY(0), hits_(1), damageInPercent_(0.25f), gamestate(nullptr),
-	defeated(false), startEnding_(0), waitEnding_(2000)
+	defeated(false), startEnding_(0), waitEnding_(2500)
 {
 }
 
 void MicroOndasManager::init() {
+	auto auxScale = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->getScale();
 	tx_->setBlendMode(SDL_BLENDMODE_BLEND);
 	tx_->setAlpha(0.0f);
 
@@ -50,40 +53,55 @@ void MicroOndasManager::init() {
 
 	right_ = entity_->getMngr()->addEntity();		//Referencia a los cables derechos
 	rightTr_ = right_->addComponent<Transform>(
-		tr_->getPos() + Vector2D(250,0), Vector2D(), 256.0f, 256.0f, 0.0f, 0.8f, 0.8f);
-	rightTr_->getFlip() = true;
+		tr_->getPos() + Vector2D(224 * auxScale,0 ), Vector2D(), 96 * auxScale, 186 * auxScale, 0.0f, 0.8f, 0.8f);
 
 	right_->setGroup<Enemy>(true);
 	
 	right_->addComponent<EnemyStateMachine>();
-	rightAttribs_ = right_->addComponent<EntityAttribs>(100 + (hamsNum_ * 50), 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 20, true, false, false);
+	rightAttribs_ = right_->addComponent<EntityAttribs>(300 + (hamsNum_ * 50), 0.0, "pirulo2", Vector2D(4.5, 2), 0, 0, 20, true, false, false);
 	
 	right_->addComponent<EnemyAttack>();
 	right_->addComponent<MovementSimple>();
 	right_->addComponent<EnemyBehaviour>(new IddleEnemy());
 
 
-	right_->addComponent<Image>(&sdlutils().images().at("cables"));
+	right_->addComponent<Animator>(&sdlutils().images().at("pirulo2Sheet"),
+		96,
+		186,
+		3,
+		3,
+		220,
+		Vector2D(),
+		3)->play(sdlutils().anims().at("pirulo2_idle"));
+
+	right_->addComponent<AnimEnemyStateMachine>();
 
 	entity_->getMngr()->getEnemies().push_back(right_);
 
 
 	left_ = entity_->getMngr()->addEntity();		//Referencia al cable iz
 	leftTr_ = left_->addComponent<Transform>(
-		tr_->getPos() + Vector2D(-250, 0), Vector2D(), 256.0f, 256.0f, 0.0f, 0.8f, 0.8f);
-	leftTr_->getFlip() = true;
+		tr_->getPos() + Vector2D((-256 - 64 ) * auxScale, 0), Vector2D(), 96 * auxScale, 186 * auxScale, 0.0f, 0.8f, 0.8f);
 	left_->setGroup<Enemy>(true);
 	
 
 	left_->addComponent<EnemyStateMachine>();
-	leftAttribs_ = left_->addComponent<EntityAttribs>(100 + (hamsNum_ * 50), 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 20, true, false, false);
+	leftAttribs_ = left_->addComponent<EntityAttribs>(300 + (hamsNum_ * 50), 0.0, "pirulo1", Vector2D(4.5, 2), 0, 0, 20, true, false, false);
 	
 	left_->addComponent<EnemyAttack>();
 	left_->addComponent<MovementSimple>();
 	left_->addComponent<EnemyBehaviour>(new IddleEnemy());
 
+	left_->addComponent<Animator>(&sdlutils().images().at("pirulo1Sheet"),
+		96,
+		186,
+		3,
+		3,
+		220,
+		Vector2D(),
+		3)->play(sdlutils().anims().at("pirulo1_idle"));
 
-	left_->addComponent<Image>(&sdlutils().images().at("cables"));
+	left_->addComponent<AnimEnemyStateMachine>();
 
 
 	entity_->getMngr()->getEnemies().push_back(left_);
@@ -92,21 +110,28 @@ void MicroOndasManager::init() {
 
 	bateria_ = entity_->getMngr()->addEntity();		//Referencia al cable iz
 	bateriaTr_ = bateria_->addComponent<Transform>(
-		tr_->getPos() + Vector2D(0, -250), Vector2D(), 256.0f, 256.0f, 0.0f, 0.8f, 0.8f);
-	bateriaTr_->getFlip() = true;
+		tr_->getPos() + Vector2D(-64 * auxScale , -64 * auxScale), Vector2D(), 128.0f * auxScale, 140.0f * auxScale, 0.0f, 0.8f, 0.8f);
 	bateria_->setGroup<Enemy>(true);
 	
 
 	bateria_->addComponent<EnemyStateMachine>();
-	bateriaAttribs_ = bateria_->addComponent<EntityAttribs>(100 + (hamsNum_ * 50), 0.0, "soldier1", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
+	bateriaAttribs_ = bateria_->addComponent<EntityAttribs>(300 + (hamsNum_ * 50), 0.0, "piruloGordo", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
 	
 	bateria_->addComponent<EnemyAttack>();
 	bateria_->addComponent<MovementSimple>();
 	bateria_->addComponent<EnemyBehaviour>(new IddleEnemy());
 
 
+	bateria_->addComponent<Animator>(&sdlutils().images().at("piruloGordoSheet"),
+		128,
+		140,
+		3,
+		3,
+		220,
+		Vector2D(),
+		3)->play(sdlutils().anims().at("piruloGordo_idle"));
 
-	bateria_->addComponent<Image>(&sdlutils().images().at("bateria"))->setActive(false);
+	bateria_->addComponent<AnimEnemyStateMachine>();
 
 
 	entity_->getMngr()->getEnemies().push_back(bateria_);
@@ -114,7 +139,7 @@ void MicroOndasManager::init() {
 	//añadir la interafz de la vida
 	
 
-	entity_->addComponent<UI>("canelon", 4);
+	entity_->addComponent<UI>("micro", 4);
 
 	handTurn_ = sdlutils().rand().nextInt(0, 2) == 0;
 
@@ -162,7 +187,6 @@ void MicroOndasManager::update() {
 	//cuando los dos cables han petado
 	if (bateria_ != nullptr && right_ == nullptr && left_ == nullptr && bateriaAttribs_->checkInvulnerability()) {
 		bateriaAttribs_->setInvincibility(false);
-		bateria_->getComponent<Image>()->setActive(true);
 		//hacer la animacion en al que cae la bateria
 	}
 
@@ -207,14 +231,15 @@ void MicroOndasManager::update() {
 				e->getComponent<EntityAttribs>()->setLife(e->getComponent<EntityAttribs>()->getMaxLife()  - e->getComponent<EntityAttribs>()->getMaxLife() * timer_ / timeToEnd_);
 				//e->getComponent<EntityAttribs>()->die();
 				//cada cuarto de tiempo le hace daño
-				if ((timer_ / timeToEnd_) >= ((float)hits_ * damageInPercent_)) {
+				if ((timer_ / timeToEnd_) >= ((float)hits_ * damageInPercent_) && !e->getComponent<EntityAttribs>()->checkInvulnerability()) {
 					//como le doy una tollina a un bicho?
-					e->getComponent<EntityAttribs>()->recieveDmg(0);
-					//sonido de la ostia
-
-					entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
-
 					auto& hamStateM = e->getComponent<HamsterStateMachine>()->getState();
+
+						e->getComponent<EntityAttribs>()->recieveDmg(0);
+						//sonido de la ostia
+
+						entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
+
 
 					if (hamStateM != HamStates::DEAD && hamStateM != HamStates::INFARCTED) {
 						//Si tiene stun, se aplica

@@ -145,64 +145,66 @@ bool FinalBossManager::isWithinAttackRange(Transform* tr, bool fist) {
 }
 
 void FinalBossManager::update() {
+	if (entity_->getMngr()->getHandler<FinalBoss>() != nullptr) {
 
-	//COMPROBACION DE CINEMATICA
-	if (!startBehavior_)
-	{
-		//FIN DE CINEMATICA
-		if (handAnim_->getState() == EnemyStatesAnim::SEQUENCE && hand_->getComponent<Animator>()->OnAnimationFrameEnd())
+		//COMPROBACION DE CINEMATICA
+		if (!startBehavior_)
 		{
-			startBehavior_ = true;
-			handAnim_->setAnimBool(EnemyStatesAnim::SEQUENCE, false);
-			//Empieza la musica del boss
-			hand_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1Boss1_0");
-			hand_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handInit");
+			//FIN DE CINEMATICA
+			if (handAnim_->getState() == EnemyStatesAnim::SEQUENCE && hand_->getComponent<Animator>()->OnAnimationFrameEnd())
+			{
+				startBehavior_ = true;
+				handAnim_->setAnimBool(EnemyStatesAnim::SEQUENCE, false);
+				//Empieza la musica del boss
+				hand_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1Boss1_0");
+				hand_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handInit");
 
-		}
-	}
-	//SE ACABA LA CINEMATICA, EMPIEZA EL COMPORTAMIENTO DEL BOSS
-	else if (lockedHamster_ != nullptr && lockedHamStatePunch_ != nullptr) {
-
-		if (bossAtk_->checkAttackFinished() || bossPunch_->checkAttackFinished()) {
-			handTurn_ = sdlutils().rand().nextInt(0, 100) < 65;
-			bossAtk_->resetAttackFinished();
-			bossPunch_->resetAttackFinished();
-			waitingTime_ = sdlutils().currRealTime();
-		}
-
-		handTurn_ ? movement(fistTr_, hamsterTrPunch_, movPunch_) : movement(handTr_, hamsterTr_, movHand_);
-
-		// Cambia el foco si el actual muere o le da un infarto
-		if (lockedHamState_->cantBeTargeted() || lockedHamStatePunch_->cantBeTargeted()) {
-			lockHamster();
-		}
-		else if (!bossAtk_->getAttackStarted() && !bossPunch_->getAttackStarted()) { // si no cambia de hamster marcado Y no está en medio de un ataque
-
-			handTurn_ ? movement(handTr_, hamsterTr_, movHand_) : movement(fistTr_, hamsterTrPunch_, movPunch_);
-
-			bool attRange = handTurn_ ? isWithinAttackRange(handTr_, false) : isWithinAttackRange(fistTr_, true);
-
-			if (attRange && sdlutils().currRealTime() > waitingTime_ + waitingCD_) {
-				if (handTurn_) bossAtk_->LaunchAttack();
-				else bossPunch_->LaunchAttack();
-				waitingTime_ = sdlutils().currRealTime();
-
-				//lockHamster();
 			}
 		}
-		else {
-			float fistLife = fistAttribs_->getLife();
-			float handLife = handAttribs_->getLife();
-			if (fistLife > handLife)
-				fistAttribs_->setLife(handLife);
-			else if (handLife > fistLife)
-				handAttribs_->setLife(fistLife);
+		//SE ACABA LA CINEMATICA, EMPIEZA EL COMPORTAMIENTO DEL BOSS
+		else if (lockedHamster_ != nullptr && lockedHamStatePunch_ != nullptr) {
 
-			//waitingTime_ = sdlutils().currRealTime();
+			if (bossAtk_->checkAttackFinished() || bossPunch_->checkAttackFinished()) {
+				handTurn_ = sdlutils().rand().nextInt(0, 100) < 65;
+				bossAtk_->resetAttackFinished();
+				bossPunch_->resetAttackFinished();
+				waitingTime_ = sdlutils().currRealTime();
+			}
+
+			handTurn_ ? movement(fistTr_, hamsterTrPunch_, movPunch_) : movement(handTr_, hamsterTr_, movHand_);
+
+			// Cambia el foco si el actual muere o le da un infarto
+			if (lockedHamState_->cantBeTargeted() || lockedHamStatePunch_->cantBeTargeted()) {
+				lockHamster();
+			}
+			else if (!bossAtk_->getAttackStarted() && !bossPunch_->getAttackStarted()) { // si no cambia de hamster marcado Y no está en medio de un ataque
+
+				handTurn_ ? movement(handTr_, hamsterTr_, movHand_) : movement(fistTr_, hamsterTrPunch_, movPunch_);
+
+				bool attRange = handTurn_ ? isWithinAttackRange(handTr_, false) : isWithinAttackRange(fistTr_, true);
+
+				if (attRange && sdlutils().currRealTime() > waitingTime_ + waitingCD_) {
+					if (handTurn_) bossAtk_->LaunchAttack();
+					else bossPunch_->LaunchAttack();
+					waitingTime_ = sdlutils().currRealTime();
+
+					//lockHamster();
+				}
+			}
+			else {
+				float fistLife = fistAttribs_->getLife();
+				float handLife = handAttribs_->getLife();
+				if (fistLife > handLife)
+					fistAttribs_->setLife(handLife);
+				else if (handLife > fistLife)
+					handAttribs_->setLife(fistLife);
+
+				//waitingTime_ = sdlutils().currRealTime();
+			}
 		}
+		else if (startBehavior_)
+			lockHamster();
 	}
-	else if (startBehavior_)
-		lockHamster();
 }
 
 void FinalBossManager::movement(Transform* tr, Transform* hamsterTr, MovementSimple* mov) {

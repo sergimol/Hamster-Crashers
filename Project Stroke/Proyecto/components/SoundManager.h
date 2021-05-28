@@ -71,6 +71,7 @@ public:
 	int initMicrowaveVol = 128;
 	int initMicrowaveExplosionVol = 60;
 
+	int initAngelVol = 100;
 
 	void resetNumInts();
 private:
@@ -106,6 +107,9 @@ private:
 	void  playHandInit();
 	void  playHandPunch();
 	void  playHandHit();
+
+	void  playAngelHit();
+	void  playAngelAttack();
 
 	void playTrap();
 
@@ -306,6 +310,22 @@ private:
 	SoundEffect* microExplosion;
 	SoundEffect* microStatic;
 	SoundEffect* microTiktak;
+
+	//Angel
+	SoundEffect* AngelAttack0;
+	SoundEffect* AngelAttack1;
+	SoundEffect* AngelAttack2;
+	SoundEffect* AngelAttack3;
+	SoundEffect* AngelAttack4;
+	SoundEffect* AngelAttack5;
+
+	SoundEffect* AngelHit0;
+	SoundEffect* AngelHit1;
+	SoundEffect* AngelHit2;
+	SoundEffect* AngelHit3;
+
+	SoundEffect* AngelDep;
+
 
 };
 

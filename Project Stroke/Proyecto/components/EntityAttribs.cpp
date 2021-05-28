@@ -267,22 +267,30 @@ void EntityAttribs::die() {
 	traux->setZ(tr_->getZ());
 	traux->setGravity(e->addComponent<Gravity>());
 
-	int tam = 0;
+	int tamX, tamY = 0;
 
 	if (id_ == "sardinilla" || id_ == "monchi" || id_ == "soldier1" || id_ == "soldier2" || id_ == "bicho" || id_ == "naranja") {
-		tam = 86;
+		tamX = tamY = 86;
 	}
 	else if (id_ == "canelon" || id_ == "canelonDemon" || id_ == "monosinpatico" || id_ == "rata") {
-		tam = 128;
+		tamX = tamY = 128;
 	}
 	else if (id_ == "keta") {
-		tam = 100;
+		tamX = tamY = 100;
+	}
+	else if (id_ == "pirulo1" || id_ == "pirulo2") {
+		tamX = 96; 
+		tamY = 186;
+	}
+	else if (id_ == "piruloGordo") {
+		tamX = 128;
+		tamY = 140;
 	}
 	e->addComponent<Shadow>(false, true);
 	//Y reproducimos la animacion de muerto
 	e->addComponent<Animator>(&sdlutils().images().at(id_ + "Sheet"),
-		tam,
-		tam,
+		tamX,
+		tamY,
 		3,
 		3,
 		220,
@@ -318,17 +326,13 @@ void EntityAttribs::die() {
 		}
 	}
 	else {
-		if (entity_->getMngr()->getHandler<Boss>() == entity_) {
-			entity_->getMngr()->setHandler<Boss>(nullptr);
-			entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setcShake(false);
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
-			Mix_FadeOutMusic(2000);
+	/*	if (entity_->getMngr()->getHandler<Boss>() == entity_) {
 
 		}
-		else if (entity_->getMngr()->getHandler<FinalBoss>() == entity_) {
+		else */if (entity_->getMngr()->getHandler<FinalBoss>() == entity_) {
 			entity_->getMngr()->setHandler<FinalBoss>(nullptr);
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
-
+			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level3Boss", true, 2);
 		}
 
 		//solamente para los enemigos
@@ -341,6 +345,10 @@ void EntityAttribs::die() {
 		else if (id_ == "bicho" || id_ == "rata" || id_ == "naranja")
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("dep");
 		else if (id_ == "calcetin") {
+			entity_->getMngr()->setHandler<Boss>(nullptr);
+			entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setcShake(false);
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
+			Mix_FadeOutMusic(2000);
 			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 5);
 		}
 

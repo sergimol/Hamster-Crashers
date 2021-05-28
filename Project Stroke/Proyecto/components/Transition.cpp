@@ -102,6 +102,7 @@ void Transition::fadeIn() {
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1GameVersion");
 			}
 			else if (nameScene_ == "Level2" && playeasonido) {
+				sdlutils().setTutorialDone();
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersNivel2GameVersion");
 			}
@@ -110,6 +111,9 @@ void Transition::fadeIn() {
 			}
 			else if (nameScene_ == "Level3Micro" && playeasonido) {
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersNivel4_Boss2");
+			}
+			else if (nameScene_ == "final" && playeasonido) {
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1GameVersion");
 			}
 			playeasonido = !playeasonido;
 		}
@@ -202,6 +206,11 @@ void Transition::createMap() {
 	if (nameScene_ == "final") {
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetNumInts();
 		entity_->addComponent<Creditos>();
+		// Desbloqueo de angel
+		sdlutils().unlockAngel();
+		auto hms = entity_->getMngr()->getHandler<HamsterSelectionMenu>()->getComponent<MenuButtonManager>();
+		hms->getButtons()[4][0]->getComponent<MenuButton>()->setSelectable(true);
+		hms->unlockAngelBackground();
 	}
 	else if (nameScene_ == "hasMuerto") {
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetNumInts();
