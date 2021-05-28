@@ -152,7 +152,6 @@ void MapMngr::loadNewMap(string map) {
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
 		}
 
-
 		mapHeight_ = map_.getProperties()[0].getIntValue() * TAM_CELDA * scale;
 
 		mapDimensions_ = map_.getTileCount();
@@ -484,7 +483,7 @@ void MapMngr::loadEnemyRoom() {
 
 			auto* enTr = enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(), 86 * scale, 86 * scale, 0.0f, 0, 0, 0.4, 0.5);
+				Vector2D(), 86 * scale, 86 * scale, 0.0f, 0, 0, 0.3, 0.35);
 			/*
 			hamster1->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
@@ -536,7 +535,7 @@ void MapMngr::loadEnemyRoom() {
 			auto* enemy = mngr_->addEntity();
 			auto* enTr = enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(), 128 * scale, 128 * scale, 0.0f, 0, 0, 0.3, 0.5);
+				Vector2D(), 128 * scale, 128 * scale, 0.0f, 0, 0, 0.35, 0.4);
 
 			enTr->setFloor(prop[0].getIntValue() * TAM_CELDA * scale);
 			enTr->setFloor(prop[0].getIntValue() * TAM_CELDA * scale);
@@ -673,7 +672,7 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + object.getAABB().width) * scale, object.getPosition().y * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.25);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 10, 20, 70);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 10, 200000000, 70);
 	}
 	else if (name == "monchi") {
 		tam = 86;
@@ -751,7 +750,6 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 		hamster1->addComponent<Stroke>(farirStrat);
 	}
 	hamster1->addComponent<Knockback>();
-	hamster1->addComponent<GetItem>();
 
 	//Handlr
 	hamster1->addComponent<ControlHandler>(hamster1->getComponent<EntityAttribs>()->getNumber());

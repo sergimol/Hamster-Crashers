@@ -28,7 +28,7 @@ private:
 		level2 = "Level2",
 		level3 = "Level3",
 		level3Micro = "Level3Micro",
-		final = "Final",
+		final = "final",
 		controls = "controls",
 		hasMuerto = "hasMuerto",
 		hasGanado = "hasGanado",

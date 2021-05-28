@@ -22,7 +22,7 @@ void GetItem::update() {
 		cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
 		for (Entity* e : ents) {
 			//Si la entidad es un item...
-			if (e->isActive()) {
+			if (e->isActive() && e->hasComponent<Item>() && e->getComponent<Item>() != nullptr) {
 				//Cogemos el transform del item
 				auto eTR = e->getComponent<Transform>();
 
@@ -32,7 +32,7 @@ void GetItem::update() {
 				SDL_Rect rI = eTR->getRectCollide();
 
 				//Y comprobamos si colisiona
-				if (e->hasComponent<Item>() && Collisions::collides(Vector2D(rH.x, rH.y), rH.w, rH.h, Vector2D(rI.x, rI.y), rI.w, rI.h)) {
+				if (Collisions::collides(Vector2D(rH.x, rH.y), rH.w, rH.h, Vector2D(rI.x, rI.y), rI.w, rI.h)) {
 					//Comprobamos el tipo
 					switch (e->getComponent<Item>()->getItem()) {
 					case ItemType::Apple:
