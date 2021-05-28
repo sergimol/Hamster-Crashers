@@ -126,8 +126,7 @@ void Manager::render() {
 	//RENDER DE UI (MINIJUEGO DE INFARTO)
 	s = uiObjects_.size();
 	for (auto i = 0u; i < s; i++) {
-		if(uiObjects_[i]->isActive())
-			uiObjects_[i]->render();
+		uiObjects_[i]->render();
 	}
 
 	s = menus_.size();

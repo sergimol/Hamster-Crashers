@@ -48,6 +48,7 @@ void KeyGame::goBack() {
 	if (poss_ != nullptr) poss_->reachedEnd();
 	else if (reanim_ != nullptr) reanim_->reachedEnd();
 	pressed_ = false;
+	down_ = false;
 	progress_ = 0;
 }
 

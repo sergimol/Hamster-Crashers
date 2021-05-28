@@ -29,8 +29,9 @@ public:
 	inline void setTextureDown(Texture* txt) { txDown_ = txt; };
 
 	void updateGamePos(const SDL_Rect& hit, const SDL_Rect& trai, int dir);
-private:
+
 	void goBack();
+private:
 
 	Transform* tr_;
 	PossesionGame* poss_ = nullptr;
@@ -45,5 +46,5 @@ private:
 
 	int timer_, progress_ = 0, dirX_ = 0;
 
-	int pressedTime_ = 50, speed_;
+	int pressedTime_ = 30, speed_;
 };
