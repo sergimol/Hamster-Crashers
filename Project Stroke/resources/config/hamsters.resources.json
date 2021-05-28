@@ -293,6 +293,10 @@
     {
       "id": "objetosCocinaSombra",
       "file": "resources/images/tiled/tilesetSombrasObjetosLevel3.png"
+    }, 
+    {
+      "id": "microondas",
+      "file": "resources/images/tiled/tilesetMicroondas.png"
     },
     {
       "id": "q",
@@ -1266,6 +1270,18 @@
     {
       "id": "cat",
       "file": "resources/images/spritesheets/enemies/level2/cat_spritesheet.png"
+    },
+    {
+      "id": "pirulo1",
+      "file": "resources/images/spritesheets/enemies/level4/pirulo1_spritesheet.png"
+    },
+    {
+      "id": "pirulo2",
+      "file": "resources/images/spritesheets/enemies/level4/pirulo2_spritesheet.png"
+    },
+    {
+      "id": "piruloGordo",
+      "file": "resources/images/spritesheets/enemies/level4/pirulogordo_spritesheet.png"
     }
   ],
 
@@ -3393,6 +3409,90 @@
       "duration": 6,
       "cols": 5,
       "rows": 5,
+      "frameUpdate": 80,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "pirulo_idle",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 10,
+      "cols": 18,
+      "rows": 1,
+      "frameUpdate": 80,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "pirulo_hit",
+      "startFrameX": 10,
+      "startFrameY": 0,
+      "duration": 2,
+      "cols": 18,
+      "rows": 1,
+      "frameUpdate": 80,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "pirulo_death",
+      "startFrameX": 12,
+      "startFrameY": 0,
+      "duration": 6,
+      "cols": 18,
+      "rows": 1,
+      "frameUpdate": 80,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "piruloGordo_idle",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 9,
+      "cols": 18,
+      "rows": 1,
+      "frameUpdate": 80,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "piruloGordo_hit",
+      "startFrameX": 9,
+      "startFrameY": 0,
+      "duration": 2,
+      "cols": 18,
+      "rows": 1,
+      "frameUpdate": 80,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "piruloGordo_shield",
+      "startFrameX": 11,
+      "startFrameY": 0,
+      "duration": 1,
+      "cols": 18,
+      "rows": 1,
+      "frameUpdate": 80,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "piruloGordo_death",
+      "startFrameX": 12,
+      "startFrameY": 0,
+      "duration": 6,
+      "cols": 18,
+      "rows": 1,
       "frameUpdate": 80,
       "loop": 0,
       "chain": "",

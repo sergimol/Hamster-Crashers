@@ -135,15 +135,17 @@ void dialogos::dialogoStateChange() {
 
 //"dialogo3" o "dialogo3singleplayer" dependiendo del num de jugadores
 void dialogos::showStrokeTutorial(std::string text) {
-	dialogueNum_++;
-	//el sonido tendrá que ser diferente si es single o no
-	if (text == "dialogo3")
-		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("tutorial");
-	else
-		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("tutorialsingle");
+	if (sdlutils().tutorialDone()) {
+		dialogueNum_++;
+		//el sonido tendrá que ser diferente si es single o no
+		if (text == "dialogo3")
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("tutorial");
+		else
+			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("tutorialsingle");
 
-	dialogoText_ = &sdlutils().images().at(text);
-	explicacionText_ = &sdlutils().images().at("explicacion3");
-	showDialogue_ = true;
-	sdlutils().setTutorialDone();
+		dialogoText_ = &sdlutils().images().at(text);
+		explicacionText_ = &sdlutils().images().at("explicacion3");
+		showDialogue_ = true;
+		sdlutils().setTutorialDone();
+	}
 }

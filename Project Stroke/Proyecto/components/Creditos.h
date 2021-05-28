@@ -24,7 +24,7 @@ private:
 	bool scrolling = true;
 
 	int timer = 0;
-	const int UPDATE = 5;
+	const int UPDATE = 1;
 	const int ENDWAIT = 5000;
 };
 
