@@ -219,7 +219,7 @@ void Transition::createMap() {
 		mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/" + nameScene_ + ".tmx");
 
 		//Metemos al mapa en el Handler de Map
-		entity_->getMngr()->setHandler<Map>(mapa);
+		//entity_->getMngr()->setHandler<Map>(mapa);
 
 		auto cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
 
