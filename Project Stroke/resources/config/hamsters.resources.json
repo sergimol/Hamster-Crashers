@@ -293,6 +293,10 @@
     {
       "id": "objetosCocinaSombra",
       "file": "resources/images/tiled/tilesetSombrasObjetosLevel3.png"
+    }, 
+    {
+      "id": "microondas",
+      "file": "resources/images/tiled/tilesetMicroondas.png"
     },
     {
       "id": "q",
