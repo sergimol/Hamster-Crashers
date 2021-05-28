@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include "ImageSecuence.h"
 #include "EnemyMother.h"
+#include "../ecs/Camera.h"
 #include "MenuButton.h"
 #include "Creditos.h"
 #include "MenuIndicator.h"
@@ -215,6 +216,12 @@ void Transition::createMap() {
 		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::Players);
 	}
 	else if (changeMap_) {
+		if (nameScene_ == "Level3") {
+			auto cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
+			cam->changeCamState(State::Players);
+			cam->setGoToCat(false);
+			cam->setGoToTracker(false);
+		}
 		auto* mapa = entity_->getMngr()->getHandler<Map>();
 		mapa->getComponent<MapMngr>()->loadNewMap("resources/images/tiled/" + nameScene_ + ".tmx");
 
