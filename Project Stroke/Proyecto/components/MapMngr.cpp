@@ -109,7 +109,7 @@ void MapMngr::update() {
 			triggerFtCamera.pop();
 
 			//TUTORIAL
-			if (!sdlutils().tutorialDone() && stoi(trigger.getName()) < 4) {
+			if (!sdlutils().tutorialDone() && stoi(trigger.getName()) < 4 ) {
 				entity_->getMngr()->getHandler<dialogosMngr>()->getComponent<dialogos>()->dialogoStateChange();
 			}
 		}
@@ -151,7 +151,6 @@ void MapMngr::loadNewMap(string map) {
 			scale = 3.0f;
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
 		}
-
 
 		mapHeight_ = map_.getProperties()[0].getIntValue() * TAM_CELDA * scale;
 
@@ -673,7 +672,7 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + object.getAABB().width) * scale, object.getPosition().y * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.25);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 10, 20, 70);
+		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 10, 200000000, 70);
 	}
 	else if (name == "monchi") {
 		tam = 86;

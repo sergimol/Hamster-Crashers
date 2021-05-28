@@ -1803,6 +1803,50 @@
     {
       "id": "tiktak",
       "file": "resources/sound/microwave/tiktak.wav"
+    },
+    {
+      "id": "AngelAttack0",
+      "file": "resources/sound/angelHamster/atacar0.mp3"
+    },
+    {
+      "id": "AngelAttack1",
+      "file": "resources/sound/angelHamster/atacar1.mp3"
+    },
+    {
+      "id": "AngelAttack2",
+      "file": "resources/sound/angelHamster/atacar2.mp3"
+    },
+    {
+      "id": "AngelAttack3",
+      "file": "resources/sound/angelHamster/atacar3.mp3"
+    },
+    {
+      "id": "AngelAttack4",
+      "file": "resources/sound/angelHamster/atacar4.mp3"
+    },
+    {
+      "id": "AngelAttack5",
+      "file": "resources/sound/angelHamster/atacar5.mp3"
+    },
+    {
+      "id": "Angeldep",
+      "file": "resources/sound/angelHamster/morirse.mp3"
+    },
+    {
+      "id": "AngelDamage0",
+      "file": "resources/sound/angelHamster/recibirDamages0.mp3"
+    },
+    {
+      "id": "AngelDamage1",
+      "file": "resources/sound/angelHamster/recibirDamages1.mp3"
+    },
+    {
+      "id": "AngelDamage2",
+      "file": "resources/sound/angelHamster/recibirDamages2.mp3"
+    },
+    {
+      "id": "AngelDamage3",
+      "file": "resources/sound/angelHamster/recibirDamages3.mp3"
     }
   ],
 
