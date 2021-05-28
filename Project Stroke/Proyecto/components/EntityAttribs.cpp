@@ -14,6 +14,7 @@
 #include "SoundManager.h"
 #include "MapMngr.h"
 #include "EnemyMother.h"
+#include "FinalBossManager.h"
 
 EntityAttribs::EntityAttribs() :
 	health_(100),
@@ -231,8 +232,11 @@ bool EntityAttribs::recieveDmg(int dmg) {
 			EnemyBehaviour* eB = entity_->getComponent<EnemyBehaviour>();
 			if (eB != nullptr)
 				eB->die();
-			else
-				entity_->setActive(false);
+			else {
+				auto* boss = entity_->getMngr()->getHandler<FinalBoss>()->getComponent<FinalBossManager>();
+				if (boss != nullptr && boss->getHand() != entity_ && boss->getFist() != entity_)
+					entity_->setActive(false);
+			}
 		}
 		//Actualizamos UI
 		if (entity_->hasComponent<UI>())
@@ -301,7 +305,7 @@ void EntityAttribs::die() {
 
 	//TODO WHY ¿?
 	//Si la persona que muere es un hamster...
-	if (!entity_->hasGroup<Enemy>()) {
+	if (entity_->hasGroup<Ally>()) {
 
 		//Ponemos su UI a 'Muerto'
 		e->addComponent<UI>(id_, entity_->getComponent<UI>()->getPosUI())->dep("2");
@@ -326,12 +330,16 @@ void EntityAttribs::die() {
 	/*	if (entity_->getMngr()->getHandler<Boss>() == entity_) {
 
 		}
-		else */if (entity_->getMngr()->getHandler<FinalBoss>() == entity_) {
-			entity_->getMngr()->setHandler<FinalBoss>(nullptr);
-			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
-			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level3Boss", true, 2);
+		else */
+		if (entity_->hasComponent<FinalBossAttack>() || entity_->hasComponent<FinalBossPunch>()) {
+			auto* boss = entity_->getMngr()->getHandler<FinalBoss>()->getComponent<FinalBossManager>();
+			if (boss != nullptr && (boss->getHand() == entity_ || boss->getFist() == entity_)) {
+				boss->die();
+				entity_->getMngr()->setHandler<FinalBoss>(nullptr);
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
+				entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level3Boss", true, 2);
+			}
 		}
-
 		//solamente para los enemigos
 		//entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala
 		e->addComponent<Dying>();
@@ -349,7 +357,7 @@ void EntityAttribs::die() {
 			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 5);
 		}
 
-		entity_->setActive(false);
+		if(entity_->isActive()) entity_->setActive(false);
 	}
 
 

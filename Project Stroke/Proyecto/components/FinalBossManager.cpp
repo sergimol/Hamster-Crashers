@@ -46,7 +46,6 @@ void FinalBossManager::init() {
 	bossAtk_ = hand_->addComponent<FinalBossAttack>();
 	movHand_ = hand_->addComponent<MovementSimple>();
 
-	entity_->getMngr()->setHandler<FinalBoss>(hand_);
 	entity_->getMngr()->getEnemies().push_back(hand_);
 
 
@@ -142,6 +141,12 @@ bool FinalBossManager::isWithinAttackRange(Transform* tr, bool fist) {
 	}
 	else
 		return(hamX + hamWidth >= x + 3 * width / 4 && hamX <= x + 1 * width / 4);
+}
+
+void FinalBossManager::die(){
+	hand_->setActive(false);
+	fist_->setActive(false);
+	this->setActive(false);
 }
 
 void FinalBossManager::update() {

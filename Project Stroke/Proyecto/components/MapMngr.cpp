@@ -447,7 +447,7 @@ bool MapMngr::intersectFinalBoss(const SDL_Rect& hamster) {
 
 	bool collide = false;
 
-	if (boss != nullptr && boss->isActive() && boss->getComponent<FinalBossAttack>()->getCollide()) {
+	if (boss != nullptr && boss->isActive() && boss->getComponent<FinalBossManager>()->getHand()->getComponent<FinalBossAttack>()->getCollide()) {
 		auto bossRect = boss->getComponent<Transform>()->getRectCollide();
 		collide = Collisions::collides(Vector2D(hamster.x, hamster.y), hamster.w, hamster.h,
 			Vector2D(bossRect.x, bossRect.y), bossRect.w, bossRect.h);
@@ -620,7 +620,7 @@ void MapMngr::loadEnemyRoom() {
 				Vector2D(),164.0 * scale, 330.0f * scale, 0.0f, 0.8f, 0.8f)->getFlip() = true;
 
 			enemy->addComponent<FinalBossManager>(hamstersToLoad_.size(), scale);
-
+			mngr_->setHandler<FinalBoss>(enemy);
 			numberEnemyRoom++;
 
 			//CUANDO SE CONFIRME QUE FUNCIONA SE PUEDE BORRAR

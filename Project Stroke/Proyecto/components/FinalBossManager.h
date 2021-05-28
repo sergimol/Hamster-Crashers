@@ -32,12 +32,15 @@ public:
 
 	void lockHamster();
 	bool isWithinAttackRange(Transform* tr, bool fist);
+	void die();
+	inline Entity* getHand() const { return hand_; };
+	inline Entity* getFist() const { return fist_; };
 
 protected:
 private:
 
 	void movement(Transform* tr, Transform* hamsterTr, MovementSimple* mov);
-	
+
 	//hamster al que va a perseguir* en verdad solo queremos la propiedad tranform ahora mismo pero
 	// mas adelante es posible que nos interese conocer estados o componentes oportunos, por ahora no ahce daño verdad¿?¿
 	std::vector<Entity*> hamsters_;
