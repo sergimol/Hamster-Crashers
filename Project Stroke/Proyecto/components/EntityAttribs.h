@@ -71,6 +71,9 @@ public:
 	inline bool getPoisoned() const {
 		return poisoned_;
 	}
+	inline bool isDead() const {
+		return allDead;
+	}
 	inline int getCriticProb() const {
 		return critProbability_;
 	}
