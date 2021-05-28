@@ -165,6 +165,7 @@ void SoundManager::init() {
 	AngelAttack0 = &sdlutils().soundEffects().at("AngelAttack0");
 	AngelAttack1 = &sdlutils().soundEffects().at("AngelAttack1");
 	AngelAttack2 = &sdlutils().soundEffects().at("AngelAttack2");
+
 	AngelStrongAttack3 = &sdlutils().soundEffects().at("AngelDamage1");
 	AngelStrongAttack4 = &sdlutils().soundEffects().at("AngelDamage2");
 	AngelStrongAttack5 = &sdlutils().soundEffects().at("AngelDamage3");
@@ -175,6 +176,7 @@ void SoundManager::init() {
 	AngelHit3 = &sdlutils().soundEffects().at("AngelDamage3");
 
 	AngelDep = &sdlutils().soundEffects().at("Angeldep");
+	AngelUlti = &sdlutils().soundEffects().at("angelUlti");
 
 	Vector2D vol = sdlutils().volumes();
 	musicVol_ = vol.getX();
@@ -514,12 +516,16 @@ void SoundManager::play(std::string soundName) {
 		playAngelAttack();
 	}
 	else if (soundName == "angelstrongHit") {
-	AngelAttack0->setChannelVolume(fxVol_ * initAngelVol);
-	playAngelStrongAttack();
+		AngelAttack0->setChannelVolume(fxVol_ * initAngelVol);
+		playAngelStrongAttack();
 	}
 	else if (soundName == "angelDep") {
 		AngelDep->setChannelVolume(fxVol_ * initAngelVol);
 		AngelDep->play();
+	}
+	else if (soundName == "angelUlti") {
+		AngelUlti->setChannelVolume(fxVol_ * angelUlti);
+		AngelUlti->play();
 	}
 
 }

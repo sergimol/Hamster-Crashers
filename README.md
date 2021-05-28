@@ -1,7 +1,7 @@
 THE SQUEAKSHIP
 
 
-(CAPTURA DE PANTALLA DEL JUEGO)
+![H4thv5](https://user-images.githubusercontent.com/62661210/120047344-a1b7fa80-c014-11eb-9cb7-911a31d6d375.png)
 
 
 Juegos Asados
@@ -246,10 +246,10 @@ Sección de scroll automático en el sentido del movimiento del gato.
 Empuja a los Aliados al golpearlos
 
 ##### “La Mano”
-	Ataca de manera similar a “Mom” en The Binding of Isaac.
-	Son 2 entidades que comparten vida y se mantienen estáticos un tiempo para permitir que los hamsters le bajen la vida:
-	Una mano que funciona igual que “El Monstruo”, con el comportamiento añadido de hacer un barrido que solo puede ser esquivado saltando. Este nuevo movimiento sucederá 		después del 3º, 4º o 5º manotazo.
-	Un puño que cae del cielo y golpea a los aliados.
+Ataca de manera similar a “Mom” en The Binding of Isaac.
+Son 2 entidades que comparten vida y se mantienen estáticos un tiempo para permitir que los hamsters le bajen la vida:
+Una mano que funciona igual que “El Monstruo”, con el comportamiento añadido de hacer un barrido que solo puede ser esquivado saltando. Este nuevo movimiento sucederá 		después del 3º, 4º o 5º manotazo.
+Un puño que cae del cielo y golpea a los aliados.
 
  
 ### 3.2 Dinámica
