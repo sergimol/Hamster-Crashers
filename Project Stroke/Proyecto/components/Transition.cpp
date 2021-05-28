@@ -206,6 +206,11 @@ void Transition::createMap() {
 	if (nameScene_ == "final") {
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetNumInts();
 		entity_->addComponent<Creditos>();
+		// Desbloqueo de angel
+		sdlutils().unlockAngel();
+		auto hms = entity_->getMngr()->getHandler<HamsterSelectionMenu>()->getComponent<MenuButtonManager>();
+		hms->getButtons()[4][0]->getComponent<MenuButton>()->setSelectable(true);
+		hms->unlockAngelBackground();
 	}
 	else if (nameScene_ == "hasMuerto") {
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetNumInts();

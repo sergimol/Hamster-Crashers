@@ -141,7 +141,6 @@ void MapMngr::loadNewMap(string map) {
 	cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
 
 	if (map_.load(map)) {
-
 		if (map == "resources/images/tiled/Level1Boss.tmx") {
 			scale = 2.4f;
 			entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setcShake(true);
