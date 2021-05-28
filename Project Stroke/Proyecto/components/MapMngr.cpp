@@ -276,7 +276,7 @@ void MapMngr::loadNewMap(string map) {
 								Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
 								Vector2D(), 256.0f, 2 * 256.0f, 0.0f, 1, 1);
 
-							micro->addComponent<EntityAttribs>(300 + 150 * hamstersToLoad_.size(), 0.0, "soldier1", Vector2D(0, 0), 0, 0, 20, true, false, false);
+							micro->addComponent<EntityAttribs>(900 + 150 * hamstersToLoad_.size(), 0.0, "soldier1", Vector2D(0, 0), 0, 0, 20, true, false, false);
 							/*EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, int marg);
 							EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty, bool canBPois);*/
 
