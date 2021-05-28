@@ -37,7 +37,7 @@ void WarCry::init() {
 
 void WarCry::action() {
 	//Ahora empiezas la animacion
-
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("angelUlti");
 	//Mete los buffs
 	attribs_->setDmg(attribs_->getDmg() * dmgMultiplier_);
 	lightAtt_->setCadence(lightAtt_->getCadence() * attCadenceMultiplier_);

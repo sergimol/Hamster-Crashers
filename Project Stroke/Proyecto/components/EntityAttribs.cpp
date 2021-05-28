@@ -208,9 +208,13 @@ bool EntityAttribs::recieveDmg(int dmg) {
 	//Actualizamos la healthBar
 	if (entity_->hasComponent<UI>())
 		entity_->getComponent<UI>()->bar(-dmg);
+	if(id_ == "angel")
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("angelHit");
 	//Si la vida ha bajado de 0...
 	if (health_ <= 0) {
 		if (hms_ != nullptr) {
+			if (id_ == "angel")
+				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("angelDep");
 			hms_->getState() = HamStates::DEAD;
 			auto& ents = entity_->getMngr()->getPlayers();
 
@@ -273,7 +277,7 @@ void EntityAttribs::die() {
 
 	int tamX, tamY = 0;
 
-	if (id_ == "sardinilla" || id_ == "monchi" || id_ == "soldier1" || id_ == "soldier2" || id_ == "bicho" || id_ == "naranja") {
+	if (id_ == "sardinilla" || id_ == "monchi" || id_=="angel" || id_ == "soldier1" || id_ == "soldier2" || id_ == "bicho" || id_ == "naranja") {
 		tamX = tamY = 86;
 	}
 	else if (id_ == "canelon" || id_ == "canelonDemon" || id_ == "monosinpatico" || id_ == "rata") {
@@ -340,7 +344,7 @@ void EntityAttribs::die() {
 				boss->die();
 				entity_->getMngr()->setHandler<FinalBoss>(nullptr);
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
-				entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level1", true, 2);
+				entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level3Boss", true, 2);
 			}
 		}
 		//solamente para los enemigos

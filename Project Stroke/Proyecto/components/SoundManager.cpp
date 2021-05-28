@@ -166,9 +166,9 @@ void SoundManager::init() {
 	AngelAttack1 = &sdlutils().soundEffects().at("AngelAttack1");
 	AngelAttack2 = &sdlutils().soundEffects().at("AngelAttack2");
 
-	AngelStrongAttack3 = &sdlutils().soundEffects().at("AngelDamage1");
-	AngelStrongAttack4 = &sdlutils().soundEffects().at("AngelDamage2");
-	AngelStrongAttack5 = &sdlutils().soundEffects().at("AngelDamage3");
+	AngelStrongAttack3 = &sdlutils().soundEffects().at("AngelStrongAttack3");
+	AngelStrongAttack4 = &sdlutils().soundEffects().at("AngelStrongAttack4");
+	AngelStrongAttack5 = &sdlutils().soundEffects().at("AngelStrongAttack5");
 
 	AngelHit0 = &sdlutils().soundEffects().at("AngelDamage0");
 	AngelHit1 = &sdlutils().soundEffects().at("AngelDamage1");
