@@ -3454,7 +3454,7 @@
       "cols": 18,
       "rows": 1,
       "frameUpdate": 80,
-      "loop": 0,
+      "loop": 1,
       "chain": "",
       "attackFrame": -1
     },
