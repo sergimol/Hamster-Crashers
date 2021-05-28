@@ -1,3 +1,21 @@
+THE SQUEAKSHIP
+
+
+(CAPTURA DE PANTALLA DEL JUEGO)
+
+
+Juegos Asados
+
+
+# Pagina Web
+https://juegosasados.itch.io/the-squeakship
+
+# Pivotal
+https://www.pivotaltracker.com/n/projects/2489769
+
+
+### GDD ###
+
 # The SqueakShip
 ## Documento de diseño de videojuego 
 ![pasted image 0](https://user-images.githubusercontent.com/62880649/111375437-889edf00-869e-11eb-92d6-65eb4820882b.png)
