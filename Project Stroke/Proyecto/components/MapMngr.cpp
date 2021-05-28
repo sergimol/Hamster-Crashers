@@ -616,8 +616,8 @@ void MapMngr::loadEnemyRoom() {
 		else if (name == "finalBoss" && prop[1].getIntValue() == Room && prop[2].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* enemy = mngr_->addEntity();
 			enemy->addComponent<Transform>(
-				Vector2D(object.getPosition().x * scale, object.getPosition().y * scale),
-				Vector2D(),256.0f, 5 * 256.0f, 0.0f, 0.8f, 0.8f)->getFlip() = true;
+				Vector2D(object.getPosition().x * scale, (object.getPosition().y - 300) * scale),
+				Vector2D(),164.0 * scale, 330.0f * scale, 0.0f, 0.8f, 0.8f)->getFlip() = true;
 
 			enemy->addComponent<FinalBossManager>(hamstersToLoad_.size(), scale);
 

@@ -52,7 +52,7 @@ void FinalBossManager::init() {
 
 	fist_ = entity_->getMngr()->addEntity(); //Referencia al puño
 	fistTr_ = fist_->addComponent<Transform>(
-		tr_->getPos(), Vector2D(), scale_ * 164.0f, scale_ * 300.0f, 0.0f, 0.8f, 0.8f);
+		tr_->getPos(), Vector2D(), scale_ * 164.0f, scale_ * 330.0f, 0.0f, 0.8f, 0.8f);
 	fistTr_->getFlip() = true;
 
 	fist_->addComponent<EnemyStateMachine>();
@@ -64,7 +64,7 @@ void FinalBossManager::init() {
 	fist_->addComponent<Animator>(
 		&sdlutils().images().at("fistSheet"),
 		164,
-		300,
+		330,
 		3,
 		3,
 		100,
