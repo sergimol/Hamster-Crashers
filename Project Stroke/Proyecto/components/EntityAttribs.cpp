@@ -250,22 +250,30 @@ void EntityAttribs::die() {
 	traux->setZ(tr_->getZ());
 	traux->setGravity(e->addComponent<Gravity>());
 
-	int tam = 0;
+	int tamX, tamY = 0;
 
 	if (id_ == "sardinilla" || id_ == "monchi" || id_ == "soldier1" || id_ == "soldier2" || id_ == "bicho" || id_ == "naranja") {
-		tam = 86;
+		tamX = tamY = 86;
 	}
 	else if (id_ == "canelon" || id_ == "canelonDemon" || id_ == "monosinpatico" || id_ == "rata") {
-		tam = 128;
+		tamX = tamY = 128;
 	}
 	else if (id_ == "keta") {
-		tam = 100;
+		tamX = tamY = 100;
+	}
+	else if (id_ == "pirulo1" || id_ == "pirulo2") {
+		tamX = 96; 
+		tamY = 186;
+	}
+	else if (id_ == "piruloGordo") {
+		tamX = 128;
+		tamY = 140;
 	}
 	e->addComponent<Shadow>(false, true);
 	//Y reproducimos la animacion de muerto
 	e->addComponent<Animator>(&sdlutils().images().at(id_ + "Sheet"),
-		tam,
-		tam,
+		tamX,
+		tamY,
 		3,
 		3,
 		220,
