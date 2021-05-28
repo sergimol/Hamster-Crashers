@@ -52,7 +52,8 @@ EntityAttribs::EntityAttribs() :
 	tr_(nullptr),
 	state_(nullptr),
 
-	allDead(false)
+	allDead(false),
+	alredyDied(false)
 {}
 
 EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, int marg) :
@@ -91,7 +92,10 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	hmsText_(nullptr),
 	enmState_(nullptr),
 	tr_(nullptr),
-	state_(nullptr)
+	state_(nullptr),
+
+	allDead(false),
+	alredyDied(false)
 {}
 
 EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D speed, int number, float poisonProb, int dmg, bool igMargin, bool invincibilty, bool canBPois) :
@@ -179,20 +183,15 @@ void EntityAttribs::update() {
 			}
 		}
 		//PONER AQUI ONANIMATIONEND cuando furrule 
-		if (allDead /*&& entity_->getComponent<Animator>()->OnAnimationFrameEnd*/) {
-
-			auto hamsters = entity_->getMngr()->getPlayers();
-			int contador = 0;
-			for (Entity* e : hamsters) {
-				if (e->getComponent<EntityAttribs>()->isDead())
-					contador++;
-			}
-			if (contador == hamsters.size()) {
+		if (allDead && sdlutils().currRealTime() > deadTime + waitAfterDeath) {
 				auto cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
-				cam->changeCamState(State::Players);
-				cam->setGoToCat(false);
-				cam->setGoToTracker(false);
-			}
+				if (cam->getCamState() == State::BossCat) {
+					cam->changeCamState(State::Players);
+					cam->setGoToCat(false);
+					cam->setGoToTracker(false);
+				}
+
+				allDead = false;
 
 			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", true, 0);
 		}
@@ -247,7 +246,8 @@ bool EntityAttribs::recieveDmg(int dmg) {
 
 		health_ = 0;
 		//Desactivamos la entidad
-		die();
+		if(!alredyDied)
+			die();
 
 		//entity_->setActive(false);
 
@@ -260,7 +260,7 @@ bool EntityAttribs::recieveDmg(int dmg) {
 void EntityAttribs::die() {
 	//Ponemos la camara en estatico
 	//entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::Static)
-
+	alredyDied = true;
 	//Creamos una entidad
 	Entity* e = entity_->getMngr()->addEntity();
 
@@ -283,7 +283,7 @@ void EntityAttribs::die() {
 		tamX = tamY = 100;
 	}
 	else if (id_ == "pirulo1" || id_ == "pirulo2") {
-		tamX = 96; 
+		tamX = 96;
 		tamY = 186;
 	}
 	else if (id_ == "piruloGordo") {
@@ -325,9 +325,12 @@ void EntityAttribs::die() {
 				allDead = false;
 			}
 		}
+		if (allDead) {
+			deadTime = sdlutils().currRealTime();
+		}
 	}
 	else {
-	/*	if (entity_->getMngr()->getHandler<Boss>() == entity_) {
+		/*	if (entity_->getMngr()->getHandler<Boss>() == entity_) {
 
 		}
 		else */

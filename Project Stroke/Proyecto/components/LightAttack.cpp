@@ -72,9 +72,10 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 						if (entity_->getMngr()->getHandler<Boss>() == ents[i] || entity_->getMngr()->getHandler<FinalBoss>() == ents[i]) {
 							entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handHit");
 						}
+						else if (ents[i]->hasComponent<WarCry>())
+							entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("angelAttack");
 						else
 							entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
-
 						hasHit = true;
 					}
 
@@ -149,7 +150,7 @@ bool LightAttack::CheckCollisions(const SDL_Rect& rectPlayer) {
 
 						//ANIMACION DE HIT DEL ENEMIGO
 						if (ents[i]->hasComponent<AnimEnemyStateMachine>())
-						ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
+							ents[i]->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::HITTED, true);
 
 						//Si tiene Knockback, se aplica
 						Knockback* enmKnockback = ents[i]->getComponent<Knockback>();
