@@ -621,18 +621,6 @@ void MapMngr::loadEnemyRoom() {
 			enemy->addComponent<FinalBossManager>(hamstersToLoad_.size(), scale);
 			mngr_->setHandler<FinalBoss>(enemy);
 			numberEnemyRoom++;
-
-			//CUANDO SE CONFIRME QUE FUNCIONA SE PUEDE BORRAR
-			//enemy->addComponent<EnemyStateMachine>();
-			//enemy->setGroup<Enemy>(true);
-
-			//enemy->addComponent<EntityAttribs>(600 + (hamstersToLoad_.size() * 100), 0.0, "enemy", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
-
-			//enemy->addComponent<Image>(&sdlutils().images().at("firstBoss"));
-			//enemy->addComponent<UI>("canelon", 4);
-
-			//enemy->addComponent<FirstBossAttack>();
-			//enemy->addComponent<MovementSimple>();
 		}
 		else if (name == "escalectris" && prop[1].getIntValue() == Room && prop[3].getIntValue() == RoundsCount) { //PROP[0] ES LA PROPIEDAD 0, EDITAR SI SE AÑADEN MAS
 			auto* escalectris = mngr_->addWaveObject();
@@ -729,10 +717,10 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 	//Habilidad
 	if (name == "sardinilla") hamster1->addComponent<Roll>();
 	else if (name == "canelon") hamster1->addComponent<Pray>(30, 10);
-	else if (name == "keta") hamster1->addComponent<Poison>(20);
+	else if (name == "keta") hamster1->addComponent<Poison>(7);
 	else if (name == "monchi") {
 		hamster1->addComponent<Turret>();
-		hamster1->addComponent<Swallow>(5);
+		//hamster1->addComponent<Swallow>(5);
 	}
 	else hamster1->addComponent<WarCry>(0.25, 1.5);
 
