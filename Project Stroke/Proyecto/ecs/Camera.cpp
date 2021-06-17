@@ -1,5 +1,6 @@
 #include "Camera.h"
 #include "../components/Transform.h"
+#include "../components/HamsterStateMachine.h"
 
 void Camera::init() {
 	map_ = entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>();
@@ -109,16 +110,19 @@ Vector2D Camera::newObjetivo() {
 	Vector2D playerMidPos;
 	auto& players_ = entity_->getMngr()->getPlayers();
 	for (Entity* e : players_) {
-		auto* tr = e->getComponent<Transform>();
-		auto playerpos = tr->getPos();
-		// Operaci�n para calcular el punto medio con m�s jugadores
-		camPos = camPos + playerpos + (Vector2D(tr->getW(), tr->getH()) / 2);
-		players++;
-		if (minH_ == -1 || tr->getFloor() < minH_)
-			minH_ = tr->getFloor();
+		if (e->getComponent<HamsterStateMachine>()->getState() != HamStates::DEAD) {
+			auto* tr = e->getComponent<Transform>();
+			auto playerpos = tr->getPos();
+			// Operaci�n para calcular el punto medio con m�s jugadores
+			camPos = camPos + playerpos + (Vector2D(tr->getW(), tr->getH()) / 2);
+			players++;
+			if (minH_ == -1 || tr->getFloor() < minH_)
+				minH_ = tr->getFloor();
+		}
 	}
 	//Actualizamos la posicion central de los 4 jugadores
-	playerMidPos = Vector2D((camPos.getX() / players), (camPos.getY() / players));
+	if (players != 0) playerMidPos = Vector2D((camPos.getX() / players), (camPos.getY() / players));
+	else playerMidPos = camPos;
 
 	int osci = (playerMidPos.getX() - cameraFollowPos_.getX()) / 4;
 	//Dependiendo del valor de "CameraFollowPos" vamos a devolver el punto medio entre el punto que se pasa y la posici�n de los jugadores, o la posicion de los jugadores
