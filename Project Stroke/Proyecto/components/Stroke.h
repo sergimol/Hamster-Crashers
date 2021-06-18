@@ -57,7 +57,7 @@ private:
 		NORMALDECREASE = 75, //Decremento de forma natural
 		MINVALUE = 5, //Mínimo porcentaje de infarto
 		DECREASEPERCENTAGE = 35, // Porcentaje que se reduce por acierto en el minijuego
-		CHANGECOLORVALUE = 750; //Porcentaje para cambiar el color del hamster a aviso
+		CHANGECOLORVALUE = 800; //Porcentaje para cambiar el color del hamster a aviso
 	// Probabilidad de que haya un infarto
 	int chance_ = 1,
 		chanceFromAb_ = 0,
