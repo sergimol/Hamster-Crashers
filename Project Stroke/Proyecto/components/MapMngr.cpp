@@ -545,7 +545,7 @@ void MapMngr::loadEnemyRoom() {
 			enemy->addComponent<Shadow>(false, true);
 			enemy->setGroup<Enemy>(true);
 
-			enemy->addComponent<EntityAttribs>(250 + ((hamstersToLoad_.size() - 1) * 75), 0.0, prop[3].getStringValue(), Vector2D(3.6, 2), 0, 0, 5, true, false, true);
+			enemy->addComponent<EntityAttribs>(250 + ((hamstersToLoad_.size() - 1) * 75), 0.0, prop[3].getStringValue(), Vector2D(3.6, 2), 0, 0, 10, true, false, true);
 
 			enemy->addComponent<Animator>(
 				&sdlutils().images().at(prop[3].getStringValue() + "Sheet"),
@@ -562,7 +562,7 @@ void MapMngr::loadEnemyRoom() {
 			if (prop[3].getStringValue() == "rata")
 				enemy->addComponent<EnemyAttack>();
 			else
-				enemy->addComponent<EnemyAttack>(500, 900);
+				enemy->addComponent<EnemyAttack>(300, 500);
 
 			enemy->addComponent<EnemyStrongAttack>();
 			enemy->addComponent<Knockback>();

@@ -280,7 +280,7 @@ void EntityAttribs::die() {
 	if (id_ == "sardinilla" || id_ == "monchi" || id_=="angel" || id_ == "soldier1" || id_ == "soldier2" || id_ == "bicho" || id_ == "naranja") {
 		tamX = tamY = 86;
 	}
-	else if (id_ == "canelon" || id_ == "canelonDemon" || id_ == "monosinpatico" || id_ == "rata") {
+	else if (id_ == "canelon" || id_ == "canelonDemon" || id_ == "monosinpatico" || id_ == "rata" || id_ == "ratafachera") {
 		tamX = tamY = 128;
 	}
 	else if (id_ == "keta") {

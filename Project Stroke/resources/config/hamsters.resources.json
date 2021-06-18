@@ -1310,6 +1310,10 @@
     {
       "id": "piruloGordoSheet",
       "file": "resources/images/spritesheets/enemies/level4/pirulogordo_spritesheet.png"
+    },
+    {
+      "id": "ratafacheraSheet",
+      "file": "resources/images/spritesheets/enemies/level2/ratafachera_spritesheet.png"
     }
   ],
 
@@ -3329,7 +3333,7 @@
       "duration": 4,
       "cols": 6,
       "rows": 6,
-      "frameUpdate": 80,
+      "frameUpdate": 150,
       "loop": 0,
       "chain": "",
       "attackFrame": -1
@@ -3410,7 +3414,7 @@
       "id": "rata_death",
       "startFrameX": 2,
       "startFrameY": 4,
-      "duration": 5,
+      "duration": 6,
       "cols": 6,
       "rows": 6,
       "frameUpdate": 80,
@@ -3775,6 +3779,90 @@
       "cols": 8,
       "rows": 8,
       "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "ratafachera_idle",
+      "startFrameX": 0,
+      "startFrameY": 0,
+      "duration": 4,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "ratafachera_move",
+      "startFrameX": 4,
+      "startFrameY": 0,
+      "duration": 6,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 1,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "ratafachera_attack",
+      "startFrameX": 4,
+      "startFrameY": 1,
+      "duration": 5,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": 8
+    },
+    {
+      "id": "ratafachera_strongattack",
+      "startFrameX": 4,
+      "startFrameY": 1,
+      "duration": 5,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": 8
+    },
+    {
+      "id": "ratafachera_hit",
+      "startFrameX": 3,
+      "startFrameY": 2,
+      "duration": 4,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 70,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "ratafachera_stun",
+      "startFrameX": 1,
+      "startFrameY": 3,
+      "duration": 7,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 100,
+      "loop": 0,
+      "chain": "",
+      "attackFrame": -1
+    },
+    {
+      "id": "ratafachera_death",
+      "startFrameX": 2,
+      "startFrameY": 4,
+      "duration": 6,
+      "cols": 6,
+      "rows": 6,
+      "frameUpdate": 80,
       "loop": 0,
       "chain": "",
       "attackFrame": -1
