@@ -20,6 +20,7 @@
 class EnemyAttack : public Component {
 public:
 	EnemyAttack();
+	EnemyAttack(int cdMin, int cdMax);
 
 	virtual ~EnemyAttack() {}
 

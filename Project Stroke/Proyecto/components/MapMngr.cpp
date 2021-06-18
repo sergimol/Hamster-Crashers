@@ -109,7 +109,7 @@ void MapMngr::update() {
 			triggerFtCamera.pop();
 
 			//TUTORIAL
-			if (!sdlutils().tutorialDone() && stoi(trigger.getName()) < 4 ) {
+			if (!sdlutils().tutorialDone() && stoi(trigger.getName()) < 4) {
 				entity_->getMngr()->getHandler<dialogosMngr>()->getComponent<dialogos>()->dialogoStateChange();
 			}
 		}
@@ -172,7 +172,7 @@ void MapMngr::loadNewMap(string map) {
 			addParaxall(1, false, true, 7, 10, 15, 0);
 		else if (map == "resources/images/tiled/Level2.tmx")
 			addParaxall(2, true, false, 7, 10, 1, 10);
-		else if(map == "resources/images/tiled/Level3.tmx")
+		else if (map == "resources/images/tiled/Level3.tmx")
 			addParaxall(3, false, false, 10, 0, 0, 0);
 
 		//Dimensiones de los tiles
@@ -559,7 +559,11 @@ void MapMngr::loadEnemyRoom() {
 				);
 			enemy->addComponent<AnimEnemyStateMachine>();
 
-			enemy->addComponent<EnemyAttack>();
+			if (prop[3].getStringValue() == "rata")
+				enemy->addComponent<EnemyAttack>();
+			else
+				enemy->addComponent<EnemyAttack>(500, 900);
+
 			enemy->addComponent<EnemyStrongAttack>();
 			enemy->addComponent<Knockback>();
 			enTr->setGravity(enemy->addComponent<Gravity>());
@@ -616,7 +620,7 @@ void MapMngr::loadEnemyRoom() {
 			auto* enemy = mngr_->addEntity();
 			enemy->addComponent<Transform>(
 				Vector2D(object.getPosition().x * scale, (object.getPosition().y - 300) * scale),
-				Vector2D(),164.0 * scale, 330.0f * scale, 0.0f, 0.8f, 0.8f)->getFlip() = true;
+				Vector2D(), 164.0 * scale, 330.0f * scale, 0.0f, 0.8f, 0.8f)->getFlip() = true;
 
 			enemy->addComponent<FinalBossManager>(hamstersToLoad_.size(), scale);
 			mngr_->setHandler<FinalBoss>(enemy);
