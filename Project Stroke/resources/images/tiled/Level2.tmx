@@ -241,7 +241,7 @@
    <properties>
     <property name="Altura" type="int" value="0"/>
     <property name="sala" type="int" value="3"/>
-    <property name="zRondas" type="int" value="1"/>
+    <property name="zRondas" type="int" value="0"/>
     <property name="zzId" value="ratafachera"/>
    </properties>
   </object>
