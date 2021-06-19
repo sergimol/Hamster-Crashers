@@ -12,7 +12,7 @@ const enum class EnemyStatesAnim {
 	STRONGATTACK,
 	HITTED, STUNNED, DEAD,
 	DEFAULT,
-	ONFLOOR, UP, SEQUENCE
+	ONFLOOR, UP, SEQUENCE, SHIELD
 };
 
 
@@ -40,6 +40,7 @@ private:
 	bool onfloor;
 	bool up;
 	bool sequence;
+	bool shield;
 
 public: 
 	AnimEnemyStateMachine() : currentState(EnemyStatesAnim::IDLE), lastState(EnemyStatesAnim::DEFAULT), anim(nullptr), ent(nullptr) {};

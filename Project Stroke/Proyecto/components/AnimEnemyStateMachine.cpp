@@ -52,7 +52,8 @@ void AnimEnemyStateMachine::HandleAnimState()
 		currentState = EnemyStatesAnim::UP;
 	if (sequence)
 		currentState = EnemyStatesAnim::SEQUENCE;
-	
+	if(shield)
+		currentState = EnemyStatesAnim::SHIELD;
 }
 
 //Cambia las animaciones dependiendo del estado del hamster
@@ -100,6 +101,9 @@ void AnimEnemyStateMachine::CheckAnimState()
 			break;
 		case EnemyStatesAnim::SEQUENCE:
 			anim->play(sdlutils().anims().at(id + "_sequence"));
+			break;		
+		case EnemyStatesAnim::SHIELD:
+			anim->play(sdlutils().anims().at(id + "_shield"));
 			break;
 		}
 	}
@@ -149,6 +153,9 @@ void AnimEnemyStateMachine::setAnimBool(EnemyStatesAnim h, bool b)
 		break;
 	case EnemyStatesAnim::SEQUENCE:
 		sequence = b;
+		break;
+	case EnemyStatesAnim::SHIELD:
+		shield = b;
 		break;
 	}
 }
