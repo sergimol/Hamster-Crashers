@@ -129,17 +129,18 @@ void MicroOndasManager::init() {
 		3,
 		220,
 		Vector2D(),
-		3)->play(sdlutils().anims().at("piruloGordo_idle"));
+		3);
 
-	bateria_->addComponent<AnimEnemyStateMachine>();
+	auto a = bateria_->addComponent<AnimEnemyStateMachine>();
 
+	a->setAnimBool(EnemyStatesAnim::SHIELD, true);
 
 	entity_->getMngr()->getEnemies().push_back(bateria_);
 
 	//añadir la interafz de la vida
 	
 
-	entity_->addComponent<UI>("micro", 4);
+	//entity_->addComponent<UI>("micro", 4);
 
 	handTurn_ = sdlutils().rand().nextInt(0, 2) == 0;
 
@@ -187,6 +188,7 @@ void MicroOndasManager::update() {
 	//cuando los dos cables han petado
 	if (bateria_ != nullptr && right_ == nullptr && left_ == nullptr && bateriaAttribs_->checkInvulnerability()) {
 		bateriaAttribs_->setInvincibility(false);
+		bateria_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::SHIELD, false);
 		//hacer la animacion en al que cae la bateria
 	}
 

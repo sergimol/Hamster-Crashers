@@ -294,7 +294,7 @@ void EntityAttribs::die() {
 		tamX = 128;
 		tamY = 140;
 	}
-	e->addComponent<Shadow>(false, true);
+	if(id_ != "pirulo1" && id_ != "pirulo2" && id_ != "piruloGordo") e->addComponent<Shadow>(false, true);
 	//Y reproducimos la animacion de muerto
 	e->addComponent<Animator>(&sdlutils().images().at(id_ + "Sheet"),
 		tamX,
@@ -316,6 +316,7 @@ void EntityAttribs::die() {
 		hms_->getState() = HamStates::DEAD;
 		//Desactivamos el componente del hasmter vivo
 		entity_->getComponent<Animator>()->setActive(false);
+		entity_->getComponent<Shadow>()->setActive(false);
 
 		//TODO arreglar camara, y demas objetos que den problemas con el como se esta desactivando el hamster,
 		//hacerlo a mano cada vez que os den problemas porque desactivar la entidad del hamster 
@@ -366,8 +367,6 @@ void EntityAttribs::die() {
 
 		if(entity_->isActive()) entity_->setActive(false);
 	}
-
-
 }
 
 void EntityAttribs::setLife(int life) {
