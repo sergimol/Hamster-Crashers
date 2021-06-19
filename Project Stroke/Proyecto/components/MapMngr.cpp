@@ -142,12 +142,12 @@ void MapMngr::loadNewMap(string map) {
 
 	if (map_.load(map)) {
 		if (map == "resources/images/tiled/Level1Boss.tmx") {
-			scale = 2.4f;
+			scale = 2.407;
 			entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setcShake(true);
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("trainBackground");
 		}
 		else if (map == "resources/images/tiled/Level2.tmx") {
-			scale = 3.0f;
+			scale = 3.0;
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("birds");
 		}
 
