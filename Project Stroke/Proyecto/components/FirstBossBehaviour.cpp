@@ -123,15 +123,17 @@ void FirstBossBehaviour::lockHamster(int id) {
 //Esta a rango de ataque
 bool FirstBossBehaviour::isWithinAttackRange()
 {
-	auto width = tr_->getW();
-	auto hamWidth = hamsterTr_->getW();
+	auto hamCollider = hamsterTr_->getRectCollide();
+	auto bossCollider = tr_->getRectCollide();
 
-	auto& hamPos = hamsterTr_->getPos();
-	auto& pos = tr_->getPos();
-	int hamX = hamPos.getX(),
-		x = pos.getX();
+	int hamX = hamCollider.x,
+		x = bossCollider.x;
 
-	return(hamX /*+ rangeOffsetX_*/ + hamWidth /**2*/ >= x + 3 * width / 4 && hamX /*+ hamWidth*/ /*- rangeOffsetX_ */ <= x + 1 * width / 4);
+	auto width = bossCollider.w;
+	auto hamWidth = hamCollider.w;
+
+	//return(hamX + hamWidth >= x + 3 * width / 4 && hamX <= x + 1 * width / 4);
+	return(x < hamX + hamWidth / 4 && x + width > hamX + hamWidth - hamWidth / 4);
 }
 
 void FirstBossBehaviour::behave()
@@ -161,15 +163,15 @@ void FirstBossBehaviour::behave()
 			lockHamster();
 		}
 		else if (!bossAtk_->getAttackStarted()) { // si no cambia de hamster marcado Y no está en medio de un ataque
-			auto& hamPos = hamsterTr_->getPos();
-			auto& pos = tr_->getPos();
-			int hamX = hamPos.getX(),
-				hamY = hamPos.getY() + hamsterTr_->getH(),
-				x = pos.getX(),
-				y = pos.getY() + tr_->getH();
 
-			auto width = tr_->getW();
-			auto hamWidth = hamsterTr_->getW();
+			auto hamCollider = hamsterTr_->getRectCollide();
+			auto bossCollider = tr_->getRectCollide();
+
+			int hamX = hamCollider.x,
+				x = bossCollider.x;
+
+			auto width = bossCollider.w;
+			auto hamWidth = hamCollider.w;
 			auto& flip = tr_->getFlip();
 
 			if (x + width / 2 < hamX + hamWidth / 2)
@@ -180,11 +182,11 @@ void FirstBossBehaviour::behave()
 			if (!isWithinAttackRange()) {
 				// Movimiento del enemigo en base a pos del jugador
 
-				if (x > hamX + tr_->getW() / 4 /*+ rangeOffsetX_*/)
+				if (x > hamX + hamWidth / 4)
 					mov_->updateKeymap(MovementSimple::LEFT, true);
 				else
 					mov_->updateKeymap(MovementSimple::LEFT, false);
-				if (x < hamX/* - rangeOffsetX_ / 2 */ - tr_->getW() / 4)
+				if (x + width < hamX + hamWidth - hamWidth / 4)
 					mov_->updateKeymap(MovementSimple::RIGHT, true);
 				else
 					mov_->updateKeymap(MovementSimple::RIGHT, false);
