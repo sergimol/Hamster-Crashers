@@ -118,7 +118,7 @@ void CollisionDetec::tryToMoveObs(Vector2D dir, Vector2D goalVel, SDL_Rect& rect
 		if (dir.getX() != 0 && dir.getY() != 0 || vel.getX() != 0 && vel.getY() != 0) {
 
 			//Probamos con ignorar el Y
-			rectFoot.y = tr_->getRectCollideFeet().y + tr_->getFloor();
+			rectFoot.y = tr_->getRectCollideFeet().y;
 
 			//Si con el Y bloqueado se mueve correctamente
 			if (!map->intersectObstacles(rectFoot)) {

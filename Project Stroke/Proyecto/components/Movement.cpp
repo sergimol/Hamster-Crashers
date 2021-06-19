@@ -137,7 +137,7 @@ void Movement::update() {
 		
 		SDL_Rect footPlayer = tr_->getRectCollideFeet();
 		footPlayer.x += goalVel_.getX();
-		footPlayer.y += goalVel_.getY() + tr_->getFloor();
+		footPlayer.y += goalVel_.getY();
 
 		if (col_ != nullptr) {
 			col_->tryToMove(dir, goalVel_, rectPlayer, false);		//Intenta moverse
