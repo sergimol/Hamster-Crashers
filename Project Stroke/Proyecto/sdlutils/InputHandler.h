@@ -218,6 +218,10 @@ public:
 		return controllers_[player] != nullptr;
 	}
 
+	inline bool isInverted() {
+		return inverted_;
+	}
+
 	// mouse
 	inline bool mouseMotionEvent() {
 		return isMouseMotionEvent_;
@@ -247,6 +251,7 @@ public:
 			sysToGameId.emplace(i, actualControllers_ - 1 - i);
 			gameToSysId[actualControllers_ - 1 - i] = i;
 		}
+		inverted_ = true;
 	}
 
 private:
@@ -481,6 +486,7 @@ private:
 	bool isButtonDownEvent_;
 	bool isButtonUpEvent_;
 	bool isAxisMotionEvent_;
+	bool inverted_ = false;
 	array<vector<int>, MAXPLAYERS> buttonStates_;
 	array<int, MAXPLAYERS> gameToSysId{ -1, -1, -1, -1 };
 	map<int, int> sysToGameId;

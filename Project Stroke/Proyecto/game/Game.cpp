@@ -173,7 +173,7 @@ void Game::start() {
 		while (SDL_PollEvent(&event))
 			ih().update(event);
 
-		if(startTime < 8000)
+		if(!ih().isInverted())
 			ih().invertControllerIds();
 
 		if (ih().onQuit()) {
