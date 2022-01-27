@@ -20,6 +20,8 @@ void Camera::update() {
 			StaticCamera();
 		else if (cameraState == BossCat)
 			followBossCat();
+		else if (cameraState == Dead)
+			return;
 
 		checkBounds();
 

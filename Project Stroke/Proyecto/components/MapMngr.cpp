@@ -663,7 +663,7 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + object.getAABB().width) * scale, object.getPosition().y * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.25);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(100, 0.0, name, Vector2D(9, 5.5), i, 10, 20, 70);
+		hamster1->addComponent<EntityAttribs>(1, 0.0, name, Vector2D(9, 5.5), i, 10, 20, 70);
 	}
 	else if (name == "monchi") {
 		tam = 86;

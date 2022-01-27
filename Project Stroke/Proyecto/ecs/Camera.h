@@ -15,7 +15,7 @@
 #include <SDL_rect.h>
 #include "../components/MapMngr.h"
 
-const enum State { Players, GoingTo, Static, BossCat };
+const enum State { Players, GoingTo, Static, BossCat, Dead};
 class Camera : public Component {
 private:
 	const float upOffset = -205;
@@ -45,9 +45,9 @@ private:
 	bool cShake_;
 public:
 
-	Camera(SDL_Rect cam) : camera_(cam), cameraFollowPos_(Vector2D()), cameraState(State::Players), map_(nullptr), camShake_(0), down_(true) {}
+	Camera(SDL_Rect cam) : camera_(cam), cameraFollowPos_(Vector2D()), cameraState(State::Players), map_(nullptr), camShake_(0), down_(true), camPos(Vector2D(0, 0)) {};
 
-	virtual ~Camera() {}
+	virtual ~Camera() {};
 	void init() override;
 	void update() override;
 	inline SDL_Rect getCam() const{ return camera_; };

@@ -9,10 +9,10 @@ using namespace std;
 
 class Transition : public Component {
 public:
-	Transition(Texture* tx) : tx_(tx), alpha(0), alphaCalc(0), fadingOut(false), fadingIn(false), change(false), state_(nullptr){
-	}
+	Transition(Texture* tx) : tx_(tx), alpha(0), alphaCalc(0), fadingOut(false), fadingIn(false), change(false), state_(nullptr) {
+	};
 
-		virtual ~Transition() {}
+	virtual ~Transition() {};
 
 	void init() override;
 
@@ -22,7 +22,7 @@ public:
 
 	inline void startFadeIn() { fadingOut = true; fadingIn = false; };
 
-	inline void startFadeOut() { fadingIn = true; fadingOut = false;};
+	inline void startFadeOut() { fadingIn = true; fadingOut = false; };
 
 	void changeScene(string nameScene, bool changeMap, int numTransitions);
 
@@ -58,7 +58,7 @@ private:
 
 	string nameScene_;
 	string subs;
-	
+
 	GameStates* state_;
 	Subtitulos* subs_;
 	bool playeasonido = true;

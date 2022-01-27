@@ -184,14 +184,14 @@ void EntityAttribs::update() {
 		}
 		//PONER AQUI ONANIMATIONEND cuando furrule 
 		if (allDead && sdlutils().currRealTime() > deadTime + waitAfterDeath) {
-				auto cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
-				if (cam->getCamState() == State::BossCat) {
-					cam->changeCamState(State::Players);
-					cam->setGoToCat(false);
-					cam->setGoToTracker(false);
-				}
+			auto cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
+			if (cam->getCamState() == State::BossCat) {
+				cam->changeCamState(State::Players);
+				cam->setGoToCat(false);
+				cam->setGoToTracker(false);
+			}
 
-				allDead = false;
+			allDead = false;
 
 			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", true, 0);
 		}
@@ -208,7 +208,7 @@ bool EntityAttribs::recieveDmg(int dmg) {
 	//Actualizamos la healthBar
 	if (entity_->hasComponent<UI>())
 		entity_->getComponent<UI>()->bar(-dmg);
-	if(id_ == "angel")
+	if (id_ == "angel")
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("angelHit");
 	//Si la vida ha bajado de 0...
 	if (health_ <= 0) {
@@ -250,7 +250,7 @@ bool EntityAttribs::recieveDmg(int dmg) {
 
 		health_ = 0;
 		//Desactivamos la entidad
-		if(!alredyDied)
+		if (!alredyDied)
 			die();
 
 		//entity_->setActive(false);
@@ -263,7 +263,6 @@ bool EntityAttribs::recieveDmg(int dmg) {
 
 void EntityAttribs::die() {
 	//Ponemos la camara en estatico
-	//entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::Static)
 	alredyDied = true;
 	//Creamos una entidad
 	Entity* e = entity_->getMngr()->addEntity();
@@ -277,7 +276,7 @@ void EntityAttribs::die() {
 
 	int tamX, tamY = 0;
 
-	if (id_ == "sardinilla" || id_ == "monchi" || id_=="angel" || id_ == "soldier1" || id_ == "soldier2" || id_ == "bicho" || id_ == "naranja") {
+	if (id_ == "sardinilla" || id_ == "monchi" || id_ == "angel" || id_ == "soldier1" || id_ == "soldier2" || id_ == "bicho" || id_ == "naranja") {
 		tamX = tamY = 86;
 	}
 	else if (id_ == "canelon" || id_ == "canelonDemon" || id_ == "monosinpatico" || id_ == "rata" || id_ == "ratafachera") {
@@ -294,7 +293,7 @@ void EntityAttribs::die() {
 		tamX = 128;
 		tamY = 140;
 	}
-	if(id_ != "pirulo1" && id_ != "pirulo2" && id_ != "piruloGordo") e->addComponent<Shadow>(false, true);
+	if (id_ != "pirulo1" && id_ != "pirulo2" && id_ != "piruloGordo") e->addComponent<Shadow>(false, true);
 	//Y reproducimos la animacion de muerto
 	e->addComponent<Animator>(&sdlutils().images().at(id_ + "Sheet"),
 		tamX,
@@ -331,6 +330,8 @@ void EntityAttribs::die() {
 			}
 		}
 		if (allDead) {
+			entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::Dead);
+
 			deadTime = sdlutils().currRealTime();
 		}
 	}
@@ -365,7 +366,7 @@ void EntityAttribs::die() {
 			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 5);
 		}
 
-		if(entity_->isActive()) entity_->setActive(false);
+		if (entity_->isActive()) entity_->setActive(false);
 	}
 }
 
