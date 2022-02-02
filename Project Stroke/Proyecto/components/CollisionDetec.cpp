@@ -78,7 +78,7 @@ void CollisionDetec::tryToMove(Vector2D dir, Vector2D goalVel, SDL_Rect& rectPla
 		if (rectPlayer.y < cam.y || rectPlayer.y + rectPlayer.h - tr_->getFloor() + (tr_->getFloor() - cam_->getHeightMap()) + 60 > pCam.getY() + cam.h / 2)
 			vel.setY(-speed_.getY());
 	}
-	else {
+	else if (entity_->getComponent<HamsterStateMachine>() != nullptr && entity_->getComponent<HamsterStateMachine>()->getState() != HamStates::INFARCTED) {
 		if (rectPlayer.x < cam.x) {
 			if (entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCamState() == State::GoingTo)
 				vel.setX(20);
@@ -147,7 +147,7 @@ void CollisionDetec::tryToMoveObs(Vector2D dir, Vector2D goalVel, SDL_Rect& rect
 			vel.setX(0);
 			vel.setY(0);
 		}
-	}	
+	}
 
 	if (vel.getX() < 0.001 && vel.getX() > -0.001) vel.setX(0);
 	if (vel.getY() < 0.001 && vel.getY() > -0.001) vel.setY(0);

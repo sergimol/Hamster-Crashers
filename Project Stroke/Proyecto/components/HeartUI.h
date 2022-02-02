@@ -20,6 +20,7 @@ public:
 	void dep();
 	void resurrection();
 	void increaseLatency(float aux);
+	inline int getPosition() { return position; };
 
 private:
 	//Textura del corazon

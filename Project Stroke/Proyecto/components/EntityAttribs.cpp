@@ -310,8 +310,6 @@ void EntityAttribs::die() {
 	//Si la persona que muere es un hamster...
 	if (entity_->hasGroup<Ally>()) {
 
-		//Ponemos su UI a 'Muerto'
-		e->addComponent<UI>(id_, entity_->getComponent<UI>()->getPosUI())->dep("2");
 		hms_->getState() = HamStates::DEAD;
 		//Desactivamos el componente del hasmter vivo
 		entity_->getComponent<Animator>()->setActive(false);

@@ -112,7 +112,7 @@ Vector2D Camera::newObjetivo() {
 	Vector2D playerMidPos;
 	auto& players_ = entity_->getMngr()->getPlayers();
 	for (Entity* e : players_) {
-		if (e->getComponent<HamsterStateMachine>()->getState() != HamStates::DEAD) {
+		if (e->getComponent<HamsterStateMachine>()->getState() != HamStates::DEAD && e->getComponent<HamsterStateMachine>()->getState() != HamStates::INFARCTED) {
 			auto* tr = e->getComponent<Transform>();
 			auto playerpos = tr->getPos();
 			// Operaci�n para calcular el punto medio con m�s jugadores

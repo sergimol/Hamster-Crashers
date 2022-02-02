@@ -34,8 +34,8 @@ private:
 
 	//DestRects
 	SDL_Rect dest;	//Face
-	SDL_Rect dest3;	//Bar
 	SDL_Rect dest2;	//Background
+	SDL_Rect dest3;	//Bar
 	SDL_Rect dest4;	//Hexagono
 
 	//Posiciones de los destRects
