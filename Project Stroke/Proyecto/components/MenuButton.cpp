@@ -103,7 +103,7 @@ void MenuButton::pressed() {
 		entity_->getMngr()->getHandler<HamsterSelectionMenu>()->getComponent<MenuButtonManager>()->onResume();
 		//entity_->getMngr()->getHandler<MainMenu>()->getComponent<MenuButtonManager>()->updateKeymap(MenuButtonManager::SPACE, false);
 	}
-	else if (buttonName_ == "online") {
+	else if (buttonName_ == "online" && ih().playerHasController(0)) {
 		state_->setState(GameStates::PLAYERSELECTION);
 
 		Vector2D pos = entity_->getMngr()->getHandler<MainMenu>()->getComponent<MenuControlHandler>()->getMousePos();
@@ -125,7 +125,7 @@ void MenuButton::pressed() {
 
 		//entity_->getMngr()->getHandler<PlayerQuantityMenu>()->getComponent<MenuButtonManager>()->updateKeymap(MenuButtonManager::SPACE, false);
 	}
-	else if (buttonName_ == "threePlayers") {
+	else if (buttonName_ == "threePlayers" && ih().playerHasController(1)) {
 		sdlutils().setHamstersToChoose(3);
 		state_->setState(GameStates::HAMSTERSELECTION);
 
@@ -134,7 +134,7 @@ void MenuButton::pressed() {
 
 		//->getMngr()->getHandler<PlayerQuantityMenu>()->getComponent<MenuButtonManager>()->updateKeymap(MenuButtonManager::SPACE, false);
 	}
-	else if (buttonName_ == "fourPlayers") {
+	else if (buttonName_ == "fourPlayers" && ih().playerHasController(2)) {
 		sdlutils().setHamstersToChoose(4);
 		state_->setState(GameStates::HAMSTERSELECTION);
 
