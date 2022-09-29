@@ -42,6 +42,9 @@ public:
 private:
 	void checkChance();
 
+	bool allInfarted = false;
+	int infartTime;
+	int waitAfterInfart = 5000;
 
 	StrokeStrategy* ss_;
 	HamsterStateMachine* hms_;

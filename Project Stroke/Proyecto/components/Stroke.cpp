@@ -42,7 +42,19 @@ void Stroke::update() {
 			INFARCT();
 		checkChance();
 	}
-	//std::cout << chance_ << " " << chanceFromAb_ << std::endl;
+	
+	if (allInfarted && sdlutils().currRealTime() > infartTime + waitAfterInfart) {
+		auto cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
+		if (cam->getCamState() == State::BossCat) {
+			cam->changeCamState(State::Players);
+			cam->setGoToCat(false);
+			cam->setGoToTracker(false);
+		}
+
+		allInfarted = false;
+
+		entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", true, 0);
+	}
 }
 
 void Stroke::increaseChance(int n, bool fromAbility) {
@@ -112,17 +124,6 @@ void Stroke::checkChance() {
 void Stroke::infarctHamster() {
 
 	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("heartattack");
-	auto hams_ = entity_->getMngr()->getPlayers();
-	bool allDead = true;
-	for (Entity* e : hams_) {
-		auto sta = e->getComponent<HamsterStateMachine>()->getState();
-		if (sta != HamStates::DEAD && sta != HamStates::INFARCTED) {
-			allDead = false;
-		}
-	}
-	if (allDead) {
-		entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", true, 0);
-	}
 
 	bool& strokeTutorial = entity_->getMngr()->getStrokeTuto();
 	if (strokeTutorial) {
@@ -162,12 +163,27 @@ void Stroke::infarctHamster() {
 		entity_->getComponent<UI>()->dep("3");
 
 		//hms_->getState() = HamStates::INFARCTED;
-		this->setActive(false);
+		//this->setActive(false);
 
 		//Animacion del fantasma
 		entity_->getComponent<AnimHamsterStateMachine>()->setAnimBool(HamStatesAnim::STROKE, true);
 		//Activamos el control del fantasma
 		entity_->getComponent<GhostCtrl>()->setActive(true);
+
+		//Chekeo todos infartados
+		auto hams_ = entity_->getMngr()->getPlayers();
+		bool allDead = true;
+		for (Entity* e : hams_) {
+			auto sta = e->getComponent<HamsterStateMachine>()->getState();
+			if (sta != HamStates::DEAD && sta != HamStates::INFARCTED) {
+				allDead = false;
+			}
+		}
+		if (allDead) {
+			allInfarted = true;
+			infartTime = sdlutils().currRealTime();
+			entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::Dead);
+		}
 
 		//GENERAR PERSONAJE INFARTADO ()
 		auto* deadBody = entity_->getMngr()->addEntity();
