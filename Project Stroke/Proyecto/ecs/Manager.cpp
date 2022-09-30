@@ -83,7 +83,6 @@ void Manager::update() {
 	for (auto i = 0u; i < m; i++)
 		menus_[i]->update();
 
-
 	auto w = wavesObjects_.size();
 	for (auto i = 0u; i < w; i++)
 		wavesObjects_[i]->update();
@@ -95,12 +94,6 @@ void Manager::render() {
 	for (auto i = 0u; i < s; i++)
 		bgs_[i]->render();
 
-	//RENDERIZA FONDOS
-	s = menuBgs_.size();
-	for (auto i = 0u; i < s; i++) {
-		if (menuBgs_[i]->isActive())
-			menuBgs_[i]->render();
-	}
 
 	//RENDERIZA TILES
 	s = tiles_.size();
@@ -127,6 +120,12 @@ void Manager::render() {
 	s = uiObjects_.size();
 	for (auto i = 0u; i < s; i++) {
 		uiObjects_[i]->render();
+	}
+	//RENDERIZA FONDOS
+	s = menuBgs_.size();
+	for (auto i = 0u; i < s; i++) {
+		if (menuBgs_[i]->isActive())
+			menuBgs_[i]->render();
 	}
 
 	s = menus_.size();

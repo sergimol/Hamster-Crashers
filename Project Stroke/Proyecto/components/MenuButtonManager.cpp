@@ -12,7 +12,7 @@ void MenuButtonManager::init() {
 
 	auto mngr = entity_->getMngr();
 	if (menuMode_ == "mainMenu") {
-		
+
 		buttonsMagnitude_ = Vector2D(2, 2); //4 botones, 2x2
 
 		buttons_ = vector<vector<Entity*>>(buttonsMagnitude_.getX());
@@ -20,7 +20,7 @@ void MenuButtonManager::init() {
 			buttons_[i] = vector<Entity*>(buttonsMagnitude_.getY());
 		}
 
-		
+
 
 		auto* localbutton = mngr->addMenu();
 		localbutton->addComponent<MenuButton>("local", Vector2D(100, 650), stateNumber_);
@@ -37,7 +37,7 @@ void MenuButtonManager::init() {
 		auto* quitbutton = mngr->addMenu();
 		quitbutton->addComponent<MenuButton>("quit", Vector2D(1520, 850), stateNumber_);
 		buttons_[1][1] = quitbutton;
-		
+
 		auto backgrText = &sdlutils().images().at("mainMenuBlank");
 		background_ = entity_->getMngr()->addMenuBackground();
 		background_->addComponent<Transform>(Vector2D(0, -205), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
@@ -62,6 +62,12 @@ void MenuButtonManager::init() {
 		auto* quitbutton = mngr->addMenu();
 		quitbutton->addComponent<MenuButton>("exit", Vector2D(820, 750), stateNumber_);
 		buttons_[0][2] = quitbutton;
+
+		auto backgrText = &sdlutils().images().at("configBackground");
+		background_ = entity_->getMngr()->addMenuBackground();
+
+		background_->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
+		background_->addComponent<BackGround>(backgrText, 0, false);
 	}
 	else if (menuMode_ == "hamsterMenu") {
 		buttonsMagnitude_ = Vector2D(5, 1); //5 botones, 5x1
@@ -99,7 +105,7 @@ void MenuButtonManager::init() {
 		else
 			backgrText = &sdlutils().images().at("hamsterSelectorBlank");
 
-		background_ = entity_->getMngr()->addMenuBackground(); 
+		background_ = entity_->getMngr()->addMenuBackground();
 		background_->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
 		background_->addComponent<BackGround>(backgrText, 0, false);
 
@@ -159,7 +165,7 @@ void MenuButtonManager::init() {
 		auto* resolutionDownButton = mngr->addMenu();
 		resolutionDownButton->addComponent<MenuButton>("resolutionDown", Vector2D(650, 550), stateNumber_);
 		buttons_[0][2] = resolutionDownButton;
-		
+
 		auto* resolutionUpButton = mngr->addMenu();
 		resolutionUpButton->addComponent<MenuButton>("resolutionUp", Vector2D(1275, 550), stateNumber_);
 		buttons_[1][2] = resolutionUpButton;
@@ -196,10 +202,11 @@ void MenuButtonManager::init() {
 		resolutionSign->addComponent<MenuIndicator>("resolution", Vector2D(287, 550), stateNumber_);
 		indicators_.push_back(resolutionSign);
 
-		/*auto backgrText = &sdlutils().images().at("configBackground");
+		auto backgrText = &sdlutils().images().at("configBackground");
 		background_ = entity_->getMngr()->addMenuBackground();
-		background_->addComponent<Transform>(Vector2D(0, -250), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
-		background_->addComponent<BackGround>(backgrText, 0);*/
+		
+		background_->addComponent<Transform>(Vector2D(0, 0), Vector2D(0, 0), backgrText->width(), backgrText->height(), 0.0, 1, 1);
+		background_->addComponent<BackGround>(backgrText, 0, false);
 	}
 	//buttonsPosition = Vector2D(0, 0);
 	buttons_[buttonsPosition_.getX()][buttonsPosition_.getY()]->getComponent<MenuButton>()->selected();
@@ -212,9 +219,13 @@ void MenuButtonManager::update() {
 	if (background_ != nullptr)
 	{
 		auto gameState = state_->getState();
-		if(gameState == stateNumber_ && !background_->isActive())
+		if (gameState == stateNumber_ && !background_->isActive()) {
+			Vector2D pos = Vector2D(entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam().x, 
+					entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam().y);
+			background_->getComponent<Transform>()->setPos(pos);
 			background_->setActive(true);
-		else if(gameState != stateNumber_ && background_->isActive())
+		}
+		else if (gameState != stateNumber_ && background_->isActive())
 			background_->setActive(false);
 	}
 }
