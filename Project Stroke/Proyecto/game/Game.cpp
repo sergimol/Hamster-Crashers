@@ -202,48 +202,6 @@ void Game::start() {
 	sdlutils().saveData();
 }
 
-//void Game::updateCamera() {
-//
-//	Vector2D camPos;
-//	int players(0);
-//	auto& players_ = mngr_->getPlayers();
-//
-//	//Cámara sigue a los personajes
-//	for (Entity* e : players_) {
-//		auto& playerpos = e->getComponent<Transform>()->getPos();
-//
-//		// Operación para calcular el punto medio con más jugadores
-//		camPos = camPos + playerpos;
-//		players++;
-//	}
-//
-//	camera_.x = (camPos.getX() / players) - camera_.w / 2;
-//	camera_.y = (camPos.getY() / players) - camera_.h / 2;
-//
-//	// Bordes de la cámara
-//	/*
-//	if (camera_.x < 0)
-//		camera_.x = 0;
-//	if (camera_.y < 0)
-//		camera_.y = 0;
-//	if (camera_.x > camera_.w)
-//		camera_.x = camera_.w;
-//	if (camera_.h > camera_.h)
-//		camera_.y = camera_.h;
-//	*/
-//
-//	//std::cout << camera_.x << " " << camera_.y << "\n";
-//}
-//
-//bool myfunction(Entity* a, Entity* b) {
-//	std::cout << "MENOR QUE" << std::endl;
-//	if (a->hasComponent<Transform>() && b->hasComponent<Transform>())
-//		return (a->getComponent<Transform>()->getPos().getY() <= b->getComponent<Transform>()->getPos().getY());
-//	return false;
-//}
-
-
-
 void Game::sortEntities() {
 
 	auto& entities = mngr_->getEntities();
@@ -331,8 +289,3 @@ void Game::merge(vector<Entity*>& vec, int l, int m, int r) {
 		k++;
 	}
 }
-
-void Game::changeScene(string newScene) {
-
-}
-
