@@ -38,7 +38,7 @@ void Stroke::init() {
 
 void Stroke::update() {
 	if (state_->getState() == GameStates::RUNNING) {
-		if (ih().isKeyDown(SDLK_z) && entity_->getComponent<EntityAttribs>()->getId() == "keta")
+		if (debug && ih().isKeyDown(SDLK_z))
 			INFARCT();
 		checkChance();
 	}
