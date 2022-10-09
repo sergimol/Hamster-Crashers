@@ -528,7 +528,7 @@
   <object id="355" name="finalBoss" x="7470.27" y="384" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="6"/>
+    <property name="sala" type="int" value="4"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
@@ -625,7 +625,7 @@
     <property name="zBoss" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="371" name="6" x="7328.22" y="160.871" width="13" height="638.5">
+  <object id="371" name="4" x="7328.22" y="160.871" width="13" height="638.5">
    <properties>
     <property name="CameraCoordX" type="int" value="7600"/>
     <property name="Rounds" type="int" value="1"/>
