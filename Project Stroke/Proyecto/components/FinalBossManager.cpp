@@ -20,7 +20,7 @@ void FinalBossManager::init() {
 	assert(lockedHamState_ != nullptr);
 	assert(hamsterTr_ != nullptr);
 
-	hand_ = entity_->getMngr()->addEntity();		//Referencia a la mano
+	hand_ = entity_->getMngr()->addTrap();		//Referencia a la mano
 	handTr_ = hand_->addComponent<Transform>(
 		tr_->getPos(), Vector2D(), scale_ * 164.0f, scale_ * 600.0f, 0.0f, 0.4, 0.6);
 	handTr_->getFlip() = true;
@@ -49,7 +49,7 @@ void FinalBossManager::init() {
 	entity_->getMngr()->getEnemies().push_back(hand_);
 
 
-	fist_ = entity_->getMngr()->addEntity(); //Referencia al puño
+	fist_ = entity_->getMngr()->addTrap(); //Referencia al puño
 	fistTr_ = fist_->addComponent<Transform>(
 		tr_->getPos(), Vector2D(), scale_ * 164.0f, scale_ * 330.0f, 0.0f, 0.8f, 0.8f);
 	fistTr_->getFlip() = true;
@@ -125,25 +125,44 @@ void FinalBossManager::lockHamster() {
 
 //Esta a rango de ataque
 bool FinalBossManager::isWithinAttackRange(Transform* tr, bool fist) {
-	auto width = tr->getW();
-	auto height = tr->getH();
-	auto hamWidth = hamsterTr_->getW();
+	/*auto width = tr->getW();
+	auto height = tr->getH();*/
 
-	auto& hamPos = hamsterTr_->getPos();
+	auto hamCollider = hamsterTr_->getRectCollide();
+	auto bossCollider = tr->getRectCollide();
+
+	/*auto& hamPos = hamsterTr_->getPos();
+	auto hamWidth = hamsterTr_->getW();
 	auto& pos = tr->getPos();
 	int hamX = hamPos.getX(),
-		x = pos.getX();
+		x = pos.getX();*/
+
+	int hamX = hamCollider.x,
+		x = bossCollider.x;
+	int hamY = hamCollider.y,
+		y = bossCollider.y;
+
+
+
+
+	int width = bossCollider.w;
+	int height = bossCollider.h;
+	int hamWidth = hamCollider.w;
+	int hamHeight = hamCollider.h;
+
 	if (fist) {
-		int hamY = hamPos.getY(),
-			y = pos.getY();
-		return ((hamX + hamWidth >= x + 3 * width / 4 && hamX <= x + 1 * width / 4) &&
-			(hamY >= y + 3 * height / 4 && hamY <= y + 3.5 * height / 4));
+		return ((x < hamX + hamWidth / 4 && x + width > hamX + hamWidth - hamWidth / 4) &&
+			(y < hamY + hamHeight / 4 && y + height > hamY + hamHeight - hamHeight / 4));
+
+		/*return ((hamX + hamWidth >= x + 3 * width / 4 && hamX <= x + 1 * width / 4) &&
+			(hamY >= y + 3 * height / 4 && hamY <= y + 3.5 * height / 4));*/
 	}
 	else
-		return(hamX + hamWidth >= x + 3 * width / 4 && hamX <= x + 1 * width / 4);
+		return(x < hamX + hamWidth / 4 && x + width > hamX + hamWidth - hamWidth / 4);
+	//return(hamX + hamWidth >= x + 3 * width / 4 && hamX <= x + 1 * width / 4);
 }
 
-void FinalBossManager::die(){
+void FinalBossManager::die() {
 	hand_->setActive(false);
 	fist_->setActive(false);
 	this->setActive(false);
@@ -213,15 +232,29 @@ void FinalBossManager::update() {
 }
 
 void FinalBossManager::movement(Transform* tr, Transform* hamsterTr, MovementSimple* mov) {
-	auto& hamPos = hamsterTr->getPos();
+	/*auto& hamPos = hamsterTr->getPos();
 	auto& pos = tr->getPos();
 	int hamX = hamPos.getX(),
 		hamY = hamPos.getY(),
 		x = pos.getX(),
-		y = pos.getY();
+		y = pos.getY();*/
 
-	auto width = tr->getW();
-	auto hamWidth = hamsterTr->getW();
+	auto hamCollider = hamsterTr_->getRectCollide();
+	auto bossCollider = tr->getRectCollide();
+
+	int hamX = hamCollider.x,
+		x = bossCollider.x;
+	int hamY = hamCollider.y,
+		y = bossCollider.y;
+
+	/*auto width = tr->getW();
+	auto hamWidth = hamsterTr->getW();*/
+
+	auto width = bossCollider.w;
+	auto hamWidth = hamCollider.w;
+	auto height = bossCollider.h;
+	auto hamHeight = hamCollider.h;
+
 	auto& flip = tr->getFlip();
 
 	if (x + width / 2 < hamX + hamWidth / 2)
@@ -229,21 +262,21 @@ void FinalBossManager::movement(Transform* tr, Transform* hamsterTr, MovementSim
 	else
 		flip = true;
 
-	if (x > hamX + width / 4)
+	if (x > hamX + hamWidth / 4)
 		mov->updateKeymap(MovementSimple::LEFT, true);
 	else
 		mov->updateKeymap(MovementSimple::LEFT, false);
-	if (x < hamX - width / 4)
+	if (x + width < hamX + hamWidth - hamWidth / 4)
 		mov->updateKeymap(MovementSimple::RIGHT, true);
 	else
 		mov->updateKeymap(MovementSimple::RIGHT, false);
 
 	if (tr == fistTr_) {
-		if (y > hamY - 3 * tr->getH() / 4)
+		if (y + (height - height / 7) > hamY + hamHeight / 4)
 			mov->updateKeymap(MovementSimple::UP, true);
 		else
 			mov->updateKeymap(MovementSimple::UP, false);
-		if (y < hamY - 3.5 * tr->getH() / 4)
+		if (y + height < hamY + hamHeight - hamHeight / 4)
 			mov->updateKeymap(MovementSimple::DOWN, true);
 		else
 			mov->updateKeymap(MovementSimple::DOWN, false);

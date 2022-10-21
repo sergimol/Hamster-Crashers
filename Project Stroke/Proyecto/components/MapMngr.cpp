@@ -232,9 +232,6 @@ void MapMngr::loadNewMap(string map) {
 									addHamster(hamstersToLoad_[i], i, object);
 							}
 						}
-						else if (object.getName() == "sardinilla" || object.getName() == "canelon" || object.getName() == "keta" || object.getName() == "monchi")
-						{
-						}//addHamster(object);
 						else if (object.getName() == "newScene") {
 							newSceneTrigger(object.getProperties()[0].getStringValue(), object);
 						}
