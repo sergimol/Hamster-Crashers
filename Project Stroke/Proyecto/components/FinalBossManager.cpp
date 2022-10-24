@@ -29,7 +29,6 @@ void FinalBossManager::init() {
 	hand_->setGroup<Enemy>(true);
 
 	handAttribs_ = hand_->addComponent<EntityAttribs>(800 + (hamsNum_ * 100), 0.0, "mano", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
-	hand_->addComponent<UI>("canelon", 4);
 
 	//hand_->addComponent<Image>(&sdlutils().images().at("firstBoss"));
 	hand_->addComponent<Animator>(
@@ -43,6 +42,7 @@ void FinalBossManager::init() {
 		3
 		);
 	handAnim_ = hand_->addComponent<AnimEnemyStateMachine>();
+	hand_->addComponent<UI>("canelon", 4);
 	bossAtk_ = hand_->addComponent<FinalBossAttack>();
 	movHand_ = hand_->addComponent<MovementSimple>();
 
