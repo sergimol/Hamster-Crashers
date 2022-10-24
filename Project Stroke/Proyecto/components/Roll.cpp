@@ -62,7 +62,7 @@ void Roll::action()
 		rectPlayer.x += tr_->getVel().getX();
 		rectPlayer.y += tr_->getVel().getY() + tr_->getFloor();
 
-		SDL_Rect rectFoot = tr_->getRectCollide();
+		SDL_Rect rectFoot = tr_->getRectCollideFeet();
 		rectFoot.x += goalVel_.getX();
 		rectFoot.y += goalVel_.getY() + tr_->getFloor();
 
@@ -120,7 +120,7 @@ void Roll::update() {
 			rectPlayer.x += goalVel_.getX();
 			rectPlayer.y += goalVel_.getY() + tr_->getFloor();
 
-			SDL_Rect rectFoot = tr_->getRectCollide();
+			SDL_Rect rectFoot = tr_->getRectCollideFeet();
 			rectFoot.x += goalVel_.getX();
 			rectFoot.y += goalVel_.getY() + tr_->getFloor();
 

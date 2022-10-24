@@ -50,8 +50,9 @@ void FinalBossManager::init() {
 
 
 	fist_ = entity_->getMngr()->addTrap(); //Referencia al puño
+	Vector2D p = tr_->getPos() + Vector2D(200, 200);
 	fistTr_ = fist_->addComponent<Transform>(
-		tr_->getPos(), Vector2D(), scale_ * 164.0f, scale_ * 330.0f, 0.0f, 0.8f, 0.8f);
+		p, Vector2D(), scale_ * 164.0f, scale_ * 330.0f, 0.0f, 0.8f, 0.8f);
 	fistTr_->getFlip() = true;
 
 	fist_->addComponent<EnemyStateMachine>();
@@ -71,7 +72,7 @@ void FinalBossManager::init() {
 		3
 		);
 	fistAnim_ = fist_->addComponent<AnimEnemyStateMachine>();
-
+	
 	bossPunch_ = fist_->addComponent<FinalBossPunch>();
 	movPunch_ = fist_->addComponent<MovementSimple>();
 
