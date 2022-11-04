@@ -24,6 +24,7 @@ void Transition::init() {
 	blackRect.y = 0;
 	blackRect.w = sdlutils().width();
 	blackRect.h = sdlutils().height();
+	lastTimeAct = SDL_GetTicks();
 
 	state_ = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
 	assert(state_ != nullptr);
@@ -31,11 +32,15 @@ void Transition::init() {
 
 void Transition::update() {
 	if (state_->getState() == GameStates::RUNNING || state_->getState() == GameStates::CONTROLS || state_->getState() ==  GameStates::MAINMENU) {
-		if (fadingOut)
+		if (fadingOut) {
 			fadeOut();
+			cout << alpha << "\n";
+		}
 
-		if (fadingIn)
+		if (fadingIn) {
 			fadeIn();
+			cout << alpha << "\n";
+		}
 	}
 }
 
@@ -55,8 +60,9 @@ void Transition::fadeOut() {
 
 	// Actualiza el alpha de la textura
 	if (alpha < SDL_ALPHA_OPAQUE) {
-		alphaCalc += FADE_SPEED * (SDL_GetTicks() / 1000);
-		alpha = alphaCalc;
+		alphaCalc = FADE_SPEED * (SDL_GetTicks() - lastTimeAct);
+		lastTimeAct = SDL_GetTicks();
+		alpha += alphaCalc;
 	}
 
 	// Si el alpha supera 255, lo iguala a 255;
@@ -87,8 +93,9 @@ void Transition::fadeIn() {
 
 	// Actualiza el alpha de la textura
 	if (alpha > SDL_ALPHA_TRANSPARENT) {
-		alphaCalc -= FADE_SPEED * (SDL_GetTicks() / 1000);
-		alpha = alphaCalc;
+		alphaCalc = FADE_SPEED * (SDL_GetTicks() - lastTimeAct);
+		lastTimeAct = SDL_GetTicks();
+		alpha -= alphaCalc;
 	}
 
 	// Si el alpha esta por debajo de 0, lo iguala a 0;

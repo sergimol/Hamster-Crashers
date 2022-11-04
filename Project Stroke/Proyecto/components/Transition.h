@@ -20,9 +20,9 @@ public:
 
 	void render() override;
 
-	inline void startFadeIn() { fadingOut = true; fadingIn = false; };
+	inline void startFadeIn() { fadingOut = true; fadingIn = false; lastTimeAct = SDL_GetTicks(); };
 
-	inline void startFadeOut() { fadingIn = true; fadingOut = false; };
+	inline void startFadeOut() { fadingIn = true; fadingOut = false; lastTimeAct = SDL_GetTicks(); };
 
 	void changeScene(string nameScene, bool changeMap, int numTransitions);
 
@@ -45,7 +45,8 @@ private:
 	Texture* tx_;
 	float alphaCalc;
 
-	const float FADE_SPEED = 0.5;
+	const float FADE_SPEED = 0.25;
+	Uint32 lastTimeAct;
 
 	bool fadingOut;
 	bool fadingIn;
