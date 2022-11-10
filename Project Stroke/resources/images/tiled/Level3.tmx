@@ -528,7 +528,7 @@
   <object id="355" name="finalBoss" x="7470.27" y="384" width="27.2727" height="44.9091">
    <properties>
     <property name="Altura" type="int" value="0"/>
-    <property name="sala" type="int" value="1"/>
+    <property name="sala" type="int" value="4"/>
     <property name="zRondas" type="int" value="0"/>
    </properties>
   </object>
@@ -604,7 +604,28 @@
   </object>
  </objectgroup>
  <objectgroup id="12" name="Salas">
-  <object id="371" name="1" x="7328.22" y="160.871" width="13" height="638.5">
+  <object id="365" name="1" x="1791.63" y="267.643" width="13" height="255.5">
+   <properties>
+    <property name="CameraCoordX" type="int" value="1910"/>
+    <property name="Rounds" type="int" value="2"/>
+    <property name="zBoss" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="366" name="2" x="3604.89" y="221.43" width="13" height="255.5">
+   <properties>
+    <property name="CameraCoordX" type="int" value="3750"/>
+    <property name="Rounds" type="int" value="2"/>
+    <property name="zBoss" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="369" name="3" x="5903.13" y="332.977" width="13" height="255.5">
+   <properties>
+    <property name="CameraCoordX" type="int" value="5950"/>
+    <property name="Rounds" type="int" value="2"/>
+    <property name="zBoss" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="371" name="4" x="7328.22" y="160.871" width="13" height="638.5">
    <properties>
     <property name="CameraCoordX" type="int" value="7600"/>
     <property name="Rounds" type="int" value="1"/>
