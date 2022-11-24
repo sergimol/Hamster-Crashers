@@ -132,6 +132,7 @@ void Transition::changeScene(string nameScene, bool changeMap, int numTransition
 		e->getComponent<Transform>()->setZ(0);
 	}
 	entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setHeightMap(0);
+	entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->resetCamera();
 	change = true;
 	changeMap_ = changeMap;
 	nameScene_ = nameScene;

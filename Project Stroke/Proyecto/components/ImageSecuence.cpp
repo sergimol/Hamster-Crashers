@@ -12,8 +12,8 @@ ImageSecuence::ImageSecuence(string newScene) :newScene_(newScene) {
 
 void ImageSecuence::init() {
 	float offsetCamera = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getUpOffset();
-	int x = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam().x;
-	int y = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam().y + 205;
+	int x = 0;// entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam().x;
+	int y = 0;// entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam().y + 205;
 	Vector2D pos(x, y + offsetCamera);
 	if (newScene_ == level1) {
 		//Cinematica 8
@@ -217,8 +217,8 @@ void ImageSecuence::init() {
 
 
 		keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
-		}
-		else if (newScene_ == level3) {
+	}
+	else if (newScene_ == level3) {
 		//Cinematica 16
 		auto anim16 = entity_->getMngr()->addEntity();
 		anim16->addComponent<Transform>(pos, Vector2D(0, 0), 1920, 1080, 0, 1, 1);
