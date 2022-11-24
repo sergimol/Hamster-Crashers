@@ -35,7 +35,9 @@ public:
 
 	void die();
 
-	void setLife(int life);
+	void setLife(int life); 
+		
+	void allDeadFunc();
 
 	//Getters auxiliares
 	inline int getLife() const {

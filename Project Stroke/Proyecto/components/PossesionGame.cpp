@@ -27,7 +27,7 @@ void PossesionGame::update() {
 
 		// Si el fantasma se está controlando con mando
 		if (ih().playerHasController(playerNumber_)) {
-			if (ih().isButtonDownEvent()) {
+			if (ih().isButtonDownEvent() && ih().isAnyResurrectButtonDown(playerNumber_)) {
 				success = ih().isButtonDown(playerNumber_, actualButton_) && keyGame_->getComponent<KeyGame>()->hitSkillCheck();
 
 				if (success)

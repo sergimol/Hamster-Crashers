@@ -181,8 +181,8 @@ void MenuButton::pressed() {
 			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level1", true, 8);
 
 			state_->setState(GameStates::RUNNING);
+			Mix_FadeOutMusic(500);
 		}
-		Mix_FadeOutMusic(500);
 	}
 	else if (buttonName_ == "musicDown") {
 		auto soundMngr = entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>();

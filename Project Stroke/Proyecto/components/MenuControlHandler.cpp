@@ -31,7 +31,7 @@ void MenuControlHandler::update() {
 			bool handled = false;
 			int i = 0;
 			// Si hay algún mando conectado los tiene en cuenta
-			while (!handled && ih().playerHasController(i)) {
+			while (!handled && i < MAXPLAYERS && ih().playerHasController(i)) {
 				handled = handleController(i);
 				i++;
 			}

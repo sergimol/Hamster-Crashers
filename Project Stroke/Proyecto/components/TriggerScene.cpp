@@ -14,30 +14,32 @@ void TriggerScene::init() {
 }
 
 void TriggerScene::update() {
+	int hamInside = 0;
 	for (Entity* hamsters : entity_->getMngr()->getPlayers()) {
 		//Cogemos la posicion de cada hamster...
 		auto hamsterTr = hamsters->getComponent<Transform>();
 
-		//Cogemos la camara para hacer bien las colisiones
-		SDL_Rect cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam();
-
-		if (!Collisions::collides(hamsterTr->getPos(), hamsterTr->getW(), hamsterTr->getH(),
-			tr_->getPos(), tr_->getW(), tr_->getH())) {
-			canChange = false;
+		if (!hamsters->getComponent<HamsterStateMachine>()->cantBeTargeted()) {
+			if (!Collisions::collides(hamsterTr->getPos(), hamsterTr->getW(), hamsterTr->getH(),
+				tr_->getPos(), tr_->getW(), tr_->getH())) {
+				canChange = false;
+			}
+			else
+				hamInside++;
 		}
 	}
 
 	//Si todos los hamsters estan en el trigger
-	if (canChange && !entity_->getMngr()->getPlayers().empty()) { //TODO ELIMINAR ULTIMA CONDICION TRIGGER
+	if (hamInside != 0 && canChange && !entity_->getMngr()->getPlayers().empty()) { //TODO ELIMINAR ULTIMA CONDICION TRIGGER
 		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::Players);
 		//Cambio de escena
-		entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene(nameScene, true,numT);
+		entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene(nameScene, true, numT);
 		entity_->setActive(false);
-	}		
+	}
 	else
 		canChange = true;
 }
 
 void TriggerScene::render() {
-	if(debug) SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 255, 0, 255);
+	if (debug) SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 255, 0, 255);
 }

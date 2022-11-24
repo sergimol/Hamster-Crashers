@@ -192,7 +192,6 @@ void EntityAttribs::update() {
 			}
 
 			allDead = false;
-
 			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", true, 0);
 		}
 	}
@@ -306,7 +305,6 @@ void EntityAttribs::die() {
 
 	e->getComponent<Animator>()->play(sdlutils().anims().at(id_ + "_death"));
 
-	//TODO WHY ¿?
 	//Si la persona que muere es un hamster...
 	if (entity_->hasGroup<Ally>()) {
 
@@ -334,10 +332,6 @@ void EntityAttribs::die() {
 		}
 	}
 	else {
-		/*	if (entity_->getMngr()->getHandler<Boss>() == entity_) {
-
-		}
-		else */
 		if (entity_->hasComponent<FinalBossAttack>() || entity_->hasComponent<FinalBossPunch>()) {
 			auto* boss = entity_->getMngr()->getHandler<FinalBoss>()->getComponent<FinalBossManager>();
 			if (boss != nullptr && (boss->getHand() == entity_ || boss->getFist() == entity_)) {
@@ -348,9 +342,7 @@ void EntityAttribs::die() {
 			}
 		}
 		//solamente para los enemigos
-		//entity_->getMngr()->getHandler<Map>()->getComponent<MapMngr>()->reduceNumberEnemyRoom();	//Reduce el numero total de enemigos que hay en una sala
 		e->addComponent<Dying>();
-		//e->getComponent<Transform>()->setGravity(e->addComponent<Gravity>());
 		enmState_->getState() = EnemyStates::ENM_DEAD;
 		if (id_ == "soldier1" || id_ == "soldier2")
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("soldierDep");
@@ -411,4 +403,11 @@ void EntityAttribs::onResume() {
 	damageInvulTime_ += sdlutils().currRealTime() - damageInvulTime_;
 	timeLastUpdate_ += sdlutils().currRealTime() - timeLastUpdate_;
 	poisonTime_ += sdlutils().currRealTime() - poisonTime_;
+}
+
+void EntityAttribs::allDeadFunc() {
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetNumInts();
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopBossSounds();
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopTutorial();
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersMainThemev2");
 }

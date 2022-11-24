@@ -34,12 +34,10 @@ void Transition::update() {
 	if (state_->getState() == GameStates::RUNNING || state_->getState() == GameStates::CONTROLS || state_->getState() ==  GameStates::MAINMENU) {
 		if (fadingOut) {
 			fadeOut();
-			cout << alpha << "\n";
 		}
 
 		if (fadingIn) {
 			fadeIn();
-			cout << alpha << "\n";
 		}
 	}
 }
@@ -119,9 +117,6 @@ void Transition::fadeIn() {
 			else if (nameScene_ == "Level3Boss" && playeasonido) {
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersNivel4_Boss2");
 			}
-			/*else if (nameScene_ == "Level3Micro" && playeasonido) {
-				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersNivel4_Boss2");
-			}*/
 			else if (nameScene_ == "final" && playeasonido) {
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("Nivel1GameVersion");
 			}

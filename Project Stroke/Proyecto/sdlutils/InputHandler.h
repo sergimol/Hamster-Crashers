@@ -168,6 +168,15 @@ public:
 		return false;
 	}
 
+	inline bool isAnyResurrectButtonDown(int controller) {
+		if (controllers_[controller] != nullptr) {
+			if (buttonStates_[controller][SDL_CONTROLLER_BUTTON_A] || buttonStates_[controller][SDL_CONTROLLER_BUTTON_B] || buttonStates_[controller][SDL_CONTROLLER_BUTTON_X] || buttonStates_[controller][SDL_CONTROLLER_BUTTON_Y])
+				return true;
+		}
+
+		return false;
+	}
+
 	inline bool isButtonUp(int controller, SDL_GameControllerButton button) {
 		if (controllers_[controller] == nullptr)
 			return false;
