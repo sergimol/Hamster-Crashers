@@ -62,6 +62,7 @@ private:
 
 	bool phaseComplete_, defeated;
 	bool hamsterDead_;
+	bool transDone_;
 
 	//las texturas que mostraran el progreso de la fase
 	float alpha;

@@ -24,16 +24,6 @@ public:
 private:
 	stack<Entity*> keyAnimations;
 
-	const string level1 = "Level1",
-		level2 = "Level2",
-		level3 = "Level3",
-		level3Micro = "Level3Boss",
-		final = "final",
-		controls = "controls",
-		hasMuerto = "hasMuerto",
-		hasGanado = "hasGanado",
-		level1Boss = "Level1Boss";
-
 	string newScene_;
 
 	bool next = false;

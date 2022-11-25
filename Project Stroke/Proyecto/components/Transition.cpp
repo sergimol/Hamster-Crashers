@@ -93,6 +93,7 @@ void Transition::fadeIn() {
 	if (alpha > SDL_ALPHA_TRANSPARENT) {
 		alphaCalc = FADE_SPEED * (SDL_GetTicks() - lastTimeAct);
 		lastTimeAct = SDL_GetTicks();
+		if (alphaCalc == 0) alphaCalc = 1;
 		alpha -= alphaCalc;
 	}
 
@@ -264,7 +265,6 @@ void Transition::createMap() {
 
 		auto cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
 
-		cam->changeCamState(State::Players);
 		cam->setMap(mapa->getComponent<MapMngr>());
 	}
 }

@@ -490,7 +490,7 @@
   <object id="171" name="newScene" x="-99.002" y="102.848" width="64" height="278.667">
    <properties>
     <property name="newMap" value="Level3"/>
-    <property name="numT" type="int" value="0"/>
+    <property name="numT" type="int" value="3"/>
    </properties>
   </object>
   <object id="172" name="startMusic" x="8249.04" y="62.4848" width="81.3333" height="316">

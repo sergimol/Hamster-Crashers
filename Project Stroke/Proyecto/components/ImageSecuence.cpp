@@ -15,7 +15,7 @@ void ImageSecuence::init() {
 	int x = 0;// entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam().x;
 	int y = 0;// entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam().y + 205;
 	Vector2D pos(x, y + offsetCamera);
-	if (newScene_ == level1) {
+	if (newScene_ == "Level1") {
 		//Cinematica 8
 		auto anim8 = entity_->getMngr()->addEntity();
 		anim8->addComponent<Transform>(pos, Vector2D(0, 0), 1920, 1080, 0, 1, 1);
@@ -139,7 +139,7 @@ void ImageSecuence::init() {
 		keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
 
 	}
-	else if (newScene_ == level2) {
+	else if (newScene_ == "Level2") {
 		//Cinematica 13
 		auto anim13 = entity_->getMngr()->addEntity();
 		anim13->addComponent<Transform>(pos, Vector2D(0, 0), 1920, 1080, 0, 1, 1);
@@ -218,7 +218,7 @@ void ImageSecuence::init() {
 
 		keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
 	}
-	else if (newScene_ == level3) {
+	else if (newScene_ == "Level3") {
 		//Cinematica 16
 		auto anim16 = entity_->getMngr()->addEntity();
 		anim16->addComponent<Transform>(pos, Vector2D(0, 0), 1920, 1080, 0, 1, 1);
@@ -267,7 +267,7 @@ void ImageSecuence::init() {
 
 		keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
 	}
-	else if (newScene_ == level3Micro) {
+	else if (newScene_ == "Level3Boss") {
 		//Cinematica 18
 		auto anim18 = entity_->getMngr()->addEntity();
 		anim18->addComponent<Transform>(pos, Vector2D(0, 0), 1920, 1080, 0, 1, 1);
@@ -301,7 +301,7 @@ void ImageSecuence::init() {
 
 		keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
 	}
-	else if (newScene_ == final) {
+	else if (newScene_ == "final") {
 		//Cinematica 25
 		auto anim25 = entity_->getMngr()->addEntity();
 		anim25->addComponent<Transform>(pos, Vector2D(0, 0), 1920, 1080, 0, 1, 1);
@@ -410,7 +410,7 @@ void ImageSecuence::init() {
 
 		keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
 	}
-	else if (newScene_ == hasMuerto) {
+	else if (newScene_ == "hasMuerto") {
 		//Cinematica 19
 		auto anim19 = entity_->getMngr()->addEntity();
 		anim19->addComponent<Transform>(pos, Vector2D(0, 0), 1920, 1080, 0, 1, 1);

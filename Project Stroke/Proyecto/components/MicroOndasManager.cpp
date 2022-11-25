@@ -14,7 +14,7 @@ MicroOndasManager::MicroOndasManager(int hamN, Texture* tx, Texture* tx2) :
 	timer_(0), timeToEnd_(90000), lastTime_(sdlutils().currRealTime()),
 	phaseComplete_(false), hamsterDead_(false), tx_(tx), txBat_(tx2),
 	auxX(0), auxY(0), hits_(1), damageInPercent_(0.25f), gamestate(nullptr),
-	defeated(false), startEnding_(0), waitEnding_(2500)
+	defeated(false), startEnding_(0), waitEnding_(2500), transDone_(false)
 {
 }
 
@@ -40,7 +40,7 @@ void MicroOndasManager::init() {
 	tr_ = entity_->getComponent<Transform>();
 	assert(tr_ != nullptr);
 
-		
+
 	gamestate = entity_->getMngr()->getHandler<StateMachine>()->getComponent<GameStates>();
 	assert(gamestate != nullptr);
 
@@ -53,13 +53,13 @@ void MicroOndasManager::init() {
 
 	right_ = entity_->getMngr()->addEntity();		//Referencia a los cables derechos
 	rightTr_ = right_->addComponent<Transform>(
-		tr_->getPos() + Vector2D(224 * auxScale,0 ), Vector2D(), 96 * auxScale, 186 * auxScale, 0.0f, 0.8f, 0.8f);
+		tr_->getPos() + Vector2D(224 * auxScale, 0), Vector2D(), 96 * auxScale, 186 * auxScale, 0.0f, 0.8f, 0.8f);
 
 	right_->setGroup<Enemy>(true);
-	
+
 	right_->addComponent<EnemyStateMachine>();
 	rightAttribs_ = right_->addComponent<EntityAttribs>(300 + (hamsNum_ * 50), 0.0, "pirulo2", Vector2D(4.5, 2), 0, 0, 20, true, false, false);
-	
+
 	right_->addComponent<EnemyAttack>();
 	right_->addComponent<MovementSimple>();
 	right_->addComponent<EnemyBehaviour>(new IddleEnemy());
@@ -81,13 +81,13 @@ void MicroOndasManager::init() {
 
 	left_ = entity_->getMngr()->addEntity();		//Referencia al cable iz
 	leftTr_ = left_->addComponent<Transform>(
-		tr_->getPos() + Vector2D((-256 - 64 ) * auxScale, 0), Vector2D(), 96 * auxScale, 186 * auxScale, 0.0f, 0.8f, 0.8f);
+		tr_->getPos() + Vector2D((-256 - 64) * auxScale, 0), Vector2D(), 96 * auxScale, 186 * auxScale, 0.0f, 0.8f, 0.8f);
 	left_->setGroup<Enemy>(true);
-	
+
 
 	left_->addComponent<EnemyStateMachine>();
 	leftAttribs_ = left_->addComponent<EntityAttribs>(300 + (hamsNum_ * 50), 0.0, "pirulo1", Vector2D(4.5, 2), 0, 0, 20, true, false, false);
-	
+
 	left_->addComponent<EnemyAttack>();
 	left_->addComponent<MovementSimple>();
 	left_->addComponent<EnemyBehaviour>(new IddleEnemy());
@@ -110,13 +110,13 @@ void MicroOndasManager::init() {
 
 	bateria_ = entity_->getMngr()->addEntity();		//Referencia al cable iz
 	bateriaTr_ = bateria_->addComponent<Transform>(
-		tr_->getPos() + Vector2D(-64 * auxScale , -64 * auxScale), Vector2D(), 128.0f * auxScale, 140.0f * auxScale, 0.0f, 0.8f, 0.8f);
+		tr_->getPos() + Vector2D(-64 * auxScale, -64 * auxScale), Vector2D(), 128.0f * auxScale, 140.0f * auxScale, 0.0f, 0.8f, 0.8f);
 	bateria_->setGroup<Enemy>(true);
-	
+
 
 	bateria_->addComponent<EnemyStateMachine>();
 	bateriaAttribs_ = bateria_->addComponent<EntityAttribs>(300 + (hamsNum_ * 50), 0.0, "piruloGordo", Vector2D(4.5, 2), 0, 0, 20, true, true, false);
-	
+
 	bateria_->addComponent<EnemyAttack>();
 	bateria_->addComponent<MovementSimple>();
 	bateria_->addComponent<EnemyBehaviour>(new IddleEnemy());
@@ -138,9 +138,7 @@ void MicroOndasManager::init() {
 	entity_->getMngr()->getEnemies().push_back(bateria_);
 
 	//añadir la interafz de la vida
-	
-
-	//entity_->addComponent<UI>("micro", 4);
+	entity_->addComponent<UI>("micro", 4);
 
 	handTurn_ = sdlutils().rand().nextInt(0, 2) == 0;
 
@@ -150,9 +148,6 @@ void MicroOndasManager::init() {
 	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("microwaveBep");
 	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("tiktak");
 	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("microwaveStatic");
-
-
-
 }
 
 
@@ -160,7 +155,7 @@ void MicroOndasManager::init() {
 void MicroOndasManager::update() {
 
 	int vida = 0;
-	
+
 	//como los enemigos se elimnan al final de todo esto me hace el apaño
 
 	if (right_ != nullptr && !right_->isActive())
@@ -192,8 +187,6 @@ void MicroOndasManager::update() {
 		//hacer la animacion en al que cae la bateria
 	}
 
-	
-
 
 	if (bateria_ == nullptr && right_ == nullptr && left_ == nullptr)
 		phaseComplete_ = true;
@@ -203,18 +196,16 @@ void MicroOndasManager::update() {
 	//dependiendo del tiempo que le quede se aplicaro un difunicado a la pantalla de color rojo/naranja
 	if (gamestate->getState() == GameStates::RUNNING)
 		timer_ += sdlutils().currRealTime() - lastTime_;
-	
+
 	lastTime_ = sdlutils().currRealTime();
-		
-		//la suma del tiempo
+
+	//la suma del tiempo
 	if (!phaseComplete_) {
 
 		//si el estado del jeugo no esta en pausa
 		//TODO 
 		//seria esta parte la unica que no se actualiza el resto daria igual, el last time si que es necesario 
 		//que se actualice para que al volver al estado funcione de forma correcta
-		
-
 
 
 		if (!hamsterDead_) {
@@ -226,21 +217,21 @@ void MicroOndasManager::update() {
 					e->getComponent<EntityAttribs>()->setLife(0);
 					e->getComponent<EntityAttribs>()->die();
 				}
-				hamsterDead_= true;
+				hamsterDead_ = true;
 			}
 			auto ents = entity_->getMngr()->getPlayers();
 			for (Entity* e : ents) {
-				e->getComponent<EntityAttribs>()->setLife(e->getComponent<EntityAttribs>()->getMaxLife()  - e->getComponent<EntityAttribs>()->getMaxLife() * timer_ / timeToEnd_);
+				e->getComponent<EntityAttribs>()->setLife(e->getComponent<EntityAttribs>()->getMaxLife() - e->getComponent<EntityAttribs>()->getMaxLife() * timer_ / timeToEnd_);
 				//e->getComponent<EntityAttribs>()->die();
 				//cada cuarto de tiempo le hace daño
 				if ((timer_ / timeToEnd_) >= ((float)hits_ * damageInPercent_) && !e->getComponent<EntityAttribs>()->checkInvulnerability()) {
 					//como le doy una tollina a un bicho?
 					auto& hamStateM = e->getComponent<HamsterStateMachine>()->getState();
 
-						e->getComponent<EntityAttribs>()->recieveDmg(0);
-						//sonido de la ostia
+					e->getComponent<EntityAttribs>()->recieveDmg(0);
+					//sonido de la ostia
 
-						entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
+					entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("lighthit");
 
 
 					if (hamStateM != HamStates::DEAD && hamStateM != HamStates::INFARCTED) {
@@ -279,7 +270,7 @@ void MicroOndasManager::update() {
 			}
 			if ((timer_ / timeToEnd_) >= ((float)hits_ * damageInPercent_))
 				hits_++;
-			tx_->setAlpha(10.0f + (205.0f * timer_/ timeToEnd_));
+			tx_->setAlpha(10.0f + (205.0f * timer_ / timeToEnd_));
 		}
 	}
 	else { //microondas KO
@@ -287,17 +278,19 @@ void MicroOndasManager::update() {
 		if (!defeated) {
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopBossSounds();
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("microwaveExplosion");
+			entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::Static);
 			defeated = true;
 
 			startEnding_ = timer_;
 
 			//camera sake
 		}
-		else if (timer_ >= startEnding_ + waitEnding_){
+		else if (!transDone_ && timer_ >= startEnding_ + waitEnding_) {
 			//cosasextras
 
 			//ahy que apañarlo .tm
 			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("final", true, 6);
+			transDone_ = true;
 		}
 
 		//transition de meurte del boss
@@ -319,7 +312,7 @@ void MicroOndasManager::render() {
 	else
 		txBat_->setAlpha(255.0f);
 
-	bateriaRect.x = auxX - cam.x - (cam.w / 2) ;
+	bateriaRect.x = auxX - cam.x - (cam.w / 2);
 	bateriaRect.y = auxY - cam.y - (cam.h / 2);
 
 	txBat_->render(bateriaRect);
