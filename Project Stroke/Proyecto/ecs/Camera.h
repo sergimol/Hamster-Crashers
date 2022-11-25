@@ -61,7 +61,7 @@ public:
 
 	inline void setHeightMap(int h) { heightMap_ = h; };
 	void resetCamera();
-	Vector2D cameraFollowPos_;	//Guarda el punto de la posición de la camara cuando lo lea
+	Vector2D cameraFollowPos_;	//Guarda el punto de la posiciï¿½n de la camara cuando lo lea
 
 	void setGoToTracker(bool objetivo) {GoToTracker = objetivo;};
 	void setGoToCat(bool objetivo) {goToCat = objetivo;};
@@ -71,7 +71,7 @@ public:
 
 /*
 Como se supone que se van a leer capas de objetos por cada zona (o por sus propiedades), no hace falta
-guardar un array de posiciones de la camara, puesto que cuando se entre en una nueva zona, solo habrá una nueva
-posición de la camara a la que esta tendra que ir
+guardar un array de posiciones de la camara, puesto que cuando se entre en una nueva zona, solo habrï¿½ una nueva
+posiciï¿½n de la camara a la que esta tendra que ir
 */
 

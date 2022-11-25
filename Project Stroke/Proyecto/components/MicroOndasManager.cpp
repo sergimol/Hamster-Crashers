@@ -289,7 +289,7 @@ void MicroOndasManager::update() {
 			//cosasextras
 
 			//ahy que apañarlo .tm
-			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("final", true, 6);
+			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("final", true, 6, false);
 			transDone_ = true;
 		}
 

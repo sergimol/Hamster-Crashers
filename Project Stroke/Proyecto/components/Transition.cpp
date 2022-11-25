@@ -268,6 +268,7 @@ void Transition::createMap() {
 		auto cam = entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>();
 
 		cam->setMap(mapa->getComponent<MapMngr>());
+		cam->changeCamState(State::Players);
 	}
 }
 

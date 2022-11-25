@@ -172,4 +172,5 @@ void Camera::resetCamera() {
 	camera_.x = 0;
 	camera_.y = upOffset;
 	camPos = Vector2D(camera_.w / 2, camera_.h / 2);
+	cameraFollowPos_ = Vector2D(0, 0);
 }

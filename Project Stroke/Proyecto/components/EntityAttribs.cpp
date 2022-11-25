@@ -190,7 +190,6 @@ void EntityAttribs::update() {
 				cam->setGoToCat(false);
 				cam->setGoToTracker(false);
 			}
-
 			allDead = false;
 			allDeadFunc();
 			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", true, 0, false);
@@ -339,7 +338,7 @@ void EntityAttribs::die() {
 				boss->die();
 				entity_->getMngr()->setHandler<FinalBoss>(nullptr);
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
-				entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level3Boss", true, 2);
+				entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level3Boss", true, 2, false);
 			}
 		}
 		//solamente para los enemigos
@@ -354,7 +353,7 @@ void EntityAttribs::die() {
 			entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setcShake(false);
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
 			Mix_FadeOutMusic(2000);
-			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 5);
+			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 5, false);
 		}
 
 		if (entity_->isActive()) entity_->setActive(false);

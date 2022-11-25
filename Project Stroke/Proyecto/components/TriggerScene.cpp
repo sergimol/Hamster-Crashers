@@ -33,7 +33,7 @@ void TriggerScene::update() {
 	if (hamInside != 0 && canChange && !entity_->getMngr()->getPlayers().empty()) { //TODO ELIMINAR ULTIMA CONDICION TRIGGER
 		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::Players);
 		//Cambio de escena
-		entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene(nameScene, true, numT);
+		entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene(nameScene, true, numT, false);
 		entity_->setActive(false);
 	}
 	else
