@@ -193,7 +193,7 @@ void EntityAttribs::update() {
 
 			allDead = false;
 			allDeadFunc();
-			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", true, 0);
+			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", true, 0, false);
 		}
 	}
 }

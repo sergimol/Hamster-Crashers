@@ -24,7 +24,7 @@ public:
 
 	inline void startFadeOut() { fadingIn = true; fadingOut = false; lastTimeAct = SDL_GetTicks(); };
 
-	void changeScene(string nameScene, bool changeMap, int numTransitions);
+	void changeScene(string nameScene, bool changeMap, int numTransitions, bool resetCamera = true);
 
 	void sceneTransition();
 

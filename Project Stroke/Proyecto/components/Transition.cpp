@@ -67,6 +67,7 @@ void Transition::fadeOut() {
 	if (alpha >= SDL_ALPHA_OPAQUE) {
 		alpha = SDL_ALPHA_OPAQUE;
 		alphaCalc = (float)SDL_ALPHA_OPAQUE;
+		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->resetCamera();
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("nextPage");
 		if (change)
 			sceneTransition();
@@ -126,14 +127,15 @@ void Transition::fadeIn() {
 	}
 }
 
-void Transition::changeScene(string nameScene, bool changeMap, int numTransitions) {
+void Transition::changeScene(string nameScene, bool changeMap, int numTransitions, bool resetCamera) {
 	auto& ents = entity_->getMngr()->getPlayers();
 	for (Entity* e : ents) {
 		e->getComponent<Transform>()->setFloor(0);
 		e->getComponent<Transform>()->setZ(0);
 	}
 	entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setHeightMap(0);
-	entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->resetCamera();
+	if(resetCamera)
+		entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->resetCamera();
 	change = true;
 	changeMap_ = changeMap;
 	nameScene_ = nameScene;
