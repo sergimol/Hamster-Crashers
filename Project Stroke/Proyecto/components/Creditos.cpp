@@ -65,6 +65,12 @@ void Creditos::backToMenu() {
 	i[0]->getComponent<MenuIndicator>()->reset();
 
 	entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->changeCamState(State::Players);
+
+	entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->resetCamera();
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->resetNumInts();
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopBossSounds();
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopTutorial();
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("HamstersMainThemev2");
 }
 
 void Creditos::render() {

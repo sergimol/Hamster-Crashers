@@ -1,0 +1,24 @@
+//poseer pilla todos los inputs
+letras de posesion dependen de velocidad del hamster
+//musica se para con primer hamster
+//musica no se reinicia al perder
+con la b se corta el audio al pasar escenas
+no sale el fondo del menu de opciones en el menu principal
+enemigos aparecen mal 
+comida se coge al instante
+morir saltando hace que desaparezca el cuerpo
+//trigger de final de nivel pide que pasen todos los hamsters 
+no hay suelo en el final de nivel 1
+//transicion final nivel se mueve
+primer tronco nivel 2 está mal pintado
+animación muerte mariquitas muy lenta muerte y pegar les falta el frame blanco
+camara no sigue al gato al morir
+focus de camara no se resetea al morir en el gato
+//nivel 3 faltan tarros en inicio
+//microondas no termina
+boss final pega antes de caer
+icono boss final está mal
+//salir desde creditos deja la musica mala
+no se ve a veces la letra de poseer/reanimar
+no se ve la transicion del nivel 3 al 3Micro
+ahora no va la transicion de muete jijijiji

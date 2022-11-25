@@ -20,8 +20,6 @@ void MenuButtonManager::init() {
 			buttons_[i] = vector<Entity*>(buttonsMagnitude_.getY());
 		}
 
-
-
 		auto* localbutton = mngr->addMenu();
 		localbutton->addComponent<MenuButton>("local", Vector2D(100, 650), stateNumber_);
 		buttons_[0][0] = localbutton;
