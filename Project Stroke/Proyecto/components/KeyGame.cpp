@@ -26,9 +26,7 @@ void KeyGame::render() {
 
 void KeyGame::update() {
 	if (state_->getState() == GameStates::RUNNING){
-		if (dirX_ > 0) progress_ += speed_ / 2;
-		else if (dirX_ < 0) progress_ += 1.5f * speed_;
-		else progress_ += speed_;
+		progress_ += speed_;
 
 
 		if (tr_->getPos().getX() > hitmarker_.x + hitmarker_.w) {
