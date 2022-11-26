@@ -168,6 +168,12 @@ void Camera::changeCamFollowPos(int objetive) {
 		cameraFollowPos_.setX(objetive);
 }
 
+void Camera::setcShake(bool b)
+{
+	cShake_ = b;
+	camShake_ = 0;
+}
+
 void Camera::resetCamera() {
 	camera_.x = 0;
 	camera_.y = upOffset;

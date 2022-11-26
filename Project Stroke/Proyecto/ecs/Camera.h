@@ -57,7 +57,7 @@ public:
 	inline Vector2D getCamPos() const { return camPos; };
 	inline float getUpOffset() const { return upOffset; };
 	inline float getHeightMap() const { return heightMap_; };
-	inline void setcShake(bool b) { cShake_ = b; };
+	void setcShake(bool b);
 
 	inline void setHeightMap(int h) { heightMap_ = h; };
 	void resetCamera();
