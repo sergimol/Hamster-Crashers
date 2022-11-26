@@ -1,5 +1,5 @@
 //poseer pilla todos los inputs
-letras de posesion dependen de velocidad del hamster
+//letras de posesion dependen de velocidad del hamster
 //musica se para con primer hamster
 //musica no se reinicia al perder
 con la b se corta el audio al pasar escenas
