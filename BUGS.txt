@@ -4,9 +4,10 @@
 //musica no se reinicia al perder
 con la b se corta el audio al pasar escenas
 no sale el fondo del menu de opciones en el menu principal
-enemigos aparecen mal 
+//enemigos aparecen mal 
+revisar lo lejos que salen los enemigos
 comida se coge al instante
-morir saltando hace que desaparezca el cuerpo
+//morir saltando hace que desaparezca el cuerpo
 //trigger de final de nivel pide que pasen todos los hamsters 
 no hay suelo en el final de nivel 1
 //transicion final nivel se mueve
@@ -19,8 +20,8 @@ focus de camara no se resetea al morir en el gato
 boss final pega antes de caer
 icono boss final está mal
 //salir desde creditos deja la musica mala
-no se ve a veces la letra de poseer/reanimar
+no se ve a veces la letra de poseer/reanimar(creo que es cuando el fantasma desaparece tras poseer, hay que mirarlo)
 //no se ve la transicion del nivel 3 al 3Micro
 //ahora no va la transicion de muete jijijiji
 //si mueres en el tren sige con el shake la camara
-si sales del calcetin la camara se puede quedar mas abajo
+//si sales del calcetin la camara se puede quedar mas abajo
