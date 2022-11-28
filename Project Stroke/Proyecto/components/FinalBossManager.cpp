@@ -42,7 +42,7 @@ void FinalBossManager::init() {
 		3
 		);
 	handAnim_ = hand_->addComponent<AnimEnemyStateMachine>();
-	hand_->addComponent<UI>("canelon", 4);
+	hand_->addComponent<UI>("mano", 4);
 	bossAtk_ = hand_->addComponent<FinalBossAttack>();
 	movHand_ = hand_->addComponent<MovementSimple>();
 
