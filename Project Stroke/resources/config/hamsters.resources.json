@@ -67,6 +67,10 @@
       "file": "resources/images/UI/bossUI/bossHealthBar.png"
     },
     {
+      "id": "barEnemyBack",
+      "file": "resources/images/UI/bossUI/bossHealthBar_Background.png"
+    },
+    {
       "id": "heart0",
       "file": "resources/images/UI/hamsterUI/heart0.png"
     },
@@ -84,15 +88,27 @@
     },
     {
       "id": "calcetinHead1",
-      "file": "resources/images/UI/calcetinHead.png"
+      "file": "resources/images/UI/bossUI/calcetinHead.png"
     },
     {
       "id": "calcetinHead2",
-      "file": "resources/images/UI/calcetinHead.png"
+      "file": "resources/images/UI/bossUI/calcetinHead.png"
     },
     {
       "id": "calcetinHead3",
-      "file": "resources/images/UI/calcetinHead.png"
+      "file": "resources/images/UI/bossUI/calcetinHead.png"
+    },
+    {
+      "id": "manoHead1",
+      "file": "resources/images/UI/bossUI/manoHead.png"
+    },
+    {
+      "id": "manoHead2",
+      "file": "resources/images/UI/bossUI/manoHead.png"
+    },
+    {
+      "id": "manoHead3",
+      "file": "resources/images/UI/bossUI/manoHead.png"
     },
     {
       "id": "sardinillaHead1",

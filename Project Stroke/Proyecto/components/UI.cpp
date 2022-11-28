@@ -5,6 +5,7 @@ UI::UI(std::string n, int pos) :
 	face_(&sdlutils().images().at(n + "Head1")), //
 	hexagon_(&sdlutils().images().at("Hexagon")), //
 	background_(&sdlutils().images().at("hamsBackGround")),
+	backgroundBoss_(&sdlutils().images().at("barEnemyBack")),
 	scale(1),
 	name(n),
 	position(pos)
@@ -26,18 +27,27 @@ UI::UI(std::string n, int pos) :
 	}//Si se trata de un boss
 	else {
 		//Variables
-		barLenghtInit = barLenght = 500;
+		barLenghtInit = barLenght = 1000;
 		bar_ = &sdlutils().images().at("barEnemy");
 
 		//Posiciones de los elementos de la UId
-		renderPosHead = Vector2D((sdlutils().width() / 4) -20, sdlutils().height()-130);
-		renderPosHexagon = Vector2D((sdlutils().width() / 4) - 75, sdlutils().height() - 150);
-		renderPosBar = renderPosHead + Vector2D(150, 50);
+		renderPosHead = Vector2D((sdlutils().width() / 4) -300,
+									sdlutils().height()-300);
+		renderPosHexagon = Vector2D((sdlutils().width() / 4) - 300,
+										sdlutils().height() - 300);
+		renderPosBar = renderPosHead + Vector2D(150, 150);
+		renderPosBack = renderPosBar + Vector2D(0, 20);
 
 		//DestRects
-		dest = build_sdlrect(renderPosHead, face_->width()  * scale, face_->height()  * scale);
-		dest2 = build_sdlrect(renderPosHead, 0, 0);
-		dest4 = build_sdlrect(renderPosHexagon, hexagon_->width() * scale, hexagon_->height() * scale);
+		dest = build_sdlrect(renderPosHead,
+							face_->width()  * scale,
+							face_->height()  * scale);
+		dest2 = build_sdlrect(renderPosBack,
+							 barLenght+150,
+							 backgroundBoss_->height() * scale);
+		dest4 = build_sdlrect(renderPosHexagon,
+							  hexagon_->width() * scale,
+							  hexagon_->height() * scale);
 	}
 	dest3 = build_sdlrect(renderPosBar, barLenght, bar_->height() * scale);
 }
@@ -50,7 +60,11 @@ void UI::init() {
 void UI::render() {
 	//Renderizamos la barra, la cara del hamster y su corazon
 	if (state_->getState() != GameStates::MAINMENU && state_->getState() != GameStates::CONTROLS) {
-		background_->render(dest2);
+		
+		if(position>=4) // es un boss
+			backgroundBoss_->render(dest2);
+		else
+			background_->render(dest2);
 		bar_->render(dest3);
 		hexagon_->render(dest4);
 		face_->render(dest);

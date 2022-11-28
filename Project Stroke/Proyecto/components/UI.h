@@ -31,6 +31,7 @@ private:
 	Texture* hexagon_;
 	Texture* bar_;
 	Texture* background_;
+	Texture* backgroundBoss_;
 
 	//DestRects
 	SDL_Rect dest;	//Face
