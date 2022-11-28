@@ -64,9 +64,6 @@
 #include "../components/ObstacleMoveable.h"
 #include "../components/LifeTime.h"
 
-
-
-
 MapMngr::~MapMngr() {
 	clearColliders();
 }
@@ -93,7 +90,8 @@ void MapMngr::update() {
 			RoundsPerRoom = getProp[1].getIntValue();
 
 			if (!getProp[2].getBoolValue()) {
-				loadEnemyRoom();
+				roomTrigger = true;
+				//loadEnemyRoom();
 			}
 			else {
 				BossControlSpawn = true;
@@ -115,9 +113,13 @@ void MapMngr::update() {
 			}
 		}
 	}
-
+	//Spawn de enemigos despues de que se mueva la camara
+	if (camera->getCamState() == State::Static && roomTrigger) {
+		roomTrigger = false;
+		loadEnemyRoom();
+	}
 	//Si el estado de la camara es "Static" aka luchando con enemigos, y la cantidad de enemigos en la habitación es 0, volvemos a "Player1s"
-	if (camera->getCamState() == State::Static && numberEnemyRoom <= 0) {
+	if (!roomTrigger && camera->getCamState() == State::Static && numberEnemyRoom <= 0) {
 		numberEnemyRoom = 0;
 		if (RoundsPerRoom == RoundsCount) {
 			Room++;	//Una vez cargamos a los enemigos de la habitacion incrementamos el contador para poder cargar los enemigos de la siguiente
@@ -661,7 +663,7 @@ void MapMngr::addHamster(string name, int i, const tmx::Object& object) {
 		hamster1->addComponent<Transform>(Vector2D((object.getPosition().x + object.getAABB().width) * scale, object.getPosition().y * scale),
 			Vector2D(), tam * scale, tam * scale, 0.0f, 0, 0, 0.5, 0.25);
 		hamster1->addComponent<HamsterStateMachine>();
-		hamster1->addComponent<EntityAttribs>(10, 0.0, name, Vector2D(9, 5.5), i, 10, 8000, 70);
+		hamster1->addComponent<EntityAttribs>(30, 0.0, name, Vector2D(9, 4.5), i, 10, 8000, 70);
 	}
 	else if (name == "monchi") {
 		tam = 86;

@@ -45,6 +45,7 @@ private:
 	bool collisionCreated = false;
 	float scale = 3; // 2.4 tren
 	bool BossControlSpawn = false;
+	bool roomTrigger = false;
 
 	std::queue<tmx::Object> triggerFtCamera;
 	vector<string> hamstersToLoad_;
