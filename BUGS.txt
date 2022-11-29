@@ -27,3 +27,16 @@ no se ve a veces la letra de poseer/reanimar(creo que es cuando el fantasma desa
 //si sales del calcetin la camara se puede quedar mas abajo
 sonidos de enemigo en la muerte
 desaparecio sardinilla infartado
+
+
+Habilidad canelon: feedback curacion y daño
+Gato si te mueres xD
+Subir infarto ataque base
+Cambiar los botones habilidad y reanimar/poseer
+Saltar toda transicion
+Meter comandos para saltar niveles
+Animacion muerte calcetin
+Timer frutaas
+Salga fantasma al fallar posesion
+Checkear eliminacion enemigos
+UI boss final
