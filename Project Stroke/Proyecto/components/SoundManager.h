@@ -96,6 +96,7 @@ private:
 	void playMonchiSpecial();
 
 	void playCanelonSpecial();
+	void playCanelonSpecial_LifeUp();
 
 	void playCar();
 
@@ -225,6 +226,7 @@ private:
 	int canelonState = 0;
 	SoundEffect* canelonSpecial0;
 	SoundEffect* canelonSpecial1;
+	SoundEffect* canelonSpecial_LifeUp;
 
 	//Botones UI
 	int buttonState = 0;

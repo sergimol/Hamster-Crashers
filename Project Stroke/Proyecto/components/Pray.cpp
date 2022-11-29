@@ -26,12 +26,14 @@ void Pray::action() {
 	entity_->getComponent<EntityAttribs>()->setInvincibility(true);
 }
 
+
 void Pray::endAbility() {
 	if (!dontUseAbility)
 		prayAbility();
 
 	entity_->getComponent<ControlHandler>()->setActive(true);
 	entity_->getComponent<EntityAttribs>()->setInvincibility(false);
+
 }
 
 void Pray::stopUseAbility()
@@ -109,6 +111,7 @@ void Pray::prayAbility() {
 	else {
 
 		auto& ents = entity_->getMngr()->getPlayers();
+		int i = 0;
 		for (Entity* e : ents) {
 			//Cogemos el transform del aliado
 			auto eTR = e->getComponent<Transform>();
@@ -122,7 +125,12 @@ void Pray::prayAbility() {
 				//Curamos
 				auto& state = st_->getState();
 				if (state != HamStates::DEAD && e->getComponent<EntityAttribs>()->getLife() > 0) //deberia que valer con el DEAD que cuando muera desactive cosas
+				{ 
 					e->getComponent<EntityAttribs>()->heal(heal_);
+					//if (i == 0)
+						//entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("canelonSpecial_LifeUp");
+					//i++;
+				}
 			}
 		}
 	}

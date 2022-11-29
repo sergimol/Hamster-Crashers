@@ -1529,6 +1529,10 @@
       "file": "resources/sound/specialAttack/canelon/canelonSpecialGod.wav"
     },
     {
+      "id": "canelonSpecialGod_LifeUp",
+      "file": "resources/sound/specialAttack/canelon/canelonSpecialGod_LifeUp.wav"
+    },
+    {
       "id": "canelonSpecialDevil",
       "file": "resources/sound/specialAttack/canelon/canelonSpecialDevil.wav"
     },

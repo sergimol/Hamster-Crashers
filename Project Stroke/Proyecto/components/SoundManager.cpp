@@ -73,6 +73,7 @@ void SoundManager::init() {
 	monchiSpecial4 = &sdlutils().soundEffects().at("monchiSpecial4");
 
 	canelonSpecial0 = &sdlutils().soundEffects().at("canelonSpecialGod");
+	canelonSpecial_LifeUp = &sdlutils().soundEffects().at("canelonSpecialGod_LifeUp");
 	canelonSpecial1 = &sdlutils().soundEffects().at("canelonSpecialDevil");
 
 	button0 = &sdlutils().soundEffects().at("button0");	//No lo uso
@@ -306,6 +307,11 @@ void SoundManager::play(std::string soundName) {
 		//Especial canelon
 		canelonSpecial0->setChannelVolume(fxVol_ * canelonSpecialVol);
 		playCanelonSpecial();
+	}
+	else if (soundName == "canelonSpecial_LifeUp") {
+		//Especial canelon
+		canelonSpecial_LifeUp->setChannelVolume(fxVol_ * canelonSpecialVol);
+		playCanelonSpecial_LifeUp();
 	}
 	//Boss Gato
 	else if (soundName == "catMeowInit") {
@@ -894,6 +900,10 @@ void SoundManager::playCanelonSpecial() {
 	canelonState++;
 	if (canelonState > 1)
 		canelonState = 0;
+}
+void SoundManager::playCanelonSpecial_LifeUp() {
+	if (canelonState == 0)
+		canelonSpecial_LifeUp->play();
 }
 
 void SoundManager::playCar() {
