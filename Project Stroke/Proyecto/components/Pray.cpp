@@ -39,6 +39,7 @@ void Pray::endAbility() {
 
 	entity_->getComponent<ControlHandler>()->setActive(true);
 	entity_->getComponent<EntityAttribs>()->setInvincibility(false);
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("canelonSpecial_LifeUp");
 }
 
 void Pray::stopUseAbility()

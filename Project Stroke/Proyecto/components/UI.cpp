@@ -20,7 +20,7 @@ UI::UI(std::string n, int pos) :
 
 		//Posiciones de los elementos de la UI
 		renderPosHead = Vector2D((sdlutils().width() / 4) * position + 70, 35);
-		renderPosBar = Vector2D((sdlutils().width() / 4) * position + 125, 60);
+		renderPosBar = Vector2D((sdlutils().width() / 4) * position + 125, 40);
 		renderPosBack = Vector2D((sdlutils().width() / 4) * position + 30, 10);
 		//DestRects
 		dest = build_sdlrect(renderPosHead, face_->width()  * scale, face_->height()  * scale);
