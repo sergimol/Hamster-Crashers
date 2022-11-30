@@ -26,6 +26,12 @@ void Pray::action() {
 	entity_->getComponent<EntityAttribs>()->setInvincibility(true);
 }
 
+void Pray::update()
+{
+	Ability::update();
+
+}
+
 
 void Pray::endAbility() {
 	if (!dontUseAbility)
@@ -33,7 +39,6 @@ void Pray::endAbility() {
 
 	entity_->getComponent<ControlHandler>()->setActive(true);
 	entity_->getComponent<EntityAttribs>()->setInvincibility(false);
-
 }
 
 void Pray::stopUseAbility()
@@ -127,6 +132,8 @@ void Pray::prayAbility() {
 				if (state != HamStates::DEAD && e->getComponent<EntityAttribs>()->getLife() > 0) //deberia que valer con el DEAD que cuando muera desactive cosas
 				{ 
 					e->getComponent<EntityAttribs>()->heal(heal_);
+					e->getComponent<UI>()->setLifeUp(true);
+
 					//if (i == 0)
 						//entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("canelonSpecial_LifeUp");
 					//i++;

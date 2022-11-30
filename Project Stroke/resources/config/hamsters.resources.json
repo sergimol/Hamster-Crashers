@@ -59,6 +59,10 @@
       "file": "resources/images/UI/hamsterUI/healthbar.png"
     },
     {
+      "id": "bar_up",
+      "file": "resources/images/UI/hamsterUI/healthbar_Up.png"
+    },
+    {
       "id": "hamsBackGround",
       "file": "resources/images/UI/hamsterUI/background.png"
     },

@@ -16,6 +16,7 @@ public:
 
 	void init() override;
 	void render() override;
+	void update() override;
 	void dep(std::string s);
 	void bar(float objetivo);
 	void resurrection();
@@ -24,12 +25,14 @@ public:
 
 	//Getters auxiliares
 	inline int getPosUI() { return position; };
+	void setLifeUp(bool life);
 
 private:
 	//Texturas de la UI
 	Texture* face_;
 	Texture* hexagon_;
 	Texture* bar_;
+	Texture* bar_up_;
 	Texture* background_;
 	Texture* backgroundBoss_;
 
@@ -54,4 +57,9 @@ private:
 	int position;
 
 	GameStates* state_;
+
+	bool life_up = false;
+	long unsigned int timer_; 
+	long unsigned int lifeUp_Time_ = 1500; //Timer para aumentar la vida
+
 };
