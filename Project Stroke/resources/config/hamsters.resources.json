@@ -3333,7 +3333,7 @@
       "duration": 4,
       "cols": 6,
       "rows": 6,
-      "frameUpdate": 70,
+      "frameUpdate": 100,
       "loop": 0,
       "chain": "",
       "attackFrame": -1

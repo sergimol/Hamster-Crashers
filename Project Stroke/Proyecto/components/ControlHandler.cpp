@@ -203,7 +203,11 @@ void ControlHandler::handleController() {
 					st_->attack();
 				}
 				//HABILIDAD
-				else if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)) {
+				/*else if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)) {
+					ab_->use();
+
+				}*/
+				else if (ih().isButtonDown(player_, SDL_CONTROLLER_BUTTON_B)) {
 					ab_->use();
 
 				}
