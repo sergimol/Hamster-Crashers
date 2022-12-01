@@ -16,6 +16,7 @@ void ImageSecuence::init() {
 	int y = 0;// entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->getCam().y + 205;
 	Vector2D pos(x, y + offsetCamera);
 	if (newScene_ == "Level1") {
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->setNumInts(0);
 		//Cinematica 8
 		auto anim8 = entity_->getMngr()->addEntity();
 		anim8->addComponent<Transform>(pos, Vector2D(0, 0), 1920, 1080, 0, 1, 1);
@@ -140,6 +141,7 @@ void ImageSecuence::init() {
 
 	}
 	else if (newScene_ == "Level2") {
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->setNumInts(8);
 		//Cinematica 13
 		auto anim13 = entity_->getMngr()->addEntity();
 		anim13->addComponent<Transform>(pos, Vector2D(0, 0), 1920, 1080, 0, 1, 1);
@@ -219,6 +221,7 @@ void ImageSecuence::init() {
 		keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
 	}
 	else if (newScene_ == "Level3") {
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->setNumInts(13);
 		//Cinematica 16
 		auto anim16 = entity_->getMngr()->addEntity();
 		anim16->addComponent<Transform>(pos, Vector2D(0, 0), 1920, 1080, 0, 1, 1);
@@ -268,6 +271,7 @@ void ImageSecuence::init() {
 		keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
 	}
 	else if (newScene_ == "Level3Boss") {
+	entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->setNumInts(16);
 		//Cinematica 18
 		auto anim18 = entity_->getMngr()->addEntity();
 		anim18->addComponent<Transform>(pos, Vector2D(0, 0), 1920, 1080, 0, 1, 1);
@@ -302,6 +306,7 @@ void ImageSecuence::init() {
 		keyAnimations.top()->getComponent<Animator>()->play(sdlutils().anims().at("cinematic_anim"));
 	}
 	else if (newScene_ == "final") {
+		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->setNumInts(18);
 		//Cinematica 25
 		auto anim25 = entity_->getMngr()->addEntity();
 		anim25->addComponent<Transform>(pos, Vector2D(0, 0), 1920, 1080, 0, 1, 1);

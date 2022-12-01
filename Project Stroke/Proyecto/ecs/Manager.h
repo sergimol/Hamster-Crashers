@@ -447,6 +447,7 @@ public:
 			wavesObjects_.end());
 	}
 
+	std::string getLevel(); 
 private:
 	std::vector<Entity*> entities_;
 	std::vector<Entity*> tiles_;
@@ -472,5 +473,6 @@ private:
 
 	bool strokeTuto_ = true;
 	bool startStrokeActive_ = false;
+	std::string level;
 };
 
