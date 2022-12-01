@@ -41,6 +41,7 @@ private:
 	bool up;
 	bool sequence;
 	bool shield;
+	bool dead;
 
 public: 
 	AnimEnemyStateMachine() : currentState(EnemyStatesAnim::IDLE), lastState(EnemyStatesAnim::DEFAULT), anim(nullptr), ent(nullptr) {};

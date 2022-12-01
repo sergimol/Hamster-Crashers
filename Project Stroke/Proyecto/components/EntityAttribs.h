@@ -158,12 +158,13 @@ private:
 	int updateCD_;
 
 	bool allDead;
+	int bossDead;
 	bool alredyDied;
 
 	std::string id_;
 
 	int deadTime;
-	int const waitAfterDeath = 2000;
+	int const waitAfterDeath = 1500;
 
 	Vector2D velocity_;
 	Vector2D maxVelocity_;

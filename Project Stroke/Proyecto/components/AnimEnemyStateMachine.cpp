@@ -41,6 +41,7 @@ void AnimEnemyStateMachine::HandleAnimState()
 	//strong attack
 	if (sAttack && !lAttack)
 		currentState = EnemyStatesAnim::STRONGATTACK;
+
 	
 	//hitted
 	if (hit)
@@ -54,6 +55,8 @@ void AnimEnemyStateMachine::HandleAnimState()
 		currentState = EnemyStatesAnim::SEQUENCE;
 	if(shield)
 		currentState = EnemyStatesAnim::SHIELD;
+	if (dead)
+		currentState = EnemyStatesAnim::DEAD;
 }
 
 //Cambia las animaciones dependiendo del estado del hamster
@@ -143,7 +146,7 @@ void AnimEnemyStateMachine::setAnimBool(EnemyStatesAnim h, bool b)
 		stun = b;
 		break;
 	case EnemyStatesAnim::DEAD:
-		idle = b;
+		dead = b;
 		break;
 	case EnemyStatesAnim::ONFLOOR:
 		onfloor = b;

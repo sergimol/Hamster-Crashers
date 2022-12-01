@@ -53,6 +53,7 @@ EntityAttribs::EntityAttribs() :
 	state_(nullptr),
 
 	allDead(false),
+	bossDead(0),
 	alredyDied(false)
 {}
 
@@ -95,6 +96,7 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	state_(nullptr),
 
 	allDead(false),
+	bossDead(0),
 	alredyDied(false)
 {}
 
@@ -134,7 +136,11 @@ EntityAttribs::EntityAttribs(int life, float range, std::string id, Vector2D spe
 	hmsText_(nullptr),
 	enmState_(nullptr),
 	tr_(nullptr),
-	state_(nullptr)
+	state_(nullptr),
+
+	allDead(false),
+	bossDead(0),
+	alredyDied(false)
 {}
 
 EntityAttribs::~EntityAttribs() {
@@ -194,6 +200,20 @@ void EntityAttribs::update() {
 			allDeadFunc();
 			cam->setcShake(false);
 			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("hasMuerto", true, 0, false);
+		}
+		if (bossDead != 0 && sdlutils().currRealTime() > deadTime + waitAfterDeath) {
+			if (bossDead == 1) {
+				entity_->getMngr()->setHandler<Boss>(nullptr);
+				entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setcShake(false);
+				entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 5, false);
+				bossDead = 0;
+			}
+			else {
+				entity_->getMngr()->getHandler<FinalBoss>()->getComponent<FinalBossManager>()->die();
+				entity_->getMngr()->setHandler<FinalBoss>(nullptr);
+				entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level3Boss", true, 2, false);
+				bossDead = 0;
+			}
 		}
 	}
 }
@@ -336,10 +356,10 @@ void EntityAttribs::die() {
 		if (entity_->hasComponent<FinalBossAttack>() || entity_->hasComponent<FinalBossPunch>()) {
 			auto* boss = entity_->getMngr()->getHandler<FinalBoss>()->getComponent<FinalBossManager>();
 			if (boss != nullptr && (boss->getHand() == entity_ || boss->getFist() == entity_)) {
-				boss->die();
-				entity_->getMngr()->setHandler<FinalBoss>(nullptr);
 				entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
-				entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level3Boss", true, 2, false);
+				entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::DEAD, true);				
+				bossDead = 2;
+				deadTime = sdlutils().currRealTime();
 			}
 		}
 		//solamente para los enemigos
@@ -350,14 +370,18 @@ void EntityAttribs::die() {
 		else if (id_ == "bicho" || id_ == "rata" || id_ == "naranja")
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("dep");
 		else if (id_ == "calcetin") {
-			entity_->getMngr()->setHandler<Boss>(nullptr);
-			entity_->getMngr()->getHandler<Camera__>()->getComponent<Camera>()->setcShake(false);
 			entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("handDep");
-			Mix_FadeOutMusic(2000);
-			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level2", true, 5, false);
+			entity_->getMngr()->setHandler<Boss>(NULL);
+			//entity_->getComponent<Animator>()->play(sdlutils().anims().at("calcetin_death"));
+			entity_->getComponent<AnimEnemyStateMachine>()->setAnimBool(EnemyStatesAnim::DEAD, true);
+			entity_->getComponent<EnemyStateMachine>()->setActive(false);
+			Mix_FadeOutMusic(3000);
+			bossDead = 1;
+			deadTime = sdlutils().currRealTime();
 		}
 
-		if (entity_->isActive()) entity_->setActive(false);
+		if (entity_->isActive()) 
+			entity_->setActive(false);
 	}
 }
 

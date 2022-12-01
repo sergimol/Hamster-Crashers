@@ -21,7 +21,7 @@ public:
 		OPTIONS
 	};
 
-	GameStates(): state_() {};
+	GameStates(): state_(MAINMENU) {};
 	virtual ~GameStates() {};
 
 	void init() override;
