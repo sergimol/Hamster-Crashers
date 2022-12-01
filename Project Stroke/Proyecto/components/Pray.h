@@ -11,7 +11,9 @@ public:
 	//Ejecuta la habilidad en funcion del hamster que sea
 	virtual void action();
 
-	virtual void endAbility() override;
+	virtual void update() override;
+
+	virtual void endAbility();
 
 	void stopUseAbility();
 private:

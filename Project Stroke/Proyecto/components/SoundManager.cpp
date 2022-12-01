@@ -901,8 +901,11 @@ void SoundManager::playCanelonSpecial() {
 	if (canelonState > 1)
 		canelonState = 0;
 }
-void SoundManager::playCanelonSpecial_LifeUp() {
-	if (canelonState == 0)
+void SoundManager::playCanelonSpecial_LifeUp()
+{
+	// la movida es que se llama despues del de arriba, asi qye el estado esta ya a 1, pero es cuando
+	// haces la transicion de bueno a malo 
+	if (canelonState == 1)
 		canelonSpecial_LifeUp->play();
 }
 

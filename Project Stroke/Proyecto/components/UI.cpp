@@ -10,15 +10,17 @@ UI::UI(std::string n, int pos) :
 	name(n),
 	position(pos)
 {
+
 	//Si se trata de un hamster
 	if (position < 4) {
 		//Variables
 		barLenghtInit = barLenght = 300;
 		bar_ = &sdlutils().images().at("bar");
+		bar_up_ = &sdlutils().images().at("bar_up");
 
 		//Posiciones de los elementos de la UI
 		renderPosHead = Vector2D((sdlutils().width() / 4) * position + 70, 35);
-		renderPosBar = Vector2D((sdlutils().width() / 4) * position + 125, 60);
+		renderPosBar = Vector2D((sdlutils().width() / 4) * position + 125, 40);
 		renderPosBack = Vector2D((sdlutils().width() / 4) * position + 30, 10);
 		//DestRects
 		dest = build_sdlrect(renderPosHead, face_->width()  * scale, face_->height()  * scale);
@@ -57,15 +59,38 @@ void UI::init() {
 	assert(state_ != nullptr);
 }
 
+void UI::update()
+{
+	if (state_->getState() == GameStates::RUNNING)
+	{
+		// Si el aumento de vida esta activado
+		if (life_up && sdlutils().currRealTime() >= timer_ + lifeUp_Time_) {
+			life_up = false;
+			timer_ = sdlutils().currRealTime();
+		}
+	}
+
+}
+
 void UI::render() {
 	//Renderizamos la barra, la cara del hamster y su corazon
 	if (state_->getState() != GameStates::MAINMENU && state_->getState() != GameStates::CONTROLS) {
 		
-		if(position>=4) // es un boss
+		if (position >= 4) // es un boss
+		{
 			backgroundBoss_->render(dest2);
-		else
+			bar_->render(dest3);
+		}
+		else // Hamster
+		{
 			background_->render(dest2);
-		bar_->render(dest3);
+			if (!life_up)
+				bar_->render(dest3);
+			else
+				bar_up_->render(dest3);
+		}
+		
+
 		hexagon_->render(dest4);
 		face_->render(dest);
 	}
@@ -89,4 +114,10 @@ void UI::bar(float objetivo) {
 void UI::resurrection() {
 	face_ = &sdlutils().images().at(name + "Head1");
 	dest3 = build_sdlrect(renderPosBar, barLenght, bar_->height() * scale);
+}
+
+void UI::setLifeUp(bool life)
+{
+	life_up = life;
+	timer_ = sdlutils().currRealTime();
 }
