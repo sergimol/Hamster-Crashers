@@ -49,6 +49,6 @@ private:
 	const int KEY_HEIGHT = 75;
 	//Para poseer
 	const SDL_Keycode key = SDLK_p;
-	const SDL_GameControllerButton button = SDL_CONTROLLER_BUTTON_B;
+	const SDL_GameControllerButton button = SDL_CONTROLLER_BUTTON_RIGHTSHOULDER;
 };
 

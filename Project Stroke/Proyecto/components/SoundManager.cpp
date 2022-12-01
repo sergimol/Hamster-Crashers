@@ -310,7 +310,7 @@ void SoundManager::play(std::string soundName) {
 	}
 	else if (soundName == "canelonSpecial_LifeUp") {
 		//Especial canelon
-		canelonSpecial_LifeUp->setChannelVolume(fxVol_ * canelonSpecialVol);
+		canelonSpecial_LifeUp->setChannelVolume(fxVol_ * 90);
 		playCanelonSpecial_LifeUp();
 	}
 	//Boss Gato

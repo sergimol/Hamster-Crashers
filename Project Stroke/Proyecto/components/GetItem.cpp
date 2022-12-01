@@ -37,9 +37,13 @@ void GetItem::update() {
 					switch (e->getComponent<Item>()->getItem()) {
 					case ItemType::Apple:
 						entity_->getComponent<EntityAttribs>()->heal(APPLEHP);
+						entity_->getComponent<UI>()->setLifeUp(true);
+						entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("canelonSpecial_LifeUp");
 						break;
 					case ItemType::Cheese:
 						this->entity_->getComponent<EntityAttribs>()->heal(CHEESE);
+						entity_->getComponent<UI>()->setLifeUp(true);
+						entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->play("canelonSpecial_LifeUp");
 						break;
 					default:
 						break;
