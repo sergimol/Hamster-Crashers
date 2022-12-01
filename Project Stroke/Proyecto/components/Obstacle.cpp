@@ -58,10 +58,10 @@ void Obstacle::createItem() {
 		it.tex = &sdlutils().images().at("cheese");
 		it.ty = ItemType::Cheese;
 	}
-	e->addComponent<Transform>(Vector2D(tr_->getPos().getX() + (tr_->getW()/2) - 75, tr_->getPos().getY() + (tr_->getH() / 2) - 90), 
+	e->addComponent<Transform>(Vector2D(tr_->getPos().getX() + (tr_->getW()/2), tr_->getPos().getY() + (tr_->getH() / 2) - 70), 
 		Vector2D(0, 0), 
-		150, 
-		150, 
+		200, 
+		200, 
 		0, 
 		tr_->getScaleW(), 
 		tr_->getScaleH());

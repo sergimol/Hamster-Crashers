@@ -70,7 +70,7 @@ void InfarctedBody::update() {
 							tx_->addComponent<Transform>(Vector2D(tr_->getPos().getX(), tr_->getPos().getY() - tr_->getZ()),
 								Vector2D(0, 0),
 								KEY_WIDTH, KEY_HEIGHT, 0, 1, 1)->setFloor(tr_->getFloor());
-							tx_->addComponent<Image>(isCtrl ? &sdlutils().images().at("b") : &sdlutils().images().at("p"));
+							tx_->addComponent<Image>(isCtrl ? &sdlutils().images().at("rb") : &sdlutils().images().at("p"));
 							entity_->getMngr()->getUIObjects().push_back(tx_);
 						}
 
@@ -149,6 +149,8 @@ void InfarctedBody::reanimate() {
 	hamster_->getComponent<HeartUI>()->resurrection();
 	hamster_->getComponent<UI>()->resurrection();
 
+	hamster_->getComponent<Animator>()->setTexture(&sdlutils().images().at(hamster_->getComponent<EntityAttribs>()->getId() + "Sheet"));
+
 	entity_->setActive(false);
 	entity_->getMngr()->refreshDeadBodies();
 
@@ -178,7 +180,6 @@ void InfarctedBody::enableOtherHamster() {
 		otherHamster->getComponent<Movement>()->setActive(true);
 		otherHamster->getComponent<LightAttack>()->setActive(true);
 		otherHamster->getComponent<StrongAttack>()->setActive(true);
-
 	}
 }
 
