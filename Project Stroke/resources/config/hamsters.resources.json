@@ -359,6 +359,14 @@
       "file": "resources/images/UI/keys/rPressed.png"
     },
     {
+      "id": "rb",
+      "file": "resources/images/UI/keys/rb.png"
+    },
+    {
+      "id": "rbPressed",
+      "file": "resources/images/UI/keys/rbPressed.png"
+    },
+    {
       "id": "a",
       "file": "resources/images/UI/keys/a.png"
     },
