@@ -178,7 +178,12 @@ void MenuButton::pressed() {
 		//Cuando haya seleccionado a los hamsters...
 		if (sdlutils().hamstersToChoose() <= 0) {
 			//Hago una transicion para presentar el nivel inicial
-			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene("Level1", true, 8, false);
+			string lvl = mngr->getLevel();
+			int trans = 0;
+			if (lvl == "Level1") trans = 8;
+			else if (lvl == "Level2") trans = 5;
+			else if (lvl == "Level3") trans = 3;
+			entity_->getMngr()->getHandler<LevelHandlr>()->getComponent<Transition>()->changeScene(lvl, true, trans, false);
 
 			state_->setState(GameStates::RUNNING);
 			Mix_FadeOutMusic(500);

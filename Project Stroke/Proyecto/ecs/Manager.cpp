@@ -6,7 +6,7 @@
 #include <algorithm>
 #include "../utils/checkML.h"
 
-Manager::Manager() {
+Manager::Manager() : level("Level1") {
 }
 
 Manager::~Manager() {
@@ -86,6 +86,28 @@ void Manager::update() {
 	auto w = wavesObjects_.size();
 	for (auto i = 0u; i < w; i++)
 		wavesObjects_[i]->update();
+
+	if (getHandler<StateMachine>()->getComponent<GameStates>()->getState() == GameStates::MAINMENU) {
+		if (ih().isKeyDown(SDLK_1)) {
+			sdlutils().setTutorialUndone();
+			level = "Level1";
+			cout << "-------LEVEL1 LISTO-------\n";
+		}
+		if (ih().isKeyDown(SDLK_2)) {
+			sdlutils().setTutorialDone();
+			level = "Level2";
+			cout << "-------LEVEL2 LISTO-------\n";
+		}
+		if (ih().isKeyDown(SDLK_3)) {
+			sdlutils().setTutorialDone();
+			level = "Level3";
+			cout << "-------LEVEL3 LISTO-------\n";
+		}
+		if (ih().isKeyDown(SDLK_4)) {
+			sdlutils().setTutorialUndone();
+			cout << "-------TUTORIALES LISTOS-------\n";
+		}
+	}
 }
 
 void Manager::render() {
@@ -154,4 +176,11 @@ void Manager::resume() {
 	auto wo = wavesObjects_.size();
 	for (auto i = 0u; i < wo; i++)
 		wavesObjects_[i]->resume();
+}
+
+std::string Manager::getLevel()
+{
+	std::string lv = level;
+	level = "Level1";
+	return lv;
 }

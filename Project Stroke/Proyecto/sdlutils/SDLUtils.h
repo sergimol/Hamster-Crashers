@@ -170,6 +170,10 @@ public:
 		tutorialDone_ = true;
 	}
 
+	inline void setTutorialUndone() {
+		tutorialDone_ = false;
+	}
+
 	inline void unlockAngel() {
 		angelUnlocked_ = true;
 	}

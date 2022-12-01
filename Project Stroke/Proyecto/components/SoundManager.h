@@ -75,6 +75,7 @@ public:
 	int angelUlti = 80;
 
 	void resetNumInts();
+	inline void setNumInts(int x) { transitionNum = x; }
 private:
 	int randomNum;
 
