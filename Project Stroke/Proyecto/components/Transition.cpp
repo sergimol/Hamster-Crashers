@@ -141,6 +141,7 @@ void Transition::changeScene(string nameScene, bool changeMap, int numTransition
 	nameScene_ = nameScene;
 	numTReference = numT = numTransitions;
 
+
 	startFadeIn();
 }
 

@@ -17,7 +17,7 @@ void PossesionGame::init() {
 }
 
 
-//Comprueba que la tecla sea pulsada y la keyGame esté chocando con el marcador
+//Comprueba que la tecla sea pulsada y la keyGame estï¿½ chocando con el marcador
 void PossesionGame::update() {
 	if (state_->getState() == GameStates::RUNNING) {
 		if (keyGame_ != nullptr)
@@ -25,7 +25,7 @@ void PossesionGame::update() {
 
 		bool success = false;
 
-		// Si el fantasma se está controlando con mando
+		// Si el fantasma se estï¿½ controlando con mando
 		if (ih().playerHasController(playerNumber_)) {
 			if (ih().isButtonDownEvent() && ih().isAnyResurrectButtonDown(playerNumber_)) {
 				success = ih().isButtonDown(playerNumber_, actualButton_) && keyGame_->getComponent<KeyGame>()->hitSkillCheck();
@@ -38,7 +38,7 @@ void PossesionGame::update() {
 				keyGame_->getComponent<KeyGame>()->goBack();
 			}
 		}
-		// Si se está controlando con teclado
+		// Si se estï¿½ controlando con teclado
 		else if (ih().keyDownEvent()) {
 			success = ih().isKeyDown(actualKey_) && keyGame_->getComponent<KeyGame>()->hitSkillCheck();
 
@@ -73,7 +73,7 @@ void PossesionGame::onDisable() {
 
 void PossesionGame::start() {
 	assert(possesed_ != nullptr);
-	//Tomamos el estado del poseído para comprobar que sigue vivo y no infartado mientras le ayudamos
+	//Tomamos el estado del poseï¿½do para comprobar que sigue vivo y no infartado mientras le ayudamos
 	possesedState_ = possesed_->getComponent<HamsterStateMachine>();
 
 	playerNumber_ = entity_->getComponent<EntityAttribs>()->getNumber();

@@ -20,7 +20,6 @@ focus de camara no se resetea al morir en el gato
 boss final pega antes de caer
 //icono boss final está mal
 //salir desde creditos deja la musica mala
-no se ve a veces la letra de poseer/reanimar(creo que es cuando el fantasma desaparece tras poseer, hay que mirarlo)
 //no se ve la transicion del nivel 3 al 3Micro
 //ahora no va la transicion de muete jijijiji
 //si mueres en el tren sige con el shake la camara
@@ -29,14 +28,15 @@ sonidos de enemigo en la muerte
 desaparecio sardinilla infartado
 
 
+no se ve a veces la letra de poseer/reanimar(creo que es cuando el fantasma desaparece tras poseer, hay que mirarlo)
 Habilidad canelon: feedback curacion y daño
-Gato si te mueres xD
-Subir infarto ataque base
+//Gato si te mueres xD
+//Subir infarto ataque base
 Cambiar los botones habilidad y reanimar/poseer
 Saltar toda transicion
 Meter comandos para saltar niveles
-Animacion muerte calcetin
+//Animacion muerte calcetin
 Timer frutaas
-Salga fantasma al fallar posesion
+--(PossesionGame lin70) Salga fantasma al fallar posesion
 Checkear eliminacion enemigos
 UI boss final

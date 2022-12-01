@@ -43,7 +43,7 @@ private:
 
 	int progress = 0;
 	//Referente al minijuego
-	const int MAX_PROGRESS = 500,
+	const int MAX_PROGRESS = 250,
 			  BEAT = 25,
 			  DROP = 2,
 			  TIME_BETWEEN_DROPS = 30; //ms
