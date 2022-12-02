@@ -157,7 +157,9 @@ void Transition::sceneTransition() {
 				//La elimino
 				e->setActive(false);
 		}
-
+		entity_->getMngr()->setHandler<Cat_>(nullptr);
+		entity_->getMngr()->setHandler<Boss>(nullptr);
+		entity_->getMngr()->setHandler<FinalBoss>(nullptr);
 		//Elimino los efectos del nivel anterior
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopBossSounds();
 		entity_->getMngr()->getHandler<SoundManager>()->getComponent<SoundManager>()->StopTutorial();
