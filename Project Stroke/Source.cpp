@@ -1,5 +1,5 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
-
+// Just a comment
 #include <iostream>
 #include <memory>
 #include "SDL.h"

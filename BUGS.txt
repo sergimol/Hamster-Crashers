@@ -1,34 +1,34 @@
-//poseer pilla todos los inputs
-//letras de posesion dependen de velocidad del hamster
-//musica se para con primer hamster
-//musica no se reinicia al perder
+// Poseer pilla todos los inputs
+// Letras de posesion dependen de velocidad del hamster
+// Musica se para con primer hamster
+// Musica no se reinicia al perder
 con la b se corta el audio al pasar escenas
 no sale el fondo del menu de opciones en el menu principal
-//enemigos aparecen mal 
+// Enemigos aparecen mal 
 revisar lo lejos que salen los enemigos
 comida se coge al instante
-//morir saltando hace que desaparezca el cuerpo
-//trigger de final de nivel pide que pasen todos los hamsters 
+// Morir saltando hace que desaparezca el cuerpo
+// Trigger de final de nivel pide que pasen todos los hamsters 
 no hay suelo en el final de nivel 1
-//transicion final nivel se mueve
+// Transicion final nivel se mueve
 primer tronco nivel 2 está mal pintado
 animación muerte mariquitas muy lenta muerte y pegar les falta el frame blanco
 camara no sigue al gato al morir
 focus de camara no se resetea al morir en el gato
-//nivel 3 faltan tarros en inicio
+// Nivel 3 faltan tarros en inicio
 //microondas no termina
 boss final pega antes de caer
-//icono boss final está mal
-//salir desde creditos deja la musica mala
-//no se ve la transicion del nivel 3 al 3Micro
-//ahora no va la transicion de muete jijijiji
-//si mueres en el tren sige con el shake la camara
-//si sales del calcetin la camara se puede quedar mas abajo
+// Icono boss final está mal
+// Salir desde creditos deja la musica mala
+// No se ve la transicion del nivel 3 al 3Micro
+// Ahora no va la transicion de muete jijijiji
+// Si mueres en el tren sige con el shake la camara
+// Si sales del calcetin la camara se puede quedar mas abajo
 sonidos de enemigo en la muerte
 desaparecio sardinilla infartado
 
 
-no se ve a veces la letra de poseer/reanimar(creo que es cuando el fantasma desaparece tras poseer, hay que mirarlo)
+No se ve a veces la letra de poseer/reanimar(creo que es cuando el fantasma desaparece tras poseer, hay que mirarlo)
 Habilidad canelon: feedback curacion y daño
 //Gato si te mueres xD
 //Subir infarto ataque base
